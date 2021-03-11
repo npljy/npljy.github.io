@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="关注前端知识，收集精彩博文，做技术的搬运工"><title>Node新版本13.2.0正式支持ES Modules特性 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script type="text/javascript" src="/js/fixedPage.js"></script><script type="text/javascript" src="//js.fundebug.cn/fundebug.2.0.0.min.js" apikey="0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3" crossorigin="anonymous"></script><script>(function(){var scripts=document.getElementsByTagName('script');var sLen=scripts.length;var fd = document.createElement('script');var hasDebug = false;fd.setAttribute('apikey','0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3');fd.setAttribute('crossorigin','anonymous');fd.src='//js.fundebug.cn/fundebug.2.0.0.min.js';fd.apikey='0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3';for(var i=0; i<scripts.length;i++){if($(scripts[i]).attr('src') && $(scripts[i]).attr('src').indexOf('fundebug.cn') > -1){hasDebug=true;var p=scripts[i].parentNode;scripts[i].remove();p.appendChild(fd);};};!hasDebug&&$('head').append(fd)})()</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Node新版本13.2.0正式支持ES Modules特性</h1><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://love.xuehuayu.cn/" target="_target"><i class="fa fa-heart"> LOVE</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="/about/" target="_self"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Node新版本13.2.0正式支持ES Modules特性</h1><div class="post-meta"><span class="date">Dec 2, 2019</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/node/">node </a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 895</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 3</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/2019/12/02/Node%E6%96%B0%E7%89%88%E6%9C%AC13-2-0%E6%AD%A3%E5%BC%8F%E6%94%AF%E6%8C%81ES-Modules%E7%89%B9%E6%80%A7.html#vcomment"><span class="valine-comment-count" data-xid="/2019/12/02/Node%E6%96%B0%E7%89%88%E6%9C%AC13-2-0%E6%AD%A3%E5%BC%8F%E6%94%AF%E6%8C%81ES-Modules%E7%89%B9%E6%80%A7.html"></span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5ddb2e2d6fb9a07ab12c7546</code></p>
+<span id="more"></span>
+<p>在本月 21 日，即2019.11.21，Node.js 发布了 13.2.0 版本，更新了一些特性。其中最令人兴奋的莫过于正式取消了 <code>--experimental-modules</code> 启动参数。这说明Node.js 正式支持 ES modules。我们一起来看看。</p>
+<h3 id="Stability-Index说明"><a href="#Stability-Index说明" class="headerlink" title="Stability Index说明"></a>Stability Index说明</h3><p>Stability Index，即 Api 的稳定指数说明。它包括3个值：</p>
+<ol>
+<li>Stability: 0 ,不推荐使用。表示该Api官方不推荐使用，该功能可能会发出警告。不能保证向后兼容。</li>
+<li>Stability: 1，实验性的。表示该Api已经支持使用性使用。但是在将来的任何发行版中都可能发生非向后兼容的更改或删除。不建议在生产环境中使用该功能。</li>
+</ol>
+<ul>
+<li>Stability: 2，稳定版。表示已经试验完成，基本不会再发生改动，可以再生产环境中使用。</li>
+</ul>
+<h3 id="Unflag-–experimental-modules"><a href="#Unflag-–experimental-modules" class="headerlink" title="Unflag –experimental-modules"></a>Unflag –experimental-modules</h3><p>在 13.2.0的版本中，node 默认情况下会启用对ECMAScript模块的实验支持，也就是不需要启动参数了。那么nodejs是如何区分 esm 和 commonjs 的呢？这里翻译一下官方文档。</p>
+<p>Node.js会将把以下内容视为ES模块：</p>
+<ul>
+<li>文件后缀为<code>.mjs</code></li>
+<li>当文件后缀为<code>.js</code>，或者无文件后缀时，看其package.json文件，<code>package.json 中 type 字段值为 &quot;module&quot;</code></li>
+<li>启动参数添加 —-input-type=module</li>
+<li>使用传递字符参数给<code>--eval</code>，如<code>$ node --eval &#39;import(&quot;http&quot;);</code></li>
+</ul>
+<p>其他情况下，都会被识别为 commonjs。现在node已经支持esm和commonjs了，我们在使用的时候，最好还是指定一下模块。</p>
+<h3 id="举个例子🌰"><a href="#举个例子🌰" class="headerlink" title="举个例子🌰"></a>举个例子🌰</h3><pre><code>import&#39;./legacy-file.cjs&#39;;
+// Loaded as CommonJS since .cjs is always loaded as CommonJS.import&#39;commonjs-package/src/index.mjs&#39;;
+// Loaded as ES module since .mjs is always loaded as ES module.复制代码
+</code></pre>
+<p>这种情况，根据文件后缀按不同模块处理。</p>
+<pre><code>// package.json
+&#123;
+  &quot;type&quot;: &quot;module&quot;
+&#125;
+复制代码
+</code></pre>
+<p>当前目录下，或者上级目录中的<code>package.json</code>含有<code>&quot;type&quot;: &quot;module&quot;</code>时，该模块会被当作ES Module。</p>
+<pre><code>// my-app.js, in an ES module package scope because there is a package.json// file in the same folder with &quot;type&quot;: &quot;module&quot;.import&#39;./startup/init.js&#39;;
+// Loaded as ES module since ./startup contains no package.json file,// and therefore inherits the ES module package scope from one level up.import&#39;commonjs-package&#39;;
+// Loaded as CommonJS since ./node_modules/commonjs-package/package.json// lacks a &quot;type&quot; field or contains &quot;type&quot;: &quot;commonjs&quot;.import&#39;./node_modules/commonjs-package/index.js&#39;;
+// Loaded as CommonJS since ./node_modules/commonjs-package/package.json// lacks a &quot;type&quot; field or contains &quot;type&quot;: &quot;commonjs&quot;.复制代码
+</code></pre>
+<p>如上图注释所示，如果当前文件目录不包含<code>package.json</code>，则会看其父级目录的<code>package.json</code>文件，然后判断type类型。</p>
+<pre><code>node --input-type=module --eval&quot;import &#123; sep &#125; from &#39;path&#39;; console.log(sep);&quot;
+echo &quot;import &#123; sep &#125; from &#39;path&#39;; console.log(sep);&quot; | node --input-type=module复制代码
+</code></pre>
+<p>这里就是使用传递字符参数给<code>--eval</code>，添加 <code>--input-type</code>启动参数的情况。</p>
+<h3 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h3><p>目前13.2.0版本的官方文档对ES Module的标记是 <code>Stability: 1</code>，你已经可以安装新版本来试验啦。相信在社区的共同努力下，很快就会进入 <code>Stability: 2</code> 正式稳定版了。</p>
+<p>本地开发的时候，经常需要快速更新或切换不同的node版本。可以使用 nvm、n 等方案，还有一个跨平台的本地管理方案就是 nvs。都可以选择使用，这里我举的例子，就是使用 nvs：</p>
+<pre><code>$ nvs add node/13.2.0
+$ nvs use 13.2.0
+$ node -v
+13.2.0复制代码
+</code></pre>
+<p>赶紧尝试一下吧～</p>
+</div><iframe src="/donate/?AliPayQR=https://store.xuehuayu.cn/store/public/alipay_qr.jpg&amp;WeChatQR=https://store.xuehuayu.cn/store/public/wechat_qr.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://www.paypal.com/paypalme/OrdinaryPerson" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>雪花雨</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/2019/12/02/Node新版本13-2-0正式支持ES-Modules特性.html">https://xuehuayu.cn/2019/12/02/Node%E6%96%B0%E7%89%88%E6%9C%AC13-2-0%E6%AD%A3%E5%BC%8F%E6%94%AF%E6%8C%81ES-Modules%E7%89%B9%E6%80%A7.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 转载文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/2019/12/02/MVVM-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%85%A8%E9%87%8F%E7%89%88%E6%95%B4%E7%90%86.html">MVVM 双向绑定全量版整理</a><a class="next" href="/2019/12/02/jQuery-%E6%A8%A1%E5%9D%97%E7%BB%88%E4%BA%8E%E4%BB%8E-AMD-%E8%BF%81%E7%A7%BB%E5%88%B0%E4%BA%86-ES-%E6%A8%A1%E5%9D%97.html">jQuery 模块终于从 AMD 迁移到了 ES 模块</a></div><div id="vcomment"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/npm/valine@^1/dist/Valine.min.js"></script><script>var VERIFY = ['nick', 'mail']
+var verify = 'nick,mail'.split(',').filter(function(item){
+  return VERIFY.indexOf(item) !== -1
+});
+verify = verify.length == 0 ? VERIFY : verify;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  appId:'Pt5dXCRRAeqLpXMJ1mS3sIsk-gzGzoHsz',
+  appKey:'3gXWn2UbeH70Q3orJsbHh5qs',
+  placeholder:'正确填写邮箱，收到回复有邮件通知哦！😎',
+  avatar:'mp',
+  meta:guest_info,
+  requiredFields: verify,
+  recordIP: 'false',
+  visitor: 'true',
+})
+//- $.get('https://cmts.xuehuayu.cn')
+</script><script>(function(){
+  var scripts = document.getElementsByTagName('script')
+  var sLen = scripts.length
+  var fd = document.createElement('script')
+  var hasDebug = false
+  fd.setAttribute('apikey', '0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3')
+  fd.setAttribute('crossorigin', 'anonymous')
+  fd.src='//js.fundebug.cn/fundebug.2.0.0.min.js'
+  for (var i = 0; i < scripts.length; i++) {
+    if($(scripts[i]).attr('src') && $(scripts[i]).attr('src').indexOf('fundebug.cn') > -1) {
+      hasDebug = true
+      var p = scripts[i].parentNode
+      scripts[i].remove()
+      p.appendChild(fd)
+    }
+  }
+  !hasDebug && $('head').append(fd)
+})()</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = 'search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/antd/">antd</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/app/">app</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/babel/">babel</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/electron/">electron</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/h5/">h5</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">52</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mvvm/">mvvm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/valine/">valine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/xhr/">xhr</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E5%B7%A7/">技巧</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%BB%E6%9D%BE%E4%B8%80%E5%88%BB/">轻松一刻</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-tags"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 15px;">原创</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 15px;">转载</a> <a href="/tags/%E7%96%AB%E6%83%85/" style="font-size: 15px;">疫情</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15px;">网络</a></div></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/02/19/android-studio%E6%A8%A1%E6%8B%9F%E5%99%A8AVD%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91%E9%97%AE%E9%A2%98.html">android studio模拟器AVD无法联网问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/10/%E4%B8%80%E6%AC%BE%E5%85%A8%E7%BD%91%E8%A7%86%E9%A2%91%E8%81%9A%E5%90%88APP%EF%BC%8C%E6%97%A0%E5%B9%BF%E5%91%8A%EF%BC%8C%E6%97%A0%E9%9A%90%E7%A7%81.html">追剧必备，一款全网视频小说漫画聚合手机APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/28/uni-app%E7%9A%84webview%E9%A1%B5%E9%9D%A2subNvue%E5%BC%B9%E7%AA%97%E8%AE%BE%E7%BD%AE.html">uni-app的webview页面subNvue弹窗设置border-radius圆角</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/08/webpack%E7%9A%84%E7%83%AD%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86.html">webpack的热更新原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/01/uniapp%E7%9A%84web-view%E7%BB%84%E4%BB%B6%E6%97%A0%E6%B3%95%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%AC%E5%9C%B0html%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html">uniapp的web-view组件无法动态加载本地html文件的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/28/%E5%93%88%E5%93%88%E5%93%88%E5%93%88-%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%B0%8F%E5%AD%A6%E7%94%9F%E5%A4%AA%E6%90%9E%E7%AC%91%E4%BA%86.html">哈哈哈哈~~现在的小学生太搞笑了~~</a></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://www.hellolbc.me?from=xuehuayu.cn" title="百川的博客" target="_blank">百川的博客</a><ul></ul><a href="https://m3w.cn/nplayer?from=xuehuayu.cn" title="nPlayer" target="_blank">nPlayer</a><ul></ul><a href="https://github.com/npljy?from=xuehuayu.cn" title="GitHub" target="_blank">GitHub</a><ul></ul><a href="https://blog.csdn.net/u010762099?from=xuehuayu.cn" title="CSDN" target="_blank">CSDN</a><ul></ul><a href="https://xhy.coding.net?from=xuehuayu.cn" title="coding" target="_blank">coding</a><ul></ul><a href="https://cainiaoblog.cn?from=xuehuayu.cn" title="菜鸟博客" target="_blank">菜鸟博客</a><ul></ul><a href="mailto:boss@com.email.cn" title="友链联系" target="_blank">友链联系</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">前端壹菜鸟. </a><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;amp;utm_medium=referral"><img class="nofancybox" height="40" style="vertical-align: middle" src="/img/upy_logo.svg"/></a><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a><br/><div class="busuanzi_container" id="busuanzi_container"><span class="busuanzi_container_site_pv" id="busuanzi_container_site_pv">访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner"></i></span></span><span class="busuanzi_container_site_uv" id="busuanzi_container_site_uv">访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner"></i></span></span></div><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png"/><span id="gaba">京公网安备 11010802031264号</span></a><script>(function(){
+  var cnb =window.location.origin.indexOf('cainiaoblog') !==-1
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=202006301145" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

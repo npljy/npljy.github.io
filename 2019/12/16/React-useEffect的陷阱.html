@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="关注前端知识，收集精彩博文，做技术的搬运工"><title>React useEffect的陷阱 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script type="text/javascript" src="/js/fixedPage.js"></script><script type="text/javascript" src="//js.fundebug.cn/fundebug.2.0.0.min.js" apikey="0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3" crossorigin="anonymous"></script><script>(function(){var scripts=document.getElementsByTagName('script');var sLen=scripts.length;var fd = document.createElement('script');var hasDebug = false;fd.setAttribute('apikey','0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3');fd.setAttribute('crossorigin','anonymous');fd.src='//js.fundebug.cn/fundebug.2.0.0.min.js';fd.apikey='0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3';for(var i=0; i<scripts.length;i++){if($(scripts[i]).attr('src') && $(scripts[i]).attr('src').indexOf('fundebug.cn') > -1){hasDebug=true;var p=scripts[i].parentNode;scripts[i].remove();p.appendChild(fd);};};!hasDebug&&$('head').append(fd)})()</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">React useEffect的陷阱</h1><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://love.xuehuayu.cn/" target="_target"><i class="fa fa-heart"> LOVE</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="/about/" target="_self"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">React useEffect的陷阱</h1><div class="post-meta"><span class="date">Dec 16, 2019</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/react/">react </a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.6k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 5</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/2019/12/16/React-useEffect%E7%9A%84%E9%99%B7%E9%98%B1.html#vcomment"><span class="valine-comment-count" data-xid="/2019/12/16/React-useEffect%E7%9A%84%E9%99%B7%E9%98%B1.html"></span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://zhuanlan.zhihu.com/p/84697185</code></p>
+<p>今天就来讲一个useEffect这个Hook使用的一个小陷阱，看下面的代码，一个Counter，在窗口大小改变的时候，在console上输出当前count。</p>
+<span id="more"></span>
+
+<p>好久不写React的相关的东西，因为虽然这个技术作为工具还是在得到越来越多的应用，但是，React自<a target="_blank" rel="noopener" href="https://www.zhihu.com/lives/1051824303045246976">Hooks和Suspense</a>以来，也没有什么特别值得一说的新功能出来，所以，我也觉得真没有什么好写的:-)</p>
+<p>回顾一下过去几个月，值得一提的，就是React Hooks正式推出之后暴露出来的一些小问题，这些小问题不是React的缺陷，而是开发者在面对Hooks这种新的思维方式时的水土不服。</p>
+<p>今天就来讲一个useEffect这个Hook使用的一个小陷阱，看下面的代码，一个Counter，在窗口大小改变的时候，在console上输出当前count。</p>
+<pre><code>function App() &#123;
+  const [count, setCount] = useState(0)
+
+  useEffect(() =&gt; &#123;
+     // 让resize事件触发handleResize
+     window.addEventListener(&#39;resize&#39;, handleResize)
+     return () =&gt; window.removeEventListener(&#39;resize&#39;, handleResize)
+  &#125;, [])
+
+  const handleResize = () =&gt; &#123;
+    // 把count输出
+    console.log(`count is $&#123;count&#125;`)
+  &#125;
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;+&lt;/button&gt;
+      &lt;h1&gt;&#123;count&#125;&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+&#125;
+
+const rootElement = document.getElementById(&quot;root&quot;);
+ReactDOM.render(&lt;App /&gt;, rootElement);
+</code></pre>
+<p>这段代码会画出我们熟悉的Counter例子。<br><img src="https://pic1.zhimg.com/v2-c9caa4d47ed8c35c4d26d61be1e97f20_b.jpg" alt="xuehuayu.cn"><img src="https://pic1.zhimg.com/80/v2-c9caa4d47ed8c35c4d26d61be1e97f20_hd.jpg" alt="xuehuayu.cn"><br>现在我们如果点击那个+按钮，下面的数字0当然会增长，比如我们现在让count增长为1，这时候你去改变浏览器窗口的大小，console上会输出什么呢？</p>
+<p>你可能预期这样输出：</p>
+<pre><code>count is 1
+</code></pre>
+<p>事实上，输出是这样：</p>
+<pre><code>count is 0
+</code></pre>
+<p>怎么会这样?！</p>
+<p>我先直接说这个问题怎么fix吧，关键在useEffect是用法上，正确的写法是这样：</p>
+<pre><code>  useEffect(() =&gt; &#123;
+     // 让resize事件触发handleResize
+     window.addEventListener(&#39;resize&#39;, handleResize)
+     return window.removeEventListener(&#39;resize&#39;, handleResize)
+  &#125;, [count])             //看这一行！！！ useEffect有第二个数组参数！！！
+</code></pre>
+<p>看了fix之后，你也许就明白这是怎么回事了。</p>
+<p>useEffect的第二个参数可选，如果用上的话，这个参数必须是一个数组。useEffect在每次被调用的时候，都会“记住”这个数组参数，当下一次被调用的时候，会逐个比较数组中的元素，看是否和上一次调用的数组元素一模一样，如果一模一样，第一个参数（那个函数参数）也就不用被调用了，如果不一样，就调用那个第一个参数。</p>
+<p>当我们代码中的App组件第一次被渲染的时候，useEffect百分之百会调用第一个函数参数，这时候count变量是0，但是，当我们点+按钮让Counter增长为1，这时候App被重新渲染，但是因为useEffect第一个参数总是一个空数组，所以不会重新做addEventListener的工作。</p>
+<p>你可能又会问：就算useEffect不重新执行第一个函数参数，也不应该有什么问题啊，handleResize函数利用闭包(clousre)功能访问App中的count变量，那也应该是使用更新为1的count啊！</p>
+<p>抱歉，又让你失望了，虽然闭包的确可以访问外围的变量，但是，此handleResize非彼handleResize，第一次渲染时的handleResize和第二次渲染时的handleResize，虽然源自同一段代码，但是在运行时却是两个不同的函数对象。这并不难理解，handleResize是一个局部变量，每次App被执行时，handleResize都会被重行赋值，所以每一次App被渲染时，都会给handleResize一个全新的函数对象。</p>
+<p>如果你觉得有点绕，我们详细复盘一下：</p>
+<ol>
+<li><p>App第一次被渲染</p>
+</li>
+<li><p>给handleResize赋值了一个函数对象（我们姑且用XX-1代表），这个XX-1引用的count值是这一次App被渲染时的count值，值为0；</p>
+</li>
+<li><p>handleResize被useEffect挂到resize事件上，以后，当resize时间发生时，handleResize（应该说是XX-1)被调用；</p>
+</li>
+<li><p>App第二次被渲染</p>
+</li>
+<li><p>有一次给handleResize赋值了一个函数对象，代号YY-2，注意，这个YY-2和之前的XX-1不是同一个函数对象，XX-1依然引用的是值为0的count，但是YY-2引用的是值为1的count；</p>
+</li>
+<li><p>handleResize（也就是YY-2）没有被useEffect挂到resize时间上，换句话说，YY-2这个函数对象压根没有派上用场。</p>
+</li>
+<li><p>resize事件发生了</p>
+</li>
+<li><p>window上挂的resize事件处理，是第一次渲染时候创造的XX-1号handleResize，所以方位的count值为0</p>
+</li>
+</ol>
+<p>希望现在你明白了。</p>
+<p>总结一下，请明白这几点：</p>
+<ul>
+<li>React Hooks只能用于函数组件，而每一次函数组件被渲染，都是一个全新的开始；</li>
+<li>每一个全新的开始，所有的局部变量全都重来，全体失忆；</li>
+<li>每一次全新的开始，只有Hooks函数（比如useEffect）具有上一次渲染的“记忆”；</li>
+</ul>
+<p>对于上面说的问题，因为count每次渲染都会改变，而且我们想要useEffect总会用上count的值，所以，就要把count放在useEffect的第二个数组参数里面。</p>
+<p>规矩就是：如果useEffect第一个函数参数直接或者间接用上某个变量，就请把这个变量放在useEffect的第二个参数里。 </p>
+<p>如果根本不用useEffect的第二个参数呢？</p>
+<p>也行，但是，这样每次渲染都会执行useEffect的第一个参数，这……在某些场景下有一点点浪费。</p>
+<p>其实要做到上面的规矩，也没那么难，不过在实际操作的时候，的确让人容易失误，你看，在上面的例子中，useEffect并没有直接使用count，只不过使用了handleResize，handleResize虽然直接使用了count，但是它作为一个独立函数并不知道（或者说也不该知道）自己会被useEffect用到，这……让人防不胜防啊！</p>
+<p>这只有一层简介调用，靠人的眼力脑力还能把我，假设useEffect调用了函数X，函数X调用了Y，Y调用了Z……曲里拐弯调用N层之后再调用handleResize，真的不容易看出useEffect需要加上对count的依赖。</p>
+<p>好吧，这是useEffect的一个陷阱，所以，我们再加一个规矩：使用useEffect，不要调用函数层次太多，代码应该一眼看清楚哪些函数会被useEffect调用。</p>
+</div><iframe src="/donate/?AliPayQR=https://store.xuehuayu.cn/store/public/alipay_qr.jpg&amp;WeChatQR=https://store.xuehuayu.cn/store/public/wechat_qr.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://www.paypal.com/paypalme/OrdinaryPerson" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>雪花雨</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/2019/12/16/React-useEffect的陷阱.html">https://xuehuayu.cn/2019/12/16/React-useEffect%E7%9A%84%E9%99%B7%E9%98%B1.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 转载文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/2019/12/16/Web%E6%80%A7%E8%83%BD%E9%A2%86%E5%9F%9F%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD.html">Web性能领域常见的专业术语</a><a class="next" href="/2019/12/13/React-SSR-%E8%AF%A6%E8%A7%A3%E3%80%90%E8%BF%91-1W-%E5%AD%97%E3%80%91-2%E4%B8%AA%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.html">React SSR 详解 + 2个项目实战</a></div><div id="vcomment"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/npm/valine@^1/dist/Valine.min.js"></script><script>var VERIFY = ['nick', 'mail']
+var verify = 'nick,mail'.split(',').filter(function(item){
+  return VERIFY.indexOf(item) !== -1
+});
+verify = verify.length == 0 ? VERIFY : verify;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  appId:'Pt5dXCRRAeqLpXMJ1mS3sIsk-gzGzoHsz',
+  appKey:'3gXWn2UbeH70Q3orJsbHh5qs',
+  placeholder:'正确填写邮箱，收到回复有邮件通知哦！😎',
+  avatar:'mp',
+  meta:guest_info,
+  requiredFields: verify,
+  recordIP: 'false',
+  visitor: 'true',
+})
+//- $.get('https://cmts.xuehuayu.cn')
+</script><script>(function(){
+  var scripts = document.getElementsByTagName('script')
+  var sLen = scripts.length
+  var fd = document.createElement('script')
+  var hasDebug = false
+  fd.setAttribute('apikey', '0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3')
+  fd.setAttribute('crossorigin', 'anonymous')
+  fd.src='//js.fundebug.cn/fundebug.2.0.0.min.js'
+  for (var i = 0; i < scripts.length; i++) {
+    if($(scripts[i]).attr('src') && $(scripts[i]).attr('src').indexOf('fundebug.cn') > -1) {
+      hasDebug = true
+      var p = scripts[i].parentNode
+      scripts[i].remove()
+      p.appendChild(fd)
+    }
+  }
+  !hasDebug && $('head').append(fd)
+})()</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = 'search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/antd/">antd</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/app/">app</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/babel/">babel</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/electron/">electron</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/h5/">h5</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">52</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mvvm/">mvvm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/valine/">valine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/xhr/">xhr</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E5%B7%A7/">技巧</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%BB%E6%9D%BE%E4%B8%80%E5%88%BB/">轻松一刻</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-tags"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 15px;">原创</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 15px;">转载</a> <a href="/tags/%E7%96%AB%E6%83%85/" style="font-size: 15px;">疫情</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15px;">网络</a></div></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/02/19/android-studio%E6%A8%A1%E6%8B%9F%E5%99%A8AVD%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91%E9%97%AE%E9%A2%98.html">android studio模拟器AVD无法联网问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/10/%E4%B8%80%E6%AC%BE%E5%85%A8%E7%BD%91%E8%A7%86%E9%A2%91%E8%81%9A%E5%90%88APP%EF%BC%8C%E6%97%A0%E5%B9%BF%E5%91%8A%EF%BC%8C%E6%97%A0%E9%9A%90%E7%A7%81.html">追剧必备，一款全网视频小说漫画聚合手机APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/28/uni-app%E7%9A%84webview%E9%A1%B5%E9%9D%A2subNvue%E5%BC%B9%E7%AA%97%E8%AE%BE%E7%BD%AE.html">uni-app的webview页面subNvue弹窗设置border-radius圆角</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/08/webpack%E7%9A%84%E7%83%AD%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86.html">webpack的热更新原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/01/uniapp%E7%9A%84web-view%E7%BB%84%E4%BB%B6%E6%97%A0%E6%B3%95%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%AC%E5%9C%B0html%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html">uniapp的web-view组件无法动态加载本地html文件的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/28/%E5%93%88%E5%93%88%E5%93%88%E5%93%88-%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%B0%8F%E5%AD%A6%E7%94%9F%E5%A4%AA%E6%90%9E%E7%AC%91%E4%BA%86.html">哈哈哈哈~~现在的小学生太搞笑了~~</a></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://www.hellolbc.me?from=xuehuayu.cn" title="百川的博客" target="_blank">百川的博客</a><ul></ul><a href="https://m3w.cn/nplayer?from=xuehuayu.cn" title="nPlayer" target="_blank">nPlayer</a><ul></ul><a href="https://github.com/npljy?from=xuehuayu.cn" title="GitHub" target="_blank">GitHub</a><ul></ul><a href="https://blog.csdn.net/u010762099?from=xuehuayu.cn" title="CSDN" target="_blank">CSDN</a><ul></ul><a href="https://xhy.coding.net?from=xuehuayu.cn" title="coding" target="_blank">coding</a><ul></ul><a href="https://cainiaoblog.cn?from=xuehuayu.cn" title="菜鸟博客" target="_blank">菜鸟博客</a><ul></ul><a href="mailto:boss@com.email.cn" title="友链联系" target="_blank">友链联系</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">前端壹菜鸟. </a><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;amp;utm_medium=referral"><img class="nofancybox" height="40" style="vertical-align: middle" src="/img/upy_logo.svg"/></a><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a><br/><div class="busuanzi_container" id="busuanzi_container"><span class="busuanzi_container_site_pv" id="busuanzi_container_site_pv">访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner"></i></span></span><span class="busuanzi_container_site_uv" id="busuanzi_container_site_uv">访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner"></i></span></span></div><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png"/><span id="gaba">京公网安备 11010802031264号</span></a><script>(function(){
+  var cnb =window.location.origin.indexOf('cainiaoblog') !==-1
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=202006301145" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

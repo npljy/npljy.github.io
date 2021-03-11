@@ -1,0 +1,6 @@
+# github
+151.101.1.194 github.global.ssl.fastly.net
+151.101.89.194 github.global.ssl.fastly.net
+151.101.109.194 github.global.ssl.fastly.net
+151.101.137.194 github.global.ssl.fastly.net
+151.101.229.194 github.global.ssl.fastly.net

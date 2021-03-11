@@ -1,0 +1,8 @@
+# robots.txt generated at http://xuehuayu.cn/
+User-agent: *
+Disallow: /adfilter/
+Disallow: /adblock/
+Disallow: /hosts/
+Sitemap: https://cainiaoblog.cn/baidusitemap.xml
+Sitemap: https://xuehuayu.cn/sitemap.xml
+

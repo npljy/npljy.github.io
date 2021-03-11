@@ -1,0 +1,439 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="关注前端知识，收集精彩博文，做技术的搬运工"><title>一文搞懂 Webpack 多入口配置 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script type="text/javascript" src="/js/fixedPage.js"></script><script type="text/javascript" src="//js.fundebug.cn/fundebug.2.0.0.min.js" apikey="0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3" crossorigin="anonymous"></script><script>(function(){var scripts=document.getElementsByTagName('script');var sLen=scripts.length;var fd = document.createElement('script');var hasDebug = false;fd.setAttribute('apikey','0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3');fd.setAttribute('crossorigin','anonymous');fd.src='//js.fundebug.cn/fundebug.2.0.0.min.js';fd.apikey='0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3';for(var i=0; i<scripts.length;i++){if($(scripts[i]).attr('src') && $(scripts[i]).attr('src').indexOf('fundebug.cn') > -1){hasDebug=true;var p=scripts[i].parentNode;scripts[i].remove();p.appendChild(fd);};};!hasDebug&&$('head').append(fd)})()</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">一文搞懂 Webpack 多入口配置</h1><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://love.xuehuayu.cn/" target="_target"><i class="fa fa-heart"> LOVE</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="/about/" target="_self"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">一文搞懂 Webpack 多入口配置</h1><div class="post-meta"><span class="date">Nov 22, 2019</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/webpack/">webpack </a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 14</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/2019/11/22/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82-Webpack-%E5%A4%9A%E5%85%A5%E5%8F%A3%E9%85%8D%E7%BD%AE.html#vcomment"><span class="valine-comment-count" data-xid="/2019/11/22/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82-Webpack-%E5%A4%9A%E5%85%A5%E5%8F%A3%E9%85%8D%E7%BD%AE.html"></span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/F89xzQ9YvoRSXaCw5GL3ug</code></p>
+<p>最近在做项目的时候遇到了一个场景：一个项目有多个入口，不同的入口，路由、组件、资源等有重叠部分，也有各自不同的部分。由于不同入口下的路由页面有一些是重复的，因此我考虑使用 Webpack 多入口配置来解决这个需求。</p>
+<span id="more"></span>
+
+<p>再一次，在网上找的不少文章都不合我的需求，很多文章都是只简单介绍了生产环境下配置，没有介绍开发环境下的配置，有的也没有将多入口结合 <code>vue-router</code>、 <code>vuex</code>、 <code>ElementUI</code> 等进行配置，因此在下通过不断探坑，然后将思路和配置过程记录下来，留给自己作为笔记，同时也分享给大家，希望可以帮助到有同样需求的同学们～</p>
+<h2 id="1-目标分析"><a href="#1-目标分析" class="headerlink" title="1. 目标分析"></a>1. 目标分析</h2><ol>
+<li><p>一个项目中保存了多个 HTML 模版，不同的模版有不同的入口，并且有各自的 router、store 等；</p>
+</li>
+<li><p>不仅可以打包出不同 HTML，而且开发的时候也可以顺利进行调试；</p>
+</li>
+<li><p>不同入口的文件可以引用同一份组件、图片等资源，也可以引用不同的资源；</p>
+</li>
+</ol>
+<p>代码仓库：multi-entry-vue</p>
+<p>示意图如下：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<h2 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2. 准备工作"></a>2. 准备工作</h2><p>首先我们 <code>vue init webpack multi-entry-vue</code> 使用 <code>vue-cli</code> 创建一个 webpack 模版的项。文件结构如下：</p>
+<pre><code>├── build
+├── config
+├── src
+│   ├── assets
+│   │   └── logo.png
+│   ├── components
+│   │   └──HelloWorld.vue
+│   ├── router
+│   │   └── index.js
+│   ├──App.vue
+│   └── main.js
+├── static
+├── README.md
+├── index.html
+├── package-lock.json
+└── package.json
+</code></pre>
+<blockquote>
+<p>这里顺便介绍在不同系统下生成目录树的方法：</p>
+<ol>
+<li>mac 系统命令行生成目录树的方法 <code>tree-I node_modules--dirsfirst</code> ，这个命令的意思是，不显示 <code>node_modules</code> 路径的文件，并且以文件夹在前的排序方式生成目录树。如果报没有找到 tree 命令的错，安装 tree 命令行 <code>brew install tree</code> 即可。</li>
+<li>windows 系统在目标目录下使用 <code>tree/f1.txt</code> 即可把当前目录树生成到一个新文件 <code>1.txt</code> 中。</li>
+</ol>
+</blockquote>
+<p>首先我们简单介绍一下 Webpack 的相关配置项，这些配置项根据使用的 Webpack 模版不同，一般存放在 <code>webpack.config.js</code> 或 <code>webpack.base.conf.js</code> 中：</p>
+<pre><code>const path = require(&#39;path&#39;)
+module.exports =&#123;
+  context: path.resolve(__dirname,&#39;../&#39;),
+  entry:&#123;
+    app:&#39;./src/main.js&#39;
+&#125;,
+  output:&#123;
+    path: path.resolve(__dirname,&#39;../dist&#39;),
+    filename:&#39;output-file.js&#39;,
+    publicPath:&#39;/&#39;
+&#125;,
+  module:&#123;&#125;,// 文件的解析 loader 配置
+  plugins:[],// 插件，根据需要配置各种插件
+  devServer:&#123;&#125;// 配置 dev 服务功能
+&#125;
+</code></pre>
+<p>这个配置的意思是，进行 Webpack 后，会在命令的执行目录下新建 <code>dist</code> 目录（如果需要的话），并将打包 <code>src</code> 目录下的 <code>main.js</code> 和它的依赖，生成 <code>output-file.js</code> 放在 <code>dist</code> 目录中。</p>
+<p>下面稍微解释一下相关配置项：</p>
+<ol>
+<li><p><strong>entry：</strong> 入口文件配置项，可以为字符串、对象、数组。以上面的对象形式为例， <code>app</code> 是入口名称，如果 <code>output.filename</code> 中有 <code>[name]</code> 的话，就会被替换成 <code>app</code>。</p>
+</li>
+<li><p><strong>context：</strong> 是 webpack 编译时的基础目录，用于解析 <code>entry</code> 选项的基础目录(绝对路径)， <code>entry</code> 入口起点会相对于此目录查找，相当于公共目录，下面所有的目录都在这个公共目录下面。</p>
+</li>
+<li><p><strong>output：</strong> 出口文件的配置项。</p>
+</li>
+<li><p><strong>output/path：</strong> 打包文件输出的目录，比如上面的 <code>dist</code>，那么就会将输出的文件放在当前目录同级目录的 <code>dist</code> 文件夹下，没有这个文件夹就新建一个。可以配置为 <code>path.resolve(__dirname,&#39;./dist/$&#123;Date.now()&#125;/&#39;)</code> （md 语法不方便改成模板字符串，请自行修改）方便做持续集成。</p>
+</li>
+<li><p><strong>output.filename：</strong> 输出的文件名称， <code>[name]</code> 的意为根据入口文件的名称，打包成相同的名称，有几个入口，就可以打包出几个文件。比如入口的 <code>key</code> 为 <code>app</code>，打包出来就是 <code>app.js</code>，入口是 <code>my-entry</code>，打包出来就是 <code>my-entry.js</code>。</p>
+</li>
+<li><p><strong>output.publicPath：</strong> 静态资源的公共路径，可以记住这个公式： <code>静态资源最终访问路径=output.publicPath+资源loader或插件等配置路径</code>。举个例子， <code>publicPath</code> 配置为 <code>/dist/</code>，图片的 <code>url-loader</code> 配置项为 <code>name:&#39;img/[name].[ext]&#39;</code> ，那么最终打包出来文件中图片的引用路径为 <code>output.publicPath+&#39;img/[name].[ext]&#39;=&#39;/dist/img/[name].[ext]&#39;</code>。</p>
+</li>
+</ol>
+<p>本文由于是入口和出口相关的配置，所以内容主要围绕着 <code>entry</code> 、 <code>output</code> 和一个重要的 webpack 插件 html-webpack-plugin，这个插件是跟打包出来的 HTML 文件密切相关，主要有下面几个作用：</p>
+<ol>
+<li><p>根据模版生成 HTML 文件；</p>
+</li>
+<li><p>给生成的 HTML 文件引入外部资源比如 <code>link</code>、 <code>script</code> 等；</p>
+</li>
+<li><p>改变每次引入的外部文件的 Hash，防止 HTML 引用缓存中的过时资源；</p>
+</li>
+</ol>
+<p>下面我们从头一步步配置一个多入口项目。</p>
+<h2 id="3-开始配置"><a href="#3-开始配置" class="headerlink" title="3. 开始配置"></a>3. 开始配置</h2><h3 id="3-1-文件结构改动"><a href="#3-1-文件结构改动" class="headerlink" title="3.1 文件结构改动"></a>3.1 文件结构改动</h3><p>在 <code>src</code> 目录下将 <code>main.js</code> 和 <code>App.vue</code> 两个文件各复制一下，作为不同入口，文件结构变为：</p>
+<pre><code>├── build
+│   ├── build.js
+│   ├── check-versions.js
+│   ├── logo.png
+│   ├── utils.js
+│   ├── vue-loader.conf.js
+│   ├── webpack.base.conf.js
+│   ├── webpack.dev.conf.js    # 主要配置目标
+│   └── webpack.prod.conf.js   # 主要配置目标
+├── config
+│   ├── dev.env.js
+│   ├── index.js
+│   └── prod.env.js
+├── src
+│   ├── assets
+│   │   └── logo.png
+│   ├── components
+│   │   └──HelloWorld.vue
+│   ├── router
+│   │   └── index.js
+│   ├──App.vue
+│   ├──App2.vue       # 新增的入口
+│   ├── main.js
+│   └── main2.js       # 新增的入口
+├── static
+├── README.md
+├── index.html
+└── package.json
+</code></pre>
+<h3 id="3-2-简单配置"><a href="#3-2-简单配置" class="headerlink" title="3.2 简单配置"></a>3.2 简单配置</h3><p>要想从不同入口，打包出不同 HTML，我们可以改变一下 <code>entry</code> 和 <code>output</code> 两个配置，</p>
+<pre><code>// build/webpack.prod.conf.js
+module.exports =&#123;
+  entry:&#123;
+    entry1:&#39;./src/main.js&#39;,
+    entry2:&#39;./src/main2.js&#39;
+&#125;,
+  output:&#123;
+    filename:&#39;[name].js&#39;,
+    publicPath:&#39;/&#39;
+&#125;,
+    plugins:[
+      newHtmlWebpackPlugin(&#123;
+                  template:&quot;index.html&quot;,// 要打包输出哪个文件，可以使用相对路径
+                  filename:&quot;index.html&quot;// 打包输出后该html文件的名称
+      &#125;)
+    ]
+&#125;
+</code></pre>
+<p>根据上面一小节我们知道，webpack 配置里的 <code>output.filename</code> 如果有 <code>[name]</code> 意为根据入口文件的名称，打包成对应名称的 JS 文件，那么现在我们是可以根据两个入口打包出 <code>entry.js</code> 和 <code>entry2.js</code>。</p>
+<p>打包的结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XP4dRIhZqqU4jEtH5Upia9D5BoOxBGFRpJSxrh63T80haHxrNCrtIdDFmdShOHWxZR6BSuJclxp4rmiazdDmymDA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="xuehuayu.cn"></p>
+<p>当前代码：Github - multi-entry-vue1</p>
+<p>如上图，此时我们 <code>npm run build</code> 打包出一个引用了这两个文件的 <code>index.html</code>，那么如何打包出不同 HTML 文件，分别应用不同入口 JS 文件呢，此时我们需要借助于 <code>HtmlWebpackPlugin</code> 这个插件。</p>
+<p><code>HtmlWebpackPlugin</code> 这个插件， <code>new</code> 一个，就打包一个 HTML 页面，所以我们在 <code>plugins</code> 配置里 <code>new</code> 两个，就能打包出两个页面来。</p>
+<h3 id="3-3-打包出不同的-HTML-页面"><a href="#3-3-打包出不同的-HTML-页面" class="headerlink" title="3.3 打包出不同的 HTML 页面"></a>3.3 打包出不同的 HTML 页面</h3><p>我们把配置文件改成下面这样：</p>
+<pre><code>// build/webpack.prod.conf.js
+module.exports =&#123;
+  entry:&#123;
+    entry:&#39;./src/main.js&#39;,// 打包输出的chunk名为entry
+    entry2:&#39;./src/main2.js&#39;// 打包输出的chunk名为entry2
+  &#125;,
+  output:&#123;
+    filename:&#39;[name].js&#39;,
+    publicPath:&#39;/&#39;
+  &#125;,
+  plugins:[
+    newHtmlWebpackPlugin(&#123;
+          filename:&#39;entry.html&#39;,// 要打包输出的文件名
+          template:&#39;index.html&#39;,// 打包输出后该html文件的名称
+          chunks:[&#39;manifest&#39;,&#39;vendor&#39;,&#39;entry&#39;]// 输出的html文件引入的入口chunk
+    // 还有一些其他配置比如minify、chunksSortMode和本文无关就省略，详见github
+    &#125;),
+    newHtmlWebpackPlugin(&#123;
+      filename:&#39;entry2.html&#39;,
+      template:&#39;index.html&#39;,
+      chunks:[&#39;manifest&#39;,&#39;vendor&#39;,&#39;entry2&#39;]
+    &#125;)
+  ]
+&#125;
+</code></pre>
+<p>上面一个配置要注意的是 <code>chunks</code>，如果没有配置，那么生成的 HTML 会引入所有入口 JS 文件，在上面的例子就是，生成的两个 HTML 文件都会引入 <code>entry.js</code> 和 <code>entry2.js</code>，所以要使用 <code>chunks</code> 配置来指定生成的 HTML 文件应该引入哪个 JS 文件。配置了 <code>chunks</code> 之后，才能达到不同的 HTML 只引入对应 <code>chunks</code> 的 JS 文件的目的。</p>
+<p>大家可以看到除了我们打包生成的 <code>chunk</code> 文件 <code>entry.js</code> 和 <code>entry2.js</code> 之外，还有 <code>manifest</code> 和 <code>vendor</code> 这两个，这里稍微解释一下这两个 <code>chunk</code>：</p>
+<ol>
+<li><p><code>vendor</code> 是指提取涉及 <code>node_modules</code> 中的公共模块；</p>
+</li>
+<li><p><code>manifest</code> 是对 <code>vendor</code> 模块做的缓存；</p>
+</li>
+</ol>
+<p>打包完的结果如下：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p>文件结构：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p>现在打包出来的样式正是我们所需要的，此时我们在 <code>dist</code> 目录下启动 <code>live-server</code>（如果你没安装的话可以先安装 <code>npm i-g live-server</code>），就可以看到效果出来了：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p>当前代码：Github - multi-entry-vue2</p>
+<p>至此就实现了一个简单的多入口项目的配置。</p>
+<h2 id="4-配置改进"><a href="#4-配置改进" class="headerlink" title="4. 配置改进"></a>4. 配置改进</h2><h3 id="4-1-文件结构改动"><a href="#4-1-文件结构改动" class="headerlink" title="4.1 文件结构改动"></a>4.1 文件结构改动</h3><p>我们在前文进行了多入口的配置，要想新建一个新的入口，就复制多个文件，再手动改一下对应配置。</p>
+<p>但是如果不同的 HTML 文件下不同的 <code>vue-router</code>、 <code>vuex</code> 都放到 <code>src</code> 目录下，多个入口的内容平铺在一起，项目目录会变得凌乱不清晰，因此在下将多入口相关的文件放到一个单独的文件夹中，以后如果有多入口的内容，就到这个文件夹中处理。</p>
+<p>下面我们进行文件结构的改造：</p>
+<ol>
+<li><p>首先我们在根目录创建一个 <code>entries</code> 文件夹，把不同入口的 <code>router</code>、 <code>store</code>、 <code>main.js</code> 都放这里，每个入口相关单独放在一个文件夹；</p>
+</li>
+<li><p>在 <code>src</code> 目录下建立一个 <code>common</code> 文件夹，用来存放多入口共用的组件等；</p>
+</li>
+</ol>
+<p>现在的目录结构：</p>
+<pre><code>├── build    # 没有改动
+├── config   # 没有改动
+├── entries  # 存放不同入口的文件
+│   ├── entry1
+│   │   ├── router       # entry1 的 router
+│   │   │   └── index.js
+│   │   ├── store        # entry1 的 store
+│   │   │   └── index.js
+│   │   ├──App.vue      # entry1 的根组件
+│   │   ├── index.html   # entry1 的页面模版
+│   │   └── main.js      # entry1 的入口
+│   └── entry2
+│       ├── router
+│       │   └── index.js
+│       ├── store
+│       │   └── index.js
+│       ├──App.vue
+│       ├── index.html
+│       └── main.js
+├── src
+│   ├── assets
+│   │   └── logo.png
+│   ├── common          # 多入口通用组件
+│   │   └──CommonTemplate.vue
+│   └── components
+│       ├──HelloWorld.vue
+│       ├── test1.vue
+│       └── test2.vue
+├── static
+├── README.md
+├── index.html
+├── package-lock.json
+└── package.json
+</code></pre>
+<h3 id="4-2-webpack-配置"><a href="#4-2-webpack-配置" class="headerlink" title="4.2 webpack 配置"></a>4.2 webpack 配置</h3><p>然后我们在 <code>build/utils</code> 文件中加两个函数，分别用来生成 webpack 的 <code>entry</code> 配置和 <code>HtmlWebpackPlugin</code> 插件配置，由于要使用 <code>node.js</code> 来读取文件夹结构，因此需要引入 <code>fs</code>、 <code>glob</code> 等模块：</p>
+<pre><code>// build/utils
+const fs = require(&#39;fs&#39;)
+const glob = require(&#39;glob&#39;)
+const merge = require(&#39;webpack-merge&#39;)
+constHtmlWebpackPlugin= require(&#39;html-webpack-plugin&#39;)
+const ENTRY_PATH = path.resolve(__dirname,&#39;../entries&#39;)
+// 多入口配置，这个函数从 entries 文件夹中读取入口文件，装配成webpack.entry配置
+exports.entries =function()&#123;
+const entryFiles = glob.sync(ENTRY_PATH +&#39;/*/*.js&#39;)
+const map =&#123;&#125;
+  entryFiles.forEach(filePath =&gt;&#123;
+const filename = filePath.replace(/.*\/(\w+)\/\w+(\.html|\.js)$/,(rs, $1)=&gt; $1)
+    map[filename]= filePath
+&#125;)
+return map
+&#125;
+// 多页面输出模版配置 HtmlWebpackPlugin，根据环境装配html模版配置
+exports.htmlPlugin =function()&#123;
+  let entryHtml = glob.sync(ENTRY_PATH +&#39;/*/*.html&#39;)
+  let arr =[]
+  entryHtml.forEach(filePath =&gt;&#123;
+    let filename = filePath.replace(/.*\/(\w+)\/\w+(\.html|\.js)$/,(rs, $1)=&gt; $1)
+    let conf =&#123;
+      template: filePath,
+      filename: filename +&#39;.html&#39;,
+      chunks:[filename],
+      inject:true
+&#125;
+
+// production 生产模式下配置
+if(process.env.NODE_ENV ===&#39;production&#39;)&#123;
+      conf = merge(conf,&#123;
+        chunks:[&#39;manifest&#39;,&#39;vendor&#39;],
+        minify:&#123;
+          removeComments:true,
+          collapseWhitespace:true,
+          removeAttributeQuotes:true
+&#125;,
+        chunksSortMode:&#39;dependency&#39;
+&#125;)
+&#125;
+    arr.push(newHtmlWebpackPlugin(conf))
+&#125;)
+return arr
+&#125;
+</code></pre>
+<p>稍微解释一下这两个函数：</p>
+<ol>
+<li><p><code>exports.entries</code> 函数从 <code>entries</code> 文件夹中找到二级目录下的 JS 文件作为入口文件，并且将二级目录的文件夹名作为 <code>key</code>，生成这样一个对象：<code>&#123;&quot;entry1&quot;:&quot;/multi-entry-vue/entries/entry1/main.js&quot;&#125;</code>，多个入口情况下会有更多键值对；</p>
+</li>
+<li><p><code>exports.htmlPlugin</code> 函数和之前函数的原理类似，不过组装的是 <code>HtmlWebpackPlugin</code> 插件的配置，生成这样一个数组，可以看到和我们手动设置的配置基本一样，只不过现在是根据文件夹结构来生成的：</p>
+<p> // production 下<br> [<br> {</p>
+<pre><code> template:&quot;/multi-entry-vue/entries/entry1/index.html&quot;,
+ chunks:[&#39;manifest&#39;,&#39;vendor&#39;,&#39;entry1&#39;],
+ filename:&quot;entry1.html&quot;,
+ chunksSortMode:&#39;dependency&#39;
+</code></pre>
+<p> },<br> {…}// 下一个入口的配置<br> ]</p>
+</li>
+</ol>
+<p>有了这两个根据 <code>entries</code> 文件夹的结构来自动生成 webpack 配置的函数，下面来改一下 webpack 相关的几个配置文件：</p>
+<pre><code>// build/webpack.base.conf.js
+module.exports =&#123;
+  entry: utils.entries(),// 使用函数生成 entry 配置
+  output:&#123;
+    path: config.build.assetsRoot,
+    filename:&#39;[name].js&#39;,
+    publicPath: process.env.NODE_ENV ===&#39;production&#39;
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
+  &#125;
+&#125;
+// build/webpack.dev.conf.js
+// const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)  // 不需要了
+const devWebpackConfig = merge(baseWebpackConfig,&#123;
+  devServer:&#123;
+    historyApiFallback:&#123;
+      rewrites:[// 别忘了把 devserver 的默认路由改一下
+        &#123; from:/.*/, to: path.posix.join(config.dev.assetsPublicPath,&#39;entry1.html&#39;)&#125;,
+      ],
+    &#125;
+  &#125;,
+  plugins:[
+    // https://github.com/ampedandwired/html-webpack-plugin
+    // new HtmlWebpackPlugin(&#123;
+    //   filename: &#39;index.html&#39;,
+    //   template: &#39;index.html&#39;,
+    //   inject: true
+    // &#125;),                   // 注释掉原来的 HtmlWebpackPlugin 配置，使用生成的配置
+  ].concat(utils.htmlPlugin())
+&#125;)
+
+// build/webpack.prod.conf.js
+// const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)
+const webpackConfig = merge(baseWebpackConfig,&#123;
+  plugins:[
+  // new HtmlWebpackPlugin(&#123;
+  //   ... 注释掉，不需要了
+  // &#125;),
+  ].concat(utils.htmlPlugin())
+&#125;)
+</code></pre>
+<p>现在我们再 <code>npm run build</code>，看看生成的目录是什么样的：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XP4dRIhZqqU4jEtH5Upia9D5BoOxBGFRpwD2amvMGhAiaicmvPlBf4QMfslVV9WT3YxtV6nliaTcQdbZca7PQCm4rg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="xuehuayu.cn"></p>
+<p>此时我们在 <code>dist</code> 目录下启动 <code>live-server</code> 看看是什么效果：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/XP4dRIhZqqU4jEtH5Upia9D5BoOxBGFRpTjh4JwsEcOibT8JicJemY6aPk3mn9y2kSYpq6Piamu6uOde4hTyfoeqRg/640?wx_fmt=gif&tp=webp&wxfrom=5&wx_lazy=1" alt="xuehuayu.cn"></p>
+<p>当前代码：Github - multi-entry-vue3</p>
+<hr>
+<p>网上的帖子大多深浅不一，甚至有些前后矛盾，在下的文章都是学习过程中的总结，如果发现错误，欢迎留言指出~</p>
+<blockquote>
+<p>参考：</p>
+<ol>
+<li>webpack解惑：多入口文件打包策略</li>
+<li>webpack配置文件：入口和出口，多入口、多出口配置</li>
+<li>一看就懂之webpack高级配置与优化</li>
+</ol>
+</blockquote>
+<p><strong>推荐阅读</strong></p>
+<p>（点击标题可跳转阅读）</p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651557057&idx=1&sn=3fc52a1998d954e6124dae11f859fe75&chksm=80255b00b752d216450352894c3c35f54691401af65688a789df63c7b74b9401740250463fca&scene=21#wechat_redirect">浏览器垃圾回收机制与 Vue 项目内存泄漏场景分析</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651557043&idx=2&sn=531feefa5133f279ccae6242ea16e0c0&chksm=80255b72b752d264692bfee6d71ed582cef914c526fc18b5ddcc841cc4f64c07e447dff06a42&scene=21#wechat_redirect">愿未来没有 Webpack</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651557038&idx=1&sn=c1bda14bb9e8da7db2a17cacfb885eb1&chksm=80255b6fb752d279e303bb61ec0a92c79352dfe73d2ee26d16d14f1bfb22d036c68b77decae5&scene=21#wechat_redirect">深入理解图片和框架的原生懒加载功能</a></p>
+<p>觉得本文对你有帮助？请分享给更多人</p>
+<p>关注「前端大全」加星标，提升前端技能</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/zPh0erYjkib3jzxuxibgz8GJ7k0UVp4kHMMDsL32ialKjpkgA9q7BFkbJ8VRYh0Liad1x6rD7w6oU7icR9DVPgsIxzQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="xuehuayu.cn"></p>
+<p>好文章，我在看❤️</p>
+</div><iframe src="/donate/?AliPayQR=https://store.xuehuayu.cn/store/public/alipay_qr.jpg&amp;WeChatQR=https://store.xuehuayu.cn/store/public/wechat_qr.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://www.paypal.com/paypalme/OrdinaryPerson" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>雪花雨</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/2019/11/22/一文搞懂-Webpack-多入口配置.html">https://xuehuayu.cn/2019/11/22/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82-Webpack-%E5%A4%9A%E5%85%A5%E5%8F%A3%E9%85%8D%E7%BD%AE.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 转载文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/2019/11/27/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.html">前端面试之手写观察者模式</a><a class="next" href="/2019/11/21/%E5%A6%82%E4%BD%95%E5%AF%B9-React-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96.html">如何对 React 函数式组件进行优化</a></div><div id="vcomment"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//cdn.jsdelivr.net/npm/valine@^1/dist/Valine.min.js"></script><script>var VERIFY = ['nick', 'mail']
+var verify = 'nick,mail'.split(',').filter(function(item){
+  return VERIFY.indexOf(item) !== -1
+});
+verify = verify.length == 0 ? VERIFY : verify;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  appId:'Pt5dXCRRAeqLpXMJ1mS3sIsk-gzGzoHsz',
+  appKey:'3gXWn2UbeH70Q3orJsbHh5qs',
+  placeholder:'正确填写邮箱，收到回复有邮件通知哦！😎',
+  avatar:'mp',
+  meta:guest_info,
+  requiredFields: verify,
+  recordIP: 'false',
+  visitor: 'true',
+})
+//- $.get('https://cmts.xuehuayu.cn')
+</script><script>(function(){
+  var scripts = document.getElementsByTagName('script')
+  var sLen = scripts.length
+  var fd = document.createElement('script')
+  var hasDebug = false
+  fd.setAttribute('apikey', '0b7cd004d208c5ab1739e9aba226862e9580af0d1c6042d40ad5710595e832e3')
+  fd.setAttribute('crossorigin', 'anonymous')
+  fd.src='//js.fundebug.cn/fundebug.2.0.0.min.js'
+  for (var i = 0; i < scripts.length; i++) {
+    if($(scripts[i]).attr('src') && $(scripts[i]).attr('src').indexOf('fundebug.cn') > -1) {
+      hasDebug = true
+      var p = scripts[i].parentNode
+      scripts[i].remove()
+      p.appendChild(fd)
+    }
+  }
+  !hasDebug && $('head').append(fd)
+})()</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = 'search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/antd/">antd</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/app/">app</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/babel/">babel</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/electron/">electron</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/h5/">h5</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/http/">http</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">52</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mvvm/">mvvm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/valine/">valine</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/xhr/">xhr</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E5%B7%A7/">技巧</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90/">资源</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%BB%E6%9D%BE%E4%B8%80%E5%88%BB/">轻松一刻</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-tags"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 15px;">原创</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 15px;">转载</a> <a href="/tags/%E7%96%AB%E6%83%85/" style="font-size: 15px;">疫情</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15px;">网络</a></div></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/02/19/android-studio%E6%A8%A1%E6%8B%9F%E5%99%A8AVD%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91%E9%97%AE%E9%A2%98.html">android studio模拟器AVD无法联网问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/10/%E4%B8%80%E6%AC%BE%E5%85%A8%E7%BD%91%E8%A7%86%E9%A2%91%E8%81%9A%E5%90%88APP%EF%BC%8C%E6%97%A0%E5%B9%BF%E5%91%8A%EF%BC%8C%E6%97%A0%E9%9A%90%E7%A7%81.html">追剧必备，一款全网视频小说漫画聚合手机APP</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/28/uni-app%E7%9A%84webview%E9%A1%B5%E9%9D%A2subNvue%E5%BC%B9%E7%AA%97%E8%AE%BE%E7%BD%AE.html">uni-app的webview页面subNvue弹窗设置border-radius圆角</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/08/webpack%E7%9A%84%E7%83%AD%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86.html">webpack的热更新原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/01/uniapp%E7%9A%84web-view%E7%BB%84%E4%BB%B6%E6%97%A0%E6%B3%95%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%AC%E5%9C%B0html%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html">uniapp的web-view组件无法动态加载本地html文件的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/28/%E5%93%88%E5%93%88%E5%93%88%E5%93%88-%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%B0%8F%E5%AD%A6%E7%94%9F%E5%A4%AA%E6%90%9E%E7%AC%91%E4%BA%86.html">哈哈哈哈~~现在的小学生太搞笑了~~</a></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://www.hellolbc.me?from=xuehuayu.cn" title="百川的博客" target="_blank">百川的博客</a><ul></ul><a href="https://m3w.cn/nplayer?from=xuehuayu.cn" title="nPlayer" target="_blank">nPlayer</a><ul></ul><a href="https://github.com/npljy?from=xuehuayu.cn" title="GitHub" target="_blank">GitHub</a><ul></ul><a href="https://blog.csdn.net/u010762099?from=xuehuayu.cn" title="CSDN" target="_blank">CSDN</a><ul></ul><a href="https://xhy.coding.net?from=xuehuayu.cn" title="coding" target="_blank">coding</a><ul></ul><a href="https://cainiaoblog.cn?from=xuehuayu.cn" title="菜鸟博客" target="_blank">菜鸟博客</a><ul></ul><a href="mailto:boss@com.email.cn" title="友链联系" target="_blank">友链联系</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">前端壹菜鸟. </a><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;amp;utm_medium=referral"><img class="nofancybox" height="40" style="vertical-align: middle" src="/img/upy_logo.svg"/></a><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a><br/><div class="busuanzi_container" id="busuanzi_container"><span class="busuanzi_container_site_pv" id="busuanzi_container_site_pv">访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner"></i></span></span><span class="busuanzi_container_site_uv" id="busuanzi_container_site_uv">访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner"></i></span></span></div><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png"/><span id="gaba">京公网安备 11010802031264号</span></a><script>(function(){
+  var cnb =window.location.origin.indexOf('cainiaoblog') !==-1
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=202006301145" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
