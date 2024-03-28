@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>vscode 插件，CSS Peek 能让你在 HTML 文件中一键跳转到 CSS 定义 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//jsd.cdn.zzko.cn/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//jsd.cdn.zzko.cn/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//jsd.cdn.zzko.cn/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//jsd.cdn.zzko.cn/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//jsd.cdn.zzko.cn/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.1.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.net/a/big_old/thank" target="_target"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_target"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">vscode 插件，CSS Peek 能让你在 HTML 文件中一键跳转到 CSS 定义</h1><div class="post-meta"><span class="date">2019-12-02</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 21</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 1</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/15428.html#waline-comment"><span class="waline-comment-count" data-path="/article/15428.html">0</span><span> 条评论</span></a><div class="post-content"><ul>
+<li><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=pranaygp.vscode-css-peek">vscode 插件，CSS Peek 能让你在 HTML 文件中一键跳转到 CSS 定义</a></li>
+</ul>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/15428.html">https://xuehuayu.cn/article/15428.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/54178.html">jQuery 模块终于从 AMD 迁移到了 ES 模块</a><a class="next" href="/article/26354.html">Mozilla 为开发者推出新的网页调试 Firefox Replay</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//jsd.cdn.zzko.cn/npm/@waline/client@v2/dist/waline.min.css"><script src="//jsd.cdn.zzko.cn/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//jsd.cdn.zzko.cn/npm/@waline/emojis@1.2.0/qq',
+    '//jsd.cdn.zzko.cn/npm/@waline/emojis@1.2.0/bmoji',
+    '//jsd.cdn.zzko.cn/npm/@waline/emojis@1.2.0/weibo',
+    '//jsd.cdn.zzko.cn/npm/@waline/emojis@1.2.0/tieba',
+    '//jsd.cdn.zzko.cn/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//jsd.cdn.zzko.cn/npm/@waline/emojis@1.2.0/alus',
+    '//jsd.cdn.zzko.cn/npm/@waline/emojis@1.2.0/bilibili',
+    '//jsd.cdn.zzko.cn/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li><li class="post-list-item"><a class="post-list-link" href="/article/bf6d70b6.html">js根据月份计算第一天和最后一天</a></li><li class="post-list-item"><a class="post-list-link" href="/article/a9c48713.html">js获取当天、本周、本月、本年的开始时间和结束时间</a></li><li class="post-list-item"><a class="post-list-link" href="/article/79636f56.html">项目中用的20个轮子 开发效率提升200% 建议收藏</a></li><li class="post-list-item"><a class="post-list-link" href="/article/405fc2a5.html">手动实现uni-app可用的new URL</a></li><li class="post-list-item"><a class="post-list-link" href="/article/72503f26.html">uni-app集成mui-player</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7e2721b7.html">uni-app/iOS/safari不支持正则预查匹配?=、反向预查匹配?<=、正向预查不匹配?!、反向预查不匹配?<!</a></li><li class="post-list-item"><a class="post-list-link" href="/article/64fa40dd.html">某某某小说app接口抓包分析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/9c3c56c.html">vue、react、webpack、babel</a></li><li class="post-list-item"><a class="post-list-link" href="/article/84c9ccd6.html">精读《SolidJS》</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//jsd.cdn.zzko.cn/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.net/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2024 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="/"><div class="busuanzi_container" id="busuanzi_container"><span class="busuanzi_container_site_pv" id="busuanzi_container_site_pv">访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner"></i></span></span><span class="busuanzi_container_site_uv" id="busuanzi_container_site_uv">访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner"></i></span></span><span style="padding-right: 10px;"></span></div></a><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div><div class="flex-block justify-center align-center flex-wrap"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//jsd.cdn.zzko.cn/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>
