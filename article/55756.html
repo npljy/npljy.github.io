@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>ESLint v7.0.0 将会有哪些新功能？ | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//jsd.onmicrosoft.cn/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//jsd.onmicrosoft.cn/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//jsd.onmicrosoft.cn/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//jsd.onmicrosoft.cn/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//jsd.onmicrosoft.cn/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.net/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a href="https://chatbot.weixin.qq.com/webapp/V2n6xMymCDSES64N87KuxF0WBxK9Zk?robotName=%E5%A4%A7%E8%80%81" target="_self"><i class="fa fa-user"> 联系我</i></a><a href="/atom.xml" target="_self"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">ESLint v7.0.0 将会有哪些新功能？</h1><div class="post-meta"><span class="date">2020-03-23</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.3k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 5</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/55756.html#waline-comment"><span class="waline-comment-count" data-path="/article/55756.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/YsR9NGIUyBANFUxceJdfqw</code><br>最近，<code>ESLint</code> 开始发布 <code>v7.0.0</code> 的 <code>alpha</code> 版本，据官方描述，<code>v7.0.0</code> 是 <code>ESLint</code> 的一个重要的里程碑版本，你可以在 <code>Github</code> 的项目看板中看到 <code>v7.0.0</code> 将计划支持的所有内容。</p>
+<span id="more"></span>
+<p><img src="https://store.xuehuayu.cn/store20200323/202003231036-1.jpg" alt="xuhuayu.cn"><br>下面我就带大家来看看将要有哪些更改，以便你可以更好地为更改做准备，并了解为什么需要进行这些更改。</p>
+<h2 id="放弃对-Node-js-v8-x-的支持"><a href="#放弃对-Node-js-v8-x-的支持" class="headerlink" title="放弃对 Node.js v8.x 的支持"></a>放弃对 Node.js v8.x 的支持</h2><p><code>Node.js v8.x</code> 于2019年12月正式停止维护，因此 <code>v7.0.0</code> 删除了对该版本 <code>Node.js</code> 的支持。</p>
+<h2 id="ESLint-类替代-CLIEngine-类"><a href="#ESLint-类替代-CLIEngine-类" class="headerlink" title="ESLint 类替代 CLIEngine 类"></a>ESLint 类替代 CLIEngine 类</h2><p>从 <code>ESLint</code> 的早期开始，我们提供了一个 <code>CLIEngine</code> 类，允许开发人员创建 <code>ESLint</code> 的一些扩展，例如编辑器插件、构建工具插件等等。<code>CLIEngine</code> 类为 <code>ESLint</code> 提供支持，多年来一直是该项目的重要组成部分。</p>
+<p>不幸的是， <code>CLIEngine</code> 已经成为许多新特性的主要阻碍。最重要的是，因为<code>CLIEngine</code> 类是同步工作的，所以在 <code>ESLint</code> 的核心中不可能执行任何类型的异步操作。这一限制意味着诸如文件的并行连接和加载 <code>ECMAScript</code> 模块(ESM)文件等功能无法实现。</p>
+<p>在我们决定用新的 <code>ESLint</code> 类替换 <code>CLIEngine</code> 类之前，考虑了几种方法。<code>ESLint</code> 类将包含异步方法，作为将异步功能引入核心的起点。最开始， <code>ESLint</code> 类只是对 <code>CLIEngine</code> 的一个封装，随着时间的推移，我们将系统地开始在 <code>ESLint</code> 类中编写新功能。最终， <code>ESLint</code> 和 <code>CLIEngine</code> 类将完全独立。</p>
+<p>在 <code>v7.0.0</code>，<code>CLIEngine</code>类将被弃用，但不会删除。我们会在将来的主要版本中将 <code>CLIEngine</code> 删除（不用担心，在这样做之前，我们会给您很多提示）。</p>
+<h2 id="弃用-Node-js-CommonJS-特定的规则"><a href="#弃用-Node-js-CommonJS-特定的规则" class="headerlink" title="弃用 Node.js &#x2F; CommonJS 特定的规则"></a>弃用 Node.js &#x2F; CommonJS 特定的规则</h2><p>因此，以下规则将在 <code>core</code> 中被弃用：</p>
+<p>在 <code>core</code> 中管理规则是正在进行的 <code>ESLint</code> 维护的重要组成部分。随着项目的发展，我们维护的规则数量也在增加。我们检查了所有当前规则，并确定特定于 <code>Node.js / CommonJS</code> 的规则没有必要包含在未来的 <code>core</code> 中。特别是 <code>Node.js</code> 更倾向于 <code>ESM</code> 作为首选模块系统时。</p>
+<ul>
+<li>callback-return</li>
+<li>global-require</li>
+<li>handle-callback-err</li>
+<li>no-buffer-constructor</li>
+<li>no-mixed-requires</li>
+<li>no-new-require</li>
+<li>no-path-concat</li>
+<li>no-process-env</li>
+<li>no-process-exit</li>
+<li>no-restricted-modules</li>
+</ul>
+<p>这些规则将移至 <code>eslint-plugin-node</code> 项目。我们建议用户用插件的方式引入这些规则。这些规则将保留在 <code>ESLint v7.0.0</code> 中，并将在以后的 <code>major</code> 版本中删除。</p>
+<h2 id="指令注释中的描述"><a href="#指令注释中的描述" class="headerlink" title="指令注释中的描述"></a>指令注释中的描述</h2><p>指令注释描述允许你给自己和其他开发人员留下关于为什么要包含注释的说明。例如:</p>
+<pre><code>/* eslint-disable no-new -- this class has a side-effect in the constructor. */
+</code></pre>
+<h2 id="对-eslintrc-配置文件的使用警告"><a href="#对-eslintrc-配置文件的使用警告" class="headerlink" title="对 ~&#x2F;.eslintrc 配置文件的使用警告"></a>对 ~&#x2F;.eslintrc 配置文件的使用警告</h2><p><code>v6.7.0</code> 中已弃用主目录中的配置文件，并且在 <code>v7.0.0</code> 中使用时会发出警告。长期以来，此功能一直使 <code>ESLint</code> 用户感到困惑，尤其是因为如果找不到其他配置文件， <code>ESLint</code> 只会在主目录中查找配置文件。自引入主目录配置文件以来， <code>ESLint</code> 中的配置系统已发生了很大变化，并且由于具有额外的灵活性，我们认为还有许多比主目录配置文件更清晰的其他配置 <code>ESLint</code> 的选项。</p>
+<p><code>v8.0.0</code> 中将删除对主目录配置文件的支持。</p>
+<h2 id="使用–config或时更新基本路径–ignore-path"><a href="#使用–config或时更新基本路径–ignore-path" class="headerlink" title="使用–config或时更新基本路径–ignore-path"></a>使用–config或时更新基本路径–ignore-path</h2><p>在 <code>v7.0.0</code> 之前的版本中，<code>ESLint</code> 将解析配置文件中的引用，或者忽略相对于传递给 <code>--config</code> 或 <code>-—ignore-path</code> 的文件位置相关的文件。这没有多大意义，并且会给用户带来混乱和意外行为。在 <code>v7.0.0</code> 中，配置文件和忽略使用 <code>--config</code> 或 <code>--ignore-path</code> 传递的文件使用当前工作目录作为它们的基本路径。</p>
+<h2 id="从配置文件目录加载的插件"><a href="#从配置文件目录加载的插件" class="headerlink" title="从配置文件目录加载的插件"></a>从配置文件目录加载的插件</h2><p>在<code>v7.0.0</code>中，将相对于引用插件的配置加载插件。</p>
+<h2 id="配置文件中的文件扩展名"><a href="#配置文件中的文件扩展名" class="headerlink" title="配置文件中的文件扩展名"></a>配置文件中的文件扩展名</h2><p><code>ESLint v7.0.0</code> 将读取 <code>overrides</code> 配置部分中的全局模式，以确定要处理的文件。在 <code>v7.0.0</code>之前，您需要提供 <code>--ext</code> 命令行标志以指定要添加到 <code>lint</code> 的其他文件。</p>
+<h2 id="更新了默认-ignore-模式"><a href="#更新了默认-ignore-模式" class="headerlink" title="更新了默认 ignore 模式"></a>更新了默认 ignore 模式</h2><p>除了当前的默认值， <code>ESLint</code> 的默认忽略模式将更改为：</p>
+<ul>
+<li>不忽略 <code>.eslintrc.js</code></li>
+<li>不忽略 <code>/bower_components/*</code></li>
+<li>在子目录中忽略 <code>node_modules/*</code></li>
+</ul>
+<h2 id="更严格的-RuleTester"><a href="#更严格的-RuleTester" class="headerlink" title="更严格的 RuleTester"></a>更严格的 RuleTester</h2><p>将 <code>RuleTester</code> 类添加一些额外的检查，以确保规则的正常工作：</p>
+<ul>
+<li>如果规则使用非标准 <code>node.start</code> 或 <code>node.end</code> 属性，则失败，<code>ESLint</code> 支持的所有解析器可能未提供这些非标准或属性。</li>
+<li>自动修复程序规则必须测试其修复程序的输出。</li>
+<li>现在测试代码存在语法错误的地方将失败。</li>
+<li>如果测试规范包含未知属性，则测试失败。</li>
+</ul>
+<h2 id="安装-v7-0-0-的预览版本"><a href="#安装-v7-0-0-的预览版本" class="headerlink" title="安装 v7.0.0 的预览版本"></a>安装 v7.0.0 的预览版本</h2><p>如果您想测试 <code>v7.0.0</code> 的开发过程，则可以使用 <code>next</code> 标记从 <code>npm</code> 安装：</p>
+<pre><code>npm i eslint@next --save-dev
+</code></pre>
+<blockquote>
+<p>更多内容请关注官方文档：<a target="_blank" rel="noopener" href="https://eslint.org/">https://eslint.org/</a></p>
+</blockquote>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/55756.html">https://xuehuayu.cn/article/55756.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/1518.html">一文完全吃透 JavaScript 继承(面试必备良药)</a><a class="next" href="/article/12238.html">如何固定table表格的列</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//jsd.onmicrosoft.cn/npm/@waline/client@v2/dist/waline.min.css"><script src="//jsd.onmicrosoft.cn/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/qq',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/bmoji',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/weibo',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/tieba',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/alus',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/bilibili',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li><li class="post-list-item"><a class="post-list-link" href="/article/bf6d70b6.html">js根据月份计算第一天和最后一天</a></li><li class="post-list-item"><a class="post-list-link" href="/article/a9c48713.html">js获取当天、本周、本月、本年的开始时间和结束时间</a></li><li class="post-list-item"><a class="post-list-link" href="/article/79636f56.html">项目中用的20个轮子 开发效率提升200% 建议收藏</a></li><li class="post-list-item"><a class="post-list-link" href="/article/405fc2a5.html">手动实现uni-app可用的new URL</a></li><li class="post-list-item"><a class="post-list-link" href="/article/72503f26.html">uni-app集成mui-player</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7e2721b7.html">uni-app/iOS/safari不支持正则预查匹配?=、反向预查匹配?<=、正向预查不匹配?!、反向预查不匹配?<!</a></li><li class="post-list-item"><a class="post-list-link" href="/article/64fa40dd.html">某某某小说app接口抓包分析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/9c3c56c.html">vue、react、webpack、babel</a></li><li class="post-list-item"><a class="post-list-link" href="/article/84c9ccd6.html">精读《SolidJS》</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//jsd.onmicrosoft.cn/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.net/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="摸鱼日历" width="100%" src="https://dayu.qqsuu.cn/moyuribao/apis.php" onclick="window.open(&quot;https://dayu.qqsuu.cn/moyuribao/apis.php&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2024 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="/"><div class="busuanzi_container" id="busuanzi_container"><span class="busuanzi_container_site_pv" id="busuanzi_container_site_pv">访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner"></i></span></span><span class="busuanzi_container_site_uv" id="busuanzi_container_site_uv">访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner"></i></span></span><span style="padding-right: 10px;"></span></div></a><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div><div class="flex-block justify-center align-center flex-wrap"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>

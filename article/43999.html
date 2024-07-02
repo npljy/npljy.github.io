@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>11 种在大多数教程中找不到的JavaScript技巧 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//jsd.onmicrosoft.cn/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//jsd.onmicrosoft.cn/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//jsd.onmicrosoft.cn/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//jsd.onmicrosoft.cn/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//jsd.onmicrosoft.cn/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.net/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a href="https://chatbot.weixin.qq.com/webapp/V2n6xMymCDSES64N87KuxF0WBxK9Zk?robotName=%E5%A4%A7%E8%80%81" target="_self"><i class="fa fa-user"> 联系我</i></a><a href="/atom.xml" target="_self"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">11 种在大多数教程中找不到的JavaScript技巧</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"><i class="fa fa-spinner"></i></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 9</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/43999.html#waline-comment"><span class="waline-comment-count" data-path="/article/43999.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.html.cn/web/javascript/14151.html</code></p>
+<p>在这篇文章中，将分享11条我认为特别有用的技巧。这篇文章是为初学者准备的，但希望即使是中级JavaScript开发人员也能在这个列表中找到一些新的东西。</p>
+<span id="more"></span>
+<p><img src="https://img.php.cn/upload/article/000/000/006/5dd5fe17c5036748.jpg" alt="xuehuayu.cn"></p>
+<h2 id="1-过滤唯一值"><a href="#1-过滤唯一值" class="headerlink" title="1..过滤唯一值"></a>1..过滤唯一值</h2><p><code>Set</code>对象类型是在ES6中引入的，配合展开操作<code>...</code>一起，我们可以使用它来创建一个新数组，该数组只有唯一的值。</p>
+<pre><code>const array = [1, 1, 2, 3, 5, 5, 1]
+const uniqueArray = [...new Set(array)];
+console.log(uniqueArray); // Result: [1, 2, 3, 5]
+</code></pre>
+<p>在ES6之前，隔离惟一值将涉及比这多得多的代码。</p>
+<p>此技巧适用于包含基本类型的数组：<code>undefined</code>，<code>null</code>，<code>boolean</code>，<code>string</code>和<code>number</code>。 （如果你有一个包含对象，函数或其他数组的数组，你需要一个不同的方法！）</p>
+<h2 id="2-与或运算"><a href="#2-与或运算" class="headerlink" title="2. 与或运算"></a>2. 与或运算</h2><p>三元运算符是编写简单（有时不那么简单）条件语句的快速方法，如下所示：</p>
+<pre><code>x &gt; 100 ? &#39;Above 100&#39; : &#39;Below 100&#39;;
+x &gt; 100 ? (x &gt; 200 ? &#39;Above 200&#39; : &#39;Between 100-200&#39;) : &#39;Below 100&#39;;
+</code></pre>
+<p>但有时使用三元运算符处理也会很复杂。 相反，我们可以使用’与’<code>&amp;&amp;</code>和’或’<code>||</code> 逻辑运算符以更简洁的方式书写表达式。 这通常被称为“短路”或“短路运算”。</p>
+<h4 id="它是怎么工作的"><a href="#它是怎么工作的" class="headerlink" title="它是怎么工作的"></a><strong>它是怎么工作的</strong></h4><p>假设我们只想返回两个或多个选项中的一个。</p>
+<p>使用<code>&amp;&amp;</code>将返回第一个条件为<code>假</code>的值。如果每个操作数的计算值都为<code>true</code>，则返回最后一个计算过的表达式。</p>
+<pre><code>let one = 1, two = 2, three = 3;
+console.log(one &amp;&amp; two &amp;&amp; three); // Result: 3
+console.log(0 &amp;&amp; null); // Result: 0
+</code></pre>
+<p>使用<code>||</code>将返回第一个条件为<code>真</code>的值。如果每个操作数的计算结果都为<code>false</code>，则返回最后一个计算过的表达式。</p>
+<pre><code>let one = 1, two = 2, three = 3;
+console.log(one || two || three); // Result: 1
+console.log(0 || null); // Result: null
+</code></pre>
+<h4 id="例一"><a href="#例一" class="headerlink" title="例一"></a><strong>例一</strong></h4><p>假设我们想返回一个变量的长度，但是我们不知道变量的类型。</p>
+<p>我们可以使用<code>if/else</code>语句来检查<code>foo</code>是可接受的类型，但是这可能会变得非常冗长。或运行可以帮助我们简化操作：</p>
+<pre><code>return (foo || []).length
+</code></pre>
+<p>如果变量<code>foo</code>是true，它将被返回。否则，将返回空数组的长度:<code>0</code>。</p>
+<h4 id="例二"><a href="#例二" class="headerlink" title="例二"></a><strong>例二</strong></h4><p>你是否遇到过访问嵌套对象属性的问题？ 你可能不知道对象或其中一个子属性是否存在，这可能会导致令人沮丧的错误。</p>
+<p>假设我们想在<code>this.state</code>中访问一个名为<code>data</code>的属性，但是在我们的程序成功返回一个获取请求之前，<code>data</code> 是未定义的。</p>
+<p>根据我们使用它的位置，调用<code>this.state.data</code>可能会阻止我们的应用程序运行。 为了解决这个问题，我们可以将其做进一步的判断：</p>
+<pre><code>if (this.state.data) &#123;
+  return this.state.data;
+&#125; else &#123;
+  return &#39;Fetching Data&#39;;
+&#125;
+</code></pre>
+<p>但这似乎很重复。 ‘<code>或&#39;</code> 运算符提供了更简洁的解决方案：</p>
+<pre><code>return (this.state.data || &#39;Fetching Data&#39;);
+</code></pre>
+<h4 id="一个新特性-Optional-Chaining"><a href="#一个新特性-Optional-Chaining" class="headerlink" title="一个新特性: Optional Chaining"></a><strong>一个新特性: Optional Chaining</strong></h4><p>过去在 Object 属性链的调用中，很容易因为某个属性不存在而导致之后出现<code>Cannot read property xxx of undefined</code>的错误。</p>
+<p>那 <code>optional chaining</code> 就是添加了<code>?.</code>这么个操作符，它会先判断前面的值，如果是 <code>null</code> 或 <code>undefined</code>，就结束调用、返回 <code>undefined</code>。</p>
+<p>例如，我们可以将上面的示例重构为  <code>this.state.data?.()</code>。或者，如果我们主要关注<code>state</code> 是否已定义，我们可以返回<code>this.state？.data</code>。</p>
+<p>该提案目前处于第1阶段，作为一项实验性功能。 你可以在这里阅读它，你现在可以通过Babel使用你的JavaScript，将 @babel&#x2F;plugin-proposal-optional-chaining添加到你的<code>.babelrc</code>文件中。</p>
+<h2 id="3-转换为布尔值"><a href="#3-转换为布尔值" class="headerlink" title="3.转换为布尔值"></a>3.转换为布尔值</h2><p>除了常规的布尔值<code>true</code>和<code>false</code>之外，JavaScript还将所有其他值视为 <strong>‘truthy’</strong> 或<strong>‘falsy’</strong>。</p>
+<p>除非另有定义，否则 JavaScript 中的所有值都是’truthy’，除了 <code>0</code>，<code>“”</code>，<code>null</code>，<code>undefined</code>，<code>NaN</code>，当然还有<code>false</code>，这些都是**’falsy’**</p>
+<p>我们可以通过使用负算运算符轻松地在<code>true</code>和<code>false</code>之间切换。它也会将类型转换为“boolean”。</p>
+<pre><code>const isTrue  = !0;
+const isFalse = !1;
+const alsoFalse = !!0;
+console.log(isTrue); // Result: true
+console.log(typeof true); // Result: &quot;boolean&quot;
+</code></pre>
+<h2 id="4-转换为字符串"><a href="#4-转换为字符串" class="headerlink" title="4. 转换为字符串"></a>4. 转换为字符串</h2><p>要快速地将数字转换为字符串，我们可以使用连接运算符<code>+</code>后跟一组空引号<code>&quot;&quot;</code>。</p>
+<pre><code>const val = 1 + &quot;&quot;;
+console.log(val); // Result: &quot;1&quot;
+console.log(typeof val); // Result: &quot;string&quot;
+</code></pre>
+<h2 id="5-转换为数字"><a href="#5-转换为数字" class="headerlink" title="5. 转换为数字"></a>5. 转换为数字</h2><p>使用加法运算符<code>+</code>可以快速实现相反的效果。</p>
+<pre><code>let int = &quot;15&quot;;
+int = +int;
+console.log(int); // Result: 15
+console.log(typeof int); Result: &quot;number&quot;
+</code></pre>
+<p>这也可以用于将布尔值转换为数字，如下所示</p>
+<pre><code> console.log(+true);  // Return: 1
+ console.log(+false); // Return: 0
+</code></pre>
+<p>在某些上下文中，<code>+</code>将被解释为连接操作符，而不是加法操作符。当这种情况发生时(你希望返回一个整数，而不是浮点数)，您可以使用两个波浪号:<code>~~</code>。</p>
+<p>连续使用两个波浪有效地否定了操作，因为<code>— ( — n — 1) — 1 = n + 1 — 1 = n</code>。 换句话说，<code>~—16</code> 等于<code>15。</code></p>
+<pre><code>const int = ~~&quot;15&quot;
+console.log(int); // Result: 15
+console.log(typeof int); Result: &quot;number&quot;
+</code></pre>
+<p>虽然我想不出很多用例，但是按位NOT运算符也可以用在布尔值上：<code>~true = -2</code>和<code>~false = -1</code>。</p>
+<h2 id="6-性能更好的运算"><a href="#6-性能更好的运算" class="headerlink" title="6.性能更好的运算"></a>6.性能更好的运算</h2><p>从ES7开始，可以使用指数运算符<code>**</code>作为幂的简写，这比编写<code>Math.pow(2, 3)</code> 更快。 这是很简单的东西，但它之所以出现在列表中，是因为没有多少教程更新过这个操作符。</p>
+<pre><code>console.log(2 ** 3); // Result: 8
+</code></pre>
+<p>这不应该与通常用于表示指数的^符号相混淆，但在JavaScript中它是按位<code>异或</code>运算符。</p>
+<p>在ES7之前，只有以<code>2</code>为基数的幂才存在简写，使用按位左移操作符<code>&lt;&lt;</code></p>
+<pre><code>Math.pow(2, n);
+2 &lt;&lt; (n - 1);
+2**n;
+</code></pre>
+<p>例如，<code>2 &lt;&lt; 3 = 16</code>等于<code>2 ** 4 = 16</code>。</p>
+<h2 id="7-快速浮点数转整数"><a href="#7-快速浮点数转整数" class="headerlink" title="7. 快速浮点数转整数"></a>7. 快速浮点数转整数</h2><p>如果希望将浮点数转换为整数，可以使用<code>Math.floor()</code>、<code>Math.ceil()</code>或<code>Math.round()</code>。但是还有一种更快的方法可以使用<code>|</code>(位或运算符)将浮点数截断为整数。</p>
+<pre><code>console.log(23.9 | 0);  // Result: 23
+console.log(-23.9 | 0); // Result: -23
+</code></pre>
+<p><code>|</code>的行为取决于处理的是正数还是负数，所以最好只在确定的情况下使用这个快捷方式。</p>
+<p>如果<code>n</code>为正，则<code>n | 0</code>有效地向下舍入。 如果<code>n</code>为负数，则有效地向上舍入。 更准确地说，此操作将删除小数点后面的任何内容，将浮点数截断为整数。</p>
+<p>你可以使用<code>~~</code>来获得相同的舍入效果，如上所述，实际上任何位操作符都会强制浮点数为整数。这些特殊操作之所以有效，是因为一旦强制为整数，值就保持不变。</p>
+<h4 id="删除最后一个数字"><a href="#删除最后一个数字" class="headerlink" title="删除最后一个数字"></a><strong>删除最后一个数字</strong></h4><p><code>按位或</code>运算符还可以用于从整数的末尾删除任意数量的数字。这意味着我们不需要使用这样的代码来在类型之间进行转换。</p>
+<pre><code>let str = &quot;1553&quot;; 
+Number(str.substring(0, str.length - 1));
+</code></pre>
+<p>相反，按位或运算符可以这样写：</p>
+<pre><code>console.log(1553 / 10   | 0)  // Result: 155
+console.log(1553 / 100  | 0)  // Result: 15
+console.log(1553 / 1000 | 0)  // Result: 1
+</code></pre>
+<h2 id="8-类中的自动绑定"><a href="#8-类中的自动绑定" class="headerlink" title="8. 类中的自动绑定"></a>8. 类中的自动绑定</h2><p>我们可以在类方法中使用ES6箭头表示法，并且通过这样做可以隐含绑定。 这通常会在我们的类构造函数中保存几行代码，我们可以愉快地告别重复的表达式，例如<code>this.myMethod = this.myMethod.bind(this)</code></p>
+<pre><code>import React, &#123; Component &#125; from React;
+export default class App extends Compononent &#123;
+  constructor(props) &#123;
+  super(props);
+  this.state = &#123;&#125;;
+  &#125;
+myMethod = () =&gt; &#123;
+    // This method is bound implicitly!
+  &#125;
+render() &#123;
+    return (
+      &lt;&gt;
+        &lt;p&gt;
+          &#123;this.myMethod()&#125;
+        &lt;/p&gt;
+      &lt;/&gt;
+    )
+  &#125;
+&#125;;
+</code></pre>
+<h2 id="9-数组截断"><a href="#9-数组截断" class="headerlink" title="9. 数组截断"></a>9. 数组截断</h2><p>如果要从数组的末尾删除值，有比使用<code>splice()</code>更快的方法。</p>
+<p>例如，如果你知道原始数组的大小，您可以重新定义它的<code>length</code>属性，就像这样</p>
+<pre><code>let array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+array.length = 4;
+console.log(array); // Result: [0, 1, 2, 3]
+</code></pre>
+<p>这是一个特别简洁的解决方案。但是，我发现<code>slice()</code>方法的运行时更快。如果速度是你的主要目标，考虑使用：</p>
+<pre><code>let array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+array = array.slice(0, 4);
+console.log(array); // Result: [0, 1, 2, 3]
+</code></pre>
+<h2 id="10-获取数组中的最后一项"><a href="#10-获取数组中的最后一项" class="headerlink" title="10. 获取数组中的最后一项"></a>10. 获取数组中的最后一项</h2><p>数组方法<code>slice()</code>可以接受负整数，如果提供它，它将接受数组末尾的值，而不是数组开头的值。</p>
+<pre><code>let array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+console.log(array.slice(-1)); // Result: [9]
+console.log(array.slice(-2)); // Result: [8, 9]
+console.log(array.slice(-3)); // Result: [7, 8, 9]
+</code></pre>
+<h2 id="11-格式化JSON代码"><a href="#11-格式化JSON代码" class="headerlink" title="11.格式化JSON代码"></a>11.格式化JSON代码</h2><p>最后，你之前可能已经使用过<code>JSON.stringify</code>，但是您是否意识到它还可以帮助你缩进JSON？</p>
+<p><code>stringify()</code>方法有两个可选参数：一个<code>replacer</code>函数，可用于过滤显示的JSON和一个空格值。</p>
+<pre><code>console.log(JSON.stringify(&#123; alpha: &#39;A&#39;, beta: &#39;B&#39; &#125;, null, &#39;\t&#39;));
+// Result:
+// &#39;&#123;
+//     &quot;alpha&quot;: A,
+//     &quot;beta&quot;: B
+// &#125;&#39;
+</code></pre>
+<p><code>原文地址：https://medium.com/@bretcameron/12-javascript-tricks-you-wont-find-in-most-tutorials-a9c9331f169d</code></p>
+<p>为了保证的可读性，本文采用意译而非直译。</p>
+<p>更多<a target="_blank" rel="noopener" href="https://www.html.cn/">前端开发</a>知识，请查阅 HTML中文网 ！！</p>
+<p>以上就是11 种在大多数教程中找不到的JavaScript技巧的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/43999.html">https://xuehuayu.cn/article/43999.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/20021.html">如何在 JS 循环中正确使用 async 与 await</a><a class="next" href="/article/52500.html">20个棘手的ES6面试问题来提高JavaScript技能</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//jsd.onmicrosoft.cn/npm/@waline/client@v2/dist/waline.min.css"><script src="//jsd.onmicrosoft.cn/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/qq',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/bmoji',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/weibo',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/tieba',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/alus',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/bilibili',
+    '//jsd.onmicrosoft.cn/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li><li class="post-list-item"><a class="post-list-link" href="/article/bf6d70b6.html">js根据月份计算第一天和最后一天</a></li><li class="post-list-item"><a class="post-list-link" href="/article/a9c48713.html">js获取当天、本周、本月、本年的开始时间和结束时间</a></li><li class="post-list-item"><a class="post-list-link" href="/article/79636f56.html">项目中用的20个轮子 开发效率提升200% 建议收藏</a></li><li class="post-list-item"><a class="post-list-link" href="/article/405fc2a5.html">手动实现uni-app可用的new URL</a></li><li class="post-list-item"><a class="post-list-link" href="/article/72503f26.html">uni-app集成mui-player</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7e2721b7.html">uni-app/iOS/safari不支持正则预查匹配?=、反向预查匹配?<=、正向预查不匹配?!、反向预查不匹配?<!</a></li><li class="post-list-item"><a class="post-list-link" href="/article/64fa40dd.html">某某某小说app接口抓包分析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/9c3c56c.html">vue、react、webpack、babel</a></li><li class="post-list-item"><a class="post-list-link" href="/article/84c9ccd6.html">精读《SolidJS》</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//jsd.onmicrosoft.cn/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.net/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="摸鱼日历" width="100%" src="https://dayu.qqsuu.cn/moyuribao/apis.php" onclick="window.open(&quot;https://dayu.qqsuu.cn/moyuribao/apis.php&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2024 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="/"><div class="busuanzi_container" id="busuanzi_container"><span class="busuanzi_container_site_pv" id="busuanzi_container_site_pv">访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner"></i></span></span><span class="busuanzi_container_site_uv" id="busuanzi_container_site_uv">访客数：<span id="busuanzi_value_site_uv"><i class="fa fa-spinner"></i></span></span><span style="padding-right: 10px;"></span></div></a><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div><div class="flex-block justify-center align-center flex-wrap"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//jsd.onmicrosoft.cn/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>
