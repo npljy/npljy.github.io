@@ -1,0 +1,12 @@
+! [xuehuayu.cn]
+! Title: 菜鸟_MOB过滤器[xuehuayu.cn]
+! Version: 2408061
+! Expires: 7 days
+! Homepage: https://xuehuayu.cn?mobilefilter
+!********* filter start *********!
+
+!===  拼多多 ↓
+/d?$app=com.xunmeng.pinduoduo
+/d4?$app=com.xunmeng.pinduoduo
+*.h3*.mp4$app=com.xunmeng.pinduoduo
+!===  拼多多 ↑

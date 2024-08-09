@@ -1,0 +1,373 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>轻松理解webpack热更新原理 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//fastly.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//fastly.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//fastly.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//fastly.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//fastly.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a href="https://chatbot.weixin.qq.com/webapp/V2n6xMymCDSES64N87KuxF0WBxK9Zk?robotName=%E5%A4%A7%E8%80%81" target="_self"><i class="fa fa-user"> 联系我</i></a><a href="/atom.xml" target="_self"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">轻松理解webpack热更新原理</h1><div class="post-meta"><span class="date">2019-12-05</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 17</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/22237.html#waline-comment"><span class="waline-comment-count" data-path="/article/22237.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5de0cfe46fb9a071665d3df0</code></p>
+<blockquote>
+<p><code>Hot Module Replacement</code>，简称<code>HMR</code>，无需完全刷新整个页面的同时，更新模块。<code>HMR</code>的好处，在日常开发工作中体会颇深：<strong>节省宝贵的开发时间、提升开发体验</strong>。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="一、前言-webpack热更新"><a href="#一、前言-webpack热更新" class="headerlink" title="一、前言 - webpack热更新"></a>一、前言 - webpack热更新</h2><blockquote>
+<p><code>Hot Module Replacement</code>，简称<code>HMR</code>，无需完全刷新整个页面的同时，更新模块。<code>HMR</code>的好处，在日常开发工作中体会颇深：<strong>节省宝贵的开发时间、提升开发体验</strong>。</p>
+</blockquote>
+<p>刷新我们一般分为两种：</p>
+<ul>
+<li>一种是页面刷新，不保留页面状态，就是简单粗暴，直接<code>window.location.reload()</code>。</li>
+<li>另一种是基于<code>WDS (Webpack-dev-server)</code>的模块热替换，只需要局部刷新页面上发生变化的模块，同时可以保留当前的页面状态，比如复选框的选中状态、输入框的输入等。</li>
+</ul>
+<p><code>HMR</code>作为一个<code>Webpack</code>内置的功能，可以通过<code>HotModuleReplacementPlugin</code>或<code>--hot</code>开启。那么，<code>HMR</code>到底是怎么实现热更新的呢？下面让我们来了解一下吧！</p>
+<h2 id="二、webpack的编译构建过程"><a href="#二、webpack的编译构建过程" class="headerlink" title="二、webpack的编译构建过程"></a>二、webpack的编译构建过程</h2><p>项目启动后，进行构建打包，控制台会输出构建过程，我们可以观察到生成了一个 <strong>Hash值</strong>：<code>a93fd735d02d98633356</code>。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec043909c70b12?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="首次构建控制台输出日志"><br>然后，在我们每次修改代码保存后，控制台都会出现 <code>Compiling…</code>字样，触发新的编译中…可以在控制台中观察到：</p>
+<ul>
+<li><strong>新的Hash值</strong>：<code>a61bdd6e82294ed06fa3</code></li>
+<li><strong>新的json文件</strong>： <code>a93fd735d02d98633356.hot-update.json</code></li>
+<li><strong>新的js文件</strong>：<code>index.a93fd735d02d98633356.hot-update.js</code></li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec04454e1167f7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="修改代码的编译日志"><br>首先，我们知道<code>Hash</code>值代表每一次编译的标识。其次，根据新生成文件名可以发现，上次输出的<code>Hash</code>值会作为本次编译新生成的文件标识。依次类推，本次输出的<code>Hash</code>值会被作为下次热更新的标识。</p>
+<p>然后看一下，新生成的文件是什么？每次修改代码，紧接着触发重新编译，然后浏览器就会发出 2 次请求。请求的便是本次新生成的 2 个文件。如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec04289af752da?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="浏览器请求"><br>首先看<code>json</code>文件，返回的结果中，<code>h</code>代表本次新生成的<code>Hash</code>值，用于下次文件热更新请求的前缀。<code>c</code>表示当前要热更新的文件对应的是<code>index</code>模块。<br>再看下生成的<code>js</code>文件，那就是本次修改的代码，重新编译打包后的。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec04316d6ac5e3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>还有一种情况是，如果没有任何代码改动，直接保存文件，控制台也会输出编译打包信息的。</p>
+<ul>
+<li><strong>新的Hash值</strong>：<code>d2e4208eca62aa1c5389</code></li>
+<li><strong>新的json文件</strong>：<code>a61bdd6e82294ed06fa3.hot-update.json</code></li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec04bd0d47eae4?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>但是我们发现，并没有生成新的<code>js</code>文件，因为没有改动任何代码，同时浏览器发出的请求，可以看到<code>c</code>值为空，代表本次没有需要更新的代码。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec04c7b158cb3b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>小声说下，<code>webapck</code>以前的版本这种情况<code>hash</code>值是不会变的，后面可能出于什么原因改版了。细节不用在意，了解原理才是真谛!!!</p>
+<p>最后思考下🤔，浏览器是如何知道本地代码重新编译了，并迅速请求了新生成的文件？是谁告知了浏览器？浏览器获得这些文件又是如何热更新成功的？那让我们带着疑问看下热更新的过程，从源码的角度看原理。</p>
+<h2 id="三、热更新实现原理"><a href="#三、热更新实现原理" class="headerlink" title="三、热更新实现原理"></a>三、热更新实现原理</h2><p>相信大家都会配置<code>webpack-dev-server</code>热更新，我就不示意例子了。自己网上查下即可。接下来我们就来看下<code>webpack-dev-server</code>是如何实现热更新的？（源码都是精简过的，第一行会注明代码路径，看完最好结合源码食用一次）。</p>
+<h3 id="1-webpack-dev-server启动本地服务"><a href="#1-webpack-dev-server启动本地服务" class="headerlink" title="1. webpack-dev-server启动本地服务"></a>1. webpack-dev-server启动本地服务</h3><p>我们根据<code>webpack-dev-server</code>的<code>package.json</code>中的<code>bin</code>命令，可以找到命令的入口文件<code>bin/webpack-dev-server.js</code>。</p>
+<pre><code>// node_modules/webpack-dev-server/bin/webpack-dev-server.js// 生成webpack编译主引擎 compilerlet compiler = webpack(config);
+
+// 启动本地服务let server = new Server(compiler, options, log);
+server.listen(options.port, options.host, (err) =&gt; &#123;
+    if (err) &#123;throw err&#125;;
+&#125;);
+</code></pre>
+<p>本地服务代码：</p>
+<pre><code>// node_modules/webpack-dev-server/lib/Server.jsclassServer&#123;
+    constructor() &#123;
+        this.setupApp();
+        this.createServer();
+    &#125;
+    
+    setupApp() &#123;
+        // 依赖了expressthis.app = new express();
+    &#125;
+    
+    createServer() &#123;
+        this.listeningApp = http.createServer(this.app);
+    &#125;
+    listen(port, hostname, fn) &#123;
+        returnthis.listeningApp.listen(port, hostname, (err) =&gt; &#123;
+            // 启动express服务后，启动websocket服务this.createSocketServer();
+        &#125;
+    &#125;                                   
+&#125;
+</code></pre>
+<p>这一小节代码主要做了三件事：</p>
+<ul>
+<li>启动<code>webpack</code>，生成<code>compiler</code>实例。<code>compiler</code>上有很多方法，比如可以启动 <code>webpack</code> 所有<strong>编译</strong>工作，以及<strong>监听</strong>本地文件的变化。</li>
+<li>使用<code>express</code>框架启动本地<code>server</code>，让浏览器可以请求本地的<strong>静态资源</strong>。</li>
+<li>本地<code>server</code>启动之后，再去启动<code>websocket</code>服务，如果不了解<code>websocket</code>，建议简单了解一下<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2017/05/websocket.html">websocket速成</a>。通过<code>websocket</code>，可以建立本地服务和浏览器的双向通信。这样就可以实现当本地文件发生变化，立马告知浏览器可以热更新代码啦！</li>
+</ul>
+<p>上述代码主要干了三件事，但是源码在启动服务前又做了很多事，接下来便看看<code>webpack-dev-server/lib/Server.js</code>还做了哪些事？</p>
+<h3 id="2-修改webpack-config-js的entry配置"><a href="#2-修改webpack-config-js的entry配置" class="headerlink" title="2. 修改webpack.config.js的entry配置"></a>2. 修改webpack.config.js的entry配置</h3><p>启动本地服务前，调用了<code>updateCompiler(this.compiler)</code>方法。这个方法中有 2 段关键性代码。一个是获取<code>websocket</code>客户端代码路径，另一个是根据配置获取<code>webpack</code>热更新代码路径。</p>
+<pre><code>// 获取websocket客户端代码const clientEntry = `$&#123;require.resolve(
+    &#39;../../client/&#39;
+)&#125;?$&#123;domain&#125;$&#123;sockHost&#125;$&#123;sockPath&#125;$&#123;sockPort&#125;`;
+
+// 根据配置获取热更新代码let hotEntry;
+if (options.hotOnly) &#123;
+    hotEntry = require.resolve(&#39;webpack/hot/only-dev-server&#39;);
+&#125; elseif (options.hot) &#123;
+    hotEntry = require.resolve(&#39;webpack/hot/dev-server&#39;);
+&#125;
+</code></pre>
+<p>修改后的<code>webpack</code>入口配置如下：</p>
+<pre><code>// 修改后的entry入口
+&#123; entry:
+    &#123; index: 
+        [
+            // 上面获取的clientEntry&#39;xxx/node_modules/webpack-dev-server/client/index.js?http://localhost:8080&#39;,
+            // 上面获取的hotEntry&#39;xxx/node_modules/webpack/hot/dev-server.js&#39;,
+            // 开发配置的入口&#39;./src/index.js&#39;
+        ],
+    &#125;,
+&#125;      
+</code></pre>
+<p>为什么要新增了 2 个文件？在入口默默增加了 2 个文件，那就意味会一同打包到<code>bundle</code>文件中去，也就是线上运行时。</p>
+<p><strong>（1）webpack-dev-server&#x2F;client&#x2F;index.js</strong></p>
+<p>首先这个文件用于<code>websocket</code>的，因为<code>websoket</code>是双向通信，如果不了解<code>websocket</code>，建议简单了解一下<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2017/05/websocket.html">websocket速成</a>。我们在第 1 步 <code>webpack-dev-server</code>初始化 的过程中，启动的是本地服务端的<code>websocket</code>。那客户端也就是我们的浏览器，浏览器还没有和服务端通信的代码呢？总不能让开发者去写吧hhhhhh。因此我们需要把<code>websocket</code>客户端通信代码偷偷塞到我们的代码中。客户端具体的代码后面会在合适的时机细讲哦。</p>
+<p><strong>（2）webpack&#x2F;hot&#x2F;dev-server.js</strong></p>
+<p>这个文件主要是用于检查更新逻辑的，这里大家知道就好，代码后面会在合适的时机（<strong>第5步</strong>）细讲。</p>
+<h3 id="3-监听webpack编译结束"><a href="#3-监听webpack编译结束" class="headerlink" title="3. 监听webpack编译结束"></a>3. 监听webpack编译结束</h3><p>修改好入口配置后，又调用了<code>setupHooks</code>方法。这个方法是用来注册监听事件的，监听每次<code>webpack</code>编译完成。</p>
+<pre><code>// node_modules/webpack-dev-server/lib/Server.js// 绑定监听事件
+setupHooks() &#123;
+    const &#123;done&#125; = compiler.hooks;
+    // 监听webpack的done钩子，tapable提供的监听方法
+    done.tap(&#39;webpack-dev-server&#39;, (stats) =&gt; &#123;
+        this._sendStats(this.sockets, this.getStats(stats));
+        this._stats = stats;
+    &#125;);
+&#125;;
+</code></pre>
+<p>当监听到一次<code>webpack</code>编译结束，就会调用<code>_sendStats</code>方法通过<code>websocket</code>给浏览器发送通知，<code>ok</code>和<code>hash</code>事件，这样浏览器就可以拿到最新的<code>hash</code>值了，做检查更新逻辑。</p>
+<pre><code>// 通过websoket给客户端发消息
+_sendStats() &#123;
+    this.sockWrite(sockets, &#39;hash&#39;, stats.hash);
+    this.sockWrite(sockets, &#39;ok&#39;);
+&#125;
+</code></pre>
+<h3 id="4-webpack监听文件变化"><a href="#4-webpack监听文件变化" class="headerlink" title="4. webpack监听文件变化"></a>4. webpack监听文件变化</h3><p>每次修改代码，就会触发编译。说明我们还需要监听本地代码的变化，主要是通过<code>setupDevMiddleware</code>方法实现的。</p>
+<p>这个方法主要执行了<code>webpack-dev-middleware</code>库。很多人分不清<code>webpack-dev-middleware</code>和<code>webpack-dev-server</code>的区别。其实就是因为<code>webpack-dev-server</code>只负责启动服务和前置准备工作，所有文件相关的操作都抽离到<code>webpack-dev-middleware</code>库了，主要是本地文件的<strong>编译</strong>和<strong>输出</strong>以及<strong>监听</strong>，无非就是职责的划分更清晰了。</p>
+<p>那我们来看下<code>webpack-dev-middleware</code>源码里做了什么事:</p>
+<pre><code>// node_modules/webpack-dev-middleware/index.js
+compiler.watch(options.watchOptions, (err) =&gt; &#123;
+    if (err) &#123; /*错误处理*/ &#125;
+&#125;);
+
+// 通过“memory-fs”库将打包后的文件写入内存
+setFs(context, compiler); 
+</code></pre>
+<p>（1）调用了<code>compiler.watch</code>方法，在第 1 步中也提到过，<code>compiler</code>的强大。这个方法主要就做了 2 件事：</p>
+<ul>
+<li>首先对本地文件代码进行编译打包，也就是<code>webpack</code>的一系列编译流程。</li>
+<li>其次编译结束后，开启对本地文件的监听，当文件发生变化，重新编译，编译完成之后继续监听。</li>
+</ul>
+<p>为什么代码的改动保存会自动编译，重新打包？这一系列的重新检测编译就归功于<code>compiler.watch</code>这个方法了。监听本地文件的变化主要是通过<strong>文件的生成时间</strong>是否有变化，这里就不细讲了。</p>
+<p>（2）执行<code>setFs</code>方法，这个方法主要目的就是将编译后的文件打包到内存。这就是为什么在开发的过程中，你会发现<code>dist</code>目录没有打包后的代码，因为都在内存中。原因就在于访问内存中的代码比访问文件系统中的文件更快，而且也减少了代码写入文件的开销，这一切都归功于<code>memory-fs</code>。</p>
+<h3 id="5-浏览器接收到热更新的通知"><a href="#5-浏览器接收到热更新的通知" class="headerlink" title="5. 浏览器接收到热更新的通知"></a>5. 浏览器接收到热更新的通知</h3><p>我们已经可以监听到文件的变化了，当文件发生变化，就触发重新编译。同时还监听了每次编译结束的事件。当监听到一次<code>webpack</code>编译结束，<code>_sendStats</code>方法就通过<code>websoket</code>给浏览器发送通知，检查下是否需要热更新。下面重点讲的就是<code>_sendStats</code>方法中的<code>ok</code>和<code>hash</code>事件都做了什么。</p>
+<p>那浏览器是如何接收到<code>websocket</code>的消息呢？回忆下第 2 步骤增加的入口文件，也就是<code>websocket</code>客户端代码。</p>
+<pre><code>&#39;xxx/node_modules/webpack-dev-server/client/index.js?http://localhost:8080&#39;
+</code></pre>
+<p>这个文件的代码会被打包到<code>bundle.js</code>中，运行在浏览器中。来看下这个文件的核心代码吧。</p>
+<pre><code>// webpack-dev-server/client/index.jsvar socket = require(&#39;./socket&#39;);
+var onSocketMessage = &#123;
+    hash: functionhash(_hash) &#123;
+        // 更新currentHash值
+        status.currentHash = _hash;
+    &#125;,
+    ok: functionok() &#123;
+        sendMessage(&#39;Ok&#39;);
+        // 进行更新检查等操作
+        reloadApp(options, status);
+    &#125;,
+&#125;;
+// 连接服务地址socketUrl，?http://localhost:8080，本地服务地址
+socket(socketUrl, onSocketMessage);
+
+functionreloadApp() &#123;
+    if (hot) &#123;
+        log.info(&#39;[WDS] App hot update...&#39;);
+        
+        // hotEmitter其实就是EventEmitter的实例var hotEmitter = require(&#39;webpack/hot/emitter&#39;);
+        hotEmitter.emit(&#39;webpackHotUpdate&#39;, currentHash);
+    &#125; 
+&#125;
+</code></pre>
+<p><code>socket</code>方法建立了<code>websocket</code>和服务端的连接，并注册了 2 个监听事件。</p>
+<ul>
+<li><code>hash</code>事件，更新最新一次打包后的<code>hash</code>值。</li>
+<li><code>ok</code>事件，进行热更新检查。</li>
+</ul>
+<p>热更新检查事件是调用<code>reloadApp</code>方法。比较奇怪的是，这个方法又利用<code>node.js</code>的<code>EventEmitter</code>，发出<code>webpackHotUpdate</code>消息。这是为什么？为什么不直接进行检查更新呢？</p>
+<p>个人理解就是为了更好的维护代码，以及职责划分的更明确。<code>websocket</code>仅仅用于客户端（浏览器）和服务端进行通信。而真正做事情的活还是交回给了<code>webpack</code>。</p>
+<p>那<code>webpack</code>怎么做的呢？再来回忆下第 2 步。入口文件还有一个文件没有讲到，就是：</p>
+<pre><code>&#39;xxx/node_modules/webpack/hot/dev-server.js&#39;
+</code></pre>
+<p>这个文件的代码同样会被打包到<code>bundle.js</code>中，运行在浏览器中。这个文件做了什么就显而易见了吧！先瞄一眼代码：</p>
+<pre><code>// node_modules/webpack/hot/dev-server.jsvar check = functioncheck() &#123;
+    module.hot.check(true)
+        .then(function(updatedModules) &#123;
+            // 容错，直接刷新页面if (!updatedModules) &#123;
+                window.location.reload();
+                return;
+            &#125;
+            
+            // 热更新结束，打印信息if (upToDate()) &#123;
+                log(&quot;info&quot;, &quot;[HMR] App is up to date.&quot;);
+            &#125;
+    &#125;)
+        .catch(function(err) &#123;
+            window.location.reload();
+        &#125;);
+&#125;;
+
+var hotEmitter = require(&quot;./emitter&quot;);
+hotEmitter.on(&quot;webpackHotUpdate&quot;, function(currentHash) &#123;
+    lastHash = currentHash;
+    check();
+&#125;);
+</code></pre>
+<p>这里<code>webpack</code>监听到了<code>webpackHotUpdate</code>事件，并获取最新了最新的<code>hash</code>值，然后终于进行检查更新了。检查更新呢调用的是<code>module.hot.check</code>方法。那么问题又来了，<code>module.hot.check</code>又是哪里冒出来了的！答案是<code>HotModuleReplacementPlugin</code>搞得鬼。这里留个疑问，继续往下看。</p>
+<h3 id="6-HotModuleReplacementPlugin"><a href="#6-HotModuleReplacementPlugin" class="headerlink" title="6. HotModuleReplacementPlugin"></a>6. HotModuleReplacementPlugin</h3><p>前面好像一直是<code>webpack-dev-server</code>做的事，那<code>HotModuleReplacementPlugin</code>在热更新过程中又做了什么伟大的事业呢？</p>
+<p>首先你可以对比下，配置热更新和不配置时<code>bundle.js</code>的区别。内存中看不到？直接执行<code>webpack</code>命令就可以看到生成的<code>bundle.js</code>文件啦。不要用<code>webpack-dev-server</code>启动就好了。</p>
+<p>（1）没有配置的。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec0c9e8fd12349?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>（2）配置了<code>HotModuleReplacementPlugin</code>或<code>--hot</code>的。<br><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec0c90092fa0ac?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>哦~ 我们发现<code>moudle</code>新增了一个属性为<code>hot</code>，再看<code>hotCreateModule</code>方法。<br>这不就找到<code>module.hot.check</code>是哪里冒出来的。<br><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec0dc36018973f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>经过对比打包后的文件，<code>__webpack_require__</code>中的<code>moudle</code>以及代码行数的不同。我们都可以发现<code>HotModuleReplacementPlugin</code>原来也是默默的塞了很多代码到<code>bundle.js</code>中呀。这和第 2 步骤很是相似哦！为什么，因为检查更新是在浏览器中操作呀。这些代码必须在运行时的环境。</p>
+<p>你也可以直接看浏览器<code>Sources</code>下的代码，会发现<code>webpack</code>和<code>plugin</code>偷偷加的代码都在哦。在这里调试也很方便。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec0d4634af2b3c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><code>HotModuleReplacementPlugin</code>如何做到的？这里我就不讲了，因为这需要你对<code>tapable</code>以及<code>plugin</code>机制有一定了解，可以看下我写的文章<a target="_blank" rel="noopener" href="https://juejin.im/post/5dc169b0f265da4d542092c6">Webpack插件机制之Tapable-源码解析</a>。当然你也可以选择跳过，只关心热更新机制即可，毕竟信息量太大。</p>
+<h3 id="7-moudle-hot-check-开始热更新"><a href="#7-moudle-hot-check-开始热更新" class="headerlink" title="7. moudle.hot.check 开始热更新"></a>7. moudle.hot.check 开始热更新</h3><p>通过第 6 步，我们就可以知道<code>moudle.hot.check</code>方法是如何来的啦。那都做了什么？之后的源码都是<code>HotModuleReplacementPlugin</code>塞入到<code>bundle.js</code>中的哦，我就不写文件路径了。</p>
+<ul>
+<li><p>利用上一次保存的<code>hash</code>值，调用<code>hotDownloadManifest</code>发送<code>xxx/hash.hot-update.json</code>的<code>ajax</code>请求；</p>
+</li>
+<li><p>请求结果获取热更新模块，以及下次热更新的<code>Hash</code> 标识，并进入热更新准备阶段。</p>
+<p>  hotAvailableFilesMap &#x3D; update.c; &#x2F;&#x2F; 需要更新的文件<br>  hotUpdateNewHash &#x3D; update.h; &#x2F;&#x2F; 更新下次热更新hash值<br>  hotSetStatus(“prepare”); &#x2F;&#x2F; 进入热更新准备状态</p>
+</li>
+<li><p>调用<code>hotDownloadUpdateChunk</code>发送<code>xxx/hash.hot-update.js</code> 请求，通过<code>JSONP</code>方式。</p>
+<p>  functionhotDownloadUpdateChunk(chunkId) {<br>  var script &#x3D; document.createElement(“script”);<br>  script.charset &#x3D; “utf-8”;<br>  script.src &#x3D; <strong>webpack_require</strong>.p + “” + chunkId + “.” + hotCurrentHash + “.hot-update.js”;<br>  if (null) script.crossOrigin &#x3D; null;<br>  document.head.appendChild(script);<br>   }</p>
+</li>
+</ul>
+<p>这个函数体为什么要单独拿出来，因为这里要解释下为什么使用<code>JSONP</code>获取最新代码？主要是因为<code>JSONP</code>获取的代码可以直接执行。为什么要直接执行？我们来回忆下<code>/hash.hot-update.js</code>的代码格式是怎么样的。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec04316d6ac5e3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>可以发现，新编译后的代码是在一个<code>webpackHotUpdate</code>函数体内部的。也就是要立即执行<code>webpackHotUpdate</code>这个方法。</p>
+<p>再看下<code>webpackHotUpdate</code>这个方法。</p>
+<pre><code>window[&quot;webpackHotUpdate&quot;] = function (chunkId, moreModules) &#123;
+    hotAddUpdateChunk(chunkId, moreModules);
+&#125; ;
+</code></pre>
+<ul>
+<li><p><code>hotAddUpdateChunk</code>方法会把更新的模块<code>moreModules</code>赋值给全局全量<code>hotUpdate</code>。</p>
+</li>
+<li><p><code>hotUpdateDownloaded</code>方法会调用<code>hotApply</code>进行代码的替换。</p>
+<p>  functionhotAddUpdateChunk(chunkId, moreModules) {<br>  &#x2F;&#x2F; 更新的模块moreModules赋值给全局全量hotUpdatefor (var moduleId in moreModules) {<br>      if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {<br>      hotUpdate[moduleId] &#x3D; moreModules[moduleId];<br>      }<br>  }<br>  &#x2F;&#x2F; 调用hotApply进行模块的替换<br>  hotUpdateDownloaded();<br>  }</p>
+</li>
+</ul>
+<h3 id="8-hotApply-热更新模块替换"><a href="#8-hotApply-热更新模块替换" class="headerlink" title="8. hotApply 热更新模块替换"></a>8. hotApply 热更新模块替换</h3><p>热更新的核心逻辑就在<code>hotApply</code>方法了。<br><code>hotApply</code>代码有将近 400 行，还是挑重点讲了，看哭😭</p>
+<h4 id="①删除过期的模块，就是需要替换的模块"><a href="#①删除过期的模块，就是需要替换的模块" class="headerlink" title="①删除过期的模块，就是需要替换的模块"></a>①删除过期的模块，就是需要替换的模块</h4><p>通过<code>hotUpdate</code>可以找到旧模块</p>
+<pre><code>var queue = outdatedModules.slice();
+while (queue.length &gt; 0) &#123;
+    moduleId = queue.pop();
+    // 从缓存中删除过期的模块module = installedModules[moduleId];
+    // 删除过期的依赖delete outdatedDependencies[moduleId];
+    
+    // 存储了被删掉的模块id，便于更新代码
+    outdatedSelfAcceptedModules.push(&#123;
+        module: moduleId
+    &#125;);
+&#125;
+</code></pre>
+<h4 id="②将新的模块添加到-modules-中"><a href="#②将新的模块添加到-modules-中" class="headerlink" title="②将新的模块添加到 modules 中"></a>②将新的模块添加到 modules 中</h4><pre><code>appliedUpdate[moduleId] = hotUpdate[moduleId];
+for (moduleId in appliedUpdate) &#123;
+    if (Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) &#123;
+        modules[moduleId] = appliedUpdate[moduleId];
+    &#125;
+&#125;
+</code></pre>
+<h4 id="③通过-webpack-require-执行相关模块的代码"><a href="#③通过-webpack-require-执行相关模块的代码" class="headerlink" title="③通过__webpack_require__执行相关模块的代码"></a>③通过__webpack_require__执行相关模块的代码</h4><pre><code>for (i = 0; i &lt; outdatedSelfAcceptedModules.length; i++) &#123;
+    var item = outdatedSelfAcceptedModules[i];
+    moduleId = item.module;
+    try &#123;
+        // 执行最新的代码
+        __webpack_require__(moduleId);
+    &#125; catch (err) &#123;
+        // ...容错处理
+    &#125;
+&#125;
+</code></pre>
+<p><code>hotApply</code>的确比较复杂，知道大概流程就好了，这一小节，要求你对webpack打包后的文件如何执行的有一些了解，大家可以自去看下。</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>还是以阅读源码的形式画的图，①-④的小标记，是文件发生变化的一个流程。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/1/16ec13499800dfce?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>本次是以阅读源码的方式讲解原理，是因为觉得热更新这块涉及的知识量比较多。所以知识把关键性代码拿出来，因为每一个块细节说起来都能写一篇文章了，大家可以自己对着源码再理解下。</p>
+<p>还是建议提前了解以下知识会更好理解热更新：</p>
+<ul>
+<li><strong>websocket</strong>：<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2017/05/websocket.html">websocket基础知识了解</a></li>
+<li>打包后的<code>bundle</code>文件如何运行的。</li>
+<li><code>webpack</code>启动流程，<code>webpack</code>生命周期。</li>
+<li><strong>tapable</strong>: <a target="_blank" rel="noopener" href="https://juejin.im/post/5dc169b0f265da4d542092c6">Webpack插件机制之Tapable-源码解析</a></li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/Jocs/jocs.github.io/issues/15">Webpack Hot Module Replacement 的原理解析</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5d8b755fe51d45781332e919">看完这篇，面试再也不怕被问 Webpack 热更新</a></li>
+</ul>
+<p>参考的文章大家也可以看下，但是由于源码版本不同，所以不要太纠结与细节。</p>
+<p>原创不易，走过路过点个赞吧~😊</p>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/22237.html">https://xuehuayu.cn/article/22237.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/2021.html">不容错过的 Babel7 知识</a><a class="next" href="/article/22565.html">使用 Hooks 优化 React 组件</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//fastly.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//fastly.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//fastly.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//fastly.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//fastly.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//fastly.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//fastly.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//fastly.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//fastly.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//fastly.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/e856e555.html">vue实现按钮切换背景移动效果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ebec0b44.html">vue实现滚动到底部加载</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d817e843.html">vue实现图片横向拖动滚动</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li><li class="post-list-item"><a class="post-list-link" href="/article/bf6d70b6.html">js根据月份计算第一天和最后一天</a></li><li class="post-list-item"><a class="post-list-link" href="/article/a9c48713.html">js获取当天、本周、本月、本年的开始时间和结束时间</a></li><li class="post-list-item"><a class="post-list-link" href="/article/79636f56.html">项目中用的20个轮子 开发效率提升200% 建议收藏</a></li><li class="post-list-item"><a class="post-list-link" href="/article/405fc2a5.html">手动实现uni-app可用的new URL</a></li><li class="post-list-item"><a class="post-list-link" href="/article/72503f26.html">uni-app集成mui-player</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7e2721b7.html">uni-app/iOS/safari不支持正则预查匹配?=、反向预查匹配?<=、正向预查不匹配?!、反向预查不匹配?<!</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//fastly.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.net/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="摸鱼日历" width="100%" src="https://dayu.qqsuu.cn/moyuribao/apis.php" onclick="window.open(&quot;https://dayu.qqsuu.cn/moyuribao/apis.php&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2024 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//fastly.jsdelivr.net/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>

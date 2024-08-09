@@ -1,0 +1,70 @@
+! [xuehuayu.cn]
+! Title: 菜鸟_PC过滤器[xuehuayu.cn]
+! Version: 2407252
+! Expires: 7 days
+! Homepage: https://xuehuayu.cn?mobilefilter
+!********* filter start *********!
+!==== 八号影院 ↓
+js/ban
+js/bbk
+js/share.js
+!==== 八号影院 ↑
+!=== 脚本 ↓
+||v.youku.com#%#!function(){var a=JSON.parse(window.localStorage["YK_PSL_SETTINGS"]);a.quality="1080p",a.preferQuality="1080p",window.localStorage["YK_PSL_SETTINGS"]=JSON.stringify(a)}();
+||v.youku.com#%#(function(){'use strict';window.sessionStorage.setItem("P_l_h5", true);})();
+!=== 脚本 ↑
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
