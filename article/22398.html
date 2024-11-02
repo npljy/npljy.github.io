@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>巧用 CSS 实现酷炫的充电动画 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a href="/atom.xml" target="_self"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">巧用 CSS 实现酷炫的充电动画</h1><div class="post-meta"><span class="date">2019-12-26</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 4</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/22398.html#waline-comment"><span class="waline-comment-count" data-path="/article/22398.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5e00240ee51d45583c1cc9a7</code></p>
+<p>循序渐进，看看只使用 CSS ，可以鼓捣出什么样的充电动画效果。</p>
+<span id="more"></span>
+<p><img src="https://store.xuehuayu.cn/store/20191226/1.webp" alt="xuehuayu.cn"></p>
+<h2 id="画个电池"><a href="#画个电池" class="headerlink" title="画个电池"></a>画个电池</h2><p>当然，电池充电，首先得用 CSS 画一个电池，这个不难，随便整一个：<br><img src="https://store.xuehuayu.cn/store/20191226/2.webp" alt="xuehuayu.cn"><br>欧了，勉强就是它了。有了电池，那接下来直接充电吧。最最简单的动画，那应该是用色彩把整个电池灌满即可。</p>
+<p>方法很多，代码也很简单，直接看效果：<br><img src="https://store.xuehuayu.cn/store/20191226/3.gif" alt="xuehuayu.cn"><br>有内味了，如果要求不高，这个勉强也就能够交差了。通过蓝色渐变表示电量，通过色块的位移动画实现充电的动画。但是总感觉少了点什么。</p>
+<h3 id="增加阴影及颜色的变化"><a href="#增加阴影及颜色的变化" class="headerlink" title="增加阴影及颜色的变化"></a>增加阴影及颜色的变化</h3><p>如果要继续优化的话，需要添加点细节。</p>
+<p>我们知道，低电量时，电量通常表示为红色，高电量时表示为绿色。再给整个色块添加点阴影的变化，呼吸的感觉，让充电的效果看起来确实是在动。<br><img src="https://store.xuehuayu.cn/store/20191226/4.gif" alt="xuehuayu.cn"></p>
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><p>到这里，其实只有一个知识点：</p>
+<ul>
+<li>使用 filter: hue-rotate() 对渐变色彩进行色彩过渡变换动画</li>
+</ul>
+<p>我们无法对一个渐变色直接进行 animation ，这里通过滤镜对色相进行调整，从而实现了渐变色的变换动画。</p>
+<p>上述例子完整的 Demo： <a target="_blank" rel="noopener" href="https://codepen.io/Chokcoco/pen/bGNqyra?editors=1100">CodePen Demo – Battery Animation One</a></p>
+<h2 id="添加波浪"><a href="#添加波浪" class="headerlink" title="添加波浪"></a>添加波浪</h2><p>ok，刚刚算一个小里程碑，接下来再进一步。电量的顶部为一条直线有点呆呆的感觉，这里我们进行改造一下，如果能将顶部直线，改为波浪滚动，效果会更为逼真一点。</p>
+<p>改造之后的效果：<br><img src="https://store.xuehuayu.cn/store/20191226/5.gif" alt="xuehuayu.cn"><br>使用 CSS 实现这种波浪滚动效果，其实只是用了一种障眼法，具体的可以我早期写的这篇文章：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/coco1s/p/7197662.html">纯 CSS 实现波浪效果！</a></p>
+<h3 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h3><p>这里的一个知识点就是上述说的使用 CSS 实现简易的波浪效果，通过障眼法实现，看看图就明白了：<br><img src="https://store.xuehuayu.cn/store/20191226/6.gif" alt="xuehuayu.cn"><br>上述例子完整的 Demo： <a target="_blank" rel="noopener" href="https://codepen.io/Chokcoco/pen/qBErGoO">CodePen Demo – Battery Animation Two</a></p>
+<p>OK，到这，上述效果加上数字变化已经算是一个比较不错的效果了。当然上面的效果看上去还是很 CSS 的，就是一眼看到就觉得用 CSS 是可以做到的。</p>
+<h2 id="使用强大的-CSS-滤镜实现安卓充电动画效果"><a href="#使用强大的-CSS-滤镜实现安卓充电动画效果" class="headerlink" title="使用强大的 CSS 滤镜实现安卓充电动画效果"></a>使用强大的 CSS 滤镜实现安卓充电动画效果</h2><p>那下面这个呢？<br><img src="https://store.xuehuayu.cn/store/20191226/7.webp" alt="xuehuayu.cn"><br>用安卓手机的同学肯定不陌生，这个是安卓手机在充电的时候的效果。看到这个我就很好奇，使用 CSS 能做到吗？</p>
+<p>经过一番尝试，发现使用 CSS 也是可以很好的模拟这种动画效果：<br><img src="https://store.xuehuayu.cn/store/20191226/8.gif" alt="xuehuayu.cn"><br>上述 Gif 录制的效果图是完全使用 CSS 模拟的效果。</p>
+<p>上述例子完整的 Demo： <a target="_blank" rel="noopener" href="https://codepen.io/Chokcoco/pen/vYExwvm">HuaWei Battery Charging Animation</a></p>
+<h3 id="知识点-2"><a href="#知识点-2" class="headerlink" title="知识点"></a>知识点</h3><p>拆解一下知识点，最主要的其实是用到了 <code>filter: contrast()</code> 以及 <code>filter: blur()</code> 这两个滤镜，可以很好的实现这种融合效果。</p>
+<p>单独将两个滤镜拿出来，它们的作用分别是：</p>
+<ol>
+<li><code>filter: blur()</code>： 给图像设置高斯模糊效果。</li>
+<li><code>filter: contrast()</code>： 调整图像的对比度。</li>
+</ol>
+<p>但是，当他们“合体”的时候，产生了奇妙的融合现象。</p>
+<p>先来看一个简单的例子：<br><img src="https://store.xuehuayu.cn/store/20191226/9.gif" alt="xuehuayu.cn"><br>仔细看两圆相交的过程，在边与边接触的时候，会产生一种边界融合的效果，通过对比度滤镜把高斯模糊的模糊边缘给干掉，利用高斯模糊实现融合效果。</p>
+<p>当然，这种效果在之前的文章也多次提及过，更具体的，可以看看：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/chokcoco/iCSS/issues/62">CSS 火焰？不在话下 </a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/chokcoco/iCSS/issues/30">你所不知道的 CSS 滤镜技巧与细节</a></li>
+</ul>
+<h3 id="颜色的变换"><a href="#颜色的变换" class="headerlink" title="颜色的变换"></a>颜色的变换</h3><p>当然，这里也是可以加上颜色的变换，效果也很不错：<br><img src="https://store.xuehuayu.cn/store/20191226/10.gif" alt="xuehuayu.cn"><br>上述例子完整的 Demo： <a target="_blank" rel="noopener" href="https://codepen.io/Chokcoco/pen/vYExwvm">HuaWei Battery Charging Animation</a></p>
+<h3 id="容易忽视的点"><a href="#容易忽视的点" class="headerlink" title="容易忽视的点"></a>容易忽视的点</h3><p>通过调节  <code>filter: blur()</code> 及 <code>filter: contrast()</code> 属性的值，动画效果其实会有很大程度的变化，好的效果需要不断的调试。当然，经验在其中也是发挥了很重要的作用，说到底还是要多尝试。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>本文给出的几个充电动画，效果渐进增强，本文只指出了最核心的知识点。但是在实际输出的过程中有很多小细节是本文没有提及的，感兴趣的同学还是应该点进 Demo 好好看看源码或者自己动手实现一遍。</p>
+<p>更多精彩 CSS 技术文章汇总在我的 <a target="_blank" rel="noopener" href="https://github.com/chokcoco/iCSS">Github – iCSS</a> ，持续更新，欢迎点个 star 订阅收藏。</p>
+<p>好了，本文到此结束，希望对你有帮助 :)</p>
+<p>如果还有什么疑问或者建议，可以多多交流，原创文章，文笔有限，才疏学浅，文中若有不正之处，万望告知。</p>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/22398.html">https://xuehuayu.cn/article/22398.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/56139.html">第 4 种 Web 语言来了：WebAssembly</a><a class="next" href="/article/13265.html">string-similarity: 可以帮你检查两个字符串的相似性，轻松完成模糊匹配</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/7beb973b.html">uniapp解决安卓targetSdkVersion升级为33导致通知权限置灰无法打开问题</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7fb2c15c.html">vue中echarts的3D饼图实现</a></li><li class="post-list-item"><a class="post-list-link" href="/article/e856e555.html">vue实现按钮切换背景移动效果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ebec0b44.html">vue实现滚动到底部加载</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d817e843.html">vue实现图片横向拖动滚动</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li><li class="post-list-item"><a class="post-list-link" href="/article/bf6d70b6.html">js根据月份计算第一天和最后一天</a></li><li class="post-list-item"><a class="post-list-link" href="/article/a9c48713.html">js获取当天、本周、本月、本年的开始时间和结束时间</a></li><li class="post-list-item"><a class="post-list-link" href="/article/79636f56.html">项目中用的20个轮子 开发效率提升200% 建议收藏</a></li><li class="post-list-item"><a class="post-list-link" href="/article/405fc2a5.html">手动实现uni-app可用的new URL</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">204</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-tags"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 15px;">转载</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 15px;">原创</a> <a href="/tags/%E6%89%8B%E5%86%99/" style="font-size: 15px;">手写</a> <a href="/tags/%E7%96%AB%E6%83%85/" style="font-size: 15px;">疫情</a> <a href="/tags/ZYPlayer/" style="font-size: 15px;">ZYPlayer</a> <a href="/tags/KKPlayer/" style="font-size: 15px;">KKPlayer</a> <a href="/tags/APP/" style="font-size: 15px;">APP</a> <a href="/tags/%E6%95%B4%E7%90%86/" style="font-size: 15px;">整理</a> <a href="/tags/URL/" style="font-size: 15px;">URL</a> <a href="/tags/uni-app/" style="font-size: 15px;">uni-app</a> <a href="/tags/mui-player/" style="font-size: 15px;">mui-player</a> <a href="/tags/WebDAV/" style="font-size: 15px;">WebDAV</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/echarts-3d/" style="font-size: 15px;">echarts 3d</a></div></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2024 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>
