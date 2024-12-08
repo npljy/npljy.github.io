@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>HTTPS 到底加密了什么？ | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a href="/atom.xml" target="_self"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">HTTPS 到底加密了什么？</h1><div class="post-meta"><span class="date">2020-02-03</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 4</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/43397.html#waline-comment"><span class="waline-comment-count" data-path="/article/43397.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/EO2WQt0TQjhyRd3zgoF1Bg</code><br>关于 HTTP 和 HTTPS 这个老生常谈的话题，我们之前已经写过很多文章了，比如这篇《 从 HTTP 到 HTTPS 再到 HSTS 》，详细讲解了 HTTP 和 HTTPS 的进化之路，对的没错，就是 HTTP 兽进化 HTTPS 兽。</p>
+<p>那么今天我们主要聊一聊 HTTPS 到底加密了些什么内容。</p>
+<span id="more"></span>
+<p><img src="https://store.xuehuayu.cn/store/20200203/0.gif" alt="xuehuayu.cn"></p>
+<p>先跟大家讲个故事，小编的初恋是在初中时谈的，我的后桌。那个时候没有手机这类的沟通工具，上课交流有三宝，脚踢屁股、笔戳后背以及传纸条，当然我只能是那个屁股和后背。</p>
+<p>说实话传纸条真的很危险，尤其是这种早恋的纸条，被抓到就是一首《凉凉》。</p>
+<p>于是我和我的小女朋友就商量一下加密这个小纸条上面的数据，这样就算被班主任抓到她也奈何不了我们！</p>
+<p>我们用将英文字母和数字一一对应，组成一个密码本，然后在小纸条上写上数字，要将他翻译成对应的字母，在拼成拼音才能知道这串数字意思。</p>
+<p>上面就是最初小编坎坷的感情史。</p>
+<p>后来等我长大了，才知道这是回不去的美好。如果给我一个机会，我愿意……啊呸，跑偏了，等长大了才知道，这个就是现在网站数据传输中的 HTTPS。</p>
+<p><strong>多了 SSL 层的 HTTP 协议</strong></p>
+<p>简而言之，HTTPS 就是在 HTTP 下加入了 SSL 层，从而保护了交换数据隐私和完整性，提供对网站服务器身份认证的功能，简单来说它就是安全版的 HTTP。</p>
+<p>现在随着技术的发展，TLS 得到了广泛的应用，关于 SSL 与 TLS 的差别，我们不用在意，只要知道 TLS 是 SSL 的升级版本就好。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200203/1.png" alt="xuehuayu.cn"></p>
+<p>一般来说，HTTPS 主要用途有三个：一是通过证书等信息确认网站的真实性；二是建立加密的信息通道；三是数据内容的完整性。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200203/2.jpg" alt="xuehuayu.cn"></p>
+<p>上文为又拍云官网，我们可以通过点击浏览器地址栏锁标志来查看网站认证之后的真实信息，SSL 证书保证了网站的唯一性与真实性。</p>
+<p><strong>那么加密的信息通道又加密了哪些信息呢？</strong></p>
+<p>签发证书的 CA 中心会发布一种权威性的电子文档——数字证书，它可以通过加密技术（对称加密与非对称加密）对我们在网上传输的信息进行加密，比如我在 Pornhub 上输入：</p>
+<p>账号：cbssfaw</p>
+<p>密码：123djaosid</p>
+<p>可是这个数据被黑客拦截盗窃了，那么加密后，黑客得到的数据可能就是这样的：</p>
+<p>账号：çµø…≤¥ƒ∂ø†®∂˙∆¬</p>
+<p>密码：∆ø¥§®†ƒ©®†©˚¬</p>
+<p><img src="https://store.xuehuayu.cn/store/20200203/3.jpg" alt="xuehuayu.cn"></p>
+<p>最后一个就是验证数据的完整性，当数据包经过无数次路由器转发后会发生数据劫持，黑客将数据劫持后进行篡改，比如植入羞羞的小广告。开启HTTPS后黑客就无法对数据进行篡改，就算真的被篡改了，我们也可以检测出问题。</p>
+<p><strong>对称加密与非对称加密</strong></p>
+<p><strong>对称加密</strong></p>
+<p>对称加密是指加密与解密的使用同一个密钥的加密算法。小编初中的时候传纸条使用了同一套加密密码，所以我用的加密算法就是对称加密算法。</p>
+<p>目前常见的加密算法有：DES、AES、IDEA 等。</p>
+<p><strong>非对称加密</strong></p>
+<p>非对称加密使用的是两个密钥，公钥与私钥，我们会使用公钥对网站账号密码等数据进行加密，再用私钥对数据进行解密。这个公钥会发给查看网站的所有人，而私钥是只有网站服务器自己拥有的。</p>
+<p>目前常见非对称加密算法：RSA，DSA，DH 等。</p>
+<p><strong>HTTPS &#x3D;数据加密+网站认证+完整性验证+ HTTP</strong></p>
+<p>通过上文，我们已经知道，HTTPS 就是在 HTTP 传输协议的基础上对网站进行认证，给予它独一无二的身份证明，再对网站数据进行加密，并对传输的数据进行完整性验证。</p>
+<p>HTTPS 作为一种加密手段不仅加密了数据，还给了网站一张身份证。</p>
+<p>如果让我回到十年前，那么我一定会这样跟我的女朋友传纸条：</p>
+<p>先准备一张独一无二的纸条，并在上面签上我的大名，然后用只有我女朋友可以解密的方式进行数据加密，最后写完后，用胶水封起来，防止隔壁桌的小王偷看修改小纸条内容。</p>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/43397.html">https://xuehuayu.cn/article/43397.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/63266.html">CSS实现自适应分隔线的N种方法</a><a class="next" href="/article/28976.html">阿里 P6 大佬的面经，送给在面试或学习路上的小伙伴们</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/65953a19.html">electron-vite+react项目中如何使用css module</a></li><li class="post-list-item"><a class="post-list-link" href="/article/433d7e2b.html">electron-vite+react+react-router-dom+antd中useRoutes踩坑</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ed850983.html">Next.js启动打包部署（out、standalone）</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7beb973b.html">uniapp解决安卓targetSdkVersion升级为33导致通知权限置灰无法打开问题</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7fb2c15c.html">vue中echarts的3D饼图实现</a></li><li class="post-list-item"><a class="post-list-link" href="/article/e856e555.html">vue实现按钮切换背景移动效果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ebec0b44.html">vue实现滚动到底部加载</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d817e843.html">vue实现图片横向拖动滚动</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li><li class="post-list-item"><a class="post-list-link" href="/article/bf6d70b6.html">js根据月份计算第一天和最后一天</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">207</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-tags"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 15px;">转载</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 15px;">原创</a> <a href="/tags/%E6%89%8B%E5%86%99/" style="font-size: 15px;">手写</a> <a href="/tags/%E7%96%AB%E6%83%85/" style="font-size: 15px;">疫情</a> <a href="/tags/ZYPlayer/" style="font-size: 15px;">ZYPlayer</a> <a href="/tags/KKPlayer/" style="font-size: 15px;">KKPlayer</a> <a href="/tags/APP/" style="font-size: 15px;">APP</a> <a href="/tags/%E6%95%B4%E7%90%86/" style="font-size: 15px;">整理</a> <a href="/tags/URL/" style="font-size: 15px;">URL</a> <a href="/tags/uni-app/" style="font-size: 15px;">uni-app</a> <a href="/tags/mui-player/" style="font-size: 15px;">mui-player</a> <a href="/tags/WebDAV/" style="font-size: 15px;">WebDAV</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/echarts-3d/" style="font-size: 15px;">echarts 3d</a> <a href="/tags/nextjs/" style="font-size: 15px;">nextjs</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/electron-vite/" style="font-size: 15px;">electron-vite</a> <a href="/tags/useRoutes/" style="font-size: 15px;">useRoutes</a> <a href="/tags/CSSModule/" style="font-size: 15px;">CSSModule</a></div></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2024 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>
