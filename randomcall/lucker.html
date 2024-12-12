@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>LJY-抽奖</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      font-family: 'Microsoft Yahei'
+    }
+    .main{
+      position: relative;
+      width: 1080px;
+      height: 600px;
+      text-align: center;
+      margin: 0 auto;
+      background-color: yellow;
+      background-image: url(./lucky.png);
+      background-size: cover;
+    }
+    #show{
+      position: absolute;
+      left: 50%;
+      bottom: 125px;
+      transform: translateX(-50%);
+      font-size: 80px;
+      color: red;
+    }
+    #start, #lucky, #speed {
+      position: absolute;
+      right: 250px;
+      width: 80px;
+      line-height: 40px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    #speed{
+      bottom:200px;
+      width: 80px;
+      background-color: inherit;
+      border-radius: 9px;
+      border: none;
+      padding: 2px;
+    }
+    #start{
+      bottom: 140px;
+    }
+    #lucky{
+      bottom: 80px;
+    }
+    #list{
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      width: 150px;
+      height: 92%;
+      color:yellow;
+      text-align: left;
+      font-size: 20px;
+      overflow-y: auto;
+    }
+    #tips{
+      box-sizing: border-box;
+      position: absolute;
+      right: 25px;
+      top: 10px;
+      font-size: 32px;
+      cursor: pointer;
+    }
+    #name-list, #name-ipt{
+      position: absolute;
+      height: 478px;
+      right: 25px;
+      top: 60px;
+      overflow-y: auto;
+    }
+    #name-ipt{
+      display: none;
+    }
+    #name-area{
+      resize: none;
+      height: 470px;
+    }
+    #update, #submit{
+      position: absolute;
+      bottom: 10px;
+      right: 56px;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 6px;
+      cursor: pointer;
+    }
+    #submit{
+      display: none;
+    }
+    .name-ul{
+      list-style: none;
+      color: yellow;
+      float: left;
+      margin-right: 10px;
+      max-width: 65px;
+    }
+    .title{
+      margin: 0 auto;
+      font-size:40px;
+      color: red;
+      background-color: yellow;
+      width: 300px;
+      border-radius: 2px;
+      user-select: none;
+    }
+    .btn{
+      box-sizing: border-box;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+      color: yellow;
+      border: 1px solid;
+      border-radius: 9px;
+      padding: 2px;
+    }
+    .btn:hover{
+      border: 1px solid yellowgreen;
+    }
+    #play{
+      position: absolute;
+      right: 200px;
+      top: 10px;
+      width: 60px;
+      height: 60px;
+      line-height: 24px;
+      border-radius: 100%;
+      background: url(https://store.xuehuayu.cn/store/public/btn.png) no-repeat;
+      background-position: 0 0;
+      cursor: pointer;
+    }
+    #play:hover{
+      background-position: -60px 0;
+    }
+    #play.playing{
+      background-position: 0 -60px !important;
+    }
+    #play:hover.playing{
+      background-position: -60px -60px !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="title">随机抽奖</div>
+    <div id="list"></div>
+    <div id="tips" class="btn">点击重置</div>
+    <div id="name-list">
+      <ul id="name-ul-1" class="name-ul"></ul>
+      <ul id="name-ul-2" class="name-ul"></ul>
+    </div>
+    <div id="name-ipt">
+      <textarea id="name-area" placeholder="录入名字，请以换行分隔，即一个名字占一行" name="" id="" cols="20" rows="28"></textarea>
+    </div>
+    <div id="show">大 奖</div>
+    <input type="number" value=30 id="speed" title="速度"/>
+    <div id="start" class="btn" title="点击开始">看运气</div>
+    <div id="lucky" class="btn" title="点击停止">中大奖</div>
+    <div id="update" class="btn">录入名单</div>
+    <div id="submit" class="btn">更新名单</div>
+    <div id="play"></div>
+    <audio id="myaudio" src="https://store.xuehuayu.cn/store/public/erxiao.mp3" autoplay preload="auto" loop="loop" style="display: none;">
+      您的浏览器不支持 audio 标签。
+    </audio>
+  </div>
+  <script>
+    let names = ''
+    let nameArr = []
+    let speedIpt = document.getElementById('speed')
+    let start = document.getElementById('start')
+    let lucky = document.getElementById('lucky')
+    let show = document.getElementById('show')
+    let list = document.getElementById("list")
+    let update = document.getElementById("update")
+    let submit = document.getElementById("submit")
+    let nameList = document.getElementById('name-list')
+    let nameUl1 = document.getElementById("name-ul-1")
+    let nameUl2 = document.getElementById("name-ul-2")
+    let nameIpt = document.getElementById('name-ipt')
+    let nameArea = document.getElementById("name-area")
+    let tips = document.getElementById('tips')
+    let myaudio = document.getElementById('myaudio')
+    let play = document.getElementById('play')
+    let nameLen = nameArr.length
+    let timer = null
+    let onoff = false
+    let isPlayed = false
+    let listObj = {}
+    let num = 0
+    let n = 0
+    let ulStr1 = ''
+    let ulStr2= ''
+    let speed = 0
+
+  
+
+    initList()
+    function initList(){
+      ulStr1 = ''
+      ulStr2= ''
+      nameArr = names.split('\n')
+      nameArr.forEach(e => e.replace(/(^\s*)|(\s*$)/g),'')
+      nameArr = nameArr.filter(e => e !== '')
+      nameLen = nameArr.length
+      nameArr.forEach((e, i, a)=>{
+        i < 22 ? ulStr1 += '<li>'+ e +'</li>' : ulStr2 += '<li>'+ e +'</li>'
+      })
+      nameUl1.innerHTML = ulStr1
+      nameUl2.innerHTML = ulStr2
+      myaudio.volume = 0.4
+    }
+
+    play.onclick = function(){
+      isPlayed = true
+      myaudio.paused ? myaudio.play() : myaudio.pause()
+      myaudio.paused ? play.className='' : play.className='playing'
+    }
+
+    tips.onclick = function(){
+      window.location.reload(true)
+    }
+    update.onclick = function(){
+      clearInterval(timer)
+      nameList.style.display='none'
+      nameIpt.style.display='block'
+      this.style.display='none'
+      submit.style.display='block'
+      nameArea.value=names
+    }
+
+    submit.onclick = function(){
+      clearInterval(timer)
+      list.innerHTML=''
+      show.innerHTML = '大 奖'
+      listObj = {}
+      names = nameArea.value
+      initList()
+      nameIpt.style.display='none'
+      nameList.style.display='block'
+      this.style.display='none'
+      update.style.display='block'
+    }
+
+    start.onclick = function(){
+      !isPlayed && myaudio.paused && myaudio.play()
+      myaudio.paused ? play.className='' : play.className='playing'
+      onoff = true
+      speed = speedIpt.value
+      if( !nameArr.length){
+        alert('名单为空，请先录入名单')
+        return
+      }
+      clearInterval(timer)
+      timer = setInterval(function(){
+        n = num++ % nameLen
+        show.innerHTML = nameArr[n]
+      },speed*1 || 30)
+    }
+    lucky.onclick = function(){
+      if(!onoff)return
+      onoff = false
+      if(!nameArr.length || !timer){
+        alert('名单为空，请先录入名单')
+        return
+      }
+      clearInterval(timer)
+      let str = ''
+      listObj[nameArr[n]] ? listObj[nameArr[n]]++ : listObj[nameArr[n]] = 1
+      for(attr in listObj){
+        str += attr + '&nbsp;&nbsp;&nbsp;' + listObj[attr] + '&nbsp;次<br />'
+      }
+      list.innerHTML = str
+    }
+
+    window.onload = function(){
+      myaudio.paused ? play.className='' : play.className='playing'
+    }
+  </script>
+</body>
+</html>
