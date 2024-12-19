@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>12个提高 JavaScript 技能的概念！ | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a href="/atom.xml" target="_self"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">12个提高 JavaScript 技能的概念！</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 14</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/31330.html#waline-comment"><span class="waline-comment-count" data-path="/article/31330.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.html.cn/web/javascript/14000.html</code></p>
+<p>JavaScript 是一种复杂的语言。如果是你是高级或者初级 JavaScript 开发人员，了解它的基本概念非常重要。本文介绍 JavaScript 至关重要的<strong>12</strong>个概念，但绝对不是说 JavaScript 开发人员只需要知道这些就可以了。</p>
+<span id="more"></span>
+<p><img src="https://img.php.cn/upload/article/000/000/006/5dccbda2c71d1969.jpeg" alt="xuehuayu.cn"></p>
+<h2 id="1-变量赋值-值-vs-引用）"><a href="#1-变量赋值-值-vs-引用）" class="headerlink" title="1.变量赋值 (值 vs 引用）"></a>1.变量赋值 (值 vs 引用）</h2><p>理解 JavaScript 如何给变量赋值可以帮助我们减少一些不必要的 <strong>bug</strong>。如果你不理解这一点，可能很容易地编写被无意中更改值的代码。</p>
+<p>JavaScript 总是按照值来给变量赋值。 <strong>这一部分非常重要</strong>：当指定的值是 JavaScript 的五种基本类型之一（即 <code>Boolean</code>，<code>null</code>，<code>undefined</code>，<code>String</code> 和 <code>Number</code>）时，将分配实际值。 但是，当指定的值是 <code>Array</code>，<code>Function</code>或<code>Object</code>时，将分配对内存中对象的引用给变量。</p>
+<p>在以下代码段中，使用 <code>var1</code> 对 <code>var2</code> 进行赋值。 由于<code>var1</code>是基本类型（String），因此 var2 的值等于 <code>var1</code> 的 String 值，并且可以认为此时与<code>var1</code>完全不同。 因此，重新赋值<code>var2</code>对<code>var1</code>没有影响。</p>
+<pre><code>let var1 = &#39;My string&#39;;
+let var2 = var1;
+var2 = &#39;My new string&#39;;
+console.log(var1);
+// &#39;My string&#39;
+console.log(var2);
+// &#39;My new string&#39;
+</code></pre>
+<p>接着，与对象赋值进行比较。</p>
+<pre><code>let var1 = &#123; name: &#39;Jim&#39; &#125;
+let var2 = var1;
+var2.name = &#39;John&#39;;
+console.log(var1);
+// &#123; name: &#39;John&#39; &#125;
+console.log(var2);
+// &#123; name: &#39;John&#39; &#125;
+</code></pre>
+<p>如果你期望它会像原始类型赋值那样，很可能会出问题！如果你创建了一个无意中会改变对象的函数，就会出现一些非预期的行为。</p>
+<h2 id="2-闭包"><a href="#2-闭包" class="headerlink" title="2.闭包"></a>2.闭包</h2><p>闭包是一个重要的JavaScript模式，可以私有访问变量。在本例中，<code>createGreeter</code>返回一个匿名函数，这个函数可以访问参数 <code>greeting</code>（在这里是“Hello”）。在后续的调用中，<code>sayHello</code> 将有权访问这个 greeting！</p>
+<pre><code>function createGreeter(greeting) &#123;
+  return function(name) &#123;
+    console.log(greeting + &#39;, &#39; + name);
+  &#125;
+&#125;
+const sayHello = createGreeter(&#39;Hello&#39;);
+sayHello(&#39;Joe&#39;);
+// Hello, Joe
+</code></pre>
+<p>在更真实的场景中，你可以设想一个初始函数<code>apiConnect(apiKey)</code>，它返回一些使用<code>API key</code>的方法。在这种情况下，<code>apiKey</code> 只需要提供一次即可。</p>
+<pre><code>function apiConnect(apiKey) &#123;
+  function get(route) &#123;
+    return fetch(`$&#123;route&#125;?key=$&#123;apiKey&#125;`);
+  &#125;
+  function post(route, params) &#123;
+    return fetch(route, &#123;
+      method: &#39;POST&#39;,
+      body: JSON.stringify(params),
+        headers: &#123;
+          &#39;Authorization&#39;: `Bearer $&#123;apiKey&#125;`
+        &#125;
+      &#125;)
+  &#125;
+  return &#123; get, post &#125;
+&#125;
+const api = apiConnect(&#39;my-secret-key&#39;);
+// No need to include the apiKey anymore
+api.get(&#39;http://www.example.com/get-endpoint&#39;);
+api.post(&#39;http://www.example.com/post-endpoint&#39;, &#123; name: &#39;Joe&#39; &#125;);
+</code></pre>
+<h2 id="3-解构"><a href="#3-解构" class="headerlink" title="3.解构"></a>3.解构</h2><p>JavaScript 参数解构可以从对象中干中提取所需属性的常用方法。</p>
+<pre><code>const obj = &#123;
+  name: &#39;Joe&#39;,
+  food: &#39;cake&#39;
+&#125;
+const &#123; name, food &#125; = obj;
+console.log(name, food);
+// &#39;Joe&#39; &#39;cake&#39;
+</code></pre>
+<p>如果要以其他名称提取属性，可以使用如下方式：</p>
+<pre><code>const obj = &#123;
+  name: &#39;Joe&#39;,
+  food: &#39;cake&#39;
+&#125;
+const &#123; name: myName, food: myFood &#125; = obj;
+console.log(myName, myFood);
+// &#39;Joe&#39; &#39;cake&#39;
+</code></pre>
+<p>解构经常也用于直接用于提取传给函数的参数。如果你熟悉 React，可能已经见过这个：</p>
+<pre><code>const person = &#123;
+  name: &#39;Eddie&#39;,
+  age: 24
+&#125;
+function introduce(&#123; name, age &#125;) &#123;
+  console.log(`I&#39;m $&#123;name&#125; and I&#39;m $&#123;age&#125; years old!`);
+&#125;
+console.log(introduce(person));
+// &quot;I&#39;m Eddie and I&#39;m 24 years old!&quot;
+</code></pre>
+<h2 id="4-展开运算"><a href="#4-展开运算" class="headerlink" title="4. 展开运算"></a>4. 展开运算</h2><p>ES6的一个常用之一的特性就是展开(…)运算符了,在下面的例子中，<code>Math.max</code> 不能应用于 <code>arr</code> 数组，因为它不将数组作为参数，但它可以将各个元素作为参数传入。展开运算符<code>...</code>可用于提取数组的各个元素。</p>
+<pre><code>const arr = [4, 6, -1, 3, 10, 4];
+const max = Math.max(...arr);
+console.log(max);
+// 10
+</code></pre>
+<h2 id="5-剩余参数"><a href="#5-剩余参数" class="headerlink" title="5. 剩余参数"></a>5. 剩余参数</h2><p>剩余参数语法和展开语法看起来的一样的，不同的是展开语法是为了结构数组和对象；而剩余参数和展开运算符是相反的，剩余参数收集多个元素合成一个数组。</p>
+<pre><code>function myFunc(...args) &#123;
+  console.log(args[0] + args[1]);
+&#125;
+myFunc(1, 2, 3, 4);
+// 3
+</code></pre>
+<p><strong>rest parameters</strong> 和 <strong>arguments</strong> 的区别</p>
+<ol>
+<li>arguments 是伪数组，包含所有的实参</li>
+<li>剩余参数 是标准的数组，可以使用数组的方法</li>
+</ol>
+<h2 id="6-数组方法"><a href="#6-数组方法" class="headerlink" title="6. 数组方法"></a>6. 数组方法</h2><p>JavaScript 数组方法通常可以提供令人难以置信的、优雅的方法来执行所需的数据转换。作为StackOverflow 的贡献者，我经常看到关于如何以某种方式操纵对象数组的问题，这往往也是数组方法的完美用例。</p>
+<h4 id="map、filter、reduce"><a href="#map、filter、reduce" class="headerlink" title="map、filter、reduce"></a>map、filter、reduce</h4><p>JavaScript 数组方法<code>map</code>、<code>filter</code>和<code>reduce</code>容易混淆，这些都是转换数组或返回聚合值的有用方法。</p>
+<p><strong>map：返回一个数组，其中每个元素都使用指定函数进行过转换。</strong></p>
+<pre><code>const arr = [1, 2, 3, 4, 5, 6];
+const mapped = arr.map(el =&gt; el + 20);
+console.log(mapped);
+// [21, 22, 23, 24, 25, 26]
+</code></pre>
+<p><strong>filter：返回一个数组，只有当指定函数返回 true 时，相应的元素才会被包含在这个数组中。</strong></p>
+<pre><code>const arr = [1, 2, 3, 4, 5, 6];
+const filtered = arr.filter(el =&gt; el === 2 || el === 4);
+console.log(filtered);
+// [2, 4]
+</code></pre>
+<p><strong>reduce:按函数中指定的值累加</strong></p>
+<pre><code>const arr = [1, 2, 3, 4, 5, 6];
+const reduced = arr.reduce((total, current) =&gt; total + current);
+console.log(reduced);
+// 21
+</code></pre>
+<h4 id="find-findIndex-indexOf"><a href="#find-findIndex-indexOf" class="headerlink" title="find, findIndex, indexOf"></a><strong>find, findIndex, indexOf</strong></h4><p><strong>find：返回与指定条件匹配的第一个实例，如果查到不会继续查找其他匹配的实例。</strong></p>
+<pre><code>const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const found = arr.find(el =&gt; el &gt; 5);
+console.log(found);
+// 6
+</code></pre>
+<p><strong>再次注意</strong>，虽然<code>5</code>之后的所有元素都满足条件，但是只返回第一个匹配的元素。当你发现匹配项时，通常会中断<code>for</code>循环，在这种情况下，这实际上非常有用。</p>
+<p><strong>findIndex</strong>：这与<code>find</code>几乎完全相同，但不是返回第一个匹配元素，而是返回第一个匹配元素的索引。</p>
+<pre><code>const arr = [&#39;Nick&#39;, &#39;Frank&#39;, &#39;Joe&#39;, &#39;Frank&#39;];
+const foundIndex = arr.findIndex(el =&gt; el === &#39;Frank&#39;);
+console.log(foundIndex);
+// 1
+</code></pre>
+<p><strong>indexOf</strong>：与<code>findIndex</code>几乎完全相同，但它不是将函数作为参数，而是采用一个简单的值。 当w你需要更简单的逻辑并且不需要使用函数来检查是否存在匹配时，可以使用此方法。</p>
+<pre><code>const arr = [&#39;Nick&#39;, &#39;Frank&#39;, &#39;Joe&#39;, &#39;Frank&#39;];
+const foundIndex = arr.indexOf(&#39;Frank&#39;);
+console.log(foundIndex);
+// 1
+</code></pre>
+<h4 id="push-pop-shift-unshift"><a href="#push-pop-shift-unshift" class="headerlink" title="push, pop, shift, unshift"></a><strong>push, pop, shift, unshift</strong></h4><p><strong>push</strong>：这是一个相对简单的方法，它将一个项添加到数组的末尾。它就地修改数组，函数本身会返回添加到数组中的项。</p>
+<pre><code>let arr = [1, 2, 3, 4];
+const pushed = arr.push(5);
+console.log(arr);
+// [1, 2, 3, 4, 5]
+console.log(pushed);
+// 5
+</code></pre>
+<p><strong>pop</strong>:这将从数组中删除最后一项。同样，它在适当的位置修改数组，函数本身返回从数组中删除的项。</p>
+<pre><code>let arr = [1, 2, 3, 4];
+const popped = arr.pop();
+console.log(arr);
+// [1, 2, 3]
+console.log(popped);
+// 4
+</code></pre>
+<p><strong>shift</strong>:从数组中删除第一项。同样，它在适当的位置修改数组。函数本身返回从数组中删除的项。</p>
+<pre><code>let arr = [1, 2, 3, 4];
+const shifted = arr.shift();
+console.log(arr);
+// [2, 3, 4]
+console.log(shifted);
+// 1
+</code></pre>
+<p><strong>unshift</strong>:将一个或多个元素添加到数组的开头。同样，它在适当的位置修改数组。与许多其他方法不同，函数本身返回数组的新长度。</p>
+<pre><code>let arr = [1, 2, 3, 4];
+const unshifted = arr.unshift(5, 6, 7);
+console.log(arr);
+// [5, 6, 7, 1, 2, 3, 4]
+console.log(unshifted);
+// 7
+</code></pre>
+<h4 id="splice-slice"><a href="#splice-slice" class="headerlink" title="splice, slice"></a><strong>splice, slice</strong></h4><p><strong>splice：</strong>通过删除或替换现有元素和&#x2F;或添加新元素来更改数组的内容，此方法会修改了数组本身。</p>
+<p>下面的代码示例的意思是：在数组的位置 <code>1</code> 上删除 <code>0</code> 个元素，并插入 <code>b</code>。</p>
+<pre><code>let arr = [&#39;a&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;];
+arr.splice(1, 0, &#39;b&#39;)
+</code></pre>
+<p><strong>slice</strong>：从指定的起始位置和指定的结束位置之前返回数组的浅拷贝。 如果未指定结束位置，则返回数组的其余部分。 重要的是，此方法不会修改数组，而是返回所需的子集。</p>
+<pre><code>let arr = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;];
+const sliced = arr.slice(2, 4);
+console.log(sliced);
+// [&#39;c&#39;, &#39;d&#39;]
+console.log(arr);
+// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]
+</code></pre>
+<h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a><strong>sort</strong></h4><p><strong>sort：</strong>根据提供的函数对数组进行排序。这个方法就地修改数组。如果函数返回负数或 0，则顺序保持不变。如果返回正数，则交换元素顺序。</p>
+<pre><code>let arr = [1, 7, 3, -1, 5, 7, 2];
+const sorter = (firstEl, secondEl) =&gt; firstEl - secondEl;
+arr.sort(sorter);
+console.log(arr);
+// [-1, 1, 2, 3, 5, 7, 7]
+</code></pre>
+<h2 id="7-Generators-生成器"><a href="#7-Generators-生成器" class="headerlink" title="7. Generators(生成器)"></a>7. Generators(生成器)</h2><p>生成器是一种特殊的行为，实际上是一种设计模式，我们通过调用**next()<strong>方法来遍历一组有序的值。想象一下，例如使用遍历器对数组<code>[1,2,3,4,5]</code>进行遍历。第一次调用</strong>next()<strong>方法返回<code>1</code>，第二次调用</strong>next()<strong>方法返回<code>2</code>，以此类推。当数组中的所有值都返回后，调用</strong>next()**方法将返回<code>null</code>或<code>false</code>或其它可能的值用来表示数组中的所有元素都已遍历完毕。</p>
+<pre><code>function* greeter() &#123;
+  yield &#39;Hi&#39;;
+  yield &#39;How are you?&#39;;
+  yield &#39;Bye&#39;;
+&#125;
+const greet = greeter();
+console.log(greet.next().value);
+// &#39;Hi&#39;
+console.log(greet.next().value);
+// &#39;How are you?&#39;
+console.log(greet.next().value);
+// &#39;Bye&#39;
+console.log(greet.next().value);
+// undefined
+</code></pre>
+<p>使用生成器生成无限个值：</p>
+<pre><code>function* idCreator() &#123;
+  let i = 0;
+  while (true)
+    yield i++;
+&#125;
+const ids = idCreator();
+console.log(ids.next().value);
+// 0
+console.log(ids.next().value);
+// 1
+console.log(ids.next().value);
+// 2
+// etc...
+</code></pre>
+<h2 id="8-恒等运算符-与相等运算符"><a href="#8-恒等运算符-与相等运算符" class="headerlink" title="8.恒等运算符(&#x3D;&#x3D;&#x3D;)与相等运算符(&#x3D;&#x3D;)"></a>8.恒等运算符(&#x3D;&#x3D;&#x3D;)与相等运算符(&#x3D;&#x3D;)</h2><p>大家一定要知道JavaScript中的恒等运算符（<code>===</code>）和相等运算符（<code>==</code>）之间的区别！ <code>==</code>运算符在比较值之前会进行类型转换，而<code>===</code>运算符在比较之前不会进行任何类型转换。</p>
+<pre><code>console.log(0 == &#39;0&#39;);
+// true
+console.log(0 === &#39;0&#39;);
+// false
+</code></pre>
+<h2 id="9-对象比较"><a href="#9-对象比较" class="headerlink" title="9. 对象比较"></a>9. 对象比较</h2><p>我看到 JavaScript新手所犯的错误是直接比较对象。 变量指向内存中对象的引用，而不是对象本身！ 实际比较它们的一种方法是将对象转换为 JSON 字符串。 这有一个缺点：对象属性顺序不能保证！ 比较对象的一种更安全的方法是引入专门进行深度对象比较的库（例如，lodash的isEqual）。</p>
+<p>下面的对象看起来是相等的，但实际上它们指向不同的引用。</p>
+<pre><code>const joe1 = &#123; name: &#39;Joe&#39; &#125;;
+const joe2 = &#123; name: &#39;Joe&#39; &#125;;
+console.log(joe1 === joe2);
+// false
+</code></pre>
+<p>相反，下面的计算结果为<code>true</code>，因为一个对象被设置为与另一个对象相等，因此指向相同的引用(内存中只有一个对象)。</p>
+<pre><code>const joe1 = &#123; name: &#39;Joe&#39; &#125;;
+const joe2 = joe1;
+console.log(joe1 === joe2);
+// true
+</code></pre>
+<p>相反，以下计算结果为<code>true</code>，因为一个对象设置为等于另一个对象，因此指向相同的引用（内存中只有一个对象）。</p>
+<pre><code>const joe1 = &#123; name: &#39;Joe&#39; &#125;;
+const joe2 = joe1;
+console.log(joe1 === joe2);
+// true
+</code></pre>
+<h2 id="10-回调函数"><a href="#10-回调函数" class="headerlink" title="10. 回调函数"></a>10. 回调函数</h2><p>很多人都被 JavaScript 回调函数吓倒了！ 他们很简单，举个例子。 <code>console.log</code> 函数作为回调传递给<code>myFunc</code>。 它在<code>setTimeout</code>完成时执行。</p>
+<pre><code>function myFunc(text, callback) &#123;
+  setTimeout(function() &#123;
+    callback(text);
+  &#125;, 2000);
+&#125;
+myFunc(&#39;Hello world!&#39;, console.log);
+// &#39;Hello world!&#39;
+</code></pre>
+<h2 id="11-Promises"><a href="#11-Promises" class="headerlink" title="11. Promises"></a>11. Promises</h2><p>一旦你理解了 JavaScript 回调，很快就会发现自己陷入了“回调地狱”中。这个时候可以使用 promise,将异步逻辑包装在 promise 中，成功时 <code>resolve</code> 或在失败时<code>reject</code> 使用“then”来处理成功的情况，使用<code>catch</code>来处理异常。</p>
+<pre><code>const myPromise = new Promise(function(res, rej) &#123;
+  setTimeout(function()&#123;
+    if (Math.random() &lt; 0.9) &#123;
+      return res(&#39;Hooray!&#39;);
+    &#125;
+    return rej(&#39;Oh no!&#39;);
+  &#125;, 1000);
+&#125;);
+myPromise
+  .then(function(data) &#123;
+    console.log(&#39;Success: &#39; + data);
+   &#125;)
+   .catch(function(err) &#123;
+    console.log(&#39;Error: &#39; + err);
+   &#125;);
+   
+// If Math.random() returns less than 0.9 the following is logged:
+// &quot;Success: Hooray!&quot;
+// If Math.random() returns 0.9 or greater the following is logged:
+// &quot;Error: On no!&quot;
+</code></pre>
+<h2 id="12-Async-Await"><a href="#12-Async-Await" class="headerlink" title="12. Async&#x2F;Await"></a>12. Async&#x2F;Await</h2><p>在掌握了 promise 的用法后，你可能也会喜欢 <code>async await</code>，它只是一种基于 promise 的“语法糖”。在下面的示例中，我们创建了一个 <code>async</code> 函数，并 await greeter promise。</p>
+<pre><code>const greeter = new Promise((res, rej) =&gt; &#123;
+  setTimeout(() =&gt; res(&#39;Hello world!&#39;), 2000);
+&#125;)
+async function myFunc() &#123;
+  const greeting = await greeter;
+  console.log(greeting);
+&#125;
+myFunc();
+// &#39;Hello world!&#39;
+</code></pre>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如果您不知道这12个概念中的任何一个，那么您可能至少对JavaScript有了一点了解！而且，如果您了解所有这些知识，那么希望这是一次练习和增进知识的机会。</p>
+<p><code>原文地址：https://hackernoon.com/12-javascript-concepts-that-will-level-up-your-development-skills-b37d16ad7104</code></p>
+<p><strong>为了保证的可读性，本文采用意译而非直译。</strong></p>
+<p>以上就是12个提高 JavaScript 技能的概念！的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/31330.html">https://xuehuayu.cn/article/31330.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/40964.html">Promise的三兄弟：all(), race()以及allSettled()</a><a class="next" href="/article/20021.html">如何在 JS 循环中正确使用 async 与 await</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/65953a19.html">electron-vite+react项目中如何使用css module</a></li><li class="post-list-item"><a class="post-list-link" href="/article/433d7e2b.html">electron-vite+react+react-router-dom+antd中useRoutes踩坑</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ed850983.html">Next.js启动打包部署（out、standalone）</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7beb973b.html">uniapp解决安卓targetSdkVersion升级为33导致通知权限置灰无法打开问题</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7fb2c15c.html">vue中echarts的3D饼图实现</a></li><li class="post-list-item"><a class="post-list-link" href="/article/e856e555.html">vue实现按钮切换背景移动效果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ebec0b44.html">vue实现滚动到底部加载</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d817e843.html">vue实现图片横向拖动滚动</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li><li class="post-list-item"><a class="post-list-link" href="/article/bf6d70b6.html">js根据月份计算第一天和最后一天</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">207</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-tags"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 15px;">转载</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 15px;">原创</a> <a href="/tags/%E6%89%8B%E5%86%99/" style="font-size: 15px;">手写</a> <a href="/tags/%E7%96%AB%E6%83%85/" style="font-size: 15px;">疫情</a> <a href="/tags/ZYPlayer/" style="font-size: 15px;">ZYPlayer</a> <a href="/tags/KKPlayer/" style="font-size: 15px;">KKPlayer</a> <a href="/tags/APP/" style="font-size: 15px;">APP</a> <a href="/tags/%E6%95%B4%E7%90%86/" style="font-size: 15px;">整理</a> <a href="/tags/URL/" style="font-size: 15px;">URL</a> <a href="/tags/uni-app/" style="font-size: 15px;">uni-app</a> <a href="/tags/mui-player/" style="font-size: 15px;">mui-player</a> <a href="/tags/WebDAV/" style="font-size: 15px;">WebDAV</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/echarts-3d/" style="font-size: 15px;">echarts 3d</a> <a href="/tags/nextjs/" style="font-size: 15px;">nextjs</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/electron-vite/" style="font-size: 15px;">electron-vite</a> <a href="/tags/useRoutes/" style="font-size: 15px;">useRoutes</a> <a href="/tags/CSSModule/" style="font-size: 15px;">CSSModule</a></div></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2024 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>
