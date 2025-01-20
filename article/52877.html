@@ -1,0 +1,595 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>MVVM 双向绑定全量版整理 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a href="/atom.xml" target="_self"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">MVVM 双向绑定全量版整理</h1><div class="post-meta"><span class="date">2019-12-02</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 17</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/52877.html#waline-comment"><span class="waline-comment-count" data-path="/article/52877.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.infoq.cn/article/sGeiocEofyryEbrkYH30</code></p>
+<blockquote>
+<p>随着各大前端框架的崛起，前端技术热词不断演进，我们只有知道发展的原因，才能去理解各项技术的优劣，根据应用的实际情况做出最合适的技术栈选择。<br>当前前端领域的前沿特性，双向绑定必占一席，双向绑定是怎么来的？各大框架如何实现双向绑定？我们怎样做出选择？本文对此作了全面整理说明。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="发展背景"><a href="#发展背景" class="headerlink" title="发展背景"></a>发展背景</h2><p>早期的 Web 开发主要基于 MVC 模式，MVC 即<code>Model-View-Controller</code>的缩写，表示模型 - 视图 - 控制器，一个标准的 Web 应用组成如下：</p>
+<ul>
+<li>View 用来把数据以某种方式呈现给用户；</li>
+<li>Model 数据；</li>
+<li>Controller 接收并处理来自用户的请求，将 Model 返回给用户。</li>
+</ul>
+<p><img src="https://static001.infoq.cn/resource/image/2d/62/2d7ef5326723b4c661d7b8a0b23c6262.png" alt="MVVM双向绑定全量版整理"></p>
+<p>这种 MVC 架构模式对于简单的应用是合适的，符合软件架构分层的思想。但随着 H5 的发展以及当前各种页面复杂操作行为及数据的出现，MVC 暴露出了痛点问题：</p>
+<ol>
+<li>代码中大量调用 DOM API 时，处理繁琐，使得代码难以维护。</li>
+<li>当 Model 频繁发生变化时，开发者需要主动更新到 View；用户操作导致 Model 发生变化时，同样需要将数据同步到 Model 中，很难维护复杂多变的数据状态。</li>
+</ol>
+<p>MVVM 是<code>Model-View-ViewModel</code>的缩写，VM 代替了 C，改变了通信方向，View 与 Model 不发生联系，通过 ViewModel 传递。可以做到 View 层用户操作时，ViewModel 层数据同步更新，ViewModel 数据变化时，支持同步更新到 View 层，提升了数据频繁变化时的代码可维护性。这里的 View 与 ViewModel 之间的双向同步过程，我们称之为双向绑定。</p>
+<p><img src="https://static001.infoq.cn/resource/image/a2/29/a21198875ea2b0b69da2dfb091729329.png" alt="MVVM双向绑定全量版整理"></p>
+<p>用一张动图来感受一下，表单 change 产生数据变化时自动更新 ViewModel, ViewModel 因外界事件导致数据改变时会同步到 View。</p>
+<p><img src="https://static001.infoq.cn/resource/image/58/5a/583eb02cb586372f2d7345910dff675a.gif" alt="MVVM双向绑定全量版整理"></p>
+<p>当前热门的前端框架 Angular 和 Vue 都主打 MVVM 模式，建立视图层与视图模型层之间的数据连接，可以轻松实现表单变化的数据反馈到模型层。而 React 框架则推荐单向数据流，使用自身 render 机制完成视图渲染，实际上只担任了 View 层。我们来看一看各个不同框架对此都做了怎样的工作。</p>
+<h2 id="Angular-的脏值检测"><a href="#Angular-的脏值检测" class="headerlink" title="Angular 的脏值检测"></a>Angular 的脏值检测</h2><p>脏值检测是 Angular 的数据更新思路，”脏值“意为<code>dirty data</code>，表示当前数据与上一轮 UI 更新的数据不同，Angular 通过监听数据异步更新，采用比较不同 component 组件中方式更新 DOM。总结起来, 主要有如下几种情况可能改变数据：</p>
+<ul>
+<li>用户输入事件，比如 click 事件；</li>
+<li>请求服务端数据 (XHR)；</li>
+<li>定时事件，比如 setTimeout，setInterval。</li>
+</ul>
+<p>上述三种情况都有一个共同点，即这些导致绑定值发生改变的事件都是异步发生的，如下为 JavaScript 的异步机制：</p>
+<p><img src="https://static001.infoq.cn/resource/image/3a/ba/3aa2a1836119b9e2848fbc8054c9e1ba.png" alt="MVVM双向绑定全量版整理"></p>
+<p>左边表示将要运行的代码，这里的 stack 表示 JavaScript 的运行栈，而 WebApi 则是浏览器中提供的一些 JavaScript 的 API，TaskQueue 表示 JavaScript 中任务队列，因为 JavaScript 是单线程的，异步任务在任务队列中执行。如果这些异步的事件在发生时能够执行 Angular 重写的异步事件，通知到 Angular 框架，那么 Angular 就能及时的检测到变化。Angular 在这里使用了 Zone.js 做异步处理的脏值检测，细节可以查看<a target="_blank" rel="noopener" href="https://blog.strongbrew.io/how-the-hell-do-zones-really-work/">《Zone.js 究竟是如何工作的》</a>以及<a target="_blank" rel="noopener" href="https://github.com/angular/zone.js"> angular&#x2F;zone.js 源码</a>。</p>
+<p>Angular 的每一个 Component 都对应有一个<code>changeDetector</code>，意为变化检测器。由于我们的多个 Component 是一个树状结构的组织，一个 Component 对应一个 changeDetector，所以 changeDetector 之间同样是一个树状结构的组织。</p>
+<p>我们用一个图例来进行说明检测到脏值变化后的更新过程，下图每一个模块都是一个 changeDetector 变化检测器，红色区块表示有 UI 更新的变化检测器，左侧为脏值变化检测前，右侧为有脏值变化时的 UI 更新。根据上述 EventLoop 机制，Angular 框架层捕获到异步事件对一个 component 数据更新后，从根组件开始，通知当前组件链路及以下链路，进行 View 层更新 (OnPush 模式)。因此，无论是从 V 层出发的用户输入事件，还是 VM 处产生的定时、Http 事件，都能保证数据更新、界面更新！</p>
+<p><img src="https://static001.infoq.cn/resource/image/95/1a/9566609341cb845eb5083b742cc8761a.png" alt="MVVM双向绑定全量版整理"></p>
+<p><img src="https://static001.infoq.cn/resource/image/80/ef/80640256e264514f7a51a7f810710def.jpg" alt="MVVM双向绑定全量版整理"></p>
+<p>但是自 Angular1 推出脏值检测机制以来，在性能上一直饱受质疑，原因如下：</p>
+<ol>
+<li>如果有一个 ComponentA 数据修改，影响了下路 ComponentB。</li>
+<li>下路的 componentB 数据在更新时触发了数据调整机制，下路 Component 更新的短时间过程中，又影响了 ComponentA。那么最终是否会形成 ComponentA、ComponentB 的检测循环？</li>
+</ol>
+<p>对于以上问题，Angular1 的解决方式是，如果有 10 次往复循环，就不再进行继续检测。无论是性能还是结果，都不能令人满意。因此 Angular2 以脱胎换骨的方式进行了重构，支持 dev 开发模式与 prod 线上模式，prod 线上模式只进行单向数据流检测，并支持设置<code>ChangeDetectionStrategy</code>变化检测策略，具备局部组件 View 层更新能力，因此性能上有了明显突破。</p>
+<p><img src="https://static001.infoq.cn/resource/image/4a/69/4a371ea97e7bfc2ca163e0332104e969.png" alt="MVVM双向绑定全量版整理"></p>
+<h2 id="Vue-的数据劫持-发布订阅"><a href="#Vue-的数据劫持-发布订阅" class="headerlink" title="Vue 的数据劫持 + 发布订阅"></a>Vue 的数据劫持 + 发布订阅</h2><p>Vue 的双向绑定策略基础是数据劫持，在 Vue2.0 中使用了 ES5 语法 Object.defineProperty，来劫持各个属性的 setter&#x2F;getter，在数据变动时发布消息给订阅者（Wacther）, 触发相应的监听回调。先来看一下这个 ES5 特性，我们可以通过 Object.defineProperty 这个方法，直接在一个对象上定义一个新的属性，或者修改已存在的属性，最终这个方法会返回该对象，如下为简单说明，对该特性不了解的同学可以查看《JavaScript 高级程序设计》的第六章，或者在线访问<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"> MDN Web 文档</a>。</p>
+<p>复制代码</p>
+<pre><code>var o = &#123;&#125;;
+
+var value = 1;
+
+Object.defineProperty(o, &#39;a&#39;, &#123;
+
+get: function() &#123; return value; &#125;,
+
+set: function(newValue) &#123; value = newValue; &#125;,
+
+enumerable: true,
+
+configurable: true
+
+&#125;);
+
+o.a; // 1
+
+o.a = 2;
+
+o.a; // 2
+</code></pre>
+<p>结合这一特定与发布订阅机制，可以实现完整的双向绑定。如下所示，Observer 数据监听器能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者，内部采用 Object.defineProperty 的 getter 和 setter 来实现。</p>
+<blockquote>
+<p>Compile 指令解析器，它的作用对每个元素节点的指令进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数。</p>
+</blockquote>
+<blockquote>
+<p>Watcher 订阅者， 作为连接 Observer 和 Compile 的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。</p>
+</blockquote>
+<blockquote>
+<p>Dep 消息订阅器，内部维护了一个数组，用来收集订阅者（Watcher），数据变动触发 notify 函数，再调用订阅者的 update 方法。</p>
+</blockquote>
+<p>当执行 new Vue() 时，Vue 就进入了初始化阶段，一方面会遍历 data 选项中的属性，用 Object.defineProperty 将它们转为 getter&#x2F;setter，实现数据变化监听功能；另一方面，Vue 的指令编译器 Compile 对元素节点的指令进行扫描和解析，初始化视图，并订阅 Watcher 来更新视图， 此时 Wather 会将自己添加到消息订阅器中 (Dep), 初始化完毕。当数据发生变化时，Observer 中的 setter 方法被触发，setter 会立即调用 Dep.notify()，Dep 开始遍历所有的订阅者，并调用订阅者的 update 方法，订阅者收到通知后对视图进行相应的更新。</p>
+<p><img src="https://static001.infoq.cn/resource/image/43/9f/43e47f50f1ad9358a2e9ab4e5d10879f.png" alt="MVVM双向绑定全量版整理"></p>
+<p>使用 Object.defineProperty 这个特性存在一些明显的缺点，总结起来大概是下面两个：</p>
+<blockquote>
+<ol>
+<li><blockquote>
+<p>Object.defineProperty 无法监控到数组下标的变化，当监控数组数据对象的时候，实质上就是监控数组的地址，地址不变也就不会被监测到。为了解决这个问题，经过 Vue 内部处理后可以使用 push、pop、shift、unshift、splice、sort、reverse 来监听数组。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>Object.defineProperty 只能劫持对象的属性, 因此我们需要对每个对象的每个属性进行遍历。Vue 2.x 里，是通过 递归 + 遍历 data 对象来实现对数据的监控的，如果属性值也是对象那么需要深度遍历，显然如果能劫持一个完整的对象是才是更好的选择。</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<p>由于只针对了以上八种方法进行了 hack 处理, 所以其他数组的属性也是检测不到的，还是具有一定的局限性。Vue3.0 中使用了 ES6 语法 Proxy，用于取代 defineProperty，使用 Proxy 有以下两个优点：</p>
+<blockquote>
+<ol>
+<li>可以劫持整个对象，并返回一个新对象；</li>
+<li>有 13 种劫持操作。</li>
+</ol>
+</blockquote>
+<p>既然 Proxy 能解决以上两个问题，而且 Proxy 作为 ES6 的新属性在 Vue2.x 之前就有了，为什么 Vue2.x 不使用 Proxy 呢？一个很重要的原因就是，Proxy 是 ES6 提供的新特性，兼容性不好，并且这个属性无法用 polyfill 来兼容。</p>
+<p>Vue 的双向绑定策略成为当前考察前端人员技术功底的重点，我们以 Object.defineProperty 特性实现一个简单的双向绑定，实现最初的 hello everyone 效果。</p>
+<p>复制代码</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+
+&lt;htmllang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+
+&lt;title&gt; 双向绑定最最最初级 demo&lt;/title&gt;
+
+&lt;metacharset=&quot;UTF-8&quot;&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;divid=&quot;app&quot;&gt;
+
+&lt;inputtype=&quot;text&quot;id=&quot;txt&quot;&gt;
+
+&lt;pid=&quot;show-txt&quot;&gt;&lt;/p&gt;
+
+&lt;buttononClick=&quot;changeData()&quot;&gt; 更新数据 &lt;/button&gt;
+
+&lt;/div&gt;
+
+&lt;/body&gt;
+
+&lt;script&gt;
+
+var obj=&#123;&#125;
+
+Object.defineProperty(obj,&#39;txt&#39;,&#123;
+
+get:function()&#123;
+
+return obj
+
+            &#125;,
+
+set:function(newValue)&#123;
+
+document.getElementById(&#39;txt&#39;).value = newValue
+
+document.getElementById(&#39;show-txt&#39;).innerHTML = newValue
+
+            &#125;
+
+        &#125;)
+
+document.addEventListener(&#39;keyup&#39;,function(e)&#123;
+
+            obj.txt = e.target.value
+
+        &#125;)
+
+        changeData = function() &#123;
+
+            obj.txt = &#39;hello world&#39;;
+
+        &#125;
+
+&lt;/script&gt;
+
+&lt;/html&gt;
+</code></pre>
+<p>由于<code>Object.defineProperty</code>默认只能劫持值类型数据，对引用类型数据的内部修改无法劫持，需要重写覆盖原原型方法，以 Array 为例，如下可以支持到 7 种数组方法：</p>
+<p>复制代码</p>
+<pre><code>let arr = [];
+
+let arrayMethod = Object.create(Array.prototype);
+
+[&#39;push&#39;, &#39;pop&#39;, &#39;shift&#39;, &#39;unshift&#39;, &#39;splice&#39;, &#39;sort&#39;, &#39;reverse&#39;].forEach(function (method) &#123;
+
+Object.defineProperty(arrayMethod, method, &#123;
+
+enumerable: true,
+
+configurable: true,
+
+value: function () &#123;
+
+let args = [...arguments]
+
+Array.prototype[method].apply(this, args);
+
+console.log(`operation: $&#123;method&#125;`);
+
+        &#125;
+
+    &#125;)
+
+&#125;);
+
+arr.__proto__ = arrayMethod;
+
+arr.push(1);  // 劫持到了 push 方法
+</code></pre>
+<p>相对完整的仿 Vue 双向绑定实现，来自<a target="_blank" rel="noopener" href="https://gitee.com/merico/Blog/tree/master/Object.defineProperty_Array">双向绑定数组源码</a>。</p>
+<p>复制代码</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+
+&lt;htmllang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+
+&lt;title&gt; 双向绑定支持数组监听 &lt;/title&gt;
+
+&lt;metacharset=&quot;UTF-8&quot;&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;divid=&quot;app&quot;&gt;
+
+&lt;divid=&#39;list&#39;&gt;&lt;/div&gt;
+
+&lt;inputtype=&quot;button&quot;value=&quot; 添加 &quot;onclick=&quot;btnAdd()&quot; /&gt;
+
+&lt;inputtype=&quot;button&quot;value=&quot; 删除 &quot;onclick=&quot;btnDel()&quot; /&gt;
+
+&lt;/div&gt;
+
+&lt;/body&gt;
+
+&lt;script&gt;
+
+// 数据源
+
+let vm = &#123;
+
+list: [1, 2, 3, 4]
+
+        &#125;
+
+// 用于管理 watcher 的 Dep 对象
+
+let Dep = function () &#123;
+
+this.list = [];
+
+this.add = function (watcher) &#123;
+
+this.list.push(watcher)
+
+            &#125;;
+
+this.notify = function (newValue) &#123;
+
+this.list.forEach(function (fn) &#123;
+
+                    fn(newValue)
+
+                &#125;)
+
+            &#125;
+
+        &#125;;
+
+// 模拟 compile, 通过对 Html 的解析生成一系列订阅者（watcher）
+
+functionrenderList() &#123;
+
+let listContainer = document.querySelector(&#39;#list&#39;);
+
+let contentList = &#39;&#39;;
+
+            vm.list.forEach(function (item) &#123;
+
+                contentList = contentList + `&lt;div&gt;&lt;h3&gt;$&#123;item&#125;&lt;/h3&gt;&lt;/div&gt;`
+
+            &#125;)
+
+            listContainer.innerHTML = contentList;
+
+        &#125;
+
+// 将解析出来的 watcher 存入 Dep 中待用
+
+let dep = new Dep();
+
+        dep.add(renderList)
+
+// 核心方法
+
+functioninitMVVM(vm) &#123;
+
+Object.keys(vm).forEach(function (key) &#123;
+
+let value = vm[key];
+
+if (Array.isArray(value)) &#123;
+
+                    observeArray(vm, key)
+
+                &#125;
+
+            &#125;)
+
+        &#125;
+
+functionobserveArray(vm, key) &#123;
+
+let arrayMethod = bindWatcherToArray();
+
+            vm[key].__proto__ = arrayMethod;
+
+        &#125;
+
+functionbindWatcherToArray() &#123;
+
+let arrayMethod = Object.create(Array.prototype);
+
+            [&#39;push&#39;, &#39;pop&#39;, &#39;shift&#39;, &#39;unshift&#39;, &#39;splice&#39;, &#39;sort&#39;, &#39;reverse&#39;].forEach(function (method) &#123;
+
+Object.defineProperty(arrayMethod, method, &#123;
+
+enumerable: true,
+
+configurable: true,
+
+value: function () &#123;
+
+let args = [...arguments]
+
+Array.prototype[method].apply(this, args);
+
+console.log(`operation: $&#123;method&#125;`)
+
+                        dep.notify();
+
+                    &#125;
+
+                &#125;)
+
+            &#125;);
+
+return arrayMethod
+
+        &#125;
+
+// 页面引用的方法
+
+functionbtnAdd() &#123;
+
+            vm.list.push(Math.random())
+
+        &#125;
+
+functionbtnDel() &#123;
+
+            vm.list.pop()
+
+        &#125;
+
+// 初始化数据源
+
+        initMVVM(vm)
+
+// 初始化页面
+
+        dep.notify();
+
+&lt;/script&gt;
+
+&lt;/html&gt;
+</code></pre>
+<h2 id="React-的工具辅助"><a href="#React-的工具辅助" class="headerlink" title="React 的工具辅助"></a>React 的工具辅助</h2><p>React 推荐单向数据流，目标从来不是“让开发者写更少的代码”，而是让“代码结构更加清晰易于维护”。加上有如下 Redux 的状态管理方案，可以很清楚地了解应用中状态数据，体现其单向数据流的优势。</p>
+<p><img src="https://static001.infoq.cn/resource/image/ea/73/ea7cc8ee37c9cc3d36b83a8a8415aa73.png" alt="MVVM双向绑定全量版整理"></p>
+<p>由于 React 推荐单向数据流，没有上述 Angular 和 Vue 的双向绑定特性，如果出现似表单类用户视图和存储数据有同步的业务场景，我们需要怎么实现？Redux 的重型状态管理不适合应用于每个场景。一般在 React 里的表单，我们可以监听 “change” 事件来实现数据变更，默认写法是从数据源（通常是 DOM）读取并在我们的某个组件调用 setState() , 如下代码为常规的表单使用方式：</p>
+<p>复制代码</p>
+<pre><code>var NoLink = React.createClass(&#123;
+
+getInitialState: function() &#123;
+
+return &#123;message: &#39;Hello!&#39;&#125;;
+
+  &#125;,
+
+handleChange: function(event) &#123;
+
+this.setState(&#123;message: event.target.value&#125;);
+
+  &#125;,
+
+render: function() &#123;
+
+var message = this.state.message;
+
+return&lt;inputtype=&quot;text&quot;value=&#123;message&#125;onChange=&#123;this.handleChange&#125; /&gt;;
+
+  &#125;
+
+&#125;);
+</code></pre>
+<p>以上写法每出现一个表单，就需要绑定一个事件，在只有少量表单时还能使用，一旦表单增多，维护大量 value 和 onChange 成了 React 的痛点。React 官方也提供了一种方案 ReactLink：设置如上代码描述的通用数据回流模式的语法糖，或者 “linking” 某些数据结构到 React state，做一层对 onChange 和 setState() 模式的薄包装。它没有根本性地改变你的 React 应用里数据如何流动，下面是 ReactLink 提供的使用方式：</p>
+<p>复制代码</p>
+<pre><code>var LinkedStateMixin = require(&#39;react-addons-linked-state-mixin&#39;);
+
+var WithLink = React.createClass(&#123;
+
+mixins: [LinkedStateMixin],
+
+getInitialState: function() &#123;
+
+return &#123;message: &#39;Hello!&#39;&#125;;
+
+  &#125;,
+
+render: function() &#123;
+
+return&lt;inputtype=&quot;text&quot;valueLink=&#123;this.linkState(&#39;message&#39;)&#125; /&gt;;
+
+  &#125;
+
+&#125;);
+</code></pre>
+<p>实际项目中，我们几乎不会使用官方提供的 createClass 方案，毕竟写法受限。如何减少 value 与 onChange 的使用，简化 React 下的表单开发，成为了大量轮子制造工程的出发点。下述各团队产出的 form 表单解决方案都给出了一定的方式，以及其他各种平台下的开源轮子数不胜数，可以选择一两种进行了解。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56280821">阿里 Fusion：Form 表单组件设计之路 - 高易用性</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/51748223">阿里飞冰： Ice FormBinder </a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/62927004?spm=ata.13261165.0.0.545c6945ca8kKm">阿里供应链平台：面向复杂场景的高性能表单解决方案 - UForm </a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44120143">阿里 NoForm：一个更好的表单解决方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/57820186"> React 实现高度简洁的 Form 组件</a></li>
+<li><a href="https://link.zhihu.com/?target=https://redux-form.com/7.0.3/"> redux-form </a></li>
+<li><a href="https://link.zhihu.com/?target=https://github.com/final-form/final-form"> final-form </a></li>
+</ul>
+<p>追根究底，都是对大量的 value 与 onChange 进行整合，将表单 DOM 的使用方式简化，由辅助函数统一控制。我们可以通过处理函数通用化，来模拟文中提到的动态双向绑定效果。</p>
+<p>复制代码</p>
+<pre><code>import React, &#123;Component&#125; from&#39;react&#39;
+
+exportdefaultclassHelloextendsComponent&#123;
+
+  state = &#123; val: &#39;&#39; &#125;;
+
+  handleInput = _event =&gt; &#123;
+
+let event = _event;
+
+let elem = event.target;
+
+let value = elem.value;
+
+if (elem.attributes.bindField !== null) &#123;
+
+let attr = elem.attributes.bindField.value;
+
+this.setState(state =&gt; state[attr] = value);
+
+    &#125;
+
+  &#125;
+
+  updateValue = (getFiled, getValue) =&gt; &#123;
+
+let fieldNodeList = [...document.querySelectorAll(&#39;[bindField]&#39;)];
+
+let fieldNode = fieldNodeList.find(node =&gt; node.attributes[0].nodeValue === getFiled);
+
+    fieldNode.value = getValue;
+
+let attr = fieldNode.attributes.bindField.value;
+
+this.setState(state =&gt; state[attr] = getValue);
+
+  &#125;
+
+  render() &#123;
+
+return (
+
+&lt;div&gt;
+
+&lt;inputonInput=&#123;this.handleInput&#125;bindField=&#123;&#39;val&#39;&#125; /&gt;
+
+&lt;p&gt;&#123;this.state.val&#125;&lt;/p&gt;
+
+&lt;buttononClick=&#123;() =&gt; this.updateValue(&#39;val&#39;, &#39;hello world&#39;)&#125;&gt; 设置 &lt;/button&gt;
+
+&lt;/div&gt;
+
+    )
+
+  &#125;
+
+&#125;
+</code></pre>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>关于 MVVM 双向绑定的策略百花齐放，各有利弊，Angular 与 Vue 通过不同策略直接将双向绑定特性植入框架中，React 推荐单向数据流，但也确实存在不少需要减少编码的双向绑定场景，因此涌现了大量双向绑定辅助库。</p>
+<p>Angular 框架大而全，主要由 Google 团队维护，从特性上看适用于中后台应用，每个关键模块都有官方主导，因此更为稳定。React 实际上仅为一个视图层 Js 库，由 Facebook 推出，但经过社区整合，已经形成了完整的生态。Vue 属于后起之秀，没有大厂背景依靠，但由于使用简单，渲染快，在国内市场增速明显，周边生态也已成熟。</p>
+<p>无论技术如何实现，只有适合自己当前业务场景的策略才是最好的解决方案。</p>
+<p><strong>参考附录：</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/onepixel/p/6034307.html">《Vue.js 和 MVVM 小细节》</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000010928087">《angular 系列之变化检测 (Change Detection)》</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/860418f0785c">《vue3.0 尝鲜 – 摒弃 Object.defineProperty，基于 Proxy 的观察者机制探索》</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000011225943?utm_source=tag-newest">《实现一个简单的双向绑定》</a></li>
+<li><a target="_blank" rel="noopener" href="https://reactjs.org/docs/two-way-binding-helpers.html">《react 官网双向绑定辅助工具》</a></li>
+</ol>
+<p><strong>作者介绍：</strong></p>
+<p>飞来，就职于阿里巴巴 CBU 体验技术部，一个以前常写 Angular，刚开始转 React，研究过但没真正写 Vue 的前端人。</p>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/52877.html">https://xuehuayu.cn/article/52877.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/59059.html">20道JS原理题助你面试一臂之力！</a><a class="next" href="/article/34431.html">Node新版本13.2.0正式支持ES Modules特性</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/a91910b6.html">create-react-app，webpack配置超强解析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/65953a19.html">electron-vite+react项目中如何使用css module</a></li><li class="post-list-item"><a class="post-list-link" href="/article/433d7e2b.html">electron-vite+react+react-router-dom+antd中useRoutes踩坑</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ed850983.html">Next.js启动打包部署（out、standalone）</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7beb973b.html">uniapp解决安卓targetSdkVersion升级为33导致通知权限置灰无法打开问题</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7fb2c15c.html">vue中echarts的3D饼图实现</a></li><li class="post-list-item"><a class="post-list-link" href="/article/e856e555.html">vue实现按钮切换背景移动效果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ebec0b44.html">vue实现滚动到底部加载</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d817e843.html">vue实现图片横向拖动滚动</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">208</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-tags"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 15px;">转载</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 15px;">原创</a> <a href="/tags/%E6%89%8B%E5%86%99/" style="font-size: 15px;">手写</a> <a href="/tags/%E7%96%AB%E6%83%85/" style="font-size: 15px;">疫情</a> <a href="/tags/ZYPlayer/" style="font-size: 15px;">ZYPlayer</a> <a href="/tags/KKPlayer/" style="font-size: 15px;">KKPlayer</a> <a href="/tags/APP/" style="font-size: 15px;">APP</a> <a href="/tags/%E6%95%B4%E7%90%86/" style="font-size: 15px;">整理</a> <a href="/tags/URL/" style="font-size: 15px;">URL</a> <a href="/tags/uni-app/" style="font-size: 15px;">uni-app</a> <a href="/tags/mui-player/" style="font-size: 15px;">mui-player</a> <a href="/tags/WebDAV/" style="font-size: 15px;">WebDAV</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/echarts-3d/" style="font-size: 15px;">echarts 3d</a> <a href="/tags/nextjs/" style="font-size: 15px;">nextjs</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/electron-vite/" style="font-size: 15px;">electron-vite</a> <a href="/tags/useRoutes/" style="font-size: 15px;">useRoutes</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/CSSModule/" style="font-size: 15px;">CSSModule</a></div></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>
