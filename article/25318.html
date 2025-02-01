@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>可能是最全的 文本溢出截断省略 方案合集 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a href="/atom.xml" target="_self"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">可能是最全的 文本溢出截断省略 方案合集</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.9k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 11</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/25318.html#waline-comment"><span class="waline-comment-count" data-path="/article/25318.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5dc15b35f265da4d432a3d10</code></p>
+<p>在我们的日常开发工作中，文本溢出截断省略是很常见的一种需考虑的业务场景细节。看上去 “稀松平常” ，但在实现上却有不同的区分，是单行截断还是多行截断？多行的截断判断是基于行数还是基于高度？这些问题之下，都有哪些实现方案？他们之间的差异性和场景适应性又是如何？凡事就怕较真，较真必有成长。本文试图通过编码实践，给出一些答案。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>本文首发于政采云前端团队博客： <a target="_blank" rel="noopener" href="https://www.zoo.team/article/text-overflow">可能是最全的 “文本溢出截断省略” 方案合集</a></p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2019/11/9/16e50853a4306507?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="亚格.png"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在我们的日常开发工作中，文本溢出截断省略是很常见的一种需考虑的业务场景细节。看上去 “稀松平常” ，但在实现上却有不同的区分，是单行截断还是多行截断？多行的截断判断是基于行数还是基于高度？这些问题之下，都有哪些实现方案？他们之间的差异性和场景适应性又是如何？凡事就怕较真，较真必有成长。本文试图通过编码实践，给出一些答案。</p>
+<h2 id="先来点基础的，单行文本溢出省略"><a href="#先来点基础的，单行文本溢出省略" class="headerlink" title="先来点基础的，单行文本溢出省略"></a>先来点基础的，单行文本溢出省略</h2><p><strong>核心 CSS 语句</strong></p>
+<ul>
+<li>overflow: hidden；（文字长度超出限定宽度，则隐藏超出的内容）</li>
+<li>white-space: nowrap；（设置文字在一行显示，不能换行）</li>
+<li>text-overflow: ellipsis；（规定当文本溢出时，显示省略符号来代表被修剪的文本）</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li>无兼容问题</li>
+<li>响应式截断</li>
+<li>文本溢出范围才显示省略号，否则不显示省略号</li>
+<li>省略号位置显示刚好</li>
+</ul>
+<p><strong>短板</strong></p>
+<ul>
+<li>只支持单行文本截断</li>
+</ul>
+<p><strong>适用场景</strong></p>
+<ul>
+<li>适用于单行文本溢出显示省略号的情况</li>
+</ul>
+<p><strong>Demo</strong></p>
+<pre><code>&lt;style&gt;
+    .demo &#123;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    &#125;
+&lt;/style&gt;
+&lt;body&gt;
+	&lt;div class=&quot;demo&quot;&gt;这是一段很长的文本&lt;/div&gt;
+&lt;/body&gt;
+复制代码
+</code></pre>
+<p><strong>示例图片</strong><br><img src="https://user-gold-cdn.xitu.io/2019/11/5/16e3b4c405615623?imageslim" alt="avatar"></p>
+<h2 id="进阶一下，多行文本溢出省略（按行数）"><a href="#进阶一下，多行文本溢出省略（按行数）" class="headerlink" title="进阶一下，多行文本溢出省略（按行数）"></a>进阶一下，多行文本溢出省略（按行数）</h2><h3 id="○-纯-CSS-实现方案"><a href="#○-纯-CSS-实现方案" class="headerlink" title="○ 纯 CSS 实现方案"></a>○ 纯 CSS 实现方案</h3><p><strong>核心 CSS 语句</strong></p>
+<ul>
+<li>-webkit-line-clamp: 2；（用来限制在一个块元素显示的文本的行数, 2 表示最多显示 2 行。 为了实现该效果，它需要组合其他的WebKit属性）</li>
+<li>display: -webkit-box；（和 1 结合使用，将对象作为弹性伸缩盒子模型显示 ）</li>
+<li>-webkit-box-orient: vertical；（和 1 结合使用 ，设置或检索伸缩盒对象的子元素的排列方式 ）</li>
+<li>overflow: hidden；（文本溢出限定的宽度就隐藏内容）</li>
+<li>text-overflow: ellipsis；（多行文本的情况下，用省略号“…”隐藏溢出范围的文本)</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li>响应式截断</li>
+<li>文本溢出范围才显示省略号，否则不显示省略号</li>
+<li>省略号显示位置刚好</li>
+</ul>
+<p><strong>短板</strong></p>
+<ul>
+<li>兼容性一般： -webkit-line-clamp 属性只有  WebKit  内核的浏览器才支持</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2019/11/5/16e3b4c406bdaa3a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="avatar"><br><strong>适用场景</strong></p>
+<ul>
+<li>多适用于移动端页面，因为移动设备浏览器更多是基于 WebKit 内核</li>
+</ul>
+<p><strong>Demo</strong></p>
+<pre><code>&lt;style&gt;
+	.demo &#123;
+		  display: -webkit-box;
+	    overflow: hidden;
+	    -webkit-line-clamp: 2;
+	    -webkit-box-orient: vertical;
+	&#125;
+&lt;/style&gt;
+
+&lt;body&gt;
+	&lt;div class=&#39;demo&#39;&gt;这是一段很长的文本&lt;/div&gt;
+&lt;/body&gt;
+复制代码
+</code></pre>
+<p><strong>示例图片</strong><br><img src="https://user-gold-cdn.xitu.io/2019/11/5/16e3b4c40876a945?imageslim" alt="avatar"></p>
+<h3 id="○-基于-JavaScript-的实现方案"><a href="#○-基于-JavaScript-的实现方案" class="headerlink" title="○ 基于 JavaScript 的实现方案"></a>○ 基于 JavaScript 的实现方案</h3><p><strong>优点</strong></p>
+<ul>
+<li>无兼容问题</li>
+<li>响应式截断</li>
+<li>文本溢出范围才显示省略号，否则不显示省略号</li>
+</ul>
+<p><strong>短板</strong></p>
+<ul>
+<li>需要 JS 实现，背离展示和行为相分离原则</li>
+<li>文本为中英文混合时，省略号显示位置略有偏差</li>
+</ul>
+<p><strong>适用场景</strong></p>
+<ul>
+<li>适用于响应式截断，多行文本溢出省略的情况</li>
+</ul>
+<p><strong>Demo</strong></p>
+<p>当前仅适用于文本为中文，若文本中有英文，可自行修改</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    const text = &#39;这是一段很长的文本&#39;;
+    const totalTextLen = text.length;
+    const formatStr = () =&gt; &#123;
+        const ele = document.getElementsByClassName(&#39;demo&#39;)[0];
+        const lineNum = 2;
+        const baseWidth = window.getComputedStyle(ele).width;
+        const baseFontSize = window.getComputedStyle(ele).fontSize;
+        const lineWidth = +baseWidth.slice(0, -2);
+
+        // 所计算的strNum为元素内部一行可容纳的字数(不区分中英文)
+        const strNum = Math.floor(lineWidth / +baseFontSize.slice(0, -2));
+
+        let content = &#39;&#39;;
+        
+      	// 多行可容纳总字数
+        const totalStrNum = Math.floor(strNum * lineNum);
+
+        const lastIndex = totalStrNum - totalTextLen;
+
+        if (totalTextLen &gt; totalStrNum) &#123;
+            content = text.slice(0, lastIndex - 3).concat(&#39;...&#39;);
+        &#125; else &#123;
+            content = text;
+        &#125;
+        ele.innerHTML = content;
+    &#125;
+    
+    formatStr();
+    
+		window.onresize = () =&gt; &#123;
+        formatStr();
+    &#125;;
+&lt;/script&gt;
+
+&lt;body&gt;
+	&lt;div class=&#39;demo&#39;&gt;&lt;/div&gt;
+&lt;/body&gt;
+复制代码
+</code></pre>
+<p><strong>示例图片</strong><br><img src="https://user-gold-cdn.xitu.io/2019/11/5/16e3b4c4099041ae?imageslim" alt="avatar"></p>
+<h2 id="再进阶一步，多行文本溢出省略（按高度）"><a href="#再进阶一步，多行文本溢出省略（按高度）" class="headerlink" title="再进阶一步，多行文本溢出省略（按高度）"></a>再进阶一步，多行文本溢出省略（按高度）</h2><h3 id="○-多行文本溢出不显示省略号"><a href="#○-多行文本溢出不显示省略号" class="headerlink" title="○ 多行文本溢出不显示省略号"></a>○ 多行文本溢出不显示省略号</h3><p><strong>核心 CSS 语句</strong></p>
+<ul>
+<li>overflow: hidden；（文本溢出限定的宽度就隐藏内容）</li>
+<li>line-height: 20px；（结合元素高度，高度固定的情况下，设定行高， 控制显示行数）</li>
+<li>max-height: 40px；（设定当前元素最大高度）</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li>无兼容问题</li>
+<li>响应式截断</li>
+</ul>
+<p><strong>短板</strong></p>
+<ul>
+<li>单纯截断文字, 不展示省略号，观感上较为生硬</li>
+</ul>
+<p><strong>适用场景</strong></p>
+<ul>
+<li>适用于文本溢出不需要显示省略号的情况</li>
+</ul>
+<p><strong>Demo</strong></p>
+<pre><code>&lt;style&gt;
+	.demo &#123;
+		overflow: hidden;
+		max-height: 40px;
+		line-height: 20px;
+	&#125;
+&lt;/style&gt;
+
+&lt;body&gt;
+	&lt;div class=&#39;demo&#39;&gt;这是一段很长的文本&lt;/div&gt;
+&lt;/body&gt;
+
+复制代码
+</code></pre>
+<p><strong>示例图片</strong><br><img src="https://user-gold-cdn.xitu.io/2019/11/5/16e3b4c4096f17c9?imageslim" alt="avatar"></p>
+<h3 id="○-伪元素-定位实现多行省略"><a href="#○-伪元素-定位实现多行省略" class="headerlink" title="○ 伪元素 + 定位实现多行省略"></a>○ 伪元素 + 定位实现多行省略</h3><p><strong>核心 CSS 语句</strong></p>
+<ul>
+<li><p>position: relative; （为伪元素绝对定位）</p>
+</li>
+<li><p>overflow: hidden; （文本溢出限定的宽度就隐藏内容）</p>
+</li>
+<li><p>position: absolute;（给省略号绝对定位）</p>
+</li>
+<li><p>line-height: 20px; （结合元素高度,高度固定的情况下,设定行高, 控制显示行数）</p>
+</li>
+<li><p>height: 40px; （设定当前元素高度）</p>
+</li>
+<li><p>::after {}  （设置省略号样式）</p>
+</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li><p>无兼容问题</p>
+</li>
+<li><p>响应式截断</p>
+</li>
+</ul>
+<p><strong>短板</strong></p>
+<ul>
+<li><p>无法识别文字的长短，无论文本是否溢出范围, 一直显示省略号</p>
+</li>
+<li><p>省略号显示可能不会刚刚好，有时会遮住一半文字</p>
+</li>
+</ul>
+<p><strong>适用场景</strong></p>
+<ul>
+<li>适用于对省略效果要求较低，文本一定会溢出元素的情况</li>
+</ul>
+<p><strong>Demo</strong></p>
+<pre><code>&lt;style&gt;
+    .demo &#123;
+        position: relative;
+        line-height: 20px;
+        height: 40px;
+        overflow: hidden;
+    &#125;
+    .demo::after &#123;
+        content: &quot;...&quot;;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 0 20px 0 10px;
+    &#125;
+&lt;/style&gt;
+
+&lt;body&gt;
+	&lt;div class=&#39;demo&#39;&gt;这是一段很长的文本&lt;/div&gt;
+&lt;/body&gt;
+复制代码
+</code></pre>
+<p><strong>示例图片</strong><br><img src="https://user-gold-cdn.xitu.io/2019/11/5/16e3b4c40d1eefac?imageslim" alt="avatar"></p>
+<h3 id="○-利用-Float-特性，纯-CSS-实现多行省略"><a href="#○-利用-Float-特性，纯-CSS-实现多行省略" class="headerlink" title="○ 利用 Float 特性，纯 CSS 实现多行省略"></a>○ 利用 Float 特性，纯 CSS 实现多行省略</h3><p><strong>核心 CSS 语句</strong></p>
+<ul>
+<li><p>line-height: 20px；（结合元素高度,高度固定的情况下,设定行高, 控制显示行数）</p>
+</li>
+<li><p>overflow: hidden；（文本溢出限定的宽度就隐藏内容）</p>
+</li>
+<li><p>float: right&#x2F;left；（利用元素浮动的特性实现）</p>
+</li>
+<li><p>position: relative；（根据自身位置移动省略号位置, 实现文本溢出显示省略号效果）</p>
+</li>
+<li><p>word-break: break-all；（使一个单词能够在换行时进行拆分）</p>
+</li>
+</ul>
+<p><strong>优点</strong></p>
+<ul>
+<li><p>无兼容问题</p>
+</li>
+<li><p>响应式截断</p>
+</li>
+<li><p>文本溢出范围才显示省略号，否则不显示省略号</p>
+</li>
+</ul>
+<p><strong>短板</strong></p>
+<ul>
+<li>省略号显示可能不会刚刚好，有时会遮住一半文字</li>
+</ul>
+<p><strong>适用场景</strong></p>
+<ul>
+<li>适用于对省略效果要求较低，多行文本响应式截断的情况</li>
+</ul>
+<p><strong>Demo</strong></p>
+<pre><code>&lt;style&gt;
+    .demo &#123;
+        background: #099;
+        max-height: 40px;
+        line-height: 20px;
+        overflow: hidden;
+    &#125;
+    .demo::before&#123;
+        float: left;
+        content:&#39;&#39;;
+        width: 20px;
+        height: 40px;
+    &#125;
+
+    .demo .text &#123;
+        float: right;
+        width: 100%;
+        margin-left: -20px;
+        word-break: break-all;
+    &#125;
+    .demo::after&#123;
+        float:right;
+        content:&#39;...&#39;;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        left:100%;
+        transform: translate(-100%,-100%);
+    &#125;
+&lt;/style&gt;
+
+&lt;body&gt;
+    &lt;div class=&#39;demo&#39;&gt;
+    	&lt;div class=&quot;text&quot;&gt;这是一段很长的文本&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+复制代码
+</code></pre>
+<p><strong>示例图片</strong><br><img src="https://user-gold-cdn.xitu.io/2019/11/5/16e3b4c4375581cb?imageslim" alt="avatar"><br><strong>原理讲解</strong></p>
+<p>有 A、B、C 三个盒子，A 左浮动，B、C 右浮动。设置 A 盒子的高度与 B 盒子高度（或最大高度）要保持一致</p>
+<ol>
+<li><p>当的 B 盒子高度低于 A 盒子，C 盒子仍会处于 B 盒子右下方。</p>
+</li>
+<li><p>如果 B 盒子文本过多，高度超过了 A 盒子，则 C 盒子不会停留在右下方，而是掉到了 A 盒子下。</p>
+</li>
+<li><p>接下来对 C 盒子进行相对定位，将 C 盒子位置向右侧移动 100%，并向左上方向拉回一个 C 盒子的宽高（不然会看不到哟）。这样在文本未溢出时不会看到 C 盒子，在文本溢出时，显示 C 盒子。</p>
+</li>
+</ol>
+<p><img src="https://user-gold-cdn.xitu.io/2019/11/5/16e3b4c444cf3295?imageslim" alt="yuanli.gif"></p>
+<h2 id="收，大道归简，能力封装"><a href="#收，大道归简，能力封装" class="headerlink" title="收，大道归简，能力封装"></a>收，大道归简，能力封装</h2><blockquote>
+<p>凡重复的，让它单一；凡复杂的，让它简单。</p>
+</blockquote>
+<p>每次都要搞一坨代码，太麻烦。这时候你需要考虑将文本截断的能力，封装成一个可随时调用的自定义容器组件。市面上很多 UI 组件库，都提供了同类组件的封装，如基于 Vue 的 ViewUI Pro，或面向小程序提供组件化解决能力的 MinUI 。<br><img src="https://user-gold-cdn.xitu.io/2019/11/5/16e3b4c44af83125?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><img src="https://user-gold-cdn.xitu.io/2019/11/5/16e3b4c44857bc88?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>本文介绍了几种目前常见的文本截断省略的方案，各有利弊，各位同学可根据实际开发情况及需求选择方案。如果你还知道更好其他实现方案，欢迎在评论区留下宝贵评论。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/happylindz/blog/issues/12">纯 CSS 实现多行文字截断</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40072782/article/details/82908581">【 CSS &#x2F; JS 】限制一行和多行文字数量，溢出部分用省略号显示</a></li>
+<li><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1621362934713048315&amp;wfr=spider&amp;for=pc">HTML技巧篇：如何让单行文本以及多行文本溢出显示省略号(…)</a></li>
+</ul>
+<h2 id="招贤纳士"><a href="#招贤纳士" class="headerlink" title="招贤纳士"></a>招贤纳士</h2><p>政采云前端团队（ZooTeam），一个年轻富有激情和创造力的前端团队，隶属于政采云产品研发部，Base 在风景如画的杭州。团队现有 50 余个前端小伙伴，平均年龄 27 岁，近 3 成是全栈工程师，妥妥的青年风暴团。成员构成既有来自于阿里、网易的“老”兵，也有浙大、中科大、杭电等校的应届新人。团队在日常的业务对接之外，还在物料体系、工程平台、搭建平台、性能体验、云端应用、数据分析及可视化等方向进行技术探索和实战，推动并落地了一系列的内部技术产品，持续探索前端技术体系的新边界。</p>
+<p>如果你想改变一直被事折腾，希望开始能折腾事；如果你想改变一直被告诫需要多些想法，却无从破局；如果你想改变你有能力去做成那个结果，却不需要你；如果你想改变你想做成的事需要一个团队去支撑，但没你带人的位置；如果你想改变既定的节奏，将会是“ 5 年工作时间 3 年工作经验”；如果你想改变本来悟性不错，但总是有那一层窗户纸的模糊… 如果你相信相信的力量，相信平凡人能成就非凡事，相信能遇到更好的自己。如果你希望参与到随着业务腾飞的过程，亲手推动一个有着深入的业务理解、完善的技术体系、技术创造价值、影响力外溢的前端团队的成长历程，我觉得我们该聊聊。任何时间，等着你写点什么，发给 <code>ZooTeam@cai-inc.com</code><br><img src="https://user-gold-cdn.xitu.io/2019/8/29/16cddbe09f60b388?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p><a target="_blank" rel="noopener" href="https://juejin.im/post/5dafa3d35188257b1549bad1">1024 巨献！！一文看尽前端过去一年的精华沉淀（700 篇好文大汇总）</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5d8774bff265da03ae78b2a1">前端工程实践之可视化搭建系统（一）</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5d6de51de51d45620771f12c">自动化 Web 性能优化分析方案</a></p>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/25318.html">https://xuehuayu.cn/article/25318.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/402.html">如何用120行代码，实现一个交互完整的拖拽上传组件？</a><a class="next" href="/article/17246.html">OPTIONS请求时设置了Header请求和token可是后台接收不到，为什么？</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/a91910b6.html">create-react-app，webpack配置超强解析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/65953a19.html">electron-vite+react项目中如何使用css module</a></li><li class="post-list-item"><a class="post-list-link" href="/article/433d7e2b.html">electron-vite+react+react-router-dom+antd中useRoutes踩坑</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ed850983.html">Next.js启动打包部署（out、standalone）</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7beb973b.html">uniapp解决安卓targetSdkVersion升级为33导致通知权限置灰无法打开问题</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7fb2c15c.html">vue中echarts的3D饼图实现</a></li><li class="post-list-item"><a class="post-list-link" href="/article/e856e555.html">vue实现按钮切换背景移动效果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ebec0b44.html">vue实现滚动到底部加载</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d817e843.html">vue实现图片横向拖动滚动</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">208</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-tags"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 15px;">转载</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 15px;">原创</a> <a href="/tags/%E6%89%8B%E5%86%99/" style="font-size: 15px;">手写</a> <a href="/tags/%E7%96%AB%E6%83%85/" style="font-size: 15px;">疫情</a> <a href="/tags/ZYPlayer/" style="font-size: 15px;">ZYPlayer</a> <a href="/tags/KKPlayer/" style="font-size: 15px;">KKPlayer</a> <a href="/tags/APP/" style="font-size: 15px;">APP</a> <a href="/tags/%E6%95%B4%E7%90%86/" style="font-size: 15px;">整理</a> <a href="/tags/URL/" style="font-size: 15px;">URL</a> <a href="/tags/uni-app/" style="font-size: 15px;">uni-app</a> <a href="/tags/mui-player/" style="font-size: 15px;">mui-player</a> <a href="/tags/WebDAV/" style="font-size: 15px;">WebDAV</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/echarts-3d/" style="font-size: 15px;">echarts 3d</a> <a href="/tags/nextjs/" style="font-size: 15px;">nextjs</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/electron-vite/" style="font-size: 15px;">electron-vite</a> <a href="/tags/useRoutes/" style="font-size: 15px;">useRoutes</a> <a href="/tags/CSSModule/" style="font-size: 15px;">CSSModule</a></div></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>

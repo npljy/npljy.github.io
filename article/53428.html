@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>2019年适用于JavaScript开发人员的27种神奇的VSCode工具 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a href="/atom.xml" target="_self"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">2019年适用于JavaScript开发人员的27种神奇的VSCode工具</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.7k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 10</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/53428.html#waline-comment"><span class="waline-comment-count" data-path="/article/53428.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.html.cn/top/14138.html</code></p>
+<p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/"><code>Visual Studio Code</code></a>（也称为VSCode）是一种轻量级但功能强大的跨平台源代码编辑器, 借助对TypeScript 和Chrome调试器等开发工具的内置支持，越来越多的开发都都喜欢使用它。</p>
+<span id="more"></span>
+<p><img src="https://img.php.cn/upload/article/000/000/006/5dd4aaaa3d273411.jpg" alt="xuehuayu.cn"></p>
+<p>如果你正在寻找更多的好用的 VSCode 工具，那么这篇或许能够帮助你。以下是 2019年为 JS 开发者提供的27个不可思议的VSCode工具。</p>
+<h2 id="1-Project-Snippets-代码片段"><a href="#1-Project-Snippets-代码片段" class="headerlink" title="1. Project Snippets (代码片段)"></a>1. Project Snippets (代码片段)</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=rebornix.project-snippets">project snippets</a>，这是我最喜欢的一个工具，它来自于 VSCode 中内置的原始用户代码片段。<br>该特性允许你创建自己的代码段，以便在整个项目中重用。</p>
+<p>但是**“重用”**它们到底意味着什么？</p>
+<p>如果咱们经常要重复写下面这样的样板文件：</p>
+<pre><code>import &#123; useReducer &#125; from &#39;react&#39;
+
+const initialState = &#123;
+  //
+&#125;
+
+const reducer = (state, action) =&gt; &#123;
+  switch (action.type) &#123;
+    default:
+      return state
+  &#125;
+&#125;
+
+const useSomeHook = () =&gt; &#123;
+  const [state, dispatch] = useReducer(reducer, initialState)
+  return &#123;
+    ...state,
+  &#125;
+&#125;
+
+export default useSomeHook
+</code></pre>
+<p>实际上，咱们可以直接将上面的代码放到的<strong>用户代码片段</strong>中，因此不必写出(或复制和粘贴)整个代码片段，只需键入一个自定义前缀来生成配置的代码片段即可。</p>
+<p>打开 VsCode，然后选择 <code>文件 &gt;首选项 &gt; 用户代码片段</code>，则可以选择通过单击 <code>&#39;新建全局代码片段文件&#39;</code>来创建新的全局代码片段。</p>
+<p>例如，要为 TypeScript React 项目创建自己的代码片段文件，可以单击<code>新建全局代码片段文件</code>，输入 <code>typescriptreact.json</code>。它将引导咱们访问一个新创建的<code>.json</code>文件，可以使用该文件来构建使用TypeScript 的 React 应用程序。</p>
+<p>例如，要从上面的代码示例创建一个用户片段，可以这样做:</p>
+<pre><code>&#123;
+  &quot;const initialState = &#123;&#125;; const reducer = (state, action)&quot;: &#123;
+    &quot;prefix&quot;: &quot;rsr&quot;,
+    &quot;body&quot;: [
+      &quot;const initialState = &#123;&quot;,
+      &quot;  //$1&quot;,
+      &quot;&#125;&quot;,
+      &quot;&quot;,
+      &quot;const reducer = (state, action) =&gt; &#123;&quot;,
+      &quot;  switch (action.type) &#123;&quot;,
+      &quot;    default:&quot;,
+      &quot;      return state&quot;,
+      &quot;  &#125;&quot;,
+      &quot;&#125;&quot;
+    ]
+  &#125;
+&#125;
+</code></pre>
+<p>有了它，咱们可以创建一个以<code>.tsx</code>结尾的新<code>TypeScript</code>文件，在新创建的文件输入<code>rsr</code>，然后按回车或 <code>tab</code> 键 VSCode 就会帮咱们生成代码片段内容。</p>
+<pre><code>const initialState = &#123;
+  //
+&#125;
+
+const reducer = (state, action) =&gt; &#123;
+  switch (action.type) &#123;
+    default:
+      return state
+  &#125;
+&#125;
+</code></pre>
+<p>全局用户代码片段的问题是，它将贯穿咱们所有项目(在某些情况下，这对于一般的代码片段来说是非常强大的)。</p>
+<p>一些项目将以不同的方式配置，当需要区分特定的用例时，用于配置代码片段的全局文件就成了一个问题。</p>
+<p>例如，当每个项目的项目结构不同时</p>
+<pre><code>&#123;
+  &quot;import Link from components/common/Link&quot;: &#123;
+    &quot;prefix&quot;: &quot;gcl&quot;,
+    &quot;body&quot;: &quot;import Link from &#39;components/common/Link&#39;&quot;
+  &#125;,
+  &quot;border test&quot;: &#123;
+    &quot;prefix&quot;: &quot;b1&quot;,
+    &quot;body&quot;: &quot;border: &#39;1px solid red&#39;,&quot;
+  &#125;,
+  &quot;border test2&quot;: &#123;
+    &quot;prefix&quot;: &quot;b2&quot;,
+    &quot;body&quot;: &quot;border: &#39;1px solid green&#39;,&quot;
+  &#125;,
+  &quot;border test3&quot;: &#123;
+    &quot;prefix&quot;: &quot;b3&quot;,
+    &quot;body&quot;: &quot;border: &#39;1px solid magenta&#39;,&quot;
+  &#125;
+&#125;
+</code></pre>
+<p>这对于具有特定<code>file/folder</code>结构的项目可能就足够了，但是如果咱们正在处理另一个项目，其中 <code>Link</code> 组件具有类似<code>components/Link</code>的路径，该怎么办？</p>
+<p>请注意这三个<code>border tests</code>是如何将它们的值用单引号括起来的：<code>border: &#39;1px solid red&#39;</code>。</p>
+<p>这在 JS 中是完全有效的，但是如果使用 <a target="_blank" rel="noopener" href="https://www.styled-components.com/docs">styled-components</a> 作为项目的样式解决方案呢?该语法不再适用于该工作区，因为 <code>styled components</code>使用普通的CSS语法</p>
+<p>这就是 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=rebornix.project-snippets">project snippets</a> 的亮点所在。</p>
+<p><strong>Project snippets</strong>使咱们可以声明<strong>项目&#x2F;工作区</strong>级别的代码段，让当前项目代码段不会与其它项目冲突也不会污染其他项目。</p>
+<h2 id="2-Better-Comments-更加人性化的注释"><a href="#2-Better-Comments-更加人性化的注释" class="headerlink" title="2. Better Comments(更加人性化的注释)"></a>2. Better Comments(更加人性化的注释)</h2><p>如果喜欢在代码中编写注释，那么有时你可能会发现搜索您以前编写的特定注释的位置是令人沮丧的，因为代码可能会变得有些拥挤。</p>
+<p>有了 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments">Better Comments</a>，可以通过引入彩色注释使注释更加明显。</p>
+<p><img src="https://img.php.cn/upload/image/755/631/305/1574216166518041.jpg" alt="1574216166518041.jpg"></p>
+<h2 id="3-Bracket-Pair-Colorizer-标签匹配-括号匹配插件"><a href="#3-Bracket-Pair-Colorizer-标签匹配-括号匹配插件" class="headerlink" title="3. Bracket Pair Colorizer (标签匹配 括号匹配插件)"></a>3. Bracket Pair Colorizer (标签匹配 括号匹配插件)</h2><p>第一次看到<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer">Bracket Pair Colorizer</a>的屏幕截图时，我第一时间入安装使用了。</p>
+<p><img src="https://img.php.cn/upload/image/254/741/166/1574216306540170.png" alt="1574216306540170.png"></p>
+<h2 id="4-Material-Theme"><a href="#4-Material-Theme" class="headerlink" title="4. Material Theme"></a>4. Material Theme</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme">Material Theme</a>是一个史诗主题，可以直接安装到VSCode中，安装后代码看起来像这样：</p>
+<p><img src="https://img.php.cn/upload/image/622/242/464/1574218558500543.gif" alt="1574218558500543.gif"></p>
+<h2 id="5-typescript-eslint-parser"><a href="#5-typescript-eslint-parser" class="headerlink" title="5. @typescript-eslint&#x2F;parser"></a>5. @typescript-eslint&#x2F;parser</h2><p>如果你是一个TypeScript用户，应该开始考虑将你的 TSLint 配置转移到<code>ESLint + TypeScript</code>上，<a target="_blank" rel="noopener" href="https://github.com/typescript-eslint/typescript-eslint#what-about-tslint">TSLint 背后的支持者已经宣布计划在今年的某个时候弃用 TSLint</a>。</p>
+<p>项目正逐步采用<code>@typescript-eslint/parser</code>和相关包，以确保其项目的前瞻性设置。</p>
+<p>咱们仍然能够利用大部分ESLint的规则和兼容性与更漂亮使用新的设置。</p>
+<h2 id="6-Stylelint"><a href="#6-Stylelint" class="headerlink" title="6. Stylelint"></a>6. Stylelint</h2><p>对我来说，出于以下几个原因，<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint">stylelint</a> 在我所有的项目中都是必须的：</p>
+<ol>
+<li><p>它有助于避免错误。</p>
+</li>
+<li><p>它加强了CSS中的样式约定。</p>
+</li>
+<li><p>它与<a target="_blank" rel="noopener" href="https://prettier.io/">Prettier</a>支持并驾齐驱。</p>
+</li>
+<li><p>它支持 CSS&#x2F;SCSS&#x2F;Sass&#x2F;Less。</p>
+</li>
+<li><p>它支持社区编写的插件。</p>
+</li>
+</ol>
+<p><img src="https://img.php.cn/upload/image/455/242/653/1574216516754930.jpg" alt="1574216516754930.jpg"></p>
+<h2 id="7-Markdownlint-docsify"><a href="#7-Markdownlint-docsify" class="headerlink" title="7. Markdownlint + docsify"></a>7. Markdownlint + docsify</h2><p>markdown 爱好者一定要试试 vscode 上的 <a target="_blank" rel="noopener" href="https://github.com/DavidAnson/vscode-markdownlint">markdownlint</a> 扩展，会用绿色波浪线给你提示出 N 多不符合书写规范的地方，比如：</p>
+<ul>
+<li><p>标题下面必须是个空行</p>
+</li>
+<li><p>代码段必须加上类型</p>
+</li>
+<li><p>文中不能出现<code>&lt;br&gt;</code>这种<code>html</code>标号</p>
+</li>
+<li><p><code>URL</code>必须用<code>&lt; &gt;</code>扩起来</p>
+</li>
+</ul>
+<p>同时也可以配合安装 <a target="_blank" rel="noopener" href="https://docsify.js.org/#/">docsify</a>，因为它支持<code>Markdown</code>和每个项目的其他增强。</p>
+<h2 id="8-TODO-Highlight"><a href="#8-TODO-Highlight" class="headerlink" title="8. TODO Highlight"></a>8. TODO Highlight</h2><p>如果习惯在应用程序代码中编写待办事项的开发者，可以安装 TODO Highlight 这样的扩展名对于突出显示整个项目中设置的待办事项非常有用。</p>
+<p><img src="https://img.php.cn/upload/image/948/350/968/1574216771656927.jpg" alt="1574216771656927.jpg"></p>
+<h2 id="9-Import-Cost"><a href="#9-Import-Cost" class="headerlink" title="9. Import Cost"></a>9. Import Cost</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost">Import Cost</a> 可以显示咱们在VS代码编辑器中导入的程序包的大小。</p>
+<p><img src="https://img.php.cn/upload/image/203/279/899/1574217030168635.gif" alt="1574217030168635.gif"></p>
+<h2 id="10-Highlight-Matching-Tag"><a href="#10-Highlight-Matching-Tag" class="headerlink" title="10. Highlight Matching Tag"></a>10. Highlight Matching Tag</h2><p>有时，试图匹配标签的结束地方会令人沮丧，这时 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=vincaslt.highlight-matching-tag">Highlight Matching Tag</a> 就派上用场了</p>
+<p><img src="https://img.php.cn/upload/image/927/943/875/1574217070426834.gif" alt="1574217070426834.gif"></p>
+<h2 id="11-vscode-spotify"><a href="#11-vscode-spotify" class="headerlink" title="11. vscode-spotify"></a>11. vscode-spotify</h2><p>程序员经常边听歌边打代码，有时候写到一半，歌太难听，想切换，得切到音乐播放器，然后在回到 VsCdoe 界面，有点麻烦。</p>
+<p>这就是 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=shyykoserhiy.vscode-spotify">vscode-spotify</a> 用武功之地，因为它可以在VSCode内直接使用音乐播放器。</p>
+<p>有了这个扩展，各位就可以在状态栏中看到当前播放的歌曲，可以通过热键在歌曲之间切换，也可以点击按钮来控制音乐播放器等等。</p>
+<p><img src="https://img.php.cn/upload/image/685/359/708/1574217205987421.jpg" alt="1574217205987421.jpg"></p>
+<h2 id="12-GraphQL-for-VSCode"><a href="#12-GraphQL-for-VSCode" class="headerlink" title="12. GraphQL for VSCode"></a>12. GraphQL for VSCode</h2><p><a target="_blank" rel="noopener" href="https://graphql.org/">GraphQL</a>一直在发展，咱们经常可以在 JS 社区中看到它的身影。因此，最好开始考虑在 VSCode中安装 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=kumar-harsh.graphql-for-vscode">GraphQL for VSCode</a>。</p>
+<p><img src="https://img.php.cn/upload/image/262/748/565/1574217265115356.jpg" alt="1574217265115356.jpg"></p>
+<h2 id="13-Indent-Rainbow"><a href="#13-Indent-Rainbow" class="headerlink" title="13. Indent-Rainbow"></a>13. Indent-Rainbow</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow">Indent-Rainbow</a> 会给缩进添加一种颜色,让你更加直观的看到代码层次。</p>
+<p><img src="https://img.php.cn/upload/image/932/815/964/1574217301293097.jpg" alt="1574217301293097.jpg"></p>
+<h2 id="14-Color-Highlight"><a href="#14-Color-Highlight" class="headerlink" title="14. Color Highlight"></a>14. Color Highlight</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight">Color Highlight</a> 可以在代码中突出显示颜色，如下所示：</p>
+<p><img src="https://img.php.cn/upload/image/221/241/391/1574217336136341.jpg" alt="1574217336136341.jpg"></p>
+<h2 id="15-Color-Picker"><a href="#15-Color-Picker" class="headerlink" title="15. Color Picker"></a>15. Color Picker</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=anseki.vscode-color">Color Picker</a> 是一个 VSCode 扩展，它为咱们提供了一个图形用户界面，用来选择和生成颜色代码，如 CSS 颜色符号。</p>
+<p><img src="https://img.php.cn/upload/image/381/956/202/1574217387588756.gif" alt="1574217387588756.gif"></p>
+<h2 id="16-REST-Client"><a href="#16-REST-Client" class="headerlink" title="16. REST Client"></a>16. REST Client</h2><p>第一次看到 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client</a> 并尝试它时，与现有的软件(如Postman)相比，它似乎不是一个非常有用的工具。</p>
+<p>但是，对 <strong>REST Client</strong> 扩展的用法了解越多，就会意识到它对开发工具的影响有多大，尤其是在测试API 时。</p>
+<p>只需要创建一个新文件写入下面这一行：</p>
+<pre><code>https://google.com
+</code></pre>
+<p>然后转到命令面板<code>(CTRL + SHIFT + P)</code>，单击<code>Rest Client: Send request</code>，它会在一瞬间弹出一个包含请求响应详细信息的新选项卡，非常有用：</p>
+<p><img src="https://img.php.cn/upload/image/580/109/765/1574217446933344.jpg" alt="1574217446933344.jpg"></p>
+<p>甚至还可以传递参数，或将请求体数据请求到<code>POST</code>，而下面仅需几行代码：</p>
+<pre><code>POST https://test.someapi.com/v1/account/user/login/
+Content-Type: application/json
+
+&#123; &quot;email&quot;: &quot;someemail@gmail.com&quot;, &quot;password&quot;: 1 &#125;
+</code></pre>
+<p>就会发送<code>POST</code>请求，参数为 <code>&#123; &quot;email&quot;: &quot;someemail@gmail.com&quot;, &quot;password&quot;: 1 &#125;</code>。</p>
+<h2 id="17-Settings-Sync"><a href="#17-Settings-Sync" class="headerlink" title="17. Settings Sync"></a>17. Settings Sync</h2><p><code>vscode</code>上有各种各样不同的插件，如果要在不同的电脑上使用 <code>vscode</code> 配置是件比较麻烦的事情，使用 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync">Settings Sync</a> 将 <code>vscode</code> 配置备份起来，当需要在其他电脑使用  <code>vscode</code>  时只需下载备份的配置就可以了。</p>
+<p>咱们只需要一个 GitHub 帐户，并且每次要保存配置（包括按键绑定，代码片段，扩展名等）时，只需按<code>SHIFT + ALT + U</code>将私有设置上传到 <code>GitHub</code> 帐户即可。 然后，下次登录或重新格式化为另一台计算机时，可以按<code>SHIFT + ALT + D</code>组合键立即下载配置。</p>
+<h2 id="18-Todo-Tree"><a href="#18-Todo-Tree" class="headerlink" title="18. Todo Tree"></a>18. Todo Tree</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree">Todo Tree</a> 将帮助咱们找到在整个应用程序代码中创建的所有待办事项。它将把它们放到一个单独的树中，还可以在面板的左侧同时查看它们</p>
+<p><img src="https://img.php.cn/upload/image/983/518/305/1574217600518893.jpg" alt="1574217600518893.jpg"></p>
+<h2 id="19-Toggle-Quotes"><a href="#19-Toggle-Quotes" class="headerlink" title="19. Toggle Quotes"></a>19. Toggle Quotes</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=BriteSnow.vscode-toggle-quotes">Toggle Quotes</a>是一个有趣的实用工具扩展，它允许咱们在引号之间进行切换。当需要在使用字符串插入时切换到反引号时，它就派上用场了。</p>
+<p><img src="https://img.php.cn/upload/image/928/330/255/1574217655942615.gif" alt="1574217655942615.gif"></p>
+<h2 id="20-Better-Align"><a href="#20-Better-Align" class="headerlink" title="20. Better Align"></a>20. Better Align</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=wwm.better-align">Better Align</a> 对齐赋值符号和注释。要使用它，将光标放在想要对齐的代码中，使用<code>CTRL + SHIFT + P</code>打开命令面板(或者使用自定义快捷方式打开命令面板)，然后调用<code>Align</code> 命令。</p>
+<p><img src="https://img.php.cn/upload/image/409/272/648/1574217915322689.gif" alt="1574217915322689.gif"></p>
+<h2 id="21-Auto-Close-Tag"><a href="#21-Auto-Close-Tag" class="headerlink" title="21. Auto Close Tag"></a>21. Auto Close Tag</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag">Auto Close Tag</a>自动闭合html标签。</p>
+<p><img src="https://img.php.cn/upload/image/676/343/980/1574217966385009.gif" alt="1574217966385009.gif"></p>
+<h2 id="22-Sort-Lines"><a href="#22-Sort-Lines" class="headerlink" title="22. Sort Lines"></a>22. Sort Lines</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=Tyriar.sort-lines">Sort lines</a> 可以帮助咱们排序选中行。</p>
+<p><img src="https://img.php.cn/upload/image/546/759/462/1574217997625141.gif" alt="1574217997625141.gif"></p>
+<h2 id="23-VSCode-Google-Translate"><a href="#23-VSCode-Google-Translate" class="headerlink" title="23. VSCode Google Translate"></a>23. VSCode Google Translate</h2><p>如果是参与多语言开发的项目，<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=funkyremi.vscode-google-translate">VSCode Google Translate</a> 可以帮助咱们快速切换语言。</p>
+<p><img src="https://img.php.cn/upload/image/861/494/373/1574218031355854.gif" alt="1574218031355854.gif"></p>
+<h2 id="24-Prettier"><a href="#24-Prettier" class="headerlink" title="24. Prettier"></a>24. Prettier</h2><p><a target="_blank" rel="noopener" href="https://github.com/prettier/prettier-vscode">Prettier</a>是VSCode的扩展，可自动格式化JavaScript&#x2F;TypeScript 等等，使代码更漂亮。</p>
+<p><img src="https://img.php.cn/upload/image/395/191/310/1574218079544896.jpg" alt="1574218079544896.jpg"></p>
+<h2 id="25-Material-Icon-Theme"><a href="#25-Material-Icon-Theme" class="headerlink" title="25. Material Icon Theme"></a>25. Material Icon Theme</h2><p>与其他图标主题相比，我更喜欢 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme">Material Icon Theme</a>，因为文件类型更为明显，尤其是在使用深色主题。</p>
+<p><img src="https://img.php.cn/upload/image/166/874/874/1574218129394011.jpg" alt="1574218129394011.jpg"></p>
+<h2 id="26-IntelliSense-for-CSS-Class-Names-in-HTML"><a href="#26-IntelliSense-for-CSS-Class-Names-in-HTML" class="headerlink" title="26. IntelliSense for CSS Class Names in HTML"></a>26. IntelliSense for CSS Class Names in HTML</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion">IntelliSense for CSS Class Names in HTML</a>，基于在工作空间中找到的定义性，并提供了CSS 类名补全。</p>
+<h2 id="27-Path-Intellisense"><a href="#27-Path-Intellisense" class="headerlink" title="27. Path Intellisense"></a>27. Path Intellisense</h2><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense">Path Intellisense</a> 自动路劲补全。</p>
+<p><img src="https://img.php.cn/upload/image/342/485/189/1574218215665637.gif" alt="1574218215665637.gif"></p>
+<p><code>原文地址：https://dev.to/jsmanifest/26-miraculous-vs-code-tools-for-javascript-developers-in-2019-50gg</code></p>
+<p>为了保证的可读性，本文采用意译而非直译。</p>
+<p>以上就是2019年适用于JavaScript开发人员的27种神奇的VSCode工具的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/53428.html">https://xuehuayu.cn/article/53428.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/15518.html">13 个 npm 快速开发技巧</a><a class="next" href="/article/39637.html">常见React.js问题（附解决方案）</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/a91910b6.html">create-react-app，webpack配置超强解析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/65953a19.html">electron-vite+react项目中如何使用css module</a></li><li class="post-list-item"><a class="post-list-link" href="/article/433d7e2b.html">electron-vite+react+react-router-dom+antd中useRoutes踩坑</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ed850983.html">Next.js启动打包部署（out、standalone）</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7beb973b.html">uniapp解决安卓targetSdkVersion升级为33导致通知权限置灰无法打开问题</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7fb2c15c.html">vue中echarts的3D饼图实现</a></li><li class="post-list-item"><a class="post-list-link" href="/article/e856e555.html">vue实现按钮切换背景移动效果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ebec0b44.html">vue实现滚动到底部加载</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d817e843.html">vue实现图片横向拖动滚动</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">208</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-tags"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 15px;">转载</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 15px;">原创</a> <a href="/tags/%E6%89%8B%E5%86%99/" style="font-size: 15px;">手写</a> <a href="/tags/%E7%96%AB%E6%83%85/" style="font-size: 15px;">疫情</a> <a href="/tags/ZYPlayer/" style="font-size: 15px;">ZYPlayer</a> <a href="/tags/KKPlayer/" style="font-size: 15px;">KKPlayer</a> <a href="/tags/APP/" style="font-size: 15px;">APP</a> <a href="/tags/%E6%95%B4%E7%90%86/" style="font-size: 15px;">整理</a> <a href="/tags/URL/" style="font-size: 15px;">URL</a> <a href="/tags/uni-app/" style="font-size: 15px;">uni-app</a> <a href="/tags/mui-player/" style="font-size: 15px;">mui-player</a> <a href="/tags/WebDAV/" style="font-size: 15px;">WebDAV</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/echarts-3d/" style="font-size: 15px;">echarts 3d</a> <a href="/tags/nextjs/" style="font-size: 15px;">nextjs</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/electron-vite/" style="font-size: 15px;">electron-vite</a> <a href="/tags/useRoutes/" style="font-size: 15px;">useRoutes</a> <a href="/tags/CSSModule/" style="font-size: 15px;">CSSModule</a></div></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>
