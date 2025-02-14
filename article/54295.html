@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>前端实现弹幕效果的方法总结(包含css3和canvas的实现方式) | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/css/style.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="icon" mask="" sizes="any" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.ico"><link rel="apple-touch-icon" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><link rel="apple-touch-icon-precomposed" href="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/blog.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/isPhone.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/fixedPage.jm.min.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a href="/atom.xml" target="_self"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">前端实现弹幕效果的方法总结(包含css3和canvas的实现方式)</h1><div class="post-meta"><span class="date">2019-12-17</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.8k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 7</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/54295.html#waline-comment"><span class="waline-comment-count" data-path="/article/54295.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/forthealllight/blog/issues/17)</code></p>
+<p>之前在一个移动端的抽奖页面中，在抽奖结果的展示窗口需要弹幕轮播显示，之前踩过一些小坑，现在总结一下前端弹幕效果的实现方式。</p>
+<blockquote>
+<ul>
+<li>css3实现乞丐版的弹幕</li>
+<li>css3弹幕性能优化</li>
+<li>canvas实现弹幕</li>
+<li>canva弹幕的扩展功能</li>
+</ul>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="1-css3实现乞丐版的弹幕"><a href="#1-css3实现乞丐版的弹幕" class="headerlink" title="1. css3实现乞丐版的弹幕"></a>1. css3实现乞丐版的弹幕</h2><h3 id="1-如何通过css3实现弹幕"><a href="#1-如何通过css3实现弹幕" class="headerlink" title="(1)如何通过css3实现弹幕"></a>(1)如何通过css3实现弹幕</h3><p>首先来看如何通过css的方法实现一个最简单的弹幕：</p>
+<p>首先在html中定义一条弹幕的dom结构：</p>
+<pre><code>&lt;div class=&quot;block&quot;&gt;我是弹幕&lt;/div&gt;
+</code></pre>
+<p>弹幕的移动可以通过移动这个block来实现，以从右向左移动的弹幕为例，弹幕的初始位置在容器的最左侧且贴边隐藏（弹幕的最左边与容器的最右贴合）,可以通过绝对定位加transform来实现：</p>
+<pre><code>.block&#123;
+   position:absolute;
+&#125;
+</code></pre>
+<p>初始位置：</p>
+<pre><code>from&#123;
+    left:100%;
+    transform:translateX(0)
+&#125;
+</code></pre>
+<p>移动到最左边的结束位置为（弹幕的最右边与容器的最左边贴合）：</p>
+<pre><code>to&#123;
+   left:0;
+   transform:translateX(-100%)
+&#125;
+</code></pre>
+<p>起始位置和结束位置的具体图示如下所示：</p>
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/17233651/42359492-ca68cfdc-8114-11e8-87ea-eb56e0f68483.png"><img src="https://user-images.githubusercontent.com/17233651/42359492-ca68cfdc-8114-11e8-87ea-eb56e0f68483.png" alt="default"></a></p>
+<p>根据起始位置和结束位置可以定义完整的两帧弹幕动画：</p>
+<pre><code>@keyframes barrage&#123;
+   from&#123;
+     left:100%;
+     transform:translateX(0);
+   &#125;
+   to&#123;
+     left:0;
+     transform:translateX(-100%);
+   &#125;
+&#125;
+</code></pre>
+<p>给弹幕元素引入这个动画：</p>
+<pre><code>.block&#123;
+  position:absolute;
+  /* other decorate style */
+  animation:barrage 5s linear 0s;
+&#125;
+</code></pre>
+<p>这样就可以实现一个乞丐版的弹幕效果：</p>
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/17233651/42359662-e8773472-8115-11e8-9e97-94b5cd013df2.gif"><img src="https://user-images.githubusercontent.com/17233651/42359662-e8773472-8115-11e8-9e97-94b5cd013df2.gif" alt="xuehuayu.cn"></a></p>
+<h3 id="2-通过绝对定位和left实现弹幕的缺陷"><a href="#2-通过绝对定位和left实现弹幕的缺陷" class="headerlink" title="(2)通过绝对定位和left实现弹幕的缺陷"></a>(2)通过绝对定位和left实现弹幕的缺陷</h3><p>首先明确一下css的渲染过程</p>
+<ul>
+<li>I）根据HTML的结构生成DOM树（DOM树中包含了display:none的节点）</li>
+<li>II）在DOM树的基础上，根据节点的几何属性（margin&#x2F;padding&#x2F;width&#x2F;height&#x2F;left等）生成render树</li>
+<li>III）在render树的基础上继续渲染color,font等属性</li>
+</ul>
+<p>其中如果I）中和II）中的属性发生变化会发生reflow(回流)，如果仅仅III）中的属性发生改变，只会发生repaint（重绘）。显然从css的渲染过程我们也可以看出来：reflow(回流）必伴随着重绘。</p>
+<p>reflow(回流)：当render树中的一部分或者全部因为大小边距等问题发生改变而需要重建的过程叫做回流</p>
+<p>repaint(重绘)：当元素的一部分属性发生变化，如外观背景色不会引起布局变化而需要重新渲染的过程叫做重绘</p>
+<p>reflow（回流）会影响浏览器css的渲染速度，因此在做网页性能优化的时候要减少回流的发生。</p>
+<p>在第一节，我们通过left属性，实现了弹幕的效果，left会改变元素的布局，因此会发生reflow(回流)，表现在移动端页面上会造成弹幕动画的卡顿。</p>
+<h2 id="2-css3弹幕性能优化"><a href="#2-css3弹幕性能优化" class="headerlink" title="2. css3弹幕性能优化"></a>2. css3弹幕性能优化</h2><p>我们直到了第一节中的弹幕动画存在卡顿的问题，下面我们看看如何解决动画的卡顿。</p>
+<h3 id="1-CSS开启硬件加速"><a href="#1-CSS开启硬件加速" class="headerlink" title="(1)CSS开启硬件加速"></a>(1)CSS开启硬件加速</h3><p>在浏览器中用css开启硬件加速，使用GPU（Graphics Processing Unit）可以提升网页性能。鉴于此，我们可以发挥GPU的力量，从而使我们的网站或应用表现的更为流畅。</p>
+<p>CSS animations, transforms 以及 transitions 不会自动开启GPU加速，而是由浏览器的缓慢的软件渲染引擎来执行。那我们怎样才可以切换到GPU模式呢，很多浏览器提供了某些触发的CSS规则。</p>
+<p>比较常见的方式是，我们可以通过3d变化（translate3d属性）来开启硬件加速，鉴于此，我们修改动画为：</p>
+<pre><code>@keyframes barrage&#123;
+   from&#123;
+     left:100%;
+     transform:translate3d(0,0,0);
+   &#125;
+   to&#123;
+     left:0;
+     transform:translate3d(-100%,0,0);
+   &#125;
+&#125;
+</code></pre>
+<p>这样就可以通过开启硬件加速的方式，优化网页性能。但是这种方式没有从根本上解决问题，同时使用GPU增加了内存的使用，会减少移动设备的电池寿命等等。</p>
+<h3 id="2-不改变left属性"><a href="#2-不改变left属性" class="headerlink" title="(2)不改变left属性"></a>(2)不改变left属性</h3><p>第二种方法，就是想办法在弹幕动画的前后不改变left属性的值，这样就不会发生reflow。</p>
+<p>我们想仅仅通过translateX来确定弹幕节点的初始位置，但是translateX(-100%)是相对于弹幕节点本身的，而不是相对于父元素，因此我们耦合js和css，在js中获取弹幕节点所在的父元素的宽度，接着根据宽度来定义弹幕节点的初始位置。</p>
+<p>以父元素为body时为例：</p>
+<pre><code>//css
+ .block&#123;
+  position:absolute;
+  left:0;
+  visibility:hidden;
+  /* other decorate style */
+  animation:barrage 5s linear 0s;
+&#125;
+//js
+let style = document.createElement(&#39;style&#39;);
+document.head.appendChild(style);
+let width = window.innerWidth;
+let from = `from &#123; visibility: visible; -webkit-transform: translateX($&#123;width&#125;px); &#125;`;
+let to = `to &#123; visibility: visible; -webkit-transform: translateX(-100%); &#125;`;
+style.sheet.insertRule(`@-webkit-keyframes barrage &#123; $&#123;from&#125; $&#123;to&#125; &#125;`, 0);
+</code></pre>
+<p>除了耦合js计算了父元素的宽度，从而确定弹幕节点的初始位置之外，这里在弹幕节点中我们为了防止初始位置就有显示，增加了visibility:hidden属性。防止弹幕节点在未确定初始位置时就显示在父容器内。只有弹幕开始从初始位置滚动，才会变得可见。</p>
+<p>但是这种css的实现方式，在实现弹幕的扩展功能方面比较麻烦，比如如何控制弹幕暂停等等。</p>
+<h2 id="3-canvas实现弹幕"><a href="#3-canvas实现弹幕" class="headerlink" title="3. canvas实现弹幕"></a>3. canvas实现弹幕</h2><p>除了通过css实现弹幕的方法之外，通过canvas也可以实现弹幕。</p>
+<p>通过canvas实现弹幕的原理就是时时的重绘文字，下面来一步步的实现。</p>
+<ul>
+<li>获取画布</li>
+</ul>
+<p>let canvas &#x3D; document.getElementById(‘canvas’);</p>
+<p>let ctx &#x3D; canvas.getContext(‘2d’);</p>
+<ul>
+<li>绘制文字</li>
+</ul>
+<p>ctx.font &#x3D; ‘20px Microsoft YaHei’;</p>
+<p>ctx.fillStyle &#x3D; ‘#000000’;</p>
+<p>ctx.fillText(‘canvas 绘制文字’, x, y);</p>
+<p>上面的fillText就是实现弹幕效果的主要api，其中x表示横方向的坐标，y表示纵方向的坐标，只要时时的改变x，y进行重绘，就可以实现动态的弹幕效果。</p>
+<ul>
+<li>清除绘制内容</li>
+</ul>
+<p>ctx.clearRect(0, 0, width, height);</p>
+<ul>
+<li>具体实现</li>
+</ul>
+<p>通过定时器，定时改变x,y,每次改变之前先进性清屏，然后根据改变后的x,y进行重绘。当存在多条弹幕的情况下,定义：</p>
+<pre><code>let colorArr=_this.getColor(color);  弹幕数组多对应的颜色数组
+let numArrL=_this.getLeft();  弹幕数组所对应的x坐标位置数组
+let numArrT=_this.getTop();  弹幕数组所对应的y坐标位置数组
+let speedArr=_this.getSpeed(); 弹幕数组所对应的弹幕移动速度数组
+</code></pre>
+<p>定时的重绘弹幕函数为：</p>
+<pre><code>_this.timer=setInterval(function()&#123;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.save();
+    for(let j=0;j&lt;barrageList.length;j++)&#123;
+      numArrL[j]-=speedArr[j];
+      ctx.fillStyle = colorArr[j]
+      ctx.fillText(barrageList[j],numArrL[j],numArrT[j]);
+      ctx.restore();
+ &#125;,16.7);
+</code></pre>
+<p>实现的效果为：</p>
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/17233651/42372735-a47e144a-8145-11e8-9bb9-423c539b0249.gif"><img src="https://user-images.githubusercontent.com/17233651/42372735-a47e144a-8145-11e8-9bb9-423c539b0249.gif" alt="xuehuayu.cn"></a></p>
+<h2 id="4-canva弹幕的扩展功能"><a href="#4-canva弹幕的扩展功能" class="headerlink" title="4. canva弹幕的扩展功能"></a>4. canva弹幕的扩展功能</h2><p>通过canvas实现弹幕的方式，很方便做比如暂停弹幕滚动等扩展功能，此外，也可以给弹幕增加头像，给每条弹幕增加边框等等功能，以后再补充。</p>
+<p>最后给一个简单的react弹幕组件；<a target="_blank" rel="noopener" href="https://github.com/forthealllight/react-barrage">https://github.com/forthealllight/react-barrage</a></p>
+</div><iframe src="/donate/?AliPayQR=https://i.niupic.com/images/2023/12/13/dDD4.png&amp;WeChatQR=https://i.niupic.com/images/2023/12/13/dDD3.jpg&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://afdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/54295.html">https://xuehuayu.cn/article/54295.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/37102.html">前端工程化 - 剖析npm的包管理机制</a><a class="next" href="/article/3286.html">异常监控：教你如何优雅的处理前端异常</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/search.min.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/search.xml';
+      }
+      var path = '//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/a91910b6.html">create-react-app，webpack配置超强解析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/65953a19.html">electron-vite+react项目中如何使用css module</a></li><li class="post-list-item"><a class="post-list-link" href="/article/433d7e2b.html">electron-vite+react+react-router-dom+antd中useRoutes踩坑</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ed850983.html">Next.js启动打包部署（out、standalone）</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7beb973b.html">uniapp解决安卓targetSdkVersion升级为33导致通知权限置灰无法打开问题</a></li><li class="post-list-item"><a class="post-list-link" href="/article/7fb2c15c.html">vue中echarts的3D饼图实现</a></li><li class="post-list-item"><a class="post-list-link" href="/article/e856e555.html">vue实现按钮切换背景移动效果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ebec0b44.html">vue实现滚动到底部加载</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d817e843.html">vue实现图片横向拖动滚动</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d59498f9.html">uniapp纯前端renderjs实现WebDAV</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 10,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">208</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-tags"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 15px;">转载</a> <a href="/tags/%E6%89%8B%E5%86%99/" style="font-size: 15px;">手写</a> <a href="/tags/%E7%96%AB%E6%83%85/" style="font-size: 15px;">疫情</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 15px;">原创</a> <a href="/tags/ZYPlayer/" style="font-size: 15px;">ZYPlayer</a> <a href="/tags/KKPlayer/" style="font-size: 15px;">KKPlayer</a> <a href="/tags/APP/" style="font-size: 15px;">APP</a> <a href="/tags/%E6%95%B4%E7%90%86/" style="font-size: 15px;">整理</a> <a href="/tags/URL/" style="font-size: 15px;">URL</a> <a href="/tags/uni-app/" style="font-size: 15px;">uni-app</a> <a href="/tags/mui-player/" style="font-size: 15px;">mui-player</a> <a href="/tags/WebDAV/" style="font-size: 15px;">WebDAV</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/echarts-3d/" style="font-size: 15px;">echarts 3d</a> <a href="/tags/nextjs/" style="font-size: 15px;">nextjs</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/electron-vite/" style="font-size: 15px;">electron-vite</a> <a href="/tags/useRoutes/" style="font-size: 15px;">useRoutes</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/CSSModule/" style="font-size: 15px;">CSSModule</a></div></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="/guestbook" title="留言" target="_blank">留言</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/img/upy_logo.min.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" href="#top"></a><div class="darkmode-toggle">🌓</div><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/totop.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/dark.min.js" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/codeblock-resizer.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/smartresize.min.js"></script></div></body></html>
