@@ -1,0 +1,405 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>高频面试题深入解析/ 周刊 06 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css@latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss@latest/build/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">高频面试题深入解析/ 周刊 06</h1><div class="post-meta"><span class="date">2019-10-03</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%88%86%E4%BA%AB/">分享 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 13</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/38423.html#waline-comment"><span class="waline-comment-count" data-path="/article/38423.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/37</code></p>
+<span id="more"></span>
+
+<h3 id="关于【Step-By-Step】"><a href="#关于【Step-By-Step】" class="headerlink" title="关于【Step-By-Step】"></a>关于【Step-By-Step】</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step">Step-By-Step</a> (点击进入项目) 是我于 <code>2019-05-20</code> 开始的一个项目，每个工作日发布一道面试题。<br>每个周末我会仔细阅读大家的答案，整理最一份较优答案出来，因本人水平有限，有误的地方，大家及时指正。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>本周面试题一览:</p>
+</blockquote>
+<ul>
+<li>原型链继承的基本思路是什么？有什么优缺点？</li>
+<li>借用构造函数和组合继承基本思路是什么？有什么优缺点？</li>
+<li>原型式继承的基本思路是什么？有什么优缺点？</li>
+<li>寄生式继承的基本思路是什么？有什么优缺点？</li>
+<li>寄生组合式继承的基本思路是什么？有什么优缺点？</li>
+</ul>
+<p>本周是继承专题，在开始之前，需要先了解构造函数、原型和原型链的相关知识。</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>构造函数和普通函数的区别仅在于调用它们的方式不同，任何函数，只要通过 <code>new</code> 操作符来调用，那它就可以作为构造函数；任何函数，如果不通过 <code>new</code> 操作符来调用，那么它就是一个普通函数。</p>
+<p>实例拥有 <code>constructor(构造函数)</code> 属性，该属性返回创建实例对象的构造函数。</p>
+<pre><code>functionPerson(name, age) &#123;
+    this.name= name;
+    this.age= age;
+&#125;
+
+var Yvette =newPerson(&#39;刘小夕&#39;, 20);
+console.log(Yvette.constructor=== Person); //true
+</code></pre>
+<p>有一点需要说明的是，除了基本数据类型的 <code>constructor</code> 外( <code>null</code> 和 <code>undefined</code> 无 <code>constructor</code> 属性)，<code>constructor</code> 属性是可以被重写的。因此检测对象类型时，<code>instanceof</code> 操作符比 <code>contsrutor</code> 更可靠一些。</p>
+<pre><code>functionPerson(name) &#123;
+    this.name= name;
+&#125;
+functionSuperType() &#123; &#125;
+var Yvette =newPerson(&#39;刘小夕&#39;);
+console.log(Yvette.constructor); //[Function: Person]Yvette.constructor= SuperType;
+console.log(Yvette.constructor); //[Function: SuperType]
+</code></pre>
+<h3 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h3><p>我们创建的每个函数都有 <code>prototype</code> 属性，这个属性指向函数的原型对象。原型对象的<strong>用途</strong>是包含可以由特定类型的所有实例共享的属性和方法。</p>
+<p>在默认情况下，所有原型对象都会自动获得一个 <code>constructor</code> 属性，这个属性包含一个指向 <code>prototype</code> 属性所在函数的指针。</p>
+<p>当调用构造函数创建一个新实例后，该实例的内部将包含一个指针，指向构造函数的原型对象(可以通过实例的 <code>__proto__</code> 来访问构造函数的原型对象)。</p>
+<pre><code>functionPerson(name) &#123;
+    this.name= name;
+&#125;
+Person.prototype.sayName=function() &#123;
+    console.log(this.name);
+&#125;
+var person1 =newPerson(&#39;刘小夕&#39;);
+var person2 =newPerson(&#39;前端小姐姐&#39;);
+//构造函数原型对象上的方法和属性被实例共享person1.sayName();
+person1.sayName(); 
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/16602b6909621ce63a882221389c062c4d032256/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434534366564343366333030363430353439383465356332346466373930393962312f3239353432"><img src="https://camo.githubusercontent.com/16602b6909621ce63a882221389c062c4d032256/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434534366564343366333030363430353439383465356332346466373930393962312f3239353432" alt="xuehuayu.cn"></a></p>
+<p><code>实例.__proto__ === 构造函数.prototype</code></p>
+<pre><code>console.log(Object.prototype.__proto__===null)  //trueconsole.log(Object.__proto__===Function.prototype) //trueconsole.log(Function.prototype.__proto__===Object.prototype) //true
+</code></pre>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p>简单回顾一下构造函数、原型和实例的关系：</p>
+<p>每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个可以执行原型对象的内部指针(可以通过 <code>__proto</code> 访问)。</p>
+<p>假如我们让原型对象等于另一个类型的实例，那么此时原型对象包含一个指向另一个原型的指针，相应地，另一个原型中也包含着一个指向另一个构造函数的指针。加入另一个原型又是另一个类型的实例，那么上述关系仍然成立，如此层层递进，就构成了实例与原型的链条，这就是原型链的基本概念。</p>
+<pre><code>functionSuperType() &#123;
+    this.type=&#39;animal&#39;;
+&#125;
+SuperType.prototype.getType=function() &#123;
+    console.log(this.type);
+&#125;
+functionSubType() &#123;
+
+&#125;
+SubType.prototype=newSuperType();
+SubType.prototype.sayHello=function() &#123;
+    console.log(&#39;hello&#39;);
+&#125;
+functionSimType(name) &#123;
+    this.name= name;
+&#125;
+SimType.prototype=newSubType();
+SimType.prototype.sayHi=function() &#123;
+    console.log(&#39;hi&#39;);
+&#125;
+var instance =newSimType(&#39;刘小夕&#39;);
+instance.getType();
+</code></pre>
+<p>一图胜万言:</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/bb69ed50e52bf2d899a093cbe685074f28cacc0f/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434565333233613738316338613737653239363833373531643965333236653139342f3239353434"><img src="https://camo.githubusercontent.com/bb69ed50e52bf2d899a093cbe685074f28cacc0f/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434565333233613738316338613737653239363833373531643965333236653139342f3239353434" alt="xuehuayu.cn"></a></p>
+<p>调用 <code>instance.getType()</code> 会调用以下的搜索步骤:</p>
+<ol>
+<li>搜索 <code>instance</code> 实例</li>
+<li>搜索 <code>SimType.prototype</code></li>
+<li>搜索 <code>SubType.prototype</code></li>
+<li>搜索 <code>SuperType.prototype</code>，找到了 <code>getType</code> 方法</li>
+</ol>
+<p>在找不到属性或方法的情况下，搜索过程总是要一环一环地前行到原型链的末端才会停下来。</p>
+<p>所有引用类型都继承了 <code>Object</code>，这个继承也是通过原型链实现的。如果在 <code>SuperType.prototype</code> 还没有找到 <code>getType</code>，就会到 <code>Object.prototype</code>中找(图中少画了一环)。</p>
+<h3 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h3><p>原型链继承的基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。</p>
+<p>如 <code>SubType.prototype = new SuperType()</code>;</p>
+<pre><code>functionSuperType() &#123;
+    this.name=&#39;Yvette&#39;;
+    this.colors= [&#39;pink&#39;, &#39;blue&#39;, &#39;green&#39;];
+&#125;
+SuperType.prototype.getName=function () &#123;
+    returnthis.name;
+&#125;
+functionSubType() &#123;
+    this.age=22;
+&#125;
+SubType.prototype=newSuperType();
+SubType.prototype.getAge=function() &#123;
+    returnthis.age;
+&#125;
+SubType.prototype.constructor= SubType;
+let instance1 =newSubType();
+instance1.colors.push(&#39;yellow&#39;);
+console.log(instance1.getName()); //&#39;Yvette&#39;console.log(instance1.colors);//[ &#39;pink&#39;, &#39;blue&#39;, &#39;green&#39;, &#39;yellow&#39; ]let instance2 =newSubType();
+console.log(instance2.colors);//[ &#39;pink&#39;, &#39;blue&#39;, &#39;green&#39;, &#39;yellow&#39; ]
+</code></pre>
+<p>可以看出 <code>colors</code> 属性会被所有的实例共享(instance1、instance2、…)。</p>
+<blockquote>
+<p>缺点：</p>
+</blockquote>
+<ol>
+<li>通过原型来实现继承时，原型会变成另一个类型的实例，原先的实例属性变成了现在的原型属性，该原型的引用类型属性会被所有的实例共享。</li>
+<li>在创建子类型的实例时，没有办法在不影响所有对象实例的情况下给超类型的构造函数中传递参数。</li>
+</ol>
+<h3 id="借用构造函数"><a href="#借用构造函数" class="headerlink" title="借用构造函数"></a>借用构造函数</h3><p><strong>借用构造函数</strong>的技术，其基本思想为:</p>
+<p>在子类型的构造函数中调用超类型构造函数。</p>
+<pre><code>functionSuperType(name) &#123;
+    this.name= name;
+    this.colors= [&#39;pink&#39;, &#39;blue&#39;, &#39;green&#39;];
+&#125;
+functionSubType(name) &#123;
+    SuperType.call(this, name);
+&#125;
+let instance1 =newSubType(&#39;Yvette&#39;);
+instance1.colors.push(&#39;yellow&#39;);
+console.log(instance1.colors);//[&#39;pink&#39;, &#39;blue&#39;, &#39;green&#39;, yellow]let instance2 =newSubType(&#39;Jack&#39;);
+console.log(instance2.colors); //[&#39;pink&#39;, &#39;blue&#39;, &#39;green&#39;]
+</code></pre>
+<blockquote>
+<p>优点:</p>
+</blockquote>
+<ol>
+<li>可以向超类传递参数</li>
+<li>解决了原型中包含引用类型值被所有实例共享的问题</li>
+</ol>
+<blockquote>
+<p>缺点:</p>
+</blockquote>
+<ol>
+<li>方法都在构造函数中定义，函数复用无从谈起，另外超类型原型中定义的方法对于子类型而言都是不可见的。</li>
+</ol>
+<h3 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h3><p>组合继承指的是将原型链和借用构造函数技术组合到一块，从而发挥二者之长的一种继承模式。基本思路：</p>
+<p>使用原型链实现对原型属性和方法的继承，通过借用构造函数来实现对实例属性的继承，既通过在原型上定义方法来实现了函数复用，又保证了每个实例都有自己的属性。</p>
+<pre><code>functionSuperType(name) &#123;
+    this.name= name;
+    this.colors= [&#39;pink&#39;, &#39;blue&#39;, &#39;green&#39;];
+&#125;
+SuperType.prototype.sayName=function () &#123;
+    console.log(this.name);
+&#125;
+functionSuberType(name, age) &#123;
+    SuperType.call(this, name);
+    this.age= age;
+&#125;
+SuberType.prototype=newSuperType();
+SuberType.prototype.constructor= SuberType;
+SuberType.prototype.sayAge=function () &#123;
+    console.log(this.age);
+&#125;
+let instance1 =newSuberType(&#39;Yvette&#39;, 20);
+instance1.colors.push(&#39;yellow&#39;);
+console.log(instance1.colors); //[ &#39;pink&#39;, &#39;blue&#39;, &#39;green&#39;, &#39;yellow&#39; ]instance1.sayName(); //Yvettelet instance2 =newSuberType(&#39;Jack&#39;, 22);
+console.log(instance2.colors); //[ &#39;pink&#39;, &#39;blue&#39;, &#39;green&#39; ]instance2.sayName();//Jack
+</code></pre>
+<blockquote>
+<p>缺点:</p>
+</blockquote>
+<ul>
+<li>无论什么情况下，都会调用两次超类型构造函数：一次是在创建子类型原型的时候，另一次是在子类型构造函数内部。</li>
+</ul>
+<blockquote>
+<p>优点:</p>
+</blockquote>
+<ul>
+<li>可以向超类传递参数</li>
+<li>每个实例都有自己的属性</li>
+<li>实现了函数复用</li>
+</ul>
+<h3 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h3><p>原型继承的基本思想：</p>
+<p>借助原型可以基于已有的对象创建新对象，同时还不必因此创建自定义类型。</p>
+<pre><code>functionobject(o) &#123;
+    functionF() &#123; &#125;
+    F.prototype= o;
+    returnnewF();
+&#125;
+</code></pre>
+<p>在 <code>object()</code> 函数内部，先穿甲一个临时性的构造函数，然后将传入的对象作为这个构造函数的原型，最后返回了这个临时类型的一个新实例，从本质上讲，<code>object()</code> 对传入的对象执行了一次浅拷贝。</p>
+<p>ECMAScript5通过新增 <code>Object.create()</code>方法规范了原型式继承。这个方法接收两个参数：一个用作新对象原型的对象和（可选的）一个为新对象定义额外属性的对象(可以覆盖原型对象上的同名属性)，在传入一个参数的情况下，<code>Object.create()</code> 和 <code>object()</code> 方法的行为相同。</p>
+<pre><code>var person = &#123;
+    name:&#39;Yvette&#39;,
+    hobbies: [&#39;reading&#39;, &#39;photography&#39;]
+&#125;
+var person1 =Object.create(person);
+person1.name=&#39;Jack&#39;;
+person1.hobbies.push(&#39;coding&#39;);
+var person2 =Object.create(person);
+person2.name=&#39;Echo&#39;;
+person2.hobbies.push(&#39;running&#39;);
+console.log(person.hobbies);//[ &#39;reading&#39;, &#39;photography&#39;, &#39;coding&#39;, &#39;running&#39; ]console.log(person1.hobbies);//[ &#39;reading&#39;, &#39;photography&#39;, &#39;coding&#39;, &#39;running&#39; ]
+</code></pre>
+<p>在没有必要创建构造函数，仅让一个对象与另一个对象保持相似的情况下，原型式继承是可以胜任的。</p>
+<blockquote>
+<p>缺点:</p>
+</blockquote>
+<p>同原型链实现继承一样，包含引用类型值的属性会被所有实例共享。</p>
+<h3 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h3><p>寄生式继承是与原型式继承紧密相关的一种思路。寄生式继承的思路与寄生构造函数和工厂模式类似，即创建一个仅用于封装继承过程的函数，该函数在内部已某种方式来增强对象，最后再像真地是它做了所有工作一样返回对象。</p>
+<pre><code>functioncreateAnother(original) &#123;
+    var clone =object(original);//通过调用函数创建一个新对象clone.sayHi=function () &#123;//以某种方式增强这个对象console.log(&#39;hi&#39;);
+    &#125;;
+    return clone;//返回这个对象
+&#125;
+var person = &#123;
+    name:&#39;Yvette&#39;,
+    hobbies: [&#39;reading&#39;, &#39;photography&#39;]
+&#125;;
+
+var person2 =createAnother(person);
+person2.sayHi(); //hi
+</code></pre>
+<p>基于 <code>person</code> 返回了一个新对象 -—— <code>person2</code>，新对象不仅具有 <code>person</code> 的所有属性和方法，而且还有自己的 <code>sayHi()</code> 方法。在考虑对象而不是自定义类型和构造函数的情况下，寄生式继承也是一种有用的模式。</p>
+<blockquote>
+<p>缺点：</p>
+</blockquote>
+<ul>
+<li>使用寄生式继承来为对象添加函数，会由于不能做到函数复用而效率低下。</li>
+<li>同原型链实现继承一样，包含引用类型值的属性会被所有实例共享。</li>
+</ul>
+<h3 id="寄生组合式继承"><a href="#寄生组合式继承" class="headerlink" title="寄生组合式继承"></a>寄生组合式继承</h3><p>所谓寄生组合式继承，即通过借用构造函数来继承属性，通过原型链的混成形式来继承方法，基本思路：</p>
+<p>不必为了指定子类型的原型而调用超类型的构造函数，我们需要的仅是超类型原型的一个副本，本质上就是使用寄生式继承来继承超类型的原型，然后再将结果指定给子类型的原型。寄生组合式继承的基本模式如下所示：</p>
+<pre><code>functioninheritPrototype(subType, superType) &#123;
+    var prototype =object(superType.prototype); //创建对象prototype.constructor= subType;//增强对象subType.prototype= prototype;//指定对象
+&#125;
+</code></pre>
+<ul>
+<li>第一步：创建超类型原型的一个副本</li>
+<li>第二步：为创建的副本添加 <code>constructor</code> 属性</li>
+<li>第三步：将新创建的对象赋值给子类型的原型</li>
+</ul>
+<p>至此，我们就可以通过调用 <code>inheritPrototype</code> 来替换为子类型原型赋值的语句：</p>
+<pre><code>functionSuperType(name) &#123;
+    this.name= name;
+    this.colors= [&#39;pink&#39;, &#39;blue&#39;, &#39;green&#39;];
+&#125;
+//...codefunctionSuberType(name, age) &#123;
+    SuperType.call(this, name);
+    this.age= age;
+&#125;
+inheritPrototype(SuberType, SuperType);
+//...code
+</code></pre>
+<blockquote>
+<p>优点:</p>
+</blockquote>
+<p>只调用了一次超类构造函数，效率更高。避免在<code>SuberType.prototype</code>上面创建不必要的、多余的属性，与其同时，原型链还能保持不变。</p>
+<p>因此寄生组合继承是引用类型最理性的继承范式。</p>
+<h3 id="ES6-继承"><a href="#ES6-继承" class="headerlink" title="ES6 继承"></a>ES6 继承</h3><p><code>Class</code> 可以通过extends关键字实现继承，如:</p>
+<pre><code>classSuperType &#123;
+    constructor(age) &#123;
+        this.age= age;
+    &#125;
+
+    getAge() &#123;
+        console.log(this.age);
+    &#125;
+&#125;
+
+classSubTypeextendsSuperType &#123;
+    constructor(age, name) &#123;
+        super(age); // 调用父类的constructor(x, y)this.name= name;
+    &#125;
+
+    getName() &#123;
+        console.log(this.name);
+    &#125;
+&#125;
+
+let instance =newSubType(22, &#39;刘小夕&#39;);
+instance.getAge(); //22
+</code></pre>
+<p>对于ES6的 <code>class</code> 需要做以下几点说明：</p>
+<ol>
+<li><p>类的数据类型就是函数，类本身就指向构造函数。</p>
+<p> console.log(typeof SuperType);&#x2F;&#x2F;functionconsole.log(SuperType &#x3D;&#x3D;&#x3D;SuperType.prototype.constructor); &#x2F;&#x2F;true</p>
+</li>
+<li><p>类的内部所有定义的方法，都是不可枚举的。(ES5原型上的方法默认是可枚举的)</p>
+<p> Object.keys(SuperType.prototype);</p>
+</li>
+<li><p><code>constructor</code> 方法是类的默认方法，通过 <code>new</code> 命令生成对象实例时，自动调用该方法。一个类必须有<code>constructor</code> 方法，如果没有显式定义，一个空的 <code>constructor</code> 方法会被默认添加。</p>
+</li>
+<li><p><code>Class</code> 不能像构造函数那样直接调用，会抛出错误。</p>
+</li>
+</ol>
+<p>使用 <code>extends</code> 关键字实现继承，有一点需要特别说明：</p>
+<ul>
+<li><p>子类必须在 <code>constructor</code> 中调用 <code>super</code> 方法，否则新建实例时会报错。如果没有子类没有定义 <code>constructor</code> 方法，那么这个方法会被默认添加。在子类的构造函数中，只有调用 <code>super</code> 之后，才能使用 <code>this</code>关键字，否则报错。这是因为子类实例的构建，基于父类实例，只有super方法才能调用父类实例。</p>
+<p>  classSubTypeextendsSuperType {<br>  constructor(…args) {<br>      super(…args);<br>  }<br>  }</p>
+</li>
+</ul>
+<h3 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h3><p>[1] <a target="_blank" rel="noopener" href="http://www.zhufengpeixun.cn/main/course/index.html">珠峰架构课(墙裂推荐)</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004865198">CSS-清除浮动</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2975c25e4d71">详解JS函数柯里化</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000016418021?utm_source=tag-newest">JavaScript数组去重</a></p>
+<p>谢谢各位小伙伴愿意花费宝贵的时间阅读本文，如果本文给了您一点帮助或者是启发，请不要吝啬你的赞和Star，您的肯定是我前进的最大动力。 <a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog">https://github.com/YvetteLau/Blog</a></p>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/38423.html">https://xuehuayu.cn/article/38423.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/22230.html">高频面试题深入解析/ 周刊 07</a><a class="next" href="/article/38743.html">高频面试题深入解析/ 周刊 05</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/a91910b6.html">create-react-app，webpack配置超强解析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/65953a19.html">electron-vite+react项目中如何使用css module</a></li><li class="post-list-item"><a class="post-list-link" href="/article/433d7e2b.html">electron-vite+react+react-router-dom+antd中useRoutes踩坑</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">208</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="/img/upy_logo.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
