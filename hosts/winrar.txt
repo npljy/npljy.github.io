@@ -1,0 +1,2 @@
+# winrar
+127.0.0.1 ad.winrar.com.cn

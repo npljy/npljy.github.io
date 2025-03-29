@@ -1,0 +1,551 @@
+! [xuehuayu.cn]
+! Title: 菜鸟_DNS过滤器[xuehuayu.cn]
+! Version: 2410281
+! Expires: 7 days
+! Homepage: https://xuehuayu.cn?mobilefilter
+!=== *** filter start ***!
+
+||adsdk.whjzjx.cn^
+||xingya-ad-track.shytkjgs.com^
+||wkanx.com^
+||xingya-track.shytkjgs.com^
+||ads*-normal-hl.zijieapi.com^
+||*-ad-sign.byteimg.com^
+||open.e.189.cn^
+||admonitor.dengtayiduiyi.com^
+||analyze.lemurbrowser.com^
+||adim.pinduoduo.com^
+||edgesdk-data.uhabo.com^
+||data.kuiniuca.com^
+||eqghuu.com^
+||rltdxt.com^
+||xcggzzb.com^
+||bdxiguaimg.com^
+||datacenter.live.qcloud.com^
+||qchannel*.cn^
+||shenshiads.com^
+||log-sdk*
+||irs01.*
+||wheelplayer.*
+||nstools.*
+||clientlog.*
+||clientlog1.*
+||clientlog2.*
+||clientlog3.*
+||allyes.*
+||-ad.
+||ad.*
+||-ad.*
+||ad1.*
+||ads.*
+||adsense.*
+||adserver.*
+||sspapi.youxiaoad.com^
+||dcarimg.com^
+||adurl.scriptmh.com^
+||scriptmh.com^
+||sdkapi.douyucdn.cn^
+||voiceads.cn^
+||fumiad.dxys.pro^
+||analytics-tcp.mintegral.net^
+||c.msn.cn^
+||union.maccms.la
+||auth.api.gitv.tv
+||omgmta.play.aiseet.atianqi.com^
+||mfe.paqpq.com^
+||advert.58.com^
+||2144.cn^
+||admaster.com.cn^
+||adsmis.duxiaoman.com^
+||advertisement.tanx.com^
+||advertising.cdn.vip.xunlei.com^
+||api-game-ssl.xunlei.com^
+||cgptwd.com^
+||chunhangmall.com^
+||data.p2cdn.com^
+||dingyueads.com^
+||dmapp.chinadegi.com^
+||dykj.site^
+||fenqile.com^
+||flash.cn^
+||fpdownload.macromedia.com^
+||fpdownload2.macromedia.com^
+||geo2.adobe.com^
+||gg*.miguvideo.com^
+||gsgs10086.com^
+||guozhiyouq.com^
+||imsearch.dzh.com.cn^
+||iwanxyx.com^
+||jinzhandaily.com^
+||jizhimobi.com^
+||kingsoft-office-service.com^
+||kukuchuangxiang*.com^
+||log-sdk
+||ltyonej.cn^
+||macromedia.com^
+||market.wsskj520.cn^
+||optimus-ads.amap.com^
+||otantgi.cn^
+||rcpuierp.cn^
+||readnos.com^
+||s.xcmad.com^
+||sdk.yilutaobao.com^
+||ssp.linglong001.com^
+||stats.chinaz.com^
+||tongji.4hw.com.cn^
+||wtrace.bj.chinamobile.com^
+||yuetx.cc^
+
+!===  非凡资源 ↓
+||ffzyad.com^
+!===  非凡资源 ↑
+
+!===  乐播投屏 ↓
+||adeng.hpplay.cn^
+||adcdn.hpplay.cn^
+||ad.hpplay.cn^
+||adc.hpplay.cn^
+||fix.hpplay.cn^
+||rps.hpplay.cn^
+||imdns.hpplay.cn^
+||devicemgr.hpplay.cn^
+||rp.hpplay.cn^
+||tvapp.hpplay.cn^
+||pin.hpplay.cn^
+||sl.hpplay.cn^
+||vipauth.hpplay.cn^
+||vipsdkauth.hpplay.cn^
+||sdkauth.hpplay.cn^
+||conf.hpplay.cn^
+||image.hpplay.cn^
+||hotupgrade.hpplay.cn^
+||cloud.hpplay.cn^
+||gslb.hpplay.cn^
+||cdn1.hpplay.cn^
+||ftp.hpplay.com.cn^
+||rp.hpplay.com.cn^
+||cdn.hpplay.com.cn^
+||userapi.hpplay.com.cn^
+||leboapi.hpplay.com.cn^
+||api.hpplay.com.cn^
+||h5.hpplay.com.cn^
+||hpplay.cdn.cibn.cc
+||ha.wheel.duolebo.com^
+||duolebo.com^
+||cdn-live.duolebo.com^
+!===  乐播投屏 ↑
+
+!===  钉钉 ↓ 
+||adashx.ut.dingtalk.com^
+||h-adashx.ut.dingtalk.com^
+!===  钉钉 ↑
+
+!===  友盟 ↓ 
+||umcdn.uc.^
+||umeng.com^
+||*.umeng.*
+||umengcloud.com^
+||*.umengcloud.*
+||umengacs.m.taobao.com^
+||umengjmacs.m.taobao.com^
+||umengacs.*
+||umeng.com.gds.alibabadns.com^
+||umm6.cn^
+!===  友盟 ↑
+
+!===  酷云 ↓
+||controldata.kuyun.com^
+||logonext.tv.kuyun.com^
+||config.kuyun.com^
+||tvapi.kuyun.com^
+||tvsdk.kuyun.com^
+!===  酷云 ↑
+
+!===  CNZZ ↓
+||*.cnzz.com^
+||cnzz.com^
+||cnzz.*
+!===  CNZZ ↑
+
+!===  塔读 ↓ 
+||mgame.tadu.com^
+||log.tadu.com^
+!===  塔读 ↑
+
+!===  神马 ↓ 
+||ad.sm.cn^
+||log.m.sm.cn^
+||content-understand-strategy.sm.cn^
+||sense-arrival.sm.cn^
+||huichuan.sm.cn^
+!===  神马 ↑
+
+!===  小米隐私保护 ↓ 
+log.avlyun.sec.intl.miui.com
+update.avlyun.sec.miui.com
+ixav-cse.avlyun.com
+logupdate.avlyun.sec.miui.com
+miui-fxcse.avlyun.com
+sdkconf.avlyun.com
+sdkconf.avlyun.com
+miav-cse.avlyun.com
+miav-cse.avlyun.com
+api.installer.xiaomi.com
+tmfsdk.m.qq.com
+a0.app.xiaomi.com
+adv.sec.miui.com
+xlmc.sec.miui.com
+etl-xlmc-ssl.sandai.net
+cn.app.chat.xiaomi.net
+idm.api.io.mi.com
+api.jr.mi.com
+ssl-cdn.static.browser.mi-img.com
+flash.sec.miui.com
+!===  小米隐私保护 ↑
+
+!===  小米 ↓ 
+||mistat.mi.com^
+||*.mistat.mi.com^
+||mistat.xiaomi.com^
+||*.mistat.xiaomi.com^
+||stats.*.xiaomi.com^
+||pandora.mi.com^
+||*.pandora.mi.com^
+||pandora.xiaomi.com^
+||*.pandora.xiaomi.com^
+||wtradv.market.xiaomi.com^
+||*.ad.xiaomi.com^
+||ad.xiaomi.com^
+||ad*.xiaomi.com^
+||ad.mi.com^
+||*.ad.mi.com^
+||ad*.mi.com^
+||video.market.xiaomi.com^
+||a.market.xiaomi.com^
+||misc.in.duokanbox.com^
+||ssp.mi.com^
+||api.sec.miui.com^
+||ad.miui.*
+||tracking.miui.com^
+||mcc.miui.com^
+||hot.browser.miui.com^
+||api.*.xlmc.sec.miui.com^
+||metok.sys.miui.com^
+!===  小米 ↑
+
+!===  百度 ↓
+||mobads.baidu.com^
+||hm.baidu.com^
+||hmma.baidu.com^
+||mobads-logs.baidu.com^
+||zhanzhang.baidu.com$third-party
+||union.baidu.com^
+||utility.baidu.com^
+||utk.baidu.com^
+||ucstat.baidu.com^
+||tk.baidu.com^
+||suggestion.baidu.com^
+||share.baidu.com^
+||sp0.baidu.com^
+||spcode.baidu.com^
+||nsclick.baidu.com^
+||olimenew.baidu.com^
+||ma.baidu.com^
+||hc.baidu.com^
+||drmcmm.baidu.com^
+||e.baidu.com^
+||eiv.baidu.com^
+||fclick.baidu.com^
+||focusbaiduafp.allyes.com^
+||cpro.baidu.com^
+||c.baidu.com^
+||baidujs.vip^
+||baidutv.baidu.com^
+||bar.baidu.com^
+||a.baidu.com^
+||cjhq.baidu.com^
+!===  百度 ↑
+
+!===  阿里 ↓
+||tuijian.taobao.com^
+||tunion-api.m.taobao.com^
+||adashxgc.ut.taobao.com^
+||baichuan.m.taobao.com^
+||baichuan-sdk.alicdn.com^
+||feedback-api.aliyuncs.com^
+||alibabausercontent.com^
+||unidesk.alicdn.com^
+||gma.alicdn.com^
+||advertisement.alibabacorp.com^
+||mmstat.com^
+!===  阿里 ↑
+
+!===  360 ↓
+||mini.browser.360.cn^
+||sayhi.360.cn^
+||lianmeng.360.cn^
+!===  360 ↑
+
+!===  UC ↓
+||applog.uc.cn^
+||track.uc.cn^
+||upaas.uc.cn^
+||ucsthummer.tjcu.u3.ucweb.com^
+||utp.ucweb.com^
+!===  UC ↑
+
+!===  网易 ↓ 
+||netapm.music.163.com^
+||nex.163.com^
+||mshare.cc.163.com^
+||crash.163.com^
+||clientlog3.music.163.com^
+||iadmusicmatvideo.music.126.net^
+||iadmat.nosdn.127.net^
+||epay.nosdn.127.net^
+||iadmusicmat.music.126.net^
+||statistic.live.126.net^
+||admusicpic.music.126.net^
+||iadmatvideo.nosdn.127.net^
+||ydstatic.com^
+||*.ydstatic.com^
+||gorgon.youdao.com^
+||dsp-impr*.youdao.com^
+||sdk-log.youdao.com^
+||mam.netease.com^
+||nstool.netease.com^
+||hubble.netease.com^
+||da.netease.com^
+!===  网易 ↑
+
+!===  京东 ↓
+||xlog.jd.com^
+||dsp-x.jd.com^
+||orbit.jd.com^
+||janapi.jd.com^
+!===  京东 ↑
+
+!===  知乎 ↓
+||crash2.zhihu.com^
+||zhihu-web-analytics.zhihu.com^
+!===  知乎 ↑
+
+!===  快手 ↓
+||multi-az-ad.kuaishou.com^
+||e.kuaishou.com^
+||*.e.kuaishou.com^
+||e.kuaishou.cn^
+||*.e.kuaishou.cn^
+||adkwai.com^
+||adukwai.com^
+||gifshow.com^
+||ulog-sdk.ksapisrv.com^
+||kskwai.com^
+||gskwai.com^
+||api.kwaizt.com^
+||api.kuaishouzt.com^
+||zt.gifshow.com^
+!===  快手 ↑
+
+!===  酷我 ↓ 
+||mobilead.kuwo.cn^
+||mobilefhtj.kuwo.cn^
+||mobileinterfaces.kuwo.cn^
+||zhiborecserver.kuwo.cn^
+||zhibopartnermi.kuwo.cn^
+!===  酷我 ↑
+
+!===  酷狗 ↓ 
+||nbcollect.kugou.com^
+||nbcollectretry.kugou.com^
+||adserviceretry.kglink.cn^
+||adsfilebssdlbig.*.kugou.com^
+||acshow*.kugou.com^
+||ads.service.kugou.com^
+||adserviceretry.kugou.com^
+||webcollect.kugou.com^
+||serveraddr.service.kugou.com^
+||rt-m.kugou.com^
+||rtmretry.kugou.com^
+||log.stat.kugou.com^
+||log.web.kugou.com^
+||gateway.kugou.com^
+||gateway*.kugou.com^
+||gatewayretry.kugou.com^
+||adservice.kugou.com^
+!===  酷狗 ↑
+
+!===  字节 ↓ 
+||extlog.snssdk.com^
+||pangolin.snssdk.com^
+||ctobsnssdk.com^
+||mssdk-bu.snssdk.com^
+||i.snssdk.com^
+||is.snssdk.com^
+||bds.snssdk.com^
+||tnc3-*.snssdk.com^
+||xlog.snssdk.com^
+||tobapplog.*.com^
+||toblog.*.com^
+||pglstatp-toutiao.com^
+||*.pglstatp-toutiao.com^
+||*.pangolin-sdk-toutiao.com^
+||pangolin-dsp-toutiao.com^
+||*.pangolin-sdk-toutiao-b.com^
+||*.pangolin-sdk-toutiao
+||*.pangolin-sdk-toutiao*.com^
+||sf3-ttcdn-tos.pstatp.com^
+||*.pstatp.com^
+||tnc*-*.zijieapi.com^
+||*-ad-sign.byteimg.com^
+||feedback-c.zijieapi.com^
+||ads*-normal-hl.zijieapi.com^
+||mssdk-bu.bytedance.com^
+||lf-cdn-tos.bytescm.com^
+||dm.toutiao.com^
+||www.toutiaopage.com^
+||iesdouyin.com^
+||dig.bdurl.net^
+||dig.zjurl.cn^
+!===  字节 ↑
+
+!===  腾讯 ↓
+||report.tencentmusic.com^
+||tmead.y.qq.com^
+||tmeadcomm.y.qq.com^
+||*.l.qq.com^
+||sdk.e.qq.com^
+||aeventlog.beacon.qq.com^
+||analytics.map.qq.com^
+||isure.stream.qqmusic.qq.com^
+||video.mpush.qq.com^
+||video.wap.mpush.qq.com^
+||vlive.qqvideo.tc.qq.com^
+||report.huatuo.qq.com^
+||mcgi.v.qq.com^
+||bugly.qq.com^
+||*.gdt.qq.com^
+||gdt.qq.com^
+||pgdt.gtimg.cn^
+||adsmind.ugdtimg.com^
+||qzs.gdtimg.com^
+||ugdtimg.com^
+!===  腾讯 ↑ 
+
+!===  谷歌 ↓
+||device-provisioning.googleapis.com^
+||play.googleapis.com^
+||safebrowsing.googleapis.com^
+||googlesyndication.com^
+!===  谷歌 ↑ 
+
+!===  优酷 ↓
+||atm.youku.com^
+||*.atm.youku.com^
+||stat.youku.com^
+||lstat.youku.com^
+||*.lstat.youku.com^
+!===  优酷 ↑ 
+
+!===  拼多多 ↓
+||*-a.pinduoduo.com^
+||apm.pinduoduo.com^
+||*.p4.manlaxy.com^
+||th.pinduoduo.com^
+||ta.pinduoduo.com^
+||th-*.pinduoduo.com^
+*.pddugc.com^
+||static-*.pddpic.com^
+||static.pddpic.com^
+||*-snapshot.pddpic.com
+
+!===  拼多多 ↑ 
+
+!===  爱奇艺 ↓ 
+||cupid.iqiyi.com^
+||*.cupid.ptqy.gitv.tv^
+||ifacelog.iqiyi.com^
+||cmts.iqiyi.com^
+||afp.qiyi.com^
+||msg.qy.net^
+||feedback.qy.net^
+!===  爱奇艺 ↑ 
+
+!===  芒果 ↓ 
+||da.hunantv.^
+||da.mgtv.^
+!===  芒果 ↑ 
+
+!===  CCTV ↓ 
+||a.cctv.com^
+||ad.cctv.com^
+||cctv.adsunion.com^
+||a.cntv.cn^
+||d.cntv.cn^
+!===  CCTV ↑ 
+
+||17ugo.com^
+||86file.megajoy.com^
+||86get.joy.cn^
+||86log.joy.cn^
+||ad.ixigua.com^
+||ad.ximalaya.com^
+||adguanggao.eee114.com^
+||admaster.com^
+||adx.babytree.com^
+||aimg.babytreeimg.com^
+||api.htp.ad-scope.com.cn^
+||assume8.com^
+||atianqi.com^
+||audit8.com^
+||auth.api.gitv.tv^
+||bjimp.voiceads.cn^
+||bla.gtimg.com^
+||by2.nty.tv189.cn^
+||cmvideo.cn^
+||crashlytics.com^
+||cvnad.com^
+||df.tanx.com^
+||g3.letv.com^
+||graph.facebook.com^
+||grocery.pptv.com^
+||gvod.aiseejapp.atianqi.com^
+||haoxianggoufafuli.cn^
+||hku.lccfjszp.cn^
+||hlsks.duolaibo.cn^
+||howyunying.com^
+||hpplay.cdn.cibn.cc^
+||irs01.com^
+||jingfeed.com^
+||jinyazhou8888.com^
+||krt.zhengxiaoliu.top^
+||live.bsycdn.siqiangame.com^
+||live.sharkselection.com^
+||live.siqiangame.com^
+||mediav.com^
+||mhy.wdpkx.cn^
+||miaozhen.com^
+||mzran.com.cn^
+||ott.fstvgo.com^
+||ott.live.iduochong.com^
+||ottshopping.net^
+||*.bdxiguaimg.com^
+||pagead2.googlesyndication.com^
+||pay.dianshihome.com^
+||play.cdn.jdcloud.fstvgo.com^
+||pv.sohu.com^
+||rebo.yundzh.com^
+||sdk1xyajs.data.p2cdn.com^
+||siqiangame.co^
+||t.appsflyer.com^
+||t.kexin001.com^
+||thishare.cn^
+||thishare.com^
+||tj.youzanyun.com^
+||tv.aiseet.atianqi.com^
+||union.maccms.la^
+||vott.haomaishou.com^
+||vv.play.aiseet.atianqi.com^
+||wwnott.hxgwott.com^
+||www.qchannel^
+

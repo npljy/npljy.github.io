@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>可靠React组件设计的7个准则之封装 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">可靠React组件设计的7个准则之封装</h1><div class="post-meta"><span class="date">2019-09-29</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 7</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/38753.html#waline-comment"><span class="waline-comment-count" data-path="/article/38753.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/43</code><br><code>翻译：刘小夕</code><br><code>原文链接：https://dmitripavlutin.com/7-architectural-attributes-of-a-reliable-react-component/)</code><br>原文的篇幅<strong>非常</strong>长，不过内容太过于吸引我，还是忍不住要翻译出来。此篇文章对编写可重用和可维护的React组件非常有帮助。但因为篇幅实在太长，我对文章进行了分割，本篇文章重点阐述  <strong><code>封装</code></strong>。因本人水平有限，文中部分翻译可能不够准确，如果您有更好的想法，欢迎在评论区指出。</p>
+<span id="more"></span>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><blockquote>
+<p>一个封装组件提供 <code>props</code> 控制其行为而不是暴露其内部结构。</p>
+</blockquote>
+<p>耦合是决定组件之间依赖程度的系统特性。根据组件的依赖程度，可区分两种耦合类型：</p>
+<ul>
+<li><p>当应用程序组件对其他组件知之甚少或一无所知时，就会发生松耦合。</p>
+</li>
+<li><p>当应用程序组件知道彼此的许多详细信息时，就会发生紧耦合。</p>
+</li>
+</ul>
+<p>松耦合是我们设计应用结构和组件之间关系的目标。</p>
+<blockquote>
+<p>松耦合应用(封装组件)</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/8200817c412a4c670086ca3af828de712268562f/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663373161366262393264313631653f773d3131333026683d3131313426663d6a70656726733d3838363933"><img src="https://camo.githubusercontent.com/8200817c412a4c670086ca3af828de712268562f/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663373161366262393264313631653f773d3131333026683d3131313426663d6a70656726733d3838363933" alt="xuehuayu.cn"></a></p>
+<p><strong>松耦合</strong>会带来以下好处：</p>
+<ul>
+<li>可以在不影响应用其它部分的情况下对某一块进行修改。、</li>
+<li>任何组件都可以替换为另一种实现</li>
+<li>在整个应用程序中实现组件复用，从而避免重复代码</li>
+<li>独立组件更容易测试，增加了测试覆盖率</li>
+</ul>
+<p>相反，紧耦合的系统会失去上面描述的好处。主要缺点是很难修改高度依赖于其他组件的组件。即使是一处修改，也可能导致一系列的依赖组件需要修改。</p>
+<blockquote>
+<p>紧耦合应用(组件无封装)</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/61d43c90e941d3dd94bac646e92c8cd3446b0fa3/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663373163393337653837386532343f773d3131323226683d3131333026663d6a70656726733d3837313530"><img src="https://camo.githubusercontent.com/61d43c90e941d3dd94bac646e92c8cd3446b0fa3/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663373163393337653837386532343f773d3131323226683d3131333026663d6a70656726733d3837313530" alt="xuehuayu.cn"></a></p>
+<p><strong>封装</strong> 或 <strong>信息隐藏</strong> 是如何设计组件的基本原则，也是松耦合的关键。</p>
+<h4 id="信息隐藏"><a href="#信息隐藏" class="headerlink" title="信息隐藏"></a>信息隐藏</h4><p>封装良好的组件隐藏其内部结构，并提供一组属性来控制其行为。</p>
+<p>隐藏内部结构是必要的。其他组件没必要知道或也不依赖组件的内部结构或实现细节。</p>
+<p><code>React</code> 组件可能是函数组件或类组件、定义实例方法、设置 <code>ref</code>、拥有 <code>state</code> 或使用生命周期方法。这些实现细节被封装在组件内部，其他组件不应该知道这些细节。</p>
+<p>隐藏内部结构的组件彼此之间的依赖性较小，而降低依赖度会带来松耦合的好处。</p>
+<h4 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h4><p>细节隐藏是隔离组件的关键。此时，你需要一种组件通信的方法：<code>props</code>。<code>porps</code> 是组件的输入。</p>
+<p>建议 <code>prop</code> 的类型为基本数据（例如，<code>string</code> 、 <code>number</code> 、<code>boolean</code>）：</p>
+<pre><code>&lt;Message text=&quot;Hello world!&quot; modal=&#123;false&#125; /&gt;;
+</code></pre>
+<p>必要时，使用复杂的数据结构，如对象或数组：</p>
+<pre><code>&lt;MoviesList items=&#123;[&#39;Batman Begins&#39;, &#39;Blade Runner&#39;]&#125; /&gt;
+</code></pre>
+<p><code>prop</code> 可以是一个事件处理函数和异步函数：</p>
+<pre><code>&lt;input type=&quot;text&quot; onChange=&#123;handleChange&#125; /&gt;
+</code></pre>
+<p><code>prop</code> 甚至可以是一个组件构造函数。组件可以处理其他组件的实例化：</p>
+<pre><code>functionIf(&#123; component: Component, condition &#125;) &#123;
+    return condition ?&lt;Component /&gt;:null;
+&#125;
+&lt;If condition=&#123;false&#125; component=&#123;LazyComponent&#125; /&gt;
+</code></pre>
+<p>为了避免破坏封装，请注意通过 <code>props</code> 传递的内容。给子组件设置 <code>props</code> 的父组件不应该暴露其内部结构的任何细节。例如，使用 <code>props</code> 传输整个组件实例或 <code>refs</code> 都是一个不好的做法。</p>
+<p>访问全局变量同样也会对封装产生负面影响。</p>
+<h4 id="案例研究：封装修复"><a href="#案例研究：封装修复" class="headerlink" title="案例研究：封装修复"></a>案例研究：封装修复</h4><p>组件的实例和状态对象是封装在组件内部的实现细节。因此，将状态管理的父组件实例传递给子组件会破坏封装。</p>
+<p>我们来研究一下这种情况。</p>
+<p>一个简单的应用程序显示一个数字和两个按钮。第一个按钮增加数值，第二个按钮减少数值：</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/77c8ca39774b1abf9ee5606462d12facc7da55cf/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663373165613336396463653165313f773d3134313426683d35323826663d6a70656726733d3630333731"><img src="https://camo.githubusercontent.com/77c8ca39774b1abf9ee5606462d12facc7da55cf/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663373165613336396463653165313f773d3134313426683d35323826663d6a70656726733d3630333731" alt="xuehuayu.cn"></a></p>
+<p>这个应用由两个组件组成：<code>&lt;App&gt;</code> 和 <code>&lt;Controls&gt;</code>.</p>
+<p><code>number</code> 是 <code>&lt;App&gt;</code> 的 <code>state</code> 对象，<code>&lt;App&gt;</code> 负责 将这个数字渲染到页面。</p>
+<pre><code>// 问题: 封装被破坏classAppextendsComponent &#123;
+    constructor(props) &#123;
+        super(props);
+        this.state= &#123; number:0 &#125;;
+    &#125;
+
+    render() &#123;
+        return (
+            &lt;div className=&quot;app&quot;&gt;&lt;span className=&quot;number&quot;&gt;&#123;this.state.number&#125;&lt;/span&gt;&lt;Controls parent=&#123;this&#125; /&gt;&lt;/div&gt;
+        );
+    &#125;
+&#125;
+</code></pre>
+<p><code>&lt;Controls&gt;</code> 负责渲染按钮，并为其设置事件处理函数，当用户点击按钮时，父组件的状态将会被更新：<code>number</code> 加1或者减1(<code>(</code>updateNumber()方法&#96;)</p>
+<pre><code>// 问题: 使用父组件的内部结构classControlsextendsComponent &#123;
+    render() &#123;
+        return (
+            &lt;div className=&quot;controls&quot;&gt;&lt;button onClick=&#123;() =&gt;this.updateNumber(+1)&#125;&gt;
+                    Increase
+          &lt;/button&gt;&lt;button onClick=&#123;() =&gt;this.updateNumber(-1)&#125;&gt;
+                    Decrease
+          &lt;/button&gt;&lt;/div&gt;
+        );
+    &#125;
+
+    updateNumber(toAdd) &#123;
+        this.props.parent.setState(prevState=&gt; (&#123;
+            number:prevState.number+ toAdd
+        &#125;));
+    &#125;
+&#125;
+</code></pre>
+<p>当前的实现有什么问题？</p>
+<ul>
+<li><p>第一个问题是： <code>&lt;App&gt;</code> 的封装被破坏，因为它的内部结构在应用中传递。<code>&lt;App&gt;</code> 错误地允许 <code>&lt;Controls&gt;</code> 直接去修改其 <code>state</code>。</p>
+</li>
+<li><p>第二个问题是: 子组件 <code>Controls</code> 知道了太多父组件 <code>&lt;App&gt;</code> 的内部细节，它可以访问父组件的实例，知道父组件是一个有状态组件，知道父组件的 <code>state</code> 对象的细节(知道 <code>number</code> 是父组件 <code>state</code> 的属性)，并且知道怎么去更新父组件的 <code>state</code>.</p>
+</li>
+</ul>
+<p>一个麻烦的结果是： <code>&lt;Controls&gt;</code> 将很难测试和重用。对 <code>&lt;App&gt;</code> 结构的细微修改会导致需要对 <code>&lt;Controls&gt;</code> 进行修改（对于更大的应用程序，也会导致类似耦合的组件需要修改）。</p>
+<p>解决方案是设计一个方便的通信接口，考虑到松耦合和封装。让我们改进两个组件的结构和属性，以便恢复封装。</p>
+<p>只有组件本身应该知道它的状态结构。<code>&lt;App&gt;</code> 的状态管理应该从 <code>&lt;Controls&gt;</code>（<code>updateNumber()</code>方法）移到正确的位置：即 <code>&lt;App&gt;</code> 组件中。</p>
+<p><code>&lt;App&gt;</code> 被修改为 <code>&lt;Controls&gt;</code> 设置属性 <code>onIncrease</code> 和 <code>onDecrease</code>。这些是更新 <code>&lt;App&gt;</code> 状态的回调函数:</p>
+<pre><code>// 解决: 恢复封装classAppextendsComponent &#123;
+    constructor(props) &#123;
+        super(props);
+        this.state= &#123; number:0 &#125;;
+    &#125;
+
+    render() &#123;
+        return (
+            &lt;div className=&quot;app&quot;&gt;&lt;span className=&quot;number&quot;&gt;&#123;this.state.number&#125;&lt;/span&gt;&lt;Controls
+                    onIncrease=&#123;() =&gt;this.updateNumber(+1)&#125;
+                    onDecrease=&#123;() =&gt;this.updateNumber(-1)&#125;
+                /&gt;&lt;/div&gt;
+        );
+    &#125;
+
+    updateNumber(toAdd) &#123;
+        this.setState(prevState=&gt; (&#123;
+            number:prevState.number+ toAdd
+        &#125;));
+    &#125;
+&#125;
+</code></pre>
+<p>现在，<code>&lt;Controls&gt;</code> 接收用于增加和减少数值的回调，注意解耦和封装恢复时：<code>&lt;Controls&gt;</code> 不再需要访问父组件实例。也不会直接去修改父组件的状态。</p>
+<p>而且，<code>&lt;Controls&gt;</code> 被修改为了一个函数式组件:</p>
+<pre><code>// 解决方案: 使用回调函数去更新父组件的状态functionControls(&#123; onIncrease, onDecrease &#125;) &#123;
+    return (
+        &lt;div className=&quot;controls&quot;&gt;&lt;button onClick=&#123;onIncrease&#125;&gt;Increase&lt;/button&gt;&lt;button onClick=&#123;onDecrease&#125;&gt;Decrease&lt;/button&gt;&lt;/div&gt;
+    );
+&#125;
+</code></pre>
+<p><code>&lt;App&gt;</code> 组件的封装已经恢复，状态由其本身管理，也应该如此。</p>
+<p>此外，<code>&lt;Controls&gt;</code> 不在依赖 <code>&lt;App&gt;</code> 的实现细节，<code>onIncrease</code> 和 <code>onDecrease</code> 在按钮被点击的时候调用，<code>&lt;Controls&gt;</code> 不知道(也不应该知道)这些回调的内部实现。</p>
+<p><code>&lt;Controls&gt;</code> 组件的可重用性和可测试性显著增加。</p>
+<p><code>&lt;Controls&gt;</code> 的复用变得很容易，因为它除了需要回调，没有其它依赖。测试也变得简单，只需验证单击按钮时，回调是否执行。</p>
+<p><strong>最后谢谢各位小伙伴愿意花费宝贵的时间阅读本文，如果本文给了您一点帮助或者是启发，请不要吝啬你的赞和Star，您的肯定是我前进的最大动力。<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog">https://github.com/YvetteLau/Blog</a></strong></p>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/38753.html">https://xuehuayu.cn/article/38753.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/41717.html">从多线程到Event Loop全面梳理</a><a class="next" href="/article/18071.html">可靠React组件设计的7个准则之SRP</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/6dfc7293.html">个税申报时年度汇算时申报的劳务报酬总收入小于本年度代开的劳务发票</a></li><li class="post-list-item"><a class="post-list-link" href="/article/a91910b6.html">create-react-app，webpack配置超强解析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/65953a19.html">electron-vite+react项目中如何使用css module</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">208</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="/img/upy_logo.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

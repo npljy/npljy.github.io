@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>重磅！TypeScript 3.7 RC发布 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs'})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">重磅！TypeScript 3.7 RC发布</h1><div class="post-meta"><span class="date">2019-10-25</span><span> | </span><span class="tag"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载 </a></span><span> | </span><span class="category"><a href="/categories/%E8%B5%84%E8%AE%AF/">资讯 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 5.5k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 22</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/45156.html#waline-comment"><span class="waline-comment-count" data-path="/article/45156.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/7z8mJvg063ttfHqqkJFpTQ</code></p>
+<span id="more"></span>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XIibZ0YbvibkW1ELLUnvYXMdomcibLYibicDEB9uib4a2ueVc7kIECD9xxxicRJ9wL0Ntwx5bcHD5wz8b2teC8qkF2yOw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<pre><code>	作者｜Daniel Rosenwasser、TypeScript 团队	
+	译者｜王强	
+	编辑｜王文婧	
+	今天，微软发布了 TypeScript 3.7 RC，这是 TypeScript 3.7 的候选发布版本。到最终版本发布之前，除了重要的错误修复，微软表示，预计不会再有其他更改。下面我们来逐一看看有哪些新功能值得关注。	TypeScript 3.7 RC 提供了一些呼声最高的功能特性！
+</code></pre>
+<ul>
+<li><p>可选链</p>
+</li>
+<li><p>空值合并</p>
+</li>
+<li><p>断言函数</p>
+</li>
+<li><p>更好地支持返回 never 的函数</p>
+</li>
+<li><p>（更多）递归类型别名</p>
+</li>
+<li><p>–declaration 和 –allowJs</p>
+</li>
+<li><p>使用项目引用进行免构建编辑</p>
+</li>
+<li><p>未调用函数的检查</p>
+</li>
+<li><p>TypeScript 文件中的 &#x2F;&#x2F; @ts-nocheck</p>
+</li>
+<li><p>分号格式化选项</p>
+</li>
+<li><p>重大更改</p>
+</li>
+<li><p>DOM 更改</p>
+</li>
+<li><p>函数真实性检查</p>
+</li>
+<li><p>本地和导入的类型声明现在会冲突</p>
+</li>
+<li><p>API 更改</p>
+</li>
+</ul>
+<p>你可以通过 NuGet 或以下 npm 命令开始使用 RC 版：<br>    npm install typescript@rc</p>
+<p>你可以通过下列途径获得编辑器支持：</p>
+<ul>
+<li>下载 Visual Studio 2019&#x2F;2017。</li>
+<li>查阅 Visual Studio Code 和 Sublime Text 的指引。</li>
+</ul>
+<p>Visual Studio 2019&#x2F;2017：<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items">https://marketplace.visualstudio.com/items</a>?</p>
+<p>Visual Studio Code：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/Docs/languages/typescript#_using-newer-typescript-versions">https://code.visualstudio.com/Docs/languages/typescript#_using-newer-typescript-versions</a></p>
+<p>Sublime Text：<a target="_blank" rel="noopener" href="https://github.com/Microsoft/TypeScript-Sublime-Plugin/#note-using-different-versions-of-typescript">https://github.com/Microsoft/TypeScript-Sublime-Plugin/#note-using-different-versions-of-typescript</a></p>
+<p>下面，我们来逐一介绍 TypeScript 3.7 的新功能。首先是最受瞩目的功能：可选链（Optional Chaining）。<br>可选链<br>TypeScript 3.7 实现了呼声最高的 ECMAScript 功能之一：可选链（Optional Chaining）！我们的团队一直在深度参与 TC39 的标准制定，努力将这一功能推向第三阶段，从而将其带给所有的 TypeScript 用户。<br>那么什么是可选链呢？从本质上讲，有了可选链后，我们编写代码时如果遇到 null 或 undefined 就可以立即停止某些表达式的运行。可选链的核心是新的?. 运算符，用于 <strong>可选的属性访问</strong>。比如下面的代码：<br>    let x &#x3D; foo?.bar.baz();</p>
+<p>也就是说，当定义了 foo 时，将计算 foo.bar.<br>baz()；但如果 foo 为 null 或 undefined，程序就会停止运行并只返回 undefined。说得更清楚些，以上代码等效下面这种写法。<br>    let x &#x3D; (foo &#x3D;&#x3D;&#x3D; null || foo &#x3D;&#x3D;&#x3D; undefined) ?<br>        undefined :<br>        foo.bar.baz();</p>
+<p>请注意，如果 bar 为 null 或 undefined，我们的代码在访问 baz 时仍会出错。同样，如果 baz 为 null 或 undefined，我们在调用函数时也会出现错误。?. 只会检查其左侧的值是否为 null 或 undefined，而不检查任何后续属性。<br>你可能会使用?. 替换许多使用 &amp;&amp; 运算符执行中间属性检查的代码。<br>    &#x2F;&#x2F; 之前<br>    if (foo &amp;&amp; foo.bar &amp;&amp; foo.bar.baz) {<br>        &#x2F;&#x2F; …<br>    }</p>
+<pre><code>// 之后
+if (foo?.bar?.baz) &#123;
+    // ...
+&#125;
+</code></pre>
+<p>请记住?. 与 &amp;&amp; 操作的行为有所不同，其中 &amp;&amp; 操作特别针对的是“虚假”值（例如空字符串、0、NaN 和 false）。<br>可选链还包括其他两个操作。首先是 <strong>可选元素访问</strong>，其作用类似可选属性访问，但允许我们访问非标识符属性（例如任意字符串、数字和符号）：<br>    &#x2F;**<br>     * 当我们有一个数组时，返回它的第一个元素<br>     * 否则返回 undefined。<br>     *&#x2F;<br>    function tryGetFirstElement<T>(arr?: T[]) {<br>        return arr?.[0];<br>        &#x2F;&#x2F; 等效：<br>        &#x2F;&#x2F; return (arr &#x3D;&#x3D;&#x3D; null || arr &#x3D;&#x3D;&#x3D; undefined) ?<br>        &#x2F;&#x2F; undefined :<br>        &#x2F;&#x2F; arr[0];<br>    }</p>
+<p>另一个是 <strong>可选调用</strong>，如果表达式不是 null 或 undefined，我们可以有条件地调用它们。<br>    async function makeRequest(url: string, log?: (msg: string) &#x3D;&gt; void) {<br>        log?.(<code>Request started at $&#123;new Date().toISOString()&#125;</code>);<br>        &#x2F;&#x2F; 等效：<br>        &#x2F;&#x2F; if (log !&#x3D;&#x3D; null &amp;&amp; log !&#x3D;&#x3D; undefined) {<br>        &#x2F;&#x2F; log(<code>Request started at $&#123;new Date().toISOString()&#125;</code>);<br>        &#x2F;&#x2F; }</p>
+<pre><code>    const result = (await fetch(url)).json();
+
+    log?.(`Request finished at at $&#123;new Date().toISOString()&#125;`);
+
+    return result;
+&#125;
+</code></pre>
+<p>可选链的“短路（short-circuiting）”行为仅限于“普通”和可选属性访问、调用和元素访问——它不会从这些表达式进一步扩展。换句话说，下面的代码不会阻止除法或 someComputation() 调用。<br>    let result &#x3D; foo?.bar &#x2F; someComputation()</p>
+<p>它相当于：<br>    let temp &#x3D; (foo &#x3D;&#x3D;&#x3D; null || foo &#x3D;&#x3D;&#x3D; undefined) ?<br>        undefined :<br>        foo.bar;</p>
+<pre><code>let result = temp / someComputation();
+</code></pre>
+<p>这可能会导致除法结果 undefined，这就是为什么在 strictNullChecks 中，以下代码会报错：<br>    function barPercentage(foo?: { bar: number }) {<br>        return foo?.bar &#x2F; 100;<br>        &#x2F;&#x2F; ~~~~~~~~<br>        &#x2F;&#x2F; 错误：对象可能未定义。<br>    }</p>
+<p>有关更多详细信息可以查阅提案和原始的拉取请求。</p>
+<p>提案：<a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-optional-chaining/]">https://github.com/tc39/proposal-optional-chaining/]</a>(<a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-optional-chaining/">https://github.com/tc39/proposal-optional-chaining/</a></p>
+<p>拉取请求：<a target="_blank" rel="noopener" href="https://github.com/microsoft/TypeScript/pull/33294">https://github.com/microsoft/TypeScript/pull/33294</a><br>空值合并<br>另一个即将推出的 ECMAScript 功能是 <strong>空值合并运算符（nullish coalescing operator）</strong>，它与可选链都是我们的团队一直努力推进的功能。<br>你可以设想一下这个功能——?? 运算符可以在处理 null 或 undefined 时“回退”到一个默认值上。例如下面的代码：<br>    let x &#x3D; foo ?? bar();</p>
+<p>这是一种新的途径来表示值 foo“存在”时会被使用；但当它为 null 或 undefined 时，就在其位置计算 bar()。<br>同样，以上代码等效于下面的写法。<br>    let x &#x3D; (foo !&#x3D;&#x3D; null &amp;&amp; foo !&#x3D;&#x3D; undefined) ?<br>        foo :<br>        bar();</p>
+<p>尝试使用默认值时，?? 运算符可以代替||。例如，以下代码段尝试获取上次保存在 local-Storage 中的 volume 值（如果曾经保存过），但因为它使用了||，所以会报错。<br>    function initializeAudio() {<br>        let volume &#x3D; localStorage.volume || 0.5</p>
+<pre><code>    // ...
+&#125;
+</code></pre>
+<p>当 localStorage.volume 设置为 0 时，页面会意外地将 volume 设置为 0.5。?? 能避免将 0、NaN 和””中的某些意外行为视为虚假值。</p>
+<p>我们非常感谢社区成员 Wenlu Wang 和 Titian Cernicova Dragomir 实现此功能！有关更多详细信息，请查看其拉取请求和空值合并提案存储库。</p>
+<p>拉取请求：<a target="_blank" rel="noopener" href="https://github.com/microsoft/TypeScript/pull/32883">https://github.com/microsoft/TypeScript/pull/32883</a></p>
+<p>空值合并提案存储库：<a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-nullish-coalescing/">https://github.com/tc39/proposal-nullish-coalescing/</a><br>断言函数如果发生意外情况，有一组特定的函数会 throw 一个错误。它们被称为“断言”函数。例如，Node.js 为此有一个专用函数，称为 assert。<br>    assert(someValue &#x3D;&#x3D;&#x3D; 42);</p>
+<p>在此示例中，如果 someValue 不等于 42，则 assert 将抛出 AssertionError。<br>JavaScript 中的断言通常用于防止传入不正确的类型。例如：<br>    function multiply(x, y) {<br>        assert(typeof x &#x3D;&#x3D;&#x3D; “number”);<br>        assert(typeof y &#x3D;&#x3D;&#x3D; “number”);</p>
+<pre><code>    return x * y;
+&#125;
+</code></pre>
+<p>不幸的是，在 TypeScript 中，这些检查永远无法正确编码。这意味着 TypeScript 对松散类型的代码检查更少，并经常在稍保守的代码类型中迫使用户使用类型断言。<br>    function yell(str) {<br>        assert(typeof str &#x3D;&#x3D;&#x3D; “string”);</p>
+<pre><code>    return str.toUppercase();
+    // 哇！我们拼错了 &#39;toUpperCase&#39;。
+    // 希望 TypeScript 还是能捕获它！
+&#125;
+</code></pre>
+<p>替代方法是重写代码以便 TS 语言分析，但这并不方便。<br>    function yell(str) {<br>        if (typeof str !&#x3D;&#x3D; “string”) {<br>            throw new TypeError(“str should have been a string.”)<br>        }<br>        &#x2F;&#x2F; 错误捕获！<br>        return str.toUppercase();<br>    }</p>
+<p>TypeScript 的终极目标是以破坏最少的方式嵌入现有的 JavaScript 结构中，所以 TypeScript 3.7 引入了一个称为“断言签名”的新概念，可以对这些断言函数建模。<br>第一种断言签名的建模方式和 Node 的 assert 函数的机制相同。它确保在作用域的其余部分中，无论检查的是什么条件都必须为真。<br>    function assert(condition: any, msg?: string): asserts condition {<br>        if (!condition) {<br>            throw new AssertionError(msg)<br>        }<br>    }</p>
+<p>asserts condition 表示，如果 assert 返回，则传递给 condition 参数的任何内容都必须为真（否则会抛出错误）。这意味着对于作用域的其余部分，该条件必须是真的。举个例子，使用这个断言函数意味着我们 <strong>确实</strong> 捕获了之前 yell 示例中的异常。<br>    function yell(str) {<br>        assert(typeof str &#x3D;&#x3D;&#x3D; “string”);</p>
+<pre><code>    return str.toUppercase();
+    // ~~~~~~~~~~~
+    // 错误：属性 &#39;toUppercase&#39; 在 &#39;string&#39; 类型上不存在。
+    // 你说的是 &#39;toUpperCase&#39; 吗？
+&#125;
+
+function assert(condition: any, msg?: string): asserts condition &#123;
+    if (!condition) &#123;
+        throw new AssertionError(msg)
+    &#125;
+&#125;
+</code></pre>
+<p>另一种断言签名不检查条件，而是告诉 TypeScript 特定的变量或属性具有不同的类型。<br>    function assertIsString(val: any): asserts val is string {<br>        if (typeof val !&#x3D;&#x3D; “string”) {<br>            throw new AssertionError(“Not a string!”);<br>        }<br>    }</p>
+<p>这里的 assert val is string 确保在对 assertIs-String 进行任何调用之后，传入的任何变量都将是一个 string。<br>    function yell(str: any) {<br>        assertIsString(str);</p>
+<pre><code>    // 现在 TypeScript 知道 &#39;str&#39; 是一个 &#39;string&#39;.
+
+    return str.toUppercase();
+    // ~~~~~~~~~~~
+    // 错误：属性 &#39;toUppercase&#39; 在 &#39;string&#39; 类型上不存在。
+    // 你说的是 &#39;toUpperCase&#39; 吗？
+
+&#125;
+</code></pre>
+<p>这些断言签名与编写类型谓词签名非常相似：<br>    function isString(val: any): val is string {<br>        return typeof val &#x3D;&#x3D;&#x3D; “string”;<br>    }</p>
+<pre><code>function yell(str: any) &#123;
+    if (isString(str)) &#123;
+        return str.toUppercase();
+    &#125;
+    throw &quot;Oops!&quot;;
+&#125;
+</code></pre>
+<p>就像类型谓词签名一样，这些断言签名也有着惊人的表现力。我们可以用它们表达一些相当复杂的想法。<br>    function assertIsDefined<T>(val: T): asserts val is NonNullable<T> {<br>        if (val &#x3D;&#x3D;&#x3D; undefined || val &#x3D;&#x3D;&#x3D; null) {<br>            throw new AssertionError(<br>                <code>Expected &#39;val&#39; to be defined, but received $&#123;val&#125;</code><br>            );<br>        }<br>    }</p>
+<p>有关断言签名的更多信息，请查看原始的拉取请求。</p>
+<p>拉取请求：<a target="_blank" rel="noopener" href="https://github.com/microsoft/TypeScript/pull/32695">https://github.com/microsoft/TypeScript/pull/32695</a><br>更好地支持返回 never 的函数<br>作为断言签名项目的一部分，TypeScript 需要对调用的函数和调用的位置编码更多信息。于是我们就可以扩展对另一类函数的支持：返回 never 的函数。</p>
+<p>任何返回 never 的函数的意图都是说它不会返回。它表明抛出了异常，出现了暂停错误条件或程序已退出。例如，@types&#x2F;node 中的 process.exit(…) 被指定为返回 never。<br>为了确保函数永远不会返回 undefined，或者说可以从所有代码路径中有效地返回，TypeScript 需要一些语法信号——在函数结尾 return 或 throw。这样用户就会发现自己正在 return 故障函数。<br>    function dispatch(x: string | number): SomeType {<br>        if (typeof x &#x3D;&#x3D;&#x3D; “string”) {<br>            return doThingWithString(x);<br>        }<br>        else if (typeof x &#x3D;&#x3D;&#x3D; “number”) {<br>            return doThingWithNumber(x);<br>        }<br>        return process.exit(1);<br>    }</p>
+<p>现在，当调用这些返回 never 的函数时，TypeScript 会识别出它们会影响控制流图，并说明原因。<br>    function dispatch(x: string | number): SomeType {<br>        if (typeof x &#x3D;&#x3D;&#x3D; “string”) {<br>            return doThingWithString(x);<br>        }<br>        else if (typeof x &#x3D;&#x3D;&#x3D; “number”) {<br>            return doThingWithNumber(x);<br>        }<br>        process.exit(1);<br>    }</p>
+<p>你可以在断言函数的拉取请求中查阅更多信息。<br>（更多）递归类型别名“递归”引用类型别名时一直存在一些限制。原因是一旦用到类型别名就必须能用其别名来代替自己。在某些情况下这是不可能的，因此编译器会拒绝某些递归别名，如下所示：<br>    type Foo &#x3D; Foo;</p>
+<p>这是一个合理的限制，因为任何对 Foo 的使用都需要用 Foo 代替，而 Foo 则需要用 Foo 代替，而 Foo 则需要用 Foo 代替……好吧，希望你懂我的意思！最后没有哪一种类型可以代替 Foo。<br>这与其他语言对待类型别名的方式一致，但用户使用这一功能时会出现一些意想不到的问题。例如，在 TypeScript 3.6 和更低版本中，以下代码会报错。<br>    type ValueOrArray<T> &#x3D; T | Array&lt;ValueOrArray<T>&gt;;<br>    &#x2F;&#x2F; ~~~~~~~~~~~~<br>    &#x2F;&#x2F; 错误：类型别名 ‘ValueOrArray’ 循环引用它自己。</p>
+<p>这很奇怪，因为从技术上讲这种用法并没有错，用户应该总是可以通过引入接口来编写实际上是相同的代码。<br>    type ValueOrArray<T> &#x3D; T | ArrayOfValueOrArray<T>;</p>
+<pre><code>interface ArrayOfValueOrArray&lt;T&gt; extends Array&lt;ValueOrArray&lt;T&gt;&gt; &#123;&#125;
+</code></pre>
+<p>由于接口（和其他对象类型）引入了一定程度的间接性，并且不需要急切地构建其完整结构，因此 TypeScript 在使用该结构时没有问题。</p>
+<p>但对于用户而言，引入界面的解决方法并不直观。原则上来说，ValueOrArray 的原始版本，也就是直接使用 Array 确实没有任何问题。如果编译器有点“懒惰”，并且仅在必要时才计算 Array 的类型参数，则 TypeScript 就可以正确表达这些参数。</p>
+<p>这正是 TypeScript 3.7 引入的内容。在类型别名的“顶层”，TypeScript 将推迟解析类型参数以允许使用这些模式。<br>这意味着像下面这样的代码（试图表示 JSON）……<br>    type Json &#x3D;<br>        | string<br>        | number<br>        | boolean<br>        | null<br>        | JsonObject<br>        | JsonArray;</p>
+<pre><code>interface JsonObject &#123;
+    [property: string]: Json;
+&#125;
+
+interface JsonArray extends Array&lt;Json&gt; &#123;&#125;
+</code></pre>
+<p>终于无需辅助接口也能重写了。<br>    type Json &#x3D;<br>        | string<br>        | number<br>        | boolean<br>        | null<br>        | { [property: string]: Json }<br>        | Json[];</p>
+<p>这种新的宽松条件也使我们可以在元组中递归引用类型别名。下面的代码以前会报错，现在则是有效的 TypeScript 代码：<br>    type VirtualNode &#x3D;<br>        | string<br>        | [string, { [key: string]: any }, …VirtualNode[]];</p>
+<pre><code>const myNode: VirtualNode =
+    [&quot;div&quot;, &#123; id: &quot;parent&quot; &#125;,
+        [&quot;div&quot;, &#123; id: &quot;first-child&quot; &#125;, &quot;I&#39;m the first child&quot;],
+        [&quot;div&quot;, &#123; id: &quot;second-child&quot; &#125;, &quot;I&#39;m the second child&quot;]
+    ];
+</code></pre>
+<p>有关更多信息可以查阅原始的拉取请求。</p>
+<p>拉取请求：<a target="_blank" rel="noopener" href="https://github.com/microsoft/TypeScript/pull/33050">https://github.com/microsoft/TypeScript/pull/33050</a><br>–declaration 和 –allowJs<br>TypeScript 中的 –declaration 标志允许我们从源 TypeScript 文件（如.ts 和.tsx 文件）生成.d.ts 文件（声明文件）。这些.d.ts 文件很重要，因为它们允许 TypeScript 对其他项目进行类型检查，而无需重新检查 &#x2F; 构建原始源代码。出于相同的原因，使用项目引用时 <strong>需要</strong> 此设置。</p>
+<p>不幸的是，–declaration 不适用于 –allowJs 之类的设置，无法混合使用 TypeScript 和 JavaScript 输入文件。这是一个令人沮丧的限制，因为它意味着用户即使在迁移代码库时也无法使用 –declaration，即使使用 JSDoc 注释也是如此。TypeScript 3.7 对此做了更改，并允许将这两种功能混合使用！<br>使用 allowJs 时，TypeScript 将尽可能理解 JavaScript 源代码，并将其以等效表示形式保存到.d.ts 文件中。这包括其中所有的 JSDoc 注释，所以像如下代码：<br>    &#x2F;**<br>     * @callback Job<br>     * @returns {void}<br>     *&#x2F;</p>
+<pre><code>/** Queues work */
+export class Worker &#123;
+    constructor(maxDepth = 10) &#123;
+        this.started = false;
+        this.depthLimit = maxDepth;
+        /**
+         * 注意：队列中的作业可能会将更多项目添加到队列中
+         * @type &#123;Job[]&#125;
+         */
+        this.queue = [];
+    &#125;
+    /**
+     * 在队列中添加一个工作项
+     * @param &#123;Job&#125; work
+     */
+    push(work) &#123;
+        if (this.queue.length + 1 &gt; this.depthLimit) throw new Error(&quot;Queue full!&quot;);
+        this.queue.push(work);
+    &#125;
+    /**
+     * 如果队列尚未开始就启动它
+     */
+    start() &#123;
+        if (this.started) return false;
+        this.started = true;
+        while (this.queue.length) &#123;
+            /** @type &#123;Job&#125; */(this.queue.shift())();
+        &#125;
+        return true;
+    &#125;
+&#125;
+</code></pre>
+<p>现在将转换为以下无需实现的.d.ts 文件：<br>    &#x2F;**<br>     * @callback Job<br>     * @returns {void}<br>     <em>&#x2F;<br>    &#x2F;</em>* Queues work <em>&#x2F;<br>    export class Worker {<br>        constructor(maxDepth?: number);<br>        started: boolean;<br>        depthLimit: number;<br>        &#x2F;</em>*<br>         * 注意：队列中的作业可能会将更多项目添加到队列中<br>         * @type {Job[]}<br>         <em>&#x2F;<br>        queue: Job[];<br>        &#x2F;</em>*<br>         * 在队列中添加一个工作项<br>         * @param {Job} work<br>         <em>&#x2F;<br>        push(work: Job): void;<br>        &#x2F;</em>*<br>         * 如果队列尚未开始就启动它<br>         *&#x2F;<br>        start(): boolean;<br>    }<br>    export type Job &#x3D; () &#x3D;&gt; void;</p>
+<p>有关更多详细信息请查阅原始拉取请求。</p>
+<p>拉取请求：<a target="_blank" rel="noopener" href="https://github.com/microsoft/TypeScript/pull/32372">https://github.com/microsoft/TypeScript/pull/32372</a><br>使用项目引用进行免构建编辑<br>TypeScript 的项目引用为我们提供了一种简便的方法来分解代码库，从而提升编译速度。不幸的是，编辑一个尚未建立依赖关系（或输出已过时）的项目时会出现很多问题。</p>
+<p>在 TypeScript 3.7 中，当打开具有依赖项的项目时，TypeScript 将自动使用源.ts &#x2F; .tsx 文件代替。这意味着使用项目引用的项目现在将获得增强的编辑体验，其中语义操作都是最新且“有效”的。你可以使用编译器选项 disableSourceOfProjectReferenceRedirect 禁用此行为，处理非常大的项目（此更改可能影响编辑性能）时用这个选项可能会很合适。</p>
+<p>有关此更改的更多信息请查阅其拉取请求。</p>
+<p>拉取请求：<a target="_blank" rel="noopener" href="https://github.com/microsoft/TypeScript/pull/32028">https://github.com/microsoft/TypeScript/pull/32028</a><br>未调用函数的检查一个常见且危险的错误是忘记调用某个函数，尤其是当函数具有零参数，或者命名更像是属性而非函数时更容易出错。<br>    interface User {<br>        isAdministrator(): boolean;<br>        notify(): void;<br>        doNotDisturb?(): boolean;<br>    }</p>
+<pre><code>// 稍后……
+
+// 代码已破坏, 勿用!
+function doAdminThing(user: User) &#123;
+    // oops!
+    if (user.isAdministrator) &#123;
+        sudo();
+        editTheConfiguration();
+    &#125;
+    else &#123;
+        throw new AccessDeniedError(&quot;User is not an admin&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>比如在上面的代码中我们忘记调用 isAdmini-strator，该代码错误地允许非管理员用户编辑配置！<br>在 TypeScript 3.7 中，这被标识为可能的错误：<br>    function doAdminThing(user: User) {<br>        if (user.isAdministrator) {<br>        &#x2F;&#x2F; ~~~~~~~~~~~~~~~~~~~~<br>        &#x2F;&#x2F; 错误！这个条件将始终返回 true，因为这个函数定义是一直存在的<br>        &#x2F;&#x2F; 你的意思是调用它吗？</p>
+<p>此检查是一项重大更改，但正因如此，检查会非常保守。仅在 if 条件下才发出此错误，并且在 strictNullChecks 关闭，或者以后在 if 的正文中调用该函数时，不会在可选属性上发出此错误：<br>    interface User {<br>        isAdministrator(): boolean;<br>        notify(): void;<br>        doNotDisturb?(): boolean;<br>    }</p>
+<pre><code>function issueNotification(user: User) &#123;
+    if (user.doNotDisturb) &#123;
+        // OK, 属性是可选的
+    &#125;
+    if (user.notify) &#123;
+        // OK, 调用了这一函数
+        user.notify();
+    &#125;
+&#125;
+</code></pre>
+<p>如果你打算在不调用函数的情况下测试它，则可以将其定义更正为包含 undefined&#x2F;null，或使用!! 编写类似 if(!!user.isAdministrator) 的内容以指示强制是故意的。</p>
+<p>我们非常感谢 GitHub 用户 @jwbay，他创建了概念验证，并一直改进到现在这个版本。<br>TypeScript 文件中的 &#x2F;&#x2F; @ts-nocheck<br>TypeScript 3.7 允许我们在 TypeScript 文件的顶部添加 &#x2F;&#x2F; @ts-nocheck 注释以禁用语义检查。过去只有在存在 checkJs 时，JavaScript 源文件中的这一注释才会被认可。但我们已扩展了对 TypeScript 文件的支持，以简化所有用户的迁移过程。<br>分号格式化选项<br>TypeScript 的内置格式化程序现在支持在结尾分号可选的位置，根据 JavaScript 的自动分号插入（ASI）规则插入和删除分号。该设置现在在 Visual Studio Code Insiders 中可用，也在 Visual Studio 16.4 Preview 2 中的“Tools Options”菜单中可用。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkW1ELLUnvYXMdomcibLYibicDE2MsOhhKwbak2wkwraI77l9FyftfXZF35LdQ9BotyDMa83IWqicFyTrg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<p>选择“insert”或“remove”的值还会影响自动导入的格式、提取的类型以及 TypeScript 服务提供的其他生成代码。将设置保留为默认值“ignore”会使生成的代码与当前文件中检测到的分号首选项相匹配。<br>重大更改DOM 更改<br>lib.dom.d.ts 中的类型已更新。这些更改大都是与可空性相关的正确性更改，但其影响最终取决于你的代码库。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/microsoft/TypeScript/pull/33627">https://github.com/microsoft/TypeScript/pull/33627</a><br>函数真实性检查如上所述，当在 if 语句条件下似乎未调用函数时，TypeScript 现在会出错。除非满足以下任一条件，否则在 if 条件下检查函数类型时会发出错误：</p>
+<ul>
+<li>检查值来自可选属性。</li>
+<li>strictNullChecks 已禁用。</li>
+<li>该函数稍后在 if 的正文中调用。</li>
+</ul>
+<p>本地和导入的类型声明现在会起冲突由于一个错误，之前的 TypeScript 版本允许以下构造：<br>    &#x2F;&#x2F; .&#x2F;someOtherModule.ts<br>    interface SomeType {<br>        y: string;<br>    }</p>
+<pre><code>// ./myModule.ts
+import &#123; SomeType &#125; from &quot;./someOtherModule&quot;;
+export interface SomeType &#123;
+    x: number;
+&#125;
+
+function fn(arg: SomeType) &#123;
+    console.log(arg.x); // Error! &#39;x&#39; doesn&#39;t exist on &#39;SomeType&#39;
+&#125;
+</code></pre>
+<p>在这里，SomeType 似乎同时源于 import 声明和本地 interface 声明。可能想不到的是，在模块内部 SomeType 仅引用 import 的定义，而本地声明 SomeType 仅在从另一个文件导入时才可用。这非常令人困惑，我们对这类罕见情况的调查表明，开发人员通常会认为出现了一些其他问题。</p>
+<p>TypeScript 3.7 现在可以正确地将其识别为重复的标识符错误。正确的修复方案取决于作者的初衷，具体情况具体分析。通常来说，命名冲突是无意的，最好的解决方法是重命名导入的类型。如果初衷是要扩展导入的类型，则应编写适当的模块扩展。<br>API 更改<br>为了支持前文所述的递归类型别名模式，我们已从 TypeReference 接口中删除了 typeArguments 属性。用户应该在 TypeChecker 实例上使用 getTypeArguments 函数。<br>未来计划<br>TypeScript 3.7 的最终版本将在几周内发布，理想情况下只需极少的更改即可完成！我们希望大家尝试这个 RC 版本并向我们提供反馈，从而打造一个出色的 3.7 版本。如果你有任何建议或遇到任何问题，请随时在我们的问题跟踪器上报告问题！</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/microsoft/TypeScript/issues/new/choose">https://github.com/microsoft/TypeScript/issues/new/choose</a></p>
+<p>编程快乐！</p>
+<p>——Daniel Rosenwasser 和 TypeScript 团队</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://devblogs.microsoft.com/typescript/announcing-typescript-3-7-rc/">https://devblogs.microsoft.com/typescript/announcing-typescript-3-7-rc/</a><br> 活动推荐<br>近年来，随着 jQuery 的落幕，三大框架的割据以及小程序的爆发，大前端的发展也经历了从静态页面到 JavaScript 跨时代的诞生，再从 PC 端到移动端的转向，以及由依赖后端到前后端分离的架构演变。</p>
+<p>腾讯在线教育前端团队，近年来在大前端技术架构演进方面也有了不少突破，如 Hybird 方案、离线包方案、PWA 结合 SSR 方案、以及 RN 动态化方案的落地和执行等。</p>
+<p>这次 GMTC 全球大前端技术大会（深圳站）2019，我们专门请到了 <strong>腾讯的前端高级工程师曹海歌</strong>，希望可以从腾讯在线教育前端团队的实操案例中，深入了解腾讯为提升研发效率，进行的前端工程化体系建设过程。扫描下方二维码或点击阅读原文，查看详情。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkVJ39Bia0ZKsNgbMXreVo0RCzKlWxKvicKhicM1YfHnc2jtT6xLB0OSY1nJaicLsrt0ygDwX7GbhaMC3g/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/XIibZ0YbvibkWXXvo603ymFTsEG4KVIRcrIRtichVbn5KRqRzKkOPjnOXEwqSrmsiaL9hm6c168WpMcKicPtPZMEd1g/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"></p>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/45156.html">https://xuehuayu.cn/article/45156.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></div><div class="post-nav"><a class="pre" href="/article/58816.html">使用node运行electron时报Error: spawn electron-forge ENOENT解决办法</a><a class="next" href="/article/59349.html">一文洞察Chrome DevTools近半年新增了哪些功能</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/6dfc7293.html">个税申报时年度汇算时申报的劳务报酬总收入小于本年度代开的劳务发票</a></li><li class="post-list-item"><a class="post-list-link" href="/article/a91910b6.html">create-react-app，webpack配置超强解析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/65953a19.html">electron-vite+react项目中如何使用css module</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">208</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="/img/upy_logo.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
