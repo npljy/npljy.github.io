@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>浅谈React性能优化的方向 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//boke.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="//blog.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="//web.laonongmin.online/css/style.css"><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">浅谈React性能优化的方向</h1><div class="post-meta"><span class="date">2019-11-21</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 17</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/50343.html#waline-comment"><span class="waline-comment-count" data-path="/article/50343.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5d045350f265da1b695d5bf2#heading-0</code></p>
+<p>React 渲染性能优化的三个方向，其实也适用于其他软件开发领域，这三个方向分别是:</p>
+<ul>
+<li><strong>减少计算的量</strong>。 -&gt; 对应到 React 中就是<strong>减少渲染的节点 或者 降低组件渲染的复杂度</strong></li>
+<li><strong>利用缓存</strong>。-&gt; 对应到 React 中就是<strong>如何避免重新渲染，利用函数式编程的 memo 方式来避免组件重新渲染</strong></li>
+<li><strong>精确重新计算的范围</strong>。 对应到 React 中就是<strong>绑定组件和状态关系, 精确判断更新的’时机’和’范围’. 只重新渲染’脏’的组件，或者说降低渲染范围</strong></li>
+</ul>
+<span id="more"></span>
+
+<p><strong>目录</strong></p>
+<ul>
+<li><p><a href="#%E5%87%8F%E5%B0%91%E6%B8%B2%E6%9F%93%E7%9A%84%E8%8A%82%E7%82%B9%E9%99%8D%E4%BD%8E%E6%B8%B2%E6%9F%93%E8%AE%A1%E7%AE%97%E9%87%8F%E5%A4%8D%E6%9D%82%E5%BA%A6">减少渲染的节点&#x2F;降低渲染计算量(复杂度)</a></p>
+</li>
+<li><p><a href="#0%EF%B8%8F%E2%83%A3-%E4%B8%8D%E8%A6%81%E5%9C%A8%E6%B8%B2%E6%9F%93%E5%87%BD%E6%95%B0%E9%83%BD%E8%BF%9B%E8%A1%8C%E4%B8%8D%E5%BF%85%E8%A6%81%E7%9A%84%E8%AE%A1%E7%AE%97">0️⃣ 不要在渲染函数都进行不必要的计算</a></p>
+</li>
+<li><p><a href="#1%EF%B8%8F%E2%83%A3-%E5%87%8F%E5%B0%91%E4%B8%8D%E5%BF%85%E8%A6%81%E7%9A%84%E5%B5%8C%E5%A5%97">1️⃣ 减少不必要的嵌套</a></p>
+</li>
+<li><p><a href="#2%EF%B8%8F%E2%83%A3-%E8%99%9A%E6%8B%9F%E5%88%97%E8%A1%A8">2️⃣ 虚拟列表</a></p>
+</li>
+<li><p><a href="#3%EF%B8%8F%E2%83%A3-%E6%83%B0%E6%80%A7%E6%B8%B2%E6%9F%93">3️⃣ 惰性渲染</a></p>
+</li>
+<li><p><a href="#4%EF%B8%8F%E2%83%A3-%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E6%A0%B7%E5%BC%8F%E6%96%B9%E6%A1%88">4️⃣ 选择合适的样式方案</a></p>
+</li>
+<li><p><a href="#%E9%81%BF%E5%85%8D%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93">避免重新渲染</a></p>
+</li>
+<li><p><a href="#0%EF%B8%8F%E2%83%A3-%E7%AE%80%E5%8C%96-props">0️⃣ 简化 props</a></p>
+</li>
+<li><p><a href="#1%EF%B8%8F%E2%83%A3-%E4%B8%8D%E5%8F%98%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%99%A8">1️⃣ 不变的事件处理器</a></p>
+</li>
+<li><p><a href="#2%EF%B8%8F%E2%83%A3-%E4%B8%8D%E5%8F%AF%E5%8F%98%E6%95%B0%E6%8D%AE">2️⃣ 不可变数据</a></p>
+</li>
+<li><p><a href="#3%EF%B8%8F%E2%83%A3-%E7%AE%80%E5%8C%96-state">3️⃣ 简化 state</a></p>
+</li>
+<li><p><a href="#4%EF%B8%8F%E2%83%A3-%E4%BD%BF%E7%94%A8-recompose-%E7%B2%BE%E7%BB%86%E5%8C%96%E6%AF%94%E5%AF%B9">4️⃣ 使用 recompose 精细化比对</a></p>
+</li>
+<li><p><a href="#%E7%B2%BE%E7%BB%86%E5%8C%96%E6%B8%B2%E6%9F%93">精细化渲染</a></p>
+</li>
+<li><p><a href="#0%EF%B8%8F%E2%83%A3-%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%B2%BE%E7%BB%86%E5%8C%96%E6%B8%B2%E6%9F%93">0️⃣ 响应式数据的精细化渲染</a></p>
+</li>
+<li><p><a href="#1%EF%B8%8F%E2%83%A3-%E4%B8%8D%E8%A6%81%E6%BB%A5%E7%94%A8-context">1️⃣ 不要滥用 Context</a></p>
+</li>
+<li><p><a href="#%E6%89%A9%E5%B1%95">扩展</a></p>
+</li>
+</ul>
+<h2 id="减少渲染的节点-降低渲染计算量-复杂度"><a href="#减少渲染的节点-降低渲染计算量-复杂度" class="headerlink" title="减少渲染的节点&#x2F;降低渲染计算量(复杂度)"></a>减少渲染的节点&#x2F;降低渲染计算量(复杂度)</h2><p>首先从计算的量上下功夫，减少节点渲染的数量或者降低渲染的计算量可以显著的提高组件渲染性能。</p>
+<h3 id="0️⃣-不要在渲染函数都进行不必要的计算"><a href="#0️⃣-不要在渲染函数都进行不必要的计算" class="headerlink" title="0️⃣ 不要在渲染函数都进行不必要的计算"></a>0️⃣ 不要在渲染函数都进行不必要的计算</h3><p>比如不要在渲染函数(render)中进行数组排序、数据转换、订阅事件、创建事件处理器等等. <strong>渲染函数中不应该放置太多副作用</strong></p>
+<h3 id="1️⃣-减少不必要的嵌套"><a href="#1️⃣-减少不必要的嵌套" class="headerlink" title="1️⃣ 减少不必要的嵌套"></a>1️⃣ 减少不必要的嵌套</h3><p><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e532d863b10?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>我们团队是重度的 <code>styled-components</code> 用户，<strong>其实大部分情况下我们都不需要这个玩意</strong>，比如纯静态的样式规则，以及需要重度性能优化的场景。除了性能问题，另外一个困扰我们的是它带来的节点嵌套地狱(如上图)。</p>
+<p>所以我们需要理性地选择一些工具，比如使用原生的 CSS，减少 React 运行时的负担.</p>
+<p><strong>一般不必要的节点嵌套都是滥用高阶组件&#x2F;RenderProps 导致的。所以还是那句话‘只有在必要时才使用 xxx’</strong>。 有很多种方式来代替高阶组件&#x2F;RenderProps，例如优先使用 props、React Hooks</p>
+<h3 id="2️⃣-虚拟列表"><a href="#2️⃣-虚拟列表" class="headerlink" title="2️⃣ 虚拟列表"></a>2️⃣ 虚拟列表</h3><p>虚拟列表是常见的‘长列表’和’复杂组件树’优化方式，它优化的本质就是减少渲染的节点。</p>
+<p>虚拟列表只渲染当前视口可见元素:<br><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e532e72f064?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>虚拟列表渲染性能对比:<br><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e532ca493d0?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>虚拟列表常用于以下组件场景:</p>
+<ul>
+<li>无限滚动列表，grid, 表格，下拉列表，spreadsheets</li>
+<li>无限切换的日历或轮播图</li>
+<li>大数据量或无限嵌套的树</li>
+<li>聊天窗，数据流(feed), 时间轴</li>
+<li>等等</li>
+</ul>
+<p>相关组件方案:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/bvaughn/react-virtualized">react-virtualized</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bvaughn/react-window">react-window</a> 更轻量的 react-virtualized, 同出一个作者</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bvaughn/react-virtualized#friends">更多</a></li>
+</ul>
+<p>扩展：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://bvaughn.github.io/forward-js-2017/#/0/0">Creating more efficient React views with windowing</a></li>
+<li><a target="_blank" rel="noopener" href="https://addyosmani.com/blog/react-window/">Rendering large lists with react-window</a></li>
+</ul>
+<h3 id="3️⃣-惰性渲染"><a href="#3️⃣-惰性渲染" class="headerlink" title="3️⃣ 惰性渲染"></a>3️⃣ 惰性渲染</h3><p><strong>惰性渲染的初衷本质上和虚表一样，也就是说我们只在必要时才去渲染对应的节点</strong>。</p>
+<p>举个典型的例子，我们常用 Tab 组件，我们没有必要一开始就将所有 Tab 的 panel 都渲染出来，而是等到该 Tab 被激活时才去惰性渲染。</p>
+<p>还有很多场景会用到惰性渲染，例如树形选择器，模态弹窗，下拉列表，折叠组件等等。</p>
+<p>这里就不举具体的代码例子了，留给读者去思考.</p>
+<h3 id="4️⃣-选择合适的样式方案"><a href="#4️⃣-选择合适的样式方案" class="headerlink" title="4️⃣ 选择合适的样式方案"></a>4️⃣ 选择合适的样式方案</h3><p><img src="https://user-gold-cdn.xitu.io/2019/6/16/16b5dd10a46eceb2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>如图(图片来源于<a target="_blank" rel="noopener" href="https://blog.primehammer.com/the-performance-of-styled-react-components/">THE PERFORMANCE OF STYLED REACT COMPONENTS</a>), 这个图片是17年的了，但是大抵的趋势还是这样。</p>
+<p>所以在样式运行时性能方面大概可以总结为：<code>CSS &gt; 大部分CSS-in-js &gt; inline style</code></p>
+<hr>
+<h2 id="避免重新渲染"><a href="#避免重新渲染" class="headerlink" title="避免重新渲染"></a>避免重新渲染</h2><p>减少不必要的重新渲染也是 React 组件性能优化的重要方向. 为了避免不必要的组件重新渲染需要在做到两点:</p>
+<ol>
+<li>保证组件纯粹性。即控制组件的副作用，如果组件有副作用则无法安全地缓存渲染结果</li>
+<li>通过<code>shouldComponentUpdate</code>生命周期函数来比对 state 和 props, 确定是否要重新渲染。对于函数组件可以使用<code>React.memo</code>包装</li>
+</ol>
+<p>另外这些措施也可以帮助你更容易地优化组件重新渲染:</p>
+<h3 id="0️⃣-简化-props"><a href="#0️⃣-简化-props" class="headerlink" title="0️⃣ 简化 props"></a>0️⃣ 简化 props</h3><p><strong>① 如果一个组件的 props 太复杂一般意味着这个组件已经违背了‘单一职责’，首先应该尝试对组件进行拆解</strong>.<br><strong>② 另外复杂的 props 也会变得难以维护, 比如会影响<code>shallowCompare</code>效率, 还会让组件的变动变得难以预测和调试</strong>.</p>
+<p>下面是一个典型的例子, 为了判断列表项是否处于激活状态，这里传入了一个当前激活的 id:<br><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e53250b584f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>这是一个非常糟糕的设计，一旦激活 id 变动，所有列表项都会重新刷新. 更好的解决办法是使用类似<code>actived</code>这样的布尔值 prop. actived 现在只有两种变动情况，也就是说激活 id 的变动，最多只有两个组件需要重新渲染.</p>
+<p><strong>简化的 props 更容易理解, 且可以提高组件缓存的命中率</strong></p>
+<h3 id="1️⃣-不变的事件处理器"><a href="#1️⃣-不变的事件处理器" class="headerlink" title="1️⃣ 不变的事件处理器"></a>1️⃣ 不变的事件处理器</h3><p>①<strong>避免使用箭头函数形式的事件处理器</strong>, 例如:</p>
+<pre><code>&lt;ComplexComponent onClick=&#123;evt =&gt; onClick(evt.id)&#125; otherProps=&#123;values&#125; /&gt;
+复制代码
+</code></pre>
+<p>假设 ComplexComponent 是一个复杂的 PureComponent, 这里使用箭头函数，其实每次渲染时都会创建一个新的事件处理器，这会导致 ComplexComponent 始终会被重新渲染.</p>
+<p>更好的方式是使用实例方法:</p>
+<pre><code>classMyComponentextendsComponent&#123;
+  render() &#123;
+    &lt;ComplexComponent onClick=&#123;this.handleClick&#125; otherProps=&#123;values&#125; /&gt;;
+  &#125;
+  handleClick = () =&gt; &#123;
+    /*...*/
+  &#125;;
+&#125;
+复制代码
+</code></pre>
+<p>② 即使现在使用<code>hooks</code>，我依然会<strong>使用<code>useCallback</code>来包装事件处理器</strong>，尽量给下级组件暴露一个静态的函数:</p>
+<pre><code>const handleClick = useCallback(() =&gt; &#123;
+  /*...*/
+&#125;, []);
+
+return&lt;ComplexComponentonClick=&#123;handleClick&#125;otherProps=&#123;values&#125; /&gt;;
+复制代码
+</code></pre>
+<p>但是如果<code>useCallback</code>依赖于很多状态，你的<code>useCallback</code>可能会变成这样:</p>
+<pre><code>const handleClick = useCallback(() =&gt; &#123;
+  /*...*/// 🤭
+&#125;, [foo, bar, baz, bazz, bazzzz]);
+复制代码
+</code></pre>
+<p>这种写法实在让人难以接受，这时候谁还管什么函数式非函数式的。我是这样处理的:</p>
+<pre><code>functionuseRefProps&lt;T&gt;(props: T) &#123;
+  const ref = useRef &lt; T &gt; props;
+  // 每次渲染更新props
+  useEffect(() =&gt; &#123;
+    ref.current = props;
+  &#125;);
+&#125;
+
+functionMyComp(props) &#123;
+  const propsRef = useRefProps(props);
+
+  // 现在handleClick是始终不变的const handleClick = useCallback(() =&gt; &#123;
+    const &#123; foo, bar, baz, bazz, bazzzz &#125; = propsRef.current;
+    // do something
+  &#125;, []);
+&#125;
+复制代码
+</code></pre>
+<p>③<strong>设计更方便处理的 Event Props</strong>. 有时候我们会被逼的不得不使用箭头函数来作为事件处理器：</p>
+<pre><code>&lt;List&gt;
+  &#123;list.map(i =&gt; (
+    &lt;Itemkey=&#123;i.id&#125;onClick=&#123;() =&gt; handleDelete(i.id)&#125; value=&#123;i.value&#125; /&gt;
+  ))&#125;
+&lt;/List&gt;复制代码
+</code></pre>
+<p>上面的 onClick 是一个糟糕的实现，它没有携带任何信息来标识事件来源，所以这里只能使用闭包形式，更好的设计可能是这样的:</p>
+<pre><code>// onClick传递事件来源信息const handleDelete = useCallback((id: string) =&gt; &#123;
+  /*删除操作*/
+&#125;, []);
+
+return (
+  &lt;List&gt;
+    &#123;list.map(i =&gt; (
+      &lt;Itemkey=&#123;i.id&#125;id=&#123;i.id&#125;onClick=&#123;handleDelete&#125;value=&#123;i.value&#125; /&gt;
+    ))&#125;
+  &lt;/List&gt;
+);
+复制代码
+</code></pre>
+<p>如果是第三方组件或者 DOM 组件呢? 实在不行，看能不能传递<code>data-*</code>属性:</p>
+<pre><code>const handleDelete = useCallback(event =&gt; &#123;
+  const id = event.currentTarget.dataset.id;
+  /*删除操作*/
+&#125;, []);
+
+return (
+  &lt;ul&gt;
+    &#123;list.map(i =&gt; (
+      &lt;likey=&#123;i.id&#125;data-id=&#123;i.id&#125;onClick=&#123;handleDelete&#125;value=&#123;i.value&#125; /&gt;
+    ))&#125;
+  &lt;/ul&gt;
+);
+复制代码
+</code></pre>
+<h3 id="2️⃣-不可变数据"><a href="#2️⃣-不可变数据" class="headerlink" title="2️⃣ 不可变数据"></a>2️⃣ 不可变数据</h3><p>不可变数据可以让状态变得可预测，也让 shouldComponentUpdate ‘浅比较’变得更可靠和高效. 笔者在<a target="_blank" rel="noopener" href="https://juejin.im/post/5cdc2f54e51d453b0c35930d#heading-8">React 组件设计实践总结 04 - 组件的思维</a>介绍过不可变数据，有兴趣读者可以看看.</p>
+<p>相关的工具有<a target="_blank" rel="noopener" href="https://github.com/facebook/immutable-js">Immutable.js</a>、<a target="_blank" rel="noopener" href="https://github.com/mweststrate/immer">Immer</a>、immutability-helper 以及 seamless-immutable。</p>
+<h3 id="3️⃣-简化-state"><a href="#3️⃣-简化-state" class="headerlink" title="3️⃣ 简化 state"></a>3️⃣ 简化 state</h3><p><strong>不是所有状态都应该放在组件的 state 中</strong>. 例如缓存数据。按照我的原则是：<strong>如果需要组件响应它的变动, 或者需要渲染到视图中的数据才应该放到 state 中。这样可以避免不必要的数据变动导致组件重新渲染.</strong></p>
+<h3 id="4️⃣-使用-recompose-精细化比对"><a href="#4️⃣-使用-recompose-精细化比对" class="headerlink" title="4️⃣ 使用 recompose 精细化比对"></a>4️⃣ 使用 recompose 精细化比对</h3><p>尽管 hooks 出来后，recompose 宣称不再更新了，但还是不影响我们使用 recompose 来控制<code>shouldComponentUpdate</code>方法, 比如它提供了以下方法来精细控制应该比较哪些 props:</p>
+<pre><code>/* 相当于React.memo */
+ pure()
+ /* 自定义比较 */
+ shouldUpdate(test: (props: Object, nextProps: Object) =&gt;boolean): HigherOrderComponent
+ /* 只比较指定key */
+ onlyUpdateForKeys( propKeys: Array&lt;string&gt;): HigherOrderComponent
+复制代码
+</code></pre>
+<p>其实还可以再扩展一下，比如<code>omitUpdateForKeys</code>忽略比对某些 key.</p>
+<h2 id="精细化渲染"><a href="#精细化渲染" class="headerlink" title="精细化渲染"></a>精细化渲染</h2><p>所谓精细化渲染指的是<strong>只有一个数据来源导致组件重新渲染</strong>, 比如说 A 只依赖于 a 数据，那么只有在 a 数据变动时才渲染 A, 其他状态变化不应该影响组件 A。</p>
+<p>Vue 和 Mobx 宣称自己性能好的一部分原因是它们的’响应式系统’, <strong>它允许我们定义一些‘响应式数据’，当这些响应数据变动时，依赖这些响应式数据视图就会重新渲染</strong>. 来看看 Vue 官方是如何描述的:<br><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e532d4abd3c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h3 id="0️⃣-响应式数据的精细化渲染"><a href="#0️⃣-响应式数据的精细化渲染" class="headerlink" title="0️⃣ 响应式数据的精细化渲染"></a>0️⃣ 响应式数据的精细化渲染</h3><p><strong>大部分情况下，响应式数据可以实现视图精细化的渲染, 但它还是不能避免开发者写出低效的程序</strong>. <strong>本质上还是因为组件违背‘单一职责’</strong>.</p>
+<p>举个例子，现在有一个 MyComponent 组件，依赖于 A、B、C 三个数据源，来构建一个 vdom 树。现在的问题是什么呢？现在只要 A、B、C 任意一个变动，那么 MyComponent 整个就会重新渲染:<br><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e532546f6d6?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>更好的做法是让组件的职责更单一，精细化地依赖响应式数据，或者说对响应式数据进行‘隔离’. 如下图, A、B、C 都抽取各自的组件中了，现在 A 变动只会渲染 A 组件本身，而不会影响父组件和 B、C 组件:<br><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e53ae748821?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>举一个典型的例子，列表渲染:</p>
+<pre><code>import React from&#39;react&#39;;
+import &#123; observable &#125; from&#39;mobx&#39;;
+import &#123; observer &#125; from&#39;mobx-react-lite&#39;;
+
+const initialList = [];
+for (let i = 0; i &lt; 10; i++) &#123;
+  initialList.push(&#123; id: i, name: `name-$&#123;i&#125;`, value: 0 &#125;);
+&#125;
+
+const store = observable(&#123;
+  list: initialList,
+&#125;);
+
+exportconst List = observer(() =&gt; &#123;
+  const list = store.list;
+  console.log(&#39;List渲染&#39;);
+  return (
+    &lt;divclassName=&quot;list-container&quot;&gt;&lt;ul&gt;
+        &#123;list.map((i, idx) =&gt; (
+          &lt;divclassName=&quot;list-item&quot;key=&#123;i.id&#125;&gt;
+            &#123;/* 假设这是一个复杂的组件 */&#125;
+            &#123;console.log(&#39;render&#39;, i.id)&#125;
+            &lt;spanclassName=&quot;list-item-name&quot;&gt;&#123;i.name&#125; &lt;/span&gt;&lt;spanclassName=&quot;list-item-value&quot;&gt;&#123;i.value&#125; &lt;/span&gt;&lt;buttonclassName=&quot;list-item-increment&quot;onClick=&#123;() =&gt; &#123;
+                i.value++;
+                console.log(&#39;递增&#39;);
+              &#125; &#125;
+            &gt;
+              递增
+            &lt;/button&gt;&lt;buttonclassName=&quot;list-item-increment&quot;onClick=&#123;() =&gt; &#123;
+                if (idx &lt; list.length-1) &#123;
+                  console.log(&#39;移位&#39;);
+                  lett = list[idx];list[idx] = list[idx + 1];
+                  list[idx + 1] = t;
+                &#125;
+              &#125; &#125;
+            &gt;
+              下移
+            &lt;/button&gt;&lt;/div&gt;
+        ))&#125;
+      &lt;/ul&gt;&lt;/div&gt;
+  );
+&#125;);
+复制代码
+</code></pre>
+<p>上述的例子是存在性能问题的，单个 list-item 的递增和移位都会导致整个列表的重新渲染:<br><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e53c9978c97?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>原因大概能猜出来吧? 对于 Vue 或者 Mobx 来说，<strong>一个组件的渲染函数就是一个依赖收集的上下文</strong>。上面 List 组件渲染函数内’访问’了所有的列表项数据，那么 Vue 或 Mobx 就会认为你这个组件依赖于所有的列表项，这样就导致，只要任意一个列表项的属性值变动就会重新渲染整个 List 组件。</p>
+<p>解决办法也很简单，就是将数据隔离抽取到单一职责的组件中。<strong>对于 Vue 或 Mobx 来说，越细粒度的组件，可以收获更高的性能优化效果</strong>:</p>
+<pre><code>exportconst ListItem = observer(props =&gt; &#123;
+  const &#123; item, onShiftDown &#125; = props;
+  return (
+    &lt;divclassName=&quot;list-item&quot;&gt;
+      &#123;console.log(&#39;render&#39;, item.id)&#125;
+      &#123;/* 假设这是一个复杂的组件 */&#125;
+      &lt;spanclassName=&quot;list-item-name&quot;&gt;&#123;item.name&#125; &lt;/span&gt;&lt;spanclassName=&quot;list-item-value&quot;&gt;&#123;item.value&#125; &lt;/span&gt;&lt;buttonclassName=&quot;list-item-increment&quot;onClick=&#123;() =&gt; &#123;
+          item.value++;
+          console.log(&#39;递增&#39;);
+        &#125; &#125;
+      &gt;
+        递增
+      &lt;/button&gt;&lt;buttonclassName=&quot;list-item-increment&quot;onClick=&#123;() =&gt; onShiftDown(item)&#125;&gt;
+        下移
+      &lt;/button&gt;&lt;/div&gt;
+  );
+&#125;);
+
+exportconst List = observer(() =&gt; &#123;
+  const list = store.list;
+  const handleShiftDown = useCallback(item =&gt; &#123;
+    const idx = list.findIndex(i =&gt; i.id === item.id);
+    if (idx !== -1 &amp;&amp; idx &lt; list.length - 1) &#123;
+      console.log(&#39;移位&#39;);
+      let t = list[idx];
+      list[idx] = list[idx + 1];
+      list[idx + 1] = t;
+    &#125;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  &#125;, []);
+
+  console.log(&#39;List 渲染&#39;);
+
+  return (
+    &lt;divclassName=&quot;list-container&quot;&gt;&lt;ul&gt;
+        &#123;list.map((i, idx) =&gt; (
+          &lt;ListItemkey=&#123;i.id&#125;item=&#123;i&#125;onShiftDown=&#123;handleShiftDown&#125; /&gt;
+        ))&#125;
+      &lt;/ul&gt;&lt;/div&gt;
+  );
+&#125;);
+复制代码
+</code></pre>
+<p>效果很明显, list-item 递增只会重新渲染本身; 而移位只会重新渲染 List， 因为列表项没有变动, 所以下级 list-item 也不需要重新渲染:<br><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e53aea289bf?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h3 id="1️⃣-不要滥用-Context"><a href="#1️⃣-不要滥用-Context" class="headerlink" title="1️⃣ 不要滥用 Context"></a>1️⃣ 不要滥用 Context</h3><p><strong>其实 Context 的用法和响应式数据正好相反</strong>。笔者也看过不少滥用 Context API 的例子, 说到底还是没有处理好‘状态的作用域问题’.</p>
+<p>首先要理解 Context API 的更新特点，<strong>它是可以穿透<code>React.memo</code>或者<code>shouldComponentUpdate</code>的比对的，也就是说，一旦 Context 的 Value 变动，所有依赖该 Context 的组件会全部 forceUpdate</strong>.</p>
+<p><strong>这个和 Mobx 和 Vue 的响应式系统不同，Context API 并不能细粒度地检测哪些组件依赖哪些状态，所以说上节提到的‘精细化渲染’组件模式，在 Context 这里就成为了‘反模式’</strong>.</p>
+<p>总结一下使用 Context API 要遵循一下原则:</p>
+<ul>
+<li><strong>明确状态作用域, Context 只放置必要的，关键的，被大多数组件所共享的状态</strong>。比较典型的是鉴权状态</li>
+</ul>
+<p>举一个简单的例子:<br><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e53c17cd5e1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e53c9bdc0b3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>扩展：Context其实有个实验性或者说非公开的选项<code>observedBits</code>, 可以用于控制ContextConsumer是否需要更新. 详细可以看这篇文章&lt;<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/51073183">ObservedBits: React Context的秘密功能</a>&gt;. 不过不推荐在实际项目中使用，而且这个API也比较难用，不如直接上mobx。</p>
+<ul>
+<li><strong>粗粒度地订阅 Context</strong></li>
+</ul>
+<p>如下图. 细粒度的 Context 订阅会导致不必要的重新渲染, 所以这里推荐粗粒度的订阅. 比如在父级订阅 Context，然后再通过 props 传递给下级。<br><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b58e53c08a377e?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>另外程墨 Morgan 在<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50336226">避免 React Context 导致的重复渲染</a>一文中也提到 ContextAPI 的一个陷阱:</p>
+<pre><code>&lt;Context.Provider
+  value=&#123; &#123; theme: this.state.theme, switchTheme: this.switchTheme &#125; &#125;
+&gt;
+  &lt;div className=&quot;App&quot;&gt;
+    &lt;Header /&gt;
+    &lt;Content /&gt;
+  &lt;/div&gt;
+&lt;/Context.Provider&gt;
+复制代码
+</code></pre>
+<p>上面的组件会在 state 变化时重新渲染整个组件树，至于为什么留给读者去思考。</p>
+<p>所以我们一般都不会裸露地使用 Context.Provider, 而是封装为独立的 Provider 组件:</p>
+<pre><code>exportfunctionThemeProvider(props) &#123;
+  const [theme, switchTheme] = useState(redTheme);
+  return (
+    &lt;Context.Providervalue=&#123; &#123;theme, switchTheme &#125; &#125;&gt;
+      &#123;props.children&#125;
+    &lt;/Context.Provider&gt;
+  );
+&#125;
+
+// 顺便暴露useTheme, 让外部必须直接使用Context
+export function useTheme() &#123;
+  return useContext(Context);
+&#125;
+复制代码
+</code></pre>
+<p>现在 theme 变动就不会重新渲染整个组件树，因为 props.children 由外部传递进来，并没有发生变动。</p>
+<p><strong>其实上面的代码还有另外一个比较难发现的陷阱(官方文档也有<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/docs/context.html#caveats">提到</a>)</strong>:</p>
+<pre><code>export function ThemeProvider(props) &#123;
+  const [theme, switchTheme] = useState(redTheme);
+  return (
+    &#123;/* 👇 💣这里每一次渲染ThemeProvider, 都会创建一个新的value(即使theme和switchTheme没有变动),
+        从而导致强制渲染所有依赖该Context的组件 */&#125;
+    &lt;Context.Provider value=&#123; &#123; theme, switchTheme &#125; &#125;&gt;
+      &#123;props.children&#125;
+    &lt;/Context.Provider&gt;
+  );
+&#125;
+复制代码
+</code></pre>
+<p>所以<strong>传递给 Context 的 value 最好做一下缓存</strong>:</p>
+<pre><code>exportfunctionThemeProvider(props) &#123;
+  const [theme, switchTheme] = useState(redTheme);
+  const value = useMemo(() =&gt; (&#123; theme, switchTheme &#125;), [theme]);
+  return&lt;Context.Providervalue=&#123;value&#125;&gt;&#123;props.children&#125;&lt;/Context.Provider&gt;;
+&#125;
+复制代码
+</code></pre>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://react.docschina.org/docs/optimizing-performance.html">Optimizing Performance</a> React 官方文档，最好的教程, 利用好 React 的性能分析工具。</li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@paularmstrong/twitter-lite-and-high-performance-react-progressive-web-apps-at-scale-d28a00e780a3">Twitter Lite and High Performance React Progressive Web Apps at Scale</a> 看看 Twitter 如何优化的</li>
+</ul>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/50343.html">https://xuehuayu.cn/article/50343.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/41011.html">如何对 React 函数式组件进行优化</a><a class="next" href="/article/46100.html">21 个 React 性能优化技巧</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/d03fafc7.html">魔兽世界乌龟服永望镇神秘任务奖励永望广播公司背包【16格包】</a></li><li class="post-list-item"><a class="post-list-link" href="/article/6dfc7293.html">【解决办法】个税申报时年度汇算时申报的劳务报酬总收入小于本年度代开的劳务发票</a></li><li class="post-list-item"><a class="post-list-link" href="/article/a91910b6.html">create-react-app，webpack配置超强解析</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">208</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="/img/upy_logo.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
