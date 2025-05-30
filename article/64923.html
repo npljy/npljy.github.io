@@ -1,0 +1,625 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>深入浅出 Babel 上篇：架构和原理 + 实战 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">深入浅出 Babel 上篇：架构和原理 + 实战</h1><div class="post-meta"><span class="date">2019-10-02</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 5.9k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 24</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/64923.html#waline-comment"><span class="waline-comment-count" data-path="/article/64923.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5d94bfbf5188256db95589be</code><br>这个文章系列将带大家深入浅出 <a target="_blank" rel="noopener" href="https://babeljs.io/"><code>Babel</code></a>, 这个系列将分为上下两篇：上篇主要介绍 Babel 的架构和原理，顺便实践一下插件开发的；下篇会介绍 <a target="_blank" rel="noopener" href="https://github.com/kentcdodds/babel-plugin-macros"><code>babel-plugin-macros</code></a>, 利用它来写属于 Javascript 的’宏‘，</p>
+<span id="more"></span>
+
+<blockquote>
+<p>注意: 本文不是 Babel 的基础使用教程！如果你对 Babel 尚不了解，请查看<a target="_blank" rel="noopener" href="https://babeljs.io/">官方网站</a>, 或者这个<a target="_blank" rel="noopener" href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/user-handbook.md">用户手册</a></p>
+</blockquote>
+<p><strong>文章下篇已经更新：<a target="_blank" rel="noopener" href="https://juejin.im/post/5da12397e51d4578364f6ffa">深入浅出 Babel 下篇：既生 Plugin 何生 Macros</a> 有点冷清，赞起来。欢迎转载，让更多人看到我的文章，转载请注明出处</strong></p>
+<p><strong>文章大纲</strong></p>
+<ul>
+<li><p><a href="#babel-%E7%9A%84%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B">Babel 的处理流程</a></p>
+</li>
+<li><p><a href="#babel-%E7%9A%84%E6%9E%B6%E6%9E%84">Babel 的架构</a></p>
+</li>
+<li><p><a href="#%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F">访问者模式</a></p>
+</li>
+<li><p><a href="#%E8%8A%82%E7%82%B9%E7%9A%84%E9%81%8D%E5%8E%86">节点的遍历</a></p>
+</li>
+<li><p><a href="#%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87">节点的上下文</a></p>
+</li>
+<li><p><a href="#%E5%89%AF%E4%BD%9C%E7%94%A8%E7%9A%84%E5%A4%84%E7%90%86">副作用的处理</a></p>
+</li>
+<li><p><a href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E5%A4%84%E7%90%86">作用域的处理</a></p>
+</li>
+<li><p><a href="#%E6%90%9E%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6%E5%91%97">搞一个插件呗</a></p>
+</li>
+<li><p><a href="#%E6%9C%80%E5%90%8E">最后</a></p>
+</li>
+<li><p><a href="#%E6%89%A9%E5%B1%95">扩展</a></p>
+</li>
+</ul>
+<h2 id="Babel-的处理流程"><a href="#Babel-的处理流程" class="headerlink" title="Babel 的处理流程"></a>Babel 的处理流程</h2><p><img src="https://user-gold-cdn.xitu.io/2019/10/2/16d8d0cd559c7e1e?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn">Babel 的处理流程</p>
+<p>上图是 Babel 的处理流程, 如果读者学习过<code>编译器原理</code>，这个过程就相当亲切了.</p>
+<p>首先从源码 <code>解析(Parsing)</code> 开始，解析包含了两个步骤:</p>
+<p><strong>1️⃣词法解析(Lexical Analysis)</strong>： <code>词法解析器(Tokenizer)</code>在这个阶段将字符串形式的代码转换为<code>Tokens(令牌)</code>. Tokens 可以视作是一些语法片段组成的数组. 例如<code>for (const item of items) &#123;&#125;</code> 词法解析后的结果如下:<br><img src="https://user-gold-cdn.xitu.io/2019/10/2/16d8d0cd40b123d1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>从上图可以看，每个 Token 中包含了语法片段、位置信息、以及一些类型信息. 这些信息有助于后续的语法分析。</p>
+<p><strong>2️⃣语法解析(Syntactic Analysis)</strong>：这个阶段语法<code>解析器(Parser)</code>会把<code>Tokens</code>转换为<code>抽象语法树(Abstract Syntax Tree，AST)</code></p>
+<p><strong>什么是AST</strong>?</p>
+<p>它就是一棵’对象树’，用来表示代码的语法结构，例如<code>console.log(&#39;hello world&#39;)</code>会解析成为:<br><img src="https://user-gold-cdn.xitu.io/2019/10/2/16d8d0cd66ac5d80?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br><code>Program</code>、<code>CallExpression</code>、<code>Identifier</code><strong>这些都是节点的类型，每个节点都是一个有意义的语法单元</strong>。 这些节点类型定义了一些属性来描述节点的信息。</p>
+<p>JavaScript的语法越来越复杂，而且 Babel 除了支持最新的JavaScript规范语法, 还支持 <code>JSX</code>、<code>Flow</code>、现在还有<code>Typescript</code>。想象一下 AST 的节点类型有多少，其实我们不需要去记住这么多类型、也记不住. <strong>插件开发者会利用 <a target="_blank" rel="noopener" href="https://astexplorer.net/"><code>ASTExplorer</code></a> 来审查解析后的AST树</strong>, 非常强大👍。</p>
+<p><strong>AST 是 Babel 转译的核心数据结构，后续的操作都依赖于 AST</strong>。</p>
+<p>接着就是**转换(Transform)**了，转换阶段会对 AST 进行遍历，在这个过程中对节点进行增删查改。Babel 所有插件都是在这个阶段工作, 比如语法转换、代码压缩。</p>
+<p><strong>Javascript In Javascript Out</strong>, 最后阶段还是要把 AST 转换回字符串形式的Javascript，同时这个阶段还会生成Source Map。</p>
+<h2 id="Babel-的架构"><a href="#Babel-的架构" class="headerlink" title="Babel 的架构"></a>Babel 的架构</h2><p>我在<a target="_blank" rel="noopener" href="https://juejin.im/post/5d7ffad551882545ff173083">《透过现象看本质: 常见的前端架构风格和案例🔥》</a> 提及 <code>Babel</code> 和 <code>Webpack</code> 为了适应复杂的定制需求和频繁的功能变化，都使用了<a target="_blank" rel="noopener" href="https://juejin.im/post/5d7ffad551882545ff173083#heading-10">微内核</a> 的架构风格。<strong>也就是说它们的核心非常小，大部分功能都是通过插件扩展实现的</strong>。</p>
+<p>所以简单地了解一下 Babel 的架构和一些基本概念，对后续文章内容的理解, 以及Babel的使用还是有帮助的。</p>
+<p><strong>一图胜千言</strong>。仔细读过我文章的朋友会发现，我的风格就是能用图片说明的就不用文字、能用文字的就不用代码。<strong>虽然我的原创文章篇幅都很长，图片还是值得看看的</strong>。<br><img src="https://user-gold-cdn.xitu.io/2019/10/2/16d8d0cd5a3f3a0c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>Babel 是一个 <a target="_blank" rel="noopener" href="https://github.com/lerna/lerna"><code>MonoRepo</code></a> 项目， 不过组织非常清晰，下面就源码上我们能看到的模块进行一下分类， 配合上面的架构图让你对Babel有个大概的认识:</p>
+<p><strong>1️⃣ 核心</strong>:</p>
+<p><code>@babel/core</code> 这也是上面说的‘微内核’架构中的‘内核’。对于Babel来说，这个内核主要干这些事情：</p>
+<ul>
+<li>加载和处理配置(config)</li>
+<li>加载插件</li>
+<li>调用 <code>Parser</code> 进行语法解析，生成 <code>AST</code></li>
+<li>调用 <code>Traverser</code> 遍历AST，并使用<code>访问者模式</code>应用’插件’对 AST 进行转换</li>
+<li>生成代码，包括SourceMap转换和源代码生成</li>
+</ul>
+<p><strong>2️⃣ 核心周边支撑</strong></p>
+<ul>
+<li><p><strong>Parser(<code>@babel/parser</code>)</strong>： 将源代码解析为 AST 就靠它了。 它已经内置支持很多语法. 例如 JSX、Typescript、Flow、以及最新的ECMAScript规范。目前为了执行效率，parser是<a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/babel-parser#faq">不支持扩展的</a>，由官方进行维护。如果你要支持自定义语法，可以 fork 它，不过这种场景非常少。</p>
+</li>
+<li><p><strong>Traverser(<code>@babel/traverse</code>)</strong>：  实现了<code>访问者模式</code>，对 AST 进行遍历，<code>转换插件</code>会通过它获取感兴趣的AST节点，对节点继续操作, 下文会详细介绍<code>访问器模式</code>。</p>
+</li>
+<li><p><strong>Generator(<code>@babel/generator</code>)</strong>： 将 AST 转换为源代码，支持 SourceMap</p>
+</li>
+</ul>
+<p><strong>3️⃣ 插件</strong></p>
+<p>打开 Babel 的源代码，会发现有好几种类型的‘插件’。</p>
+<ul>
+<li><strong>语法插件(<code>@babel/plugin-syntax-*</code>)</strong>：上面说了 <code>@babel/parser</code> 已经支持了很多 JavaScript 语法特性，Parser也不支持扩展. <strong>因此<code>plugin-syntax-*</code>实际上只是用于开启或者配置Parser的某个功能特性</strong>。</li>
+</ul>
+<p>一般用户不需要关心这个，Transform 插件里面已经包含了相关的<code>plugin-syntax-*</code>插件了。用户也可以通过<a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/options#parseropts"><code>parserOpts</code></a>配置项来直接配置 Parser</p>
+<ul>
+<li><p><strong>转换插件</strong>： 用于对 AST 进行转换, 实现转换为ES5代码、压缩、功能增强等目的. Babel仓库将转换插件划分为两种(只是命名上的区别)：</p>
+</li>
+<li><p><code>@babel/plugin-transform-*</code>： 普通的转换插件</p>
+</li>
+<li><p><code>@babel/plugin-proposal-*</code>： 还在’提议阶段’(非正式)的语言特性, 目前有<a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/next/plugins#experimental">这些</a></p>
+</li>
+<li><p><strong>预定义集合(<code>@babel/presets-*</code>)</strong>： 插件集合或者分组，主要方便用户对插件进行管理和使用。比如<code>preset-env</code>含括所有的标准的最新特性; 再比如<code>preset-react</code>含括所有react相关的插件.</p>
+</li>
+</ul>
+<p><strong>4️⃣ 插件开发辅助</strong></p>
+<ul>
+<li><p><code>@babel/template</code>： 某些场景直接操作AST太麻烦，就比如我们直接操作DOM一样，所以Babel实现了这么一个简单的模板引擎，可以将字符串代码转换为AST。比如在生成一些辅助代码(helper)时会用到这个库</p>
+</li>
+<li><p><code>@babel/types</code>： AST 节点构造器和断言. 插件开发时使用很频繁</p>
+</li>
+<li><p><code>@babel/helper-*</code>： 一些辅助器，用于辅助插件开发，例如简化AST操作</p>
+</li>
+<li><p><code>@babel/helper</code>： 辅助代码，单纯的语法转换可能无法让代码运行起来，比如低版本浏览器无法识别class关键字，这时候需要添加辅助代码，对class进行模拟。</p>
+</li>
+</ul>
+<p><strong>5️⃣ 工具</strong></p>
+<ul>
+<li><p><code>@babel/node</code>： Node.js CLI, 通过它直接运行需要 Babel 处理的JavaScript文件</p>
+</li>
+<li><p><code>@babel/register</code>： Patch NodeJs 的require方法，支持导入需要Babel处理的JavaScript模块</p>
+</li>
+<li><p><code>@babel/cli</code>： CLI工具</p>
+</li>
+</ul>
+<h2 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h2><p>转换器会遍历 AST 树，找出自己感兴趣的节点类型, 再进行转换操作. 这个过程和我们操作<code>DOM</code>树差不多，只不过目的不太一样。AST 遍历和转换一般会使用<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1f1049d0a0f4"><code>访问者模式</code></a>。</p>
+<p>想象一下，Babel 有那么多插件，如果每个插件自己去遍历AST，对不同的节点进行不同的操作，维护自己的状态。这样子不仅低效，它们的逻辑分散在各处，会让整个系统变得难以理解和调试， 最后插件之间关系就纠缠不清，乱成一锅粥。</p>
+<p><strong>所以转换器操作 AST 一般都是使用<code>访问器模式</code>，由这个<code>访问者(Visitor)</code>来 ① 进行统一的遍历操作，② 提供节点的操作方法，③ 响应式维护节点之间的关系；而插件(设计模式中称为‘具体访问者’)只需要定义自己感兴趣的节点类型，当访问者访问到对应节点时，就调用插件的访问(visit)方法</strong>。</p>
+<h3 id="节点的遍历"><a href="#节点的遍历" class="headerlink" title="节点的遍历"></a>节点的遍历</h3><p>假设我们的代码如下:</p>
+<pre><code>functionhello(v) &#123;
+  console.log(&#39;hello&#39; + v + &#39;!&#39;)
+&#125;
+复制代码
+</code></pre>
+<p>解析后的 AST 结构如下:</p>
+<pre><code>File
+  Program (program)
+    FunctionDeclaration (body)
+      Identifier (id)  #hello
+      Identifier (params[0]) #v
+      BlockStatement (body)
+        ExpressionStatement ([0])
+          CallExpression (expression)
+            MemberExpression (callee)  #console.log
+              Identifier (object)  #console
+              Identifier (property)  #log
+            BinaryExpression (arguments[0])
+              BinaryExpression (left)
+                StringLiteral (left)  #&#39;hello&#39;
+                Identifier (right)  #v
+              StringLiteral (right)  #&#39;!&#39;
+复制代码
+</code></pre>
+<p>访问者会以<code>深度优先</code>的顺序, 或者说递归地对 AST 进行遍历，其调用顺序如下图所示:<br><img src="https://user-gold-cdn.xitu.io/2019/10/2/16d8d0cd95a22af7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>上图中<code>绿线</code>表示进入该节点，<code>红线</code>表示离开该节点。下面写一个超简单的’具体访问者’来还原上面的遍历过程:</p>
+<pre><code>const babel = require(&#39;@babel/core&#39;)
+const traverse = require(&#39;@babel/traverse&#39;).default
+
+const ast = babel.parseSync(code)
+
+let depth = 0
+traverse(ast, &#123;
+  enter(path) &#123;
+    console.log(`enter $&#123;path.type&#125;($&#123;path.key&#125;)`)
+    depth++
+  &#125;,
+  exit(path) &#123;
+    depth--
+    console.log(`  exit $&#123;path.type&#125;($&#123;path.key&#125;)`)
+  &#125;
+&#125;)
+复制代码
+</code></pre>
+<p> 查看代码执行结果<br>     enter Program(program)<br>       enter FunctionDeclaration(0)<br>         enter Identifier(id)<br>         exit Identifier(id)<br>         enter Identifier(0)<br>         exit Identifier(0)<br>         enter BlockStatement(body)<br>           enter ExpressionStatement(0)<br>             enter CallExpression(expression)<br>               enter MemberExpression(callee)<br>                 enter Identifier(object)<br>                 exit Identifier(object)<br>                 enter Identifier(property)<br>                 exit Identifier(property)<br>               exit MemberExpression(callee)<br>               enter BinaryExpression(0)<br>                 enter BinaryExpression(left)<br>                   enter StringLiteral(left)<br>                   exit StringLiteral(left)<br>                   enter Identifier(right)<br>                   exit Identifier(right)<br>                 exit BinaryExpression(left)<br>                 enter StringLiteral(right)<br>                 exit StringLiteral(right)<br>               exit BinaryExpression(0)<br>             exit CallExpression(expression)<br>           exit ExpressionStatement(0)<br>         exit BlockStatement(body)<br>       exit FunctionDeclaration(0)<br>     exit Program(program)<br>    复制代码</p>
+<p>当访问者进入一个节点时就会调用 <code>enter(进入)</code> 方法，反之离开该节点时会调用 <code>exit(离开)</code> 方法。 一般情况下，插件不会直接使用<code>enter</code>方法，只会关注少数几个节点类型，所以具体访问者也可以这样声明访问方法:</p>
+<pre><code>traverse(ast, &#123;
+  // 访问标识符
+  Identifier(path) &#123;
+    console.log(`enter Identifier`)
+  &#125;,
+  // 访问调用表达式
+  CallExpression(path) &#123;
+    console.log(`enter CallExpression`)
+  &#125;,
+  // 上面是enter的简写，如果要处理exit，也可以这样// 二元操作符
+  BinaryExpression: &#123;
+    enter(path) &#123;&#125;,
+    exit(path) &#123;&#125;,
+  &#125;,
+  // 更高级的, 使用同一个方法访问多种类型的节点&quot;ExportNamedDeclaration|Flow&quot;(path) &#123;&#125;
+&#125;)
+复制代码
+</code></pre>
+<p><strong>那么 Babel 插件是怎么被应用的呢？</strong></p>
+<p>Babel 会按照插件定义的顺序来应用访问方法，比如你注册了多个插件，babel-core 最后传递给访问器的数据结构大概长这样：</p>
+<pre><code>&#123;
+  Identifier: &#123;
+    enter: [plugin-xx, plugin-yy,] // 数组形式
+  &#125;
+&#125;
+复制代码
+</code></pre>
+<p>当进入一个节点时，这些插件会按照注册的顺序被执行。大部分插件是不需要开发者关心定义的顺序的，有少数的情况需要稍微注意以下，例如<code>plugin-proposal-decorators</code>:</p>
+<pre><code>&#123;
+  &quot;plugins&quot;: [
+    &quot;@babel/plugin-proposal-decorators&quot;,     // 必须在plugin-proposal-class-properties之前&quot;@babel/plugin-proposal-class-properties&quot;
+  ]
+&#125;
+复制代码
+</code></pre>
+<p>所有插件定义的顺序，按照惯例，应该是新的或者说实验性的插件在前面，老的插件定义在后面。因为可能需要新的插件将 AST 转换后，老的插件才能识别语法（向后兼容）。下面是官方配置例子, 为了确保先后兼容，<code>stage-*</code>阶段的插件先执行:</p>
+<pre><code>&#123;
+  &quot;presets&quot;: [&quot;es2015&quot;, &quot;react&quot;, &quot;stage-2&quot;]
+&#125;
+复制代码
+</code></pre>
+<blockquote>
+<p>注意Preset的执行顺序相反，详见官方<a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/next/plugins#plugin-ordering">文档</a></p>
+</blockquote>
+<h3 id="节点的上下文"><a href="#节点的上下文" class="headerlink" title="节点的上下文"></a>节点的上下文</h3><p>访问者在访问一个节点时, 会无差别地调用 <code>enter</code> 方法，我们怎么知道这个节点在什么位置以及和其他节点的关联关系呢？</p>
+<p>通过上面的代码，读者应该可以猜出几分，每个<code>visit</code>方法都接收一个 <code>Path</code> 对象, 你可以将它当做一个‘上下文’对象，类似于<code>JQuery</code>的 <code>JQuery</code>(<code>const $el = $(&#39;.el&#39;)</code>) 对象，这里面包含了很多信息：</p>
+<ul>
+<li>当前节点信息</li>
+<li>节点的关联信息。父节点、子节点、兄弟节点等等</li>
+<li>作用域信息</li>
+<li>上下文信息</li>
+<li>节点操作方法。节点增删查改</li>
+<li>断言方法。isXXX, assertXXX</li>
+</ul>
+<p>下面是它的主要结构:</p>
+<pre><code>exportclassNodePath&lt;T= Node&gt; &#123;
+    constructor(hub: Hub, parent: Node);
+    parent: Node;
+    hub: Hub;
+    contexts: TraversalContext[];
+    data: object;
+    shouldSkip: boolean;
+    shouldStop: boolean;
+    removed: boolean;
+    state: any;
+    opts: object;
+    skipKeys: object;
+    parentPath: NodePath;
+    context: TraversalContext;
+    container: object | object[];
+    listKey: string; // 如果节点在一个数组中，这个就是节点数组的键
+    inList: boolean;
+    parentKey: string;
+    key: string | number; // 节点所在的键或索引
+    node: T;  // 🔴 当前节点
+    scope: Scope; // 🔴当前节点所在的作用域
+    type: T extends undefined | null ? string | null : string; // 🔴节点类型
+    typeAnnotation: object;
+    // ... 还有很多方法，实现增删查改
+&#125;
+复制代码
+</code></pre>
+<p>你可以通过这个<a target="_blank" rel="noopener" href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md#toc-visitors">手册</a>来学习怎么通过 Path 来转换 AST. 后面也会有代码示例，这里就不展开细节了</p>
+<h3 id="副作用的处理"><a href="#副作用的处理" class="headerlink" title="副作用的处理"></a>副作用的处理</h3><p>实际上访问者的工作比我们想象的要复杂的多，上面示范的是静态 AST 的遍历过程。而 AST 转换本身是有副作用的，比如插件将旧的节点替换了，那么访问者就没有必要再向下访问旧节点了，而是继续访问新的节点, 代码如下。</p>
+<pre><code>traverse(ast, &#123;
+  ExpressionStatement(path) &#123;
+    // 将 `console.log(&#39;hello&#39; + v + &#39;!&#39;)` 替换为 `return ‘hello’ + v`const rtn = t.returnStatement(t.binaryExpression(&#39;+&#39;, t.stringLiteral(&#39;hello&#39;), t.identifier(&#39;v&#39;)))
+    path.replaceWith(rtn)
+  &#125;,
+&#125;
+复制代码
+</code></pre>
+<p>上面的代码, 将<code>console.log(&#39;hello&#39; + v + &#39;!&#39;)</code>语句替换为<code>return &quot;hello&quot; + v;</code>, 下图是遍历的过程：<br><img src="https://user-gold-cdn.xitu.io/2019/10/2/16d8d0cdaa67a3b1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>我们可以对 AST 进行任意的操作，比如删除父节点的兄弟节点、删除第一个子节点、新增兄弟节点… <strong>当这些操作’污染’了 AST 树后，访问者需要记录这些状态，响应式(Reactive)更新 Path 对象的关联关系, 保证正确的遍历顺序，从而获得正确的转译结果</strong>。</p>
+<h3 id="作用域的处理"><a href="#作用域的处理" class="headerlink" title="作用域的处理"></a>作用域的处理</h3><p>访问者可以确保正确地遍历和修改节点，但是对于转换器来说，另一个比较棘手的是对作用域的处理，这个责任落在了插件开发者的头上。插件开发者必须非常谨慎地处理作用域，不能破坏现有代码的执行逻辑。</p>
+<pre><code>const a = 1, b = 2functionadd(foo, bar) &#123;
+  console.log(a, b)
+  return foo + bar
+&#125;
+复制代码
+</code></pre>
+<p>比如你要将 <code>add</code> 函数的第一个参数 <code>foo</code> 标识符修改为<code>a</code>, 你就需要<strong>递归</strong>遍历子树，查出<code>foo</code>标识符的所有<code>引用</code>, 然后替换它:</p>
+<pre><code>traverse(ast, &#123;
+  // 将第一个参数名转换为a
+  FunctionDeclaration(path) &#123;
+    const firstParams = path.get(&#39;params.0&#39;)
+    if (firstParams == null) &#123;
+      return
+    &#125;
+
+    const name = firstParams.node.name
+    // 递归遍历，这是插件常用的模式。这样可以避免影响到外部作用域
+    path.traverse(&#123;
+      Identifier(path) &#123;
+        if (path.node.name === name) &#123;
+          path.replaceWith(t.identifier(&#39;a&#39;))
+        &#125;
+      &#125;
+    &#125;)
+  &#125;,
+&#125;)
+
+console.log(generate(ast).code)
+// function add(a, bar) &#123;//   console.log(a, b);//   return a + bar;// &#125;复制代码
+</code></pre>
+<p>🤯慢着，好像没那么简单，替换成 <code>a</code> 之后, <code>console.log(a, b)</code> 的行为就被破坏了。所以这里不能用 <code>a</code>，得换个标识符, 譬如<code>c</code>.</p>
+<p>这就是转换器需要考虑的作用域问题，<strong>AST 转换的前提是保证程序的正确性</strong>。 我们在添加和修改<code>引用</code>时，需要确保与现有的所有引用不冲突。Babel本身不能检测这类异常，只能依靠插件开发者谨慎处理。</p>
+<p>Javascript采用的是词法作用域, 也就是根据源代码的词法结构来确定作用域：<br><img src="https://user-gold-cdn.xitu.io/2019/10/2/16d8d0ce5dec5b69?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><br>在<strong>词法区块(block)<strong>中，由于新建变量、函数、类、函数参数等创建的标识符，都属于这个区块作用域. 这些标识符也称为</strong>绑定(Binding)</strong>，而对这些绑定的使用称为<strong>引用(Reference)</strong></p>
+<p>在Babel中，使用<code>Scope</code>对象来表示作用域。 我们可以通过Path对象的<code>scope</code>字段来获取当前节点的<code>Scope</code>对象。它的结构如下:</p>
+<pre><code>&#123;
+  path: NodePath;
+  block: Node;         // 所属的词法区块节点, 例如函数节点、条件语句节点
+  parentBlock: Node;   // 所属的父级词法区块节点
+  parent: Scope;       // ⚛️指向父作用域
+  bindings: &#123; [name: string]: Binding; &#125;; // ⚛️ 该作用域下面的所有绑定(即该作用域创建的标识符)
+&#125;
+复制代码
+</code></pre>
+<p><code>Scope</code> 对象和 <code>Path</code> 对象差不多，<strong>它包含了作用域之间的关联关系(通过parent指向父作用域)，收集了作用域下面的所有绑定(bindings), 另外还提供了丰富的方法来对作用域仅限操作</strong>。</p>
+<p>我们可以通过<code>bindings</code>属性获取当前作用域下的所有绑定(即标识符)，每个绑定由<code>Binding</code>类来表示：</p>
+<pre><code>exportclassBinding&#123;
+  identifier: t.Identifier;
+  scope: Scope;
+  path: NodePath;
+  kind: &quot;var&quot; | &quot;let&quot; | &quot;const&quot; | &quot;module&quot;;
+  referenced: boolean;
+  references: number;              // 被引用的数量
+  referencePaths: NodePath[];      // ⚛️获取所有应用该标识符的节点路径
+  constant: boolean;               // 是否是常量
+  constantViolations: NodePath[];
+&#125;
+复制代码
+</code></pre>
+<p><strong>通过<code>Binding</code>对象我们可以确定标识符被引用的情况</strong>。</p>
+<p>Ok，有了 <code>Scope</code> 和 <code>Binding</code>, 现在有能力实现安全的变量重命名转换了。 为了更好地展示作用域交互，在上面代码的基础上，我们再增加一下难度：</p>
+<pre><code>const a = 1, b = 2functionadd(foo, bar) &#123;
+  console.log(a, b)
+  return() =&gt; &#123;
+    const a = &#39;1&#39;// 新增了一个变量声明return a + (foo + bar)
+  &#125;
+&#125;
+复制代码
+</code></pre>
+<p>现在你要重命名函数参数 <code>foo</code>, 不仅要考虑<code>外部的作用域</code>, 也要考虑<code>下级作用域</code>的绑定情况，确保这两者都不冲突。</p>
+<p>上面的代码作用域和标识符引用情况如下图所示:<br><img src="https://user-gold-cdn.xitu.io/2019/10/2/16d8d0ce8af0196a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>来吧，接受挑战，试着将函数的第一个参数重新命名为更短的标识符:</p>
+<pre><code>// 用于获取唯一的标识符const getUid = () =&gt; &#123;
+  let uid = 0return() =&gt;`_$&#123;(uid++) || &#39;&#39;&#125;`
+&#125;
+
+const ast = babel.parseSync(code)
+traverse(ast, &#123;
+  FunctionDeclaration(path) &#123;
+    // 获取第一个参数const firstParam = path.get(&#39;params.0&#39;)
+    if (firstParam == null) &#123;
+      return
+    &#125;
+
+    const currentName = firstParam.node.name
+    const currentBinding = path.scope.getBinding(currentName)
+    const gid = getUid()
+    let sname
+
+    // 循环找出没有被占用的变量名while(true) &#123;
+      sname = gid()
+
+      // 1️⃣首先看一下父作用域是否已定义了该变量if (path.scope.parentHasBinding(sname)) &#123;
+        continue
+      &#125;
+
+      // 2️⃣ 检查当前作用域是否定义了变量if (path.scope.hasOwnBinding(sname)) &#123;
+        // 已占用continue
+      &#125;
+
+      //  再检查第一个参数的当前的引用情况,// 如果它所在的作用域定义了同名的变量，我们也得放弃if (currentBinding.references &gt; 0) &#123;
+        let findIt = falsefor (const refNode of currentBinding.referencePaths) &#123;
+          if (refNode.scope !== path.scope &amp;&amp; refNode.scope.hasBinding(sname)) &#123;
+            findIt = truebreak
+          &#125;
+        &#125;
+        if (findIt) &#123;
+          continue
+        &#125;
+      &#125;
+      break
+    &#125;
+
+    // 开始替换掉const i = t.identifier(sname)
+    currentBinding.referencePaths.forEach(p =&gt; p.replaceWith(i))
+    firstParam.replaceWith(i)
+  &#125;,
+&#125;)
+
+console.log(generate(ast).code)
+// const a = 1,//       b = 2;// function add(_, bar) &#123;//   console.log(a, b);//   return () =&gt; &#123;//     const a = &#39;1&#39;; // 新增了一个变量声明//     return a + (_ + bar);//   &#125;;// &#125;复制代码
+</code></pre>
+<p>上面的例子虽然没有什么实用性，而且还有Bug(没考虑<code>label</code>)，但是正好可以揭示了作用域处理的复杂性。</p>
+<p>Babel的 <code>Scope</code> 对象其实提供了一个<code>generateUid</code>方法来生成唯一的、不冲突的标识符。我们利用这个方法再简化一下我们的代码:</p>
+<pre><code>traverse(ast, &#123;
+  FunctionDeclaration(path) &#123;
+    const firstParam = path.get(&#39;params.0&#39;)
+    if (firstParam == null) &#123;
+      return
+    &#125;
+    let i = path.scope.generateUidIdentifier(&#39;_&#39;) // 也可以使用generateUidconst currentBinding = path.scope.getBinding(firstParam.node.name)
+    currentBinding.referencePaths.forEach(p =&gt; p.replaceWith(i))
+    firstParam.replaceWith(i)
+  &#125;,
+&#125;)
+复制代码
+</code></pre>
+<p>能不能再短点!</p>
+<pre><code>traverse(ast, &#123;
+  FunctionDeclaration(path) &#123;
+    const firstParam = path.get(&#39;params.0&#39;)
+    if (firstParam == null) &#123;
+      return
+    &#125;
+    let i = path.scope.generateUid(&#39;_&#39;) // 也可以使用generateUid
+    path.scope.rename(firstParam.node.name, i)
+  &#125;,
+&#125;)
+复制代码
+</code></pre>
+<p>查看generateUid的实现代码<br>    generateUid(name: string &#x3D; “temp”) {<br>      name &#x3D; t<br>        .toIdentifier(name)<br>        .replace(&#x2F;^_+&#x2F;, “”)<br>        .replace(&#x2F;[0-9]+$&#x2F;g, “”);</p>
+<pre><code>  let uid;
+  let i = 0;
+  do &#123;
+    uid = this._generateUid(name, i);
+    i++;
+  &#125; while (
+    this.hasLabel(uid) ||
+    this.hasBinding(uid) ||
+    this.hasGlobal(uid) ||
+    this.hasReference(uid)
+  );
+
+  const program = this.getProgramParent();
+  program.references[uid] = true;
+  program.uids[uid] = true;
+
+  return uid;
+&#125;
+复制代码
+</code></pre>
+<p>非常简洁哈？作用域操作最典型的场景是代码压缩，代码压缩会对变量名、函数名等进行压缩… 然而实际上很少的插件场景需要跟作用域进行复杂的交互，所以关于作用域这一块就先讲到这里。</p>
+<h2 id="搞一个插件呗"><a href="#搞一个插件呗" class="headerlink" title="搞一个插件呗"></a>搞一个插件呗</h2><p>等等别走，还没完呢，这才到2&#x2F;3。学了上面得了知识，总得写一个玩具插件试试水吧?</p>
+<p>现在打算模仿<a target="_blank" rel="noopener" href="https://github.com/ant-design/babel-plugin-import">babel-plugin-import</a>, 写一个极简版插件，来实现模块的按需导入. 在这个插件中，我们会将类似这样的导入语句:</p>
+<pre><code>import &#123;A, B, C as D&#125; from&#39;foo&#39;复制代码
+</code></pre>
+<p>转换为:</p>
+<pre><code>import A from&#39;foo/A&#39;import&#39;foo/A/style.css&#39;import B from&#39;foo/B&#39;import&#39;foo/B/style.css&#39;import D from&#39;foo/C&#39;import&#39;foo/C/style.css&#39;复制代码
+</code></pre>
+<p>首先通过 <a target="_blank" rel="noopener" href="https://astexplorer.net/">AST Explorer</a> 看一下导入语句的 AST 节点结构:<br><img src="https://user-gold-cdn.xitu.io/2019/10/2/16d8d0ce9259b895?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>通过上面展示的结果，我们需要处理 <code>ImportDeclaration</code> 节点类型，将它的<code>specifiers</code>拿出来遍历处理一下。另外如果用户使用了<code>默认导入</code>语句，我们将抛出错误，提醒用户不能使用默认导入.</p>
+<p>基本实现如下:</p>
+<pre><code>// 要识别的模块const MODULE = &#39;foo&#39;
+traverse(ast, &#123;
+  // 访问导入语句
+  ImportDeclaration(path) &#123;
+    if (path.node.source.value !== MODULE) &#123;
+      return
+    &#125;
+
+    // 如果是空导入则直接删除掉const specs = path.node.specifiers
+    if (specs.length === 0) &#123;
+      path.remove()
+      return
+    &#125;
+
+    // 判断是否包含了默认导入和命名空间导入if (specs.some(i =&gt; t.isImportDefaultSpecifier(i) || t.isImportNamespaceSpecifier(i))) &#123;
+      // 抛出错误，Babel会展示出错的代码帧throw path.buildCodeFrameError(&quot;不能使用默认导入或命名空间导入&quot;)
+    &#125;
+
+    // 转换命名导入const imports = []
+    for (const spec of specs) &#123;
+      const named = MODULE + &#39;/&#39; + spec.imported.name
+      const local = spec.local
+      imports.push(t.importDeclaration([t.importDefaultSpecifier(local)], t.stringLiteral(named)))
+      imports.push(t.importDeclaration([], t.stringLiteral(`$&#123;named&#125;/style.css`)))
+    &#125;
+
+    // 替换原有的导入语句
+    path.replaceWithMultiple(imports)
+  &#125;
+&#125;)
+复制代码
+</code></pre>
+<p>逻辑还算简单，<code>babel-plugin-import</code>可比这复杂得多。</p>
+<p>接下来，我们将它封装成标准的 Babel 插件。 按照规范，我们需要创建一个<code>babel-plugin-*</code>前缀的包名：</p>
+<pre><code>mkdir babel-plugin-toy-import
+cd babel-plugin-toy-import
+yarn init -y
+touch index.js
+复制代码
+</code></pre>
+<blockquote>
+<p>你也可以通过 <a target="_blank" rel="noopener" href="https://github.com/babel/generator-babel-plugin/tree/master/generators/app/templates">generator-babel-plugin</a> 来生成项目模板.</p>
+</blockquote>
+<p>在 <code>index.js</code> 文件中填入我们的代码。<code>index.js</code>默认导出一个函数，函数结构如下:</p>
+<pre><code>// 接受一个 babel-core 对象exportdefaultfunction(babel) &#123;
+  const &#123;types: t&#125; = babel
+  return &#123;
+    pre(state) &#123;
+      // 前置操作，可选，可以用于准备一些资源
+    &#125;,
+    visitor: &#123;
+      // 我们的访问者代码将放在这里
+      ImportDeclaration(path, state) &#123;
+        // ...
+      &#125;
+    &#125;,
+    post(state) &#123;
+      // 后置操作，可选
+    &#125;
+  &#125;
+&#125;
+复制代码
+</code></pre>
+<p><strong>我们可以从访问器方法的第二个参数<code>state</code>中获取用户传入的参数</strong>。假设用户配置为:</p>
+<pre><code>&#123;
+  plugins: [[&#39;toy-plugin&#39;, &#123;name: &#39;foo&#39;&#125;]]
+&#125;
+复制代码
+</code></pre>
+<p>我们可以这样获取用户传入的参数:</p>
+<pre><code>exportdefaultfunction(babel) &#123;
+  const &#123;types: t&#125; = babel
+  return &#123;
+    visitor: &#123;
+      ImportDeclaration(path, state) &#123;
+        const mod = state.opts &amp;&amp; state.opts.name
+        if (mod == null) &#123;
+          return
+        &#125;
+        // ...
+      &#125;
+    &#125;,
+  &#125;
+&#125;
+复制代码
+</code></pre>
+<p>打完收工 🙏，发布!</p>
+<pre><code>yarn publish # good luck
+复制代码
+</code></pre>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><blockquote>
+<p>新世界的大门已经打开: ⛩</p>
+</blockquote>
+<p>本文主要介绍了 Babel 的架构和原理，还实践了一下 Babel 插件开发，读到这里，你算是入了 Babel 的门了.</p>
+<p>接下来你可以去熟读<a target="_blank" rel="noopener" href="https://github.com/jamiebuilds/babel-handbook">Babel手册</a>, 这是目前最好的教程,<br><a target="_blank" rel="noopener" href="https://astexplorer.net/#/KJ8AjD6maa">ASTExplorer</a>是最好的演练场，多写代码多思考。<br>你也可以去看<a target="_blank" rel="noopener" href="https://github.com/babel/babel/tree/master/packages">Babel的官方插件实现</a>, 迈向更高的台阶。</p>
+<p>本文还有下篇，我将在下篇文章中介绍<a target="_blank" rel="noopener" href="https://github.com/kentcdodds/babel-plugin-macros">babel-plugin-macros</a>, 敬请期待！</p>
+<p>点赞是对我最好鼓励。</p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://astexplorer.net/#/KJ8AjD6maa">ASTExplorer</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jamiebuilds/babel-handbook">babel-handbook</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/babel/generator-babel-plugin">generator-babel-plugin</a></li>
+<li><a target="_blank" rel="noopener" href="https://the-super-tiny-compiler.glitch.me/">the-super-tiny-compiler</a></li>
+</ul>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/64923.html">https://xuehuayu.cn/article/64923.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/54632.html">前端跳槽必备，揭秘一线互联网公司高级前端JavaScript面试</a><a class="next" href="/article/39937.html">Webpack 5 升级实验</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/6b20a411.html">原生nodejs启动静态html网页</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d03fafc7.html">魔兽世界乌龟服永望镇神秘任务奖励永望广播公司背包【16格包】</a></li><li class="post-list-item"><a class="post-list-link" href="/article/6dfc7293.html">【解决办法】个税申报时年度汇算时申报的劳务报酬总收入小于本年度代开的劳务发票</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">209</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="/img/upy_logo.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
