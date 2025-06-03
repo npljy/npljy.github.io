@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>绚丽烟花</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // 烟花类
+        class Firework {
+            constructor(x, y, targetX, targetY, color, size) {
+                this.x = x;
+                this.y = y;
+                this.startX = x;
+                this.startY = y;
+                this.targetX = targetX;
+                this.targetY = targetY;
+                this.color = color;
+                this.size = size;
+                this.distance = Math.sqrt(Math.pow(targetX - x, 2) + Math.pow(targetY - y, 2));
+                this.angle = Math.atan2(targetY - y, targetX - x);
+                this.speed = 2;
+                this.acceleration = 1.05;
+                this.brightness = random(50, 80);
+                this.targetRadius = 1;
+                this.trail = [];
+                this.trailLength = 10;
+            }
+
+            update() {
+                this.trail.push([this.x, this.y]);
+                if (this.trail.length > this.trailLength) {
+                    this.trail.shift();
+                }
+
+                this.speed *= this.acceleration;
+                
+                let vx = Math.cos(this.angle) * this.speed;
+                let vy = Math.sin(this.angle) * this.speed;
+                
+                this.distanceTraveled = Math.sqrt(Math.pow(this.x - this.startX, 2) + Math.pow(this.y - this.startY, 2));
+                
+                if (this.distanceTraveled >= this.distance) {
+                    createParticles(this.targetX, this.targetY, this.color, this.size);
+                    return true;
+                }
+
+                this.x += vx;
+                this.y += vy;
+                return false;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.moveTo(this.trail[0][0], this.trail[0][1]);
+                for(let i = 1; i < this.trail.length; i++) {
+                    ctx.lineTo(this.trail[i][0], this.trail[i][1]);
+                }
+                ctx.strokeStyle = `hsla(${this.color}, 100%, ${this.brightness}%, ${this.brightness/100})`;
+                ctx.lineWidth = this.targetRadius * 2;
+                ctx.stroke();
+            }
+        }
+
+        // 粒子类
+        class Particle {
+            constructor(x, y, hue, size, angle, speed, shape) {
+                this.x = x;
+                this.y = y;
+                this.hue = hue;
+                this.size = size;
+                this.angle = angle;
+                this.speed = speed;
+                this.shape = shape;
+                this.brightness = random(50, 80);
+                this.alpha = 1;
+                this.decay = random(0.015, 0.03);
+                this.gravity = 0.7;
+                this.trail = [];
+                this.trailLength = 5;
+                this.twinkle = Math.random() > 0.7;
+                this.twinkleSpeed = random(0.03, 0.07);
+                this.twinkleTime = 0;
+
+                switch(this.shape) {
+                    case 'circle':
+                        this.velocity = {
+                            x: Math.cos(angle) * speed,
+                            y: Math.sin(angle) * speed
+                        };
+                        break;
+                    case 'heart':
+                        const heartShape = this.heartShape(angle);
+                        this.velocity = {
+                            x: heartShape.x * speed,
+                            y: heartShape.y * speed
+                        };
+                        break;
+                    case 'spiral':
+                        this.spiralAngle = angle;
+                        this.radius = speed * 2;
+                        this.velocity = {x: 0, y: 0};
+                        break;
+                        case 'ladder':
+        this.velocity = {
+            x: Math.cos(angle) * speed * 0.5,
+            y: Math.sin(angle) * speed * 0.5
+        };
+        break;
+                    default:
+                        this.velocity = {
+                            x: random(-15, 15) * size,
+                            y: random(-15, 15) * size
+                        };
+                }
+            }
+
+            heartShape(angle) {
+                const t = angle;
+                const x = 16 * Math.pow(Math.sin(t), 3);
+                const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+                return {x: x/16, y: -y/16};
+            }
+
+            update() {
+                this.trail.push([this.x, this.y]);
+                if (this.trail.length > this.trailLength) {
+                    this.trail.shift();
+                }
+
+                if (this.shape === 'spiral') {
+                    this.spiralAngle += 0.1;
+                    this.radius *= 0.99;
+                    this.x += Math.cos(this.spiralAngle) * this.radius;
+                    this.y += Math.sin(this.spiralAngle) * this.radius;
+                } else {
+                    this.velocity.x *= 0.99;
+                    this.velocity.y *= 0.99;
+                    this.velocity.y += this.gravity;
+                    this.x += this.velocity.x;
+                    this.y += this.velocity.y;
+                }
+
+                if (this.twinkle) {
+                    this.twinkleTime += this.twinkleSpeed;
+                    this.brightness = 50 + Math.sin(this.twinkleTime) * 30;
+                }
+
+                this.alpha -= this.decay;
+                return this.alpha <= 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.moveTo(this.trail[0][0], this.trail[0][1]);
+                for(let i = 1; i < this.trail.length; i++) {
+                    ctx.lineTo(this.trail[i][0], this.trail[i][1]);
+                }
+                if (this.size > 1.5) {
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = `hsla(${this.hue}, 100%, 50%, ${this.alpha})`;
+                } else {
+                    ctx.shadowBlur = 0;
+                }
+                ctx.strokeStyle = `hsla(${this.hue}, 100%, ${this.brightness}%, ${this.alpha})`;
+                ctx.lineWidth = 2 * this.size;
+                ctx.stroke();
+            }
+        }
+
+        let fireworks = [];
+        let particles = [];
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function createLadderFirework(startX, startY) {
+    const steps = 10; // 梯子的阶数
+    const stepHeight = 50; // 每阶高度
+    const stepWidth = 30; // 每阶宽度
+    const baseHue = random(0, 360);
+    
+    function createStep(index) {
+        if (index >= steps) return;
+        
+        const x = startX + (index % 2 === 0 ? stepWidth : -stepWidth);
+        const y = startY - (index * stepHeight);
+        const hue = (baseHue + index * 15) % 360;
+        const size = 1 - (index * 0.05);
+        
+        // 创建阶梯形状的粒子
+        const particleCount = 30;
+        for (let i = 0; i < particleCount; i++) {
+            const angle = (Math.PI * 2 * i) / particleCount;
+            const speed = random(2, 4);
+            particles.push(new Particle(x, y, hue, size, angle, speed, 'ladder'));
+        }
+        
+        // 添加连接线效果
+        if (index > 0) {
+            const lineParticles = 15;
+            const prevX = startX + ((index-1) % 2 === 0 ? stepWidth : -stepWidth);
+            const prevY = startY - ((index-1) * stepHeight);
+            
+            for (let i = 0; i < lineParticles; i++) {
+                const progress = i / lineParticles;
+                const lineX = prevX + (x - prevX) * progress;
+                const lineY = prevY + (y - prevY) * progress;
+                particles.push(new Particle(
+                    lineX, 
+                    lineY, 
+                    hue, 
+                    size * 0.8, 
+                    Math.PI / 2, 
+                    2, 
+                    'ladder'
+                ));
+            }
+        }
+        
+        // 延迟创建下一阶
+        setTimeout(() => createStep(index + 1), 100);
+    }
+    
+    createStep(0);
+}
+
+        function createParticles(x, y, hue, size) {
+            const shapes = ['circle', 'heart', 'spiral', 'random'];
+            const selectedShape = shapes[Math.floor(random(0, shapes.length))];
+            let particleCount = Math.floor(random(80, 150) * size);
+
+            for (let i = 0; i < particleCount; i++) {
+                const angle = (Math.PI * 2 * i) / particleCount;
+                const speed = random(5, 10) * size;
+                particles.push(new Particle(x, y, hue, size, angle, speed, selectedShape));
+            }
+        }
+
+        function createSuperFirework(x, y) {
+            const mainSize = random(2, 3);
+            const mainHue = random(0, 360);
+            createParticles(x, y, mainHue, mainSize);
+
+            setTimeout(() => {
+                const particleCount = 120;
+                for (let i = 0; i < particleCount; i++) {
+                    const angle = (Math.PI * 2 * i) / particleCount;
+                    const speed = random(8, 12);
+                    const hue = (mainHue + random(-20, 20)) % 360;
+                    particles.push(new Particle(x, y, hue, mainSize * 0.8, angle, speed, 'circle'));
+                }
+            }, 100);
+
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const offset = 50;
+                    const newX = x + random(-offset, offset);
+                    const newY = y + random(-offset, offset);
+                    const hue = (mainHue + 72 * i) % 360;
+                    createParticles(newX, newY, hue, mainSize * 0.6);
+                }, random(200, 400));
+            }
+        }
+
+        canvas.addEventListener('click', (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    
+    if (Math.random() > 0.5) {
+        createSuperFirework(x, y);
+    } else {
+        createLadderFirework(x, canvas.height - 100); // 从底部开始生成天梯
+    }
+});
+
+        function autoLaunchFirework() {
+            if (Math.random() > 0.8) { // 20%的概率生成天梯
+        let startX = random(canvas.width * 0.2, canvas.width * 0.8);
+        createLadderFirework(startX, canvas.height - 100);
+    } else {
+        // 原有的普通烟花代码
+        let startX = random(canvas.width * 0.2, canvas.width * 0.8);
+        let startY = canvas.height;
+        let endX = random(canvas.width * 0.1, canvas.width * 0.9);
+        let endY = random(canvas.height * 0.2, canvas.height * 0.5);
+        let hue = random(0, 360);
+        let size = random(0.5, 1.8);
+        fireworks.push(new Firework(startX, startY, endX, endY, hue, size));
+    }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (random(0, 1) > 0.95) {
+                autoLaunchFirework();
+            }
+
+            for (let i = fireworks.length - 1; i >= 0; i--) {
+                if (fireworks[i].update()) {
+                    fireworks.splice(i, 1);
+                } else {
+                    fireworks[i].draw();
+                }
+            }
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                if (particles[i].update()) {
+                    particles.splice(i, 1);
+                } else {
+                    particles[i].draw();
+                }
+            }
+        }
+
+        animate();
+    </script>
+</body>
+</html>
