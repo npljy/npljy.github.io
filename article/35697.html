@@ -1,0 +1,413 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>npm install 原理分析 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">npm install 原理分析</h1><div class="post-meta"><span class="date">2019-12-27</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.3k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 17</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/35697.html#waline-comment"><span class="waline-comment-count" data-path="/article/35697.html">0</span><span> 条评论</span></a><div class="post-content"><blockquote>
+<p>作者： code秘密花园 公号 &#x2F; ConardLi （本文来自作者投稿）<br><code>原文地址：https</code>:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;5tmND0G_ZkYVR7Dmug0ugQ&#96;</p>
+</blockquote>
+<p>开门见山，<code>npm install</code> 大概会经过上面的几个流程，本篇文章来讲一讲各个流程的实现细节、发展以及为何要这样实现。</p>
+<span id="more"></span>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVD240SNZBLIwLogx4AEue7BLFeSSglH5MFk8oAtkMznOZRatVjugofg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<h2 id="嵌套结构"><a href="#嵌套结构" class="headerlink" title="嵌套结构"></a>嵌套结构</h2><p>我们都知道，执行 <code>npm install</code> 后，依赖包被安装到了 <code>node_modules</code> ，下面我们来具体了解下，<code>npm</code> 将依赖包安装到 <code>node_modules</code> 的具体机制是什么。</p>
+<p>在 <code>npm</code> 的早期版本， <code>npm</code> 处理依赖的方式简单粗暴，以递归的形式，严格按照 <code>package.json</code> 结构以及子依赖包的 <code>package.json</code> 结构将依赖安装到他们各自的 <code>node_modules</code> 中。直到有子依赖包不在依赖其他模块。</p>
+<p>举个例子，我们的模块 <code>my-app</code> 现在依赖了两个模块：<code>buffer</code>、<code>ignore</code>：</p>
+<pre><code>&#123;
+&quot;name&quot;: &quot;my-app&quot;,
+&quot;dependencies&quot;: &#123;
+&quot;buffer&quot;: &quot;^5.4.3&quot;,
+&quot;ignore&quot;: &quot;^5.1.4&quot;,
+  &#125;
+&#125;
+</code></pre>
+<p><code>ignore</code>是一个纯 <code>JS</code> 模块，不依赖任何其他模块，而 <code>buffer</code> 又依赖了下面两个模块：<code>base64-js</code> 、 <code>ieee754</code>。</p>
+<pre><code>&#123;
+&quot;name&quot;: &quot;buffer&quot;,
+&quot;dependencies&quot;: &#123;
+&quot;base64-js&quot;: &quot;^1.0.2&quot;,
+&quot;ieee754&quot;: &quot;^1.1.4&quot;
+  &#125;
+&#125;
+</code></pre>
+<p>那么，执行 <code>npm install</code> 后，得到的 <code>node_modules</code> 中模块目录结构就是下面这样的：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVWoBdnbZrwALkMuqX7zBSicT68layF5DbnJGGxTeY94jZzEwryqKsGhg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>这样的方式优点很明显， <code>node_modules</code> 的结构和 <code>package.json</code> 结构一一对应，层级结构明显，并且保证了每次安装目录结构都是相同的。</p>
+<p>但是，试想一下，如果你依赖的模块非常之多，你的 <code>node_modules</code> 将非常庞大，嵌套层级非常之深：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVsVhNShUm7cMBGZmyFRMwNXDHurgl7oBsHbzGmevX2V26PJWpI1gvSA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<ul>
+<li><p>在不同层级的依赖中，可能引用了同一个模块，导致大量冗余。</p>
+</li>
+<li><p>在 <code>Windows</code> 系统中，文件路径最大长度为260个字符，嵌套层级过深可能导致不可预知的问题。</p>
+</li>
+</ul>
+<h2 id="扁平结构"><a href="#扁平结构" class="headerlink" title="扁平结构"></a>扁平结构</h2><p>为了解决以上问题，<code>NPM</code> 在 <code>3.x</code> 版本做了一次较大更新。其将早期的嵌套结构改为扁平结构：</p>
+<ul>
+<li>安装模块时，不管其是直接依赖还是子依赖的依赖，优先将其安装在 <code>node_modules</code> 根目录。</li>
+</ul>
+<p>还是上面的依赖结构，我们在执行 <code>npm install</code> 后将得到下面的目录结构：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVwQTfNrouibsRDp1iccMx09157icNIGl6ic1Ck9hklrut9Oic87h5sJmveXQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVHjHHmKYz9vegse7GXo0wHqhrE0WPUtscmiabGPIItiajttWHb8C5YAsw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>此时我们若在模块中又依赖了 <code>base64-js@1.0.1</code> 版本：</p>
+<pre><code>&#123;
+&quot;name&quot;: &quot;my-app&quot;,
+&quot;dependencies&quot;: &#123;
+&quot;buffer&quot;: &quot;^5.4.3&quot;,
+&quot;ignore&quot;: &quot;^5.1.4&quot;,
+&quot;base64-js&quot;: &quot;1.0.1&quot;,
+  &#125;
+&#125;
+</code></pre>
+<ul>
+<li>当安装到相同模块时，判断已安装的模块版本是否符合新模块的版本范围，如果符合则跳过，不符合则在当前模块的 <code>node_modules</code> 下安装该模块。</li>
+</ul>
+<p>此时，我们在执行 <code>npm install</code> 后将得到下面的目录结构：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcViceD3Ec53rMic1KvTXN7fSFOer0kPiaMldtqQLhJYYxTqUWjlUhKMaxkA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVvJMgKibou2czMUL88vUrhFkJNefaQ63ic8Qhrom4AYBygAVDHcPDhezg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>对应的，如果我们在项目代码中引用了一个模块，模块查找流程如下：</p>
+<ul>
+<li><p>在当前模块路径下搜索</p>
+</li>
+<li><p>在当前模块 <code>node_modules</code> 路径下搜素</p>
+</li>
+<li><p>在上级模块的 <code>node_modules</code> 路径下搜索</p>
+</li>
+<li><p>…</p>
+</li>
+<li><p>直到搜索到全局路径中的 <code>node_modules</code></p>
+</li>
+</ul>
+<p>假设我们又依赖了一个包 <code>buffer2@^5.4.3</code>，而它依赖了包 <code>base64-js@1.0.3</code>，则此时的安装结构是下面这样的：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVlqy2xAw9kOnZGibmiauHfD8V7YaoxTPIKkm5IHDD8J3Qwk32SwThdKfw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>所以 <code>npm 3.x</code> 版本并未完全解决老版本的模块冗余问题，甚至还会带来新的问题。</p>
+<p>试想一下，你的APP假设没有依赖 <code>base64-js@1.0.1</code> 版本，而你同时依赖了依赖不同 <code>base64-js</code> 版本的 <code>buffer</code> 和 <code>buffer2</code>。由于在执行 <code>npm install</code> 的时候，按照 <code>package.json</code> 里依赖的顺序依次解析，则 <code>buffer</code> 和 <code>buffer2</code> 在  <code>package.json</code> 的放置顺序则决定了 <code>node_modules</code> 的依赖结构：</p>
+<p>先依赖<code>buffer2</code>：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVGG4KNBgDP4tYsfraJJ6vuibBfddbUxrceuicicyhNC8axqiacX35pxLWpg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>先依赖<code>buffer</code>：<br><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"><br>另外，为了让开发者在安全的前提下使用最新的依赖包，我们在 <code>package.json</code> 通常只会锁定大版本，这意味着在某些依赖包小版本更新后，同样可能造成依赖结构的改动，依赖结构的不确定性可能会给程序带来不可预知的问题。</p>
+<h2 id="Lock文件"><a href="#Lock文件" class="headerlink" title="Lock文件"></a>Lock文件</h2><p>为了解决 <code>npm install</code> 的不确定性问题，在 <code>npm 5.x</code> 版本新增了 <code>package-lock.json</code> 文件，而安装方式还沿用了 <code>npm 3.x</code> 的扁平化的方式。</p>
+<p><code>package-lock.json</code> 的作用是锁定依赖结构，即只要你目录下有 <code>package-lock.json</code> 文件，那么你每次执行 <code>npm install</code> 后生成的 <code>node_modules</code> 目录结构一定是完全相同的。</p>
+<p>例如，我们有如下的依赖结构：</p>
+<pre><code>&#123;
+&quot;name&quot;: &quot;my-app&quot;,
+&quot;dependencies&quot;: &#123;
+&quot;buffer&quot;: &quot;^5.4.3&quot;,
+&quot;ignore&quot;: &quot;^5.1.4&quot;,
+&quot;base64-js&quot;: &quot;1.0.1&quot;,
+  &#125;
+&#125;
+</code></pre>
+<p>在执行 <code>npm install</code> 后生成的 <code>package-lock.json</code> 如下：</p>
+<pre><code>&#123;
+&quot;name&quot;: &quot;my-app&quot;,
+&quot;version&quot;: &quot;1.0.0&quot;,
+&quot;dependencies&quot;: &#123;
+&quot;base64-js&quot;: &#123;
+&quot;version&quot;: &quot;1.0.1&quot;,
+&quot;resolved&quot;: &quot;https://registry.npmjs.org/base64-js/-/base64-js-1.0.1.tgz&quot;,
+&quot;integrity&quot;: &quot;sha1-aSbRsZT7xze47tUTdW3i/Np+pAg=&quot;
+    &#125;,
+&quot;buffer&quot;: &#123;
+&quot;version&quot;: &quot;5.4.3&quot;,
+&quot;resolved&quot;: &quot;https://registry.npmjs.org/buffer/-/buffer-5.4.3.tgz&quot;,
+&quot;integrity&quot;: &quot;sha512-zvj65TkFeIt3i6aj5bIvJDzjjQQGs4o/sNoezg1F1kYap9Nu2jcUdpwzRSJTHMMzG0H7bZkn4rNQpImhuxWX2A==&quot;,
+&quot;requires&quot;: &#123;
+&quot;base64-js&quot;: &quot;^1.0.2&quot;,
+&quot;ieee754&quot;: &quot;^1.1.4&quot;
+      &#125;,
+&quot;dependencies&quot;: &#123;
+&quot;base64-js&quot;: &#123;
+&quot;version&quot;: &quot;1.3.1&quot;,
+&quot;resolved&quot;: &quot;https://registry.npmjs.org/base64-js/-/base64-js-1.3.1.tgz&quot;,
+&quot;integrity&quot;: &quot;sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==&quot;
+        &#125;
+      &#125;
+    &#125;,
+&quot;ieee754&quot;: &#123;
+&quot;version&quot;: &quot;1.1.13&quot;,
+&quot;resolved&quot;: &quot;https://registry.npmjs.org/ieee754/-/ieee754-1.1.13.tgz&quot;,
+&quot;integrity&quot;: &quot;sha512-4vf7I2LYV/HaWerSo3XmlMkp5eZ83i+/CDluXi/IGTs/O1sejBNhTtnxzmRZfvOUqj7lZjqHkeTvpgSFDlWZTg==&quot;
+    &#125;,
+&quot;ignore&quot;: &#123;
+&quot;version&quot;: &quot;5.1.4&quot;,
+&quot;resolved&quot;: &quot;https://registry.npmjs.org/ignore/-/ignore-5.1.4.tgz&quot;,
+&quot;integrity&quot;: &quot;sha512-MzbUSahkTW1u7JpKKjY7LCARd1fU5W2rLdxlM4kdkayuCwZImjkpluF9CM1aLewYJguPDqewLam18Y6AU69A8A==&quot;
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<p>我们来具体看看上面的结构：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVuCWAF9VfKQiaichicf9DqiaqkQjXaVicF4tKQUNtyIgaTS1t3t9Mly0aOUg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>最外面的两个属性 <code>name</code> 、<code>version</code> 同 <code>package.json</code> 中的 <code>name</code> 和 <code>version</code> ，用于描述当前包名称和版本。</p>
+<p><code>dependencies</code> 是一个对象，对象和 <code>node_modules</code> 中的包结构一一对应，对象的 <code>key</code> 为包名称，值为包的一些描述信息：</p>
+<ul>
+<li><p><code>version</code>：包版本 —— 这个包当前安装在 <code>node_modules</code> 中的版本</p>
+</li>
+<li><p><code>resolved</code>：包具体的安装来源</p>
+</li>
+<li><p><code>integrity</code>：包 <code>hash</code> 值，基于 <code>Subresource Integrity</code> 来验证已安装的软件包是否被改动过、是否已失效</p>
+</li>
+<li><p><code>requires</code>：对应子依赖的依赖，与子依赖的 <code>package.json</code> 中 <code>dependencies</code>的依赖项相同。</p>
+</li>
+<li><p><code>dependencies</code>：结构和外层的 <code>dependencies</code> 结构相同，存储安装在子依赖 <code>node_modules</code> 中的依赖包。</p>
+</li>
+</ul>
+<p>这里注意，并不是所有的子依赖都有 <code>dependencies</code> 属性，只有子依赖的依赖和当前已安装在根目录的  <code>node_modules</code> 中的依赖冲突之后，才会有这个属性。</p>
+<p>例如，回顾下上面的依赖关系：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVvJMgKibou2czMUL88vUrhFkJNefaQ63ic8Qhrom4AYBygAVDHcPDhezg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>我们在 <code>my-app</code> 中依赖的 <code>base64-js@1.0.1</code> 版本与 <code>buffer</code> 中依赖的 <code>base64-js@^1.0.2</code> 发生冲突，所以  <code>base64-js@1.0.1</code>  需要安装在 <code>buffer</code> 包的 <code>node_modules</code> 中，对应了 <code>package-lock.json</code> 中 <code>buffer</code> 的 <code>dependencies</code> 属性。这也对应了 <code>npm</code> 对依赖的扁平化处理方式。</p>
+<p>所以，根据上面的分析， <code>package-lock.json</code> 文件 和 <code>node_modules</code> 目录结构是一一对应的，即项目目录下存在  <code>package-lock.json</code> 可以让每次安装生成的依赖目录结构保持相同。</p>
+<p>另外，项目中使用了 <code>package-lock.json</code> 可以显著加速依赖安装时间。</p>
+<p>我们使用 <code>npm i --timing=true --loglevel=verbose</code> 命令可以看到 <code>npm install</code> 的完整过程，下面我们来对比下使用 <code>lock</code> 文件和不使用 <code>lock</code> 文件的差别。在对比前先清理下<code>npm</code> 缓存。</p>
+<p>不使用 <code>lock</code> 文件：<br><img src="https://mmbiz.qpic.cn/mmbiz_gif/aDoYvepE5x07V71lB2Paq6xf9EexnFcV2wXvKqVOP4DouJGf2dpvmdds2dcQEkRoEgIqUIKREhicoKMzia3JUw5w/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"><br>使用 <code>lock</code> 文件：<br><img src="https://mmbiz.qpic.cn/mmbiz_gif/aDoYvepE5x07V71lB2Paq6xf9EexnFcV2dYJnWXtOAWicaic6j1OXkJP1vV2hvX7v2HnhzdYT1LUnWiaMH9cGzNibw/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"><br>可见， <code>package-lock.json</code> 中已经缓存了每个包的具体版本和下载链接，不需要再去远程仓库进行查询，然后直接进入文件完整性校验环节，减少了大量网络请求。</p>
+<h3 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h3><p>开发系统应用时，建议把 <code>package-lock.json</code> 文件提交到代码版本仓库，从而保证所有团队开发者以及 <code>CI</code> 环节可以在执行 <code>npm install</code> 时安装的依赖版本都是一致的。</p>
+<p>在开发一个 <code>npm</code>包 时，你的 <code>npm</code>包 是需要被其他仓库依赖的，由于上面我们讲到的扁平安装机制，如果你锁定了依赖包版本，你的依赖包就不能和其他依赖包共享同一 <code>semver</code> 范围内的依赖包，这样会造成不必要的冗余。所以我们不应该把<code>package-lock.json</code> 文件发布出去（ <code>npm</code> 默认也不会把 <code>package-lock.json</code> 文件发布出去）。</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>在执行 <code>npm install</code> 或 <code>npm update</code>命令下载依赖后，除了将依赖包安装在<code>node_modules</code> 目录下外，还会在本地的缓存目录缓存一份。</p>
+<p>通过 <code>npm config get cache</code> 命令可以查询到：在 <code>Linux</code> 或 <code>Mac</code> 默认是用户主目录下的 <code>.npm/_cacache</code> 目录。</p>
+<p>在这个目录下又存在两个目录：<code>content-v2</code>、<code>index-v5</code>，<code>content-v2</code> 目录用于存储 <code>tar</code>包的缓存，而<code>index-v5</code>目录用于存储<code>tar</code>包的 <code>hash</code>。</p>
+<p>npm 在执行安装时，可以根据 <code>package-lock.json</code> 中存储的 <code>integrity、version、name</code> 生成一个唯一的 <code>key</code> 对应到 <code>index-v5</code> 目录下的缓存记录，从而找到 <code>tar</code>包的 <code>hash</code>，然后根据 <code>hash</code> 再去找缓存的 <code>tar</code>包直接使用。</p>
+<p>我们可以找一个包在缓存目录下搜索测试一下，在 <code>index-v5</code> 搜索一下包路径：</p>
+<pre><code>grep &quot;https://registry.npmjs.org/base64-js/-/base64-js-1.0.1.tgz&quot; -r index-v5
+</code></pre>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVukm2CxlEBDQWRernKUQqyU47zgJufPP5qG2U4ibmJTqxX5VqV4tSKUw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>然后我们将json格式化：</p>
+<pre><code>&#123;
+&quot;key&quot;: &quot;pacote:version-manifest:https://registry.npmjs.org/base64-js/-/base64-js-1.0.1.tgz:sha1-aSbRsZT7xze47tUTdW3i/Np+pAg=&quot;,
+&quot;integrity&quot;: &quot;sha512-C2EkHXwXvLsbrucJTRS3xFHv7Mf/y9klmKDxPTE8yevCoH5h8Ae69Y+/lP+ahpW91crnzgO78elOk2E6APJfIQ==&quot;,
+&quot;time&quot;: 1575554308857,
+&quot;size&quot;: 1,
+&quot;metadata&quot;: &#123;
+&quot;id&quot;: &quot;base64-js@1.0.1&quot;,
+&quot;manifest&quot;: &#123;
+&quot;name&quot;: &quot;base64-js&quot;,
+&quot;version&quot;: &quot;1.0.1&quot;,
+&quot;engines&quot;: &#123;
+&quot;node&quot;: &quot;&gt;= 0.4&quot;
+      &#125;,
+&quot;dependencies&quot;: &#123;&#125;,
+&quot;optionalDependencies&quot;: &#123;&#125;,
+&quot;devDependencies&quot;: &#123;
+&quot;standard&quot;: &quot;^5.2.2&quot;,
+&quot;tape&quot;: &quot;4.x&quot;
+      &#125;,
+&quot;bundleDependencies&quot;: false,
+&quot;peerDependencies&quot;: &#123;&#125;,
+&quot;deprecated&quot;: false,
+&quot;_resolved&quot;: &quot;https://registry.npmjs.org/base64-js/-/base64-js-1.0.1.tgz&quot;,
+&quot;_integrity&quot;: &quot;sha1-aSbRsZT7xze47tUTdW3i/Np+pAg=&quot;,
+&quot;_shasum&quot;: &quot;6926d1b194fbc737b8eed513756de2fcda7ea408&quot;,
+&quot;_shrinkwrap&quot;: null,
+&quot;bin&quot;: null,
+&quot;_id&quot;: &quot;base64-js@1.0.1&quot;
+    &#125;,
+&quot;type&quot;: &quot;finalized-manifest&quot;
+  &#125;
+&#125;
+</code></pre>
+<p>上面的 <code>_shasum</code> 属性 <code>6926d1b194fbc737b8eed513756de2fcda7ea408</code> 即为 <code>tar</code> 包的 <code>hash</code>， <code>hash</code>的前几位 <code>6926</code> 即为缓存的前两层目录，我们进去这个目录果然找到的压缩后的依赖包：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcV3TqLnb0blCz4icicddP8SB8eWFqHqDvjWcaSbDkUr8sV6feGJrIricia6g/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<blockquote>
+<p>以上的缓存策略是从 npm v5 版本开始的，在 npm v5 版本之前，每个缓存的模块在 ~&#x2F;.npm 文件夹中以模块名的形式直接存储，储存结构是{cache}&#x2F;{name}&#x2F;{version}。</p>
+</blockquote>
+<p><code>npm</code> 提供了几个命令来管理缓存数据：</p>
+<ul>
+<li><p><code>npm cache add</code>：官方解释说这个命令主要是 <code>npm</code> 内部使用，但是也可以用来手动给一个指定的 package 添加缓存。</p>
+</li>
+<li><p><code>npm cache clean</code>：删除缓存目录下的所有数据，为了保证缓存数据的完整性，需要加上 <code>--force</code> 参数。</p>
+</li>
+<li><p><code>npm cache verify</code>：验证缓存数据的有效性和完整性，清理垃圾数据。</p>
+</li>
+</ul>
+<p>基于缓存数据，npm 提供了离线安装模式，分别有以下几种：</p>
+<ul>
+<li><p><code>--prefer-offline</code>：优先使用缓存数据，如果没有匹配的缓存数据，则从远程仓库下载。</p>
+</li>
+<li><p><code>--prefer-online</code>：优先使用网络数据，如果网络数据请求失败，再去请求缓存数据，这种模式可以及时获取最新的模块。</p>
+</li>
+<li><p><code>--offline</code>：不请求网络，直接使用缓存数据，一旦缓存数据不存在，则安装失败。</p>
+</li>
+</ul>
+<h2 id="文件完整性"><a href="#文件完整性" class="headerlink" title="文件完整性"></a>文件完整性</h2><p>上面我们多次提到了文件完整性，那么什么是文件完整性校验呢？</p>
+<p>在下载依赖包之前，我们一般就能拿到 <code>npm</code> 对该依赖包计算的 <code>hash</code> 值，例如我们执行 <code>npm info</code> 命令，紧跟 <code>tarball</code>(下载链接) 的就是 <code>shasum</code>(<code>hash</code>) ：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVDqEI3R9kUNdQeAgiaomysKbNdU824OK5y3USPqGylP1v5dg9IFQ1VZQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>用户下载依赖包到本地后，需要确定在下载过程中没有出现错误，所以在下载完成之后需要在本地在计算一次文件的 <code>hash</code> 值，如果两个 <code>hash</code> 值是相同的，则确保下载的依赖是完整的，如果不同，则进行重新下载。</p>
+<h2 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h2><p>好了，我们再来整体总结下上面的流程：</p>
+<ul>
+<li><p>检查 <code>.npmrc</code> 文件：优先级为：项目级的 <code>.npmrc</code> 文件 &gt; 用户级的 <code>.npmrc</code> 文件&gt; 全局级的 <code>.npmrc</code> 文件 &gt; npm 内置的 <code>.npmrc</code> 文件</p>
+</li>
+<li><p>检查项目中有无 <code>lock</code> 文件。</p>
+</li>
+<li><p>无 <code>lock</code> 文件：</p>
+</li>
+<li><p>从 <code>npm</code> 远程仓库获取包信息</p>
+</li>
+<li><p>根据 <code>package.json</code> 构建依赖树，构建过程：</p>
+</li>
+<li><p>构建依赖树时，不管其是直接依赖还是子依赖的依赖，优先将其放置在 <code>node_modules</code> 根目录。</p>
+</li>
+<li><p>当遇到相同模块时，判断已放置在依赖树的模块版本是否符合新模块的版本范围，如果符合则跳过，不符合则在当前模块的 <code>node_modules</code> 下放置该模块。</p>
+</li>
+<li><p>注意这一步只是确定逻辑上的依赖树，并非真正的安装，后面会根据这个依赖结构去下载或拿到缓存中的依赖包</p>
+</li>
+<li><p>在缓存中依次查找依赖树中的每个包     </p>
+</li>
+<li><p>不存在缓存：</p>
+</li>
+<li><p>从 <code>npm</code> 远程仓库下载包</p>
+</li>
+<li><p>校验包的完整性</p>
+</li>
+<li><p>校验不通过：</p>
+</li>
+<li><p>重新下载    </p>
+</li>
+<li><p>校验通过：</p>
+</li>
+<li><p>将下载的包复制到 <code>npm</code> 缓存目录</p>
+</li>
+<li><p>将下载的包按照依赖结构解压到 <code>node_modules</code></p>
+</li>
+</ul>
+<p>存在缓存：将缓存按照依赖结构解压到 <code>node_modules</code></p>
+<ul>
+<li><p>将包解压到 <code>node_modules</code></p>
+</li>
+<li><p>生成 <code>lock</code> 文件</p>
+</li>
+</ul>
+<p>有 <code>lock</code> 文件：</p>
+<ul>
+<li><p>检查 <code>package.json</code> 中的依赖版本是否和 <code>package-lock.json</code> 中的依赖有冲突。</p>
+</li>
+<li><p>如果没有冲突，直接跳过获取包信息、构建依赖树过程，开始在缓存中查找包信息，后续过程相同</p>
+</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVD240SNZBLIwLogx4AEue7BLFeSSglH5MFk8oAtkMznOZRatVjugofg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>上面的过程简要描述了 <code>npm install</code> 的大概过程，这个过程还包含了一些其他的操作，例如执行你定义的一些生命周期函数，你可以执行 <code>npm install package --timing=true --loglevel=verbose</code> 来查看某个包具体的安装流程和细节。</p>
+<h2 id="yarn"><a href="#yarn" class="headerlink" title="yarn"></a>yarn</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVAfh9WOPjFFP8sEfnOkYUYC8SE2Qpp7U8kHIayFVbcA7eqOsUjmMsFw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br><code>yarn</code> 是在 <code>2016</code> 年发布的，那时 <code>npm</code> 还处于 <code>V3</code> 时期，那时候还没有 <code>package-lock.json</code> 文件，就像上面我们提到的：不稳定性、安装速度慢等缺点经常会受到广大开发者吐槽。此时，<code>yarn</code> 诞生：<br><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"><br>上面是官网提到的 <code>yarn</code> 的优点，在那个时候还是非常吸引人的。当然，后来 <code>npm</code> 也意识到了自己的问题，进行了很多次优化，在后面的优化（<code>lock</code>文件、缓存、默认-s…）中，我们多多少少能看到 <code>yarn</code> 的影子，可见 <code>yarn</code> 的设计还是非常优秀的。</p>
+<p><code>yarn</code> 也是采用的是 <code>npm v3</code> 的扁平结构来管理依赖，安装依赖后默认会生成一个 <code>yarn.lock</code> 文件，还是上面的依赖关系，我们看看 <code>yarn.lock</code> 的结构：</p>
+<pre><code># THIS IS AN AUTOGENERATED FILE. DO NOT EDIT THIS FILE DIRECTLY.
+# yarn lockfile v1
+
+
+base64-js@1.0.1:
+  version &quot;1.0.1&quot;
+  resolved &quot;https://registry.yarnpkg.com/base64-js/-/base64-js-1.0.1.tgz#6926d1b194fbc737b8eed513756de2fcda7ea408&quot;
+  integrity sha1-aSbRsZT7xze47tUTdW3i/Np+pAg=
+
+base64-js@^1.0.2:
+  version &quot;1.3.1&quot;
+  resolved &quot;https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.1.tgz#58ece8cb75dd07e71ed08c736abc5fac4dbf8df1&quot;
+  integrity sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==
+
+buffer@^5.4.3:
+  version &quot;5.4.3&quot;
+  resolved &quot;https://registry.yarnpkg.com/buffer/-/buffer-5.4.3.tgz#3fbc9c69eb713d323e3fc1a895eee0710c072115&quot;
+  integrity sha512-zvj65TkFeIt3i6aj5bIvJDzjjQQGs4o/sNoezg1F1kYap9Nu2jcUdpwzRSJTHMMzG0H7bZkn4rNQpImhuxWX2A==
+  dependencies:
+    base64-js &quot;^1.0.2&quot;
+    ieee754 &quot;^1.1.4&quot;
+
+ieee754@^1.1.4:
+  version &quot;1.1.13&quot;
+  resolved &quot;https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.13.tgz#ec168558e95aa181fd87d37f55c32bbcb6708b84&quot;
+  integrity sha512-4vf7I2LYV/HaWerSo3XmlMkp5eZ83i+/CDluXi/IGTs/O1sejBNhTtnxzmRZfvOUqj7lZjqHkeTvpgSFDlWZTg==
+
+ignore@^5.1.4:
+  version &quot;5.1.4&quot;
+  resolved &quot;https://registry.yarnpkg.com/ignore/-/ignore-5.1.4.tgz#84b7b3dbe64552b6ef0eca99f6743dbec6d97adf&quot;
+  integrity sha512-MzbUSahkTW1u7JpKKjY7LCARd1fU5W2rLdxlM4kdkayuCwZImjkpluF9CM1aLewYJguPDqewLam18Y6AU69A8A==
+</code></pre>
+<p>可见其和 <code>package-lock.json</code> 文件还是比较类似的，还有一些区别就是：</p>
+<ul>
+<li><p><code>package-lock.json</code> 使用的是 <code>json</code> 格式，<code>yarn.lock</code> 使用的是一种自定义格式</p>
+</li>
+<li><p><code>yarn.lock</code> 中子依赖的版本号不是固定的，意味着单独又一个 <code>yarn.lock</code> 确定不了 <code>node_modules</code> 目录结构，还需要和 <code>package.json</code> 文件进行配合。而 <code>package-lock.json</code> 只需要一个文件即可确定。</p>
+</li>
+</ul>
+<p><code>yarn</code> 的缓策略看起来和 <code>npm v5</code> 之前的很像，每个缓存的模块被存放在独立的文件夹，文件夹名称包含了模块名称、版本号等信息。使用命令 <code>yarn cache dir</code> 可以查看缓存数据的目录：<br><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x07V71lB2Paq6xf9EexnFcVKdmzDKwu5UiatB527goedL0U8ib1UR3jxm03sEUXeSS6BbsM6L8La0Wg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<blockquote>
+<p><code>yarn</code> 默认使用 <code>prefer-online</code> 模式，即优先使用网络数据，如果网络数据请求失败，再去请求缓存数据。</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://juejin.im/post/5a6008c2f265da3e5033cd93">https://juejin.im/post/5a6008c2f265da3e5033cd93</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/305539244/answer/551386426">https://www.zhihu.com/question/305539244/answer/551386426</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37285173">https://zhuanlan.zhihu.com/p/37285173</a></p>
+<p><strong>推荐阅读</strong></p>
+<p>（点击标题可跳转阅读）</p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651557341&amp;idx=1&amp;sn=9df72e127322b7717f13271263b3be0e&amp;chksm=80255a1cb752d30a9a73312bc8ad51f0cf3b114ca3a3022b76bf2cc53d885dadc022453428e0&amp;scene=21#wechat_redirect">NPM 如何管理依赖包版本</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651557570&amp;idx=1&amp;sn=ed30591ec4be28fe0fce0d2bf9ab0510&amp;chksm=80255903b752d0159534caeba7e444d9eb3a39091e085c8418551480f6b4a4fba8649f9b9a5d&amp;scene=21#wechat_redirect">2019 年前端事件回顾</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651556030&amp;idx=1&amp;sn=b690e282e1470c8c803e08ceb69b574d&amp;chksm=80255f7fb752d669b0ee4dee52b9287ce6b7573555b3eac646d3db14003e781e2368911770f0&amp;scene=21#wechat_redirect">在 NPM 发布自己造的轮子</a></p>
+<p>觉得本文对你有帮助？请分享给更多人</p>
+<p>关注「前端大全」加星标，提升前端技能</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/zPh0erYjkib3jzxuxibgz8GJ7k0UVp4kHMMDsL32ialKjpkgA9q7BFkbJ8VRYh0Liad1x6rD7w6oU7icR9DVPgsIxzQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<p>好文章，我在看❤️</p>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/35697.html">https://xuehuayu.cn/article/35697.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:cainiaoblog@126.com">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/44426.html">7 个令人兴奋的 JavaScript 新特性</a><a class="next" href="/article/56139.html">第 4 种 Web 语言来了：WebAssembly</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/6b20a411.html">原生nodejs启动静态html网页</a></li><li class="post-list-item"><a class="post-list-link" href="/article/d03fafc7.html">魔兽世界乌龟服永望镇神秘任务奖励永望广播公司背包【16格包】</a></li><li class="post-list-item"><a class="post-list-link" href="/article/6dfc7293.html">【解决办法】个税申报时年度汇算时申报的劳务报酬总收入小于本年度代开的劳务发票</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">209</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div><div class="flex-block justify-center align-center flex-wrap"><a rel="nofollow" target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><span style="font-weight:bold;letter-spacing: 1px;">本网站由 </span><img class="nofancybox" height="32" style="vertical-align: middle" src="/img/upy_logo.svg" alt=""/><span style="font-weight:bold;letter-spacing: 1px;">提供CDN加速/云存储服务</span></a><span style="padding-right: 10px;"></span><a rel="nofollow" style="font-size:18px;font-weight:bold;vertical-align: middle" target="_blank" title="注册就送代金券可直接使用" href="https://console.upyun.com/register/?invite=HyDsjZHIL">注册</a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
