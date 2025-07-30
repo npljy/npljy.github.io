@@ -1,0 +1,334 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>常见React.js问题（附解决方案） | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">常见React.js问题（附解决方案）</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.6k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 13</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/39637.html#waline-comment"><span class="waline-comment-count" data-path="/article/39637.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.html.cn/interview/14451.html</code></p>
+<p>在 jsComplete，我们管理一个专门用于帮助编程学习者 slack 帐户。我们常常会收到一些有趣的问题，但大多数问题都是常见问题。 我创建这个资源为了帮助 React.js学习者遇到这些常见的问题时提供一定帮助。在这里可以快速找到一些常见问题的解决方案，而不是一，遍又一遍去找解决方法，我会持续更新这些常见的问题。</p>
+<span id="more"></span>
+<p><img src="https://img.php.cn/upload/article/000/000/006/5de713db09797573.jpg" alt="xuehuayu.cn"></p>
+<h2 id="1-组件的名称开头要大写"><a href="#1-组件的名称开头要大写" class="headerlink" title="1. 组件的名称开头要大写"></a>1. 组件的名称开头要大写</h2><p>React 组件名称必须具有以大写字母开头。</p>
+<p>如果组件名称不以大写字母开头，则组件使用将被视为内置元素，例如 <code>p</code> 或 <code>span</code>。</p>
+<p>例如：</p>
+<pre><code>class greeting extends React.Component &#123; 
+  // ...
+&#125;
+</code></pre>
+<p>如果尝试渲染 <code>&lt;greeting /&gt;</code>，React 将忽略上述内容，会报以下警告：</p>
+<pre><code>Warning: The tag &lt;greeting&gt; is unrecognized in this browser.     If you meant to render a React component, start its name with an uppercase letter.
+</code></pre>
+<p>这里更大的问题是把组件命名为 <code>button</code> 或 <code>img</code>。 React 会忽略你的组件，只是渲染一个普通 HTML <code>button</code> 或 <code>img</code> 标签。</p>
+<p><img src="https://img.php.cn/upload/image/566/703/555/1575424555207539.png" alt="1575424555207539.png"></p>
+<p>注意上面没有渲染 “My Awesome Button” 和 React 刚刚呈现的空 HTML 按钮元素。 在这种情况下，React 不会警告你。</p>
+<h2 id="2-使用单引号而不是反引号"><a href="#2-使用单引号而不是反引号" class="headerlink" title="2.使用单引号而不是反引号"></a>2.使用单引号而不是反引号</h2><p>用反引号<code>(</code>…<code>)</code>创建的字符串与用单引号<code>(&#39;…&#39;)</code>创建的字符串不同。</p>
+<p>在大多数键盘上，可以使用 <strong>tab</strong> 键上方的键来输入用反引号( &#96; )字符。</p>
+<p>当需要在字符串中包含动态表达式时，使用反引号创建一个字符串(不需要使用字符串连接)。</p>
+<pre><code>`This is a string template literal that can include expressions`
+&#39;This is just a string, you cannot include expressions here&#39;
+</code></pre>
+<p>假设你想要一个始终报告当前时间的字符串：</p>
+<p>“Time is …”</p>
+<pre><code>// Current time string
+const time = new Date().toLocaleTimeString();
+// 使用普通字符串(单引号或双引号)时，需要使用字符串连接:
+&#39;Time is &#39; + time
+// 在使用反引号时，可以使用 $&#123;&#125; 在字符串中注入时间
+`Time is $&#123;time&#125;`
+</code></pre>
+<p>此外，反引号还声明一个字符串时，可以创建一个跨多行的字符串:</p>
+<pre><code>const template = `I
+CAN
+SPAN
+Multiple Lines`;
+</code></pre>
+<p>常规字符串不能这样做。</p>
+<h2 id="3-使用-React-PropTypes"><a href="#3-使用-React-PropTypes" class="headerlink" title="3. 使用 React.PropTypes"></a>3. 使用 React.PropTypes</h2><p><code>PropTypes</code> 对象已从 React 中删除。 其过去是以 React.PropTypes 的形式被使用，但不能再使用它了。</p>
+<p>相应的，你需要：</p>
+<ol>
+<li><code>npm install prop-types</code></li>
+<li><code>import PropTypes from &#39;prop-types&#39;</code></li>
+</ol>
+<p>然后就可以使用它啦，如： <code>PropTypes.string</code> 。</p>
+<p>如果你错误地使用了 <code>React.PropTypes</code>，会得到这样的错误提示：</p>
+<pre><code>TypeError: Cannot read property &#39;string&#39; of undefined
+</code></pre>
+<h2 id="4-没有使用指南里指定的版本"><a href="#4-没有使用指南里指定的版本" class="headerlink" title="4. 没有使用指南里指定的版本"></a>4. 没有使用指南里指定的版本</h2><p>在看或阅读有关代码的内容以及使用指南里的例子时，确保你使用的库版本与例子的里的版本是一致的。一般使用最新版本是没有问题，但是如果内容过时，你可能会遇到一些弃用问题。</p>
+<p>为了安全起见，请使用主干版本。 例如，如果教程里使用的是 React 16，自己就不要使用 React 15 进行开发了。</p>
+<p>这对 Node.js 也很重要。如果使用旧版本的 Node，会遇到一系列问题。 例如，如果你正在看一些教程，这些教程使用了 <code>Object.values</code>，而你现在用 Node 6.x，那个版本此方法是不存在的。 你需要 Node 7.x 或更高版本。</p>
+<h2 id="5-令人困惑的函数与类"><a href="#5-令人困惑的函数与类" class="headerlink" title="5. 令人困惑的函数与类"></a>5. 令人困惑的函数与类</h2><p>你能看出下面的代码有什么问题吗?</p>
+<pre><code>class Numbers extends React.Component &#123;
+  const arrayOfNumbers = _.range(1, 10);
+  // ...
+&#125;
+</code></pre>
+<p>上面的代码是无效的，因为在 JavaScript 类的内部，不能随意定义变量，只能使用规定的语法定义方法和属性。</p>
+<p>这有点令人困惑，因为类语法中使用的<code>&#123;&#125;</code>看起来像块级作用域，但它并不是。</p>
+<p>在一个由函数构成的组件里，你就可以想怎么搞就怎么搞：</p>
+<pre><code>// Totally Okay:
+const Number = (props) =&gt; &#123;
+  const arrayOfNumbers = _.range(1, 10);
+  // ...
+&#125;;
+</code></pre>
+<h2 id="6-将数字作为字符串传递"><a href="#6-将数字作为字符串传递" class="headerlink" title="6. 将数字作为字符串传递"></a>6. 将数字作为字符串传递</h2><p>你可以通过 prop 属性传递一个字符串：</p>
+<pre><code>&lt;Greeting name=&quot;World&quot; /&gt;
+</code></pre>
+<p>如果需要传递一个数值，不要使用字符串:</p>
+<pre><code>// 不要这样做
+&lt;Greeting counter=&quot;7&quot; /&gt;
+</code></pre>
+<p>相反，使用花括号传递一个实际的数值:</p>
+<pre><code>&lt;Greeting counter=&#123;7&#125; /&gt;
+</code></pre>
+<p>在 Greeting 组件中使用 <code>&#123;7&#125;</code>，<code>this.props.counter</code> 就被赋值为数字 <code>7</code> ，并且可以对其进行数学运算。 如果将其作为“7”传递，然后将其视为数字，则可能会遇到意外结果。</p>
+<h2 id="7-忘记了另外一个-app-在用同样的端口"><a href="#7-忘记了另外一个-app-在用同样的端口" class="headerlink" title="7. 忘记了另外一个 app 在用同样的端口"></a>7. 忘记了另外一个 app 在用同样的端口</h2><p>要运行 web 服务器，需要使用主机(如 127.0.0.1 )和端口(如 8080)使服务器侦听有效 http 地址上的请求。</p>
+<p>一旦成功运行，web 服务器就占据了那个端口，你就不能让这个端口它用，端口会被占用。</p>
+<p>如果你尝试在另一个终端上运行相同的服务器，将会得到端口被占用的错误提示，如下:</p>
+<pre><code>Error: listen EADDRINUSE 127.0.0.1:8080
+</code></pre>
+<p>请注意，有时 Web 服务器可能在后台运行或在分离的屏幕&#x2F;tmux 会话中运行。你看不到，但它仍然占据了端口。 要重新启动服务器，需要“杀死”仍在运行的服务器。</p>
+<p>要识别使用某个端口的进程，可以使用 <code>ps</code> 之类的命令（以及关于应用程序的grep），或者如果你知道端口号，则可以使用 <code>lsof</code> 命令：</p>
+<pre><code>lsof -i :8080
+</code></pre>
+<h2 id="8-忘记创建环境变量"><a href="#8-忘记创建环境变量" class="headerlink" title="8. 忘记创建环境变量"></a>8. 忘记创建环境变量</h2><p>有些项目依赖于 shell 环境变量的存在才能启动。 如果在没有所需环境变量的情况下运行这些项目，它们将尝试为它们使用未定义的值，并可能会给你一些神秘的错误。</p>
+<p>例如，如果项目连接到像 MongoDB 这样的数据库，则可能会使用像 <code>process.env.MONGO_URI</code>这样的环境变量来连接它。 这允许项目与不同环境中的不同MongoDB 实例一起使用。</p>
+<p>要在本地运行连接到 MongoDB 的项目，首先必须导出 <code>MONGO_URI</code> 环境变量。 例如，如果你在端口 <code>27017</code> 上运行本地 MongoDB，则需要在运行项目之前执行此操作：</p>
+<pre><code>export MONGO_URI=&quot;mongodb://localhost:27017/mydb&quot;
+</code></pre>
+<p>你可以 grep 项目源代码，找到 <code>process.env</code> 来查清楚其运行正常所需要的环境变量。</p>
+<h2 id="9-把花括号-和圆括号-搞混"><a href="#9-把花括号-和圆括号-搞混" class="headerlink" title="9. 把花括号{}和圆括号()搞混"></a>9. 把花括号{}和圆括号()搞混</h2><p>不要用：</p>
+<pre><code>return &#123;
+  something();
+&#125;;
+</code></pre>
+<p>这样用：</p>
+<pre><code>return (
+  something();
+);
+</code></pre>
+<p>第一个将尝试（并且会失败）返回一个对象，而第二个将正确调用 <code>something()</code> 函数并返回该函数返回的内容。</p>
+<p>因为 JSX 中的任何 <code>&lt;tag&gt;</code> 都将转换为函数调用，所以在返回任何 JSX 时都会出现这个问题。</p>
+<p>这个问题在箭头函数的缩写语法中也很常见。</p>
+<p>不要用：</p>
+<pre><code>const Greeting = () =&gt; &#123;
+  &lt;p&gt;
+    Hello World
+  &lt;/p&gt;
+&#125;;
+</code></pre>
+<p>这样用：</p>
+<pre><code>const Greeting = () =&gt; (
+  &lt;p&gt;
+    Hello World
+  &lt;/p&gt;
+);
+</code></pre>
+<p>当你使用带有箭头函数的中括号时，你就新起了一个函数的作用域。箭头函数的缩写语法不用中括号。</p>
+<h2 id="10-不使用圆括号包装对象"><a href="#10-不使用圆括号包装对象" class="headerlink" title="10. 不使用圆括号包装对象"></a>10. 不使用圆括号包装对象</h2><p>当你想要创建一个返回普通对象的箭头函数时，上面的花括号和圆括号问题也会让你感到困惑。</p>
+<p>不要用：</p>
+<pre><code>const myAction = () =&gt; &#123; type: &#39;DO_THIS&#39; &#125;;
+</code></pre>
+<p>这样用：</p>
+<pre><code>const myAction = () =&gt; (&#123; type: &#39;DO_THIS&#39;&#125;);
+</code></pre>
+<p>如果没有把对象包裹在圆括号里，你就不能使用缩写语法。实际上你会给字符串定义一个标签。</p>
+<p>这在 <code>setState</code> 方法的 <code>updater</code> 函数中很常见，因为它需要返回一个对象。 如果要使用箭头函数语法，则需要用括号包装该对象。</p>
+<p>不要用：</p>
+<pre><code>this.setState(prevState =&gt; &#123; answer: 42 &#125;);
+</code></pre>
+<p>这样用：</p>
+<pre><code>this.setState(prevState =&gt; (&#123; answer: 42 &#125;));
+</code></pre>
+<h2 id="11-没有正确使用API元素和属性的大小写"><a href="#11-没有正确使用API元素和属性的大小写" class="headerlink" title="11. 没有正确使用API元素和属性的大小写"></a>11. 没有正确使用API元素和属性的大小写</h2><p>使用 <code>React.Component</code>，而不是 <code>React.component</code>。 使用 <code>componentDidMount</code>，而不是 <code>ComponentDidMount</code>。使用 <code>ReactDOM</code>，而不是<code>ReactDom</code>。</p>
+<p>请注意需要的 API 大小写。 如果使用不正确的大小写，得到的错误信息可能不会很明确。</p>
+<p>从 <code>react</code> 和 <code>react-dom</code> 导入时，确保引入正确的名称，并且使用的内容与引入完全相同，ESLint 可以帮助你指出未使用的内容。</p>
+<p>在处理组件属性时也会遇到这种问题：</p>
+<pre><code>&lt;Greeting userName=&quot;Max&quot; /&gt;
+// 在组件内部，你需要使用 props.userName 来获取传入的值
+</code></pre>
+<p>如果你没有使用 <code>props.userName</code>，而是 <code>props.username</code> 或 <code>props.UserName</code>，你会相当于用了一个 <code>undefined</code> 的值。需要特别留意下这点，当然更好的是配置 <strong>ESLint</strong>，它也能指出这些问题。</p>
+<h2 id="12-将-state-对象与实例属性搞混"><a href="#12-将-state-对象与实例属性搞混" class="headerlink" title="12. 将 state 对象与实例属性搞混"></a>12. 将 state 对象与实例属性搞混</h2><p>在类组件中，可以定义本地 <code>state</code> 对象，然后使用 <code>this</code> 访问它：</p>
+<pre><code>class Greeting extends React.Component &#123;
+  state = &#123;
+    name: &quot;World&quot;,
+  &#125;;
+  render() &#123;
+    return `Hello $&#123;this.state.name&#125;`;
+  &#125;
+&#125;
+</code></pre>
+<p>以上代码会输出 <code>“Hello World”</code>。</p>
+<p>除 <code>state</code> 之外，你还可以定义其它本地实例属性。</p>
+<pre><code>class Greeting extends React.Component &#123;
+  user = &#123;
+    name: &quot;World&quot;,
+  &#125;;
+  render() &#123;
+    return `Hello $&#123;this.user.name&#125;`;
+  &#125;
+&#125;
+</code></pre>
+<p>以上代码也会输出 <code>“Hello World”</code>。</p>
+<p><code>state</code> 实例属性是一个特殊属性，因为 React 会管理它。 你只能通过 <code>setState</code> 更改它，当你这样做时 React 会做出响应。</p>
+<p>然而，定义的所有其他实例属性对渲染算法没有影响。 你可以根据需要在上面的示例中更改<code>this.user</code>，并且 React 不会在React中触发渲染机制。</p>
+<h2 id="13-将-与-搞混"><a href="#13-将-与-搞混" class="headerlink" title="13. 将 与&lt;&#x2F; tag&gt; 搞混"></a>13. 将 <tag />与&lt;&#x2F; tag&gt; 搞混</h2><p>在闭合标签里放错 <code>/</code> 字符。不可否认，有时你可以使用 <code>&lt;tag/&gt;</code>，而其他时间你需要<code>&lt;/tag&gt;</code>。</p>
+<p>在 HTML 中，有一种称为“自闭合标签”（AKA void tag）。这些是表示没有任何子节点的元素的标记。例如，img 标签是一个自闭合标签：</p>
+<pre><code>&lt;img src=&quot;...&quot; /&gt;
+// 不必使用 &lt;img&gt;&lt;/img&gt;
+</code></pre>
+<p>p标签可以包含子项，因此你可以使用开始和结束标记：</p>
+<pre><code>&lt;p&gt;
+  Children here...
+&lt;/p&gt;
+</code></pre>
+<p>这同样适用于 Reac t组件，如果组件具有子元素，如下所示：</p>
+<pre><code>&lt;Greeting&gt;Hello!&lt;/Greeting&gt;
+// 注意/字符的位置
+</code></pre>
+<p>如果组件没有子元素，可以用开始&#x2F;结束标签书写，或者用自闭合标签：</p>
+<pre><code>// 两种方式
+&lt;Greeting&gt;&lt;/Greeting&gt;
+&lt;Greeting /&gt;
+</code></pre>
+<p>以下方式是非法的：</p>
+<pre><code>// 错误
+&lt;Greeting&gt;&lt;Greeting /&gt;
+</code></pre>
+<p>如果放错放了 &#x2F; 字符的位置，将收到如下错误：</p>
+<pre><code>Syntax error: Unterminated JSX contents
+</code></pre>
+<h2 id="14-假设-import-export-起作用"><a href="#14-假设-import-export-起作用" class="headerlink" title="14. 假设 import&#x2F;export 起作用"></a>14. 假设 import&#x2F;export 起作用</h2><p><code>import/export</code> 特性是 JavaScript 中的官方功能（自2015年起）。 其只是 ES2015 的特性，并且还没有在流行浏览器和最新版 Node 里面被完整支持。</p>
+<p>React 项目的流行配置使用 Webpack 和 Babel。 两者都允许使用此特性并将其编译为所有浏览器都能理解的内容。 只有工作流中有 Webpack 或 Babel 之类的转译工具，才能使用 <code>import/export</code>。</p>
+<p>但是，在 React 打包应用程序中 import&#x2F;export 不意味着可以随意使用它们！ 例如，如果你还通过最新的 Node 进行服务器端渲染，会行不通，你很可能会收到<code>“unexpected token”</code> 错误。</p>
+<p>要让 Node 理解 <code>import/export</code>（如果你在前端使用它们就是你需要了解它们，并且也想要做 SSR 渲染的话），你需要有可以编译其的 Babel preset（像是_env_ preset），才能在Node 端运行。 你可以在开发时使用像 <em>pm2_、 _nodemon</em> 和 _babel-watch_的工具做到这点，，并在每次更改内容时重新启动 Node。</p>
+<h2 id="15-不绑定处理程序方法"><a href="#15-不绑定处理程序方法" class="headerlink" title="15. 不绑定处理程序方法"></a>15. 不绑定处理程序方法</h2><p>我把这个留到最后，因为这是一个大问题，一个很常见的问题。</p>
+<p>你可以在 React 组件中定义类方法，然后在组件的 render 方法中使用它们。 例如：</p>
+<pre><code>class Greeting extends React.Component &#123;
+  whoIsThis() &#123;
+    console.dir(this); // &quot;this&quot; is the caller of whoIsThis
+    return &quot;World&quot;;
+  &#125;
+  render() &#123;
+    return `Hello $&#123;this.whoIsThis()&#125;`;
+  &#125;
+&#125;
+ReactDOM.render(&lt;Greeting /&gt;, mountNode);
+</code></pre>
+<p>我在 <code>render</code> 里以 <code>this.whoIsThis</code> 的方式调用 <code>whoIsThis</code> 方法，因为在 <code>render</code>中，<code>this</code> 关键字指的是与表示组件的 DOM 元素关联的组件实例。</p>
+<p>内部 React 确保其类方法中的 <code>“this”</code> 指向实例。 但是，当你使用 <code>whoIsThis</code> 方法的引用时，JavaScript 不会自动绑定实例。</p>
+<p><code>whoIsThis</code> 方法中的 <code>console.dir</code> 可以正确告诉我们当前组件实例，因为该方法是使用显式调用方（<code>this</code>）直接从 <code>render</code> 方法调用的。 执行上面的代码时，在控制台中看到<strong>Greeting</strong> 对象：</p>
+<p><img src="https://img.php.cn/upload/image/573/544/866/1575424602909723.png" alt="1575424602909723.png"></p>
+<p>然而，当在延迟执行通道，例如事件处理里执行同样方法时，调用对象将不再是显性的，<code>console.dir</code> 也不会打印当前组件实例。</p>
+<p><img src="https://img.php.cn/upload/image/896/655/839/1575424609719349.png" alt="1575424609719349.png"></p>
+<p>在上面的代码中，当单击字符串时，React 会调用 <code>whoIsThis</code> 方法，但它不会让你访问组件实例。 这就是我们点击字符串时得到 <code>undefined</code> 的原因。 如果类方法需要访问像<code>this.props</code> 和 <code>this.state</code> 这样的属性，这会是一个问题，因为它根本行不通。</p>
+<p>对于这个问题有很多解决方案。可以将方法包装在内联函数中，或使用 <code>.bind</code> 来改变 <code>this</code> 指向。 对于不经常更新的组件，两者都可以。</p>
+<p>还可以通过在类的构造函数中而不是在 <code>render</code> 方法中执行来优化 <code>bind</code> 方法。 但是，此方法的最佳解决方案是通过 Babel 来使用 ECMAScript 类字段我（目前还是stage-3），这样对于处理程序只需使用箭头函数就可以了：</p>
+<pre><code>class Greeting extends React.Component &#123;
+  whoIsThis = () =&gt; &#123;
+    console.dir(this);
+  &#125;
+  render() &#123;
+    return (
+     &lt;p onClick=&#123;this.whoIsThis&#125;&gt;
+        Hello World
+      &lt;/p&gt;
+    );
+  &#125;
+&#125;
+</code></pre>
+<p>这样会和预期一样执行：</p>
+<p><img src="https://img.php.cn/upload/image/754/353/283/1575424614766426.png" alt="1575424614766426.png"></p>
+<p><code>原文地址：https://jscomplete.com/learn/react-beyond-basics/react-cfp</code></p>
+<p>为了保证的可读性，本文采用意译而非直译。</p>
+<p>以上就是常见React.js问题（附解决方案）的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/39637.html">https://xuehuayu.cn/article/39637.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/53428.html">2019年适用于JavaScript开发人员的27种神奇的VSCode工具</a><a class="next" href="/article/1230.html">JavaScript中数组的15种常见操作（备忘单）</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/9e7a49ba.html">魔兽世界乌龟服牧师宏分享</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ad81f8a4.html">一个开箱即用的、跨平台的影视聚合播放站</a></li><li class="post-list-item"><a class="post-list-link" href="/article/4d64834d.html">几个更新比较活跃的直播地址</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">211</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A2%8B%E9%87%8C/">袋里</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A7%82%E5%BD%B1/">观影</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://www.cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
