@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>CSS实现一个粒子动效的按钮 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">CSS实现一个粒子动效的按钮</h1><div class="post-meta"><span class="date">2020-01-16</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.6k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 6</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/27796.html#waline-comment"><span class="waline-comment-count" data-path="/article/27796.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/XboxYan/notes/issues/16</code><br>按钮（button）可能是网页中最常见的组件之一了，大部分都平淡无奇，如果你碰到的是一个这样的按钮，会不会忍不住多点几次呢？</p>
+<span id="more"></span>
+<p><img src="https://user-gold-cdn.xitu.io/2020/1/8/16f83f221ff094ee?imageslim" alt="xuehuayu.cn"><br>通常这类效果第一反应可能就是借助<code>canvas</code>了，比如下面这个<a target="_blank" rel="noopener" href="https://codepen.io/airen/pen/JBJwWB">案例</a><br><img src="https://user-gold-cdn.xitu.io/2020/1/8/16f83ea74a71326e?imageslim" alt="bubble1"><br>效果就更加震撼了，当然<code>canvas</code>实现也有一定的门槛，而且实际使用起来也略微麻烦（所有<code>js</code>实现的通病），这里尝试一下<code>CSS</code>的实现方式。</p>
+<h2 id="生成粒子"><a href="#生成粒子" class="headerlink" title="生成粒子"></a>生成粒子</h2><p>抛开<code>js</code>方案，还有<code>HTML</code>和<code>CSS</code>实现方式。<code>HTML</code>就不用说了，直接写上大量的标签</p>
+<pre><code>&lt;button&gt;
+    button
+    &lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;
+    ...
+&lt;/button&gt;复制代码
+</code></pre>
+<p>一般情况下我不是很喜欢这种方式，标签太多，结构不美观，而且有可能对现有的页面造成其他影响（很多情况下并不方便修改原始<code>HTML</code>结构）</p>
+<p>那么来看看<code>CSS</code>实现方式，主要也是两种方式，其实就是想一下有哪些属性可以无限叠加，一个是<code>box-shadow</code>，还有一个是<code>background-image</code>（CSS3支持无限叠加）。</p>
+<h3 id="1-box-shadow"><a href="#1-box-shadow" class="headerlink" title="1.box-shadow"></a>1.box-shadow</h3><p>我们先看看<code>box-shadow</code>方式，为了避免使用额外标签，这里采用伪元素生成。</p>
+<pre><code>.button::before&#123;
+  position: absolute;
+  content: &#39;&#39;;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #ff0081;
+  box-shadow: 10px10px#ff0081,15px0px02px#ff0081,20px15px03px#ff0081,...;/*无限叠加*/
+&#125;
+复制代码
+</code></pre>
+<p><img src="https://user-gold-cdn.xitu.io/2020/1/8/16f83f050c74ffdd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="image"><br>效果还是有的，主要就是多花点时间来调试，这里主要根据偏移量和扩展来决定粒子的位置和大小。</p>
+<p>不过这里的偏移量只能是<code>px</code>单位，无法很好的自适应按钮的大小，所以这里采用第二种方式来实现</p>
+<h3 id="2-background-image"><a href="#2-background-image" class="headerlink" title="2.background-image"></a>2.background-image</h3><p>CSS3中<code>background-image</code>是可以无限叠加的，类似于</p>
+<pre><code>.myclass &#123;
+  background: background1, background2, /*...*/ backgroundN;
+&#125;
+复制代码
+</code></pre>
+<p>这里我们可以采用径向渐变<code>radial-gradient</code>来实现多个小圆点。</p>
+<pre><code>.button::before&#123;
+  position: absolute;
+  content: &#39;&#39;;
+  left: -2em;
+  right: -2em;
+  top: -2em;
+  bottom: -2em;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-image: radial-gradient(circle, #ff0081 20%, transparent 0), 
+  radial-gradient(circle, #ff0081 20%, transparent 0),
+  radial-gradient(circle, #ff0081 20%, transparent 0), 
+  radial-gradient(circle, #ff0081 20%, transparent 0), 
+  ...;
+  background-size: 10%10%, 20%20%, 15%15%,...;
+  background-position: 18%40%, 20%31%, 30%30%,...;
+&#125;
+复制代码
+</code></pre>
+<p>这里主要通过<code>background-size</code>和<code>background-position</code>来控制原点的尺寸与位置，看着好像挺复杂，其实只要<code>background-size</code>和<code>background-position</code>与<code>background-image</code>位置一一对应就行了。实际开发中可能有点难调试，可以直接在控制台中通过键盘上下左右键微调实时预览效果（可以考虑做一个可视化工具）。<br><img src="https://user-gold-cdn.xitu.io/2020/1/8/16f83eb7b49c866f?imageslim" alt="bubble2"><br>这样就做出了一个简单的粒子效果。</p>
+<h2 id="动起来"><a href="#动起来" class="headerlink" title="动起来"></a>动起来</h2><p>虽然<code>background-image</code>不支持<code>CSS</code>动画，但是另外两个<code>background-size</code>和<code>background-position</code>支持呀，所以，<code>CSS transition</code>和<code>CSS animation</code>都可以用起来。</p>
+<p>动画效果很简单，就是粒子从中心往外扩散，并且逐渐消失的过程。</p>
+<h3 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h3><p>我们先看看<code>:hover</code>交互</p>
+<pre><code>.button::before&#123;
+  transition:.75s background-position ease-in-out,75s background-size ease-in-out;
+&#125;
+.button:hover::before&#123;
+  background-position: 5%44%, -5%20%, 7%5%...;
+  background-size: 0%0%;
+&#125;
+复制代码
+</code></pre>
+<p>当然直接这样设置肯定是不理想，鼠标离开时会收缩回去，效果如下<br><img src="https://user-gold-cdn.xitu.io/2020/1/8/16f83ea74bb40d6d?imageslim" alt="bubble3"><br>我们需要是鼠标离开时不收缩回去，如何实现呢？</p>
+<p>很简单，把<code>transition</code>设置在<code>:hover</code>下就可以了，表示只有当鼠标经过时才有过渡，离开时没有</p>
+<pre><code>.button:hover::before&#123;
+  background-position: 5%44%, -5%20%, 7%5%...;
+  background-size: 0%0%;
+  transition:.75s background-position ease-in-out,75s background-size ease-in-out;
+&#125;
+复制代码
+</code></pre>
+<p>![bubble4](data:image&#x2F;svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;503&quot; height=&quot;355&quot;></svg>)<br>这样是不是感觉稍微好些了呢？点击<a target="_blank" rel="noopener" href="https://codepen.io/xboxyan/pen/mdyXXPp">这里</a>查看。</p>
+<p>如果我们想做成点击的时候出现粒子动画该怎么做呢？这里就需要借助<code>:active</code>伪类了。</p>
+<p>如果我们按照<code>:hover</code>逻辑，那么</p>
+<pre><code>.button:active::before&#123;
+  background-position: 5%44%, -5%20%, 7%5%...;
+  background-size: 0%0%;
+  transition:.75s background-position ease-in-out,75s background-size ease-in-out;
+&#125;
+复制代码
+</code></pre>
+<p>![bubble5](data:image&#x2F;svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;503&quot; height=&quot;355&quot;></svg>)<br>很遗憾，只有当只有按住不动的时候才能触发，一旦鼠标抬起就没有了，这个时候我们就需要换个角度了。可以这么想象一下，默认就是发散的，然后点击的时候聚拢，抬起的时候就会有还原成之前的发散状态，同时，在点击的时候需要取消掉过渡效果，如下</p>
+<pre><code>.button::before &#123;
+    /*...*/background-position: 5%44%...;/*扩散的状态*/background-size: 0%0%;
+    transition: background-position .5s ease-in-out, background-size .75s ease-in-out;
+&#125;
+
+.button:active::before &#123;
+  transition:0s;/**注意取消掉过渡**/background-size: 10%10%, 20%20%...;
+  background-position: 18%40%, 20%31%,...;
+&#125;
+复制代码
+</code></pre>
+<p>你可以查看这个<a target="_blank" rel="noopener" href="https://codepen.io/xboxyan/pen/oNgEEdG">demo</a></p>
+<p>为什么在<code>:active</code>需要<code>transition:0s</code>呢，你可以试下不添加的效果就明白了，如下<br>![bubble6](data:image&#x2F;svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;503&quot; height=&quot;355&quot;></svg>)</p>
+<h3 id="animation"><a href="#animation" class="headerlink" title="animation"></a>animation</h3><p><code>animation</code>和<code>transition</code>实现原理比较类似，优点是可以做出更加精细的动画，这里就拿<code>:active</code>方式来说吧。</p>
+<pre><code>.button::before&#123;
+  /*...*/animation: bubbles ease-in-out .75s forwards;
+&#125;
+.button:active::before &#123;
+  animation: none; /*这里注意取消动画*/background-size: 0;
+&#125;
+@keyframes bubbles &#123;
+  0% &#123;
+    background-position: 18%40%, ...;
+  &#125;
+  50% &#123;
+    background-position: 10%44%, ...;
+  &#125;
+  100% &#123;
+    background-position: 5%44%, ...;
+    background-size: 0%0%;
+  &#125;
+&#125;
+复制代码
+</code></pre>
+<p>![bubble7](data:image&#x2F;svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;503&quot; height=&quot;355&quot;></svg>)<br>可以在<a target="_blank" rel="noopener" href="https://codepen.io/xboxyan/pen/xxbYYmr">这里</a>查看源码。</p>
+<p>唯一的不足可能是初始化动画会自执行一次。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>上面介绍了纯CSS实现一个粒子动效的按钮，优点很明显，复制一下<code>CSS</code>直接扔到项目里就能用，管他什么原生项目还是<code>react</code>项目，也无需绑定什么事件，也无需额外的逻辑处理，增强现有体验。试想一下，如果这是一个‘购买’按钮，会不会触发你多购买几次呢，反正我肯定是会被吸引住了，哈~<br>缺点也还是有的，比如上面的定位，密密麻麻都是工作量啊，建议这些功能在项目整体完成之后再细细打磨，也可以试着做一些可视化工具来减轻工作量，完。</p>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/27796.html">https://xuehuayu.cn/article/27796.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/16947.html">面试常考手写代码学习技巧总结</a><a class="next" href="/article/24169.html">我写CSS的常用套路(附demo的效果实现与源码）</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/e012dcb8.html">《南京照相馆》真实历史还原，历史不容被歪曲，历史不能被遗忘</a></li><li class="post-list-item"><a class="post-list-link" href="/article/9e7a49ba.html">魔兽世界乌龟服牧师宏分享</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ad81f8a4.html">一个开箱即用的、跨平台的影视聚合播放站</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">211</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A2%8B%E9%87%8C/">袋里</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A7%82%E5%BD%B1/">观影</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://www.cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>精读《React Hooks 最佳实践》 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">精读《React Hooks 最佳实践》</h1><div class="post-meta"><span class="date">2019-10-01</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 8</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/23046.html#waline-comment"><span class="waline-comment-count" data-path="/article/23046.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://zhuanlan.zhihu.com/p/81752821</code><br>React 16.8 于 2019.2 正式发布，这是一个能提升代码质量和开发效率的特性，笔者就抛砖引玉先列出一些实践点，希望得到大家进一步讨论。<br>然而需要理解的是，没有一个完美的最佳实践规范，对一个高效团队来说，稳定的规范比合理的规范更重要，因此这套方案只是最佳实践之一。</p>
+<span id="more"></span>
+
+<h2 id="精读"><a href="#精读" class="headerlink" title="精读"></a>精读</h2><h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><ul>
+<li>拥有较为稳定且理解函数式编程的前端团队。</li>
+<li>开启 ESLint 插件：<a href="https://link.zhihu.com/?target=https://www.npmjs.com/package/eslint-plugin-react-hooks">eslint-plugin-react-hooks</a>。</li>
+</ul>
+<h3 id="组件定义"><a href="#组件定义" class="headerlink" title="组件定义"></a>组件定义</h3><p>Function Component 采用 <code>const</code> + 箭头函数方式定义：</p>
+<pre><code>const App: React.FC&lt;&#123; title: string &#125;&gt; = (&#123; title &#125;) =&gt; &#123;
+  return React.useMemo(() =&gt; &lt;div&gt;&#123;title&#125;&lt;/div&gt;, [title]);
+&#125;;
+
+App.defaultProps = &#123;
+  title: &#39;Function Component&#39;
+&#125;
+</code></pre>
+<p>上面的例子包含了：</p>
+<ol>
+<li>用 <code>React.FC</code> 申明 Function Component 组件类型与定义 Props 参数类型。</li>
+<li>用 <code>React.useMemo</code>  优化渲染性能。</li>
+<li>用 <code>App.defaultProps</code> 定义 Props 的默认值。</li>
+</ol>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><blockquote>
+<p>为什么不用 React.memo?</p>
+</blockquote>
+<p>推荐使用 <code>React.useMemo</code> 而不是 <code>React.memo</code>，因为在组件通信时存在 <code>React.useContext</code> 的用法，这种用法会使所有用到的组件重渲染，只有 <code>React.useMemo</code> 能处理这种场景的按需渲染。</p>
+<blockquote>
+<p>没有性能问题的组件也要使用 useMemo 吗？</p>
+</blockquote>
+<p>要，考虑未来维护这个组件的时候，随时可能会通过 <code>useContext</code> 等注入一些数据，这时候谁会想起来添加 <code>useMemo</code> 呢？</p>
+<blockquote>
+<p>为什么不用解构方式代替 defaultProps?</p>
+</blockquote>
+<p>虽然解构方式书写 <code>defaultProps</code> 更优雅，但存在一个硬伤：对于对象类型每次 Rerender 时引用都会变化，这会带来性能问题，因此不要这么做。</p>
+<h3 id="局部状态"><a href="#局部状态" class="headerlink" title="局部状态"></a>局部状态</h3><p>局部状态有三种，根据常用程度依次排列： <code>useState``useRef``useReducer</code> 。</p>
+<h3 id="useState"><a href="#useState" class="headerlink" title="useState"></a>useState</h3><pre><code>const [hide, setHide] = React.useState(false);
+const [name, setName] = React.useState(&#39;BI&#39;);
+</code></pre>
+<p>状态函数名要表意，尽量聚集在一起申明，方便查阅。</p>
+<h3 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h3><pre><code>const dom = React.useRef(null);
+</code></pre>
+<p><code>useRef</code> 尽量少用，大量 Mutable 的数据会影响代码的可维护性。</p>
+<p>但对于不需重复初始化的对象推荐使用 <code>useRef</code> 存储，比如 <code>new G2()</code> 。</p>
+<h3 id="useReducer"><a href="#useReducer" class="headerlink" title="useReducer"></a>useReducer</h3><p>局部状态不推荐使用 <code>useReducer</code> ，会导致函数内部状态过于复杂，难以阅读。 <code>useReducer</code> 建议在多组件间通信时，结合 <code>useContext</code> 一起使用。</p>
+<h3 id="FAQ-1"><a href="#FAQ-1" class="headerlink" title="FAQ"></a>FAQ</h3><blockquote>
+<p>可以在函数内直接申明普通常量或普通函数吗？</p>
+</blockquote>
+<p>不可以，Function Component 每次渲染都会重新执行，常量推荐放到函数外层避免性能问题，函数推荐使用 <code>useCallback</code> 申明。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>所有 Function Component 内函数必须用 <code>React.useCallback</code> 包裹，以保证准确性与性能。</p>
+<pre><code>const [hide, setHide] = React.useState(false);
+  
+const handleClick = React.useCallback(() =&gt; &#123;
+  setHide(isHide =&gt; !isHide)
+&#125;, [])
+</code></pre>
+<p><code>useCallback</code> 第二个参数必须写，<a href="https://link.zhihu.com/?target=https://www.npmjs.com/package/eslint-plugin-react-hooks">eslint-plugin-react-hooks</a> 插件会自动填写依赖项。</p>
+<h3 id="发请求"><a href="#发请求" class="headerlink" title="发请求"></a>发请求</h3><p>发请求分为操作型发请求与渲染型发请求。</p>
+<h3 id="操作型发请求"><a href="#操作型发请求" class="headerlink" title="操作型发请求"></a>操作型发请求</h3><p>操作型发请求，作为回调函数：</p>
+<pre><code>return React.useMemo(() =&gt; &#123;
+  return (
+    &lt;div onClick=&#123;requestService.addList&#125; /&gt;
+  )
+&#125;, [requestService.addList])
+</code></pre>
+<h3 id="渲染型发请求"><a href="#渲染型发请求" class="headerlink" title="渲染型发请求"></a>渲染型发请求</h3><p>渲染型发请求在 <code>useAsync</code> 中进行，比如刷新列表页，获取基础信息，或者进行搜索， 都可以抽象为依赖了某些变量，当这些变量变化时要重新取数 ：</p>
+<pre><code>const &#123; loading, error, value &#125; = useAsync(async () =&gt; &#123;
+  return requestService.freshList(id);
+&#125;, [requestService.freshList, id]);
+</code></pre>
+<h3 id="组件间通信"><a href="#组件间通信" class="headerlink" title="组件间通信"></a>组件间通信</h3><p>简单的组件间通信使用透传 Props 变量的方式，而频繁组件间通信使用 <code>React.useContext</code> 。</p>
+<p>以一个复杂大组件为例，如果组件内部拆分了很多模块， 但需要共享很多内部状态 ，最佳实践如下：</p>
+<h3 id="定义组件内共享状态-store-ts"><a href="#定义组件内共享状态-store-ts" class="headerlink" title="定义组件内共享状态 - store.ts"></a>定义组件内共享状态 - store.ts</h3><pre><code>export const StoreContext = React.createContext&lt;&#123;
+  state: State;
+  dispatch: React.Dispatch&lt;Action&gt;;
+&#125;&gt;(null)
+
+export interface State &#123;&#125;;
+
+export interface Action &#123; type: &#39;xxx&#39; &#125; | &#123; type: &#39;yyy&#39; &#125;;
+
+export const initState: State = &#123;&#125;;
+
+export const reducer: React.Reducer&lt;State, Action&gt; = (state, action) =&gt; &#123;
+  switch (action.type) &#123;
+    default:
+      return state;
+  &#125;
+&#125;;
+</code></pre>
+<h3 id="根组件注入共享状态-main-ts"><a href="#根组件注入共享状态-main-ts" class="headerlink" title="根组件注入共享状态 - main.ts"></a>根组件注入共享状态 - main.ts</h3><pre><code>import &#123; StoreContext, reducer, initState &#125; from &#39;./store&#39;
+
+const AppProvider: React.FC = props =&gt; &#123;
+  const [state, dispatch] = React.useReducer(reducer, initState);
+
+  return React.useMemo(() =&gt; (
+    &lt;StoreContext.Provider value=&#123; &#123; state, dispatch &#125; &#125;&gt;
+      &lt;App /&gt;
+    &lt;/StoreContext.Provider&gt;
+  ), [state, dispatch])
+&#125;;
+</code></pre>
+<h3 id="任意子组件访问-修改共享状态-child-ts"><a href="#任意子组件访问-修改共享状态-child-ts" class="headerlink" title="任意子组件访问&#x2F;修改共享状态 - child.ts"></a>任意子组件访问&#x2F;修改共享状态 - child.ts</h3><pre><code>import &#123; StoreContext &#125; from &#39;./store&#39;
+
+const app: React.FC = () =&gt; &#123;
+  const &#123; state, dispatch &#125; = React.useContext(StoreContext);
+  
+  return React.useMemo(() =&gt; (
+    &lt;div&gt;&#123;state.name&#125;&lt;/div&gt;
+  ), [state.name])
+&#125;;
+</code></pre>
+<p>如上解决了 多个联系紧密组件模块间便捷共享状态的问题 ，但有时也会遇到需要共享根组件 Props 的问题，这种不可修改的状态不适合一并塞到<code>StoreContext</code> 里，我们新建一个 <code>PropsContext</code> 注入根组件的 Props：</p>
+<pre><code>const PropsContext = React.createContext&lt;Props&gt;(null)
+
+const AppProvider: React.FC&lt;Props&gt; = props =&gt; &#123;
+  return React.useMemo(() =&gt; (
+    &lt;PropsContext.Provider value=&#123;props&#125;&gt;
+      &lt;App /&gt;
+    &lt;/PropsContext.Provider&gt;
+  ), [props])
+&#125;;
+</code></pre>
+<h3 id="结合项目数据流"><a href="#结合项目数据流" class="headerlink" title="结合项目数据流"></a>结合项目数据流</h3><p>参考 <a href="https://link.zhihu.com/?target=https://github.com/reduxjs/react-redux/blob/master/docs/api/hooks.md">react-redux hooks</a>。</p>
+<h3 id="debounce-优化"><a href="#debounce-优化" class="headerlink" title="debounce 优化"></a>debounce 优化</h3><p>比如当输入框频繁输入时，为了保证页面流畅，我们会选择在 <code>onChange</code> 时进行 <code>debounce</code> 。然而在 Function Component 领域中，我们有更优雅的方式实现。</p>
+<blockquote>
+<p>其实在 Input 组件 <code>onChange</code>  使用 <code>debounce</code> 有一个问题，就是当 Input 组件 受控 时， <code>debounce</code> 的值不能及时回填，导致甚至无法输入的问题。</p>
+</blockquote>
+<p>我们站在 Function Component 思维模式下思考这个问题：</p>
+<ol>
+<li>React <a href="https://link.zhihu.com/?target=https://github.com/dt-fe/weekly/blob/v2/099.%25E7%25B2%25BE%25E8%25AF%25BB%25E3%2580%258AScheduling%2520in%2520React%25E3%2580%258B.md">scheduling</a> 通过智能调度系统优化渲染优先级，我们其实不用担心频繁变更状态会导致性能问题。</li>
+<li>如果联动一个文本还觉得慢吗？ <code>onChange</code> 本不慢，大部分使用值的组件也不慢，没有必要从 <code>onChange</code> 源头开始就 <code>debounce</code> 。</li>
+<li>找到渲染性能最慢的组件（比如 iframe 组件），对一些频繁导致其渲染的入参进行<code>useDebounce</code> 。</li>
+</ol>
+<p>下面是一个性能很差的组件，引用了变化频繁的 <code>text</code> （这个 <code>text</code> 可能是 <code>onChange</code> 触发改变的），我们利用 <code>useDebounce</code> 将其变更的频率慢下来即可：</p>
+<pre><code>const App: React.FC = (&#123; text &#125;) =&gt; &#123;
+  // 无论 text 变化多快，textDebounce 最多 1 秒修改一次
+  const textDebounce = useDebounce(text, 1000)
+  
+  return useMemo(() =&gt; &#123;
+    // 使用 textDebounce，但渲染速度很慢的一堆代码
+  &#125;, [textDebounce])
+&#125;;
+</code></pre>
+<p>使用 <code>textDebounce</code> 替代 <code>text</code> 可以将渲染频率控制在我们指定的范围内。</p>
+<h3 id="useEffect-注意事项"><a href="#useEffect-注意事项" class="headerlink" title="useEffect 注意事项"></a>useEffect 注意事项</h3><p>事实上，<code>useEffect</code> 是最为怪异的 Hook，也是最难使用的 Hook。比如下面这段代码：</p>
+<pre><code>useEffect(() =&gt; &#123;
+  props.onChange(props.id)
+&#125;, [props.onChange, props.id])
+</code></pre>
+<p>如果 <code>id</code> 变化，则调用 <code>onChange</code>。但如果上层代码并没有对 <code>onChange</code> 进行合理的封装，导致每次刷新引用都会变动，则会产生严重后果。我们假设父级代码是这么写的：</p>
+<pre><code>class App &#123;
+  render() &#123;
+    return &lt;Child id=&#123;this.state.id&#125; onChange=&#123;id =&gt; this.setState(&#123; id &#125;)&#125; /&gt;
+  &#125;
+&#125;
+</code></pre>
+<p>这样会导致死循环。虽然看上去 <code>&lt;App&gt;</code> 只是将更新 id 的时机交给了子元素 <code>&lt;Child&gt;</code>，但由于 <code>onChange</code> 函数在每次渲染时都会重新生成，因此引用总是在变化，就会出现一个无限死循环：</p>
+<p>新 <code>onChange</code> -&gt; <code>useEffect</code> 依赖更新 -&gt; <code>props.onChange</code> -&gt; 父级重渲染 -&gt; 新 <code>onChange</code>…</p>
+<p>想要阻止这个循环的发生，只要改为 <code>onChange=&#123;this.handleChange&#125;</code> 即可，<code>useEffect</code>对外部依赖苛刻的要求，只有在整体项目都注意保持正确的引用时才能优雅生效。</p>
+<p>然而被调用处代码怎么写并不受我们控制，这就导致了不规范的父元素可能导致 React Hooks 产生死循环。</p>
+<p>因此对于父级 onChange 引用总是变动时，在使用 <code>useEffect</code> 时要注意调试上下文，注意父级传递的参数引用是否正确，如果引用传递不正确，有两种做法：</p>
+<ol>
+<li><p>使用 <a href="https://link.zhihu.com/?target=https://github.com/streamich/react-use/blob/master/docs/useDeepCompareEffect.md">useDeepCompareEffect</a> 对依赖进行深比较。</p>
+</li>
+<li><p>使用 <code>useCurrentValue</code> 对引用总是变化的 props 进行包装：</p>
+<p> function useCurrentValue<T>(value: T): React.RefObject<T> {<br>   const ref &#x3D; React.useRef(null);<br>   ref.current &#x3D; value;<br>   return ref;<br> }</p>
+<p> const App: React.FC &#x3D; ({ onChange }) &#x3D;&gt; {<br>   const onChangeCurrent &#x3D; useCurrentValue(onChange)<br> };</p>
+</li>
+</ol>
+<p><code>onChangeCurrent</code> 的引用保持不变，但每次都会指向最新的 <code>props.onChange</code>，从而可以规避这个问题。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果还有补充，欢迎在文末讨论。</p>
+<p>如需了解 Function Component 或 Hooks 基础用法，可以参考往期精读：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https://github.com/dt-fe/weekly/blob/v2/079.%25E7%25B2%25BE%25E8%25AF%25BB%25E3%2580%258AReact%2520Hooks%25E3%2580%258B.md">精读《React Hooks》</a></li>
+<li><a href="https://link.zhihu.com/?target=https://github.com/dt-fe/weekly/blob/v2/080.%25E7%25B2%25BE%25E8%25AF%25BB%25E3%2580%258A%25E6%2580%258E%25E4%25B9%2588%25E7%2594%25A8%2520React%2520Hooks%2520%25E9%2580%25A0%25E8%25BD%25AE%25E5%25AD%2590%25E3%2580%258B.md">精读《怎么用 React Hooks 造轮子》</a></li>
+<li><a href="https://link.zhihu.com/?target=https://github.com/dt-fe/weekly/blob/v2/096.%25E7%25B2%25BE%25E8%25AF%25BB%25E3%2580%258AuseEffect%2520%25E5%25AE%258C%25E5%2585%25A8%25E6%258C%2587%25E5%258D%2597%25E3%2580%258B.md">精读《useEffect 完全指南》</a></li>
+<li><a href="https://link.zhihu.com/?target=https://github.com/dt-fe/weekly/blob/v2/104.%25E7%25B2%25BE%25E8%25AF%25BB%25E3%2580%258AFunction%2520Component%2520%25E5%2585%25A5%25E9%2597%25A8%25E3%2580%258B.md">精读《Function Component 入门》</a></li>
+</ul>
+<blockquote>
+<p>讨论地址是：<a href="https://link.zhihu.com/?target=https://github.com/dt-fe/weekly/issues/202">精读《React Hooks 最佳实践》 · Issue #202 · dt-fe&#x2F;weekly</a></p>
+</blockquote>
+<p>如果你想参与讨论，请<a href="https://link.zhihu.com/?target=https://github.com/dt-fe/weekly">点击这里</a>，每周都有新的主题，周末或周一发布。前端精读 - 帮你筛选靠谱的内容。</p>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/23046.html">https://xuehuayu.cn/article/23046.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/53962.html">React新旧生命周期一览</a><a class="next" href="/article/41696.html">React实战视频教程</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/e012dcb8.html">《南京照相馆》真实历史还原，历史不容被歪曲，历史不能被遗忘</a></li><li class="post-list-item"><a class="post-list-link" href="/article/9e7a49ba.html">魔兽世界乌龟服牧师宏分享</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ad81f8a4.html">一个开箱即用的、跨平台的影视聚合播放站</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">211</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A2%8B%E9%87%8C/">袋里</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A7%82%E5%BD%B1/">观影</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://www.cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
