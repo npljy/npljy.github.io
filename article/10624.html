@@ -1,0 +1,464 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>【中高级前端必备】手摸手教你撸一个脚手架 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">【中高级前端必备】手摸手教你撸一个脚手架</h1><div class="post-meta"><span class="date">2019-09-29</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%88%86%E4%BA%AB/">分享 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 10</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/10624.html#waline-comment"><span class="waline-comment-count" data-path="/article/10624.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/39</code></p>
+<span id="more"></span>
+<h3 id="脚手架"><a href="#脚手架" class="headerlink" title="脚手架"></a>脚手架</h3><p><code>vue-cli</code>, <code>create-react-app</code>、<code>react-native-cli</code> 等都是非常优秀的脚手架，通过脚手架，我们可以快速初始化一个项目，无需自己从零开始一步步配置，有效提升开发体验。尽管这些脚手架非常优秀，但是未必是符合我们的实际应用的，我们可以定制一个属于自己的脚手架(或公司通用脚手架)，来提升自己的开发效率。</p>
+<blockquote>
+<p>脚手架的作用</p>
+</blockquote>
+<ul>
+<li>减少重复性的工作，不需要复制其他项目再删除无关代码，或者从零创建一个项目和文件。</li>
+<li>可以根据交互动态生成项目结构和配置文件。</li>
+<li>多人协作更为方便，不需要把文件传来传去。</li>
+</ul>
+<h3 id="实现的功能"><a href="#实现的功能" class="headerlink" title="实现的功能"></a>实现的功能</h3><p>在开始之前，我们需要明确自己的脚手架需要哪些功能。<code>vue init template-name project-name</code> 、<code>create-react-app project-name</code>。我们这次编写的脚手架(eos-cli)具备以下能力(脚手架的名字爱叫啥叫啥，我选用了Eos黎明女神):</p>
+<ul>
+<li><code>eos init template-name project-name</code>  根据远程模板，初始化一个项目(远程模板可配置)</li>
+<li><code>eos config set &lt;key&gt; &lt;value&gt;</code> 修改配置信息</li>
+<li><code>eos config get [&lt;key&gt;]</code> 查看配置信息</li>
+<li><code>eos --version</code> 查看当前版本号</li>
+<li><code>eos -h</code></li>
+</ul>
+<p>大家可以自行扩展其它的 <code>commander</code>，本篇文章旨在教大家如何实现一个脚手架。</p>
+<p>本项目完整代码请戳（建议先clone代码）: <a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/tree/master/eos-cli">https://github.com/YvetteLau/Blog/tree/master/eos-cli</a></p>
+<blockquote>
+<p>效果展示</p>
+</blockquote>
+<p><strong>初始化一个项目</strong></p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/5cd8cc78579e2cd1364d420caa824928630ebecd/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f372f32342f313663323231353831383930393534373f773d36303626683d33333226663d67696626733d333638333532"><img src="https://camo.githubusercontent.com/5cd8cc78579e2cd1364d420caa824928630ebecd/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f372f32342f313663323231353831383930393534373f773d36303626683d33333226663d67696626733d333638333532" alt="xuehuayu.cn"></a></p>
+<p><strong>修改.eosrc文件，从 vuejs-template 下载模板</strong></p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/82add85eab645c0a19cf1e3220f4528f23c39c28/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f372f32342f313663323231353839373731653063643f773d35393226683d32383826663d67696626733d333333343738"><img src="https://camo.githubusercontent.com/82add85eab645c0a19cf1e3220f4528f23c39c28/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f372f32342f313663323231353839373731653063643f773d35393226683d32383826663d67696626733d333333343738" alt="xuehuayu.cn"></a></p>
+<h3 id="需要使用的第三方库"><a href="#需要使用的第三方库" class="headerlink" title="需要使用的第三方库"></a>需要使用的第三方库</h3><ul>
+<li>babel-cli&#x2F;babel-env: 语法转换</li>
+<li>commander: 命令行工具</li>
+<li>download-git-repo: 用来下载远程模板</li>
+<li>ini: 格式转换</li>
+<li>inquirer: 交互式命令行工具</li>
+<li>ora: 显示loading动画</li>
+<li>chalk: 修改控制台输出内容样式</li>
+<li>log-symbols: 显示出 √ 或 × 等的图标</li>
+</ul>
+<p>关于这些第三方库的说明，可以直接npm上查看相应的说明，此处不一一展开。</p>
+<h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>创建一个空项目(eos-cli)，使用 <code>npm init</code> 进行初始化。</p>
+<h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><pre><code>npm install babel-cli babel-env chalk commander download-git-repo ini inquirer log-symbols ora
+</code></pre>
+<h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><pre><code>├── bin
+│   └── www             //可执行文件
+├── dist
+    ├── ...//生成文件
+└── src
+    ├── config.js//管理eos配置文件
+    ├── index.js//主流程入口文件
+    ├── init.js//init command
+    ├── main.js//入口文件
+    └── utils
+        ├── constants.js//定义常量
+        ├── get.js//获取模板
+        └── rc.js//配置文件
+├── .babelrc//babel配置文件
+├── package.json
+├── README.md
+</code></pre>
+<h4 id="babel-配置"><a href="#babel-配置" class="headerlink" title="babel 配置"></a>babel 配置</h4><p>开发使用了ES6语法，使用 <code>babel</code> 进行转义，</p>
+<blockquote>
+<p><code>.bablerc</code></p>
+</blockquote>
+<pre><code>&#123;
+    &quot;presets&quot;: [
+        [
+            &quot;env&quot;,
+            &#123;
+                &quot;targets&quot;: &#123;
+                    &quot;node&quot;: &quot;current&quot;
+                &#125;
+            &#125;
+        ]
+    ]
+&#125;
+</code></pre>
+<h3 id="eos-命令"><a href="#eos-命令" class="headerlink" title="eos 命令"></a><code>eos</code> 命令</h3><p>node.js 内置了对命令行操作的支持，<code>package.json</code> 中的 <code>bin</code> 字段可以定义命令名和关联的执行文件。在 <code>package.json</code> 中添加 <code>bin</code> 字段</p>
+<blockquote>
+<p>package.json</p>
+</blockquote>
+<pre><code>&#123;
+    &quot;name&quot;: &quot;eos-cli&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;,
+    &quot;description&quot;: &quot;脚手架&quot;,
+    &quot;main&quot;: &quot;index.js&quot;,
+    &quot;bin&quot;: &#123;
+        &quot;eos&quot;: &quot;./bin/www&quot;
+    &#125;,
+    &quot;scripts&quot;: &#123;
+        &quot;compile&quot;: &quot;babel src -d dist&quot;,
+        &quot;watch&quot;: &quot;npm run compile -- --watch&quot;
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>www 文件</p>
+</blockquote>
+<p>行首加入一行 <code>#!/usr/bin/env node</code> 指定当前脚本由node.js进行解析</p>
+<pre><code>#! /usr/bin/env noderequire(&#39;../dist/main.js&#39;);
+</code></pre>
+<h4 id="链接到全局环境"><a href="#链接到全局环境" class="headerlink" title="链接到全局环境"></a>链接到全局环境</h4><p>开发过程中为了方便调试，在当前的 <code>eos-cli</code> 目录下执行 <code>npm link</code>，将 <code>eos</code> 命令链接到全局环境。</p>
+<h4 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h4><pre><code>npm run watch
+</code></pre>
+<h3 id="处理命令行"><a href="#处理命令行" class="headerlink" title="处理命令行"></a>处理命令行</h3><p>利用 <code>commander</code> 来处理命令行。</p>
+<blockquote>
+<p>main</p>
+</blockquote>
+<pre><code>importprogramfrom&#39;commander&#39;;
+import &#123; VERSION &#125; from&#39;./utils/constants&#39;;
+importapplyfrom&#39;./index&#39;;
+importchalkfrom&#39;chalk&#39;;
+
+/** * eos commands *    - config *    - init */let actionMap = &#123;
+    init: &#123;
+        description:&#39;generate a new project from a template&#39;,
+        usages: [
+            &#39;eos init templateName projectName&#39;
+        ]
+    &#125;,
+    config: &#123;
+        alias:&#39;cfg&#39;,
+        description:&#39;config .eosrc&#39;,
+        usages: [
+            &#39;eos config set &lt;k&gt; &lt;v&gt;&#39;,
+            &#39;eos config get &lt;k&gt;&#39;,
+            &#39;eos config remove &lt;k&gt;&#39;
+        ]
+        
+    &#125;,
+    //other commands
+&#125;
+
+// 添加 init / config 命令Object.keys(actionMap).forEach((action) =&gt; &#123;
+    program.command(action)
+    .description(actionMap[action].description)
+    .alias(actionMap[action].alias) //别名
+    .action(() =&gt; &#123;
+        switch (action) &#123;
+            case&#39;config&#39;: 
+                //配置apply(action, ...process.argv.slice(3));
+                break;
+            case&#39;init&#39;:
+                apply(action, ...process.argv.slice(3));
+                break;
+            default:
+                break;
+        &#125;
+    &#125;);
+&#125;);
+
+functionhelp() &#123;
+    console.log(&#39;\r\nUsage:&#39;);
+    Object.keys(actionMap).forEach((action) =&gt; &#123;
+        actionMap[action].usages.forEach(usage=&gt; &#123;
+            console.log(&#39;  - &#39;+ usage);
+        &#125;);
+    &#125;);
+    console.log(&#39;\r&#39;);
+&#125;
+program.usage(&#39;&lt;command&gt; [options]&#39;);
+// eos -h program.on(&#39;-h&#39;, help);
+program.on(&#39;--help&#39;, help);
+// eos -V   VERSION 为 package.json 中的版本号program.version(VERSION, &#39;-V --version&#39;).parse(process.argv);
+
+// eos 不带参数时if (!process.argv.slice(2).length) &#123;
+    program.outputHelp(make_green);
+&#125;
+functionmake_green(txt) &#123;
+    returnchalk.green(txt); 
+&#125;
+</code></pre>
+<h3 id="下载模板"><a href="#下载模板" class="headerlink" title="下载模板"></a>下载模板</h3><p><code>download-git-repo</code> 支持从 Github、Gitlab 下载远程仓库到本地。</p>
+<blockquote>
+<p>get.js</p>
+</blockquote>
+<pre><code>import &#123; getAll &#125; from&#39;./rc&#39;;
+importdownloadGitfrom&#39;download-git-repo&#39;;
+
+exportconstdownloadLocal=async (templateName, projectName) =&gt; &#123;
+    let config =awaitgetAll();
+    let api =`$&#123;config.registry&#125;/$&#123;templateName&#125;`;
+    returnnewPromise((resolve, reject) =&gt; &#123;
+        //projectName 为下载到的本地目录downloadGit(api, projectName, (err) =&gt; &#123;
+            if (err) &#123;
+                reject(err);
+            &#125;
+            resolve();
+        &#125;);
+    &#125;);
+&#125;
+</code></pre>
+<h3 id="init-命令"><a href="#init-命令" class="headerlink" title="init 命令"></a><code>init</code> 命令</h3><h4 id="命令行交互"><a href="#命令行交互" class="headerlink" title="命令行交互"></a>命令行交互</h4><p>在用户执行 init 命令后，向用户提出问题，接收用户的输入并作出相应的处理。命令行交互利用 <code>inquirer</code> 来实现:</p>
+<pre><code>inquirer.prompt([
+    &#123;
+        name:&#39;description&#39;,
+        message:&#39;Please enter the project description: &#39;
+    &#125;,
+    &#123;
+        name:&#39;author&#39;,
+        message:&#39;Please enter the author name: &#39;
+    &#125;
+]).then((answer) =&gt; &#123;
+    //...
+&#125;);
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/683b9c52b6ff83636df4d72e042ac4fa1ea67b09/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f372f32342f313663323263643938363037333861613f773d39383826683d31363626663d6a70656726733d313732383739"><img src="https://camo.githubusercontent.com/683b9c52b6ff83636df4d72e042ac4fa1ea67b09/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f372f32342f313663323263643938363037333861613f773d39383826683d31363626663d6a70656726733d313732383739" alt="xuehuayu.cn"></a></p>
+<h4 id="视觉美化"><a href="#视觉美化" class="headerlink" title="视觉美化"></a>视觉美化</h4><p>在用户输入之后，开始下载模板，这时候使用 <code>ora</code> 来提示用户正在下载模板，下载结束之后，也给出提示。</p>
+<pre><code>importorafrom&#39;ora&#39;;
+let loading =ora(&#39;downloading template ...&#39;);
+loading.start();
+//downloadloading.succeed(); //或 loading.fail();
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/70ed40fac983355be196ef4da44bfab0d1e9ad87/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f372f32342f313663323263666534623431623735643f773d39373026683d32323626663d6a70656726733d323437393634"><img src="https://camo.githubusercontent.com/70ed40fac983355be196ef4da44bfab0d1e9ad87/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f372f32342f313663323263666534623431623735643f773d39373026683d32323626663d6a70656726733d323437393634" alt="xuehuayu.cn"></a></p>
+<blockquote>
+<p>init.js</p>
+</blockquote>
+<pre><code>import &#123; downloadLocal &#125; from&#39;./utils/get&#39;;
+importorafrom&#39;ora&#39;;
+importinquirerfrom&#39;inquirer&#39;;
+importfsfrom&#39;fs&#39;;
+importchalkfrom&#39;chalk&#39;;
+importsymbolfrom&#39;log-symbols&#39;;
+
+let init =async (templateName, projectName) =&gt; &#123;
+    //项目不存在if (!fs.existsSync(projectName)) &#123;
+        //命令行交互inquirer.prompt([
+            &#123;
+                name:&#39;description&#39;,
+                message:&#39;Please enter the project description: &#39;
+            &#125;,
+            &#123;
+                name:&#39;author&#39;,
+                message:&#39;Please enter the author name: &#39;
+            &#125;
+        ]).then(async (answer) =&gt; &#123;
+            //下载模板 选择模板//通过配置文件，获取模板信息let loading =ora(&#39;downloading template ...&#39;);
+            loading.start();
+            downloadLocal(templateName, projectName).then(() =&gt; &#123;
+                loading.succeed();
+                constfileName=`$&#123;projectName&#125;/package.json`;
+                if(fs.existsSync(fileName))&#123;
+                    constdata=fs.readFileSync(fileName).toString();
+                    let json =JSON.parse(data);
+                    json.name= projectName;
+                    json.author=answer.author;
+                    json.description=answer.description;
+                    //修改项目文件夹中 package.json 文件fs.writeFileSync(fileName, JSON.stringify(json, null, &#39;\t&#39;), &#39;utf-8&#39;);
+                    console.log(symbol.success, chalk.green(&#39;Project initialization finished!&#39;));
+                &#125;
+            &#125;, () =&gt; &#123;
+                loading.fail();
+            &#125;);
+        &#125;);
+    &#125;else &#123;
+        //项目已经存在console.log(symbol.error, chalk.red(&#39;The project already exists&#39;));
+    &#125;
+&#125;
+module.exports= init;
+</code></pre>
+<h3 id="config-配置"><a href="#config-配置" class="headerlink" title="config 配置"></a><code>config</code> 配置</h3><pre><code>eos config set registry vuejs-templates
+</code></pre>
+<p>config 配置，支持我们使用其它仓库的模板，例如，我们可以使用 vuejs-templates 中的仓库作为模板。这样有一个好处：更新模板无需重新发布脚手架，使用者无需重新安装，并且可以自由选择下载目标。</p>
+<blockquote>
+<p>config.js</p>
+</blockquote>
+<pre><code>// 管理 .eosrc 文件 (当前用户目录下)import &#123; get, set, getAll, remove &#125; from&#39;./utils/rc&#39;;
+
+let config =async (action, key, value) =&gt; &#123;
+    switch (action) &#123;
+        case&#39;get&#39;:
+            if (key) &#123;
+                let result =awaitget(key);
+                console.log(result);
+            &#125; else &#123;
+                let obj =awaitgetAll();
+                Object.keys(obj).forEach(key=&gt; &#123;
+                    console.log(`$&#123;key&#125;=$&#123;obj[key]&#125;`);
+                &#125;)
+            &#125;
+            break;
+        case&#39;set&#39;:
+            set(key, value);
+            break;
+        case&#39;remove&#39;:
+            remove(key);
+            break;
+        default:
+            break;
+    &#125;
+&#125;
+
+module.exports= config;
+</code></pre>
+<blockquote>
+<p>rc.js</p>
+</blockquote>
+<p>.eosrc 文件的增删改查</p>
+<pre><code>import &#123; RC, DEFAULTS &#125; from&#39;./constants&#39;;
+import &#123; decode, encode &#125; from&#39;ini&#39;;
+import &#123; promisify &#125; from&#39;util&#39;;
+importchalkfrom&#39;chalk&#39;;
+importfsfrom&#39;fs&#39;;
+
+constexits=promisify(fs.exists);
+constreadFile=promisify(fs.readFile);
+constwriteFile=promisify(fs.writeFile);
+
+//RC 是配置文件//DEFAULTS 是默认的配置exportconstget=async (key) =&gt; &#123;
+    constexit=awaitexits(RC);
+    let opts;
+    if (exit) &#123;
+        opts =awaitreadFile(RC, &#39;utf8&#39;);
+        opts =decode(opts);
+        return opts[key];
+    &#125;
+    return&#39;&#39;;
+&#125;
+
+exportconstgetAll=async () =&gt; &#123;
+    constexit=awaitexits(RC);
+    let opts;
+    if (exit) &#123;
+        opts =awaitreadFile(RC, &#39;utf8&#39;);
+        opts =decode(opts);
+        return opts;
+    &#125;
+    return &#123;&#125;;
+&#125;
+
+exportconstset=async (key, value) =&gt; &#123;
+    constexit=awaitexits(RC);
+    let opts;
+    if (exit) &#123;
+        opts =awaitreadFile(RC, &#39;utf8&#39;);
+        opts =decode(opts);
+        if(!key) &#123;
+            console.log(chalk.red(chalk.bold(&#39;Error:&#39;)), chalk.red(&#39;key is required&#39;));
+            return;
+        &#125;
+        if(!value) &#123;
+            console.log(chalk.red(chalk.bold(&#39;Error:&#39;)), chalk.red(&#39;value is required&#39;));
+            return;
+        &#125;
+        Object.assign(opts, &#123; [key]: value &#125;);
+    &#125; else &#123;
+        opts =Object.assign(DEFAULTS, &#123; [key]: value &#125;);
+    &#125;
+    awaitwriteFile(RC, encode(opts), &#39;utf8&#39;);
+&#125;
+
+exportconstremove=async (key) =&gt; &#123;
+    constexit=awaitexits(RC);
+    let opts;
+    if (exit) &#123;
+        opts =awaitreadFile(RC, &#39;utf8&#39;);
+        opts =decode(opts);
+        delete opts[key];
+        awaitwriteFile(RC, encode(opts), &#39;utf8&#39;);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p><code>npm publish</code> 将本脚手架发布至npm上。其它用户可以通过 <code>npm install eos-cli -g</code> 全局安装。</p>
+<p>即可使用 <code>eos</code> 命令。</p>
+<h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p>本项目完整代码请戳: <a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/tree/master/eos-cli">https://github.com/YvetteLau/Blog/tree/master/eos-cli</a></p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/587be9822f9355bb5fbfe308d8840056ed7c27fa/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f372f32342f313663323264326462643339366232393f773d32353526683d32353526663d6a70656726733d38353832"><img src="https://camo.githubusercontent.com/587be9822f9355bb5fbfe308d8840056ed7c27fa/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f372f32342f313663323264326462643339366232393f773d32353526683d32353526663d6a70656726733d38353832" alt="xuehuayu.cn"></a></p>
+<p>编写本文，虽然花费了一定时间，但是在这个过程中，我也学习到了很多知识，谢谢各位小伙伴愿意花费宝贵的时间阅读本文，如果本文给了您一点帮助或者是启发，请不要吝啬你的赞和Star，您的肯定是我前进的最大动力。<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog">https://github.com/YvetteLau/Blog</a></p>
+<h3 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h3><p>[1] <a target="_blank" rel="noopener" href="http://www.zhufengpeixun.cn/main/course/index.html">珠峰架构课(墙裂推荐)</a></p>
+<p>[2] npm依赖文档(<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/download-git-repo">https://www.npmjs.com/package/download-git-repo</a>)</p>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/10624.html">https://xuehuayu.cn/article/10624.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/23195.html">细说JS异步发展历程</a><a class="next" href="/article/3544.html">深入理解全能的 Reducer</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/9f9f2ad3.html">vue3原生实现图片对比</a></li><li class="post-list-item"><a class="post-list-link" href="/article/79a06f0e.html">git checkout到历史版本后又提交了代码切回开发分支后如何找回提交的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/article/cb6b3b86.html">《东极岛》历史还原：​“里斯本丸”沉船事件</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">213</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A2%8B%E9%87%8C/">袋里</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A7%82%E5%BD%B1/">观影</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://www.cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

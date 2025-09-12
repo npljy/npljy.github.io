@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>CSS实现自适应分隔线的N种方法 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">CSS实现自适应分隔线的N种方法</h1><div class="post-meta"><span class="date">2020-02-03</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.5k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 6</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/63266.html#waline-comment"><span class="waline-comment-count" data-path="/article/63266.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>作者：XboxYan, https://github.com/XboxYan/notes/issues/12 原文地址：https://mp.weixin.qq.com/s/ICkDqd-ltGM67G60WcArow</code><br>分割线是网页中比较常见的一类设计了，比如说知乎的更多回答</p>
+<span id="more"></span>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="image"></p>
+<blockquote>
+<p>这里的自适应是指两边的横线会随着文字的个数和父级的宽度自适应</p>
+</blockquote>
+<p>偷偷的看了一下知乎的实现，很显然是用一块白色背景覆盖的，加一点背景就露馅了</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="image"></p>
+<p>心想：知乎的前端也不怎么样？ 可能别人的重点不在这些上面吧</p>
+<p>下面列举几种更好的实现方式，不会露馅的那种</p>
+<h2 id="1-伪元素-transform-translateX-100"><a href="#1-伪元素-transform-translateX-100" class="headerlink" title="1.伪元素+transform:translateX(-100%);"></a>1.伪元素+transform:translateX(-100%);</h2><p>主要原理是设置文本居中<code>text-align: center;</code>，然后给定两个伪元素，分别绝对定位，那么此时伪元素也是跟随着水平居中的，设置足够的宽度，然后把左边的往左位移<code>100%</code>就可以了，父级记得超出隐藏。</p>
+<p>具体实现如下</p>
+<p><code>html</code>结构为</p>
+<pre><code>&lt;div class=&quot;title&quot;&gt;我是分割线&lt;/div&gt;
+</code></pre>
+<p><code>css</code>样式为</p>
+<pre><code>.title&#123;
+position: relative;
+text-align: center;
+overflow: hidden;
+font-size: 14px;
+color: #999;
+&#125;
+.title::before,.title::after&#123;
+content: &#39;&#39;;
+display: inline-block;
+width: 100%;
+height: 1px;
+position: absolute;
+background: #ccc;
+top: 50%;
+&#125;
+.title::before&#123;
+margin-left: -10px;
+transform: translateX(-100%);
+&#125;
+.title::after&#123;
+margin-left: 10px;
+&#125;
+</code></pre>
+<p>CSS分隔线 （伪元素+transform）</p>
+<h2 id="2-伪元素-flex"><a href="#2-伪元素-flex" class="headerlink" title="2.伪元素+flex"></a>2.伪元素+flex</h2><p>这个比较好理解了，设置<code>display:flex</code>，然后两个伪元素分别铺满剩余空间。</p>
+<p>具体实现如下</p>
+<p><code>html</code>结构为</p>
+<pre><code>&lt;div class=&quot;title&quot;&gt;我是分割线&lt;/div&gt;
+</code></pre>
+<p><code>css</code>样式为</p>
+<pre><code>.title&#123;
+display: flex;
+align-items: center;
+font-size: 14px;
+color: #999;
+&#125;
+.title::before,.title::after&#123;
+content: &#39;&#39;;
+flex: 1;
+height: 1px;
+background: #ccc;
+&#125;
+.title::before&#123;
+margin-right: 10px;
+&#125;
+.title::after&#123;
+margin-left: 10px;
+&#125;
+</code></pre>
+<p>CSS分隔线 （伪元素+flex）</p>
+<h2 id="3-伪元素-box-shadow-outline-clip-path"><a href="#3-伪元素-box-shadow-outline-clip-path" class="headerlink" title="3.伪元素+box-shadow&#x2F;outline+clip-path"></a>3.伪元素+box-shadow&#x2F;outline+clip-path</h2><p>同样利用<code>text-align: center</code>使文本和伪元素居中，然后生成足够大的<code>box-shadow</code>或者<code>outline</code>，由于不支持单个方向，所以用<code>clip-path</code>或者<code>clip</code>裁剪掉</p>
+<p>具体实现如下</p>
+<p><code>html</code>结构为</p>
+<pre><code>&lt;div class=&quot;title&quot;&gt;我是分割线&lt;/div&gt;
+</code></pre>
+<p><code>css</code>样式为</p>
+<pre><code>.title&#123;
+text-align: center;
+font-size: 14px;
+color: #999;
+overflow: hidden;
+&#125;
+.title::before,.title::after&#123;
+content: &#39;&#39;;
+display: inline-block;
+width: 0;
+height: 1px;
+box-shadow: 0009999px#ccc;
+vertical-align: middle;
+&#125;
+.title::before&#123;
+margin-right: 10px;
+clip-path: polygon(0 0, -9999px 0, -9999px 100%, 0 100%);
+&#125;
+.title::after&#123;
+margin-left: 10px;
+clip-path: polygon(0 0, 9999px 0, 9999px 100%, 0 100%);
+&#125;
+</code></pre>
+<p>CSS分隔线 （伪元素+box-shadow&#x2F;outline+clip-path）</p>
+<h2 id="4-伪元素-right-100"><a href="#4-伪元素-right-100" class="headerlink" title="4.伪元素+right:100%"></a>4.伪元素+right:100%</h2><p>这个实现需要多一层标签，外部仍然是<code>text-align: center</code>，内部文本里添加两个伪元素绝对定位，其中左边的设置距离右边100%（相对于文本标签）即可</p>
+<p>具体实现如下</p>
+<p><code>html</code>结构为</p>
+<pre><code>&lt;div class=&quot;title&quot;&gt;
+&lt;span class=&quot;inner&quot;&gt;我是分割线&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<p><code>css</code>样式为</p>
+<pre><code>.title&#123;
+text-align: center;
+font-size: 14px;
+color: #999;
+overflow: hidden;
+&#125;
+.inner&#123;
+position: relative;
+&#125;
+.inner::before,.inner::after&#123;
+position: absolute;
+content: &#39;&#39;;
+width: 9999px;
+height: 1px;
+background: #ccc;
+top: 50%;
+&#125;
+.inner::before&#123;
+right: 100%;
+margin-right: 10px;
+&#125;
+.inner::after&#123;
+margin-left: 10px;
+&#125;
+</code></pre>
+<p>CSS分隔线 （伪元素+right:100%）</p>
+<h2 id="5-border-transform"><a href="#5-border-transform" class="headerlink" title="5. border+transform"></a>5. border+transform</h2><p>这个思路可以不用到伪元素，不过需要额外的标签，给内部文本左右足够大的<code>1px</code>边框，此时需要设置<code>line-height:1px</code>，由于内部整体以及足够大了（超过父级），可以使用绝对定位和<code>transform: translateX(-50%)</code>居中</p>
+<p>具体实现如下</p>
+<p><code>html</code>结构为</p>
+<pre><code>&lt;div class=&quot;title&quot;&gt;
+&lt;span class=&quot;inner&quot;&gt;我是分割线&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<p><code>css</code>样式为</p>
+<pre><code>.title&#123;
+position: relative;
+text-align: center;
+font-size: 14px;
+color: #999;
+overflow: hidden;
+padding: .6em0;/**把高度撑起来**/
+&#125;
+.inner&#123;
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+white-space: nowrap;
+line-height: 1px;
+border-left: 9999px solid #ccc;
+border-right: 9999px solid #ccc;
+padding: 010px;
+&#125;
+</code></pre>
+<p>CSS分隔线 （border+transform）</p>
+<h2 id="6-伪元素-border-left-right"><a href="#6-伪元素-border-left-right" class="headerlink" title="6.伪元素+border+left&#x2F;right"></a>6.伪元素+border+left&#x2F;right</h2><p>这个思路只需要一个伪元素，在文本内部生成一个伪元素，利用足够大的<code>border</code>和相同的负值（绝对定位+left&#x2F;right）还原位置</p>
+<p>具体实现如下</p>
+<p><code>html</code>结构为</p>
+<pre><code>&lt;div class=&quot;title&quot;&gt;
+&lt;span class=&quot;inner&quot;&gt;我是分割线&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<p><code>css</code>样式为</p>
+<pre><code>.title&#123;
+text-align: center;
+font-size: 14px;
+color: #999;
+overflow: hidden;
+&#125;
+.inner&#123;
+position: relative;
+padding: 010px;
+&#125;
+.inner::before&#123;
+content: &#39;&#39;;
+position: absolute;
+height: 1px;
+top: 50%;
+border-left: 9999px solid #ccc;
+border-right: 9999px solid #ccc;
+right: -9999px;
+left: -9999px;
+&#125;
+</code></pre>
+<p>CSS分隔线 （伪元素+border+left&#x2F;right）</p>
+<h2 id="7-伪元素-table-cell"><a href="#7-伪元素-table-cell" class="headerlink" title="7.伪元素+table-cell"></a>7.伪元素+table-cell</h2><p>主要思路为父级设置<code>display:table</code>，伪元素设置<code>display:table-cell</code>，并设置足够大的宽度即可</p>
+<p>具体实现如下</p>
+<p><code>html</code>结构为</p>
+<pre><code>&lt;div class=&quot;title&quot;&gt;
+&lt;span class=&quot;inner&quot;&gt;我是分割线&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<p><code>css</code>样式为</p>
+<pre><code>.title&#123;
+display: table;
+font-size: 14px;
+color: #999;
+&#125;
+.inner&#123;
+display: table-cell;
+white-space: nowrap;
+padding: 010px;
+&#125;
+.title::before,.title::after&#123;
+content: &#39;&#39;;
+display: table-cell;
+width: 9999px;
+overflow: hidden;
+background: linear-gradient(#ccc 0,#ccc) center no-repeat;/**这里用线性渐变生成的，也可以用其他方式**/
+background-size: 100%1px;
+&#125;
+</code></pre>
+<p>CSS分隔线 （伪元素+table-cell）</p>
+<h2 id="8-fieldset-legend"><a href="#8-fieldset-legend" class="headerlink" title="8.fieldset+legend"></a>8.fieldset+legend</h2><p>利用<code>fieldset</code>和<code>legend</code>标签组合，可以天然实现分隔线效果，参考至张鑫旭的这篇文章</p>
+<p>具体实现如下</p>
+<p><code>html</code>结构为</p>
+<pre><code>&lt;fieldset class=&quot;title&quot;&gt;
+&lt;legend class=&quot;inner&quot;&gt;我是分割线&lt;/legend&gt;
+&lt;/fieldset&gt;
+</code></pre>
+<p><code>css</code>样式为</p>
+<pre><code>.title&#123;
+font-size: 14px;
+color: #999;
+border: 0;
+border-top: 1px solid #ccc;
+padding: 0;
+&#125;
+.inner&#123;
+margin: 0 auto;;
+padding: 010px;
+&#125;
+</code></pre>
+<p>CSS分隔线 （fieldset+legend）</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>上面一共列举了8中方式来实现分隔线的效果，每种方法思路各不相同，重要的是可以发散自己的想象力，可能这才是<code>CSS</code>与其他语言所不同的吧~</p>
+<p>这里整理了一下，整体效果如下非大家在实际项目中可自行选取所需要的方式</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x1sPNgPd86wPYdHnPCEic360Ptl1QwjT0sEIE0Tq4c6fhzHfjXWicicvn65wXuMevkZicrhPGwH1Z8RTA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="image"></p>
+<p>可能还有其他方式没有想到，欢迎大家集思广益，在下方留言讨论</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/aDoYvepE5x2xHc4WIGl2pOfcwQngFZppYC3ZCuJiafqsncuYqfbEe6P60zDG35JVKJteqdq79icibIhs4PYLkL5uw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/63266.html">https://xuehuayu.cn/article/63266.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/4233.html">TypeScript和JavaScript混合开发，这或许是配上单元测试的最佳实践</a><a class="next" href="/article/43397.html">HTTPS 到底加密了什么？</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/9f9f2ad3.html">vue3原生实现图片对比</a></li><li class="post-list-item"><a class="post-list-link" href="/article/79a06f0e.html">git checkout到历史版本后又提交了代码切回开发分支后如何找回提交的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/article/cb6b3b86.html">《东极岛》历史还原：​“里斯本丸”沉船事件</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">213</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A2%8B%E9%87%8C/">袋里</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A7%82%E5%BD%B1/">观影</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://www.cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

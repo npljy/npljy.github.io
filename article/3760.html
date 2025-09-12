@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>ES2019中JavaScript的新功能 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src='https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683';var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-150860401-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','UA-150860401-1');
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">ES2019中JavaScript的新功能</h1><div class="post-meta"><span class="date">2019-10-31</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.8k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 8</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/3760.html#waline-comment"><span class="waline-comment-count" data-path="/article/3760.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/_cmQAQlexXGQc-3Kuay5Sg</code></p>
+<p>JavaScript从成立之初就已经走了很长一段路，提供了许多新的添加和功能，这些功能是专门设计来使该语言更加人性化和省时。以下是我最近发现的一些有趣的JavaScript新增内容。</p>
+<span id="more"></span>
+<p><img src="https://img.php.cn/upload/article/000/000/013/5daa65abe5ee1843.jpg" alt="xuehuayu.cn"></p>
+<p>其中一些功能已经在node、chrome、firefox和safari中可用，而其他功能仍处于建议阶段。</p>
+<p><strong>可选链接</strong></p>
+<p>可选的链接是使用<code>?.</code>运算符完成的。它主要确保问号之前的先前值既不不确定也不为空。这在评估深度嵌套对象的属性时非常有用。</p>
+<p><code>?.</code>在评估属性之前，需要确保操作员存在。</p>
+<p>考虑以下示例：</p>
+<pre><code>const users = [
+  &#123;
+   name: &quot;Olagunju Gbolahan&quot;,
+   occupation: &quot;Software Developer&quot;,
+   sayName()&#123;
+    console.log(`my name is $&#123;this.name&#125;`);
+   &#125;,
+   address: &#123; office: &quot;New York&quot; &#125;
+  &#125;,
+  &#123; name: &quot;Olawaseyi Moses&quot; &#125;,
+  &#123; name: &quot;Tunde Ednut&quot; &#125;];
+</code></pre>
+<p>让我们考虑用户数组中的第二个用户:</p>
+<pre><code>const secondUser = users[1];
+</code></pre>
+<p>我们可能想要得到这个用户的办公地址。在可选的链接操作符出现之前，我们必须通过一个相对低效的过程来获得这些信息:</p>
+<pre><code>const theAddress = secondUser.address &amp;&amp; secondUser.address.office;
+console.log(theAddress); // undefined
+</code></pre>
+<p>如果我们有一个深度嵌套的对象，我们必须在每一层使用&amp;&amp;操作符检查它的值是否存在。</p>
+<p>但对于可选的链接，我们只需执行以下操作：</p>
+<pre><code>const theAddress = secondUser?.address?.office;
+console.log(theAddress); // undefined
+</code></pre>
+<p>我们还可以使用可选的链接与对象方法来确认它们在执行之前存在：</p>
+<pre><code>const firstUser = users[0];
+console.log(firstUser.sayName?.()); // my name is Olagunju Gbolahan
+</code></pre>
+<p>如果对象上不存在具有给定名称的方法，则只返回undefined。</p>
+<pre><code>console.log(firstUser.sayOccupation?.()); // undefined
+</code></pre>
+<p>由于可选的链接运算符尚未添加到javascript规范中，因此它仍处于建议阶段。</p>
+<p>您今天可以将其与<a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining">babel-plugin-proposal-optional-chaining</a>插件一起使用。</p>
+<p><strong>可选的捕捉绑定</strong></p>
+<p>当我们事先知道我们的错误是什么，并且我们不想要未使用变量的冗余时，这个特性就派上用场了。</p>
+<p>考虑一下传统的try and catch块:</p>
+<pre><code>try &#123;
+  const parsedJsonData = JSON.parse(obj);
+&#125; catch (error) &#123;
+  //the variable error has to be declared whether used or unused
+  console.log(obj);
+&#125;
+</code></pre>
+<p>但是，通过添加可选的catch绑定，我们不必提供未使用的变量——特别是当我们为try块设置了默认值时。</p>
+<pre><code>function getName () &#123;
+  let name = &quot;Gbolahan Olagunju&quot;;
+  try &#123;
+    name = obj.details.name
+  &#125; catch &#123;&#125;
+  console.log(name);
+&#125;
+</code></pre>
+<p><strong>管道操作符</strong></p>
+<p>这是Javascript中建议添加的内容之一，目前处于第1阶段。</p>
+<p>它本质上帮助对同一个参数进行多个函数调用，使其具有可读性。</p>
+<p>它通过将表达式的值作为参数传递到函数来实现这一点。考虑在不使用管道操作符<code>|&gt;</code>的情况下调用以下函数。</p>
+<pre><code>const capitalize = (input) =&gt;  input[0].toUpperCase() + input.substring(1);
+const removeSpaces = (input) =&gt; input.trim();
+const repeat = (input) =&gt; `$&#123;input&#125;, $&#123;input&#125;`;
+
+const withoutpipe = repeat(capitalize(removeSpaces(&#39;    i am gbols    &#39;)));
+console.log(withoutpipe); // I am gbols, I am gbols
+</code></pre>
+<p>但是有了管道操作符，可读性可以大大提高:</p>
+<pre><code>const withpipe = &#39;    i am gbols    &#39;
+                |&gt; removeSpaces
+                |&gt; capitalize
+                |&gt; repeat;
+console.log(withpipe); // // I am gbols, I am gbols
+</code></pre>
+<p><strong>String.trimStart和String.trimEnd</strong></p>
+<p>这款应用的正式名称为trimRight和trimLeft，但随着ES2019的到来，它们的别名被改成了trimStart和trimEnd，让用户更直观。</p>
+<p>考虑下面的例子:</p>
+<pre><code>let message = &quot;     Welcome to LogRocket      &quot;;
+message.trimStart(); // &quot;Welcome to LogRocket      &quot;
+message.trimEnd(); // &quot;Welcome to LogRocket&quot;;
+</code></pre>
+<p><strong>Object.fromEntries</strong></p>
+<p>在讨论Object.fromEntries之前，讨论Object.entries是很重要的。</p>
+<p>在ES2017规范中添加了object.entries方法，以提供一种将对象转换为其等效数组的方法，从而允许它访问所有用于处理的数组方法。</p>
+<p>考虑以下对象:</p>
+<pre><code>const devs = &#123;
+  gbols: 5,
+  andrew: 3,
+  kelani: 10,
+  dafe: 8,
+&#125;;
+const arrOfDevs = Object.entries(devs);
+console.log(arrOfDevs);
+//[
+//  [&quot;gbols&quot;, 5]
+//  [&quot;andrew&quot;, 3]
+//  [&quot;kelani&quot;, 10]
+//  [&quot;dafe&quot;, 8]
+//]
+</code></pre>
+<p>现在，我们可以使用数组上的筛选方法来获得拥有5年以上经验的开发者:</p>
+<pre><code>const expDevs = arrOfDevs.filter(([name, yrsOfExp]) =&gt; yrsOfExp &gt; 5);
+console.log(expDevs);
+//[
+//  [&quot;kelani&quot;, 10]
+//  [&quot;dafe&quot;, 8]
+//]
+</code></pre>
+<p>然后出现了一个问题:没有简单的方法可以将结果转换回对象。通常，我们会写自己的代码把它转换成一个对象:</p>
+<pre><code>const expDevsObj = &#123;&#125;;
+for (let [name, yrsOfExp] of expDevs) &#123;
+expDevsObj[name] = yrsOfExp;
+&#125;
+console.log(expDevsObj);
+//&#123;
+ //dafe: 8
+ //kelani: 10
+//&#125;
+</code></pre>
+<p>但随着Object.fromEntries的引入，我们可以做到这一点:</p>
+<pre><code>console.log(Object.fromEntries(expDevs));
+//&#123;
+ //dafe: 8
+ //kelani: 10
+//&#125;
+</code></pre>
+<p><strong>Flat</strong></p>
+<p>通常，由于API调用，我们有很多嵌套的数组要处理。 在这种情况下，展平阵列尤为重要。</p>
+<p>考虑下面的例子:</p>
+<pre><code>const developers = [
+  &#123;
+    name: &#39;Gbolahan Olagunju&#39;,
+    yrsOfExp: 6,
+    stacks: [&#39;Javascript&#39;, &#39;NodeJs&#39;, [&#39;ReactJs&#39;, [&#39;ExpressJs&#39;, &#39;PostgresSql&#39;]]]
+  &#125;,
+  &#123;
+    name: &#39;Daniel Show&#39;,
+    yrsOfExp: 2,
+    stacks: [&#39;Ruby&#39;, &#39;Jest&#39;, [&#39;Rails&#39;, [&#39;JQuery&#39;, &#39;MySql&#39;]]]
+  &#125;,
+  &#123;
+    name: &#39;Edafe Emunotor&#39;,
+    yrsOfExp: 9,
+    stacks: [&#39;PHP&#39;, &#39;Lumen&#39;, [&#39;Angular&#39;, &#39;NgRx&#39;]]
+  &#125;
+];
+
+const allStacks = developers.map((&#123;stacks&#125;) =&gt; stacks);
+console.log(allStacks);
+// [
+// [&#39;Javascript&#39;, &#39;NodeJs&#39;, [&#39;ReactJs&#39;, [&#39;ExpressJs&#39;, &#39;PostgresSql&#39;]]]
+// [&#39;Ruby&#39;, &#39;Jest&#39;, [&#39;Rails&#39;, [&#39;JQuery&#39;, &#39;MySql&#39;]]]
+// [&#39;PHP&#39;, &#39;Lumen&#39;, [&#39;Angular&#39;, &#39;NgRx&#39;]]
+// ]
+</code></pre>
+<p>allstacks变量包含深度嵌套的数组。要展平此数组，可以使用<code>array.prototype.flat</code>。</p>
+<p>方法如下:</p>
+<pre><code>const flatSingle = allStacks.flat();
+console.log(flatSingle);
+//[
+// &quot;JavaScript&quot;,
+//  &quot;NodeJs&quot;,
+// [&#39;ReactJs&#39;, [&#39;ExpressJs&#39;, &#39;PostgresSql&#39;]]]
+// &quot;Ruby&quot;,
+// &quot;Jest&quot;,
+// [&#39;Rails&#39;, [&#39;JQuery&#39;, &#39;MySql&#39;]]]
+// &quot;PHP&quot;,
+// &quot;Lumen&quot;
+// [&quot;Angular&quot;, &quot;NgRx&quot;]
+//]
+</code></pre>
+<p>从上面我们可以推断出数组被压扁了一层，这是<code>array.prototype.flat</code>的默认参数。</p>
+<p>我们可以向<code>flat</code>方法传递一个参数来确定我们想要的<code>flatten</code>的程度。</p>
+<p>默认参数的值为1。为了使数组完全平坦化，我们可以传递一个无穷大的参数。无穷大参数使数组完全平坦化，而不考虑数组的深度。</p>
+<p>方法如下:</p>
+<pre><code>const completelyFlat = allStacks.flat(Infinity);
+console.log(completelyFlat);
+//[
+// &quot;JavaScript&quot;,
+// &quot;NodeJs&quot;,
+// &quot;ReactJs&quot;,
+// &quot;ExpressJs&quot;,
+// &quot;PostgresSql&quot;,
+// &quot;Ruby&quot;,
+// &quot;Jest&quot;,
+// &quot;Rails&quot;,
+// &quot;JQuery&quot;,
+// &quot;MySql&quot;,
+// &quot;PHP&quot;,
+// &quot;Lumen&quot;,
+// &quot;Angular&quot;,
+// &quot;NgRx&quot;
+//]
+</code></pre>
+<p><strong>FlatMap</strong></p>
+<p><code>FlatMap</code>是调用<code>map</code>方法和深度为1的<code>flat</code>方法的组合。它通常非常有用，因为它以一种非常有效的方式做同样的事情。</p>
+<p>下面是同时使用<code>map</code>和<code>flatmap</code>的简单示例：</p>
+<pre><code>let arr = [&#39;my name is Gbols&#39;, &#39; &#39;, &#39;and i am great developer&#39;]; 
+console.log(arr.map(word =&gt; word.split(&#39; &#39;)));
+//[
+// [&quot;my&quot;, &quot;name&quot;, &quot;is&quot;, &quot;Gbols&quot;],
+// [&quot;&quot;, &quot;&quot;],
+// [&quot;and&quot;, &quot;i&quot;, &quot;am&quot;, &quot;great&quot;, &quot;developer&quot;]
+//]
+
+console.log(arr.flatMap(word =&gt; word.split(&#39; &#39;)));
+//[ &quot;my&quot;
+//  &quot;name&quot;
+//  &quot;is&quot;
+//  &quot;Gbols&quot;
+//   &quot;&quot;
+//   &quot;&quot;
+//   &quot;and&quot;
+//   &quot;i&quot;
+//   &quot;am&quot;
+//   &quot;great&quot;
+//   &quot;developer&quot;
+//]
+</code></pre>
+<p>英文原文地址：<a target="_blank" rel="noopener" href="https://blog.logrocket.com/new-es2019-javascript-features-every-developer-should-be-excited-about/">https://blog.logrocket.com/new-es2019-javascript-features-every-developer-should-be-excited-about/</a></p>
+<p>以上就是ES2019中JavaScript的新功能的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><iframe src="/donate/?AliPayQR=null&amp;WeChatQR=null&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=null&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/3760.html">https://xuehuayu.cn/article/3760.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/26940.html">javascript常用正则表达式备忘录</a><a class="next" href="/article/32280.html">Chrome浏览器垃圾回收机制与内存泄漏分析</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/9f9f2ad3.html">vue3原生实现图片对比</a></li><li class="post-list-item"><a class="post-list-link" href="/article/79a06f0e.html">git checkout到历史版本后又提交了代码切回开发分支后如何找回提交的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/article/cb6b3b86.html">《东极岛》历史还原：​“里斯本丸”沉船事件</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">213</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A2%8B%E9%87%8C/">袋里</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A7%82%E5%BD%B1/">观影</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://github.com/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="GitHub" target="_blank">GitHub</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://www.cainiaoblog.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="菜鸟博客" target="_blank">菜鸟博客</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
