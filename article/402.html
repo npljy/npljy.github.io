@@ -1,0 +1,585 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><title>如何用120行代码，实现一个交互完整的拖拽上传组件？ | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">如何用120行代码，实现一个交互完整的拖拽上传组件？</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%88%86%E4%BA%AB/">分享 </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.3k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 11</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/402.html#waline-comment"><span class="waline-comment-count" data-path="/article/402.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/cPW8Sr2pShJumnCtXsk-ww</code></p>
+<span id="more"></span>
+
+<p>前言</p>
+<p>你将在该篇学到：</p>
+<ul>
+<li><p>如何将现有组件改写为 <code>React Hooks</code>函数组件</p>
+</li>
+<li><p><code>useState</code>、<code>useEffect</code>、<code>useRef</code>是如何替代原生命周期和<code>Ref</code>的。</p>
+</li>
+<li><p>一个完整拖拽上传行为覆盖的四个事件：<code>dragover</code>、<code>dragenter</code>、<code>drop</code>、<code>dragleave</code></p>
+</li>
+<li><p>如何使用<code>React Hooks</code>编写自己的UI组件库。</p>
+</li>
+</ul>
+<p>逛国外社区时看到这篇：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQTTRvUiaqjn7XPAic0Dibplv7wE3Cf9A5icgc0IXUseJTITlICwmpfQe7mA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<blockquote>
+<p>How To Implement Drag and Drop for Files in React</p>
+</blockquote>
+<p>文章讲了<code>React</code>拖拽上传的精简实现，但直接翻译照搬显然不是我的风格。</p>
+<p>于是我又用<code>React Hooks</code> 重写了一版，除<code>CSS</code>的代码总数 <code>120</code>行。<br>效果如下：<br><img src="https://mmbiz.qpic.cn/mmbiz_gif/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQ22hCiaDib2YSa5Z5tV8S1iagG7I6yxoG2B6vSTs1gQ17opoGf3TpTOBdA/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"></p>
+<h2 id="1-添加基本目录骨架"><a href="#1-添加基本目录骨架" class="headerlink" title="1. 添加基本目录骨架"></a>1. 添加基本目录骨架</h2><p><strong>app.js</strong></p>
+<pre><code>import React from &#39;react&#39;;
+import PropTypes from &#39;prop-types&#39;;
+
+import &#123; FilesDragAndDrop &#125; from &#39;../components/Common/FilesDragAndDropHook&#39;;
+
+export default class App extends React.Component &#123;
+    static propTypes = &#123;&#125;;
+
+    onUpload = (files) =&gt; &#123;
+        console.log(files);
+    &#125;;
+
+    render() &#123;
+        return (
+            &lt;div&gt;
+                &lt;FilesDragAndDrop
+                    onUpload=&#123;this.onUpload&#125;
+                /&gt;
+            &lt;/div&gt;
+        );
+    &#125;
+&#125;
+</code></pre>
+<p><strong>FilesDragAndDrop.js(非Hooks)：</strong></p>
+<pre><code>import React from &#39;react&#39;;
+import PropTypes from &#39;prop-types&#39;;
+
+import &#39;../../scss/components/Common/FilesDragAndDrop.scss&#39;;
+
+export default class FilesDragAndDrop extends React.Component &#123;
+    static propTypes = &#123;
+        onUpload: PropTypes.func.isRequired,
+    &#125;;
+
+    render() &#123;
+        return (
+            &lt;div className=&#39;FilesDragAndDrop__area&#39;&gt;
+                传下文件试试？
+                &lt;span
+                    role=&#39;img&#39;
+                    aria-label=&#39;emoji&#39;
+                    className=&#39;area__icon&#39;
+                &gt;
+                    &amp;#128526;
+                &lt;/span&gt;
+            &lt;/div&gt;
+        );
+    &#125;
+&#125;
+</code></pre>
+<h3 id="1-如何改写为-Hooks-组件？"><a href="#1-如何改写为-Hooks-组件？" class="headerlink" title="1. 如何改写为 Hooks 组件？"></a>1. 如何改写为 Hooks 组件？</h3><p>请看动图：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQgAicXrRuE1Eb4ibsYScOcK2LR3g76GrVmSiah9SeBVaqRVYr1DUgpibaLg/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"><img src="https://mmbiz.qpic.cn/mmbiz_png/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQXQ53pH8bZakicdOqaNd4xUgrg8MayiaOoF8XrbC9foKU56fz9sTYkVIQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<h3 id="2-改写组件"><a href="#2-改写组件" class="headerlink" title="2. 改写组件"></a>2. 改写组件</h3><p><code>Hooks</code>版组件属于函数组件，将以上改造:</p>
+<pre><code>import React, &#123; useEffect, useState, useRef &#125; from &quot;react&quot;;
+import PropTypes from &#39;prop-types&#39;;
+import classNames from &#39;classnames&#39;;
+import classList from &#39;../../scss/components/Common/FilesDragAndDrop.scss&#39;;
+const FilesDragAndDrop = (props) =&gt; &#123;
+    return (
+        &lt;div className=&#39;FilesDragAndDrop__area&#39;&gt;
+            传下文件试试？
+            &lt;span
+                role=&#39;img&#39;
+                aria-label=&#39;emoji&#39;
+                className=&#39;area__icon&#39;
+            &gt;
+                &amp;#128526;
+            &lt;/span&gt;
+        &lt;/div&gt;
+    );
+&#125;
+
+FilesDragAndDrop.propTypes = &#123;
+    onUpload: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
+    count: PropTypes.number,
+    formats: PropTypes.arrayOf(PropTypes.string)
+&#125;
+
+export &#123; FilesDragAndDrop &#125;;
+</code></pre>
+<p><strong>FilesDragAndDrop.scss</strong></p>
+<pre><code>.FilesDragAndDrop &#123;
+  .FilesDragAndDrop__area &#123;
+    width: 300px;
+    height: 200px;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+    font-size: 24px;
+    color: #555555;
+    border: 2px #c3c3c3 dashed;
+    border-radius: 12px;
+
+    .area__icon &#123;
+      font-size: 64px;
+      margin-top: 20px;
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<p>然后就可以看到页面：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQNLCxJec47zEGicU5fmTQFokLla9I8Qbdeh6hZ1pYUjnEmsBQq9jYgCQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<h2 id="2-实现分析"><a href="#2-实现分析" class="headerlink" title="2. 实现分析"></a>2. 实现分析</h2><p>从操作DOM、组件复用、事件触发、阻止默认行为、以及<code>Hooks</code>应用方面分析。</p>
+<h3 id="1-操作DOM：useRef"><a href="#1-操作DOM：useRef" class="headerlink" title="1. 操作DOM：useRef"></a>1. 操作DOM：<code>useRef</code></h3><p>由于需要拖拽文件上传以及操作组件实例，需要用到<code>ref</code>属性。</p>
+<p><code>React Hooks</code>中 新增了<code>useRef API</code><br><strong>语法</strong></p>
+<pre><code>const refContainer = useRef(initialValue);
+</code></pre>
+<ul>
+<li><p><code>useRef</code> 返回一个可变的 <code>ref</code> 对象，。</p>
+</li>
+<li><p>其 <strong>.current</strong> 属性被初始化为传递的参数（<code>initialValue</code>）</p>
+</li>
+<li><p>返回的对象将存留在整个组件的生命周期中。</p>
+<p>  …<br>  const drop &#x3D; useRef();</p>
+<p>  return (<br>  <div
+      ref={drop}
+      className='FilesDragAndDrop'
+  /><br>  …<br>  )</p>
+</li>
+</ul>
+<h3 id="2-事件触发"><a href="#2-事件触发" class="headerlink" title="2. 事件触发"></a>2. 事件触发</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_png/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQvnn30ACmFzc47kcxnB1awoxeUW2y9dicLSAQRrtiaBpp3tbaO1OLU4vQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>完成具有动态交互的拖拽行为并不简单，需要用到四个事件控制：</p>
+<ul>
+<li><p>区域外：<code>dragleave</code>，    离开范围</p>
+</li>
+<li><p>区域内：<code>dragenter</code>，用来确定放置目标是否接受放置。</p>
+</li>
+<li><p>区域内移动：<code>dragover</code>，用来确定给用户显示怎样的反馈信息</p>
+</li>
+<li><p>完成拖拽（落下）：<code>drop</code>，允许放置对象。</p>
+</li>
+</ul>
+<p>这四个事件并存，才能阻止 Web 浏览器默认行为和形成反馈。</p>
+<h3 id="3-阻止默认行为"><a href="#3-阻止默认行为" class="headerlink" title="3. 阻止默认行为"></a>3. 阻止默认行为</h3><p>代码很简单：</p>
+<pre><code>e.preventDefault() //阻止事件的默认行为(如在浏览器打开文件)
+e.stopPropagation() // 阻止事件冒泡
+</code></pre>
+<p>每个事件阶段都需要阻止，为啥呢？举个🌰栗子：</p>
+<pre><code>const handleDragOver = (e) =&gt; &#123;
+    // e.preventDefault();
+    // e.stopPropagation();
+&#125;;
+</code></pre>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQV8pBwsn4AWqE1iaOLqCd8vLFqSvtMx9HnWUIZWoibrt0TPlIXeRNLz8Q/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"><br>不阻止的话，就会触发打开文件的行为，这显然不是我们想看到的。<br><img src="https://mmbiz.qpic.cn/mmbiz_png/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQIxsGsP5FOIn74o42lDBrbOkTiaT98lHpybXia0aXno00JlCTRkTNYFYA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<h3 id="4-组件内部状态-useState"><a href="#4-组件内部状态-useState" class="headerlink" title="4. 组件内部状态: useState"></a>4. 组件内部状态: useState</h3><p>拖拽上传组件，除了基础的拖拽状态控制，还应有成功上传文件或未通过验证时的消息提醒。<br>状态组成应为：</p>
+<pre><code>state = &#123;
+    dragging: false,
+    message: &#123;
+        show: false,
+        text: null,
+        type: null,
+    &#125;,
+&#125;;
+</code></pre>
+<p>写成对应<code>useState</code>前先回归下写法:</p>
+<pre><code>const [属性, 操作属性的方法] = useState(默认值);
+</code></pre>
+<p>于是便成了：</p>
+<pre><code>const [dragging, setDragging] = useState(false);
+const [message, setMessage] = useState(&#123; show: false, text: null, type: null &#125;);
+</code></pre>
+<h3 id="5-需要第二个叠加层"><a href="#5-需要第二个叠加层" class="headerlink" title="5. 需要第二个叠加层"></a>5. 需要第二个叠加层</h3><p>除了<code>drop</code>事件，另外三个事件都是动态变化的，而在拖动元素时，每隔 <code>350</code> 毫秒会触发 <code>dragover</code>事件。</p>
+<p>此时就需要第二<code>ref</code>来统一控制。</p>
+<p>所以全部的ref为：</p>
+<pre><code>const drop = useRef(); // 落下层
+const drag = useRef(); // 拖拽活动层
+</code></pre>
+<h3 id="6-文件类型、数量控制"><a href="#6-文件类型、数量控制" class="headerlink" title="6. 文件类型、数量控制"></a>6. 文件类型、数量控制</h3><p>我们在应用组件时，<code>prop</code>需要传入类型和数量来控制</p>
+<pre><code>&lt;FilesDragAndDrop
+    onUpload=&#123;this.onUpload&#125;
+    count=&#123;1&#125;
+    formats=&#123;[&#39;jpg&#39;, &#39;png&#39;]&#125;
+&gt;
+    &lt;div className=&#123;classList[&#39;FilesDragAndDrop__area&#39;]&#125;&gt;
+        传下文件试试？
+&lt;span
+            role=&#39;img&#39;
+            aria-label=&#39;emoji&#39;
+            className=&#123;classList[&#39;area__icon&#39;]&#125;
+        &gt;
+            &amp;#128526;
+&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/FilesDragAndDrop&gt;
+</code></pre>
+<ul>
+<li><p><code>onUpload</code>：拖拽完成处理事件</p>
+</li>
+<li><p><code>count</code>: 数量控制</p>
+</li>
+<li><p><code>formats</code>: 文件类型。</p>
+</li>
+</ul>
+<p>对应的组件<code>Drop</code>内部事件：<code>handleDrop</code>:</p>
+<pre><code>const handleDrop = (e) =&gt; &#123;
+    e.preventDefault();
+    e.stopPropagation();
+    setDragging(false)
+    const &#123; count, formats &#125; = props;
+    const files = [...e.dataTransfer.files];
+    if (count &amp;&amp; count &lt; files.length) &#123;
+        showMessage(`抱歉，每次最多只能上传$&#123;count&#125; 文件。`, &#39;error&#39;, 2000);
+        return;
+    &#125;
+    if (formats &amp;&amp; files.some((file) =&gt; !formats.some((format) =&gt; file.name.toLowerCase().endsWith(format.toLowerCase())))) &#123;
+        showMessage(`只允许上传 $&#123;formats.join(&#39;, &#39;)&#125;格式的文件`, &#39;error&#39;, 2000);
+        return;
+    &#125;
+    if (files &amp;&amp; files.length) &#123;
+        showMessage(&#39;成功上传！&#39;, &#39;success&#39;, 1000);
+        props.onUpload(files);
+    &#125;
+&#125;;
+</code></pre>
+<blockquote>
+<p><code>.endsWith</code>是判断字符串结尾，如：<code>&quot;abcd&quot;.endsWith(&quot;cd&quot;); // true</code></p>
+</blockquote>
+<p><code>showMessage</code>则是控制显示文本：</p>
+<pre><code>const showMessage = (text, type, timeout) =&gt; &#123;
+    setMessage(&#123; show: true, text, type, &#125;)
+    setTimeout(() =&gt;
+        setMessage(&#123; show: false, text: null, type: null, &#125;,), timeout);
+&#125;;
+</code></pre>
+<blockquote>
+<p>需要触发定时器来回到初始状态</p>
+</blockquote>
+<h3 id="7-事件在生命周期里的触发与销毁"><a href="#7-事件在生命周期里的触发与销毁" class="headerlink" title="7. 事件在生命周期里的触发与销毁"></a>7. 事件在生命周期里的触发与销毁</h3><p>原本<code>EventListener</code>的事件需要在<code>componentDidMount</code>添加，在<code>componentWillUnmount</code>中销毁：</p>
+<pre><code>componentDidMount () &#123;
+    this.drop.addEventListener(&#39;dragover&#39;, this.handleDragOver);
+&#125;
+
+componentWillUnmount () &#123;
+    this.drop.removeEventListener(&#39;dragover&#39;, this.handleDragOver);
+&#125;
+</code></pre>
+<p>但<code>Hooks</code>中有内部操作方法和对应<code>useEffect</code>来取代上述两个生命周期</p>
+<p><code>useEffect</code>示例：</p>
+<pre><code>useEffect(() =&gt; &#123;
+  document.title = `You clicked $&#123;count&#125; times`;
+&#125;, [count]); // 仅在 count 更改时更新
+</code></pre>
+<p>而 <strong>每个<code>effect</code>都可以返回一个清除函数。如此可以将添加(<code>componentDidMount</code>)和移除(<code>componentWillUnmount</code>) 订阅的逻辑放在一起。</strong></p>
+<p>于是上述就可以写成：</p>
+<pre><code>useEffect(() =&gt; &#123;
+    drop.current.addEventListener(&#39;dragover&#39;, handleDragOver);
+    return () =&gt; &#123;
+        drop.current.removeEventListener(&#39;dragover&#39;, handleDragOver);
+    &#125;
+&#125;)
+</code></pre>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQhAnat3eFjQCk8HYbx6yeDicJzZiatoQn9RcWL18yrTS2NVia4qERFBJSQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"><br>这也太香了吧！！！</p>
+<h2 id="3-完整代码："><a href="#3-完整代码：" class="headerlink" title="3. 完整代码："></a>3. 完整代码：</h2><p><strong><code>FilesDragAndDropHook.js</code>:</strong></p>
+<pre><code>import React, &#123; useEffect, useState, useRef &#125; from &quot;react&quot;;
+import PropTypes from &#39;prop-types&#39;;
+import classNames from &#39;classnames&#39;;
+import classList from &#39;../../scss/components/Common/FilesDragAndDrop.scss&#39;;
+
+const FilesDragAndDrop = (props) =&gt; &#123;
+    const [dragging, setDragging] = useState(false);
+    const [message, setMessage] = useState(&#123; show: false, text: null, type: null &#125;);
+    const drop = useRef();
+    const drag = useRef();
+    useEffect(() =&gt; &#123;
+        // useRef 的 drop.current 取代了 ref 的 this.drop
+        drop.current.addEventListener(&#39;dragover&#39;, handleDragOver);
+        drop.current.addEventListener(&#39;drop&#39;, handleDrop);
+        drop.current.addEventListener(&#39;dragenter&#39;, handleDragEnter);
+        drop.current.addEventListener(&#39;dragleave&#39;, handleDragLeave);
+        return () =&gt; &#123;
+            drop.current.removeEventListener(&#39;dragover&#39;, handleDragOver);
+            drop.current.removeEventListener(&#39;drop&#39;, handleDrop);
+            drop.current.removeEventListener(&#39;dragenter&#39;, handleDragEnter);
+            drop.current.removeEventListener(&#39;dragleave&#39;, handleDragLeave);
+        &#125;
+    &#125;)
+    const handleDragOver = (e) =&gt; &#123;
+        e.preventDefault();
+        e.stopPropagation();
+    &#125;;
+
+    const handleDrop = (e) =&gt; &#123;
+        e.preventDefault();
+        e.stopPropagation();
+        setDragging(false)
+        const &#123; count, formats &#125; = props;
+        const files = [...e.dataTransfer.files];
+
+        if (count &amp;&amp; count &lt; files.length) &#123;
+            showMessage(`抱歉，每次最多只能上传$&#123;count&#125; 文件。`, &#39;error&#39;, 2000);
+            return;
+        &#125;
+
+        if (formats &amp;&amp; files.some((file) =&gt; !formats.some((format) =&gt; file.name.toLowerCase().endsWith(format.toLowerCase())))) &#123;
+            showMessage(`只允许上传 $&#123;formats.join(&#39;, &#39;)&#125;格式的文件`, &#39;error&#39;, 2000);
+            return;
+        &#125;
+
+        if (files &amp;&amp; files.length) &#123;
+            showMessage(&#39;成功上传！&#39;, &#39;success&#39;, 1000);
+            props.onUpload(files);
+        &#125;
+    &#125;;
+
+    const handleDragEnter = (e) =&gt; &#123;
+        e.preventDefault();
+        e.stopPropagation();
+        e.target !== drag.current &amp;&amp; setDragging(true)
+    &#125;;
+
+    const handleDragLeave = (e) =&gt; &#123;
+        e.preventDefault();
+        e.stopPropagation();
+        e.target === drag.current &amp;&amp; setDragging(false)
+    &#125;;
+
+    const showMessage = (text, type, timeout) =&gt; &#123;
+        setMessage(&#123; show: true, text, type, &#125;)
+        setTimeout(() =&gt;
+            setMessage(&#123; show: false, text: null, type: null, &#125;,), timeout);
+    &#125;;
+
+    return (
+        &lt;div
+            ref=&#123;drop&#125;
+            className=&#123;classList[&#39;FilesDragAndDrop&#39;]&#125;
+        &gt;
+            &#123;message.show &amp;&amp; (
+                &lt;div
+                    className=&#123;classNames(
+                        classList[&#39;FilesDragAndDrop__placeholder&#39;],
+                        classList[`FilesDragAndDrop__placeholder--$&#123;message.type&#125;`],
+                    )&#125;
+                &gt;
+                    &#123;message.text&#125;
+                    &lt;span
+                        role=&#39;img&#39;
+                        aria-label=&#39;emoji&#39;
+                        className=&#123;classList[&#39;area__icon&#39;]&#125;
+                    &gt;
+                        &#123;message.type === &#39;error&#39; ? &lt;&gt;&amp;#128546;&lt;/&gt; : &lt;&gt;&amp;#128536;&lt;/&gt;&#125;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            )&#125;
+            &#123;dragging &amp;&amp; (
+                &lt;div
+                    ref=&#123;drag&#125;
+                    className=&#123;classList[&#39;FilesDragAndDrop__placeholder&#39;]&#125;
+                &gt;
+                    请放手
+                    &lt;span
+                        role=&#39;img&#39;
+                        aria-label=&#39;emoji&#39;
+                        className=&#123;classList[&#39;area__icon&#39;]&#125;
+                    &gt;
+                        &amp;#128541;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            )&#125;
+            &#123;props.children&#125;
+        &lt;/div&gt;
+    );
+&#125;
+
+FilesDragAndDrop.propTypes = &#123;
+    onUpload: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
+    count: PropTypes.number,
+    formats: PropTypes.arrayOf(PropTypes.string)
+&#125;
+
+export &#123; FilesDragAndDrop &#125;;
+</code></pre>
+<p><strong><code>App.js</code>：</strong></p>
+<pre><code>import React, &#123; Component &#125; from &#39;react&#39;;
+import &#123; FilesDragAndDrop &#125; from &#39;../components/Common/FilesDragAndDropHook&#39;;
+import classList from &#39;../scss/components/Common/FilesDragAndDrop.scss&#39;;
+
+export default class App extends Component &#123;
+    onUpload = (files) =&gt; &#123;
+        console.log(files);
+    &#125;;
+    render () &#123;
+        return (
+            &lt;FilesDragAndDrop
+                onUpload=&#123;this.onUpload&#125;
+                count=&#123;1&#125;
+                formats=&#123;[&#39;jpg&#39;, &#39;png&#39;, &#39;gif&#39;]&#125;
+            &gt;
+                &lt;div className=&#123;classList[&#39;FilesDragAndDrop__area&#39;]&#125;&gt;
+                    传下文件试试？
+            &lt;span
+                        role=&#39;img&#39;
+                        aria-label=&#39;emoji&#39;
+                        className=&#123;classList[&#39;area__icon&#39;]&#125;
+                    &gt;
+                        &amp;#128526;
+            &lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/FilesDragAndDrop&gt;
+        )
+    &#125;
+&#125;
+</code></pre>
+<p><strong><code>FilesDragAndDrop.scss</code>：</strong></p>
+<pre><code>.FilesDragAndDrop &#123;
+  position: relative;
+
+  .FilesDragAndDrop__placeholder &#123;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+    background-color: #e7e7e7;
+    border-radius: 12px;
+    color: #7f8e99;
+    font-size: 24px;
+    opacity: 1;
+    text-align: center;
+    line-height: 1.4;
+
+    &amp;.FilesDragAndDrop__placeholder--error &#123;
+      background-color: #f7e7e7;
+      color: #cf8e99;
+    &#125;
+
+    &amp;.FilesDragAndDrop__placeholder--success &#123;
+      background-color: #e7f7e7;
+      color: #8ecf99;
+    &#125;
+
+    .area__icon &#123;
+      font-size: 64px;
+      margin-top: 20px;
+    &#125;
+  &#125;
+&#125;
+
+.FilesDragAndDrop__area &#123;
+  width: 300px;
+  height: 200px;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
+  font-size: 24px;
+  color: #555555;
+  border: 2px #c3c3c3 dashed;
+  border-radius: 12px;
+
+  .area__icon &#123;
+    font-size: 64px;
+    margin-top: 20px;
+  &#125;
+&#125;
+</code></pre>
+<p>然后你就可以拿到文件慢慢耍了。。。<br><img src="https://mmbiz.qpic.cn/mmbiz_gif/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQhT1icqPQAzib5H0T9ibfvH6dU2jflFBH2SoLibtPDIbj0EfRHGz7xGmXUQ/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"><img src="https://mmbiz.qpic.cn/mmbiz_png/icnrNBicEhkVWy7FdrmvylE8IOtycZZGJQMfg7iaWrzllyv91xXqjL5hGicjMsM8M5kicw3YBMkwAtGDZD8cswZFjrQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/402.html">https://xuehuayu.cn/article/402.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/35397.html">React 开发人员应该掌握的 22 种神奇工具</a><a class="next" href="/article/25318.html">可能是最全的 文本溢出截断省略 方案合集</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/369326bd.html">Celestial Master Zhong Kui</a></li><li class="post-list-item"><a class="post-list-link" href="/article/8d86d7a8.html">Vue3 Native Implementation of Image Comparison</a></li><li class="post-list-item"><a class="post-list-link" href="/article/9f9f2ad3.html">vue3原生实现图片对比</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/movie/">movie</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E5%85%B1%E8%8A%82%E6%97%A5/">公共节日</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">214</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/">uni-app</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/">iOS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/uni-app/iOS/safari/">safari</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/%E5%BD%B1%E8%A7%86%E7%94%B5%E8%A7%86%E5%B0%8F%E8%AF%B4%E6%BC%AB%E7%94%BB%E8%B5%84%E8%AE%AF%E9%9F%B3%E4%B9%90/">影视电视小说漫画资讯音乐</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%93%E5%8C%85/">抓包</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%AD%A3%E5%88%99/">正则</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A2%8B%E9%87%8C/">袋里</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A7%82%E5%BD%B1/">观影</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E8%AE%AF/">资讯</a><span class="category-list-count">16</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8在线播放器" target="_blank">M3U8在线播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
