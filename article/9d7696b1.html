@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any", // 支持所有操作系统（因为基于浏览器）
+  "permissions": "browser", // 需要的权限
+  "author": {
+      "@type": "Person",
+      "name": "前端壹菜鸟"
+  },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "前端壹菜鸟",
+      "url": "https://xuehuayu.cn",
+    },
+    {
+      "@type": "WebSite",
+      "name": "前端壹菜鸟",
+      "url": "https://cainiaoblog.cn",
+    },
+    
+  ]
+}
+</script><title>浏览器的一些“滚动”行为鉴赏 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">浏览器的一些“滚动”行为鉴赏</h1><div class="post-meta"><span class="date">2019-09-30</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 5</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/9d7696b1.html#waline-comment"><span class="waline-comment-count" data-path="/article/9d7696b1.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5d75adfbe51d4561e84fcc9c#comment</code><br>按照我的个人理解，滚动分<code>全局滚动(浏览器窗口)</code>跟<code>局部滚动(自定义的盒子)</code>，以下内容绝大部分都是指<code>全局滚动</code>，<code>局部滚动</code>的话获取<code>指定的DOM</code>再调用<code>相应的API</code>即可✅</p>
+<span id="more"></span>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h2 id="如何设置全局滚动条高度"><a href="#如何设置全局滚动条高度" class="headerlink" title="如何设置全局滚动条高度"></a>如何设置全局滚动条高度</h2><ol>
+<li><p>最常用的方法：<br> window.scrollTo(0, 0);</p>
+<p> &#x2F;&#x2F; or<br> window.scrollTo({<br>   left: 0,<br>   top: 100<br> });</p>
+</li>
+<li><p>也可以利用<code>相对滚动</code>设置：<br> window.scrollBy(0, 0);</p>
+<p> &#x2F;&#x2F; or<br> window.scrollBy({<br>   left: 0,<br>   top: 100<br> });</p>
+</li>
+<li><p>或者利用<code>scrollTop</code>设置：</p>
+<p> document.scrollingElement.scrollTop &#x3D; 100;</p>
+</li>
+</ol>
+<p>注意：<code>scrollTo</code>跟<code>scrollBy</code>的参数是一样的，区别就是<code>scrollBy</code>滚动距离是相对与当前滚动条位置进行滚动✅<br>效果对比如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d1fcdfa04499a6?imageslim" alt="xuehuayu.cn"><br><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d1fccda4295d45?imageslim" alt="xuehuayu.cn"><br>很明显，<code>前者</code>就是把滚动高度设置成<code>100</code>，而<code>后者</code>是每次都增加<code>100</code>，这就是为什么称之为<code>相对滚动</code>了✅</p>
+<h2 id="如何指定一个元素显示在视窗"><a href="#如何指定一个元素显示在视窗" class="headerlink" title="如何指定一个元素显示在视窗"></a>如何指定一个元素显示在视窗</h2><ol>
+<li><p>最常用的方法：</p>
+<p> &#x2F;&#x2F; 获取元素的offsetTop(元素距离文档顶部的距离)<br> let offsetTop &#x3D; document.querySelector(“.box”).offsetTop;</p>
+<p> &#x2F;&#x2F; 设置滚动条的高度<br> window.scrollTo(0, offsetTop);</p>
+</li>
+</ol>
+<p>效果如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d1fd8a8dba6bb5?imageslim" alt="xuehuayu.cn"></p>
+<ol>
+<li>或者用锚点：<br> <a href="#box">盒子出现在顶部</a> <div id="box"></div></li>
+</ol>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d1fd8df0ffc99c?imageslim" alt="xuehuayu.cn"></p>
+<ol>
+<li><p>或者利用<code>scrollIntoView</code>进行展现：</p>
+<p> document.querySelector(“.box”).scrollIntoView();</p>
+</li>
+</ol>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d1fe163c5ac8db?imageslim" alt="xuehuayu.cn"></p>
+<p>还可以指定元素的出现位置：</p>
+<pre><code>// start出现在视口顶部、center出现在视口中央、end出现在视口底部
+document.querySelector(&quot;.box&quot;).scrollIntoView(&#123;
+  block: &quot;start&quot; || &quot;center&quot; || &quot;end&quot;
+&#125;);
+</code></pre>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d1fe6612f88547?imageslim" alt="xuehuayu.cn"></p>
+<h2 id="如何设置滚动具有平滑的过渡效果"><a href="#如何设置滚动具有平滑的过渡效果" class="headerlink" title="如何设置滚动具有平滑的过渡效果"></a>如何设置滚动具有平滑的过渡效果</h2><ol>
+<li><p>利用每个方法的<code>参数</code>设置：</p>
+<p> window.scrollTo({<br>   behavior: “smooth”<br> });</p>
+<p> window.scrollBy({<br>   behavior: “smooth”<br> });</p>
+<p> document.querySelector(“.box”).scrollIntoView({<br>   behavior: “smooth”<br> });</p>
+</li>
+</ol>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d1fea43de896d9?imageslim" alt="xuehuayu.cn"></p>
+<ol>
+<li><p>或者用<code>css</code>属性设置：</p>
+<p> html {<br>   scroll-behavior: smooth; &#x2F;&#x2F; 全局滚动具有平滑效果<br> }</p>
+<p> &#x2F;&#x2F; 或者所有</p>
+<ul>
+<li>{<br>  scroll-behavior: smooth;<br> }</li>
+</ul>
+</li>
+</ol>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d1feddb7347ea4?imageslim" alt="xuehuayu.cn"><br>注意：设置了该属性之后，所有方法都可以不用设置<code>behavior</code>参数了，二选一即可，因为都是<code>控制当前指定元素的滚动行为</code>，所以锚点跳转、设置<code>scrollTop</code>也具有平滑(<code>smooth</code>)的<code>滚动行为</code>✅</p>
+<h2 id="一些有趣的东西"><a href="#一些有趣的东西" class="headerlink" title="一些有趣的东西"></a>一些有趣的东西</h2><h4 id="1-scrollingElement"><a href="#1-scrollingElement" class="headerlink" title="1. scrollingElement"></a>1. scrollingElement</h4><p>该对象可以非常<code>兼容</code>地获取<code>scrollTop</code>、<code>scrollHeight</code>等属性，在<code>移动端</code>跟<code>PC端</code>都屡试不爽🤞<br>还记得当初写这个兼容性方法：<br>    let scrollHeight &#x3D; document.documentElement.scrollHeight || document.body.scrollHeight;</p>
+<p>现在你只需要：<br>    let scrollHeight &#x3D; document.scrollingElement.scrollHeight;</p>
+<p>因为在<code>MDN</code>中是这样介绍它的：<br>标准模式返回<code>documentElement</code>，怪异模式返回<code>body</code>；</p>
+<h4 id="2-滚动到底部"><a href="#2-滚动到底部" class="headerlink" title="2. 滚动到底部"></a>2. 滚动到底部</h4><pre><code>window.scrollTo(&#123;
+  left: 0,
+  top: document.scrollingElement.scrollHeight
+&#125;);
+
+// 如果你实在是懒的话...
+window.scrollTo(0, 999999);
+</code></pre>
+<p>注意：平滑滚动到<code>顶部</code>或者<code>底部</code>自己加参数或者属性即可✅</p>
+<h4 id="3-判断浏览器已滚动到底部"><a href="#3-判断浏览器已滚动到底部" class="headerlink" title="3. 判断浏览器已滚动到底部"></a>3. 判断浏览器已滚动到底部</h4><pre><code>window.addEventListener(&quot;scroll&quot;, () =&gt; &#123;
+  let &#123;
+    scrollTop,
+    scrollHeight,
+    clientHeight
+  &#125; = document.scrollingElement;
+  
+  // 当前滚动高度 + 视口高度 &gt;= 文档总高度
+  if (scrollTop + clientHeight &gt;= scrollHeight) &#123;
+    console.log(&quot;已到达底部&quot;);
+  &#125;
+&#125;);
+</code></pre>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d1ffedc0c17ddb?imageslim" alt="xuehuayu.cn"></p>
+<h4 id="函数节流"><a href="#函数节流" class="headerlink" title="函数节流"></a>函数节流</h4><p>当你没加函数节流：</p>
+<pre><code>window.addEventListener(&quot;scroll&quot;, () =&gt; console.log(&quot;我在滚我在滚！&quot;));
+</code></pre>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d200492116dbce?imageslim" alt="xuehuayu.cn"><br>当你加了函数节流之后：</p>
+<pre><code>window.addEventListener(&quot;scroll&quot;, throttle(() =&gt; console.log(&quot;我在滚我在滚！&quot;)));
+</code></pre>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d200931b39f8fb?imageslim" alt="xuehuayu.cn"></p>
+<p><code>throttle</code>源码：</p>
+<pre><code>function throttle(fn, interval = 500) &#123;
+  let run = true;
+
+  returnfunction () &#123;
+    if (!run) return;
+    run = false;
+    setTimeout(() =&gt; &#123;
+      fn.apply(this, arguments);
+      run = true;
+    &#125;, interval);
+  &#125;;
+&#125;
+</code></pre>
+<p>用处：减少代码执行频率✅</p>
+<h4 id="函数防抖"><a href="#函数防抖" class="headerlink" title="函数防抖"></a>函数防抖</h4><p>当你加了函数防抖之后：</p>
+<pre><code>window.addEventListener(&quot;scroll&quot;, debounce(() =&gt; console.log(&quot;滚动结束！&quot;)));
+</code></pre>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/11/16d2010a3b42646a?imageslim" alt="xuehuayu.cn"></p>
+<p><code>debounce</code>源码：</p>
+<pre><code>function debounce(fn, interval = 500) &#123;
+  let timeout = null;
+
+  returnfunction () &#123;
+    clearTimeout(timeout);
+    timeout = setTimeout(() =&gt; &#123;
+      fn.apply(this, arguments);
+    &#125;, interval);
+  &#125;;
+&#125;
+</code></pre>
+<p>用处：判断某个<code>动作结束</code>，如刚刚的滚动结束、input输入结束等✅</p>
+<h4 id="解决IOS设备局部滚动不顺畅-粘手"><a href="#解决IOS设备局部滚动不顺畅-粘手" class="headerlink" title="解决IOS设备局部滚动不顺畅(粘手)"></a>解决IOS设备局部滚动不顺畅(粘手)</h4><p>除了浏览器原生滚动，<code>自定义的滚动条</code>都会出现这种情况，加以下属性就可以解决：</p>
+<pre><code>.box &#123;
+  -webkit-overflow-scrolling: touch;
+&#125;
+</code></pre>
+<p>对比如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/12/16d2338d59cd5e06?imageslim" alt="xuehuayu.cn"><img src="https://user-gold-cdn.xitu.io/2019/9/12/16d2338f4c7f4e0c?imageslim" alt="xuehuayu.cn"></p>
+<p>注意：要真机才能看到效果，这里指的<code>局部滚动</code>是指<code>自己定义的盒子</code>，然后设置<code>overflow: auto || scroll;</code>后的滚动行为；</p>
+<h4 id="滚动传播"><a href="#滚动传播" class="headerlink" title="滚动传播"></a>滚动传播</h4><p>指有多个<code>滚动区域</code>，当一个<code>滚动区域</code>滚动完之后，继续滚动会<code>传播到</code>到父区域继续滚动的行为：</p>
+<pre><code>.box &#123;
+  overscroll-behavior: contain; // 阻止滚动传播
+&#125;
+</code></pre>
+<p>对比效果图如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/9/12/16d2341f99d7b4b8?imageslim" alt="xuehuayu.cn"><img src="https://user-gold-cdn.xitu.io/2019/9/12/16d23421cf5ea388?imageslim" alt="xuehuayu.cn"></p>
+<h4 id="横向滚动"><a href="#横向滚动" class="headerlink" title="横向滚动"></a>横向滚动</h4><p><code>移动端</code>遇到此需求比较多，常用于图片展示：</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;
+    &lt;img src=&quot;&quot;&gt;
+  &lt;/li&gt;
+  // ...
+&lt;/ul&gt;
+
+ul &#123;
+  white-space: nowrap; // 超出不换行
+  overflow-x: auto;
+
+  li &#123;
+    display: inline-block;
+
+    img &#123;
+      display: block;
+      width: 200px;
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/12/16d234e1a9ec16bd?imageslim" alt="xuehuayu.cn"></p>
+<h4 id="滚动结束后，强制滚动到指定元素"><a href="#滚动结束后，强制滚动到指定元素" class="headerlink" title="滚动结束后，强制滚动到指定元素"></a>滚动结束后，强制滚动到指定元素</h4><p>基于上面的例子，我们设置如下属性：</p>
+<pre><code>ul &#123;
+  scroll-snap-type: x mandatory;
+  
+  li &#123;
+    scroll-snap-align: start;
+  &#125;
+&#125;
+</code></pre>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/12/16d235b560e4b58c?imageslim" alt="xuehuayu.cn"></p>
+<p>仔细看会发现，我们松手的时候，会将<code>最近的元素</code>滚动到最右边（初始位置，对于Y轴来讲就是顶部，X轴则是右边）<br>也可以设置出现在中间：</p>
+<pre><code>li &#123;
+  scroll-snap-align: center;
+&#125;
+</code></pre>
+<p>效果如下：<br><img src="https://user-gold-cdn.xitu.io/2019/9/12/16d2363b256ce9f4?imageslim" alt="xuehuayu.cn"></p>
+<p>这样，一个简易的<code>轮播图</code>效果就出来啦！<br>还可以实现全屏滚动：<br><img src="https://user-gold-cdn.xitu.io/2019/9/12/16d237cd9b5732c9?imageslim" alt="xuehuayu.cn"></p>
+<p>注意：该属性会在你<code>滚动完</code>之后再做处理，也就是说你可以一下子从<code>图片1</code>跳到<code>图片9</code>✅</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>以上涉及到的<code>方法或属性</code>文档如下：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/scrollTo">scrollTo</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/scrollBy">scrollBy</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollIntoView">scrollIntoView</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document/scrollingElement">scrollingElement</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-behavior">scroll-behavior</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/-webkit-overflow-scrolling">-webkit-overflow-scrolling</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/overscroll-behavior">overscroll-behavior</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-snap-type">scroll-snap-type</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-snap-align">scroll-snap-align</a></li>
+</ol>
+<h2 id="相关推荐"><a href="#相关推荐" class="headerlink" title="相关推荐"></a>相关推荐</h2><p><a target="_blank" rel="noopener" href="https://juejin.im/post/5d665133e51d4561c83e7c83">利用”交叉观察者”这个小宝贝儿，轻松实现懒加载、吸顶、触底 ❗</a></p>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/9d7696b1.html">https://xuehuayu.cn/article/9d7696b1.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/da4a92bd.html">9102了，你还不会移动端真机调试？</a><a class="next" href="/article/9b2f3de1.html">30 seconds of code 30秒就能理解的JavaScript优秀代码</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/369326bd.html">Celestial Master Zhong Kui</a></li><li class="post-list-item"><a class="post-list-link" href="/article/8d86d7a8.html">Vue3 Native Implementation of Image Comparison</a></li><li class="post-list-item"><a class="post-list-link" href="/article/9f9f2ad3.html">vue3原生实现图片对比</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">276</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any", // 支持所有操作系统（因为基于浏览器）
+  "permissions": "browser", // 需要的权限
+  "author": {
+      "@type": "Person",
+      "name": "前端壹菜鸟"
+  },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "前端壹菜鸟",
+      "url": "https://xuehuayu.cn",
+    },
+    {
+      "@type": "WebSite",
+      "name": "前端壹菜鸟",
+      "url": "https://cainiaoblog.cn",
+    },
+    
+  ]
+}
+</script><title>20个棘手的ES6面试问题来提高JavaScript技能 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">20个棘手的ES6面试问题来提高JavaScript技能</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 17</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/52b578ac.html#waline-comment"><span class="waline-comment-count" data-path="/article/52b578ac.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.html.cn/web/javascript/14238.html</code></p>
+<p>ECMAScript 6（以下简称ES6）是 JS 语言的下一代标准，已经在<code>2015</code>年<code>6</code>月正式发布了。它的目标，是使得 JS 语言可以用来编写复杂的大型应用程序，成为企业级开发语言。接下来咱们来看看 20 道棘手的面试题，通过做题，顺带提升一下咱们的 JS 的技能。</p>
+<span id="more"></span>
+<p><img src="https://img.php.cn/upload/article/000/000/006/5ddb99e59aece319.jpg" alt="xuehuayu.cn"></p>
+<h4 id="问题1：可以解释一下-ES5-和ES6的区别吗"><a href="#问题1：可以解释一下-ES5-和ES6的区别吗" class="headerlink" title="问题1：可以解释一下 ES5 和ES6的区别吗?"></a>问题1：可以解释一下 <code>ES5</code> 和<code>ES6</code>的区别吗?</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p><strong>ECMAScript 5 (ES5)</strong>：ECMAScript 的第五版，于2009年标准化，该标准已在所有现代浏览器中完全支持。</p>
+<p><strong>ECMAScript 6 (ES6)&#x2F; ECMAScript 2015 (ES2015)</strong>:ECMAscript 第 6 版，2015 年标准化。这个标准已经在大多数现代浏览器中部分实现。</p>
+<p>以下是ES5和ES6之间的一些主要区别：</p>
+<p><strong>箭头函数和字符串插值</strong></p>
+<pre><code>const greetings = (name) =&gt; &#123;
+  return `hello $&#123;name&#125;`;
+&#125;
+</code></pre>
+<p>也可以这样写：</p>
+<pre><code>const greetings = name =&gt; `hello $&#123;name&#125;`;
+</code></pre>
+<p><strong>const</strong>：<code>const</code> 表示无法修改变量的原始值。需要注意的是，<code>const</code>表示对值的常量引用，咱们可以改变被引用的对象的属性值，但不能改变引用本身。</p>
+<pre><code>const NAMES = [];
+NAMES.push(&quot;Jim&quot;);
+console.log(NAMES.length === 1); // true
+NAMES = [&quot;Steve&quot;, &quot;John&quot;]; // error
+</code></pre>
+<p><strong>块作用域</strong>：ES6 中 <code>let</code>, <code>const</code> 会创建块级作用域，不会像 <code>var</code> 声明变量一样会被提升。</p>
+<p><strong>默认参数</strong>：默认参数使咱们可以使用默认值初始化函数。当参数省略或 <code>undefined</code> 时使用默认参数值。</p>
+<pre><code>function multiply (a, b = 2) &#123;
+   return a * b;
+&#125;
+multiply(5); // 10
+</code></pre>
+<p><strong>类定义与继承</strong></p>
+<p>ES6 引入了对类(<code>class</code>关键字)、构造函数(<code>constructor</code>关键字)和 <code>extend</code> 关键字(用于继承)的语言支持。</p>
+<p><strong>for-of 运算符</strong></p>
+<p><code>for...of</code> 语句创建一个遍历可迭代对象的循环。</p>
+<p><strong>展开操作符</strong></p>
+<pre><code>const obj1 = &#123; a: 1, b: 2 &#125;
+const obj2 = &#123; a: 2, c: 3, d: 4&#125;
+const obj3 = &#123;...obj1, ...obj2&#125;
+</code></pre>
+<p><strong>Promises</strong>: Promises 提供了一种机制来处理异步操作的结果和错误。可以使用回调来完成相同的事情，但是<code>Promises</code> 通过方法链接和简洁的错误处理来提高可读性。</p>
+<pre><code>const isGreater = (a, b) =&gt; &#123;
+  return new Promise ((resolve, reject) =&gt; &#123;
+    if(a &gt; b) &#123;
+      resolve(true)
+    &#125; else &#123;
+      reject(false)
+    &#125;
+    &#125;)
+&#125;
+isGreater(1, 2)
+  .then(result =&gt; &#123;
+    console.log(&#39;greater&#39;)
+  &#125;)
+ .catch(result =&gt; &#123;
+    console.log(&#39;smaller&#39;)
+ &#125;)
+</code></pre>
+<p><strong>模块导出</strong></p>
+<pre><code>const myModule = &#123; x: 1, y: () =&gt; &#123; console.log(&#39;This is ES5&#39;) &#125; &#125;
+export default myModule;
+</code></pre>
+<p><strong>和导入</strong></p>
+<pre><code>import myModule from &#39;./myModule&#39;;
+</code></pre>
+<h4 id="问题-2：什么是-IIFE-立即调用的函数表达式"><a href="#问题-2：什么是-IIFE-立即调用的函数表达式" class="headerlink" title="问题 2：什么是 IIFE (立即调用的函数表达式)"></a>问题 2：什么是 IIFE (立即调用的函数表达式)</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p><code>IIFE</code>是一个立即调用的函数表达式，它在创建后立即执行</p>
+<pre><code>(function IIFE()&#123;
+    console.log( &quot;Hello!&quot; );
+&#125;)();
+// &quot;Hello!&quot;
+</code></pre>
+<p>常常使用此模式来避免污染全局命名空间，因为在<code>IIFE</code>中使用的所有变量(与任何其他普通函数一样)在其作用域之外都是不可见的。</p>
+<h4 id="问题-3：何时在-ES6-中使用箭头函数？"><a href="#问题-3：何时在-ES6-中使用箭头函数？" class="headerlink" title="问题 3：何时在 ES6 中使用箭头函数？"></a>问题 3：何时在 ES6 中使用箭头函数？</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>以下是一些经验分享：</p>
+<ul>
+<li>在全局作用域内和<code>Object.prototype</code>属性中使用 <code>function</code> 。</li>
+<li>为对象构造函数使用 <code>class</code>。</li>
+<li>其它情况使用箭头函数。</li>
+</ul>
+<p>为啥大多数情况都使用<strong>箭头函数</strong>？</p>
+<ul>
+<li><strong>作用域安全性</strong>:当箭头函数被一致使用时，所有东西都保证使用与根对象相同的<code>thisObject</code>。如果一个标准函数回调与一堆箭头函数混合在一起，那么作用域就有可能变得混乱。</li>
+<li><strong>紧凑性</strong>:箭头函数更容易读写。</li>
+<li>清晰度:使用箭头函数可明确知道当前 <code>this</code> 指向。</li>
+</ul>
+<h4 id="问题-4-将-Symbol-引入ES6-的目的是什么？"><a href="#问题-4-将-Symbol-引入ES6-的目的是什么？" class="headerlink" title="问题 4:将 Symbol 引入ES6 的目的是什么？"></a>问题 4:将 Symbol 引入ES6 的目的是什么？</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p><code>Symbol</code> 是一种新的、特殊的对象，可以用作对象中惟一的属性名。使用 <code>Symbol</code> 替换<code>string</code> 可以避免不同的模块属性的冲突。还可以将<code>Symbol</code>设置为私有，以便尚无直接访问<code>Symbol</code>权限的任何人都不能访问它们的属性。</p>
+<p><code>Symbol</code> 是JS新的基本数据类型。与<code>number</code>、<code>string</code>和<code>boolean</code> 原始类型一样，<code>Symbol</code> 也有一个用于创建它们的函数。与其他原始类型不同，<code>Symbol</code>没有字面量语法。创建它们的唯一方法是使用以下方法中的<code>Symbol</code>构造函数</p>
+<pre><code>let symbol = Symbol();
+</code></pre>
+<h4 id="问题-5-在-ES6-中使用展开-spread-语法有什么好处-它与剩余-rest-语法有什么不同"><a href="#问题-5-在-ES6-中使用展开-spread-语法有什么好处-它与剩余-rest-语法有什么不同" class="headerlink" title="问题 5: 在 ES6 中使用展开(spread)语法有什么好处? 它与剩余(rest)语法有什么不同?"></a>问题 5: 在 ES6 中使用展开(spread)语法有什么好处? 它与剩余(rest)语法有什么不同?</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>ES6 的展开语法在以函数形式进行编码时非常有用，因为咱们可以轻松地创建数组或对象的副本，而无需求助于<code>Object.create，slice</code>或库函数。<code>Redux</code> 和<code>rx.js</code>项目中经常使用此特性。</p>
+<pre><code>function putDookieInAnyArray(arr) &#123;
+  return [...arr, &#39;dookie&#39;];
+&#125;
+
+const result = putDookieInAnyArray([&#39;I&#39;, &#39;really&#39;, &quot;don&#39;t&quot;, &#39;like&#39;]); 
+// [&quot;I&quot;, &quot;really&quot;, &quot;don&#39;t&quot;, &quot;like&quot;, &quot;dookie&quot;]
+
+const person = &#123;
+  name: &#39;Todd&#39;,
+  age: 29,
+&#125;;
+
+const copyOfTodd = &#123; ...person &#125;;
+</code></pre>
+<p>ES6 的 rest 语法提供了一种捷径，其中包括要传递给函数的任意数量的参数。</p>
+<p>就像展开语法的逆过程一样，它将数据放入并填充到数组中而不是展开数组，并且它在函数变量以及数组和对象解构分中也经常用到。</p>
+<pre><code> function addFiveToABunchOfNumbers(...numbers) &#123;
+  return numbers.map(x =&gt; x + 5);
+&#125;
+
+const result = addFiveToABunchOfNumbers(4, 5, 6, 7, 8, 9, 10); 
+// [9, 10, 11, 12, 13, 14, 15]
+
+const [a, b, ...rest] = [1, 2, 3, 4]; // a: 1, b: 2, rest: [3, 4]
+
+const &#123; e, f, ...others &#125; = &#123;
+  e: 1,
+  f: 2,
+  g: 3,
+  h: 4,
+&#125;; // e: 1, f: 2, others: &#123; g: 3, h: 4 &#125;
+</code></pre>
+<h4 id="问题-6-ES6-类和-ES5-函数构造函数有什么区别？"><a href="#问题-6-ES6-类和-ES5-函数构造函数有什么区别？" class="headerlink" title="问题 6: ES6 类和 ES5 函数构造函数有什么区别？"></a>问题 6: ES6 类和 ES5 函数构造函数有什么区别？</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<pre><code>// ES5 Function Constructor
+function Person(name) &#123;
+  this.name = name;
+&#125;
+
+// ES6 Class
+class Person &#123;
+  constructor(name) &#123;
+    this.name = name;
+  &#125;
+&#125;
+</code></pre>
+<p>对于简单的构造函数，它们看起来非常相似。</p>
+<p>构造函数的主要区别在于使用继承。如果咱们创建一个继承<code>Person</code>类的<code>Student</code>子类并添加一个<code>studentId</code>字段，以下是两种方式的使用：</p>
+<pre><code>// ES5 Function Constructor
+function Student(name, studentID) &#123;
+  // 调用你类的构造函数以初始化你类派生的成员。
+  Person.call(this. name)
+  // 初始化子类的成员。
+  this.studentId = studentId
+&#125;
+
+Student.prototype = Object.create(Person.prototype)
+Student.prototype.constructor = Student
+
+// ES6 Class
+class Student extends Person &#123;
+  constructor(name, studentId) &#123;
+    super(name)
+    this.studentId = studentId
+  &#125;
+&#125;
+</code></pre>
+<p>在 ES5 中使用继承要复杂得多，而且 ES6 版本更容易理解和记住。</p>
+<h4 id="问题-7-call-和-apply-区别是啥？"><a href="#问题-7-call-和-apply-区别是啥？" class="headerlink" title="问题 7: .call 和 .apply 区别是啥？"></a>问题 7: <code>.call</code> 和 <code>.apply</code> 区别是啥？</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p><code>.call</code>和<code>.apply</code>均用于调用函数，并且第一个参数将用作函数中<code>this</code>的值。但是，<code>.call</code>将逗号分隔的参数作为下一个参数，而<code>.apply</code>将参数数组作为下一个参数。简单记忆法：<strong>C</strong>用于<code>call</code>和逗号分隔，<strong>A</strong>用于<code>apply</code>和参数数组。</p>
+<pre><code> function add(a, b) &#123;
+  return a + b;
+&#125;
+
+console.log(add.call(null, 1, 2)); // 3
+console.log(add.apply(null, [1, 2])); // 3
+</code></pre>
+<h4 id="问题-8-为什么要使用-ES6-类？"><a href="#问题-8-为什么要使用-ES6-类？" class="headerlink" title="问题 8: 为什么要使用 ES6 类？"></a>问题 8: 为什么要使用 ES6 类？</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>选择使用类的一些原因：</p>
+<ul>
+<li>语法更简单，更不容易出错。</li>
+<li>使用新语法比使用旧语法更容易(而且更不易出错)地设置继承层次结构。</li>
+<li><code>class</code>可以避免构造函数中使用new的常见错误（如果构造函数不是有效的对象，则使构造函数抛出异常）。</li>
+<li>用新语法调用父原型方法的版本比旧语法要简单得多，用<code>super.method()</code>代替<code>ParentConstructor.prototype.method.call(this)</code> 或<code>Object.getPrototypeOf(Object.getPrototypeOf(this)).method.call(this)</code></li>
+</ul>
+<p>考虑下面代码：</p>
+<pre><code>// **ES5**
+var Person = function(first, last) &#123;
+    if (!(this instanceof Person)) &#123;
+        throw new Error(&quot;Person is a constructor function, use new with it&quot;);
+    &#125;
+    this.first = first;
+    this.last = last;
+&#125;;
+
+Person.prototype.personMethod = function() &#123;
+    return &quot;Result from personMethod: this.first = &quot; + this.first + &quot;, this.last = &quot; + this.last;
+&#125;;
+
+var Employee = function(first, last, position) &#123;
+    if (!(this instanceof Employee)) &#123;
+        throw new Error(&quot;Employee is a constructor function, use new with it&quot;);
+    &#125;
+    Person.call(this, first, last);
+    this.position = position;
+&#125;;
+Employee.prototype = Object.create(Person.prototype);
+Employee.prototype.constructor = Employee;
+Employee.prototype.personMethod = function() &#123;
+    var result = Person.prototype.personMethod.call(this);
+    return result + &quot;, this.position = &quot; + this.position;
+&#125;;
+Employee.prototype.employeeMethod = function() &#123;
+    // ...
+&#125;;
+</code></pre>
+<p>使用 ES6 实现上述功能：</p>
+<pre><code>// ***ES2015+**
+class Person &#123;
+    constructor(first, last) &#123;
+        this.first = first;
+        this.last = last;
+    &#125;
+
+    personMethod() &#123;
+        // ...
+    &#125;
+&#125;
+
+class Employee extends Person &#123;
+    constructor(first, last, position) &#123;
+        super(first, last);
+        this.position = position;
+    &#125;
+
+    employeeMethod() &#123;
+        // ...
+    &#125;
+&#125;
+</code></pre>
+<h4 id="问题-9-在-JS-中定义枚举的首选语法是什么"><a href="#问题-9-在-JS-中定义枚举的首选语法是什么" class="headerlink" title="问题 9: 在 JS 中定义枚举的首选语法是什么"></a>问题 9: 在 JS 中定义枚举的首选语法是什么</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>可以 <code>Object.freeze</code> 来实现枚举</p>
+<pre><code>var DaysEnum = Object.freeze(&#123;
+    &quot;monday&quot;: 1,
+    &quot;tuesday&quot;: 2,
+    &quot;wednesday&quot;: 3,
+    ...
+&#125;)
+</code></pre>
+<p>或者</p>
+<pre><code>var DaysEnum = &#123;
+    &quot;monday&quot;: 1,
+    &quot;tuesday&quot;: 2,
+    &quot;wednesday&quot;: 3,
+    ...
+&#125;
+Object.freeze(DaysEnum)
+</code></pre>
+<p>但是，这阻止咱们把值分配给变量：</p>
+<pre><code>let day = DaysEnum.tuesday
+day = 298832342 // 不会报错
+</code></pre>
+<h4 id="问题-10-解释一下-Object-freeze-和-const-的区别"><a href="#问题-10-解释一下-Object-freeze-和-const-的区别" class="headerlink" title="问题 10: 解释一下 Object.freeze() 和 const 的区别"></a>问题 10: 解释一下 <code>Object.freeze()</code> 和 <code>const</code> 的区别</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p><code>const</code>和<code>Object.freeze</code>是两个完全不同的概念。</p>
+<p><code>const</code> 声明一个只读的变量，一旦声明，常量的值就不可改变：</p>
+<pre><code>const person = &#123;
+    name: &quot;Leonardo&quot;
+&#125;;
+let animal = &#123;
+    species: &quot;snake&quot;
+&#125;;
+person = animal; // ERROR &quot;person&quot; is read-only
+</code></pre>
+<p><code>Object.freeze</code>适用于值，更具体地说，适用于对象值，它使对象不可变，即不能更改其属性。</p>
+<pre><code>let person = &#123;
+    name: &quot;Leonardo&quot;
+&#125;;
+let animal = &#123;
+    species: &quot;snake&quot;
+&#125;;
+Object.freeze(person);
+person.name = &quot;Lima&quot;; //TypeError: Cannot assign to read only property &#39;name&#39; of object
+console.log(person);
+</code></pre>
+<h4 id="问题-11-JS-的提升是什么"><a href="#问题-11-JS-的提升是什么" class="headerlink" title="问题 11: JS 的提升是什么"></a>问题 11: JS 的提升是什么</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>提升是指 JS 解释器将所有变量和函数声明移动到当前作用域顶部的操作，提升有两种类型</p>
+<ul>
+<li>变量提升</li>
+<li>函数提升</li>
+</ul>
+<p>只要一个<code>var</code>(或函数声明)出现在一个作用域内，这个声明就被认为属于整个作用域，并且可以在任何地方访问。</p>
+<pre><code>var a = 2
+foo() // 正常运行, foo 已被提升
+
+function foo() &#123;
+  a = 3
+  console.log(a)   // 3
+  var a                        
+&#125;
+
+console.log( a )   // 2
+</code></pre>
+<h4 id="问题-12-解释一下原型设计模式-Prototype-Pattern"><a href="#问题-12-解释一下原型设计模式-Prototype-Pattern" class="headerlink" title="问题 12: 解释一下原型设计模式(Prototype Pattern)"></a>问题 12: 解释一下原型设计模式(Prototype Pattern)</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>原型模式会创建新的对象，而不是创建未初始化的对象，它会返回使用从原型或样本对象复制的值进行初始化的对象。原型模式也称为属性模式。</p>
+<p>原型模式有用的一个例子是使用与数据库中的默认值匹配的值初始化业务对象。原型对象保留默认值，这些默认值将被复制到新创建的业务对象中。</p>
+<p>传统语言很少使用原型模式，但是JavaScript作为一种原型语言，在构建新对象及其原型时使用这种模式。</p>
+<h4 id="问题-13-ES6-中的临时死区是什么"><a href="#问题-13-ES6-中的临时死区是什么" class="headerlink" title="问题 13: ES6 中的临时死区是什么"></a>问题 13: ES6 中的临时死区是什么</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>在 ES6 中，<code>let</code> 和<code>const</code> 跟 <code>var</code>、<code>class</code>和<code>function</code>一样也会被提升，只是在进入作用域和被声明之间有一段时间不能访问它们，这段时间是<strong>临时死区(TDZ)</strong>。</p>
+<pre><code>//console.log(aLet)  // would throw ReferenceError
+
+let aLet;
+console.log(aLet); // undefined
+aLet = 10;
+console.log(aLet); // 10
+</code></pre>
+<h4 id="问题-14-什么时候不使用箭头函数-说出三个或更多的例子"><a href="#问题-14-什么时候不使用箭头函数-说出三个或更多的例子" class="headerlink" title="问题 14: 什么时候不使用箭头函数? 说出三个或更多的例子"></a>问题 14: 什么时候不使用箭头函数? 说出三个或更多的例子</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>不应该使用箭头函数一些情况：</p>
+<ul>
+<li>当想要函数被提升时(箭头函数是匿名的)</li>
+<li>要在函数中使用<code>this/arguments</code>时，由于箭头函数本身不具有<code>this/arguments</code>，因此它们取决于外部上下文</li>
+<li>使用命名函数(箭头函数是匿名的)</li>
+<li>使用函数作为构造函数时(箭头函数没有构造函数)</li>
+<li>当想在对象字面是以将函数作为属性添加并在其中使用对象时，因为咱们无法访问 <code>this</code> 即对象本身。</li>
+</ul>
+<h4 id="问题-15-ES6-中的-WeakMa-p的实际用途是什么？"><a href="#问题-15-ES6-中的-WeakMa-p的实际用途是什么？" class="headerlink" title="问题 15: ES6 中的 WeakMa p的实际用途是什么？"></a>问题 15: ES6 中的 WeakMa p的实际用途是什么？</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p><strong>WeakMaps</strong> 提供了一种从外部扩展对象而不影响垃圾收集的方法。当咱们想要扩展一个对象，但是因为它是封闭的或者来自外部源而不能扩展时，可以应用<code>WeakMap</code>。</p>
+<p><strong>WeakMap</strong>只适用于 ES6 或以上版本。<strong>WeakMap</strong>是键和值对的集合，其中键<strong>必须是对象</strong>。</p>
+<pre><code>var map = new WeakMap();
+var pavloHero = &#123;
+    first: &quot;Pavlo&quot;,
+    last: &quot;Hero&quot;
+&#125;;
+var gabrielFranco = &#123;
+    first: &quot;Gabriel&quot;,
+    last: &quot;Franco&quot;
+&#125;;
+map.set(pavloHero, &quot;This is Hero&quot;);
+map.set(gabrielFranco, &quot;This is Franco&quot;);
+console.log(map.get(pavloHero)); //This is Hero
+</code></pre>
+<p><strong>WeakMaps</strong>的有趣之处在于，它包含了对<code>map</code>内部键的弱引用。弱引用意味着如果对象被销毁，垃圾收集器将从<code>WeakMap</code>中删除整个条目，从而释放内存。</p>
+<h4 id="问题-16-说明下列方法为何不能用作-IIFE，要使其成为-IIFE，需要进行哪些更改？"><a href="#问题-16-说明下列方法为何不能用作-IIFE，要使其成为-IIFE，需要进行哪些更改？" class="headerlink" title="问题 16: 说明下列方法为何不能用作 IIFE，要使其成为 IIFE，需要进行哪些更改？"></a>问题 16: 说明下列方法为何不能用作 IIFE，要使其成为 IIFE，需要进行哪些更改？</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<pre><code>function foo()&#123; &#125;();
+</code></pre>
+<p><code>IIFE</code> 代表立即调用的函数表达式。JS解析器读取函数<code>foo()&#123;&#125;();</code>作为函数<code>foo()&#123;&#125;</code>和<code>();</code>，前者是一个函数声明，后者(一对括号)是尝试调用一个函数，但没有指定名称，因此它抛出<code>Uncaught SyntaxError: Unexpected token</code> 异常。</p>
+<p>咱们可以使用<code>void</code>操作符:<code>void function foo()&#123; &#125;();</code>。不幸的是，这种方法有一个问题。给定表达式的求值总是<code>undefined</code>的，所以如果IIFE 函数有返回值，则不能使用它，如下所示：</p>
+<pre><code>const foo = void
+function bar() &#123;
+    console.log(&#39;前端小智&#39;)
+    return &#39;foo&#39;;
+&#125;();
+
+console.log(foo); // undefined
+</code></pre>
+<h4 id="问题-17-能否比较模块模式与构造函数-原型模式的用法？"><a href="#问题-17-能否比较模块模式与构造函数-原型模式的用法？" class="headerlink" title="问题 17: 能否比较模块模式与构造函数&#x2F;原型模式的用法？"></a>问题 17: 能否比较模块模式与构造函数&#x2F;原型模式的用法？</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>模块模式通常用于命名空间，在该模式中，使用单个实例作为存储来对相关函数和对象进行分组。这是一个不同于原型设计的用例,它们并不是相互排斥,咱们可以同时使用它们(例如，将一个构造函数放在一个模块中，并使用<code>new MyNamespace.MyModule.MyClass(arguments)</code> )。</p>
+<p>构造函数和原型是实现类和实例的合理方法之一。它们与模型并不完全对应，因此通常需要选择一个特定的<code>scheme</code>或辅助方法来实现原型中的类。</p>
+<h4 id="问题-18-ES6-Map-和-WeakMap-有什么区别？"><a href="#问题-18-ES6-Map-和-WeakMap-有什么区别？" class="headerlink" title="问题 18: ES6 Map 和 WeakMap 有什么区别？"></a>问题 18: ES6 Map 和 WeakMap 有什么区别？</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐⭐⭐</p>
+</blockquote>
+<p>当它们的键&#x2F;值引用的对象被删除时，它们的行为都不同，以下面的代码为例:</p>
+<pre><code>var map = new Map()
+var weakmap = new WeakMap()
+
+(function() &#123;
+    var a = &#123;
+        x: 12
+    &#125;;
+    var b = &#123;
+        y: 12
+    &#125;;
+
+    map.set(a, 1);
+    weakmap.set(b, 2);
+&#125;)()
+</code></pre>
+<p>执行上面的 IIFE，就无法再引用<code>&#123;x：12&#125;</code>和<code>&#123;y：12&#125;</code>。垃圾收集器继续运行，并从 <code>WeakMa</code>中删除<code>键b</code>指针，还从内存中删除了<code>&#123;y：12&#125;</code>。</p>
+<p>但在使用 <code>Map</code>的情况下，垃圾收集器不会从<code>Map</code>中删除指针，也不会从内存中删除<code>&#123;x：12&#125;</code>。</p>
+<p><code>WeakMap</code> 允许垃圾收集器执行其回收任务，但<code>Map</code>不允许。对于手动编写的 <code>Map</code>，数组将保留对键对象的引用，以防止被垃圾回收。但在<code>WeakMap</code>中，对键对象的引用被“弱”保留，这意味着在没有其他对象引用的情况下，它们不会阻止垃圾回收。</p>
+<h4 id="问题-19-举一个柯里化函数的例子，并说明柯里化的好处？"><a href="#问题-19-举一个柯里化函数的例子，并说明柯里化的好处？" class="headerlink" title="问题 19: 举一个柯里化函数的例子，并说明柯里化的好处？"></a>问题 19: 举一个柯里化函数的例子，并说明柯里化的好处？</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐⭐⭐</p>
+</blockquote>
+<p>柯里化是一种模式，其中一个具有多个参数的函数被分解成多个函数，当被串联调用时，这些函数将一次累加一个所需的所有参数。这种技术有助于使用函数式编写的代码更容易阅读和编写。需要注意的是，要实现一个函数，它需要从一个函数开始，然后分解成一系列函数，每个函数接受一个参数。</p>
+<pre><code>function curry(fn) &#123;
+  if (fn.length === 0) &#123;
+    return fn;
+  &#125;
+
+  function _curried(depth, args) &#123;
+    return function(newArgument) &#123;
+      if (depth - 1 === 0) &#123;
+        return fn(...args, newArgument);
+      &#125;
+      return _curried(depth - 1, [...args, newArgument]);
+    &#125;;
+  &#125;
+
+  return _curried(fn.length, []);
+&#125;
+
+function add(a, b) &#123;
+  return a + b;
+&#125;
+
+var curriedAdd = curry(add);
+var addFive = curriedAdd(5);
+
+var result = [0, 1, 2, 3, 4, 5].map(addFive); // [5, 6, 7, 8, 9, 10]
+</code></pre>
+<h4 id="问题-20-如何在-JS-中“深冻结”对象"><a href="#问题-20-如何在-JS-中“深冻结”对象" class="headerlink" title="问题 20: 如何在 JS 中“深冻结”对象"></a>问题 20: 如何在 JS 中“深冻结”对象</h4><blockquote>
+<p>主题: JavaScript<br>难度: ⭐⭐⭐⭐⭐</p>
+</blockquote>
+<p>如果咱们想要确保对象被深冻结，就必须创建一个递归函数来冻结对象类型的每个属性：</p>
+<p><strong>没有深冻结</strong></p>
+<pre><code>let person = &#123;
+    name: &quot;Leonardo&quot;,
+    profession: &#123;
+        name: &quot;developer&quot;
+    &#125;
+&#125;;
+Object.freeze(person); 
+person.profession.name = &quot;doctor&quot;;
+console.log(person); //output &#123; name: &#39;Leonardo&#39;, profession: &#123; name: &#39;doctor&#39; &#125; &#125;
+</code></pre>
+<p><strong>深冻结</strong></p>
+<pre><code>function deepFreeze(object) &#123;
+    let propNames = Object.getOwnPropertyNames(object);
+    for (let name of propNames) &#123;
+        let value = object[name];
+        object[name] = value &amp;&amp; typeof value === &quot;object&quot; ?
+            deepFreeze(value) : value;
+    &#125;
+    return Object.freeze(object);
+&#125;
+let person = &#123;
+    name: &quot;Leonardo&quot;,
+    profession: &#123;
+        name: &quot;developer&quot;
+    &#125;
+&#125;;
+deepFreeze(person);
+person.profession.name = &quot;doctor&quot;; // TypeError: Cannot assign to read only property &#39;name&#39; of object
+</code></pre>
+<p><code>原文地址：https://dev.to/fullstackcafe/20-tricky-es6-interview-questions-to-revamp-your-javascript-skills-5a4o</code></p>
+<p>为了保证的可读性，本文采用意译而非直译。</p>
+<p>以上就是20个棘手的ES6面试问题来提高JavaScript技能的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/52b578ac.html">https://xuehuayu.cn/article/52b578ac.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/87cf05af.html">11 种在大多数教程中找不到的JavaScript技巧</a><a class="next" href="/article/14539579.html">50个最简单的JavaScript面试题</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/369326bd.html">Celestial Master Zhong Kui</a></li><li class="post-list-item"><a class="post-list-link" href="/article/8d86d7a8.html">Vue3 Native Implementation of Image Comparison</a></li><li class="post-list-item"><a class="post-list-link" href="/article/9f9f2ad3.html">vue3原生实现图片对比</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">276</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

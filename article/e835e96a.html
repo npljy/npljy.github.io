@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any", // 支持所有操作系统（因为基于浏览器）
+  "permissions": "browser", // 需要的权限
+  "author": {
+      "@type": "Person",
+      "name": "前端壹菜鸟"
+  },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "前端壹菜鸟",
+      "url": "https://xuehuayu.cn",
+    },
+    {
+      "@type": "WebSite",
+      "name": "前端壹菜鸟",
+      "url": "https://cainiaoblog.cn",
+    },
+    
+  ]
+}
+</script><title>写给前端的正则表达式入门 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">写给前端的正则表达式入门</h1><div class="post-meta"><span class="date">2019-12-11</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 707</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 2</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/e835e96a.html#waline-comment"><span class="waline-comment-count" data-path="/article/e835e96a.html">0</span><span> 条评论</span></a><div class="post-content"><blockquote>
+<p>转载自：segmentfault.com<br>作者：savokiss<br><code>原文地址：https://segmentfault.com/a/1190000021145901</code></p>
+</blockquote>
+<p>在 <code>JavaScript</code> 中，使用 &#x2F;&#x2F; 即可创建一个正则表达式对象，当然也可以使用 <code>new RegExp()</code></p>
+<p>常用的跟正则相关的方法有 <code>match</code>、<code>test</code> 和 <code>replace</code>。<br>其中 <code>match</code>，<code>replace</code> 都是字符串上的方法， <code>test</code> 是正则对象上的方法。</p>
+<span id="more"></span>
+
+<p>下面看具体的图示：</p>
+<p><img src="http://i1.fuimg.com/705673/664d8e7709b499d5.jpg" alt="1.png"></p>
+<blockquote>
+<h3 id="2-匹配单字符"><a href="#2-匹配单字符" class="headerlink" title="2.匹配单字符"></a>2.匹配单字符</h3></blockquote>
+<p><code>/reg/</code> 可以直接匹配具体的字符串 <code>reg</code>。<br><code>/[arzy]/</code> 中的中括号<code>[]</code> 则代表匹配 <code>arzy</code> 中的任意单个字符<br><code>/[f-h]/</code> 中的中杠 <code>-</code> 代表匹配字母表顺序中 <code>f</code> 到 <code>h</code> 中的任意单个字符<br><code>/[1-3]/</code> 则代表匹配数字 <code>1</code> 到 <code>3</code></p>
+<p><img src="http://i1.fuimg.com/705673/678f24371f0af4ba.jpg" alt="2.png"></p>
+<blockquote>
+<h3 id="3-则选项"><a href="#3-则选项" class="headerlink" title="3.则选项"></a>3.则选项</h3></blockquote>
+<p>正则对象的后面也可以跟选项，JavaScript 中常用的选项有：</p>
+<p><code>i</code> - 代表忽略大小写<br><code>m</code> - 代表多行匹配<br><code>g</code> - 代表全局匹配（可以匹配多次）</p>
+<p><img src="http://i1.fuimg.com/705673/9e80fd8de959edfb.jpg" alt="3.png"></p>
+<blockquote>
+<h3 id="4-边界匹配"><a href="#4-边界匹配" class="headerlink" title="4.边界匹配"></a>4.边界匹配</h3></blockquote>
+<p><code>^</code> - 代表匹配字符串的开头<br><code>$</code> - 代表匹配字符串的结尾</p>
+<p><img src="http://i1.fuimg.com/705673/6376af01f76fc1bf.jpg" alt="4.png"></p>
+<blockquote>
+<h3 id="5-字符匹配"><a href="#5-字符匹配" class="headerlink" title="5.字符匹配"></a>5.字符匹配</h3></blockquote>
+<p><code>.</code> - 可以匹配除了换行符外的任意字符<br><code>\d</code> - 可以匹配任意数字<br><code>\D</code> - 可以匹配任意非数字<br><code>\s</code> - 匹配任意空白字符<br><code>\S</code> - 匹配任意非空白字符<br><code>\n</code> - 匹配换行<br><code>\w</code> - 它其实就等同于 <code>[A-Za-z0-9_]</code>，即匹配字母数字下划线</p>
+<p><img src="http://i1.fuimg.com/705673/d2d8c2dffa968406.jpg" alt="5.png"></p>
+<blockquote>
+<h3 id="6-量词匹配"><a href="#6-量词匹配" class="headerlink" title="6.量词匹配"></a>6.量词匹配</h3></blockquote>
+<p><code>*</code> - 匹配 <code>0</code> 次或多次<br><code>+</code> - 匹配 <code>1</code> 次或多次<br><code>?</code> - 匹配 <code>0</code> 次或 <code>1</code> 次<br><code>&#123;3&#125;</code> - 匹配 <code>3</code> 次<br><code>&#123;2,4&#125;</code> - 匹配 <code>2</code>、<code>3</code> 或 <code>4</code> 次<br><code>&#123;2,&#125;</code> - 匹配 <code>2</code> 次或<code>多</code>次</p>
+<p><img src="http://i1.fuimg.com/705673/acc08b06f84d3a1e.jpg" alt="6.png"></p>
+<blockquote>
+<h3 id="7-分组"><a href="#7-分组" class="headerlink" title="7.分组"></a>7.分组</h3></blockquote>
+<p><code>()</code> 小括号在正则中代表分组，一般在 <code>match</code> 方法中用来返回全匹配加上多个分组结果，如果使用了 <code>g</code> 选项，则只返回全匹配。</p>
+<p>在小括号中你可以使用管道符号 <code>|</code>，它代表或</p>
+<p><img src="http://i1.fuimg.com/705673/cc4579b39c5e6245.jpg" alt="7.png"></p>
+<blockquote>
+<h3 id="8-特殊字符"><a href="#8-特殊字符" class="headerlink" title="8.特殊字符"></a>8.特殊字符</h3></blockquote>
+<p>匹配特殊符号的时候需要加反斜杠 \</p>
+<p><code>JS</code> 中的特殊字符有 <code>^</code> <code>$</code> <code>\</code> <code>.</code> <code>*</code> <code>+</code> <code>?</code> <code>()</code> <code>[]</code> <code>&#123;&#125;</code> <code>|</code></p>
+<p>所以如果你需要匹配星号 <code>*</code>，就需要这样写：<code>\*</code></p>
+<p><img src="http://i1.fuimg.com/705673/77c8cb57421b5492.jpg" alt="8.png"></p>
+<blockquote>
+<h3 id="9-取非匹配"><a href="#9-取非匹配" class="headerlink" title="9.取非匹配"></a>9.取非匹配</h3></blockquote>
+<p>匹配除了某个字符的任意字符，需要在中括号<code>[]</code> 中使用 <code>^</code></p>
+<p>至此 <code>^</code> 具有两个含义：</p>
+<p>如果用于正则表达式的<code>开头</code>，代表匹配<code>字符串的开头</code><br>如果用于中括号 <code>[]</code> 内部，则代表匹配<code>非此字符</code></p>
+<p><img src="http://i1.fuimg.com/705673/4327d3a68d3d6e7a.jpg" alt="9.png"></p>
+<blockquote>
+<h3 id="10-完"><a href="#10-完" class="headerlink" title="10.完"></a>10.完</h3></blockquote>
+<p>上面只是介绍了正则表达式中的基本用法，在日常开发中基本就够用了。更深入的用法比如 贪婪和懒惰、零宽断言 和 捕获 ，感兴趣的小伙伴可以自行学习~</p>
+<p>正则很强大，但是也不能滥用。如果你写出了一个很复杂的只有你能看懂的正则，更好的做法是不使用正则去实现它~</p>
+<blockquote>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4></blockquote>
+<p><a target="_blank" rel="noopener" href="https://savokiss.com/tech/intro-to-regexp.html">原文链接</a><br><a target="_blank" rel="noopener" href="https://dev.to/chrisachard/intro-to-regex-for-web-developers-2fj4">Intro to Regex for Web Developers</a></p>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/e835e96a.html">https://xuehuayu.cn/article/e835e96a.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/c96889a.html">正则大全</a><a class="next" href="/article/2c99d30a.html">13 个 npm 快速开发技巧</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/369326bd.html">Celestial Master Zhong Kui</a></li><li class="post-list-item"><a class="post-list-link" href="/article/8d86d7a8.html">Vue3 Native Implementation of Image Comparison</a></li><li class="post-list-item"><a class="post-list-link" href="/article/9f9f2ad3.html">vue3原生实现图片对比</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">276</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any", // 支持所有操作系统（因为基于浏览器）
+  "permissions": "browser", // 需要的权限
+  "author": {
+      "@type": "Person",
+      "name": "前端壹菜鸟"
+  },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "前端壹菜鸟",
+      "url": "https://xuehuayu.cn",
+    },
+    {
+      "@type": "WebSite",
+      "name": "前端壹菜鸟",
+      "url": "https://cainiaoblog.cn",
+    },
+    
+  ]
+}
+</script><title>高频面试题深入解析/ 周刊 05 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();
+</script><script>(function(){
+  var src = 'https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba';
+  document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">高频面试题深入解析/ 周刊 05</h1><div class="post-meta"><span class="date">2019-10-03</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.8k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 7</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/8fa8d423.html#waline-comment"><span class="waline-comment-count" data-path="/article/8fa8d423.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/36</code></p>
+<span id="more"></span>
+
+<h3 id="关于【Step-By-Step】"><a href="#关于【Step-By-Step】" class="headerlink" title="关于【Step-By-Step】"></a>关于【Step-By-Step】</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step">Step-By-Step</a> (点击进入项目) 是我于 <code>2019-05-20</code> 开始的一个项目，每个工作日发布一道面试题。<br>每个周末我会仔细阅读大家的答案，整理最一份较优答案出来，因本人水平有限，有误的地方，大家及时指正。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>本周面试题一览:</p>
+</blockquote>
+<ul>
+<li>实现 Promise.race 方法</li>
+<li>JSONP 原理及简单实现</li>
+<li>实现一个数组去重的方法</li>
+<li>清楚浮动的方法有哪些</li>
+<li>编写一个通用的柯里化函数 currying</li>
+</ul>
+<h3 id="20-实现-Promise-race-方法"><a href="#20-实现-Promise-race-方法" class="headerlink" title="20. 实现 Promise.race 方法"></a>20. 实现 Promise.race 方法</h3><p>在实现 <code>Promise.race</code> 方法之前，我们首先要知道 <code>Promise.race</code> 的功能和特点，因为在清楚了 <code>Promise.race</code> 功能和特点的情况下，我们才能进一步去写实现。</p>
+<h4 id="Promise-race-功能"><a href="#Promise-race-功能" class="headerlink" title="Promise.race 功能"></a>Promise.race 功能</h4><p><code>Promise.race(iterable)</code> 返回一个 promise，一旦 <code>iterable</code> 中的一个 <code>promise</code> 状态是 <code>fulfilled</code> &#x2F; <code>rejected</code> ，那么 <code>Promise.race</code> 返回的 <code>promise</code> 状态是 <code>fulfilled</code> &#x2F; <code>rejected</code>.</p>
+<pre><code>let p =Promise.race([p1, p2, p3]);
+</code></pre>
+<p>只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的 <code>Promise</code> 实例的返回值，就传递给 p 的回调函数。</p>
+<h4 id="Promise-race-的特点"><a href="#Promise-race-的特点" class="headerlink" title="Promise.race 的特点"></a>Promise.race 的特点</h4><blockquote>
+<p>Promise.race 的返回值是一个 promise 实例</p>
+</blockquote>
+<ul>
+<li>如果传入的参数为空的可迭代对象，那么 <code>Promise.race</code> 返回的 <code>promise</code> 永远是 <code>pending</code> 态</li>
+<li>如果传入的参数中不包含任何 <code>promise</code>，<code>Promise.race</code> 会返回一个处理中（pending）的 <code>promise</code></li>
+<li>如果 <code>iterable</code> 包含一个或多个非 <code>promise</code> 值或已经解决的promise，则 <code>Promise.race</code> 将解析为 <code>iterable</code> 中找到的第一个值。</li>
+</ul>
+<h4 id="Promise-race-的实现"><a href="#Promise-race-的实现" class="headerlink" title="Promise.race 的实现"></a>Promise.race 的实现</h4><pre><code>Promise.race=function (promises) &#123;
+    //promises传入的是可迭代对象(省略参数合法性判断)
+    promises =Array.from(promises);//将可迭代对象转换为数组returnnewPromise((resolve, reject) =&gt; &#123;
+        if (promises.length===0) &#123;
+            //空的可迭代对象;//用于在pending态
+        &#125; else &#123;
+            for (let i =0; i &lt;promises.length; i++) &#123;
+                Promise.resolve(promises[i]).then((data) =&gt; &#123;
+                    resolve(data);
+                &#125;).catch((reason) =&gt; &#123;
+                    reject(reason);
+                &#125;)
+            &#125;
+        &#125;
+    &#125;);
+&#125;
+</code></pre>
+<h3 id="21-JSONP原理及简单实现"><a href="#21-JSONP原理及简单实现" class="headerlink" title="21. JSONP原理及简单实现"></a>21. JSONP原理及简单实现</h3><p>尽管浏览器有同源策略，但是 <code>&lt;script&gt;</code> 标签的 <code>src</code> 属性不会被同源策略所约束，可以获取任意服务器上的脚本并执行。<code>jsonp</code> 通过插入 <code>script</code> 标签的方式来实现跨域，参数只能通过 <code>url</code> 传入，仅能支持 <code>get</code> 请求。</p>
+<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理:"></a>实现原理:</h4><ul>
+<li>Step1: 创建 callback 方法</li>
+<li>Step2: 插入 script 标签</li>
+<li>Step3: 后台接受到请求，解析前端传过去的 callback 方法，返回该方法的调用，并且数据作为参数传入该方法</li>
+<li>Step4: 前端执行服务端返回的方法调用</li>
+</ul>
+<h4 id="jsonp源码实现"><a href="#jsonp源码实现" class="headerlink" title="jsonp源码实现"></a>jsonp源码实现</h4><pre><code>functionjsonp(&#123;url, params, callback&#125;) &#123;
+    returnnewPromise((resolve, reject) =&gt; &#123;
+        //创建script标签let script =document.createElement(&#39;script&#39;);
+        //将回调函数挂在 window 上window[callback] =function(data) &#123;
+            resolve(data);
+            //代码执行后，删除插入的script标签document.body.removeChild(script);
+        &#125;
+        //回调函数加在请求地址上
+        params = &#123;...params, callback&#125; //wb=b&amp;callback=showlet arrs = [];
+        for(let key in params) &#123;
+            arrs.push(`$&#123;key&#125;=$&#123;params[key]&#125;`);
+        &#125;
+        script.src=`$&#123;url&#125;?$&#123;arrs.join(&#39;&amp;&#39;)&#125;`;
+        document.body.appendChild(script);
+    &#125;);
+&#125;
+</code></pre>
+<p>使用:</p>
+<pre><code>functionshow(data) &#123;
+    console.log(data);
+&#125;
+jsonp(&#123;
+    url:&#39;http://localhost:3000/show&#39;,
+    params: &#123;
+        //code
+    &#125;,
+    callback:&#39;show&#39;
+&#125;).then(data=&gt; &#123;
+    console.log(data);
+&#125;);
+</code></pre>
+<p>服务端代码(node):</p>
+<pre><code>//express启动一个后台服务let express =require(&#39;express&#39;);
+let app =express();
+
+app.get(&#39;/show&#39;, (req, res) =&gt; &#123;
+    let &#123;callback&#125; =req.query; //获取传来的callback函数名，callback是keyres.send(`$&#123;callback&#125;(&#39;Hello!&#39;)`);
+&#125;);
+app.listen(3000);
+</code></pre>
+<h3 id="22-实现一个数组去重的方法"><a href="#22-实现一个数组去重的方法" class="headerlink" title="22. 实现一个数组去重的方法"></a>22. 实现一个数组去重的方法</h3><h4 id="法1-利用ES6新增数据类型-Set"><a href="#法1-利用ES6新增数据类型-Set" class="headerlink" title="法1: 利用ES6新增数据类型 Set"></a>法1: 利用ES6新增数据类型 <code>Set</code></h4><p><code>Set</code>类似于数组，但是成员的值都是唯一的，没有重复的值。</p>
+<pre><code>functionuniq(arry) &#123;
+    return [...newSet(arry)];
+&#125;
+</code></pre>
+<h4 id="法2-利用-indexOf"><a href="#法2-利用-indexOf" class="headerlink" title="法2: 利用 indexOf"></a>法2: 利用 <code>indexOf</code></h4><pre><code>functionuniq(arry) &#123;
+    var result = [];
+    for (var i =0; i &lt;arry.length; i++) &#123;
+        if (result.indexOf(arry[i]) ===-1) &#123;
+            //如 result 中没有 arry[i],则添加到数组中result.push(arry[i])
+        &#125;
+    &#125;
+    return result;
+&#125;
+</code></pre>
+<h4 id="法3-利用-includes"><a href="#法3-利用-includes" class="headerlink" title="法3: 利用 includes"></a>法3: 利用 <code>includes</code></h4><pre><code>functionuniq(arry) &#123;
+    var result = [];
+    for (var i =0; i &lt;arry.length; i++) &#123;
+        if (!result.includes(arry[i])) &#123;
+            //如 result 中没有 arry[i],则添加到数组中result.push(arry[i])
+        &#125;
+    &#125;
+    return result;
+&#125;
+</code></pre>
+<h4 id="法4：利用-reduce"><a href="#法4：利用-reduce" class="headerlink" title="法4：利用 reduce"></a>法4：利用 <code>reduce</code></h4><pre><code>functionuniq(arry) &#123;
+    returnarry.reduce((prev, cur) =&gt;prev.includes(cur) ? prev : [...prev, cur], []);
+&#125;
+</code></pre>
+<h4 id="法5：利用-Map"><a href="#法5：利用-Map" class="headerlink" title="法5：利用 Map"></a>法5：利用 <code>Map</code></h4><pre><code>functionuniq(arry) &#123;
+    let map =newMap();
+    let result =newArray();
+    for (let i =0; i &lt;arry.length; i++) &#123;
+        if (map.has(arry[i])) &#123;
+            map.set(arry[i], true);
+        &#125; else &#123;
+            map.set(arry[i], false);
+            result.push(arry[i]);
+        &#125;
+    &#125;
+    return result;
+&#125;
+</code></pre>
+<h3 id="23-清除浮动的方法有哪些？"><a href="#23-清除浮动的方法有哪些？" class="headerlink" title="23. 清除浮动的方法有哪些？"></a>23. 清除浮动的方法有哪些？</h3><blockquote>
+<p>当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。</p>
+</blockquote>
+<pre><code>&lt;style&gt;.inner &#123;width: 100px;height: 100px;float: left;    &#125;&lt;/style&gt;
+&lt;divclass=&#39;outer&#39;&gt;
+    &lt;divclass=&#39;inner&#39;&gt;&lt;/div&gt;
+    &lt;divclass=&#39;inner&#39;&gt;&lt;/div&gt;
+    &lt;divclass=&#39;inner&#39;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h4 id="1-利用-clear-属性"><a href="#1-利用-clear-属性" class="headerlink" title="1. 利用 clear 属性"></a>1. 利用 <code>clear</code> 属性</h4><p>在 <code>&lt;div class=&#39;outer&#39;&gt;</code> 内创建一个空元素，对其设置 <code>clear: both;</code> 的样式。</p>
+<ul>
+<li>优点：简单，代码少，浏览器兼容性好。</li>
+<li>缺点：需要添加大量无语义的html元素，代码不够优雅，后期不容易维护。</li>
+</ul>
+<h4 id="2-利用-clear-属性-伪元素"><a href="#2-利用-clear-属性-伪元素" class="headerlink" title="2. 利用 clear 属性 + 伪元素"></a>2. 利用 <code>clear</code> 属性 + 伪元素</h4><pre><code>.outer:after&#123;
+    content: &#39;&#39;;
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+&#125;
+</code></pre>
+<p>IE8以上和非IE浏览器才支持:after，如果想要支持IE6、7，需要给 <code>outer</code> 元素，设置样式 <code>zoom: 1</code>;</p>
+<h4 id="3-利用-BFC-布局规则"><a href="#3-利用-BFC-布局规则" class="headerlink" title="3. 利用 BFC 布局规则"></a>3. 利用 BFC 布局规则</h4><p>根据 BFC 的规则，计算 BFC 的高度时，浮动元素也参与计算。因此清除浮动，只需要触发一个BFC即可。</p>
+<blockquote>
+<p>可以使用以下方法来触发BFC</p>
+</blockquote>
+<ul>
+<li>position 为 absolute 或 relative</li>
+<li>overflow 不为 visible 的块元素</li>
+<li>display 为 inline-block, table-cell, table-caption</li>
+</ul>
+<p>如：</p>
+<pre><code>.outer &#123;
+    overflow: hidden;
+&#125;
+</code></pre>
+<p>注意使用 <code>display: inline-block</code> 会产生间隙。</p>
+<h3 id="24-编写一个通用的柯里化函数-currying"><a href="#24-编写一个通用的柯里化函数-currying" class="headerlink" title="24. 编写一个通用的柯里化函数 currying"></a>24. 编写一个通用的柯里化函数 currying</h3><p>在开始之前，我们首先需要搞清楚函数柯里化的概念。</p>
+<p>函数柯里化是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。</p>
+<pre><code>constcurrying= (fn, ...args) =&gt;args.length&lt;fn.length//参数长度不足时，重新柯里化该函数，等待接受新参数? (...arguments) =&gt;currying(fn, ...args, ...arguments)
+        //参数长度满足时，执行函数:fn(...args);
+
+functionsumFn(a, b, c) &#123;
+    return a + b + c;
+&#125;
+var sum =currying(sumFn);
+console.log(sum(2)(3)(5));//10console.log(sum(2, 3, 5));//10console.log(sum(2)(3, 5));//10console.log(sum(2, 3)(5));//10
+</code></pre>
+<blockquote>
+<p>函数柯里化的主要作用：</p>
+</blockquote>
+<ul>
+<li>参数复用</li>
+<li>提前返回 – 返回接受余下的参数且返回结果的新函数</li>
+<li>延迟执行 – 返回新函数，等待执行</li>
+</ul>
+<h3 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h3><p>[1] <a target="_blank" rel="noopener" href="http://www.zhufengpeixun.cn/main/course/index.html">珠峰架构课(墙裂推荐)</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004865198">CSS-清除浮动</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2975c25e4d71">详解JS函数柯里化</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000016418021?utm_source=tag-newest">JavaScript数组去重</a></p>
+<p>谢谢各位小伙伴愿意花费宝贵的时间阅读本文，如果本文给了您一点帮助或者是启发，请不要吝啬你的赞和Star，您的肯定是我前进的最大动力。 <a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog">https://github.com/YvetteLau/Blog</a></p>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/8fa8d423.html">https://xuehuayu.cn/article/8fa8d423.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/16a18599.html">高频面试题深入解析/ 周刊 06</a><a class="next" href="/article/f8afe4b5.html">高频面试题深入解析/ 周刊 04</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/369326bd.html">Celestial Master Zhong Kui</a></li><li class="post-list-item"><a class="post-list-link" href="/article/8d86d7a8.html">Vue3 Native Implementation of Image Comparison</a></li><li class="post-list-item"><a class="post-list-link" href="/article/9f9f2ad3.html">vue3原生实现图片对比</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">276</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
