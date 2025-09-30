@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,原创,FrontEnd"><title>leetCode-括号生成 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">leetCode-括号生成</h1><div class="post-meta"><span class="date">2020-06-18</span><span> | </span><span class="original">原创 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 146</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 1</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/30cd405a.html#waline-comment"><span class="waline-comment-count" data-path="/article/30cd405a.html">0</span><span> 条评论</span></a><div class="post-content"><p>数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。</p>
+<span id="more"></span>
+
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3</span><br><span class="line">输出：[</span><br><span class="line">      &quot;((()))&quot;,</span><br><span class="line">      &quot;(()())&quot;,</span><br><span class="line">      &quot;(())()&quot;,</span><br><span class="line">      &quot;()(())&quot;,</span><br><span class="line">      &quot;()()()&quot;</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+
+<h4 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">generate</span>(<span class="params">n</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> arr = []</span><br><span class="line">  <span class="title function_">every</span>(<span class="number">0</span>, <span class="number">0</span>, n, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">every</span> (left, right, max, cur) &#123;</span><br><span class="line">    <span class="comment">// 递推终结条件</span></span><br><span class="line">    <span class="keyword">if</span> (left === max &amp;&amp; right === max) &#123;</span><br><span class="line">      arr.<span class="title function_">push</span>(cur)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 下一层</span></span><br><span class="line">    <span class="keyword">if</span> (left &lt; max) &#123;</span><br><span class="line">      <span class="title function_">every</span>(left + <span class="number">1</span>, right, max, cur + <span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (left &gt; right) &#123;</span><br><span class="line">      <span class="title function_">every</span>(left, right + <span class="number">1</span>, max, cur + <span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">generate</span>(<span class="number">3</span>) <span class="comment">// [&quot;((()))&quot;, &quot;(()())&quot;, &quot;(())()&quot;, &quot;()(())&quot;, &quot;()()()&quot;]</span></span><br></pre></td></tr></table></figure>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/30cd405a.html">https://xuehuayu.cn/article/30cd405a.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/6e19cb62.html">umijs登录鉴权</a><a class="next" href="/article/4b4e88e9.html">前端面试之下划线转小驼峰</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/c3fcb716.html">基于HTML5、阿里云播放SDK、腾讯云播放SDK开发的M3U8在线播放器</a></li><li class="post-list-item"><a class="post-list-link" href="/article/369326bd.html">Celestial Master Zhong Kui</a></li><li class="post-list-item"><a class="post-list-link" href="/article/8d86d7a8.html">Vue3 Native Implementation of Image Comparison</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 3,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">278</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
