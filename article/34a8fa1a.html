@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>优化CSS并加速网站的21种方法 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">优化CSS并加速网站的21种方法</h1><div class="post-meta"><span class="date">2019-10-31</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.3k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 8</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/34a8fa1a.html#waline-comment"><span class="waline-comment-count" data-path="/article/34a8fa1a.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/9vPBOPkfPgNqOxsoeztjEw</code></p>
+<p>CSS 必须通过一个相对复杂的管道，就像 HTML 和 JavaScript一样，浏览器必须从服务器下载文件，然后进行解析并将其应用于DOM。由于优化程度极高，这个过程通常非常快——对于不基于框架的小型 web 项目，CSS通常只占总资源消耗的一小部分。</p>
+<span id="more"></span>
+<p><img src="https://img.php.cn/upload/article/000/000/006/5daa6923205bc807.jpg" alt="xuehuayu.cn"></p>
+<p>框架打破了这种平衡。包括一个 JavaScript GUI 堆栈，如 jQuery UI，可以观察 CSS, JS 和 HTML大小逐渐的变大。通常，开发人员最后才会感到压力，当他们用一个强大的 8 核工作站后面，使用 T3 internet 时，没有人关心速度，这随着延迟或 cpu 受限设备的出现而改变。</p>
+<p>优化CSS需要一个多维的方法。虽然手工编写的代码可以使用各种技术进行简化，但是手工检查框架代码是低效的。在这些情况下，使用自动化的简化会产生更好的结果。</p>
+<p>下面的步骤将带我们进入 CSS 优化的世界。并不是每一个都可以直接应用到你的项目中，但是一定要记住它们。</p>
+<h2 id="01-使用简写"><a href="#01-使用简写" class="headerlink" title="01. 使用简写"></a>01. 使用简写</h2><p><img src="https://img.php.cn/upload/image/192/710/135/1571448819576179.jpg" alt="1571448819576179.jpg"></p>
+<p>使用缩写语句，如下面所示的 <code>margin</code> 声明，可以从根本上减小 CSS 文件的大小。在 google 上搜索 <code>CSS Shorthand</code> 可以找到许多其他的速记形式。</p>
+<pre><code>p { margin-top: 1px;
+    margin-right: 2px;
+    margin-bottom:  3px;
+    margin-left: 4px; }
+
+p { margin: 1px 2px 3px 4px; }
+</code></pre>
+<h2 id="02-查找并删除未使用的-CSS"><a href="#02-查找并删除未使用的-CSS" class="headerlink" title="02. 查找并删除未使用的 CSS"></a>02. 查找并删除未使用的 CSS</h2><p><img src="https://img.php.cn/upload/image/503/682/542/1571448824927414.jpg" alt="1571448824927414.jpg"></p>
+<p>删除不必要的部分 CSS，j显然会加快网页的加载速度。谷歌的Chrome浏览器有这种开箱即用的功能。只需转到查看&gt;开发人员&gt;开发人员工具，并在最近的版本中打开Sources选项卡，然后打开命令菜单。然后，选择Show Coverage，在Coverage analysis窗口中高亮显示当前页面上未使用的代码，让您大开眼界。</p>
+<p>打开谷歌浏览器开发都工具，在 <code>Conlse</code> 旁边更多选择 <code>Coverage</code>，就可以看到未使用的 CSS, 点击对应的项，高亮显示当前页面上未使用的代码，让你大开眼界：</p>
+<p><img src="https://img.php.cn/upload/image/973/337/252/1571448829289104.png" alt="1571448829289104.png"></p>
+<h2 id="03-以更便捷的方式做到这一点"><a href="#03-以更便捷的方式做到这一点" class="headerlink" title="03. 以更便捷的方式做到这一点"></a>03. 以更便捷的方式做到这一点</h2><p><img src="https://img.php.cn/upload/image/497/664/318/1571448835387382.png" alt="1571448835387382.png"></p>
+<p>在逐行分析中导航并不一定便捷，使用谷歌浏览器的 Audits 就可以快速帮我们分析，使用方式，打开开发者工具，点击 <code>Audits</code> 栏位，点击 <strong>Run audits</strong> 后就开始分析结果。</p>
+<h2 id="04-注意这些问题"><a href="#04-注意这些问题" class="headerlink" title="04. 注意这些问题"></a>04. 注意这些问题</h2><p>请记住，对 CSS 的自动分析总是会导致错误。用压缩后的 CSS 文件替换 未压缩CSS文件之后，对整个网站进行彻底的测试——没有人知道优化器会导致什么错误。</p>
+<h2 id="05-内联关键-CSS"><a href="#05-内联关键-CSS" class="headerlink" title="05.内联关键 CSS"></a>05.内联关键 CSS</h2><p>加载外部样式表需要花费时间，这是由于延迟造成的——因此，可以把最关键的代码位放在 <code>head</code> 中。但是，请确保不要做得过火，记住，执行维护任务的人员也必须读取代码。</p>
+<pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      .blue{color:blue;}
+    &lt;/style&gt;
+    &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p class=&quot;blue&quot;&gt;
+      Hello, world!
+    &lt;/p&gt;
+</code></pre>
+<h2 id="06-允许反并行解析"><a href="#06-允许反并行解析" class="headerlink" title="06.允许反并行解析"></a>06.允许反并行解析</h2><p><code>@import</code> 将 CSS 样式方便添加代码中。遗憾的是，这些好处并不是没有代价的:由于 <code>@import</code> 可以嵌套，因此无法并行解析它们。更并行的方法是使用一系列 <strong><link></strong> 标记，浏览器可以立即获取这些标记。</p>
+<pre><code>@import url(&quot;a.css&quot;);
+@import url(&quot;b.css&quot;);
+@import url(&quot;c.css&quot;);
+
+&lt;link rel=&quot;stylesheet&quot; href=&quot;a.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;b.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;c.css&quot;&gt;
+</code></pre>
+<h2 id="07-用-CSS-替换图片"><a href="#07-用-CSS-替换图片" class="headerlink" title="07. 用 CSS 替换图片"></a>07. 用 CSS 替换图片</h2><p>几年前，一套半透明的 png 在网站上创建半透明效果是司空见惯的。现在，CSS过 滤器提供了一种节省资源的替代方法。例如，以下这个代码片段可以确保所讨论的图片显示为其自身的灰度版本。</p>
+<pre><code>img {
+    -webkit-filter: grayscale(100%); 
+    /* old safari */
+    filter: grayscale(100%);
+}
+</code></pre>
+<h2 id="08-使用颜色快捷方式"><a href="#08-使用颜色快捷方式" class="headerlink" title="08.使用颜色快捷方式"></a>08.使用颜色快捷方式</h2><p>常识告诉我们，六位数的颜色描述符是表达颜色最有效的方式。事实并非如此——在某些情况下，速记描述或颜色名称可以更短。</p>
+<pre><code>target { background-color: #ffffff; }
+target { background: #fff; }
+</code></pre>
+<h2 id="09-删除不必要的零和单位"><a href="#09-删除不必要的零和单位" class="headerlink" title="09. 删除不必要的零和单位"></a>09. 删除不必要的零和单位</h2><p>CSS 支持多种单位和数字格式。它们是一个值得感谢的优化目标——可以删除尾随和跟随的零，如下面的代码片段所示。此外，请记住，零始终是零，添加维度不会为包含的信息附带价值。</p>
+<pre><code>padding: 0.2em;
+margin: 20.0em;
+avalue: 0px;
+padding: .2em;
+margin: 20em;
+avalue: 0;
+</code></pre>
+<h2 id="10-消除过多分号"><a href="#10-消除过多分号" class="headerlink" title="10. 消除过多分号"></a>10. 消除过多分号</h2><p>这种优化需要谨慎，因为它会影响代码的更改。CSS的规范允许省略属性组中的最后一个分号。由于这种优化方法所节省的成本很小，所以我们主要针对那些正在开发自动优化的程序员说明这一点。</p>
+<pre><code>p {
+. . .
+    font-size: 1.33em
+}
+</code></pre>
+<h2 id="11-使用纹理图集"><a href="#11-使用纹理图集" class="headerlink" title="11.使用纹理图集"></a>11.使用纹理图集</h2><p>由于协议开销的原因，加载多个小图片的效率很低。CSS 精灵将一系列小图片组合成一个大的PNG 文件，然后通过 CSS 规则将其分解。<a target="_blank" rel="noopener" href="https://www.codeandweb.com/texturepacker">TexturePacker</a> 等程序大大简化了创建过程。</p>
+<pre><code>.download {
+  width:80px; 
+  height:31px; 
+  background-position: -160px -160px
+}
+
+.download:hover {
+  width:80px; 
+  height:32px; 
+  background-position: -80px -160px
+}
+</code></pre>
+<h2 id="12-省略-px"><a href="#12-省略-px" class="headerlink" title="12. 省略 px"></a>12. 省略 px</h2><p>提高性能的一个简单方法是使用CSS标准的一个特性。为 0 的数值默认单位是 <code>px</code>—— 删除 <code>px</code> 可以为每个数字节省两个字节。</p>
+<pre><code>h2 {padding:0px; margin:0px;}
+
+h2 {padding:0; margin:0}
+</code></pre>
+<h2 id="13-避免需要性能要求的属性"><a href="#13-避免需要性能要求的属性" class="headerlink" title="13. 避免需要性能要求的属性"></a>13. 避免需要性能要求的属性</h2><p>分析表明，一些标签比其他标签更昂贵。以下这些解析会影响性能—如果在没有必要的情况，尽量不要使用它们。</p>
+<pre><code>border-radius
+box-shadow
+transform
+filter
+:nth-child
+position: fixed;
+</code></pre>
+<h2 id="14-删除空格"><a href="#14-删除空格" class="headerlink" title="14. 删除空格"></a>14. 删除空格</h2><p>空格——考虑制表符、回车符和空格——使代码更容易阅读，但从解析器的角度看，它没有什么用处。在发布前删除它们，更好的方法是将此任务委托给 shell 脚本或类似的工具。</p>
+<h2 id="15-删除注释"><a href="#15-删除注释" class="headerlink" title="15. 删除注释"></a>15. 删除注释</h2><p>注释对编译器也没有任何作用。创建一个自定义解析器，以便在发布之前删除它们。这不仅节省了带宽，而且还确保攻击者和克隆者更难理解手头代码背后的思想。</p>
+<h2 id="16-使用自动压缩"><a href="#16-使用自动压缩" class="headerlink" title="16. 使用自动压缩"></a>16. 使用自动压缩</h2><p>Yahoo　的用户体验团队创建了一个处理许多压缩任务的应用程序。它以　JAR　文件的形式发布，<a target="_blank" rel="noopener" href="http://yui.github.io/yuicompressor/">可在此处获得</a>，并且可以使用所选的JVM运行。</p>
+<pre><code>java -jar yuicompressor-x.y.z.jar
+Usage: java -jar yuicompressor-x.y.z.jar
+ [options] [input file]
+Global Options
+    -h, --help                Displays this
+ information
+    --type &lt;js|css&gt;           Specifies the
+ type of the input file
+</code></pre>
+<h2 id="17-在-NPM-运行它"><a href="#17-在-NPM-运行它" class="headerlink" title="17. 在 NPM 运行它"></a>17. 在 NPM 运行它</h2><p>如果你希望将产品集成到 Node.JS 中，请访问 n<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/yuicompressor">pmjs.com&#x2F;package&#x2F;yuicompressor</a>。维护不良的存储库包含一组包装器文件和JavaScript API。</p>
+<pre><code>var compressor = require(&#39;yuicompressor&#39;);
+ compressor.compress(&#39;/path/to/
+file or String of JS&#39;, {
+    //Compressor Options:
+    charset: &#39;utf8&#39;,
+    type: &#39;js&#39;,
+</code></pre>
+<h2 id="18-保持-Sass-的检查"><a href="#18-保持-Sass-的检查" class="headerlink" title="18. 保持 Sass 的检查"></a>18. 保持 Sass 的检查</h2><p><img src="https://img.php.cn/upload/image/841/794/992/1571448920487836.jpg" alt="1571448920487836.jpg"></p>
+<p>虽然 CSS 选择器的性能不像几年前那么重要(请参阅参考资料)，但是像 Sass 这样的框架有时会产生非常复杂的代，不时查看输出文件，并考虑优化结果的方法。</p>
+<p><a target="_blank" rel="noopener" href="https://www.creativebloq.com/web-design/what-is-sass-111517618">什么是Sass？</a></p>
+<h2 id="19-设置缓存"><a href="#19-设置缓存" class="headerlink" title="19. 设置缓存"></a>19. 设置缓存</h2><p>有句老话说，最快的文件永远不会通过网络发送。让浏览器缓存请求有效地实现这一点。遗憾的是，缓存头的设置必须在服务器上进行。充分上面讲的的两个 Chrome 工具，它们提供了一种快速分析更改结果的方法。</p>
+<h2 id="20-打破缓存"><a href="#20-打破缓存" class="headerlink" title="20. 打破缓存"></a>20. 打破缓存</h2><p>设计人员通常不喜欢缓存，因为他们担心浏览器会缓存上次的样式表。解决这个问题的一个简单方法是包含带有文件名的标记。遗憾的是，由于一些代理拒绝缓存具有“动态”路径的文件，此步骤所附带的代码中概述的方案并不适用于所有地方。</p>
+<pre><code>&lt;Link rel=&quot;stylesheet&quot; href=&quot;style.css?v=1.2.3&quot;&gt;
+</code></pre>
+<h2 id="21-不要忘记基础知识"><a href="#21-不要忘记基础知识" class="headerlink" title="21. 不要忘记基础知识"></a>21. 不要忘记基础知识</h2><p>优化CSS只是游戏的一部分。如果你的服务器不使用 HTTP&#x2F;2 和 gzip 压缩，那么在数据传输期间会损失很多时间。幸运的是，解决这两个问题通常很简单。我们的示例显示了对常用Apache 服务器的一些调整。如果您发现自己在一个不同的系统上，只需参考服务器文档即可。</p>
+<pre><code>pico /etc/httpd/conf/httpd.conf
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/css
+</code></pre>
+<p>英文原文地址：<a target="_blank" rel="noopener" href="https://www.creativebloq.com/how-to/21-ways-to-optimise-your-css-and-speed-up-your-site">https://www.creativebloq.com/how-to/21-ways-to-optimise-your-css-and-speed-up-your-site</a></p>
+<p>为了保证的可读性，本文采用意译而非直译。</p>
+<p>以上就是优化CSS并加速网站的21种方法的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/34a8fa1a.html">https://xuehuayu.cn/article/34a8fa1a.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/365a63a.html">腾讯原生小程序框架 OMIX 2.0 发布</a><a class="next" href="/article/583f82b4.html">CSS 开发必知必会的 16 个DevTools技巧</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/6718f68c.html">The Difference Between 'Nai Bei Bei' and Milk Candy</a></li><li class="post-list-item"><a class="post-list-link" href="/article/5fc82f4a.html">奶贝贝与奶糖的区别解析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/968a0bf3.html">What Is VPN MUX?</a></li><li class="post-list-item"><a class="post-list-link" href="/article/b7fe6c32.html">VPN的MUX是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/article/24dcd8c4.html">美缝剂清除方法与技巧指南</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">281</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/children/">children</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/health/">health</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">280</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

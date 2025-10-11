@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>正则大全 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">正则大全</h1><div class="post-meta"><span class="date">2019-12-11</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 6</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/c96889a.html#waline-comment"><span class="waline-comment-count" data-path="/article/c96889a.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/any86/any-rule</code></p>
+<span id="more"></span>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><pre><code>/^[GCDZTSPKXLY1-9]\d{1,4}$/
+</code></pre>
+<h3 id="-2"><a href="#-2" class="headerlink" title=""></a></h3><pre><code>/^\d{15,17}$/
+</code></pre>
+<h3 id="-3"><a href="#-3" class="headerlink" title=""></a></h3><pre><code>/^((ht|f)tps?:\/\/)?[\w-]+(\.[\w-]+)+:\d{1,5}\/?$/
+</code></pre>
+<h3 id="-4"><a href="#-4" class="headerlink" title=""></a></h3><pre><code>/^(((ht|f)tps?):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?$/
+</code></pre>
+<h3 id="-5"><a href="#-5" class="headerlink" title=""></a></h3><pre><code>/^[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}$/
+</code></pre>
+<h3 id="-6"><a href="#-6" class="headerlink" title=""></a></h3><pre><code>/^thunderx?:\/\/[a-zA-Z\d]+=$/
+</code></pre>
+<h3 id="-7"><a href="#-7" class="headerlink" title=""></a></h3><pre><code>/^ed2k:\/\/\|file\|.+\|\/$/
+</code></pre>
+<h3 id="-8"><a href="#-8" class="headerlink" title=""></a></h3><pre><code>/^magnet:\?xt=urn:btih:[0-9a-fA-F]{40,}.*$/
+</code></pre>
+<h3 id="-9"><a href="#-9" class="headerlink" title=""></a></h3><pre><code>/^(?:\d{1,2}|1\d\d|2[0-4]\d|25[0-5])(?:\.(?:\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}$/
+</code></pre>
+<h3 id="-10"><a href="#-10" class="headerlink" title=""></a></h3><pre><code>/^\/(\w+\/?)+$/
+</code></pre>
+<h3 id="-11"><a href="#-11" class="headerlink" title=""></a></h3><pre><code>/^\/(\w+\/)+\w+\.\w+$/
+</code></pre>
+<h3 id="-12"><a href="#-12" class="headerlink" title=""></a></h3><pre><code>/^[a-zA-Z]:\\(?:\w+\\?)*$/
+</code></pre>
+<h3 id="-13"><a href="#-13" class="headerlink" title=""></a></h3><pre><code>/^[a-zA-Z]:\\(?:\w+\\)*\w+\.\w+$/
+</code></pre>
+<h3 id="-14"><a href="#-14" class="headerlink" title=""></a></h3><pre><code>/^(s[hz]|S[HZ])(000[\d]{3}|002[\d]{3}|300[\d]{3}|600[\d]{3}|60[\d]{4})$/
+</code></pre>
+<h3 id="-15"><a href="#-15" class="headerlink" title=""></a></h3><pre><code>/^150$|^(?:\d|[1-9]\d|1[0-4]\d)(?:.5)?$/
+</code></pre>
+<h3 id="-16"><a href="#-16" class="headerlink" title=""></a></h3><pre><code>/&lt;!--[\s\S]*?--&gt;/
+</code></pre>
+<h3 id="-17"><a href="#-17" class="headerlink" title=""></a></h3><pre><code>/^([a-f\d]{32}|[A-F\d]{32})$/
+</code></pre>
+<h3 id="-18"><a href="#-18" class="headerlink" title=""></a></h3><pre><code>/^\d+(?:\.\d+){2}$/
+</code></pre>
+<h3 id="-19"><a href="#-19" class="headerlink" title=""></a></h3><pre><code>/^https?:\/\/(.+\/)+.+(\.(swf|avi|flv|mpg|rm|mov|wav|asf|3gp|mkv|rmvb|mp4))$/i
+</code></pre>
+<h3 id="-20"><a href="#-20" class="headerlink" title=""></a></h3><pre><code>/^https?:\/\/(.+\/)+.+(\.(gif|png|jpg|jpeg|webp|svg|psd|bmp|tif))$/i
+</code></pre>
+<h3 id="-21"><a href="#-21" class="headerlink" title=""></a></h3><pre><code>/^(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d$/
+</code></pre>
+<h3 id="-22"><a href="#-22" class="headerlink" title=""></a></h3><pre><code>/^(?:1[0-2]|0?[1-9]):[0-5]\d:[0-5]\d$/
+</code></pre>
+<h3 id="-23"><a href="#-23" class="headerlink" title=""></a></h3><pre><code>/^\s*data:(?:[a-z]+\/[a-z0-9-+.]+(?:;[a-z-]+=[a-z0-9-]+)?)?(?:;base64)?,([a-z0-9!$&amp;&#39;,()*+;=\-._~:@\/?%\s]*?)\s*$/i
+</code></pre>
+<h3 id="-24"><a href="#-24" class="headerlink" title=""></a></h3><pre><code>/^-?\d+(,\d{3})*(\.\d{1,2})?$/
+</code></pre>
+<h3 id="-25"><a href="#-25" class="headerlink" title=""></a></h3><pre><code>/(?:^[1-9]([0-9]+)?(?:\.[0-9]{1,2})?$)|(?:^(?:0){1}$)|(?:^[0-9]\.[0-9](?:[0-9])?$)/
+</code></pre>
+<h3 id="）"><a href="#）" class="headerlink" title="）"></a>）</h3><pre><code>/^[1-9]\d{9,29}$/
+</code></pre>
+<h3 id="-26"><a href="#-26" class="headerlink" title=""></a></h3><pre><code>/^(?:[\u4e00-\u9fa5·]{2,16})$/
+</code></pre>
+<h3 id="-27"><a href="#-27" class="headerlink" title=""></a></h3><pre><code>/(^[a-zA-Z]{1}[a-zA-Z\s]{0,20}[a-zA-Z]{1}$)/
+</code></pre>
+<h3 id="-28"><a href="#-28" class="headerlink" title=""></a></h3><pre><code>/[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领 A-Z]{1}[A-HJ-NP-Z]{1}(([0-9]{5}[DF])|([DF][A-HJ-NP-Z0-9][0-9]{4}))$/
+</code></pre>
+<h3 id="-29"><a href="#-29" class="headerlink" title=""></a></h3><pre><code>/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领 A-Z]{1}[A-HJ-NP-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/
+</code></pre>
+<h3 id="-30"><a href="#-30" class="headerlink" title=""></a></h3><pre><code>/^(?:[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领 A-Z]{1}[A-HJ-NP-Z]{1}(?:(?:[0-9]{5}[DF])|(?:[DF](?:[A-HJ-NP-Z0-9])[0-9]{4})))|(?:[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领 A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9 挂学警港澳]{1})$/
+</code></pre>
+<h3 id="-31"><a href="#-31" class="headerlink" title=""></a></h3><pre><code>/^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/
+</code></pre>
+<h3 id="-32"><a href="#-32" class="headerlink" title=""></a></h3><pre><code>/^(?:(?:\+|00)86)?1[3-9]\d{9}$/
+</code></pre>
+<h3 id="-33"><a href="#-33" class="headerlink" title=""></a></h3><pre><code>/^(?:(?:\+|00)86)?1\d{10}$/
+</code></pre>
+<h3 id="-34"><a href="#-34" class="headerlink" title=""></a></h3><pre><code>/^\d{4}(-)(1[0-2]|0?\d)\1([0-2]\d|\d|30|31)$/
+</code></pre>
+<h3 id="-35"><a href="#-35" class="headerlink" title=""></a></h3><pre><code>/^[a-zA-Z0-9.!#$%&amp;&#39;*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+</code></pre>
+<h3 id="-36"><a href="#-36" class="headerlink" title=""></a></h3><pre><code>/\d{3}-\d{8}|\d{4}-\d{7}/
+</code></pre>
+<h3 id="-37"><a href="#-37" class="headerlink" title=""></a></h3><pre><code>/^\d{8}(0\d|10|11|12)([0-2]\d|30|31)\d{3}$/
+</code></pre>
+<h3 id="-38"><a href="#-38" class="headerlink" title=""></a></h3><pre><code>/^\d{6}(18|19|20)\d{2}(0\d|10|11|12)([0-2]\d|30|31)\d{3}[\dXx]$/
+</code></pre>
+<h3 id="-39"><a href="#-39" class="headerlink" title=""></a></h3><pre><code>/(^\d{8}(0\d|10|11|12)([0-2]\d|30|31)\d{3}$)|(^\d{6}(18|19|20)\d{2}(0\d|10|11|12)([0-2]\d|30|31)\d{3}(\d|X|x)$)/
+</code></pre>
+<h3 id="-40"><a href="#-40" class="headerlink" title=""></a></h3><pre><code>/(^[EeKkGgDdSsPpHh]\d{8}$)|(^(([Ee][a-fA-F])|([DdSsPp][Ee])|([Kk][Jj])|([Mm][Aa])|(1[45]))\d{7}$)/
+</code></pre>
+<h3 id="-41"><a href="#-41" class="headerlink" title=""></a></h3><pre><code>/^[a-zA-Z]\w{4,15}$/
+</code></pre>
+<h3 id="-42"><a href="#-42" class="headerlink" title=""></a></h3><pre><code>/^(?:[\u3400-\u4DB5\u4E00-\u9FEA\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0])+$/
+</code></pre>
+<h3 id="-43"><a href="#-43" class="headerlink" title=""></a></h3><pre><code>/^\d+\.\d+$/
+</code></pre>
+<h3 id="-44"><a href="#-44" class="headerlink" title=""></a></h3><pre><code>/^\d{1,}$/
+</code></pre>
+<h3 id="-45"><a href="#-45" class="headerlink" title=""></a></h3><pre><code>/&lt;(\w+)[^&gt;]*&gt;(.*?&lt;\/\1&gt;)?/
+</code></pre>
+<h3 id="是否qq号格式正确"><a href="#是否qq号格式正确" class="headerlink" title="是否qq号格式正确"></a>是否qq号格式正确</h3><pre><code>/^[1-9][0-9]{4,10}$/
+</code></pre>
+<h3 id="-46"><a href="#-46" class="headerlink" title=""></a></h3><pre><code>/^[A-Za-z0-9]+$/
+</code></pre>
+<h3 id="-47"><a href="#-47" class="headerlink" title=""></a></h3><pre><code>/^[a-zA-Z]+$/
+</code></pre>
+<h3 id="-48"><a href="#-48" class="headerlink" title=""></a></h3><pre><code>/^[a-z]+$/
+</code></pre>
+<h3 id="-49"><a href="#-49" class="headerlink" title=""></a></h3><pre><code>/^[A-Z]+$/
+</code></pre>
+<h3 id="-50"><a href="#-50" class="headerlink" title=""></a></h3><pre><code>/^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&amp;*? ]).*$/
+</code></pre>
+<h3 id="-51"><a href="#-51" class="headerlink" title=""></a></h3><pre><code>/^[a-zA-Z0-9_-]{4,16}$/
+</code></pre>
+<h3 id="-52"><a href="#-52" class="headerlink" title=""></a></h3><pre><code>/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+</code></pre>
+<h3 id="-53"><a href="#-53" class="headerlink" title=""></a></h3><pre><code>/^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$/i
+</code></pre>
+<h3 id="-54"><a href="#-54" class="headerlink" title=""></a></h3><pre><code>/^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
+</code></pre>
+<h3 id="-55"><a href="#-55" class="headerlink" title=""></a></h3><pre><code>/^[a-zA-Z][-_a-zA-Z0-9]{5,19}$/
+</code></pre>
+<h3 id="-56"><a href="#-56" class="headerlink" title=""></a></h3><pre><code>/^(0[1-7]|1[0-356]|2[0-7]|3[0-6]|4[0-7]|5[1-7]|6[1-7]|7[0-5]|8[013-6])\d{4}$/
+</code></pre>
+<h3 id="-57"><a href="#-57" class="headerlink" title=""></a></h3><pre><code>/^((?:[\u3400-\u4DB5\u4E00-\u9FEA\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879][\uDC00-\uDFFF]|\uD869[\uDC00-\uDED6\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0])|(\d))+$/
+</code></pre>
+<h3 id="-58"><a href="#-58" class="headerlink" title=""></a></h3><pre><code>/^[^A-Za-z]*$/
+</code></pre>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/c96889a.html">https://xuehuayu.cn/article/c96889a.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/4a87cd81.html">Webpack多入口文件、热更新等体验</a><a class="next" href="/article/e835e96a.html">写给前端的正则表达式入门</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/6718f68c.html">The Difference Between 'Nai Bei Bei' and Milk Candy</a></li><li class="post-list-item"><a class="post-list-link" href="/article/5fc82f4a.html">奶贝贝与奶糖的区别解析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/968a0bf3.html">What Is VPN MUX?</a></li><li class="post-list-item"><a class="post-list-link" href="/article/b7fe6c32.html">VPN的MUX是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/article/24dcd8c4.html">美缝剂清除方法与技巧指南</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">281</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/children/">children</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/health/">health</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">280</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
