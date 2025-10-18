@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>Webpack 是怎样运行的? | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">Webpack 是怎样运行的?</h1><div class="post-meta"><span class="date">2019-12-02</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 8</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/8fefb501.html#waline-comment"><span class="waline-comment-count" data-path="/article/8fefb501.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://zhuanlan.zhihu.com/p/52826586</code></p>
+<p>Webpack 是时下最流行的前端打包工具，它打包开发代码，输出能在各种浏览器运行的代码，提升了开发至发布过程的效率。</p>
+<p>你可能已经知道，这种便捷是由 Webpack 的插件系统带来的，但我们今天先把这些概念放在一边，从简单的实践开始，探索 Webpack<br>打包出的代码是如何在浏览器环境运行的。</p>
+<span id="more"></span>
+
+<h2 id="简单配置"><a href="#简单配置" class="headerlink" title="简单配置"></a>简单配置</h2><p>配置文件是使用 Webpack<br>的关键，一份配置文件主要包含入口（entry）、输出文件（output）、模式、加载器（Loader）、插件（Plugin）等几个部分，但如果只需要组织 JS<br>文件的话，指定入口和输出文件路径即可完成一个迷你项目的打包:</p>
+<p>项目目录：</p>
+<ul>
+<li><p>build</p>
+</li>
+<li><p>webpack.config.js – 存放 webpack 配置对象</p>
+</li>
+<li><p>src</p>
+</li>
+<li><p>index.js – 源文件</p>
+</li>
+<li><p>package.json – 本文使用 webpack ^4.23.0 作示例</p>
+</li>
+</ul>
+<p>为了更好地观察产出的文件，我们将模式设置为 <code>development</code> 关闭代码压缩，再开启 <code>source-map</code> 支持原始源代码调试。</p>
+<p>配置文件 <code>build/webpack.config.js</code>：</p>
+<pre><code>constpath=require(&#39;path&#39;);constresolve=relativePath=&gt;path.resolve(__dirname,relativePath);module.exports={mode:&#39;development&#39;,devtool:&#39;source-map&#39;,entry:resolve(&#39;../src/index.js&#39;),output:{path:resolve(&#39;../dist&#39;),} };
+</code></pre>
+<p>源文件 <code>src/index.js</code>：</p>
+<pre><code>document.writeln(&#39;Hello webpack!&#39;);
+</code></pre>
+<p>现在我们运行命令 <code>webpack --config build/webpack.config.js</code> ，打包完成后会多出一个输出目录 dist：</p>
+<ul>
+<li><p>build</p>
+</li>
+<li><p>webpack.config.js</p>
+</li>
+<li><p>dist</p>
+</li>
+<li><p>main.js</p>
+</li>
+<li><p>src</p>
+</li>
+<li><p>index.js</p>
+</li>
+<li><p>package.json</p>
+</li>
+</ul>
+<p><code>main</code> 是 webpack 默认设置的输出文件名，我们快速瞄一眼这个文件：</p>
+<p><code>dist/main.js</code>：</p>
+<pre><code>(function(modules){// ...
+})({&quot;./src/index.js&quot;:(function(){// ...
+})});
+</code></pre>
+<p>整个文件只含一个立即执行函数（IIFE），我们称它为 <code>webpackBootstrap</code>，它仅接收一个对象 —— 未加载的 模块集合（modules），这个<br>modules 对象的 key 是一个路径，value 是一个函数。你也许会问，这里的模块是什么？它们又是如何加载的呢？</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>别着急，在细看产出代码前，我们先丰富一下源代码：</p>
+<p>项目目录：</p>
+<ul>
+<li><p>build</p>
+</li>
+<li><p>webpack.config.js</p>
+</li>
+<li><p>src</p>
+</li>
+<li><p>utils</p>
+</li>
+<li><p>math.js</p>
+</li>
+<li><p>index.js</p>
+</li>
+<li><p>package.json</p>
+</li>
+</ul>
+<p>新文件 <code>src/utils/math.js</code>：</p>
+<pre><code>exportconstplus=(a,b)=&gt;{returna+b;};exportconstminus=(a,b)=&gt;{returna-b;};
+</code></pre>
+<p><code>src/index.js</code>：</p>
+<pre><code>import{plus,minus}from&#39;./utils/math.js&#39;;document.writeln(&#39;Hello webpack!&#39;);document.writeln(&#39;1 + 2: &#39;,plus(1,2));document.writeln(&#39;1 - 2: &#39;,minus(1,2));
+</code></pre>
+<p>我们按照 ES 规范的模块化语法写了一个简单的模块 <code>src/utils/math.js</code>，给 <code>src/index.js</code><br>引用。目前，虽然各大浏览器开始支持通过 <code>&lt;script type=&quot;module&quot;&gt;</code> 的方式支持 ES6<br>Module，但<a href="https://link.zhihu.com/?target=https://caniuse.com/%23feat=es6-module">还需时间覆盖</a>。Webpack<br>用自己的方式支持了 ES6 Module 规范，前面提到的 module 就是和 ES6 module 对应的概念。</p>
+<p>接下来我们看一下这些模块是如何通 ES5 代码实现的。再次运行命令 <code>webpack --config build/webpack.config.js</code><br>后查看输出文件：</p>
+<p><code>dist/main.js</code>：</p>
+<pre><code>(function(modules){// ...
+})({&quot;./src/index.js&quot;:(function(){// ...
+}),&quot;./src/utils/math.js&quot;:(function(){// ...
+})});
+</code></pre>
+<p>IIFE 传入的 modules 对象里多了一个键值对，对应着新模块 <code>src/utils/math.js</code>，这和我们在源代码中拆分的模块互相呼应。然而，有了<br>modules 只是第一步，这份文件最终达到的效果应该是让各个模块按开发者编排的顺序运行。</p>
+<h2 id="探究-webpackBootstrap"><a href="#探究-webpackBootstrap" class="headerlink" title="探究 webpackBootstrap"></a>探究 webpackBootstrap</h2><p>接下来看看 <code>webpackBootstrap</code> 函数中有些什么：</p>
+<pre><code>// webpackBootstrap
+(function(modules){// 缓存 __webpack_require__ 函数加载过的模块
+varinstalledModules={};/**
+   - Webpack 加载函数，用来加载 webpack 定义的模块
+   - @param {String} moduleId 模块 ID，一般为模块的源码路径，如 &quot;./src/index.js&quot;
+   - @returns {Object} exports 导出对象
+   */function__webpack_require__(moduleId){// ...
+}// 在 __webpack_require__ 函数对象上挂载一些变量及函数 ...
+// 传入表达式的值为 &quot;./src/index.js&quot;
+return__webpack_require__(__webpack_require__.s=&quot;./src/index.js&quot;);})(/* modules */);
+</code></pre>
+<p>可以看到其实主要做了两件事：</p>
+<ol>
+<li>定义一个模块加载函数 <code>__webpack_require__</code>。</li>
+<li>使用加载函数加载入口模块 <code>&quot;./src/index.js&quot;</code>。</li>
+</ol>
+<p>整个 <code>webpackBootstrap</code> 中只出现了入口模块的影子，那其他模块又是如何加载的呢？我们顺着<br><code>__webpack_require__(&quot;./src/index.js&quot;)</code> 细看加载函数的内部逻辑：</p>
+<pre><code>// ...
+function__webpack_require__(moduleId){// 重复加载则利用缓存
+if(installedModules[moduleId]){returninstalledModules[moduleId].exports;}// 如果是第一次加载，则初始化模块对象，并缓存
+varmodule=installedModules[moduleId]={i:moduleId,// 模块 ID
+l:false,// 模块加载标识
+exports:{}// 模块导出对象
+};/**
+    - 执行模块
+    - @param module.exports -- 模块导出对象引用，改变模块包裹函数内部的 this 指向
+    - @param module -- 当前模块对象引用
+    - @param module.exports -- 模块导出对象引用
+    - @param __webpack_require__ -- 用于在模块中加载其他模块
+    */modules[moduleId].call(module.exports,module,module.exports,__webpack_require__);// 模块加载标识置为已加载
+module.l=true;// 返回当前模块的导出对象引用
+returnmodule.exports;}// ...
+</code></pre>
+<p>首先，加载函数使用了闭包变量 <code>installedModules</code>，用来将已加载过的模块保存在内存中。<br>接着是初始化模块对象，并把它挂载到缓存里。然后是模块的执行过程，加载入口文件时 <code>modules[moduleId]</code> 其实就是<br><code>./src/index.js</code><br>对应的模块函数。执行模块函数前传入了跟模块相关的几个实参，让模块可以导出内容，以及加载其他模块的导出。最后标识该模块加载完成，返回模块的导出内容。</p>
+<p>根据 <code>__webpack_require__</code> 的缓存和导出逻辑，我们得知在整个 IIFE 运行过程中，加载已缓存的模块时，都会直接返回<br><code>installedModules[moduleId].exports</code>，换句话说，相同的模块只有在第一次引用的时候才会执行模块本身。</p>
+<h2 id="模块执行函数"><a href="#模块执行函数" class="headerlink" title="模块执行函数"></a>模块执行函数</h2><p><code>__webpack_require__</code> 中通过 <code>modules[moduleId].call()</code> 运行了模块执行函数，下面我们就进入到<br><code>webpackBootstrap</code> 的参数部分，看看模块的执行函数。</p>
+<pre><code>// webpackBootstrap
+(function(modules){// ...
+})({/*** 入口模块 ./src/index.js ***/&quot;./src/index.js&quot;:(function(module,__webpack_exports__,__webpack_require__){&quot;use strict&quot;;// 用于区分 ES 模块和其他模块规范，不影响理解 demo，战略跳过。
+__webpack_require__.r(__webpack_exports__);// 源模块代码中，`import {plus, minus} from &#39;./utils/math.js&#39;;` 语句被 loader 解析转化。
+// 加载 &quot;./src/utils/math.js&quot; 模块，
+/* harmony import */var_utils_math_js__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__(/*! ./utils/math.js */&quot;./src/utils/math.js&quot;);document.writeln(&#39;Hello webpack!&#39;);document.writeln(&#39;1 + 2: &#39;,Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_0__[&quot;plus&quot;])(1,2));document.writeln(&#39;1 - 2: &#39;,Object(_utils_math_js__WEBPACK_IMPORTED_MODULE_0__[&quot;minus&quot;])(1,2));}),/*** 工具模块 ./src/utils/math.js ***/&quot;./src/utils/math.js&quot;:(function(module,__webpack_exports__,__webpack_require__){&quot;use strict&quot;;// 同 &quot;./src/index.js&quot;
+__webpack_require__.r(__webpack_exports__);// 源模块代码中，`export` 语句被 loader 解析转化。
+// 导出 __webpack_exports__
+/* harmony export (binding) */__webpack_require__.d(__webpack_exports__,&quot;plus&quot;,function(){returnplus;});/* harmony export (binding) */__webpack_require__.d(__webpack_exports__,&quot;minus&quot;,function(){returnminus;});constplus=(a,b)=&gt;{returna+b;};constminus=(a,b)=&gt;{returna-b;};})});
+</code></pre>
+<p>执行顺序是：入口模块 -&gt; 工具模块 -&gt; 入口模块。入口模块中首先就通过<br><code>__webpack_require__(&quot;./src/utils/math.js&quot;)</code> 拿到了工具模块的 <code>exports</code> 对象。再看工具模块，ES<br>导出语法转化成了<code>__webpack_require__.d(__webpack_exports__, [key], [getter])</code>，而<br><code>__webpack_require__.d</code> 函数的定义在 <code>webpackBootstrap</code> 内：</p>
+<pre><code>// ...
+// 定义 exports 对象导出的属性。
+__webpack_require__.d=function(exports,name,getter){// 如果 exports （不含原型链上）没有 [name] 属性，定义该属性的 getter。
+if(!__webpack_require__.o(exports,name)){Object.defineProperty(exports,name,{enumerable:true,get:getter});} };// 包装 Object.prototype.hasOwnProperty 函数。
+__webpack_require__.o=function(object,property){returnObject.prototype.hasOwnProperty.call(object,property);};// ...
+</code></pre>
+<p>可见 <code>__webpack_require__.d</code> 其实就是 <code>Object.defineProperty</code> 的简单包装（怪不得叫 d 呢）。</p>
+<p>回顾一下，<code>__webpack_exports__</code> 原本在 <code>__webpack_require__</code> 中创建，初始值为<br><code>{}</code>。这个导出对象一路传到工具模块 <code>math.js</code> 中，被添加上 <code>plus</code> 和 <code>minus</code>，然后又在 <code>__webpack_require__</code><br>函数最后导出，为入口模块 <code>index.js</code> 的执行函数所用。</p>
+<p>exports 的一生：</p>
+<p><img src="https://pic3.zhimg.com/v2-6ea7c7bee5872c9edc6431273a5d830e_b.jpg" alt="xuehuayu.cn"><img src="https://pic3.zhimg.com/80/v2-6ea7c7bee5872c9edc6431273a5d830e_hd.jpg" alt="xuehuayu.cn"></p>
+<p>引用工具模块导出的变量后，入口模块再执行它剩余的部分。至此，Webpack 基本的模块执行过程就结束了。</p>
+<p>以上内容可<a href="https://link.zhihu.com/?target=https://github.com/pobusama/how-webpack-works">克隆示例代码库调试</a>，分支为<br><code>demo1</code>。</p>
+<p>除了 ES6 Module 规范，Webpack 同样支持 CommonJS 与 AMD 规范，你可以替换模块化规范，重新打包来观察它们的区别。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>好了，我们用流程图总结一下 Webpack 模块的加载思路：</p>
+<p><img src="https://pic4.zhimg.com/v2-dbd5e17901ad814d0757ad67ad58047f_b.jpg" alt="xuehuayu.cn"><img src="https://pic4.zhimg.com/80/v2-dbd5e17901ad814d0757ad67ad58047f_hd.jpg" alt="xuehuayu.cn"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://link.zhihu.com/?target=https://webpack.js.org/glossary/%23m">Glossary&#8203;webpack.js.org</a></p>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/8fefb501.html">https://xuehuayu.cn/article/8fefb501.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/f43dd4a8.html">使用 Hooks 优化 React 组件</a><a class="next" href="/article/a974109a.html">48个 JS 开发常用工具函数</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/72256181.html">孩子能不能喝酸奶，什么时候喝比较好？酸奶饮用全攻略：从成人到幼儿，一文读懂！</a></li><li class="post-list-item"><a class="post-list-link" href="/article/1edb13da.html">新生儿医疗保险怎么交-城乡居民医疗保险缴费</a></li><li class="post-list-item"><a class="post-list-link" href="/article/6718f68c.html">The Difference Between 'Nai Bei Bei' and Milk Candy</a></li><li class="post-list-item"><a class="post-list-link" href="/article/5fc82f4a.html">奶贝贝与奶糖的区别解析</a></li><li class="post-list-item"><a class="post-list-link" href="/article/968a0bf3.html">What Is VPN MUX?</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/">children</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/health/">health</a><span class="category-list-count">7</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">280</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="官方终身大流量卡" target="_blank">官方终身大流量卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

@@ -1,0 +1,74 @@
+! [xuehuayu.cn]
+! Title: 菜鸟_MOB过滤器[xuehuayu.cn]
+! Version: 2506111
+! Expires: 7 days
+! Homepage: https://xuehuayu.cn?mobilefilter
+!********* filter start *********!
+
+
+||*.meituan.net^$app=com.dz.hmjc
+||adsdk.vivo.com.cn^
+||ssp.vivo.com.cn^
+||images.pinduoduo.com^$app=com.dz.hmjc
+||apmplus.volces.com^
+||clientlognew.hzage.cn^
+||t-dsp.pinduoduo.com^
+||p*-webcast-sign.douyinpic.com^
+||abtest-ch.snssdk.com^
+||risk-fp-openapi.vivo.com.cn^
+||mssdk.volces.com^
+||sysdk.cl2009.com^
+||gecko.snssdk.com^
+||p6-novel.byteimg.com^$app=com.phoenix.read
+
+
+
+!===  红果 ↓
+||zijieapi.com^$app=com.phoenix.read
+!===  红果 ↑
+
+!===  小飞机云盘 ↓
+||pinduoduo.com^$app=com.xiaofeiji.app.disk
+||meituan.net^$app=com.xiaofeiji.app.disk
+!===  小飞机云盘 ↑
+
+!===  河马影视 ↓
+||apimobile.meituan.com^$app=com.dz.hmjc
+||*.meituan.net^$app=com.dz.hmjc
+||adsdk.vivo.com.cn^
+||ssp.vivo.com.cn^
+||images.pinduoduo.com^$app=com.dz.hmjc
+||apmplus.volces.com^
+||clientlognew.hzage.cn^
+||t-dsp.pinduoduo.com^
+||p*-webcast-sign.douyinpic.com^
+||abtest-ch.snssdk.com^
+||risk-fp-openapi.vivo.com.cn^
+||mssdk.volces.com^
+||sysdk.cl2009.com^
+||gecko.snssdk.com^
+!===  河马影视 ↑
+
+!===  拼多多 ↓
+/d?$app=com.xunmeng.pinduoduo
+/d4?$app=com.xunmeng.pinduoduo
+*.h3*.mp4$app=com.xunmeng.pinduoduo
+!===  拼多多 ↑
+
+!===  酷安 ↓
+||zijieapi.com^$app=com.coolapk.market
+||snssdk.com^$app=com.coolapk.market
+||douyin.com^$app=com.coolapk.market
+||bytedance.com^$app=com.coolapk.market
+||beizi.biz^$app=com.coolapk.market
+||apmplus.volces.com^$app=com.coolapk.market
+||tpns.tencent.com^$app=com.coolapk.market
+||dxld.shuzilm.cn^$app=com.coolapk.market
+||toutiao.com^$app=com.coolapk.market
+||pinduoduo.com^$app=com.coolapk.market
+||api2.coolapk.com/v6/feed/detail$replace=/"_ids":\[.*?]\,"":\[.*?]\,/ /
+||api2.coolapk.com/v6/feed/detail$replace=/\,"":{.*}/}}/
+||api2.coolapk.com/v6/main/indexV8$replace=/{"entityType":"card"\,"entityTemplate":"listCard".*?}"}\,/ / 
+||api2.coolapk.com/v6/main/init$replace=/{"id":1170.*?}\,/ /
+||api2.coolapk.com/v6/page/dataList$replace=/{"entityType":"card"\,"entityTemplate":"apkImageCard".*?\\u0022}"}\,/ /
+!===  酷安 ↑

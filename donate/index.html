@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<title>请作者喝咖啡</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+	<!--禁止缩放-->
+	<link rel="stylesheet" href="/css/donate.css">
+	<script src="//cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/clipboard@latest/dist/clipboard.min.js"></script>
+	<!-- clipboard.js 是 JS 复制文本的库 -->
+	<script src="//cdn.jsdelivr.net/gh/npljy/npljy.github.io@main/js/donate.js"></script>
+
+</head>
+
+<body>
+	<!-- <a id="github" title="此插件github" href="https://github.com/Kaiyuan/sponsor-page" target="_blank" class="pos-f tr3" title="Github"></a> -->
+	<div id="DonateText" class="tr3">请作者喝可乐</div>
+	<ul id="donateBox" class="list pos-f tr3">
+		<li id="WeChat">WeChat</li>
+		<li id="AliPay">AliPay</li>
+		<li id="UnionPay">UnionPay</li>
+		<li id="afd"><a href="" target="_blank">爱发电</a></li>
+		<li id="PayPal"><a href="" target="_blank">PayPal</a></li>
+		<li id="BTC" data-footnote="Copy address and show QRCode">
+			<button id="BTCBn" data-clipboard-target="#btc-key" alt="Copy to clipboard">Bitcoin</button>
+		</li>
+	</ul>
+	<div id="QRBox" class="pos-f left-100">
+		<div id="MainBox" style="background-image: url(https://i.niupic.com/images/2019/09/29/_4423.jpg);">
+		</div>
+	</div>
+	<!-- Bitcoin 账号 -->
+	<input id="btc-key" type="text" value="" readonly="readonly">
+</body>
+
+</html>
