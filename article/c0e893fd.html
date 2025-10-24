@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>一文洞察Chrome DevTools近半年新增了哪些功能 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">一文洞察Chrome DevTools近半年新增了哪些功能</h1><div class="post-meta"><span class="date">2019-10-24</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.1k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 12</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/c0e893fd.html#waline-comment"><span class="waline-comment-count" data-path="/article/c0e893fd.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.zoo.team/article/chrome-devtools</code></p>
+<p>工欲善其事，必先利其器。Chrome Devtools 是前端开发工程师不可或缺的开发工具，最近半年 Chrome 更新了 6 个版本，其中的 5 个版本里<br>Chrome Devtools 也更新了一些新功能，我们对最近的一些更新做了翻译整理，下面我们一起来看看近半年有哪些值得关注的新功能。</p>
+<span id="more"></span>
+
+<p>本文由政采云前端团队 @ 子洋同学翻译，原文可访问：<br><a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2019/09/devtools">https://developers.google.com/web/updates/2019/09/devtools</a></p>
+<h2 id="DevTools（Chrome-74）的新增功能"><a href="#DevTools（Chrome-74）的新增功能" class="headerlink" title="DevTools（Chrome 74）的新增功能"></a>DevTools（Chrome 74）的新增功能</h2><h3 id="高亮显示所有受-CSS-属性影响的节点"><a href="#高亮显示所有受-CSS-属性影响的节点" class="headerlink" title="高亮显示所有受 CSS 属性影响的节点"></a>高亮显示所有受 CSS 属性影响的节点</h3><p>将鼠标悬停在会影响节点盒子模型的 CSS 属性上，如 <code>padding</code> 或 <code>margin</code> ，会高亮显示受到这个属性声明影响的所有节点。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/1.png" alt="将鼠标悬停在margin属性上会突出显示受该声明影响的所有节点"></p>
+<h3 id="Audits-面板中的-Lighthouse-v4"><a href="#Audits-面板中的-Lighthouse-v4" class="headerlink" title="Audits 面板中的 Lighthouse v4"></a>Audits 面板中的 Lighthouse v4</h3><p>新增加的 <a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/lighthouse/audits/tap-targets">Tap targets are not sized<br>appropriately</a><br>可以检查移动设备上的交互式元素（如按钮和链接）是否设置了合适的尺寸和间隔。</p>
+<p>例如：点击目标的大小是否易于点击，或者是否距离其他可点击目标过近，更多： <a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/lighthouse/audits/tap-targets">Tap targets are not sized<br>appropriately</a></p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/2.png" alt="点击目标审核"></p>
+<p>  PWA 分类使用新的徽章计分系统。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/3.png" alt="PWA类别的新徽章计分系统"></p>
+<p>Lighthouse<br>相关介绍可参考：<a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/lighthouse/#devtools"><strong>Lighthouse</strong></a></p>
+<h3 id="新增-WebSocket-二进制消息查看器"><a href="#新增-WebSocket-二进制消息查看器" class="headerlink" title="新增 WebSocket 二进制消息查看器"></a>新增 WebSocket 二进制消息查看器</h3><p>查看 WebSocket 二进制消息的内容：</p>
+<ol>
+<li>打开 <strong>Network</strong> 面板。可参考 <a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/network/">Inspect Network<br>Activity</a> 了解<br>Network 分析的基础使用。</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/4.png" alt="网络面板"></p>
+<ol>
+<li>点击 <strong>WS</strong>， 过滤不是 WebSocket 连接的资源。</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/5.png" alt="单击WS之后，仅显示WebSockety连接"></p>
+<ol>
+<li>点击 WebSocket 连接的 <strong>Name</strong> 查看详情 。</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/6.png" alt="检查WebSocket连接"></p>
+<ol>
+<li>点击 <strong>Messages</strong> tab。</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/7.png" alt="消息选项卡"></p>
+<ol>
+<li>点击其中的一个 <strong>Binary Message</strong> 查看详情 。</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/8.png" alt="检查二进制消息"></p>
+<p>可以使用底部的下拉菜单将消息转换为 Base64 或<br>UTF-8。点击<strong>复制到剪贴板</strong><img src="https://developers.google.com/web/tools/chrome-devtools/images/shared/copy-to-clipboard.png" alt="复制到剪贴板"><br>可以复制二进制消息。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/9.png" alt="将二进制消息查看为Base64"></p>
+<h3 id="可在-Command-Menu-中使用区域屏幕截图"><a href="#可在-Command-Menu-中使用区域屏幕截图" class="headerlink" title="可在 Command Menu 中使用区域屏幕截图"></a>可在 Command Menu 中使用区域屏幕截图</h3><p>区域截图可以捕获窗口一部分的屏幕截图。这个功能之前访问入口非常隐蔽，现在可以从 <strong>Command Menu</strong> 直接使用区域截图。</p>
+<ol>
+<li>打开 DevTools，然后按 Control + Shift + P 或 Command + Shift + P（Mac）打开 <strong>Command<br>Menu</strong>（命令菜单）。</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/10.png" alt="命令菜单"></p>
+<ol>
+<li><p>输入 <code>area</code>，选择 <strong>Capture area screenshots</strong>，然后 Enter。</p>
+</li>
+<li><p>将鼠标拖到要截屏的部分。</p>
+</li>
+<li><p>选择窗口的一部分截图。</p>
+</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/11.png" alt="选择视口的一部分以进行屏幕截图"></p>
+<h3 id="Network-面板中的-Service-Worker-过滤器"><a href="#Network-面板中的-Service-Worker-过滤器" class="headerlink" title="Network 面板中的 Service Worker 过滤器"></a>Network 面板中的 Service Worker 过滤器</h3><p>在 <strong>Network</strong> 筛选框中输入 <code>is:service-worker-initiated</code> 或<br><code>is:service-worker-intercepted</code> 可以查看由 service worker<br>发起（<code>initiated</code>）或可能被其修改（<code>intercepted</code>）的请求。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/12.png" alt="筛选依据是：服务工作者发起的"></p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/13.png" alt="筛选依据是：服务工人拦截"></p>
+<p>Network 日志过滤的更多资料，可参考 <a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/network/#filter">Filter<br>resources</a>。</p>
+<h3 id="Performance-recordings-里增加长任务标记"><a href="#Performance-recordings-里增加长任务标记" class="headerlink" title="Performance recordings 里增加长任务标记"></a>Performance recordings 里增加长任务标记</h3><p>long tasks 相关介绍可参考 <a target="_blank" rel="noopener" href="https://w3c.github.io/longtasks/#sec-terminology">long<br>tasks</a>。</p>
+<p><strong>Performance</strong> 面板分析页面加载性能的示例，可参考 <a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/speed/get-started#main">Do less main thread<br>work</a></p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/14.png" alt="将鼠标悬停在Performance录音中的长期任务上"></p>
+<h3 id="Performance-Timings-部分增加-First-Paint-的标记"><a href="#Performance-Timings-部分增加-First-Paint-的标记" class="headerlink" title="Performance Timings 部分增加 First Paint 的标记"></a>Performance <a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2018/11/devtools#metrics">Timings</a> 部分增加 First Paint 的标记</h3><p>现在，Performance recordings 中的<br><a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2018/11/devtools#metrics">Timings</a><br>会标记出 First Paint 的节点。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/15.png" alt="时间部分中的第一道油漆"></p>
+<h2 id="DevTools（Chrome-75）的新增功能"><a href="#DevTools（Chrome-75）的新增功能" class="headerlink" title="DevTools（Chrome 75）的新增功能"></a>DevTools（Chrome 75）的新增功能</h2><h3 id="CSS-函数自动补全有意义的预设值"><a href="#CSS-函数自动补全有意义的预设值" class="headerlink" title="CSS 函数自动补全有意义的预设值"></a>CSS 函数自动补全有意义的预设值</h3><p>某些 CSS<br>属性（如<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter"><code>filter</code></a>）的值是函数。例如，<code>filter: blur(1px)</code>给节点增加 1px 模糊。当自动补全，如<code>filter</code> 的属性时，DevTools<br>会自动补全有意义的值，可以很方便的预览这个值将在节点上进行的更改效果。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/16.png" alt="旧的自动完成行为。">老的版本自动补全，DevTools</p>
+<p>自动补全属性为 <code>filter: blur</code> ，在视口中看不到任何更改。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/17.png" alt="新的自动完成行为。">新的自动补全，DevTools</p>
+<p>自动补全属性为 <code>filter: blur(1px)</code>，可以在窗口中看见改变效果。</p>
+<h3 id="从-Command-Menu-清除网页数据"><a href="#从-Command-Menu-清除网页数据" class="headerlink" title="从 Command Menu 清除网页数据"></a>从 Command Menu 清除网页数据</h3><p>按下 Control+ Shift+ P或 Command+ Shift+ P（Mac）打开 <strong>Command Menu</strong>，然后运行 <strong>Clear<br>Site Data</strong> 命令清除页面相关的所有数据，包括 <a target="_blank" rel="noopener" href="https://developers.google.com/web/ilt/pwa/introduction-to-service-worker">Service<br>workers</a>,<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"><code>localStorage</code></a>,<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage"><code>sessionStorage</code></a>,<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">IndexedDB</a>,<br><a target="_blank" rel="noopener" href="https://www.w3.org/TR/webdatabase/">Web SQL</a>,<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies">Cookies</a>,<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache</a> 以及 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache">Application<br>Cache</a>.</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/18.png" alt="清除站点数据命令。"></p>
+<p><strong>Application</strong> &gt; <strong>Clear Storage</strong> 中已经存在这个功能。Chrome 75 中新增可以从 <strong>Command Menu</strong><br>执行这个命令。</p>
+<p>如果不想删除所有数据，可以从 <strong>Application</strong> &gt; <strong>Clear Storage</strong> 选择删除哪些数据 。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/19.png" alt="应用程序&gt;清除存储。"></p>
+<h3 id="查看所有-IndexedDB-数据库"><a href="#查看所有-IndexedDB-数据库" class="headerlink" title="查看所有 IndexedDB 数据库"></a>查看所有 IndexedDB 数据库</h3><p>以前 <strong>Application</strong> &gt; <strong>IndexedDB</strong> 只允许查看当前域的 IndexedDB<br>数据库。如果页面里有<code>&lt;iframe&gt;</code>，并且这个<code>&lt;iframe&gt;</code> 也使用 IndexedDB，就无法查看对应的数据库。从 Chrome 75<br>开始，DevTools 会显示所有域的 IndexedDB 数据库。</p>
+<p>![旧的行为。</p>
+<p>该页面正在嵌入一个使用IndexedDB的演示，但是看不到任何数据库。](<a target="_blank" rel="noopener" href="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/20.png)%E6%97%A7%E7%89%88%E6%9C%AC%E4%B8%AD%EF%BC%8C%E8%BF%99%E4%B8%AA%E9%A1%B5%E9%9D%A2%E4%BA%86%E5%B5%8C%E5%85%A5%E4%B8%80%E4%B8%AA%E4%BD%BF%E7%94%A8">https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/20.png)旧版本中，这个页面了嵌入一个使用</a><br>IndexedDB 的 demo，但是看不到任何数据库信息。</p>
+<p>![新的行为。</p>
+<p>该演示的数据库是可见的。](<a target="_blank" rel="noopener" href="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/21.png">https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/21.png</a>)<br>新版本中，可以查看这个 demo 的数据库。</p>
+<h3 id="悬停查看资源未压缩的大小"><a href="#悬停查看资源未压缩的大小" class="headerlink" title="悬停查看资源未压缩的大小"></a>悬停查看资源未压缩的大小</h3><p>将鼠标悬停在 <strong>Size</strong> 列上可以查看资源未压缩的大小。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/22.png" alt="将鼠标悬停在&quot;大小&quot;列上可以查看资源的未压缩大小。"></p>
+<h3 id="内联断点"><a href="#内联断点" class="headerlink" title="内联断点"></a>内联断点</h3><p>假设给下面的代码添加<br><a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/javascript/breakpoints#loc">代码行断点</a>：</p>
+<pre><code>- document.querySelector(&#39;#dante&#39;).addEventListener(&#39;click&#39;, logWarning);
+</code></pre>
+<p>在此行的开头，<code>document.querySelector(&#39;#dante&#39;)</code>调用之前或 <code>addEventListener(&#39;click&#39;, logWarning)</code> 调用之前添加断点 。如果全部启用，则实际上创建了 3 个断点。之前，<strong>Breakpoints</strong> 面板无法单独管理这 3 个断点。从<br>Chrome 75 开始，每个内联断点在 <strong>Breakpoints</strong> 面板中都有自己单独的一行。</p>
+<p>![旧的行为。</p>
+<p>&quot;断点&quot;窗格中只有一个条目。](<a target="_blank" rel="noopener" href="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/23.png">https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/23.png</a>)<br>旧版本中，<strong>Breakpoints</strong> 面板中只有 1 行。</p>
+<p>![新的行为。</p>
+<p>&quot;断点&quot;窗格中有3个条目。](<a target="_blank" rel="noopener" href="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/24.png)%E6%96%B0%E7%89%88%E6%9C%AC%E4%B8%AD%EF%BC%8C**Breakpoints**%E9%9D%A2%E6%9D%BF%E4%B8%AD%E6%9C%89">https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/24.png)新版本中，**Breakpoints**面板中有</a><br>3 行。</p>
+<h2 id="DevTools（Chrome-76）的新增功能"><a href="#DevTools（Chrome-76）的新增功能" class="headerlink" title="DevTools（Chrome 76）的新增功能"></a>DevTools（Chrome 76）的新增功能</h2><h3 id="根据-CSS-值自动补全属性名"><a href="#根据-CSS-值自动补全属性名" class="headerlink" title="根据 CSS 值自动补全属性名"></a>根据 CSS 值自动补全属性名</h3><p>输入 CSS 值，根据值找到对应的属性名称。</p>
+<p>![键入&quot; bold&quot;后，&quot;样式&quot;窗格将自动完成为&quot;</p>
+<p>font-weight：bold&quot;。](<a target="_blank" rel="noopener" href="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/25.png)%E8%BE%93%E5%85%A5%60bold%60">https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/25.png)输入`bold`</a><br>后，自动补全 <code>font-weight: bold</code>。</p>
+<h3 id="总内存实时使用量"><a href="#总内存实时使用量" class="headerlink" title="总内存实时使用量"></a>总内存实时使用量</h3><p><strong>Memory</strong> 面板实时显示总内存的使用情况。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/26.png" alt="实时总内存使用率。"><strong>Memory</strong></p>
+<p>面板的底部显示这个页面总共使用 <strong>43.4 MB</strong> 内存。<strong>209 KB &#x2F; s</strong> 表示总内存使用量每秒增加 209 KB。</p>
+<p>更多实时跟踪内存介绍，可参考 <a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2017/11/devtools-release-notes#perf-monitor">Performance<br>Monitor</a></p>
+<h3 id="展示-Service-Workers-端口号"><a href="#展示-Service-Workers-端口号" class="headerlink" title="展示 Service Workers 端口号"></a>展示 Service Workers 端口号</h3><p><strong>Service Workers</strong> 面板的标题中包含端口号，可以更轻松的追踪正在调试的 Service Worker 。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/27.png" alt="服务人员端口。"></p>
+<h3 id="查看-Background-Fetch-和-Background-Sync-事件"><a href="#查看-Background-Fetch-和-Background-Sync-事件" class="headerlink" title="查看 Background Fetch 和 Background Sync 事件"></a>查看 Background Fetch 和 Background Sync 事件</h3><p>可以在 <strong>Application</strong> 面板里，新的 <strong>Background Services</strong> 可以监视 <a target="_blank" rel="noopener" href="https://medium.com/google-developer-experts/background-fetch-api-get-ready-to-use-it-69cca522cd8f">Background<br>Fetch</a><br>和 <a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2015/12/background-sync">Background<br>Sync</a> 事件。由于<br>Background Fetch 和 Background Sync 事件是在 Background 中发生的，如果只在打开 DevTools<br>时记录事件，用处不大。因此，一旦开始记录，即便关闭页面，甚至关闭 Chrome，Background Fetch 和 Background Sync<br>事件也会继续记录（最多三天）。</p>
+<p>在 <strong>Application</strong> 面板，点击 <strong>Background Fetch</strong> 或 <strong>Background Sync</strong> 选项，然后点击<br><strong>Record</strong> 开始记录。点击事件查看更多信息。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/28.png" alt="后台获取窗格。"></p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/29.png" alt="后台同步窗格。"></p>
+<p>Background Fetch 介绍可参考： <a target="_blank" rel="noopener" href="https://medium.com/google-developer-experts/background-fetch-api-get-ready-to-use-it-69cca522cd8f">Background<br>Fetch</a></p>
+<p>Background Sync 介绍可参考：<a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2015/12/background-sync">Background Sync
+</a></p>
+<h2 id="DevTools（Chrome-77）的新增功能"><a href="#DevTools（Chrome-77）的新增功能" class="headerlink" title="DevTools（Chrome 77）的新增功能"></a>DevTools（Chrome 77）的新增功能</h2><h3 id="复制元素样式"><a href="#复制元素样式" class="headerlink" title="复制元素样式"></a>复制元素样式</h3><p>右键点击 <strong>DOM树</strong>中的节点，将该节点的 CSS 复制到剪贴板。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/30.png" alt="复制样式。"></p>
+<h3 id="布局变化可视化"><a href="#布局变化可视化" class="headerlink" title="布局变化可视化"></a>布局变化可视化</h3><p><strong>注意：使用这个功能可能会导致屏幕闪烁。</strong></p>
+<p>如果页面没有为图片和广告预留空间，当图片和广告加载完成，浏览器必须将其他内容下移而留出空间，这时内容可能会跳来跳去，这个问题就是<strong>布局移动</strong>。解决方案是使用<br><a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/performance/lazy-loading-guidance/images-and-video/#layout_shifting_and_placeholders">placeholders</a>。</p>
+<p>DevTools 现在可以检测布局偏移：</p>
+<ol>
+<li>打开 <a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/command-menu">Command<br>Menu</a>。</li>
+<li>输入 <code>Rendering</code>。</li>
+<li>运行 <strong>Show Rendering</strong> 。</li>
+<li>选中 <strong>Layout Shift Regions</strong> 复选框。这时与页面进行交互，布局变化会突出显示为蓝色。</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/31.png" alt="布局转移。"></p>
+<h3 id="Audits-面板下的-Lighthouse-5-1"><a href="#Audits-面板下的-Lighthouse-5-1" class="headerlink" title="Audits 面板下的 Lighthouse 5.1"></a>Audits 面板下的 Lighthouse 5.1</h3><p><strong>Audits</strong> 面板现在使用 <a target="_blank" rel="noopener" href="https://github.com/GoogleChrome/lighthouse/releases/tag/v5.1.0">Lighthouse<br>5.1</a> 版本。新的检查项包括：</p>
+<ul>
+<li>[是否有可用的</li>
+</ul>
+<h2 id="apple-touch-icon-https-developers-google-com-web-fundamentals-design-and-ux-browser-customization-safari-。检查是否可以将PWA-添加到-iOS-主屏幕。"><a href="#apple-touch-icon-https-developers-google-com-web-fundamentals-design-and-ux-browser-customization-safari-。检查是否可以将PWA-添加到-iOS-主屏幕。" class="headerlink" title="apple-touch-icon](https://developers.google.com/web/fundamentals/design-and-ux/browser-customization/#safari)。检查是否可以将PWA 添加到 iOS 主屏幕。"></a><code>apple-touch-icon</code>](<a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/design-and-ux/browser-customization/#safari)%E3%80%82%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E5%B0%86">https://developers.google.com/web/fundamentals/design-and-ux/browser-customization/#safari)。检查是否可以将</a><br>PWA 添加到 iOS 主屏幕。</h2><h2 id="请求数量、文件大小。报告各种类别的网络请求总数和文件大小，例如documents-scripts-stylesheets-images-等。"><a href="#请求数量、文件大小。报告各种类别的网络请求总数和文件大小，例如documents-scripts-stylesheets-images-等。" class="headerlink" title="请求数量、文件大小。报告各种类别的网络请求总数和文件大小，例如documents, scripts, stylesheets, images 等。"></a><a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/lighthouse/audits/budgets">请求数量、文件大小</a>。报告各种类别的网络请求总数和文件大小，例如<br>documents, scripts, stylesheets, images 等。</h2><p><a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2018/05/first-input-delay">首次输入延迟</a>。衡量用户首次与网站进行交互（即当点击链接，按钮或使用<br>JavaScript 控件）到浏览器实际能够访问之间的时间。请注意，此度量标准替代了 <strong>预估输入延迟</strong>（Estimated Input<br>Latency）度量标准。此项不影响 Performance 类别得分。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/32.png" alt="新的&quot;审核&quot;面板用户界面。"></p>
+<p>Lighthouse 5.1 的 Node 和 CLI 版本更新可参考：</p>
+<ul>
+<li>[Performance</li>
+</ul>
+<p>Budgets](<a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/lighthouse/audits/budgets">https://developers.google.com/web/tools/lighthouse/audits/budgets</a>). -<br><a target="_blank" rel="noopener" href="https://github.com/GoogleChrome/lighthouse/blob/master/docs/plugins.md">Plugins</a>.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/GoogleChrome/lighthouse-stack-packs">Stack Packs</a>.</li>
+</ul>
+<h3 id="系统主题同步"><a href="#系统主题同步" class="headerlink" title="系统主题同步"></a>系统主题同步</h3><p>如果使用操作系统的深色主题，DevTools 会自动切换到<br><a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/customize/dark-theme">深色主题</a>。</p>
+<h3 id="Breakpoint-Editor-的快捷键"><a href="#Breakpoint-Editor-的快捷键" class="headerlink" title="Breakpoint Editor 的快捷键"></a>Breakpoint Editor 的快捷键</h3><p>焦点在 Sources 面板中的编辑器时，按下 Control + Alt + B 或 Command + Option + B（Mac）打开<br><strong>断点编辑器</strong>。断点编辑器可以用来创建<a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2019/01/devtools#logpoints">日志断点</a>和<a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/javascript/breakpoints#conditional-loc">条件断点</a>。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/33.png" alt="断点编辑器。"></p>
+<h3 id="Network-面板中展示-Prefetch-cache"><a href="#Network-面板中展示-Prefetch-cache" class="headerlink" title="Network 面板中展示 Prefetch cache"></a>Network 面板中展示 Prefetch cache</h3><p>当资源从 prefetch cache 中加载，在 Network 面板的 <strong>Size</strong> 列会显示 prefetch cache 。<a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/performance/resource-prioritization#prefetch">prefetch<br>cache</a><br>是一种新的 Web 功能，可加快页面的加载速度。 <a target="_blank" rel="noopener" href="https://caniuse.com/#feat=link-rel-prefetch">Can I<br>use…</a> 显示，截至 2019年7月，全球 83.33％<br>的浏览器都支持这个特性。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/34.png" alt="&quot;大小&quot;列显示资源来自预取缓存。"><strong>Size</strong></p>
+<p>列显示<code>prefetch2.html</code>和 <code>prefetch2.css</code>来自<code>(prefetch cache)</code>。</p>
+<p>更多可参考：<a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/performance/resource-prioritization#prefetch">prefetch<br>cache</a></p>
+<p>示例： <a target="_blank" rel="noopener" href="https://devtools.glitch.me/wndt77/prefetch1.html">prefetch cache demo</a></p>
+<h3 id="查看对象的私有属性"><a href="#查看对象的私有属性" class="headerlink" title="查看对象的私有属性"></a>查看对象的私有属性</h3><p>控制台现在支持显示<a target="_blank" rel="noopener" href="https://v8.dev/features/class-fields#private-class-fields">私有类字段</a>。</p>
+<p>![检查对象时，控制台现在会显示诸如&quot;</p>
+<h1 id="color-之类的私有字段。-https-zcy-video-oss-cn-shanghai-aliyuncs-com-medical-zooTeam-10-16-35-png-color"><a href="#color-之类的私有字段。-https-zcy-video-oss-cn-shanghai-aliyuncs-com-medical-zooTeam-10-16-35-png-color" class="headerlink" title="color&quot;之类的私有字段。](https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/35.png)`#color`"></a>color&quot;之类的私有字段。](<a target="_blank" rel="noopener" href="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/35.png)%60#color%60">https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/35.png)`#color`</a></h1><p>在左侧的旧版 Chrome 中不会显示，而右侧的新版本中会显示。</p>
+<h3 id="Application-面板-Notifications-and-push-messages"><a href="#Application-面板-Notifications-and-push-messages" class="headerlink" title="Application 面板 Notifications and push messages"></a>Application 面板 Notifications and push messages</h3><p>现在，Application 面板的 Background Services 支持查看 Push Messages 和 Notifications。当服务器向<br>service worker 发送信息时，将出现在 Push Messages。当 service worker 或页面脚本向用户显示信息时，会出现在<br>Notifications。</p>
+<p>与 <a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2019/05/devtools#background">Chrome 76
+</a>的<br><a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2019/05/devtools#background">Background Fetch and Background Sync<br>功能一样</a>，一旦开始记录，即使关闭页面，甚至关闭<br>Chrome，页面上的推送消息和通知录也会持续记录 3 天。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/36.png" alt="新的&quot;通知和推送消息&quot;窗格。"></p>
+<p>Push Messages 相关可参考：<a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/push-notifications">Web Push<br>Notifications</a></p>
+<p>Notifications 相关可参考：<a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/push-notifications/display-a-notification">Displaying a<br>Notification</a></p>
+<h2 id="DevTools（Chrome-78）的新增功能"><a href="#DevTools（Chrome-78）的新增功能" class="headerlink" title="DevTools（Chrome 78）的新增功能"></a>DevTools（Chrome 78）的新增功能</h2><h3 id="Audits-面板支持多客户端"><a href="#Audits-面板支持多客户端" class="headerlink" title="Audits 面板支持多客户端"></a>Audits 面板支持多客户端</h3><p>Audits 面板现在可以跟其他 DevTools 功能，如 <a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2017/04/devtools-release-notes#block-requests">Request<br>Blocking</a><br>和 <a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2018/01/devtools#overrides">Local Overrides
+</a>结合使用 。</p>
+<p>假设 <strong>Audits</strong> 面板报告此页面的性能得分为70，而最大的性能影响因素之一就是 <a target="_blank" rel="noopener" href="https://web.dev/render-blocking-resources">eliminating render-blocking<br>resources</a>。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/37.png" alt="初始性能得分是70。">初始<strong>性能</strong>得分。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/38.png" alt="初步报告指出，存在3个渲染阻止脚本。">初始报告显示存在</p>
+<p>3 个阻碍渲染的脚本。</p>
+<p>现在可以结合 request blocking，首先可以通过<br><a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2017/04/devtools-release-notes#block-requests">禁用阻碍渲染的脚本</a>，来快速判断阻碍渲染的脚本对加载性能的影响</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/39.png" alt="使用&quot;请求阻止&quot;选项卡阻止有问题的脚本。">使用</p>
+<p><strong>Request Blocking</strong> 选项卡禁用有问题的脚本。</p>
+<p>然后再次审核页面：</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/40.png" alt="启用请求阻止后，性能得分提高到97。">阻止有问题的脚本后，<strong>性能</strong>得分提高到了</p>
+<p>97。</p>
+<h3 id="Payment-Handler-调试"><a href="#Payment-Handler-调试" class="headerlink" title="Payment Handler 调试"></a>Payment Handler 调试</h3><p>现在，<strong>Application</strong> 面板的 <strong>Background Services</strong> 部分，支持 <a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2018/06/payment-handler-api">Payment<br>Handler（付款）</a><br>事件。</p>
+<ol>
+<li><p>转到 <strong>Application</strong>面板。</p>
+</li>
+<li><p>打开 <strong>Payment Handler</strong> 窗口。</p>
+</li>
+<li><p>点击 <strong>记录</strong>。即使关闭了DevTools，DevTools 也会记录 3 天的 Payment Handler 事件。</p>
+</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/41.png" alt="记录付款处理程序事件。"></p>
+<ol>
+<li><p>如果 Payment Handler 事件发生在其他域，可以启用 <strong>Show events from other domains</strong> 选项。</p>
+</li>
+<li><p>触发付款处理事件后，点击事件行以了解有关该事件的更多信息。</p>
+</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/42.png" alt="查看付款处理程序事件。"></p>
+<p>Payment Handler 相关介绍可参考：<a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2018/06/payment-handler-api">Payment<br>Handler</a></p>
+<h3 id="Audits-面板下的-Lighthouse-5-2"><a href="#Audits-面板下的-Lighthouse-5-2" class="headerlink" title="Audits 面板下的 Lighthouse 5.2"></a>Audits 面板下的 Lighthouse 5.2</h3><p><strong>Audits</strong> 面板，使用 <a target="_blank" rel="noopener" href="https://github.com/GoogleChrome/lighthouse/releases/tag/v5.2.0">Lighthouse<br>5.2</a> 版本。新增<br><strong>Third-Party Usage</strong> 审核项可以判断页面请求了多少第三方代码，以及页面加载时第三方代码阻塞了主线程多长时间。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/43.png" alt="Lighthouse报告用户界面中&quot;第三方使用情况&quot;审核的屏幕截图。"></p>
+<p>可参考 <a target="_blank" rel="noopener" href="https://web.dev/fast#optimize-your-third-party-resources">Optimize your third-party<br>resources</a><br>了解有关第三方代码如何降低加载性能的更多信息。</p>
+<h3 id="Performance-panel-中查看最大绘制内容"><a href="#Performance-panel-中查看最大绘制内容" class="headerlink" title="Performance panel 中查看最大绘制内容"></a>Performance panel 中查看最大绘制内容</h3><p><a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#record-load"><strong>Performance</strong><br>面板中分析加载性能</a>时，<strong>Timing</strong><br>现在新增了一个<a target="_blank" rel="noopener" href="https://web.dev/largest-contentful-paint">最大绘制内容</a>（largetst contentful<br>paint, LCP）的标志。LCP 记录了视图中可见的内容最大的元素的渲染时间。</p>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/44.png" alt="&quot;时序&quot;部分中的LCP标记。"></p>
+<p>高亮显示与 <strong>LCP</strong> 关联的 <strong>DOM</strong> 节点：</p>
+<ol>
+<li><p>点击 <strong>Timings</strong> 部分中的 <strong>LCP</strong> 标记。</p>
+</li>
+<li><p>将鼠标悬停在 <strong>Summary</strong> 选项卡中的 <strong>Related Node</strong> 上高亮显示视图中的节点。</p>
+</li>
+</ol>
+<p><img src="https://zcy-video.oss-cn-shanghai.aliyuncs.com/medical/zooTeam/10.16/45.png" alt="&quot;摘要&quot;选项卡的&quot;相关节点&quot;部分。"></p>
+<ol>
+<li>点击<strong>相关节点</strong>可在 <a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/dom"><strong>DOM<br>树</strong></a>中将其选中。</li>
+</ol>
+<h2 id="更多参考"><a href="#更多参考" class="headerlink" title="更多参考"></a>更多参考</h2><p><strong>Chrome DevTools 最近的更新到此就介绍完了，更多的介绍可以参考</strong></p>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2019/03/devtools">What’s New In DevTools (Chrome<br>74)</a></p>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2019/04/devtools">What’s New In DevTools (Chrome<br>75)</a></p>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2019/05/devtools">What’s New In DevTools (Chrome<br>76)</a></p>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2019/07/devtools">What’s New In DevTools (Chrome<br>77)</a></p>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2019/09/devtools">What’s New In DevTools (Chrome<br>78)</a></p>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/c0e893fd.html">https://xuehuayu.cn/article/c0e893fd.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/83ade139.html">重磅！TypeScript 3.7 RC发布</a><a class="next" href="/article/569b7b15.html">Node.js 13.0 正式发布</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/80fad23d.html">js中Map和对象{}的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/e36b137f.html">Husky 在前端项目中的使用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/article/56271070.html">TypeScript 中的 args 详解，和 arguments 有什么不同？</a></li><li class="post-list-item"><a class="post-list-link" href="/article/8c6832b5.html">TypeScript中as const断言和const声明变量的区别是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/article/6ff625e1.html">TypeScript 断言详解及示例</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/">children</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/health/">health</a><span class="category-list-count">7</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">287</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="官方终身大流量卡" target="_blank">官方终身大流量卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>

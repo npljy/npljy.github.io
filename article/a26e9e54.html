@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,FrontEnd,工具库,组件库,动画,数据可视化,Markdown,表单验证,拖拽,二维码,图片处理,懒加载,上传,lodash,dayjs,echarts,validator.js,swiper,mescroll"><title>项目中用的20个轮子 开发效率提升200% 建议收藏 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">项目中用的20个轮子 开发效率提升200% 建议收藏</h1><div class="post-meta"><span class="date">2023-12-08</span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 4</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/a26e9e54.html#waline-comment"><span class="waline-comment-count" data-path="/article/a26e9e54.html">0</span><span> 条评论</span></a><div class="post-content"><p>在真实的国内IT开发环境中，项目时间总是异常紧张，加班也未必能完成所有任务。与其耗费时间重复造轮子，不如善用现有工具，将宝贵时间投入到业务理解和功能开发中。以下是我近一年工作中高频使用的15个前端轮子，希望能显著提升你的开发效率。</p>
+<span id="more"></span>
+<p>如果你是后端开发者，欢迎将本文分享给前端同事，促进团队整体成长。</p>
+<h2 id="🎯-React-UI-组件库"><a href="#🎯-React-UI-组件库" class="headerlink" title="🎯 React UI 组件库"></a>🎯 React UI 组件库</h2><h3 id="1-Ant-Design"><a href="#1-Ant-Design" class="headerlink" title="1. Ant Design"></a>1. Ant Design</h3><ul>
+<li><p><strong>简介</strong>：企业级UI设计语言和React组件库</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>文档完善，社区活跃</li>
+<li>支持PC端和移动端</li>
+<li>组件丰富，开箱即用</li>
+</ul>
+</li>
+<li><p><strong>使用场景</strong>：后台管理系统、内部应用、中台产品</p>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://ant.design/">https://ant.design/</a></p>
+</li>
+</ul>
+<h3 id="2-React-Bootstrap"><a href="#2-React-Bootstrap" class="headerlink" title="2. React Bootstrap"></a>2. React Bootstrap</h3><ul>
+<li><p><strong>简介</strong>：Bootstrap的React实现版本</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>经典的Bootstrap设计风格</li>
+<li>组件稳定可靠</li>
+<li>学习成本低</li>
+</ul>
+</li>
+<li><p><strong>使用场景</strong>：个人项目、快速原型、小型应用</p>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://react-bootstrap.github.io/">https://react-bootstrap.github.io/</a></p>
+</li>
+</ul>
+<h3 id="3-MATERIAL-UI-MUI"><a href="#3-MATERIAL-UI-MUI" class="headerlink" title="3. MATERIAL-UI (MUI)"></a>3. MATERIAL-UI (MUI)</h3><ul>
+<li><p><strong>简介</strong>：基于Google Material Design的React组件库</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>GitHub 5万+ star，生态完善</li>
+<li>设计规范统一</li>
+<li>自定义能力强</li>
+</ul>
+</li>
+<li><p><strong>使用场景</strong>：追求现代设计风格的项目</p>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://mui.com/zh/">https://mui.com/zh/</a></p>
+</li>
+</ul>
+<h2 id="🎯-Vue-UI-组件库"><a href="#🎯-Vue-UI-组件库" class="headerlink" title="🎯 Vue UI 组件库"></a>🎯 Vue UI 组件库</h2><h3 id="4-Element-UI"><a href="#4-Element-UI" class="headerlink" title="4. Element UI"></a>4. Element UI</h3><ul>
+<li><p><strong>简介</strong>：国内最流行的Vue UI组件库</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>文档完整，中文友好</li>
+<li>支持Vue 3.0</li>
+<li>提供多框架版本（React&#x2F;Angular）</li>
+</ul>
+</li>
+<li><p><strong>使用场景</strong>：企业级后台管理系统</p>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://element.eleme.io/#/zh-CN">https://element.eleme.io/#/zh-CN</a></p>
+</li>
+</ul>
+<h3 id="5-Vant"><a href="#5-Vant" class="headerlink" title="5. Vant"></a>5. Vant</h3><ul>
+<li><p><strong>简介</strong>：有赞开源的移动端Vue组件库</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>组件齐全，API友好</li>
+<li>UI设计精美</li>
+<li>性能优化良好</li>
+</ul>
+</li>
+<li><p><strong>使用场景</strong>：移动端H5应用开发</p>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://vant-ui.github.io/vant/">https://vant-ui.github.io/vant/</a></p>
+</li>
+</ul>
+<h3 id="6-View-UI"><a href="#6-View-UI" class="headerlink" title="6. View UI"></a>6. View UI</h3><ul>
+<li><p><strong>简介</strong>：高质量的Vue UI组件库</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>UI设计精美</li>
+<li>提供免费和专业版</li>
+<li>组件功能完善</li>
+</ul>
+</li>
+<li><p><strong>使用场景</strong>：对UI要求较高的企业项目</p>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://www.iviewui.com/">https://www.iviewui.com/</a></p>
+</li>
+</ul>
+<h2 id="✨-动画库"><a href="#✨-动画库" class="headerlink" title="✨ 动画库"></a>✨ 动画库</h2><h3 id="7-Animate-css"><a href="#7-Animate-css" class="headerlink" title="7. Animate.css"></a>7. Animate.css</h3><ul>
+<li><p><strong>简介</strong>：纯CSS动画库</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>框架无关，随处可用</li>
+<li>动画效果丰富多样</li>
+<li>使用简单，只需添加类名</li>
+</ul>
+</li>
+<li><p><strong>使用频率</strong>：个人90%的项目中都会使用</p>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://animate.style/">https://animate.style/</a></p>
+</li>
+</ul>
+<h2 id="🎪-特效组件"><a href="#🎪-特效组件" class="headerlink" title="🎪 特效组件"></a>🎪 特效组件</h2><h3 id="8-Swiper"><a href="#8-Swiper" class="headerlink" title="8. Swiper"></a>8. Swiper</h3><ul>
+<li><p><strong>功能</strong>：强大的轮播图组件</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>效果丰富，支持3D</li>
+<li>框架支持全面（原生&#x2F;Vue&#x2F;React&#x2F;Angular）</li>
+<li>中文文档完善</li>
+</ul>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://www.swiper.com.cn/">https://www.swiper.com.cn/</a></p>
+</li>
+</ul>
+<h3 id="9-Mescroll-js"><a href="#9-Mescroll-js" class="headerlink" title="9. Mescroll.js"></a>9. Mescroll.js</h3><ul>
+<li><p><strong>功能</strong>：移动端上拉刷新、下拉加载组件</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>基于原生H5开发</li>
+<li>侵入性小，集成简单</li>
+<li>解决移动端滚动卡顿问题</li>
+</ul>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="http://www.mescroll.com/">http://www.mescroll.com/</a></p>
+</li>
+</ul>
+<h2 id="🛠️-工具类库"><a href="#🛠️-工具类库" class="headerlink" title="🛠️ 工具类库"></a>🛠️ 工具类库</h2><h3 id="10-Lodash-js"><a href="#10-Lodash-js" class="headerlink" title="10. Lodash.js"></a>10. Lodash.js</h3><ul>
+<li><p><strong>功能</strong>：JavaScript实用工具库</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>函数丰富，覆盖各种场景</li>
+<li>性能经过优化</li>
+<li>支持树摇，按需引入</li>
+</ul>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://www.lodashjs.com/">https://www.lodashjs.com/</a></p>
+</li>
+</ul>
+<h3 id="11-Day-js"><a href="#11-Day-js" class="headerlink" title="11. Day.js"></a>11. Day.js</h3><ul>
+<li><p><strong>功能</strong>：轻量级的日期处理库</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>体积仅2KB</li>
+<li>API与Moment.js兼容</li>
+<li>不可变数据，更安全</li>
+</ul>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://dayjs.fenxianglu.cn/">https://dayjs.fenxianglu.cn/</a></p>
+</li>
+</ul>
+<h3 id="12-Timeago-js"><a href="#12-Timeago-js" class="headerlink" title="12. Timeago.js"></a>12. Timeago.js</h3><ul>
+<li><p><strong>功能</strong>：相对时间格式化</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>轻量简单，仅2KB</li>
+<li>多语言支持</li>
+<li>实时更新</li>
+</ul>
+</li>
+<li><p><strong>使用场景</strong>：社交应用、内容平台</p>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://github.com/hustcc/timeago.js">https://github.com/hustcc/timeago.js</a></p>
+</li>
+</ul>
+<h3 id="13-ECharts"><a href="#13-ECharts" class="headerlink" title="13. ECharts"></a>13. ECharts</h3><ul>
+<li><p><strong>功能</strong>：企业级数据可视化图表库</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>图表类型丰富</li>
+<li>定制能力强</li>
+<li>百度开源，文档完善</li>
+</ul>
+</li>
+<li><p><strong>使用场景</strong>：数据大屏、报表系统</p>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://echarts.apache.org/">https://echarts.apache.org/</a></p>
+</li>
+</ul>
+<h3 id="14-Editor-md"><a href="#14-Editor-md" class="headerlink" title="14. Editor.md"></a>14. Editor.md</h3><ul>
+<li><p><strong>功能</strong>：开源的Markdown编辑器</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>功能完整，支持实时预览</li>
+<li>可扩展性强</li>
+<li>适合技术类应用</li>
+</ul>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://pandao.github.io/editor.md/">https://pandao.github.io/editor.md/</a></p>
+</li>
+</ul>
+<h3 id="15-Validator-js"><a href="#15-Validator-js" class="headerlink" title="15. Validator.js"></a>15. Validator.js</h3><ul>
+<li><p><strong>功能</strong>：数据验证库</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>验证规则丰富</li>
+<li>支持自定义规则</li>
+<li>在Node.js和浏览器中均可使用</li>
+</ul>
+</li>
+<li><p><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://github.com/validatorjs/validator.js">https://github.com/validatorjs/validator.js</a></p>
+</li>
+</ul>
+<h2 id="🔧-Vue-专用工具"><a href="#🔧-Vue-专用工具" class="headerlink" title="🔧 Vue 专用工具"></a>🔧 Vue 专用工具</h2><h3 id="Vue-Draggable"><a href="#Vue-Draggable" class="headerlink" title="Vue Draggable"></a>Vue Draggable</h3><ul>
+<li><strong>功能</strong>：Vue拖拽组件</li>
+<li><strong>特点</strong>：基于Sortable.js，API友好</li>
+<li><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://github.com/SortableJS/Vue.Draggable">https://github.com/SortableJS/Vue.Draggable</a></li>
+</ul>
+<h3 id="Vue-QR"><a href="#Vue-QR" class="headerlink" title="Vue QR"></a>Vue QR</h3><ul>
+<li><strong>功能</strong>：二维码生成组件</li>
+<li><strong>特点</strong>：支持自定义样式和LOGO</li>
+<li><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/vue-qr">https://www.npmjs.com/package/vue-qr</a></li>
+</ul>
+<h3 id="Vue-Cropper"><a href="#Vue-Cropper" class="headerlink" title="Vue Cropper"></a>Vue Cropper</h3><ul>
+<li><strong>功能</strong>：图片裁剪组件</li>
+<li><strong>特点</strong>：功能完善，支持多种裁剪模式</li>
+<li><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://github.com/xyxiao001/vue-cropper">https://github.com/xyxiao001/vue-cropper</a></li>
+</ul>
+<h3 id="Vue-Lazyload"><a href="#Vue-Lazyload" class="headerlink" title="Vue Lazyload"></a>Vue Lazyload</h3><ul>
+<li><strong>功能</strong>：图片懒加载</li>
+<li><strong>特点</strong>：性能优化，支持占位符</li>
+<li><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/vue-lazyload">https://www.npmjs.com/package/vue-lazyload</a></li>
+</ul>
+<h3 id="Vue-Simple-Upload"><a href="#Vue-Simple-Upload" class="headerlink" title="Vue Simple Upload"></a>Vue Simple Upload</h3><ul>
+<li><strong>功能</strong>：文件上传组件</li>
+<li><strong>特点</strong>：简单易用，支持多种上传方式</li>
+<li><strong>网址</strong>：<a target="_blank" rel="noopener" href="https://github.com/saivarunk/vue-simple-upload">https://github.com/saivarunk/vue-simple-upload</a></li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>温馨提示</strong>：以上是我在工作中使用频率最高的20个前端轮子。技术选型时请根据项目具体需求进行评估，选择最适合的技术方案。</p>
+</blockquote>
+<p>如果你有其他好用的前端工具推荐，欢迎在评论区分享交流！本文将持续更新，收录更多优质的开发资源。</p>
+<blockquote>
+<p>作者：技术胖<br>原文地址：<a target="_blank" rel="noopener" href="https://jspang.com/article/81#top">https://jspang.com/article/81#top</a></p>
+</blockquote>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/a26e9e54.html">https://xuehuayu.cn/article/a26e9e54.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a><a href="/tags/FrontEnd/">FrontEnd</a><a href="/tags/React/">React</a><a href="/tags/%E5%B7%A5%E5%85%B7%E5%BA%93/">工具库</a><a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/">组件库</a><a href="/tags/Vue/">Vue</a><a href="/tags/%E5%8A%A8%E7%94%BB/">动画</a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">数据可视化</a><a href="/tags/Markdown/">Markdown</a><a href="/tags/%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/">表单验证</a><a href="/tags/%E6%8B%96%E6%8B%BD/">拖拽</a><a href="/tags/%E4%BA%8C%E7%BB%B4%E7%A0%81/">二维码</a><a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/">图片处理</a><a href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/">懒加载</a><a href="/tags/%E4%B8%8A%E4%BC%A0/">上传</a><a href="/tags/lodash/">lodash</a><a href="/tags/dayjs/">dayjs</a><a href="/tags/echarts/">echarts</a><a href="/tags/validator-js/">validator.js</a><a href="/tags/swiper/">swiper</a><a href="/tags/mescroll/">mescroll</a></div><div class="post-nav"><a class="pre" href="/article/a9c48713.html">js获取当天、本周、本月、本年的开始时间和结束时间</a><a class="next" href="/article/8105b8cb.html">手动实现uni-app可用的new URL</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/80fad23d.html">js中Map和对象{}的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/e36b137f.html">Husky 在前端项目中的使用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/article/56271070.html">TypeScript 中的 args 详解，和 arguments 有什么不同？</a></li><li class="post-list-item"><a class="post-list-link" href="/article/8c6832b5.html">TypeScript中as const断言和const声明变量的区别是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/article/6ff625e1.html">TypeScript 断言详解及示例</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/">children</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/health/">health</a><span class="category-list-count">7</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">287</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="官方终身大流量卡" target="_blank">官方终身大流量卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://afdian.com/a/big_old?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="爱发电" target="_blank">爱发电</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li><li><a href="https://tophub.today/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="今日热点" target="_blank">今日热点</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body></html>
