@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>Webpack 深入浅出之公司级分享总结(内附完整ppt) | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">Webpack 深入浅出之公司级分享总结(内附完整ppt)</h1><div class="post-meta"><span class="date">2019-12-21</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 11</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/6cb984a0.html#waline-comment"><span class="waline-comment-count" data-path="/article/6cb984a0.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5df884ad6fb9a0164e7f979d</code></p>
+<p>前段时间，在公司做了个 Webpack 的分享。听众40多人，感觉还不错。所以总结一下，先看一下ppt的目录：</p>
+<span id="more"></span>
+
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/17/16f12ca90ed65cda?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="GitHub"></p>
+<p>本篇文章，如果直接贴ppt图，理解起来可能比较费劲，加上我之前已经把部分内容输出了完整的文章了，这里就大概讲一下内容，方便大家结合ppt来理解，因此本文结合ppt食用效果更佳哦～</p>
+<p><code>PS：公众号后台回复 webpack 即可获取本次分享的完整ppt</code></p>
+<h3 id="基本打包机制"><a href="#基本打包机制" class="headerlink" title="基本打包机制"></a>基本打包机制</h3><p>本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)。当 webpack<br>处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个<br>bundle。</p>
+<p>打包过程可以拆分为四步：</p>
+<ol>
+<li><p>利用babel完成代码转换,并生成单个文件的依赖</p>
+</li>
+<li><p>从入口开始递归分析，并生成依赖图谱</p>
+</li>
+<li><p>将各个引用模块打包为一个立即执行函数</p>
+</li>
+<li><p>将最终的bundle文件写入bundle.js中</p>
+</li>
+</ol>
+<p>完整代码见：<a target="_blank" rel="noopener" href="https://github.com/LuckyWinty/blog/tree/master/code/bundleBuild">github.com&#x2F;LuckyWinty&#x2F;…</a></p>
+<p>以上是打包的基本机制，而webpack的打包过程，会基于这些基本步骤进行扩展，主要有以下步骤：</p>
+<ol>
+<li><p>初始化参数 从配置文件和 Shell 语句中读取与合并参数，得出最终的参数</p>
+</li>
+<li><p>开始编译 用上一步得到的参数初始Compiler对象，加载所有配置的插件，通 过执行对象的run方法开始执行编译</p>
+</li>
+<li><p>确定入口 根据配置中的 Entry 找出所有入口文件</p>
+</li>
+<li><p>编译模块 从入口文件出发，调用所有配置的 Loader 对模块进行编译，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理</p>
+</li>
+<li><p>完成模块编译 在经过第4步使用 Loader 翻译完所有模块后， 得到了每个模块被编译后的最终内容及它们之间的依赖关系</p>
+</li>
+<li><p>输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk,再将每个 Chunk<br>转换成一个单独的文件加入输出列表中，这是可以修改输出内容的最后机会</p>
+</li>
+<li><p>输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，将文件的内容写入文件系统中。</p>
+</li>
+</ol>
+<p>整个流程概括为3个阶段，初始化、编译、输出。而在每个阶段中又会发生很多事件，Webpack会将这些事件广播出来供Plugin使用。具体钩子，可以看官方文档：<a target="_blank" rel="noopener" href="https://webpack.js.org/api/compiler-hooks/#hooks">webpack.js.org&#x2F;api&#x2F;compile…</a></p>
+<p>这一块，我写了另一篇更详细的文章，可以看这里：<a target="_blank" rel="noopener" href="https://juejin.im/post/5de099886fb9a071562facad">Webpack4打包机制原理简析</a></p>
+<h3 id="Webpack-Loader"><a href="#Webpack-Loader" class="headerlink" title="Webpack Loader"></a>Webpack Loader</h3><p>Loader 就像一个翻译员，能将源文件经过转化后输出新的结果，并且一个文件还可以链式地经过多个翻译员翻译。</p>
+<h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><ul>
+<li>一个Loader 的职责是单一的，只需要完成一种转换</li>
+<li>一个Loader 其实就是一个Node.js 模块，这个模块需要导出一个函数</li>
+</ul>
+<h4 id="开发Loader形式"><a href="#开发Loader形式" class="headerlink" title="开发Loader形式"></a>开发Loader形式</h4><ol>
+<li><p>基本形式</p>
+<p> module.exports &#x3D; function (source ) {<br> return source;<br> }<br> 复制代码</p>
+</li>
+<li><p>调用第三方模块</p>
+<p> const sass&#x3D; require(‘node-sass’);<br> module.exports &#x3D; function (source) {<br>   return sass(source);<br> }<br> 复制代码</p>
+</li>
+</ol>
+<p>由于 Loader 运行在 Node.js 中，所以我们可以调用任意 Node.js 自带的 API ，或者安装第三方模块进行调用</p>
+<ol>
+<li><p>调用Webpack的Api</p>
+<p> &#x2F;&#x2F;获取用户为 Loader 传入的 optionsconst loaderUtils &#x3D;require (‘loader-utils’);<br> module.exports &#x3D; (source) &#x3D;&gt; {<br> const options&#x3D; loaderUtils.getOptions(this);<br> return source;<br> }<br> &#x2F;&#x2F;返回sourceMapmodule.exports &#x3D; (source)&#x3D;&gt; {<br> this.callback(null, source, sourceMaps);<br> &#x2F;&#x2F;当我们使用 this.callback 返回内容时 ，该 Loader 必须返回 undefined,&#x2F;&#x2F;以让 Webpack 知道该 Loader 返回的结果在 this.callback 中，而不是 return中return;<br> }<br> &#x2F;&#x2F; 异步module.exports &#x3D; (source) &#x3D;&gt; {<br> const callback &#x3D; this.async()<br> someAsyncOperation(source, (err, result, sourceMaps, ast) &#x3D;&gt; {<br>     &#x2F;&#x2F; 通过 callback 返回异步执行后的结果<br>     callback(err, result, sourceMaps, ast)<br> })<br> }<br> &#x2F;&#x2F;缓存加速module.exports &#x3D; (source) &#x3D;&gt; {<br> &#x2F;&#x2F;关闭该 Loader 的缓存功能this.cacheable(false)<br> return source<br> }<br> 复制代码</p>
+</li>
+</ol>
+<p>source参数是compiler 传递给 Loader<br>的一个文件的原内容，这个函数需要返回处理后的内容，这里为了简单起见，直接将原内容返回了，相当于该Loader<br>有做任何转换.这里结合了webpack的api和第三方模块之后，可以说loader可以做的事情真的非常非常多了… 更多的webpack<br>Api可以看官方文档：<a target="_blank" rel="noopener" href="https://webpack.js.org/api/loaders">webpack.js.org&#x2F;api&#x2F;loaders</a></p>
+<h3 id="Webpack-Plugin"><a href="#Webpack-Plugin" class="headerlink" title="Webpack Plugin"></a>Webpack Plugin</h3><p>专注处理 webpack 在编译过程中的某个特定的任务的功能模块，可以称为插件</p>
+<h4 id="概念：-1"><a href="#概念：-1" class="headerlink" title="概念："></a>概念：</h4><ul>
+<li>是一个独立的模块</li>
+<li>模块对外暴露一个 js 函数</li>
+<li>函数的原型 (prototype) 上定义了一个注入 compiler 对象的 apply 方法 apply 函数中需要有通过 compiler 对象挂载的</li>
+</ul>
+<p>webpack 事件钩子，钩子的回调中能拿到当前编译的 compilation 对象，如果是异步编译插件的话可以拿到回调 callback</p>
+<ul>
+<li>完成自定义子编译流程并处理 complition 对象的内部数据</li>
+<li>如果异步编译插件的话，数据处理完成后执行 callback 回调。</li>
+</ul>
+<h4 id="开发基本形式"><a href="#开发基本形式" class="headerlink" title="开发基本形式"></a>开发基本形式</h4><pre><code>// 1、BasicPlugin.js 文件（独立模块）// 2、模块对外暴露的 js 函数classBasicPlugin{
+        //在构造函数中获取用户为该插件传入的配置constructor(pluginOptions) {
+            this.options = pluginOptions;
+        }
+        //3、原型定义一个 apply 函数，并注入了 compiler 对象
+        apply(compiler) {
+            //4、挂载 webpack 事件钩子（这里挂载的是 emit 事件）
+            compiler.plugin(&#39;emit&#39;, function (compilation, callback) {
+                // ... 内部进行自定义的编译操作// 5、操作 compilation 对象的内部数据console.log(compilation);
+                // 6、执行 callback 回调
+                callback();
+            });
+        }
+    }
+    // 7、暴露 js 函数module.exports = BasicPlugin;
+复制代码
+</code></pre>
+<p>Webpack 启动后，在读取配置的过程中会先执行 new BasicPlugin(options )初始化一个 BasicPlugin 并获得其实例。在初始化<br>Compiler 对象后，再调用 basicPlugin.apply (compiler ）为插件实例传入 compiler 对象。插件实例在获取到<br>compiler 对象后，就可以通过 compiler. plugin （事件名称 ，回调函数）监听到 Webpack 广播的事件，并且可以通过<br>compiler 对象去操作 Webpack。</p>
+<h4 id="Compiler对象"><a href="#Compiler对象" class="headerlink" title="Compiler对象"></a>Compiler对象</h4><p>compiler 对象是 webpack 的编译器对象，compiler 对象会在启动 webpack 的时候被一次性地初始化，compiler<br>对象中包含了所有 webpack 可自定义操作的配置，例如 loader 的配置，plugin 的配置，entry 的配置等各种原始 webpack 配置等</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/17/16f12c65ef49ce59?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="GitHub"></p>
+<p>webpack部分源码：<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/10282ea20648b465caec6448849f24fc34e1ba3e/lib/webpack.js#L30">github.com&#x2F;webpack&#x2F;web…</a></p>
+<h4 id="Compilation-对象"><a href="#Compilation-对象" class="headerlink" title="Compilation 对象"></a>Compilation 对象</h4><p>compilation 实例继承于 compiler，compilation 对象代表了一次单一的版本 webpack 构建和生成编译资源的过程。当运行<br>webpack 开发环境中间件时，每当检测到一个文件变化，一次新的编译将被创建，从而生成一组新的编译资源以及新的 compilation 对象。一个<br>compilation 对象包含了 当前的模块资源、编译生成资源、变化的文件、以及<br>被跟踪依赖的状态信息。编译对象也提供了很多关键点回调供插件做自定义处理时选择使用。</p>
+<p>Compiler 和 Compilation 的区别在于： Compiler 代表了整个 Webpack 从启动到关闭的生命周期，而 Compilation<br>只代表一次新的编译。</p>
+<h4 id="Tapable-Tapable-实例"><a href="#Tapable-Tapable-实例" class="headerlink" title="Tapable &amp; Tapable 实例"></a>Tapable &amp; Tapable 实例</h4><p>webpack 的插件架构主要基于 Tapable 实现的，Tapable 是 webpack 项目组的一个内部库，主要是抽象了一套插件机制。它类似于<br>NodeJS 的 EventEmitter 类，专注于自定义事件的触发和操作。 除此之外, Tapable 允许你通过回调函数的参数访问事件的生产者。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/17/16f12c65e694bac6?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="GitHub"></p>
+<p>webpack本质上是一种事件流的机制，它的工作流程就是将各个插件串联起来，而实现这一切的核心就是Tapable，webpack中最核心的负责编译的Compiler和负责创建bundles的Compilation都是Tapable的实例，Tapable<br>能够让我们为 javaScript 模块添加并应用插件。 它可以被其它模块继承或混合。</p>
+<h4 id="一些钩子的含义："><a href="#一些钩子的含义：" class="headerlink" title="一些钩子的含义："></a>一些钩子的含义：</h4><ul>
+<li>SyncBailHook:只要监听函数中有一个函数的返回值不为 null，则跳过剩下所有的逻辑。</li>
+<li>SyncWaterfallHook:上一个监听函数的返回值可以传给下一个监听函数。</li>
+<li>SyncLoopHook:当监听函数被触发的时候，如果该监听函数返回true时则这个监听函数会反复执行，如果返回 undefined 则表示退出循环。</li>
+<li>AsyncParallelHook：异步并发，不关心监听函数的返回值</li>
+<li>AsyncParallelBailHook：只要监听函数的返回值不为</li>
+</ul>
+<p>null，就会忽略后面的监听函数执行，直接跳跃到callAsync等触发函数绑定的回调函数，然后执行这个被绑定的回调函数</p>
+<ul>
+<li>AsyncSeriesHook：异步串行，不关心callback()的参数</li>
+<li>AsyncSeriesBailHook：callback()的参数不为null，就会直接执行callAsync等触发函数绑定的回调函数</li>
+<li>AsyncSeriesWaterfallHook：上一个监听函数的中的callback(err, data)的第二个参数,可以作为下一个监听函数的参数</li>
+</ul>
+<p>同步钩子，用tap方式注册。异步钩子，有三种注册&#x2F;发布的模式，tap、tapAsync、tapPromise。</p>
+<h4 id="Tapable-模型"><a href="#Tapable-模型" class="headerlink" title="Tapable 模型"></a>Tapable 模型</h4><p>Tapable 简化后的模型，就是我们熟悉的发布订阅者模式</p>
+<pre><code>classSyncHook{
+    constructor(){
+      this.hooks = {}
+    }
+
+    tap(name,fn){
+    if(!this.hooks[name])this.hooks[name] = []
+      this.hooks[name].push(fn)
+    }
+
+    call(name){
+      this.hooks[name].forEach(hook=&gt;hook(...arguments))
+    }
+}
+复制代码
+</code></pre>
+<h3 id="Loader-Plugin-开发调试"><a href="#Loader-Plugin-开发调试" class="headerlink" title="Loader &amp; Plugin 开发调试"></a>Loader &amp; Plugin 开发调试</h3><h4 id="npm-link"><a href="#npm-link" class="headerlink" title="npm link"></a>npm link</h4><ol>
+<li><p>确保正在开发的本地 Loader 模块的 package.json 已经配置好(最主要的main字段的入口文件指向要正确)</p>
+</li>
+<li><p>在本地的 Npm 模块根目录下执行 npm link，将本地模块注册到全局</p>
+</li>
+<li><p>在项目根目录下执行 npm link loader-name ，将第 2 步注册到全局的本地 Npm 模块链接到项目的 node moduels<br>下，其中的 loader-name 是指在第 1 步的package.json 文件中配置的模块名称</p>
+</li>
+</ol>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/17/16f12c65e7cb2645?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="GitHub"></p>
+<p>Npm link 专门用于开发和调试本地的 Npm 模块，能做到在不发布模块的情况下， 将本地的一个正在开发的模块的源码链接到项目的 node_modules<br>目录下，让项目可以直接使 用本地的 Npm 模块。由于是通过软链接的方式实现的，编辑了本地的 Npm 模块的代码，所以在项目中也能使用到编辑后的代码。</p>
+<p>Plugin 部分也出过完整文章，可以看这里：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI0MzIyMDM5Ng==&amp;mid=2649825806&amp;idx=1&amp;sn=e46dbd274e240c4dcc4b778d8b30c67d&amp;chksm=f175e8cdc60261db3c0caa44fd58e8d759526e5bb5b6e2caebba957a5996931cc68c18e69d37&amp;scene=21#wechat_redirect">webpack<br>插件机制分析及开发调试</a></p>
+<h4 id="Resolveloader"><a href="#Resolveloader" class="headerlink" title="Resolveloader"></a>Resolveloader</h4><p>ResolveLoader 用于配置 Webpack 如何寻找 Loader ，它在默认情况下只会去 node_modules 目录下寻找。为了让<br>Webpack 加载放在本地项目中的 Loader,需要修改 resolveLoader.modules。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/17/16f12c65e51dca28?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="GitHub"></p>
+<h3 id="HMR-性能优化"><a href="#HMR-性能优化" class="headerlink" title="HMR&amp;性能优化"></a>HMR&amp;性能优化</h3><p>关于HMR的在这：<a target="_blank" rel="noopener" href="https://juejin.im/post/5d4d3e5ce51d4561f64a07d1">webpack中的HMR(热更新)原理剖析</a></p>
+<p>关于性能优化的在这：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI0MzIyMDM5Ng==&amp;mid=2649825759&amp;idx=1&amp;sn=726279d3dfc2ea0b6ba34788517753ad&amp;chksm=f175eb1cc602620a66821baedcb2663e393f7ae4857e8daf6d57e4c436f9a7297a555d0e4750&amp;scene=21#wechat_redirect">Webpack性能优化总结大全</a></p>
+<h3 id="构建工具选择"><a href="#构建工具选择" class="headerlink" title="构建工具选择"></a>构建工具选择</h3><p>针对不同的场景，选择最合适的工具</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/17/16f12c6625059e8d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="GitHub"></p>
+<p>通过对比，不难看出，Webpack和Rollup在不同场景下，都能发挥自身优势作用。webpack作为打包工具，但是在定义模块输出的时候，webpack确不支持ESM，webpack插件系统庞大，确实有支持模块级的Tree-Shacking的插件，如webpack-deep-scope-analysis-plugin。但是粒度更细化的，一个模块里面的某个方法，本来如果没有被引用的话也可以去掉的，就不行了….这个时候，就要上rollup了。rollup它支持程序流分析，能更加正确的判断项目本身的代码是否有副作用，其实就是rollup的tree-shaking更干净。所以我们的结论是rollup<br>比较适合打包 js 的 sdk 或者封装的框架等，例如，vue 源码就是 rollup 打包的。而 webpack 比较适合打包一些应用，例如 SPA<br>或者同构项目等等。</p>
+<p>结论:在开发应用时使用 Webpack，开发库时使用 Rollup</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><p>补充学习资料：<a target="_blank" rel="noopener" href="https://github.com/LuckyWinty/blog">github.com&#x2F;LuckyWinty&#x2F;…</a></p>
+</li>
+<li><p>更多学习资料推荐：</p>
+</li>
+</ul>
+<p>Loader:<br><a target="_blank" rel="noopener" href="https://juejin.im/post/5a698a316fb9a01c9f5b9ca0">juejin.im&#x2F;post&#x2F;5a698a…</a></p>
+<p>Tapable:<br><a target="_blank" rel="noopener" href="https://juejin.im/post/5abf33f16fb9a028e46ec352">juejin.im&#x2F;post&#x2F;5abf33…</a></p>
+<p>webpack：</p>
+<p>ebook：webpack深入浅出</p>
+<p>极客时间：玩转webpack</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><ul>
+<li>公众号后台回复 webpack 即可获取本次分享的完整ppt…</li>
+<li>欢迎加我微信(winty230)，拉你进技术群，长期交流学习…</li>
+<li>欢迎关注「前端Q」,认真学前端，做个有专业的技术人…<br><img src="https://user-gold-cdn.xitu.io/2019/12/12/16ef841264af0392?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="GitHub"></li>
+</ul>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/6cb984a0.html">https://xuehuayu.cn/article/6cb984a0.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/b84b6699.html">OSCHINA 公布 2019 年度最受欢迎中国开源软件</a><a class="next" href="/article/16554c83.html">VS Code 成主宰、Vue 备受热捧！2019 前端开发趋势必读</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/ead1a366.html">vue3 pinia在App.vue中使用了useStore报错getActivePinia() was called but there wa no active pinia</a></li><li class="post-list-item"><a class="post-list-link" href="/article/abe47f31.html">vue3中的mixin写法使用Composition API 来实现代码复用</a></li><li class="post-list-item"><a class="post-list-link" href="/article/cbf3079f.html">windows虚拟内存自动管理好还是手动设置好？ 如果是手动设置多少合适？</a></li><li class="post-list-item"><a class="post-list-link" href="/article/763d6087.html">vue3中ts提示扩张参数必须具有元组类型或传递给rest参数</a></li><li class="post-list-item"><a class="post-list-link" href="/article/2f775138.html">vue3 组件 has no default export</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/">children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/health/">health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">292</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://h5.lot-ml.com/ProductEn/Index/1be1066f15176ef6/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="四大运营商大流量手机卡终身套餐" target="_blank">四大运营商大流量手机卡终身套餐</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://h5.lot-ml.com/ProductEn/Index/1be1066f15176ef6/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="四大运营商大流量手机卡终身套餐" target="_blank">四大运营商大流量手机卡终身套餐</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

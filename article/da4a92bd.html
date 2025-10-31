@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>9102了，你还不会移动端真机调试？ | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">9102了，你还不会移动端真机调试？</h1><div class="post-meta"><span class="date">2019-09-30</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.9k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 6</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/da4a92bd.html#waline-comment"><span class="waline-comment-count" data-path="/article/da4a92bd.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/5</code></p>
+<h4 id="移动端调试困难"><a href="#移动端调试困难" class="headerlink" title="移动端调试困难"></a>移动端调试困难</h4><p>很多时候，我们在进行移动端开发时，都是先在PC端使用手机模拟器进行调试，没有问题后，我们才会在手机端的浏览器进行测试，这个时候，如果没有出现问题，皆大欢喜。但是一旦出现问题，我们就很难解决，因为缺乏可视化的界面。不似在PC端，我们能直观的去改变样式，或者是进行断点调试。有时，在移动端我们不得不借助于alert来调试，但是这样的调试方法效率极其低下，很多时候，都是靠经验，或者是靠排除法。甚至，我们不得不归结为是浏览器的实现问题。</p>
+<span id="more"></span>
+
+<p>那么，有什么什么方法，能够让我们调试移动端的适配的时候，像调试PC端一样直观呢？本文旨在为你提供移动端的调试方法，希望能够为你打开新的一扇门。</p>
+<p>本文会给出三种真机调试方法，你可以选择自己最喜欢的一款~</p>
+<h4 id="移动端真机调试方法"><a href="#移动端真机调试方法" class="headerlink" title="移动端真机调试方法"></a>移动端真机调试方法</h4><ol>
+<li>chrome真机调试</li>
+<li>weinre调试</li>
+<li>spy-debugger调试</li>
+</ol>
+<p>简单说明一下每一种方式的优缺点：</p>
+<p>第一种:<br>chrome真机调试，有一个很大的局限性就是，只能调试手机端的chrome浏览器，对于UC，QQ这些浏览器均不适用，因此在调试兼容问题时，帮助不大，但是最大的优点是:<br>简单快捷。</p>
+<p>第二种: weinre调试方式，安装和适用不复杂，适用于全平台的调试，即任何手机的任何浏览器皆可以调试，不过需要手机和电脑在同一个网段下。</p>
+<p>第三种:spy-debugger，安装稍微复杂一点，spy-debugger集成了weinre，不过还增加了抓包工具，使用最为方便。</p>
+<p>下面我们开始具体介绍如何使用这三种调试方法：</p>
+<h4 id="1-chrome真机调试"><a href="#1-chrome真机调试" class="headerlink" title="1.chrome真机调试"></a>1.chrome真机调试</h4><p>手机端下载好chrome浏览器，使用USB连接到PC，打开手机的USB调试模式。</p>
+<p>然后在PC端打开chrome浏览器，在地址栏输入: chrome:&#x2F;&#x2F;inspect. 勾选”discovery usb<br>device”。然后在手机端浏览网页，就可以看到如下的页面，点击inspect，进行调试。(鉴于我的工作电脑是加了域的，因为并不能使用这个方式，如果有和我一样情况的童鞋，可以考虑使用另外两种调试方式)</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/d137415889255dd300fb309cd002784749837aae/687474703a2f2f696d6733302e333630627579696d672e636f6d2f6e6a6d6f62696c65636d732f6a66732f74312f31393133312f32382f31313934342f3135363133392f35633934353932634562386133306437622f343732666161653631633037333431652e706e67"><img src="https://camo.githubusercontent.com/d137415889255dd300fb309cd002784749837aae/687474703a2f2f696d6733302e333630627579696d672e636f6d2f6e6a6d6f62696c65636d732f6a66732f74312f31393133312f32382f31313934342f3135363133392f35633934353932634562386133306437622f343732666161653631633037333431652e706e67" alt="clipboard.png"></a></p>
+<h4 id="2-wenire真机调试"><a href="#2-wenire真机调试" class="headerlink" title="2.wenire真机调试"></a>2.wenire真机调试</h4><p>Weinre(WebInspector Remote)是一款基于Web<br>Inspector(Webkit)的远程调试工具，借助于网络，可以在PC上直接调试运行在移动设备上的远程页面。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/613b21125052f8bded811d6828896156ff2fcef0/687474703a2f2f696d6733302e333630627579696d672e636f6d2f6e6a6d6f62696c65636d732f6a66732f74312f32373532362f33352f31313932332f3230323931312f35633934353934624531636233646664632f643839333166336161636664653138342e706e67"><img src="https://camo.githubusercontent.com/613b21125052f8bded811d6828896156ff2fcef0/687474703a2f2f696d6733302e333630627579696d672e636f6d2f6e6a6d6f62696c65636d732f6a66732f74312f32373532362f33352f31313932332f3230323931312f35633934353934624531636233646664632f643839333166336161636664653138342e706e67" alt="clipboard.png"></a></p>
+<p>本地服务器: 可以使用http-server、tomcat等,也可以使用编译器集成的服务</p>
+<blockquote>
+<p>weinre安装</p>
+</blockquote>
+<p>全局安装: npm install –g weinre</p>
+<p>局部安装: npm install weinre</p>
+<p>启动: weinre –httpPort 8090 –boundHost -all-</p>
+<p>如果是局部安装的话，需要在前面加上 node_modules&#x2F;.bin&#x2F;</p>
+<p>相信前端的童鞋都会用npm包管理工具，对于这个工具，我就不展开了，如果没有安装npm的，自行安装。</p>
+<p><strong>weinew启动参数说明:</strong></p>
+<ul>
+<li>httpPort: 设置Wninre使用的端口号，默认是8080</li>
+<li>boundHost: [hostname | Ip | -all-]: 默认是 ‘localhost’.</li>
+<li>debug [true | false] : 这个选项与–verbose类似， 会输出更多的信息。默认为false。</li>
+<li>readTimeout [seconds] : Server发送信息到Target&#x2F;Client的超时时间， 默认为5s。</li>
+<li>deathTimeout [seconds] : 默认为3倍的readTimeout， 如果页面超过这个时间都没有任何响应， 那么就会断开连接。</li>
+</ul>
+<p>8080端口使用情况较多，所以我选择了指定8090端口。</p>
+<p>启动了weinre之后，我们在浏览器中输入localhost:8090.显示如下界面，表示已经启动成功。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/f29d4e21c4b827279d6d8a5a171f6dd013100d61/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434537613831326565323031373739643637323233636130633863303166373236382f3239353239"><img src="https://camo.githubusercontent.com/f29d4e21c4b827279d6d8a5a171f6dd013100d61/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434537613831326565323031373739643637323233636130633863303166373236382f3239353239" alt="clipboard.png"></a></p>
+<p>点击debug client user interface，进入调试页面。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/3e8e93116085d8c57f9988d8f9f6b7e10fdd17f2/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434561336266646166323261356566616430363230353761303231626133303530612f3239353332"><img src="https://camo.githubusercontent.com/3e8e93116085d8c57f9988d8f9f6b7e10fdd17f2/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434561336266646166323261356566616430363230353761303231626133303530612f3239353332" alt="clipboard.png"></a></p>
+<p>当前的targets中内容为空。</p>
+<p>现在，我们需要做另外一点操作，在我们要调试的页面中，增加一个脚本。</p>
+<pre><code>&lt;script src=&quot;http://localhost:8090/target/target-script-min.js#anonymous&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>记住将localhost换成你的IP地址.</p>
+<p>然后，我们在本地启动一个服务器，可以是IDE集成的服务器，或者是http-server,我使用的是http-server.启动之后，我们在手机端访问要调试的网页。然后就会发现targets下面增加了记录。</p>
+<p>这时，我们就可以点击Elements进行调试。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/bd5797c9048f8f046c701a10ff380b11824cdeb6/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434539636563313833613862373634633935646666343038623731353765373331332f3239353334"><img src="https://camo.githubusercontent.com/bd5797c9048f8f046c701a10ff380b11824cdeb6/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434539636563313833613862373634633935646666343038623731353765373331332f3239353334" alt="clipboard.png"></a></p>
+<p>修改样式时，会在手机端即时生效，并且也可以查看控制台信息，唯一一点就是，不能进行断点调试。</p>
+<p>最后，在调试结束之后，别忘记删除嵌入的script。</p>
+<p>除了这种方法之后，还介绍了在手机端保存一段Js代码，在需要调试某个页面时，点击执行JS,但是现在浏览器为了安全起见，已经不再支持此方法。默认的方法是搜索，而非执行，所以不可取。</p>
+<h4 id="3-spy-debugger真机调试"><a href="#3-spy-debugger真机调试" class="headerlink" title="3.spy-debugger真机调试"></a>3.spy-debugger真机调试</h4><p>最后，再介绍一下spy-debugger方法。用这个方法，我们不再需要自己增加和删除脚本。</p>
+<p>Spy-debugger内部集成了weinre，通过代理的方式拦截所有html自动注入weinre所需的js代码。简化了weinre需要给每个调试的页面添加js代码。spy-debugger原理是拦截所有html页面请求注入weinre所需要的js代码。让页面调试更加方便。</p>
+<p>特性:</p>
+<ol>
+<li>页面调试＋抓包</li>
+<li>操作简单</li>
+<li>支持HTTPS。</li>
+<li>spy-debugger内部集成了weinre、node-mitmproxy、AnyProxy。</li>
+<li>自动忽略原生App发起的https请求，只拦截webview发起的https请求。对使用了SSL pinning技术的原生App不造成任何影响。</li>
+<li>可以配合其它代理工具一起使用(默认使用AnyProxy)</li>
+</ol>
+<blockquote>
+<p>Spydebugger安装与使用</p>
+</blockquote>
+<ol>
+<li><p>安装: 全局安装 npm install –g spy-debugger</p>
+</li>
+<li><p>启动: spy-debugger</p>
+</li>
+<li><p>设置手机的HTTP代理</p>
+</li>
+</ol>
+<p>代理的地址为 PC的IP地址 ，代理的端口为spy-debugger的启动端口(默认端口为：9888)默认端口是 9888。</p>
+<p>如果要指定端口: spy-debugger –p 8888</p>
+<p>Android设置步骤:设置 - WLAN - 长按选中网络 - 修改网络 - 高级 - 代理设置 - 手动</p>
+<p>iOS设置代理步骤：设置 - 无线局域网 - 选中网络 - HTTP代理手动</p>
+<ol start="4">
+<li>手机安装证书(node-mitmproxy CA根证书)</li>
+</ol>
+<p>第一步：生成证书：</p>
+<p>生成CA根证书，根证书生成在 &#x2F;Users&#x2F;XXX&#x2F;node-mitmproxy&#x2F; 目录下(Mac)。</p>
+<pre><code>spy-debugger initCA
+</code></pre>
+<p>第二步：安装证书：</p>
+<p>把node-mitmproxy文件夹下的 node-mitmproxy.ca.crt 传到手机上，点击安装即可。</p>
+<p>Spy-debugger启动界面，同样，在手机端刷新页面之后，targets中会有记录</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/8aaeebc077302008e9e8a90007216fc404c3adc5/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434537613066316334656439333362333462666365353632366232366539656138362f3239353336"><img src="https://camo.githubusercontent.com/8aaeebc077302008e9e8a90007216fc404c3adc5/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434537613066316334656439333362333462666365353632366232366539656138362f3239353336" alt="clipboard.png"></a></p>
+<p>以我曾经做的京东游戏的页面展示一下效果，当我们在手机上选中一个元素时，可以在电脑上看到相应的信息，这样我们就可以看出有可能是什么样式不兼容导致了UI的异常了，同样，还可以在控制台中看到JS的log信息，对于移动端调试来说非常有帮助。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/f685c3c780ebc527141c2c18c6f4c177b2642209/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434565343964356462313464653639313761653134376430316365626232306136362f3239353338"><img src="https://camo.githubusercontent.com/f685c3c780ebc527141c2c18c6f4c177b2642209/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434565343964356462313464653639313761653134376430316365626232306136362f3239353338" alt="clipboard.png"></a></p>
+<p>]</p>
+<p><strong>总结:</strong></p>
+<ol>
+<li>chrome inspect应用场景有限</li>
+<li>weinre安装简单，使用过程中需要增加和删除script，如果调试页面很多的情况下，不适用。</li>
+<li>spy-debugger安装略复杂，但是使用过程非常愉快。</li>
+</ol>
+<p>最后，谢谢阅读。如果本篇博文给您带来了一点启发或者是帮助，请帮忙点个Star吧，非常感谢~</p>
+</div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/da4a92bd.html">https://xuehuayu.cn/article/da4a92bd.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/ae0c22e3.html">React实战视频教程</a><a class="next" href="/article/9d7696b1.html">浏览器的一些“滚动”行为鉴赏</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/ead1a366.html">vue3 pinia在App.vue中使用了useStore报错getActivePinia() was called but there wa no active pinia</a></li><li class="post-list-item"><a class="post-list-link" href="/article/abe47f31.html">vue3中的mixin写法使用Composition API 来实现代码复用</a></li><li class="post-list-item"><a class="post-list-link" href="/article/cbf3079f.html">windows虚拟内存自动管理好还是手动设置好？ 如果是手动设置多少合适？</a></li><li class="post-list-item"><a class="post-list-link" href="/article/763d6087.html">vue3中ts提示扩张参数必须具有元组类型或传递给rest参数</a></li><li class="post-list-item"><a class="post-list-link" href="/article/2f775138.html">vue3 组件 has no default export</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/">children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/health/">health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">292</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://h5.lot-ml.com/ProductEn/Index/1be1066f15176ef6/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="四大运营商大流量手机卡终身套餐" target="_blank">四大运营商大流量手机卡终身套餐</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://h5.lot-ml.com/ProductEn/Index/1be1066f15176ef6/?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="四大运营商大流量手机卡终身套餐" target="_blank">四大运营商大流量手机卡终身套餐</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>
