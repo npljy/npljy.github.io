@@ -1,0 +1,195 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>Webpack 5 升级实验 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">Webpack 5 升级实验</h1><div class="post-meta"><span class="date">2019-10-02</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.1k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 8</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/b3d63d9d.html#waline-comment"><span class="waline-comment-count" data-path="/article/b3d63d9d.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>作者：张立理</code><br><code>原文地址：https://zhuanlan.zhihu.com/p/81122986</code></p>
+<p>今天尝试把我们团队的通用构建工具<a href="https://link.zhihu.com/?target=https://www.npmjs.com/package/reskript">reskript</a>做了webpack<br>5的升级，使用最新的<code>5.0.0-alpha.23</code>版本。</p>
+<span id="more"></span>
+
+<p>先发一个实测的构建性能数据，测试环境为我自己的MacBook Pro 13寸高配：</p>
+<blockquote>
+<p>项目脚手架，构建后产出544KB的脚本，首次构建用时39.62秒，第二次构建用时22.84秒。<br>一个经典的单页应用，构建后产出3.5MB的脚本，首次构建用时299.33秒，第二次构建用时82.70秒。</p>
+</blockquote>
+<p>总结果来看，Webpack 5的长效缓存效果非常明显。</p>
+<p>这本不是一个容易的事情，我们在构建上做了大量的定制化的工作，包括：</p>
+<ol>
+<li>使用一大堆插件，比如<code>case-sensitive-paths-webpack-plugin</code>等。</li>
+<li>通过<code>DefinePlugin</code>进行了大量的“动态”内容的处理，包括整个<code>process.env</code>、构建时可声明的<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35558680">Feature<br>Matrix</a>信息，以及构建时的git版本、时间等内容。</li>
+<li>封装了<code>core-js</code>版本、<code>react-hot-loader</code>版本等，有很多包的路径不在产品开发者想象的位置，以及包的版本固定的问题。</li>
+</ol>
+<p>由于升级的过程比较枯燥，无非就是调试、修改、继续调试，所以这边只简单的罗列几个升级时的典型问题。</p>
+<h2 id="插件不兼容"><a href="#插件不兼容" class="headerlink" title="插件不兼容"></a>插件不兼容</h2><p><code>case-sensitive-paths-webpack-plugin</code>插件并不兼容新版本，在GitHub上已经有<a href="https://link.zhihu.com/?target=https://github.com/Urthen/case-sensitive-paths-webpack-plugin/issues/40">相应的Issue</a>。好在这个功能并不影响实际的构建，纯粹是一个防御性的措施，直接去掉就好了。</p>
+<h2 id="优化配置不同"><a href="#优化配置不同" class="headerlink" title="优化配置不同"></a>优化配置不同</h2><ul>
+<li><code>optimization. occurrenceOrder</code>已经废弃了，如有配置可以直接删掉。</li>
+<li><code>HashedModuleIdsPlugin</code>也已经没用了，新的模块ID生成算法应该是优于这个的，具体稳定性没喊待测试。</li>
+</ul>
+<h2 id="HTML插件不可用"><a href="#HTML插件不可用" class="headerlink" title="HTML插件不可用"></a>HTML插件不可用</h2><p><code>html-webpack-plugin</code>用不了，可以参考<a href="https://link.zhihu.com/?target=https://github.com/jantimon/html-webpack-plugin/issues/1163">这个Issue</a>。这个问题可大了，总不能构建完没有HTML页面吧。</p>
+<p>不过好在这问题不难修复，具体代码是<a href="https://link.zhihu.com/?target=https://github.com/jantimon/html-webpack-plugin/blob/35a154186501fba3ecddb819b6f632556d37a58f/index.js%23L145">index.js中的145行</a>，把这一行中的<code>compilation.compilationDependencies.add</code>修改为<code>compilation.fileDependencies.add</code>就可以正常运行了。</p>
+<p>考虑到就是升级做个实验，所以没有把修改后的版本发包，等官方修改吧。</p>
+<h2 id="复杂规则失效"><a href="#复杂规则失效" class="headerlink" title="复杂规则失效"></a>复杂规则失效</h2><p>我们有一个规则是这样的：</p>
+<pre><code>{test:/\.[jt]sx?$/,oneOf:[{resource:{and:[{include:projectDirectory},{exclude:projectDirectory+&#39;externals&#39;},{exclude:/\/node_modules\//},],}oneOf:[{test:/\.worker\.[jt]sx?$/,use:use(&#39;worker&#39;,&#39;babel&#39;,&#39;eslint&#39;),},{use:use(&#39;babel&#39;,styleName&amp;&amp;usage===&#39;devServer&#39;&amp;&amp;&#39;styleName&#39;,&#39;eslint&#39;),},],},{test:testOfPackages(sourceCompilePackages,cwd),use:use(&#39;babel&#39;,&#39;eslint&#39;),},{test:thirdParties,exclude:/\/node_modules\/monaco-editor\//,use:use(usage===&#39;devServer&#39;&amp;&amp;hot===&#39;all&#39;&amp;&amp;&#39;hot&#39;,&#39;sourceMap&#39;),},],}
+</code></pre>
+<p>在Webpack<br>5中，<code>oneOf.resource.and</code>下面不能用<code>include</code>和<code>exclude</code>了（不知道为什么，没有查到任何和这有关的变更记录）。解决的方法是把<code>resource</code>改成函数：</p>
+<pre><code>{resource(resource){returnresource.includes(projectDirectory)&amp;&amp;!resource.includes(projectDirectory+&#39;/externals&#39;)&amp;&amp;!resource.includes(&#39;/node_modules/&#39;);}
+</code></pre>
+<h2 id="没有Node兼容"><a href="#没有Node兼容" class="headerlink" title="没有Node兼容"></a>没有Node兼容</h2><p>在<a href="https://link.zhihu.com/?target=https://github.com/webpack/changelog-v5/blob/master/README.md%23automatic-nodejs-polyfills-removed">Webpack<br>5中移除了Node模块的兼容</a>。</p>
+<blockquote>
+<p>webpack 5 stops automatically polyfilling these core modules and focuses on</p>
+</blockquote>
+<p>frontend-compatible modules.</p>
+<p>在实际构建时，如果遇到类似于<code>const {Buffer} = require(&#39;buffer&#39;)</code>的代码，会提示新版本不会再对它进行自动的兼容，由你来选择是否安装相应的库并通过<code>resolve.alias</code>配置：</p>
+<pre><code>{resolve:{alias:{buffer:&#39;buffer&#39;,},},}
+</code></pre>
+<p>但是，Webpack只解决引入模块的代码， 不解决全局变量的检测，这是和之前版本最大的区别。比如有代码是这样的：</p>
+<pre><code>exports.isBuffer=Buffer.isBuffer;
+</code></pre>
+<p>Webpack 5并不会认为这里用到了<code>Buffer</code>这个对象需要处理兼容性，而是正常地进行打包，也不提示开发者。直到系统运行时，才会出现<code>Buffer is not defined</code>这样的错误。</p>
+<p>同时，由于内置的<code>NodeSourcePlugin</code>已经修改了实现，现在只会处理<code>global</code>这一个变量，所以即便把这个插件找回来也不会再帮你修复这些全局变量的使用了，我们只能自己想办法去处理。</p>
+<p>在这里推荐<a href="https://link.zhihu.com/?target=https://github.com/mopedjs/babel-plugin-import-globals">babel-plugin-import-globals</a>这个babel插件，它可以找到相关的全局变量并进行处理。我们至今发现的只有<code>Buffer</code>和<code>process</code>这两个被使用，所以配置是这样的：</p>
+<pre><code>{loader:require.resolve(&#39;babel-loader&#39;),options:{sourceType:&#39;unambiguous&#39;,// 这个一定要配，自动处理es和js模块
+compact:false,// 这个建议配，能提升性能
+plugins:[[require.resolve(&#39;babel-plugin-import-globals&#39;),{&#39;process&#39;:require.resolve(&#39;process&#39;),&#39;Buffer&#39;:{moduleName:require.resolve(&#39;buffer&#39;),exportName:&#39;Buffer&#39;},},],],},}
+</code></pre>
+<p>将这个配置加到<code>node_modules</code>下的JavaScript文件上就行，如：</p>
+<pre><code>{test:/\/jsx?$/,include:/node_modules/,use:[loader],}
+</code></pre>
+<p>当然这会让所有第三方的代码也过babel的处理（虽然只有一个插件），会被babel解析，一定程度上会影响构建的速度。babel处理的速度与原来的<code>NodeSourcePlugin</code>的处理孰优孰劣我也无法再做比较了。</p>
+<p>除此之外，在<code>resolve.alias</code>下也需要配上对应的一些兼容库：</p>
+<pre><code>{crypto:&#39;crypto-browserify&#39;,stream:&#39;stream-browserify&#39;,vm:&#39;vm-browserify&#39;,}
+</code></pre>
+<h2 id="配置缓存"><a href="#配置缓存" class="headerlink" title="配置缓存"></a>配置缓存</h2><p>Webpack 5最令我期待的功能就是长效缓存，通过相关的配置打开：</p>
+<pre><code>{cache:{type:&#39;filesystem&#39;} }
+</code></pre>
+<p>但这样打开后，缓存会过于固定，引起一系列问题：</p>
+<ul>
+<li><code>mode</code>之类的变化无法响应，缓存不会变。</li>
+<li>如果根据不同的场景，有不同的babel配置等，也同样不会感知，依然会用旧的缓存。</li>
+<li>使用<code>DefinePlugin</code>注入的动态内容，全部不会变化。</li>
+</ul>
+<p>而要处理这些“动态性”，我们需要2个东西。</p>
+<p>第一个是<code>cache.version</code>的配置，这个配置可以告诉webpack内容有了变化，需要重新处理缓存，如<code>mode</code>或babel配置之类的，可以通过不同的<code>version</code>隔离开来。</p>
+<p>最简单的<code>cache.version</code>的算法是<code>webpack.config.js</code>和<code>node_modules/.yarn-integrity</code>做一下哈希，但我们封装了webpack的能力，所以并不存在一个固定的<code>webpack.config.js</code>，就必须手动实现它，我们当前的算法是：</p>
+<pre><code>constcomputeCacheKey=(entry: BuildEntry):string=&gt;{consthash=crypto.createHash(&#39;sha1&#39;);hash.update(entry.usage);// 使用场景，如build、dev等
+hash.update(entry.mode);hash.update(entry.hostPackageName);// 主包名，会用在一些import语句上
+hash.update(fs.readFileSync(path.join(entry.cwd,&#39;settings.js&#39;)));// 用户的定制化配置
+hash.update(fs.readFileSync(path.join(entry.cwd,&#39;node_modules&#39;,&#39;.yarn-integrity&#39;)));// 依赖信息
+returnhash.digest(&#39;hex&#39;);};
+</code></pre>
+<p>要保持这个算法稳定，并且在动态的信息变化时一定会发生改变。</p>
+<p>但<code>cache.version</code>不能用来处理注入的内容，如果把<code>DefinePlugin</code>消费的东西都放进去，比如我们的构建还有当时的时间戳，这就会让版本号就会永远变化，起不了缓存的作用。</p>
+<p>解决的办法是使用<code>DefinePlugin.runtimeValue</code>函数。这个函数其实V4的时候就有，藏得挺隐蔽的，甚至<code>@types/webpack</code>的定义信息中都没有它，以至于为了用它我们不得不这么搞：</p>
+<pre><code>construntimeValue:(compute:()=&gt;string,dynamic: boolean)=&gt;any=(DefinePluginasany).runtimeValue;
+</code></pre>
+<p>使用的方法是这样：</p>
+<pre><code>constdefines={&#39;process.env.foo&#39;:DefinePlugin.runtimeValue(()=&gt;JSON.stringify(process.env.foo),true),};newDefinePlugin(defines);
+</code></pre>
+<p>注意<code>runtimeValue</code>调用的第2个参数，此处用<code>true</code>表示“这是一个始终会变的值”，它也可以传一些文件的路径来让值和文件是否变化建立关系。这样做了以后，有遇到<code>process.env.foo</code>的文件会在构建时排除在缓存外，而其它上下游的文件依然可以缓存，这里不会出现“因为入口文件有一个动态内容，所以下面其它文件都不能缓存”这样尴尬的情况，并不怎么影响缓存的使用和性能。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Webpack 5的升级并不难，一些细节和插件的兼容性是主要问题，也可以将插件兼容性的修复再反馈回社区，与社区一起成长。</p>
+<p>当做现在Webpack<br>5还存在一些问题，比如构建我们一个单页系统用掉了2.5GB内存，不设置<code>--max-old-space-size</code>参数都跑不下去。因此建议做一下升级的尝试，处理好兼容问题，以便正式版发布的时候能快速迁移，但不要直接用在生产环境上。</p>
+<p>发布于 2019-09-04</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/6e19cb62.html"><div class="related-post-title">umijs登录鉴权</div><div class="related-post-meta"><time>2020-07-08</time><span class="category-badge">前端</span></div></a><a class="related-post-item" href="/article/507688e3.html"><div class="related-post-title">chrome调试技巧</div><div class="related-post-meta"><time>2020-01-09</time><span class="category-badge">前端</span></div></a><a class="related-post-item" href="/article/3fd41578.html"><div class="related-post-title">uni-app横竖屏切换之后样式错乱字体变大解决方法</div><div class="related-post-meta"><time>2021-12-12</time><span class="category-badge">前端</span></div></a><a class="related-post-item" href="/article/c3fcb716.html"><div class="related-post-title">基于HTML5、阿里云播放SDK、腾讯云播放SDK开发的M3U8在线播放器</div><div class="related-post-meta"><time>2025-09-30</time><span class="category-badge">前端</span></div></a><a class="related-post-item" href="/article/996a092f.html"><div class="related-post-title">如何优雅处理前端异常？</div><div class="related-post-meta"><time>2020-01-13</time><span class="category-badge">前端</span></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/b3d63d9d.html">https://xuehuayu.cn/article/b3d63d9d.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/b21d7421.html">深入浅出 Babel 上篇：架构和原理 + 实战</a><a class="next" href="/article/9fe3d429.html">从零开始配置webpack(基于babel 7版本)</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/472c582b.html">手机丢失该怎么办？手机防盗防丢完全指南</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ead1a366.html">vue3 pinia在App.vue中使用了useStore报错getActivePinia() was called but there wa no active pinia</a></li><li class="post-list-item"><a class="post-list-link" href="/article/abe47f31.html">vue3中的mixin写法使用Composition API 来实现代码复用</a></li><li class="post-list-item"><a class="post-list-link" href="/article/cbf3079f.html">windows虚拟内存自动管理好还是手动设置好？ 如果是手动设置多少合适？</a></li><li class="post-list-item"><a class="post-list-link" href="/article/763d6087.html">vue3中ts提示扩张参数必须具有元组类型或传递给rest参数</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/">children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/children/health/">health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">292</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>
