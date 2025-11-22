@@ -1,0 +1,817 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd,webpack,Babel"><title>create-react-app，webpack配置超强解析 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a href="https://love.xuehuayu.cn/" target="_self"><i class="fa fa-heart"> LOVE</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">create-react-app，webpack配置超强解析</h1><div class="post-meta"><span class="date">2025-01-16</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a><a href="/categories/React/">React </a><a href="/categories/Webpack/">Webpack </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.8k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 22</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/a91910b6.html#waline-comment"><span class="waline-comment-count" data-path="/article/a91910b6.html">0</span><span> 条评论</span></a><div class="post-content"><p>【create-react-app，webpack配置超强解析】【建议收藏】😎这一次再也不怕webpack面试了</p>
+<span id="more"></span>
+
+<blockquote>
+<p><code>掘金作者：吃饺子不吃馅</code><br><code>原文链接：https://juejin.cn/post/7459740471654023220</code></p>
+</blockquote>
+<p>Create React App (CRA) 是 React 官方推荐的脚手架工具，它封装了 Webpack、Babel、ESLint<br>等工具，提供了开箱即用的开发环境。虽然 CRA 隐藏了大部分配置细节，但在某些情况下，我们可能需要自定义 Webpack 配置。本文将详细解读 CRA 的<br>Webpack 配置文件，帮助你理解其工作原理和核心配置。</p>
+<h2 id="1-配置文件概览"><a href="#1-配置文件概览" class="headerlink" title="1. 配置文件概览"></a><strong>1. 配置文件概览</strong></h2><p>我们先用create-react-app创建一个项目，然后npm run eject，可以看到webpack的配置文件<code>webpack.config.js</code></p>
+<p>CRA 的 Webpack 配置它是一个函数，接收 <code>webpackEnv</code> 参数（表示当前环境，如 <code>development</code> 或<br><code>production</code>），并返回一个 Webpack 配置对象。</p>
+<p>配置文件的主要部分包括：</p>
+<ul>
+<li><strong>入口和输出配置</strong></li>
+<li><strong>模块解析规则</strong></li>
+<li><strong>插件配置</strong></li>
+<li><strong>优化配置</strong></li>
+<li><strong>开发和生产环境的差异处理</strong></li>
+<li><strong>缓存配置</strong></li>
+</ul>
+<h2 id="2-核心配置解析"><a href="#2-核心配置解析" class="headerlink" title="2. 核心配置解析"></a><strong>2. 核心配置解析</strong></h2><h3 id="2-1-入口和输出配置"><a href="#2-1-入口和输出配置" class="headerlink" title="2.1 入口和输出配置"></a><strong>2.1 入口和输出配置</strong></h3><h4 id="入口（Entry）"><a href="#入口（Entry）" class="headerlink" title="入口（Entry）"></a><strong>入口（Entry）</strong></h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码entry: paths.appIndexJs,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>paths.appIndexJs</code> 是应用的入口文件，通常是 <code>src/index.js</code> 或 <code>src/index.tsx</code>。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="输出（Output）"><a href="#输出（Output）" class="headerlink" title="输出（Output）"></a><strong>输出（Output）</strong></h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码output: &#123;</span><br><span class="line">  path: paths.appBuild, // 构建输出目录</span><br><span class="line">  filename: isEnvProduction</span><br><span class="line"><span class="code">    ? &#x27;static/js/[name].[contenthash:8].js&#x27; // 生产环境使用哈希文件名</span></span><br><span class="line"><span class="code">    : isEnvDevelopment &amp;&amp; &#x27;static/js/bundle.js&#x27;, // 开发环境使用固定文件名</span></span><br><span class="line"><span class="code">  chunkFilename: isEnvProduction</span></span><br><span class="line"><span class="code">    ? &#x27;static/js/[name].[contenthash:8].chunk.js&#x27; // 异步 chunk 文件名</span></span><br><span class="line"><span class="code">    : isEnvDevelopment &amp;&amp; &#x27;static/js/[name].chunk.js&#x27;,</span></span><br><span class="line"><span class="code">  assetModuleFilename: &#x27;static/media/[name].[hash][ext]&#x27;, // 静态资源文件名</span></span><br><span class="line"><span class="code">  publicPath: paths.publicUrlOrPath, // 公共路径</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>path</code></strong>：构建输出的目录，通常是 <code>build</code>。</li>
+<li><strong><code>filename</code></strong>：主 bundle 的文件名，生产环境使用哈希值以支持缓存。</li>
+<li><strong><code>chunkFilename</code></strong>：异步加载的 chunk 文件名。</li>
+<li><strong><code>assetModuleFilename</code></strong>：静态资源（如图片、字体）的输出路径和文件名。</li>
+<li><strong><code>publicPath</code></strong>：静态资源的公共路径，通常与 <code>homepage</code> 配置相关。</li>
+</ul>
+<h3 id="2-2-模块解析规则【loader】"><a href="#2-2-模块解析规则【loader】" class="headerlink" title="2.2 模块解析规则【loader】"></a><strong>2.2 模块解析规则【loader】</strong></h3><h4 id="模块解析（resolve）"><a href="#模块解析（resolve）" class="headerlink" title="模块解析（resolve）"></a><strong>模块解析（resolve）</strong></h4><p>源码如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码resolve: &#123;</span><br><span class="line">  modules: [&#x27;node<span class="emphasis">_modules&#x27;, paths.appNodeModules], // 模块查找路径</span></span><br><span class="line"><span class="emphasis">  extensions: paths.moduleFileExtensions.map(ext =&gt; `.$&#123;ext&#125;`), // 支持的扩展名</span></span><br><span class="line"><span class="emphasis">  alias: &#123;</span></span><br><span class="line"><span class="emphasis">    &#x27;react-native&#x27;: &#x27;react-native-web&#x27;, // 支持 React Native Web</span></span><br><span class="line"><span class="emphasis">    ...(modules.webpackAliases || &#123;&#125;), // 自定义别名</span></span><br><span class="line"><span class="emphasis">  &#125;,</span></span><br><span class="line"><span class="emphasis">  plugins: [</span></span><br><span class="line"><span class="emphasis">    new ModuleScopePlugin(paths.appSrc, [ // 限制模块导入范围</span></span><br><span class="line"><span class="emphasis">      paths.appPackageJson,</span></span><br><span class="line"><span class="emphasis">      reactRefreshRuntimeEntry,</span></span><br><span class="line"><span class="emphasis">      reactRefreshWebpackPluginRuntimeEntry,</span></span><br><span class="line"><span class="emphasis">      babelRuntimeEntry,</span></span><br><span class="line"><span class="emphasis">      babelRuntimeEntryHelpers,</span></span><br><span class="line"><span class="emphasis">      babelRuntimeRegenerator,</span></span><br><span class="line"><span class="emphasis">    ]),</span></span><br><span class="line"><span class="emphasis">  ],</span></span><br><span class="line"><span class="emphasis">&#125;</span></span><br><span class="line"><span class="emphasis"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong><code>modules</code></strong>：模块查找路径，优先从 <code>node_modules</code> 和项目根目录的 <code>node_modules</code> 中查找。</p>
+</li>
+<li><p><strong><code>extensions</code></strong>：支持的扩展名，如 <code>.js</code>、<code>.jsx</code>、<code>.ts</code>、<code>.tsx</code>。</p>
+</li>
+<li><p><strong><code>alias</code></strong>：路径别名，支持 React Native Web 和自定义别名。</p>
+</li>
+<li><p><strong><code>ModuleScopePlugin</code></strong>：限制模块导入范围，防止从 <code>src</code> 目录外导入模块。</p>
+<ul>
+<li><strong><code>paths.appPackageJson</code></strong>：项目的 <code>package.json</code> 文件。</li>
+<li><strong><code>reactRefreshRuntimeEntry</code></strong>：React 热更新的运行时入口文件。</li>
+<li><strong><code>reactRefreshWebpackPluginRuntimeEntry</code></strong>：React 热更新插件的运行时入口文件。</li>
+<li><strong><code>babelRuntimeEntry</code></strong>：Babel 运行时的入口文件。</li>
+<li><strong><code>babelRuntimeEntryHelpers</code></strong>：Babel 运行时的辅助函数文件。</li>
+<li><strong><code>babelRuntimeRegenerator</code></strong>：Babel 运行时的 regenerator 文件。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="模块规则（Module-Rules）"><a href="#模块规则（Module-Rules）" class="headerlink" title="模块规则（Module Rules）"></a><strong>模块规则（Module Rules）</strong></h4><p>源码如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码 module: &#123;</span><br><span class="line"><span class="code">      strictExportPresence: true,</span></span><br><span class="line"><span class="code">      rules: `[`</span></span><br><span class="line"><span class="code">        shouldUseSourceMap &amp;&amp; &#123;</span></span><br><span class="line"><span class="code">          enforce: &#x27;pre&#x27;,</span></span><br><span class="line"><span class="code">          exclude: /@babel(?:\/|\\&#123;1,2&#125;)runtime/,</span></span><br><span class="line"><span class="code">          test: /\.(js|mjs|jsx|ts|tsx|css)$/,</span></span><br><span class="line"><span class="code">          loader: require.resolve(&#x27;source-map-loader&#x27;),</span></span><br><span class="line"><span class="code">        &#125;,</span></span><br><span class="line"><span class="code">        &#123;</span></span><br><span class="line"><span class="code">          oneOf: [</span></span><br><span class="line"><span class="code">            &#123;</span></span><br><span class="line"><span class="code">              test: [/\.avif$/],</span></span><br><span class="line"><span class="code">              type: &#x27;asset&#x27;,</span></span><br><span class="line"><span class="code">              mimetype: &#x27;image/avif&#x27;,</span></span><br><span class="line"><span class="code">              parser: &#123;</span></span><br><span class="line"><span class="code">                dataUrlCondition: &#123;</span></span><br><span class="line"><span class="code">                  maxSize: imageInlineSizeLimit,</span></span><br><span class="line"><span class="code">                &#125;,</span></span><br><span class="line"><span class="code">              &#125;,</span></span><br><span class="line"><span class="code">            &#125;,</span></span><br><span class="line"><span class="code">            &#123;</span></span><br><span class="line"><span class="code">              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],</span></span><br><span class="line"><span class="code">              type: &#x27;asset&#x27;,</span></span><br><span class="line"><span class="code">              parser: &#123;</span></span><br><span class="line"><span class="code">                dataUrlCondition: &#123;</span></span><br><span class="line"><span class="code">                  maxSize: imageInlineSizeLimit,</span></span><br><span class="line"><span class="code">                &#125;,</span></span><br><span class="line"><span class="code">              &#125;,</span></span><br><span class="line"><span class="code">            &#125;,</span></span><br><span class="line"><span class="code">            &#123;</span></span><br><span class="line"><span class="code">              test: /\.svg$/,</span></span><br><span class="line"><span class="code">              use: [</span></span><br><span class="line"><span class="code">                &#123;</span></span><br><span class="line"><span class="code">                  loader: require.resolve(&#x27;@svgr/webpack&#x27;),</span></span><br><span class="line"><span class="code">                  options: &#123;</span></span><br><span class="line"><span class="code">                    prettier: false,</span></span><br><span class="line"><span class="code">                    svgo: false,</span></span><br><span class="line"><span class="code">                    svgoConfig: &#123;</span></span><br><span class="line"><span class="code">                      plugins: [&#123; removeViewBox: false &#125;],</span></span><br><span class="line"><span class="code">                    &#125;,</span></span><br><span class="line"><span class="code">                    titleProp: true,</span></span><br><span class="line"><span class="code">                    ref: true,</span></span><br><span class="line"><span class="code">                  &#125;,</span></span><br><span class="line"><span class="code">                &#125;,</span></span><br><span class="line"><span class="code">                &#123;</span></span><br><span class="line"><span class="code">                  loader: require.resolve(&#x27;file-loader&#x27;),</span></span><br><span class="line"><span class="code">                  options: &#123;</span></span><br><span class="line"><span class="code">                    name: &#x27;static/media/[name].[hash].[ext]&#x27;,</span></span><br><span class="line"><span class="code">                  &#125;,</span></span><br><span class="line"><span class="code">                &#125;,</span></span><br><span class="line"><span class="code">              ],</span></span><br><span class="line"><span class="code">              issuer: &#123;</span></span><br><span class="line"><span class="code">                and: [/\.(ts|tsx|js|jsx|md|mdx)$/],</span></span><br><span class="line"><span class="code">              &#125;,</span></span><br><span class="line"><span class="code">            &#125;,</span></span><br><span class="line"><span class="code">            &#123;</span></span><br><span class="line"><span class="code">              test: /\.(js|mjs|jsx|ts|tsx)$/,</span></span><br><span class="line"><span class="code">              include: paths.appSrc,</span></span><br><span class="line"><span class="code">              loader: require.resolve(&#x27;babel-loader&#x27;),</span></span><br><span class="line"><span class="code">              options: &#123;</span></span><br><span class="line"><span class="code">                customize: require.resolve(</span></span><br><span class="line"><span class="code">                  &#x27;babel-preset-react-app/webpack-overrides&#x27;</span></span><br><span class="line"><span class="code">                ),</span></span><br><span class="line"><span class="code">                presets: [</span></span><br><span class="line"><span class="code">                  [</span></span><br><span class="line"><span class="code">                    require.resolve(&#x27;babel-preset-react-app&#x27;),</span></span><br><span class="line"><span class="code">                    &#123;</span></span><br><span class="line"><span class="code">                      runtime: hasJsxRuntime ? &#x27;automatic&#x27; : &#x27;classic&#x27;,</span></span><br><span class="line"><span class="code">                    &#125;,</span></span><br><span class="line"><span class="code">                  ],</span></span><br><span class="line"><span class="code">                ],</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">                plugins: [</span></span><br><span class="line"><span class="code">                  isEnvDevelopment &amp;&amp;</span></span><br><span class="line"><span class="code">                    shouldUseReactRefresh &amp;&amp;</span></span><br><span class="line"><span class="code">                    require.resolve(&#x27;react-refresh/babel&#x27;),</span></span><br><span class="line"><span class="code">                    [require.resolve(&#x27;babel-plugin-transform-antd-resize-table&#x27;), &#123; optionName: path.resolve(__dirname, &#x27;../src/components/table&#x27;) &#125;]</span></span><br><span class="line"><span class="code">                ].filter(Boolean),</span></span><br><span class="line"><span class="code">                cacheDirectory: true,</span></span><br><span class="line"><span class="code">                cacheCompression: false,</span></span><br><span class="line"><span class="code">                compact: isEnvProduction,</span></span><br><span class="line"><span class="code">              &#125;,</span></span><br><span class="line"><span class="code">            &#125;,</span></span><br><span class="line"><span class="code">            &#123;</span></span><br><span class="line"><span class="code">              test: /\.(js|mjs)$/,</span></span><br><span class="line"><span class="code">              exclude: /@babel(?:\/|\\&#123;1,2&#125;)runtime/,</span></span><br><span class="line"><span class="code">              loader: require.resolve(&#x27;babel-loader&#x27;),</span></span><br><span class="line"><span class="code">              options: &#123;</span></span><br><span class="line"><span class="code">                babelrc: false,</span></span><br><span class="line"><span class="code">                configFile: false,</span></span><br><span class="line"><span class="code">                compact: false,</span></span><br><span class="line"><span class="code">                presets: [</span></span><br><span class="line"><span class="code">                  [</span></span><br><span class="line"><span class="code">                    require.resolve(&#x27;babel-preset-react-app/dependencies&#x27;),</span></span><br><span class="line"><span class="code">                    &#123; helpers: true &#125;,</span></span><br><span class="line"><span class="code">                  ],</span></span><br><span class="line"><span class="code">                ],</span></span><br><span class="line"><span class="code">                cacheDirectory: true,</span></span><br><span class="line"><span class="code">                sourceMaps: shouldUseSourceMap,</span></span><br><span class="line"><span class="code">                inputSourceMap: shouldUseSourceMap,</span></span><br><span class="line"><span class="code">              &#125;,</span></span><br><span class="line"><span class="code">            &#125;,</span></span><br><span class="line"><span class="code">            &#123;</span></span><br><span class="line"><span class="code">              test: cssRegex,</span></span><br><span class="line"><span class="code">              exclude: cssModuleRegex,</span></span><br><span class="line"><span class="code">              use: getStyleLoaders(&#123;</span></span><br><span class="line"><span class="code">                importLoaders: 1,</span></span><br><span class="line"><span class="code">                sourceMap: isEnvProduction</span></span><br><span class="line"><span class="code">                  ? shouldUseSourceMap</span></span><br><span class="line"><span class="code">                  : isEnvDevelopment,</span></span><br><span class="line"><span class="code">                modules: &#123;</span></span><br><span class="line"><span class="code">                  mode: &#x27;icss&#x27;,</span></span><br><span class="line"><span class="code">                &#125;,</span></span><br><span class="line"><span class="code">              &#125;),</span></span><br><span class="line"><span class="code">              sideEffects: true,</span></span><br><span class="line"><span class="code">            &#125;,</span></span><br><span class="line"><span class="code">            &#123;</span></span><br><span class="line"><span class="code">              test: cssModuleRegex,</span></span><br><span class="line"><span class="code">              use: getStyleLoaders(&#123;</span></span><br><span class="line"><span class="code">                importLoaders: 1,</span></span><br><span class="line"><span class="code">                sourceMap: isEnvProduction</span></span><br><span class="line"><span class="code">                  ? shouldUseSourceMap</span></span><br><span class="line"><span class="code">                  : isEnvDevelopment,</span></span><br><span class="line"><span class="code">                modules: &#123;</span></span><br><span class="line"><span class="code">                  mode: &#x27;local&#x27;,</span></span><br><span class="line"><span class="code">                  getLocalIdent: getCSSModuleLocalIdent,</span></span><br><span class="line"><span class="code">                &#125;,</span></span><br><span class="line"><span class="code">              &#125;),</span></span><br><span class="line"><span class="code">            &#125;,</span></span><br><span class="line"><span class="code">            &#123;</span></span><br><span class="line"><span class="code">              test: sassRegex,</span></span><br><span class="line"><span class="code">              exclude: sassModuleRegex,</span></span><br><span class="line"><span class="code">              use: getStyleLoaders(</span></span><br><span class="line"><span class="code">                &#123;</span></span><br><span class="line"><span class="code">                  importLoaders: 3,</span></span><br><span class="line"><span class="code">                  sourceMap: isEnvProduction</span></span><br><span class="line"><span class="code">                    ? shouldUseSourceMap</span></span><br><span class="line"><span class="code">                    : isEnvDevelopment,</span></span><br><span class="line"><span class="code">                  modules: &#123;</span></span><br><span class="line"><span class="code">                    mode: &#x27;icss&#x27;,</span></span><br><span class="line"><span class="code">                  &#125;,</span></span><br><span class="line"><span class="code">                &#125;,</span></span><br><span class="line"><span class="code">                &#x27;sass-loader&#x27;</span></span><br><span class="line"><span class="code">              ),</span></span><br><span class="line"><span class="code">              sideEffects: true,</span></span><br><span class="line"><span class="code">            &#125;,</span></span><br><span class="line"><span class="code">            &#123;</span></span><br><span class="line"><span class="code">              test: sassModuleRegex,</span></span><br><span class="line"><span class="code">              use: getStyleLoaders(</span></span><br><span class="line"><span class="code">                &#123;</span></span><br><span class="line"><span class="code">                  importLoaders: 3,</span></span><br><span class="line"><span class="code">                  sourceMap: isEnvProduction</span></span><br><span class="line"><span class="code">                    ? shouldUseSourceMap</span></span><br><span class="line"><span class="code">                    : isEnvDevelopment,</span></span><br><span class="line"><span class="code">                  modules: &#123;</span></span><br><span class="line"><span class="code">                    mode: &#x27;local&#x27;,</span></span><br><span class="line"><span class="code">                    getLocalIdent: getCSSModuleLocalIdent,</span></span><br><span class="line"><span class="code">                  &#125;,</span></span><br><span class="line"><span class="code">                &#125;,</span></span><br><span class="line"><span class="code">                &#x27;sass-loader&#x27;</span></span><br><span class="line"><span class="code">              ),</span></span><br><span class="line"><span class="code">            &#125;,</span></span><br><span class="line"><span class="code">            &#123;</span></span><br><span class="line"><span class="code">              exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],</span></span><br><span class="line"><span class="code">              type: &#x27;asset/resource&#x27;,</span></span><br><span class="line"><span class="code">            &#125;,</span></span><br><span class="line"><span class="code">          ],</span></span><br><span class="line"><span class="code">        &#125;,</span></span><br><span class="line"><span class="code">      ].filter(Boolean),</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<p><code>module</code> 是 Webpack 配置的核心部分，用于定义如何处理不同类型的文件（模块）。它包含两个主要属性：</p>
+<ul>
+<li><strong><code>strictExportPresence</code></strong>：设置为 <code>true</code>，表示如果模块导出不存在，Webpack 会抛出错误。</li>
+<li><strong><code>rules</code></strong>：定义了一系列规则（<code>rules</code>），每个规则指定了如何处理特定类型的文件。</li>
+</ul>
+<p><em>接下来一个一个分析其作用</em></p>
+<ul>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理 Source Maps</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码shouldUseSourceMap &amp;&amp; &#123;</span><br><span class="line">  enforce: &#x27;pre&#x27;,</span><br><span class="line">  exclude: /@babel(?:\/|\\&#123;1,2&#125;)runtime/,</span><br><span class="line">  test: /\.(js|mjs|jsx|ts|tsx|css)$/,</span><br><span class="line">  loader: require.resolve(&#x27;source-map-loader&#x27;),</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：在开发环境中，使用 <code>source-map-loader</code> 加载 Source Maps，以便在调试时能够定位到源代码。</p>
+</li>
+<li><p><strong><code>enforce: &#39;pre&#39;</code></strong>：确保该 loader 在其他 loader 之前执行。</p>
+</li>
+<li><p><strong><code>exclude</code></strong>：排除 <code>@babel/runtime</code> 中的文件，避免重复处理。</p>
+</li>
+<li><p><strong><code>test</code></strong>：匹配 JavaScript、TypeScript 和 CSS 文件。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>oneOf</code> 规则</strong></p>
+<p><code>oneOf</code> 是 Webpack 的一种优化机制，它会按顺序遍历规则列表，直到找到匹配的规则。如果没有匹配的规则，则使用最后的 <code>file-loader</code>。</p>
+<ul>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理 AVIF 图片</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码&#123;</span><br><span class="line">  test: [/\.avif$/],</span><br><span class="line">  type: &#x27;asset&#x27;,</span><br><span class="line">  mimetype: &#x27;image/avif&#x27;,</span><br><span class="line">  parser: &#123;</span><br><span class="line"><span class="code">    dataUrlCondition: &#123;</span></span><br><span class="line"><span class="code">      maxSize: imageInlineSizeLimit,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">  &#125;,</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：处理 AVIF 格式的图片。</p>
+</li>
+<li><p><strong><code>type: &#39;asset&#39;</code></strong>：将文件作为资源处理，小于 <code>imageInlineSizeLimit</code> 的图片会转为 Base64 编码。</p>
+</li>
+<li><p><strong><code>mimetype</code></strong>：指定文件的 MIME 类型。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理常见图片格式</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码&#123;</span><br><span class="line">  test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],</span><br><span class="line">  type: &#x27;asset&#x27;,</span><br><span class="line">  parser: &#123;</span><br><span class="line"><span class="code">    dataUrlCondition: &#123;</span></span><br><span class="line"><span class="code">      maxSize: imageInlineSizeLimit,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">  &#125;,</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：处理 BMP、GIF、JPEG、PNG 等常见图片格式。</p>
+</li>
+<li><p><strong><code>type: &#39;asset&#39;</code></strong>：将文件作为资源处理，小于 <code>imageInlineSizeLimit</code> 的图片会转为 Base64 编码。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理 SVG 图片</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码&#123;</span><br><span class="line">  test: /\.svg$/,</span><br><span class="line">  use: [</span><br><span class="line"><span class="code">    &#123;</span></span><br><span class="line"><span class="code">      loader: require.resolve(&#x27;@svgr/webpack&#x27;),</span></span><br><span class="line"><span class="code">      options: &#123;</span></span><br><span class="line"><span class="code">        prettier: false,</span></span><br><span class="line"><span class="code">        svgo: false,</span></span><br><span class="line"><span class="code">        svgoConfig: &#123;</span></span><br><span class="line"><span class="code">          plugins: [&#123; removeViewBox: false &#125;],</span></span><br><span class="line"><span class="code">        &#125;,</span></span><br><span class="line"><span class="code">        titleProp: true,</span></span><br><span class="line"><span class="code">        ref: true,</span></span><br><span class="line"><span class="code">      &#125;,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">    &#123;</span></span><br><span class="line"><span class="code">      loader: require.resolve(&#x27;file-loader&#x27;),</span></span><br><span class="line"><span class="code">      options: &#123;</span></span><br><span class="line"><span class="code">        name: &#x27;static/media/[name].[hash].[ext]&#x27;,</span></span><br><span class="line"><span class="code">      &#125;,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">  ],</span></span><br><span class="line"><span class="code">  issuer: &#123;</span></span><br><span class="line"><span class="code">    and: [/\.(ts|tsx|js|jsx|md|mdx)$/],</span></span><br><span class="line"><span class="code">  &#125;,</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：处理 SVG 图片，并使用 <code>@svgr/webpack</code> 将其转换为 React 组件。</p>
+</li>
+<li><p><strong><code>@svgr/webpack</code></strong>：将 SVG 文件转换为 React 组件。</p>
+</li>
+<li><p><strong><code>file-loader</code></strong>：处理 SVG 文件的静态资源路径。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理应用代码（JavaScript&#x2F;TypeScript）</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码&#123;</span><br><span class="line">  test: /\.(js|mjs|jsx|ts|tsx)$/,</span><br><span class="line">  include: paths.appSrc,</span><br><span class="line">  loader: require.resolve(&#x27;babel-loader&#x27;),</span><br><span class="line">  options: &#123;</span><br><span class="line"><span class="code">    customize: require.resolve(&#x27;babel-preset-react-app/webpack-overrides&#x27;),</span></span><br><span class="line"><span class="code">    presets: [</span></span><br><span class="line"><span class="code">      [</span></span><br><span class="line"><span class="code">        require.resolve(&#x27;babel-preset-react-app&#x27;),</span></span><br><span class="line"><span class="code">        &#123;</span></span><br><span class="line"><span class="code">          runtime: hasJsxRuntime ? &#x27;automatic&#x27; : &#x27;classic&#x27;,</span></span><br><span class="line"><span class="code">        &#125;,</span></span><br><span class="line"><span class="code">      ],</span></span><br><span class="line"><span class="code">    ],</span></span><br><span class="line"><span class="code">    plugins: [</span></span><br><span class="line"><span class="code">      isEnvDevelopment &amp;&amp;</span></span><br><span class="line"><span class="code">        shouldUseReactRefresh &amp;&amp;</span></span><br><span class="line"><span class="code">        require.resolve(&#x27;react-refresh/babel&#x27;),</span></span><br><span class="line"><span class="code">      [require.resolve(&#x27;babel-plugin-transform-antd-resize-table&#x27;), &#123; optionName: path.resolve(__dirname, &#x27;../src/components/table&#x27;) &#125;]</span></span><br><span class="line"><span class="code">    ].filter(Boolean),</span></span><br><span class="line"><span class="code">    cacheDirectory: true,</span></span><br><span class="line"><span class="code">    cacheCompression: false,</span></span><br><span class="line"><span class="code">    compact: isEnvProduction,</span></span><br><span class="line"><span class="code">  &#125;,</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：使用 Babel 编译应用代码（JavaScript 和 TypeScript）。</p>
+</li>
+<li><p><strong><code>include</code></strong>：仅处理 <code>src/</code> 目录下的文件。</p>
+</li>
+<li><p><strong><code>babel-loader</code></strong>：使用 Babel 编译代码。</p>
+</li>
+<li><p><strong><code>presets</code></strong>：使用 <code>babel-preset-react-app</code> 预设，支持 React 和 TypeScript。</p>
+</li>
+<li><p><strong><code>plugins</code></strong>：</p>
+<ul>
+<li><code>react-refresh/babel</code>：在开发环境中启用 React 热更新。</li>
+<li><code>babel-plugin-transform-antd-resize-table</code>：自定义插件，用于处理 Ant Design 表格组件的调整大小功能。</li>
+</ul>
+</li>
+<li><p><strong><code>cacheDirectory</code></strong>：启用 Babel 缓存，加快构建速度。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理第三方库代码</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码&#123;</span><br><span class="line">  test: /\.(js|mjs)$/,</span><br><span class="line">  exclude: /@babel(?:\/|\\&#123;1,2&#125;)runtime/,</span><br><span class="line">  loader: require.resolve(&#x27;babel-loader&#x27;),</span><br><span class="line">  options: &#123;</span><br><span class="line"><span class="code">    babelrc: false,</span></span><br><span class="line"><span class="code">    configFile: false,</span></span><br><span class="line"><span class="code">    compact: false,</span></span><br><span class="line"><span class="code">    presets: [</span></span><br><span class="line"><span class="code">      [</span></span><br><span class="line"><span class="code">        require.resolve(&#x27;babel-preset-react-app/dependencies&#x27;),</span></span><br><span class="line"><span class="code">        &#123; helpers: true &#125;,</span></span><br><span class="line"><span class="code">      ],</span></span><br><span class="line"><span class="code">    ],</span></span><br><span class="line"><span class="code">    cacheDirectory: true,</span></span><br><span class="line"><span class="code">    cacheCompression: false,</span></span><br><span class="line"><span class="code">    sourceMaps: shouldUseSourceMap,</span></span><br><span class="line"><span class="code">    inputSourceMap: shouldUseSourceMap,</span></span><br><span class="line"><span class="code">  &#125;,</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：使用 Babel 编译第三方库代码。</p>
+</li>
+<li><p><strong><code>exclude</code></strong>：排除 <code>@babel/runtime</code> 中的文件。</p>
+</li>
+<li><p><strong><code>presets</code></strong>：使用 <code>babel-preset-react-app/dependencies</code> 预设，仅编译标准的 ES 特性。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理 CSS 文件</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码&#123;</span><br><span class="line">  test: cssRegex,</span><br><span class="line">  exclude: cssModuleRegex,</span><br><span class="line">  use: getStyleLoaders(&#123;</span><br><span class="line"><span class="code">    importLoaders: 1,</span></span><br><span class="line"><span class="code">    sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,</span></span><br><span class="line"><span class="code">    modules: &#123;</span></span><br><span class="line"><span class="code">      mode: &#x27;icss&#x27;,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">  &#125;),</span></span><br><span class="line"><span class="code">  sideEffects: true,</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>作用</strong>：处理普通的 CSS 文件。</li>
+<li><strong><code>getStyleLoaders</code></strong>：返回一组 loader，包括 <code>style-loader</code>、<code>css-loader</code> 和</li>
+</ul>
+<p><code>postcss-loader</code>。</p>
+<ul>
+<li><p><strong><code>modules.mode: &#39;icss&#39;</code></strong>：启用 ICSS（Interoperable CSS）模式。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理 CSS Modules</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码&#123;</span><br><span class="line">  test: cssModuleRegex,</span><br><span class="line">  use: getStyleLoaders(&#123;</span><br><span class="line"><span class="code">    importLoaders: 1,</span></span><br><span class="line"><span class="code">    sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,</span></span><br><span class="line"><span class="code">    modules: &#123;</span></span><br><span class="line"><span class="code">      mode: &#x27;local&#x27;,</span></span><br><span class="line"><span class="code">      getLocalIdent: getCSSModuleLocalIdent, // 使用 CRA 的类名生成规则</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">  &#125;),</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：处理 CSS Modules 文件。</p>
+</li>
+<li><p><strong><code>modules.mode: &#39;local&#39;</code></strong>：启用 CSS Modules 的局部作用域。</p>
+</li>
+<li><p><strong><code>getLocalIdent</code></strong>： 使用 CRA 的类名生成规则</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理 Sass 文件</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码&#123;</span><br><span class="line">  test: sassRegex,</span><br><span class="line">  exclude: sassModuleRegex,</span><br><span class="line">  use: getStyleLoaders(</span><br><span class="line"><span class="code">    &#123;</span></span><br><span class="line"><span class="code">      importLoaders: 3,</span></span><br><span class="line"><span class="code">      sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,</span></span><br><span class="line"><span class="code">      modules: &#123;</span></span><br><span class="line"><span class="code">        mode: &#x27;icss&#x27;,</span></span><br><span class="line"><span class="code">      &#125;,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">    &#x27;sass-loader&#x27;</span></span><br><span class="line"><span class="code">  ),</span></span><br><span class="line"><span class="code">  sideEffects: true,</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：处理普通的 Sass 文件。</p>
+</li>
+<li><p><strong><code>sass-loader</code></strong>：将 Sass 编译为 CSS。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理 Sass Modules</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码&#123;</span><br><span class="line">  test: sassModuleRegex,</span><br><span class="line">  use: getStyleLoaders(</span><br><span class="line"><span class="code">    &#123;</span></span><br><span class="line"><span class="code">      importLoaders: 3,</span></span><br><span class="line"><span class="code">      sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,</span></span><br><span class="line"><span class="code">      modules: &#123;</span></span><br><span class="line"><span class="code">        mode: &#x27;local&#x27;,</span></span><br><span class="line"><span class="code">        getLocalIdent: getCSSModuleLocalIdent,</span></span><br><span class="line"><span class="code">      &#125;,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">    &#x27;sass-loader&#x27;</span></span><br><span class="line"><span class="code">  ),</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：处理 Sass Modules 文件。</p>
+</li>
+<li><p><strong><code>modules.mode: &#39;local&#39;</code></strong>：启用 CSS Modules 的局部作用域。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>处理其他文件</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码&#123;</span><br><span class="line">  exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],</span><br><span class="line">  type: &#x27;asset/resource&#x27;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>作用</strong>：处理其他类型的文件（如图片、字体等）。</li>
+<li><strong><code>type: &#39;asset/resource&#39;</code></strong>：将文件作为静态资源处理，并输出到指定目录。</li>
+</ul>
+<h3 id="2-3-插件配置【plugin】"><a href="#2-3-插件配置【plugin】" class="headerlink" title="2.3 插件配置【plugin】"></a><strong>2.3 插件配置【plugin】</strong></h3><p>源码如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码plugins: [</span><br><span class="line">  new HtmlWebpackPlugin(&#123; // 生成 HTML 文件</span><br><span class="line"><span class="code">    inject: true,</span></span><br><span class="line"><span class="code">    template: paths.appHtml,</span></span><br><span class="line"><span class="code">    minify: isEnvProduction ? &#123; // 生产环境压缩 HTML</span></span><br><span class="line"><span class="code">      removeComments: true,</span></span><br><span class="line"><span class="code">      collapseWhitespace: true,</span></span><br><span class="line"><span class="code">      removeRedundantAttributes: true,</span></span><br><span class="line"><span class="code">      useShortDoctype: true,</span></span><br><span class="line"><span class="code">      removeEmptyAttributes: true,</span></span><br><span class="line"><span class="code">      removeStyleLinkTypeAttributes: true,</span></span><br><span class="line"><span class="code">      keepClosingSlash: true,</span></span><br><span class="line"><span class="code">      minifyJS: true,</span></span><br><span class="line"><span class="code">      minifyCSS: true,</span></span><br><span class="line"><span class="code">      minifyURLs: true,</span></span><br><span class="line"><span class="code">    &#125; : undefined,</span></span><br><span class="line"><span class="code">  &#125;),</span></span><br><span class="line"><span class="code">  isEnvProduction &amp;&amp;</span></span><br><span class="line"><span class="code">    new MiniCssExtractPlugin(&#123; // 提取 CSS 文件</span></span><br><span class="line"><span class="code">      filename: &#x27;static/css/[name].[contenthash:8].css&#x27;,</span></span><br><span class="line"><span class="code">      chunkFilename: &#x27;static/css/[name].[contenthash:8].chunk.css&#x27;,</span></span><br><span class="line"><span class="code">    &#125;),</span></span><br><span class="line"><span class="code">  new webpack.DefinePlugin(env.stringified), // 注入环境变量</span></span><br><span class="line"><span class="code">  isEnvDevelopment &amp;&amp;</span></span><br><span class="line"><span class="code">    shouldUseReactRefresh &amp;&amp;</span></span><br><span class="line"><span class="code">    new ReactRefreshWebpackPlugin(&#123; // 支持 React 热更新</span></span><br><span class="line"><span class="code">      overlay: false,</span></span><br><span class="line"><span class="code">    &#125;),</span></span><br><span class="line"><span class="code">  isEnvProduction &amp;&amp;</span></span><br><span class="line"><span class="code">    new WorkboxWebpackPlugin.InjectManifest(&#123; // 生成 Service Worker</span></span><br><span class="line"><span class="code">      swSrc,</span></span><br><span class="line"><span class="code">      dontCacheBustURLsMatching: /\.[0-9a-f]&#123;8&#125;\./,</span></span><br><span class="line"><span class="code">      exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],</span></span><br><span class="line"><span class="code">      maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,</span></span><br><span class="line"><span class="code">    &#125;),</span></span><br><span class="line"><span class="code">  useTypeScript &amp;&amp;</span></span><br><span class="line"><span class="code">    new ForkTsCheckerWebpackPlugin(&#123; // TypeScript 类型检查</span></span><br><span class="line"><span class="code">      async: isEnvDevelopment,</span></span><br><span class="line"><span class="code">      typescript: &#123;</span></span><br><span class="line"><span class="code">        typescriptPath: resolve.sync(&#x27;typescript&#x27;, &#123;</span></span><br><span class="line"><span class="code">          basedir: paths.appNodeModules,</span></span><br><span class="line"><span class="code">        &#125;),</span></span><br><span class="line"><span class="code">        configOverwrite: &#123;</span></span><br><span class="line"><span class="code">          compilerOptions: &#123;</span></span><br><span class="line"><span class="code">            sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,</span></span><br><span class="line"><span class="code">            skipLibCheck: true,</span></span><br><span class="line"><span class="code">            incremental: true,</span></span><br><span class="line"><span class="code">            tsBuildInfoFile: paths.appTsBuildInfoFile,</span></span><br><span class="line"><span class="code">          &#125;,</span></span><br><span class="line"><span class="code">        &#125;,</span></span><br><span class="line"><span class="code">      &#125;,</span></span><br><span class="line"><span class="code">    &#125;),</span></span><br><span class="line"><span class="code">  !disableESLintPlugin &amp;&amp;</span></span><br><span class="line"><span class="code">    new ESLintPlugin(&#123; // ESLint 检查</span></span><br><span class="line"><span class="code">      extensions: [&#x27;js&#x27;, &#x27;mjs&#x27;, &#x27;jsx&#x27;, &#x27;ts&#x27;, &#x27;tsx&#x27;],</span></span><br><span class="line"><span class="code">      formatter: require.resolve(&#x27;react-dev-utils/eslintFormatter&#x27;),</span></span><br><span class="line"><span class="code">      eslintPath: require.resolve(&#x27;eslint&#x27;),</span></span><br><span class="line"><span class="code">      failOnError: !(isEnvDevelopment &amp;&amp; emitErrorsAsWarnings),</span></span><br><span class="line"><span class="code">      context: paths.appSrc,</span></span><br><span class="line"><span class="code">      cache: true,</span></span><br><span class="line"><span class="code">    &#125;),</span></span><br><span class="line"><span class="code">].filter(Boolean);</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>HtmlWebpackPlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码new HtmlWebpackPlugin(</span><br><span class="line">  Object.assign(</span><br><span class="line"><span class="code">    &#123;&#125;,</span></span><br><span class="line"><span class="code">    &#123;</span></span><br><span class="line"><span class="code">      inject: true,</span></span><br><span class="line"><span class="code">      template: paths.appHtml,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">    isEnvProduction</span></span><br><span class="line"><span class="code">      ? &#123;</span></span><br><span class="line"><span class="code">          minify: &#123;</span></span><br><span class="line"><span class="code">            removeComments: true,</span></span><br><span class="line"><span class="code">            collapseWhitespace: true,</span></span><br><span class="line"><span class="code">            removeRedundantAttributes: true,</span></span><br><span class="line"><span class="code">            useShortDoctype: true,</span></span><br><span class="line"><span class="code">            removeEmptyAttributes: true,</span></span><br><span class="line"><span class="code">            removeStyleLinkTypeAttributes: true,</span></span><br><span class="line"><span class="code">            keepClosingSlash: true,</span></span><br><span class="line"><span class="code">            minifyJS: true,</span></span><br><span class="line"><span class="code">            minifyCSS: true,</span></span><br><span class="line"><span class="code">            minifyURLs: true,</span></span><br><span class="line"><span class="code">          &#125;,</span></span><br><span class="line"><span class="code">        &#125;</span></span><br><span class="line"><span class="code">      : undefined</span></span><br><span class="line"><span class="code">  )</span></span><br><span class="line"><span class="code">)</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：生成 <code>index.html</code> 文件，并自动注入打包后的 JavaScript 和 CSS 文件。</p>
+</li>
+<li><p><strong>配置</strong>：</p>
+<ul>
+<li><strong><code>inject: true</code></strong>：自动将生成的资源文件注入到 HTML 中。</li>
+<li><strong><code>template: paths.appHtml</code></strong>：使用指定的 HTML 模板文件（通常是 <code>public/index.html</code>）。</li>
+<li><strong><code>minify</code></strong>：在生产环境中启用 HTML 压缩，移除注释、空白字符等。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>InlineChunkHtmlPlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码isEnvProduction &amp;&amp;</span><br><span class="line">  shouldInlineRuntimeChunk &amp;&amp;</span><br><span class="line">  new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：将 Webpack 的 runtime 代码内联到 HTML 中，减少网络请求。</p>
+</li>
+<li><p><strong>条件</strong>：仅在生产环境且 <code>shouldInlineRuntimeChunk</code> 为 <code>true</code> 时启用。</p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>HtmlWebpackPlugin</code></strong>：指定要操作的 HTML 插件。</li>
+<li><strong><code>[/runtime-.+[.]js/]</code></strong>：匹配需要内联的 runtime 文件。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>InterpolateHtmlPlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：在 HTML 中插入环境变量。例如，<code>%PUBLIC_URL%</code> 会被替换为 <code>publicUrlOrPath</code>。</p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>HtmlWebpackPlugin</code></strong>：指定要操作的 HTML 插件。</li>
+<li><strong><code>env.raw</code></strong>：环境变量对象。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>ModuleNotFoundPlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码new ModuleNotFoundPlugin(paths.appPath)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：在模块未找到时提供更友好的错误提示，帮助开发者快速定位问题。</p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>paths.appPath</code></strong>：项目的根目录。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>DefinePlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码new webpack.DefinePlugin(env.stringified)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>作用</strong>：在编译时将环境变量注入到代码中。例如，<code>process.env.NODE_ENV</code> 会被替换为 <code>&quot;production&quot;</code> 或</li>
+</ul>
+<p><code>&quot;development&quot;</code>。</p>
+<ul>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>env.stringified</code></strong>：环境变量对象，键值对会被注入到代码中。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>ReactRefreshWebpackPlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码isEnvDevelopment &amp;&amp;</span><br><span class="line">  shouldUseReactRefresh &amp;&amp;</span><br><span class="line">  new ReactRefreshWebpackPlugin(&#123;</span><br><span class="line"><span class="code">    overlay: false,</span></span><br><span class="line"><span class="code">  &#125;)</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：在开发环境中启用 React 组件的热更新（Hot Module Replacement, HMR）。</p>
+</li>
+<li><p><strong>条件</strong>：仅在开发环境且 <code>shouldUseReactRefresh</code> 为 <code>true</code> 时启用。</p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>overlay: false</code></strong>：禁用错误覆盖层。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>CaseSensitivePathsPlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码isEnvDevelopment &amp;&amp; new CaseSensitivePathsPlugin()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：在开发环境中检查文件路径的大小写敏感性，避免因路径大小写不一致导致的错误。</p>
+</li>
+<li><p><strong>条件</strong>：仅在开发环境中启用。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>MiniCssExtractPlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码isEnvProduction &amp;&amp;</span><br><span class="line">  new MiniCssExtractPlugin(&#123;</span><br><span class="line"><span class="code">    filename: &#x27;static/css/[name].[contenthash:8].css&#x27;,</span></span><br><span class="line"><span class="code">    chunkFilename: &#x27;static/css/[name].[contenthash:8].chunk.css&#x27;,</span></span><br><span class="line"><span class="code">  &#125;)</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：将 CSS 提取为单独的文件，而不是内联到 JavaScript 中。</p>
+</li>
+<li><p><strong>条件</strong>：仅在生产环境中启用。</p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>filename</code></strong>：主 CSS 文件的输出路径和名称。</li>
+<li><strong><code>chunkFilename</code></strong>：异步加载的 CSS 文件的输出路径和名称。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>WebpackManifestPlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码new WebpackManifestPlugin(&#123;</span><br><span class="line">  fileName: &#x27;asset-manifest.json&#x27;,</span><br><span class="line">  publicPath: paths.publicUrlOrPath,</span><br><span class="line">  generate: (seed, files, entrypoints) =&gt; &#123;</span><br><span class="line"><span class="code">    const manifestFiles = files.reduce((manifest, file) =&gt; &#123;</span></span><br><span class="line"><span class="code">      manifest[file.name] = file.path;</span></span><br><span class="line"><span class="code">      return manifest;</span></span><br><span class="line"><span class="code">    &#125;, seed);</span></span><br><span class="line"><span class="code">    const entrypointFiles = entrypoints.main.filter(</span></span><br><span class="line"><span class="code">      fileName =&gt; !fileName.endsWith(&#x27;.map&#x27;)</span></span><br><span class="line"><span class="code">    );</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">    return &#123;</span></span><br><span class="line"><span class="code">      files: manifestFiles,</span></span><br><span class="line"><span class="code">      entrypoints: entrypointFiles,</span></span><br><span class="line"><span class="code">    &#125;;</span></span><br><span class="line"><span class="code">  &#125;,</span></span><br><span class="line"><span class="code">&#125;)</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：生成资源清单文件（<code>asset-manifest.json</code>），记录所有打包后的资源文件及其路径。</p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>fileName</code></strong>：清单文件的名称。</li>
+<li><strong><code>publicPath</code></strong>：资源的公共路径。</li>
+<li><strong><code>generate</code></strong>：自定义清单文件的生成逻辑。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>IgnorePlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码new webpack.IgnorePlugin(&#123;</span><br><span class="line">  resourceRegExp: /^\.\/locale$/,</span><br><span class="line">  contextRegExp: /moment$/,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：忽略 <code>moment.js</code> 中的本地化文件，减少打包体积。</p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>resourceRegExp</code></strong>：匹配要忽略的资源。</li>
+<li><strong><code>contextRegExp</code></strong>：匹配资源的上下文。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>WorkboxWebpackPlugin.InjectManifest</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码isEnvProduction &amp;&amp;</span><br><span class="line">  fs.existsSync(swSrc) &amp;&amp;</span><br><span class="line">  new WorkboxWebpackPlugin.InjectManifest(&#123;</span><br><span class="line"><span class="code">    swSrc,</span></span><br><span class="line"><span class="code">    dontCacheBustURLsMatching: /\.[0-9a-f]&#123;8&#125;\./,</span></span><br><span class="line"><span class="code">    exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],</span></span><br><span class="line"><span class="code">    maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,</span></span><br><span class="line"><span class="code">  &#125;)</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：生成 Service Worker 文件，支持 PWA（渐进式 Web 应用）。</p>
+</li>
+<li><p><strong>条件</strong>：仅在生产环境且 <code>swSrc</code> 文件存在时启用。</p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>swSrc</code></strong>：Service Worker 的源文件路径。</li>
+<li><strong><code>dontCacheBustURLsMatching</code></strong>：匹配不需要缓存的文件。</li>
+<li><strong><code>exclude</code></strong>：排除不需要缓存的文件。</li>
+<li><strong><code>maximumFileSizeToCacheInBytes</code></strong>：设置缓存文件的最大大小。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>ForkTsCheckerWebpackPlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码useTypeScript &amp;&amp;</span><br><span class="line">  new ForkTsCheckerWebpackPlugin(&#123;</span><br><span class="line"><span class="code">    async: isEnvDevelopment,</span></span><br><span class="line"><span class="code">    typescript: &#123;</span></span><br><span class="line"><span class="code">      typescriptPath: resolve.sync(&#x27;typescript&#x27;, &#123;</span></span><br><span class="line"><span class="code">        basedir: paths.appNodeModules,</span></span><br><span class="line"><span class="code">      &#125;),</span></span><br><span class="line"><span class="code">      configOverwrite: &#123;</span></span><br><span class="line"><span class="code">        compilerOptions: &#123;</span></span><br><span class="line"><span class="code">          sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,</span></span><br><span class="line"><span class="code">          skipLibCheck: true,</span></span><br><span class="line"><span class="code">          inlineSourceMap: false,</span></span><br><span class="line"><span class="code">          declarationMap: false,</span></span><br><span class="line"><span class="code">          noEmit: true,</span></span><br><span class="line"><span class="code">          incremental: true,</span></span><br><span class="line"><span class="code">          tsBuildInfoFile: paths.appTsBuildInfoFile,</span></span><br><span class="line"><span class="code">        &#125;,</span></span><br><span class="line"><span class="code">      &#125;,</span></span><br><span class="line"><span class="code">      context: paths.appPath,</span></span><br><span class="line"><span class="code">      diagnosticOptions: &#123;</span></span><br><span class="line"><span class="code">        syntactic: true,</span></span><br><span class="line"><span class="code">      &#125;,</span></span><br><span class="line"><span class="code">      mode: &#x27;write-references&#x27;,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">    issue: &#123;</span></span><br><span class="line"><span class="code">      include: [</span></span><br><span class="line"><span class="code">        &#123; file: &#x27;../**/src/**/*.&#123;ts,tsx&#125;&#x27; &#125;,</span></span><br><span class="line"><span class="code">        &#123; file: &#x27;**/src/**/*.&#123;ts,tsx&#125;&#x27; &#125;,</span></span><br><span class="line"><span class="code">      ],</span></span><br><span class="line"><span class="code">      exclude: [</span></span><br><span class="line"><span class="code">        &#123; file: &#x27;**/src/**/__tests__/**&#x27; &#125;,</span></span><br><span class="line"><span class="code">        &#123; file: &#x27;**/src/**/?(*.)&#123;spec|test&#125;.*&#x27; &#125;,</span></span><br><span class="line"><span class="code">        &#123; file: &#x27;**/src/setupProxy.*&#x27; &#125;,</span></span><br><span class="line"><span class="code">        &#123; file: &#x27;**/src/setupTests.*&#x27; &#125;,</span></span><br><span class="line"><span class="code">      ],</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">    logger: &#123;</span></span><br><span class="line"><span class="code">      infrastructure: &#x27;silent&#x27;,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">  &#125;)</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：在单独的进程中检查 TypeScript 类型错误，提升构建速度。</p>
+</li>
+<li><p><strong>条件</strong>：仅在项目使用 TypeScript 时启用。</p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>async: isEnvDevelopment</code></strong>：在开发环境中异步检查类型错误。</li>
+<li><strong><code>typescript</code></strong>：TypeScript 配置，包括路径、编译器选项等。</li>
+<li><strong><code>issue</code></strong>：指定需要检查的文件范围。</li>
+<li><strong><code>logger</code></strong>：控制日志输出。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>ESLintPlugin</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码!disableESLintPlugin &amp;&amp;</span><br><span class="line">  new ESLintPlugin(&#123;</span><br><span class="line"><span class="code">    extensions: [&#x27;js&#x27;, &#x27;mjs&#x27;, &#x27;jsx&#x27;, &#x27;ts&#x27;, &#x27;tsx&#x27;],</span></span><br><span class="line"><span class="code">    formatter: require.resolve(&#x27;react-dev-utils/eslintFormatter&#x27;),</span></span><br><span class="line"><span class="code">    eslintPath: require.resolve(&#x27;eslint&#x27;),</span></span><br><span class="line"><span class="code">    failOnError: !(isEnvDevelopment &amp;&amp; emitErrorsAsWarnings),</span></span><br><span class="line"><span class="code">    context: paths.appSrc,</span></span><br><span class="line"><span class="code">    cache: true,</span></span><br><span class="line"><span class="code">    cacheLocation: path.resolve(</span></span><br><span class="line"><span class="code">      paths.appNodeModules,</span></span><br><span class="line"><span class="code">      &#x27;.cache/.eslintcache&#x27;</span></span><br><span class="line"><span class="code">    ),</span></span><br><span class="line"><span class="code">    cwd: paths.appPath,</span></span><br><span class="line"><span class="code">    resolvePluginsRelativeTo: __dirname,</span></span><br><span class="line"><span class="code">    baseConfig: &#123;</span></span><br><span class="line"><span class="code">      extends: [require.resolve(&#x27;eslint-config-react-app/base&#x27;)],</span></span><br><span class="line"><span class="code">      rules: &#123;</span></span><br><span class="line"><span class="code">        ...(!hasJsxRuntime &amp;&amp; &#123;</span></span><br><span class="line"><span class="code">          &#x27;react/react-in-jsx-scope&#x27;: &#x27;error&#x27;,</span></span><br><span class="line"><span class="code">        &#125;),</span></span><br><span class="line"><span class="code">      &#125;,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code">  &#125;)</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：在 Webpack 构建过程中运行 ESLint，检查代码规范。</p>
+</li>
+<li><p><strong>条件</strong>：仅在未禁用 ESLint 时启用。</p>
+</li>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><strong><code>extensions</code></strong>：需要检查的文件扩展名。</li>
+<li><strong><code>formatter</code></strong>：指定 ESLint 的输出格式。</li>
+<li><strong><code>failOnError</code></strong>：在发现错误时是否终止构建。</li>
+<li><strong><code>context</code></strong>：指定 ESLint 的工作目录。</li>
+<li><strong><code>cache</code></strong>：启用 ESLint 缓存，提升检查速度。</li>
+<li><strong><code>baseConfig</code></strong>：指定 ESLint 的基础配置。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-优化配置"><a href="#2-4-优化配置" class="headerlink" title="2.4 优化配置"></a><strong>2.4 优化配置</strong></h3><h4 id="代码压缩"><a href="#代码压缩" class="headerlink" title="代码压缩"></a><strong>代码压缩</strong></h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码optimization: &#123;</span><br><span class="line">  minimize: isEnvProduction,</span><br><span class="line">  minimizer: [</span><br><span class="line"><span class="code">    new TerserPlugin(&#123; // 压缩 JavaScript</span></span><br><span class="line"><span class="code">      terserOptions: &#123;</span></span><br><span class="line"><span class="code">        parse: &#123; ecma: 8 &#125;,</span></span><br><span class="line"><span class="code">        compress: &#123; ecma: 5, warnings: false, comparisons: false, inline: 2 &#125;,</span></span><br><span class="line"><span class="code">        mangle: &#123; safari10: true &#125;,</span></span><br><span class="line"><span class="code">        output: &#123; ecma: 5, comments: false, ascii_only: true &#125;,</span></span><br><span class="line"><span class="code">      &#125;,</span></span><br><span class="line"><span class="code">    &#125;),</span></span><br><span class="line"><span class="code">    new CssMinimizerPlugin(), // 压缩 CSS</span></span><br><span class="line"><span class="code">  ],</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>TerserPlugin</code></strong>：压缩 JavaScript 代码。</li>
+<li><strong><code>CssMinimizerPlugin</code></strong>：压缩 CSS 代码。</li>
+</ul>
+<h4 id="代码分割"><a href="#代码分割" class="headerlink" title="代码分割"></a><strong>代码分割</strong></h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码splitChunks: &#123;</span><br><span class="line">  chunks: &#x27;all&#x27;, // 对所有 chunk 进行代码分割</span><br><span class="line">  name: false, // 不指定 chunk 名称</span><br><span class="line">&#125;,</span><br><span class="line">runtimeChunk: &#123;</span><br><span class="line">  name: entrypoint =&gt; <span class="code">`runtime-$&#123;entrypoint.name&#125;`</span>, // 提取 runtime 代码</span><br><span class="line">&#125;,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>splitChunks</code></strong>：将公共代码提取到单独的 chunk 中。</li>
+<li><strong><code>runtimeChunk</code></strong>：提取 Webpack 的 runtime 代码，减少重复加载。</li>
+</ul>
+<h3 id="2-5-缓存配置"><a href="#2-5-缓存配置" class="headerlink" title="2.5 缓存配置"></a><strong>2.5 缓存配置</strong></h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">js 代码解读复制代码 cache: &#123;</span><br><span class="line"><span class="code">      type: &#x27;filesystem&#x27;,</span></span><br><span class="line"><span class="code">      version: createEnvironmentHash(env.raw),</span></span><br><span class="line"><span class="code">      cacheDirectory: paths.appWebpackCache,</span></span><br><span class="line"><span class="code">      store: &#x27;pack&#x27;,</span></span><br><span class="line"><span class="code">      buildDependencies: &#123;</span></span><br><span class="line"><span class="code">        defaultWebpack: [&#x27;webpack/lib/&#x27;],</span></span><br><span class="line"><span class="code">        config: [__filename],</span></span><br><span class="line"><span class="code">        tsconfig: [paths.appTsConfig, paths.appJsConfig].filter(f =&gt;</span></span><br><span class="line"><span class="code">          fs.existsSync(f)</span></span><br><span class="line"><span class="code">        ),</span></span><br><span class="line"><span class="code">      &#125;,</span></span><br><span class="line"><span class="code">    &#125;,</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="缓存的作用"><a href="#缓存的作用" class="headerlink" title="缓存的作用"></a><strong>缓存的作用</strong></h4><p>Webpack 的缓存机制可以显著提升构建性能，尤其是在大型项目中。它的核心作用包括：</p>
+<ul>
+<li><p><strong>减少重复编译</strong>：通过缓存已编译的模块，避免重复处理未变化的文件。</p>
+</li>
+<li><p><strong>加快构建速度</strong>：在后续构建中直接使用缓存结果，减少构建时间。</p>
+</li>
+<li><p><strong>支持增量构建</strong>：只重新编译变化的文件，而不是整个项目。</p>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="配置详解"><a href="#配置详解" class="headerlink" title="配置详解"></a><strong>配置详解</strong></h4><p><strong><code>type: &#39;filesystem&#39;</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码type: &#x27;filesystem&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：启用文件系统缓存，将缓存数据存储到磁盘中。</p>
+</li>
+<li><p><strong>说明</strong>：</p>
+<ul>
+<li>Webpack 5 引入了持久化缓存功能，支持将缓存数据存储到文件系统中。</li>
+<li>与内存缓存（<code>memory</code>）相比，文件系统缓存在重启构建后仍然有效。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>version: createEnvironmentHash(env.raw)</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码version: createEnvironmentHash(env.raw)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：为缓存生成一个唯一的版本标识符。</p>
+</li>
+<li><p><strong>说明</strong>：</p>
+<ul>
+<li><code>createEnvironmentHash</code> 是一个工具函数，用于根据环境变量（<code>env.raw</code>）生成哈希值。</li>
+<li>当环境变量发生变化时，缓存版本会更新，确保缓存数据的有效性。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>cacheDirectory: paths.appWebpackCache</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码cacheDirectory: paths.appWebpackCache</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：指定缓存文件的存储目录。</p>
+</li>
+<li><p><strong>说明</strong>：</p>
+<ul>
+<li><code>paths.appWebpackCache</code> 是缓存目录的路径，通常是 <code>node_modules/.cache/webpack</code>。</li>
+<li>缓存文件会存储在该目录下，以便后续构建时复用。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>store: &#39;pack&#39;</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码store: &#x27;pack&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>作用</strong>：指定缓存存储的方式。</p>
+</li>
+<li><p><strong>说明</strong>：</p>
+<ul>
+<li><code>pack</code> 是 Webpack 5 中的一种缓存存储方式，它会将缓存数据打包成一个文件。</li>
+<li>这种方式可以减少文件数量，提升缓存读写效率。</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><code>buildDependencies</code></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">javascript 代码解读复制代码buildDependencies: &#123;</span><br><span class="line">  defaultWebpack: [&#x27;webpack/lib/&#x27;],</span><br><span class="line">  config: [<span class="strong">__filename],</span></span><br><span class="line"><span class="strong">  tsconfig: [paths.appTsConfig, paths.appJsConfig].filter(f =&gt;</span></span><br><span class="line"><span class="strong">    fs.existsSync(f)</span></span><br><span class="line"><span class="strong">  ),</span></span><br><span class="line"><span class="strong">&#125;</span></span><br><span class="line"><span class="strong"></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>作用</strong>：指定构建依赖，当这些依赖发生变化时，缓存会失效。</li>
+<li><strong>说明</strong>：</li>
+<li><strong><code>defaultWebpack: [&#39;webpack/lib/&#39;]</code></strong>：将 Webpack 的核心库作为构建依赖。如果 Webpack</li>
+</ul>
+<p>版本发生变化，缓存会失效。</p>
+<ul>
+<li>**&#96;config:</li>
+</ul>
+<p>[__filename]<code>**：将当前配置文件（</code>webpack.config.js&#96;）作为构建依赖。如果配置文件发生变化，缓存会失效。</p>
+<ul>
+<li><strong><code>tsconfig: [paths.appTsConfig, paths.appJsConfig]</code></strong>：将 TypeScript</li>
+</ul>
+<p>配置文件（<code>tsconfig.json</code>）和 JavaScript 配置文件（<code>jsconfig.json</code>）作为构建依赖。如果这些文件发生变化，缓存会失效。</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/de24b120.html"><div class="related-post-title">预览img图片文件pdf文件如何鉴权配置请求头token</div><div class="related-post-meta"><time>2025-11-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">Frontend</span><span class="category-badge">PDF</span><span class="category-badge">Image</span><span class="category-badge">请求头</span></div></div></a><a class="related-post-item" href="/article/bf95eb5d.html"><div class="related-post-title">要面试了，数据结构和算法太弱怎么办</div><div class="related-post-meta"><time>2020-03-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/55e10b84.html"><div class="related-post-title">字符串的ES5和ES6方法</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/8c6832b5.html"><div class="related-post-title">TypeScript中as const断言和const声明变量的区别是什么？</div><div class="related-post-meta"><time>2025-10-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">TypeScript</span></div></div></a><a class="related-post-item" href="/article/7547e1a1.html"><div class="related-post-title">“云”端的语雀：用 JavaScript 全栈打造商业级应用</div><div class="related-post-meta"><time>2020-01-13</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/a91910b6.html">https://xuehuayu.cn/article/a91910b6.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/React/">React</a><a href="/tags/webpack/">webpack</a><a href="/tags/Babel/">Babel</a><a href="/tags/ESLint/">ESLint</a></div><div class="post-nav"><a class="pre" href="/article/d386254.html">【解决办法】个税申报时年度汇算时申报的劳务报酬总收入小于本年度代开的劳务发票</a><a class="next" href="/article/65953a19.html">electron-vite+react项目中如何使用css module</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js"></script><script>const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+Waline.init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/de24b120.html">预览img图片文件pdf文件如何鉴权配置请求头token</a></li><li class="post-list-item"><a class="post-list-link" href="/article/472c582b.html">手机丢失该怎么办？手机防盗防丢完全指南</a></li><li class="post-list-item"><a class="post-list-link" href="/article/ead1a366.html">vue3 pinia在App.vue中使用了useStore报错getActivePinia() was called but there wa no active pinia</a></li><li class="post-list-item"><a class="post-list-link" href="/article/abe47f31.html">vue3中的mixin写法使用Composition API 来实现代码复用</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">//- import { RecentComments } from  '//cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+import { RecentComments } from  'https://xuehuayu.cn/js/waline.mjs';
+
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

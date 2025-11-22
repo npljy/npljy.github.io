@@ -1,0 +1,9 @@
+# flash
+# C:\Users\当前的用户账户名\AppData\Local\Microsoft\Edge\User Data\Default\Pepper Data  里面文件删除
+127.0.0.1 geo2.adobe.com
+127.0.0.1 flash.2144.com
+127.0.0.1 www.2144.cn
+127.0.0.1 fpdownload2.macromedia.com
+127.0.0.1 fpdownload.macromedia.com
+127.0.0.1 macromedia.com
+127.0.0.1 flash.cn
