@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>你不知道的 JSON.stringify() 的威力 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">你不知道的 JSON.stringify() 的威力</h1><div class="post-meta"><span class="date">2019-12-13</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 16</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/eb94f47d.html#waline-comment"><span class="waline-comment-count" data-path="/article/eb94f47d.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/NieZhuZhu/Blog/issues/1</code></p>
+<span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/44939961/70389981-692bf780-1a01-11ea-8d30-08f8daf73af3.png"><img src="https://user-images.githubusercontent.com/44939961/70389981-692bf780-1a01-11ea-8d30-08f8daf73af3.png" alt="xuehuayu.cn"></a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>其实有很多有用的东西，当时学习了，也记住了，但是时间久了就是记不住，所以导致在日常开发中总是想不起来原来这个东西可以这么用，而去选择了更加复杂和麻烦的方式。其实我们日常学习的知识就是拿来用的，即使你今天把知识点背下来了，没有去思考这个知识点我们可以用来干嘛，不需要几天就会慢慢地忘掉。所以今天我们来了解一下在日常学习时你遗漏掉或者忘掉或者没有思考过的你不知道的<br><code>JSON.stringify()</code> 的威力。</p>
+<h1 id="通过需求学习JSON-stringify"><a href="#通过需求学习JSON-stringify" class="headerlink" title="通过需求学习JSON.stringify()"></a>通过需求学习<code>JSON.stringify()</code></h1><p>首先我们在开发的过程当中遇到这样一个处理数据的需求</p>
+<pre><code>consttodayILearn= {
+  _id:1,
+  content:&#39;今天学习 JSON.stringify()，我很开心！&#39;,
+  created_at:&#39;Mon Nov 25 2019 14:03:55 GMT+0800 (中国标准时间)&#39;,
+  updated_at:&#39;Mon Nov 25 2019 16:03:55 GMT+0800 (中国标准时间)&#39;
+}
+</code></pre>
+<p>我们需要将上面这个对象处理成下面这个对象</p>
+<pre><code>consttodayILearn= {
+  id:1,
+  content:&#39;今天学习 JSON.stringify()，我很开心！&#39;,
+  createdAt:&#39;Mon Nov 25 2019 14:03:55 GMT+0800 (中国标准时间)&#39;,
+  updatedAt:&#39;Mon Nov 25 2019 16:03:55 GMT+0800 (中国标准时间)&#39;
+}
+</code></pre>
+<p>也就是在不改变属性的值的前提下，将对象属性修改一下。 把<code>_id</code> 改成 <code>id</code>，把 <code>updated_at</code> 改成 <code>updatedAt</code>，把<br><code>created_at</code> 改成 <code>createdAt</code>。我们现在通过这个小小的需求来见识一下 <code>JSON.stringify()</code> 的强大吧。</p>
+<p>首先要解决这个问题我们有很多的解决方式，我们先提供两种不优雅的解决方案：</p>
+<ul>
+<li><p><strong>方案一：一次遍历+多声明一个变量</strong></p>
+<p>  &#x2F;&#x2F; 多一个变量存储consttodayILearnTemp&#x3D; {};<br>  for (const [key, value] ofObject.entries(todayILearn)) {<br>if (key &#x3D;&#x3D;&#x3D;”_id”) todayILearnTemp[“id”] &#x3D; value;<br>elseif (key &#x3D;&#x3D;&#x3D;”created_at”) todayILearnTemp[“createdAt”] &#x3D; value;<br>elseif (key &#x3D;&#x3D;&#x3D;”updatedAt”) todayILearnTemp[“updatedAt”] &#x3D; value;<br>else todayILearnTemp[key] &#x3D; value;<br>  }<br>  console.log(todayILearnTemp);<br>  &#x2F;&#x2F; 结果：&#x2F;&#x2F; { id: 1,&#x2F;&#x2F;  content: ‘今天学习 JSON.stringify()，我很开心！’,&#x2F;&#x2F;  createdAt: ‘Mon Nov 25 2019 14:03:55 GMT+0800 (中国标准时间)’,&#x2F;&#x2F;  updated_at: ‘Mon Nov 25 2019 16:03:55 GMT+0800 (中国标准时间)’ &#x2F;&#x2F; }</p>
+</li>
+</ul>
+<p>方案一完全没有问题可以实现。但是多声明了一个变量又加上一层循环并且还有很多的 <code>if``else</code> 语句，怎么都显得不太优雅。</p>
+<ul>
+<li><p><strong>方案二：暴力 <code>delete</code> 属性和增加属性</strong></p>
+<p>  &#x2F;&#x2F; 极致的暴力美学todayILearn.id&#x3D;todayILearn._id;<br>  todayILearn.createdAt&#x3D;todayILearn.created_at;<br>  todayILearn.updatedAt&#x3D;todayILearn.updated_at;<br>  deletetodayILearn._id;<br>  deletetodayILearn.created_at;<br>  deletetodayILearn.updated_at;<br>  console.log(todayILearn);<br>  &#x2F;&#x2F;     太暴力😢&#x2F;&#x2F;{ &#x2F;&#x2F;  content: ‘今天学习 JSON.stringify()，我很开心！’,&#x2F;&#x2F;  id: 1,&#x2F;&#x2F;  createdAt: ‘Mon Nov 25 2019 14:03:55 GMT+0800 (中国标准时间)’,&#x2F;&#x2F;  updatedAt: ‘Mon Nov 25 2019 16:03:55 GMT+0800 (中国标准时间)’ &#x2F;&#x2F;}</p>
+</li>
+</ul>
+<p>直接 delete 暴力解决太粗鲁了，而且有一个缺点，属性的顺序变了。</p>
+<ul>
+<li><p><strong>方案三：序列化+ <code>replace</code> 美学典范</strong></p>
+<p>  constmapObj&#x3D; {<br>_id:”id”,<br>created_at:”createdAt”,<br>updated_at:”updatedAt”<br>  };<br>  JSON.parse(<br>JSON.stringify(todayILearn).replace(<br>  &#x2F;_id|created_at|updated_at&#x2F;gi,<br>  matched&#x3D;&gt; mapObj[matched])<br>  )<br>  &#x2F;&#x2F; { &#x2F;&#x2F; id: 1,&#x2F;&#x2F;  content: ‘今天学习 JSON.stringify()，我很开心！’,&#x2F;&#x2F;  createdAt: ‘Mon Nov 25 2019 14:03:55 GMT+0800 (中国标准时间)’,&#x2F;&#x2F;  updatedAt: ‘Mon Nov 25 2019 16:03:55 GMT+0800 (中国标准时间)’ &#x2F;&#x2F; }</p>
+</li>
+</ul>
+<p>瞬间感觉非常优雅和舒服，有木有！如果你这样写，你导师给你 review 代码的时候，你导师肯定会夸赞你的😁。</p>
+<p>接下来，正片开始，我们今天将系统的学习或者说是复习一遍 <code>JSON.stringify</code> 的基础知识，让我们在日常开发中更加的游刃有余。</p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/44939961/70389976-5a454500-1a01-11ea-81bd-8c12208fbd0e.png"><img src="https://user-images.githubusercontent.com/44939961/70389976-5a454500-1a01-11ea-81bd-8c12208fbd0e.png" alt="image"></a></p>
+<h1 id="温故知新之非常简单的-JSON-stringify-九大特性"><a href="#温故知新之非常简单的-JSON-stringify-九大特性" class="headerlink" title="温故知新之非常简单的 JSON.stringify() 九大特性"></a>温故知新之非常简单的 <code>JSON.stringify()</code> 九大特性</h1><h2 id="JSON-stringify-第一大特性"><a href="#JSON-stringify-第一大特性" class="headerlink" title="JSON.stringify()第一大特性"></a><code>JSON.stringify()</code>第一大特性</h2><p><strong>对于 <code>undefined</code>、任意的函数以及 <code>symbol</code> 三个特殊的值分别作为对象属性的值、数组元素、单独的值时<br><code>JSON.stringify()</code>将返回不同的结果。</strong></p>
+<p>首先，我们来复习一下知识点，看一道非常简单的面试题目：请问下面代码会输出什么？</p>
+<pre><code>constdata= {
+  a: &quot;aaa&quot;,
+  b: undefined,
+  c: Symbol(&quot;dd&quot;),
+  fn: function() {
+    return true;
+  }
+};
+JSON.stringify(data); // 输出：？// &quot;{&quot;a&quot;:&quot;aaa&quot;}&quot;
+</code></pre>
+<p>很简单这道题目面试官主要考察的知识点是：</p>
+<ul>
+<li><code>undefined</code>、任意的函数以及 <code>symbol</code> 作为对象属性值时 <code>JSON.stringify()</code> 跳过（忽略）对它们进行序列化</li>
+</ul>
+<p><strong>面试官追问</strong>：假设 <code>undefined</code>、任意的函数以及 <code>symbol</code> 值作为数组元素会是怎样呢？</p>
+<pre><code>JSON.stringify([&quot;aaa&quot;, undefined, functionaa() {
+    return true
+  }, Symbol(&#39;dd&#39;)])  // 输出：？// &quot;[&quot;aaa&quot;,null,null,null]&quot;
+</code></pre>
+<p>知识点是：</p>
+<ul>
+<li><code>undefined</code>、任意的函数以及 <code>symbol</code> 作为数组元素值时，<code>JSON.stringify()</code> 将会将它们序列化为 <code>null</code></li>
+</ul>
+<p>我们再发挥动下脑筋，如果单独序列化这些值会是什么样的结果呢？</p>
+<pre><code>JSON.stringify(functiona (){console.log(&#39;a&#39;)})
+// undefinedJSON.stringify(undefined)
+// undefinedJSON.stringify(Symbol(&#39;dd&#39;))
+// undefined
+</code></pre>
+<p>单独转换的结果就是：</p>
+<ul>
+<li><code>undefined</code>、任意的函数以及 <code>symbol</code> 被 <code>JSON.stringify()</code> 作为单独的值进行序列化时都会返回 <code>undefined</code></li>
+</ul>
+<h3 id="JSON-stringify-第一大特性总结"><a href="#JSON-stringify-第一大特性总结" class="headerlink" title="JSON.stringify() 第一大特性总结"></a><code>JSON.stringify()</code> 第一大特性总结</h3><ul>
+<li><p><code>undefined</code>、任意的函数以及 <code>symbol</code> 作为对象属性值时 <code>JSON.stringify()</code> 对跳过（忽略）它们进行序列化</p>
+</li>
+<li><p><code>undefined</code>、任意的函数以及 <code>symbol</code> 作为数组元素值时，<code>JSON.stringify()</code> 将会将它们序列化为 <code>null</code></p>
+</li>
+<li><p><code>undefined</code>、任意的函数以及 <code>symbol</code> 被 <code>JSON.stringify()</code> 作为单独的值进行序列化时，都会返回</p>
+</li>
+</ul>
+<p><code>undefined</code></p>
+<h2 id="JSON-stringify-第二大特性"><a href="#JSON-stringify-第二大特性" class="headerlink" title="JSON.stringify() 第二大特性"></a><code>JSON.stringify()</code> 第二大特性</h2><p>也是在使用过程中必须要非常注意的一个点：</p>
+<ul>
+<li><p>非数组对象的属性不能保证以特定的顺序出现在序列化后的字符串中。</p>
+<p>  constdata&#x3D; {<br>a: “aaa”,<br>b: undefined,<br>c: Symbol(“dd”),<br>fn: function() {<br>  return true;<br>},<br>d: “ddd”<br>  };<br>  JSON.stringify(data); &#x2F;&#x2F; 输出：？&#x2F;&#x2F; “{“a”:”aaa”,”d”:”ddd”}”JSON.stringify([“aaa”, undefined, functionaa() {<br>  return true<br>}, Symbol(‘dd’),”eee”])  &#x2F;&#x2F; 输出：？&#x2F;&#x2F; “[“aaa”,null,null,null,”eee”]”</p>
+</li>
+</ul>
+<p>正如我们在第一特性所说，<code>JSON.stringify()</code> 序列化时会忽略一些特殊的值，所以不能保证序列化后的字符串还是以特定的顺序出现（数组除外）。</p>
+<h2 id="JSON-stringify-第三大特性"><a href="#JSON-stringify-第三大特性" class="headerlink" title="JSON.stringify() 第三大特性"></a><code>JSON.stringify()</code> 第三大特性</h2><ul>
+<li><p>转换值如果有 <code>toJSON()</code> 函数，该函数返回什么值，序列化结果就是什么值，并且忽略其他属性的值。</p>
+<p>  JSON.stringify({<br>  say: “hello JSON.stringify”,<br>  toJSON: function() {<br>    return”today i learn”;<br>  }<br>})<br>  &#x2F;&#x2F; “today i learn”</p>
+</li>
+</ul>
+<h2 id="JSON-stringify-第四大特性"><a href="#JSON-stringify-第四大特性" class="headerlink" title="JSON.stringify()第四大特性"></a><code>JSON.stringify()</code>第四大特性</h2><ul>
+<li><p><code>JSON.stringify()</code> 将会正常序列化 <code>Date</code> 的值。</p>
+<p>  JSON.stringify({ now:newDate() });<br>  &#x2F;&#x2F; “{“now”:”2019-12-08T07:42:11.973Z”}”</p>
+</li>
+</ul>
+<p>实际上 <code>Date</code> 对象自己部署了 <code>toJSON()</code> 方法（同Date.toISOString()），因此 <code>Date</code> 对象会被当做字符串处理。</p>
+<h2 id="JSON-stringify-第五大特性"><a href="#JSON-stringify-第五大特性" class="headerlink" title="JSON.stringify() 第五大特性"></a><code>JSON.stringify()</code> 第五大特性</h2><ul>
+<li><code>NaN</code> 和 <code>Infinity</code> 格式的数值及 <code>null</code> 都会被当做 <code>null</code>。</li>
+</ul>
+<p>直接上代码：</p>
+<pre><code>JSON.stringify(NaN)
+// &quot;null&quot;JSON.stringify(null)
+// &quot;null&quot;JSON.stringify(Infinity)
+// &quot;null&quot;
+</code></pre>
+<h2 id="JSON-stringify-第六大特性"><a href="#JSON-stringify-第六大特性" class="headerlink" title="JSON.stringify() 第六大特性"></a><code>JSON.stringify()</code> 第六大特性</h2><p>关于基本类型的序列化：</p>
+<ul>
+<li><p>布尔值、数字、字符串的包装对象在序列化过程中会自动转换成对应的原始值。</p>
+<p>  JSON.stringify([newNumber(1), newString(“false”), newBoolean(false)]);<br>  &#x2F;&#x2F; “[1,”false”,false]”</p>
+</li>
+</ul>
+<h2 id="JSON-stringify-第七大特性"><a href="#JSON-stringify-第七大特性" class="headerlink" title="JSON.stringify() 第七大特性"></a><code>JSON.stringify()</code> 第七大特性</h2><p>关于对象属性的是否可枚举：</p>
+<ul>
+<li><p>其他类型的对象，包括 Map&#x2F;Set&#x2F;WeakMap&#x2F;WeakSet，仅会序列化可枚举的属性。</p>
+<p>  &#x2F;&#x2F; 不可枚举的属性默认会被忽略：JSON.stringify(<br>  Object.create(<br>      null,<br>      {<br>          x: { value:’json’, enumerable:false },<br>          y: { value:’stringify’, enumerable:true }<br>      }<br>  )<br>  );<br>  &#x2F;&#x2F; “{“y”,”stringify”}”</p>
+</li>
+</ul>
+<h2 id="JSON-stringify-第八大特性"><a href="#JSON-stringify-第八大特性" class="headerlink" title="JSON.stringify() 第八大特性"></a><code>JSON.stringify()</code> 第八大特性</h2><p>我们都知道实现深拷贝最简单粗暴的方式就是序列化：<code>JSON.parse(JSON.stringify())</code>，这个方式实现深拷贝会因为序列化的诸多特性导致诸多的坑点：比如现在我们要说的循环引用问题。</p>
+<pre><code>// 对包含循环引用的对象（对象之间相互引用，形成无限循环）执行此方法，会抛出错误。 constobj= {
+  name: &quot;loopObj&quot;
+};
+constloopObj= {
+  obj
+};
+// 对象之间形成循环引用，形成闭环obj.loopObj= loopObj;
+functiondeepClone(obj) {
+  returnJSON.parse(JSON.stringify(obj));
+}
+deepClone(obj)
+/** VM44:9 Uncaught TypeError: Converting circular structure to JSON    --&gt; starting at object with constructor &#39;Object&#39;    |     property &#39;loopObj&#39; -&gt; object with constructor &#39;Object&#39;    --- property &#39;obj&#39; closes the circle    at JSON.stringify (&lt;anonymous&gt;)    at deepClone (&lt;anonymous&gt;:9:26)    at &lt;anonymous&gt;:11:13*/
+</code></pre>
+<ul>
+<li>对包含循环引用的对象（对象之间相互引用，形成无限循环）执行此方法，会抛出错误。</li>
+</ul>
+<p>这也就是为什么用序列化去实现深拷贝时，遇到循环引用的对象会抛出错误的原因。</p>
+<h2 id="JSON-stringify-第九大特性"><a href="#JSON-stringify-第九大特性" class="headerlink" title="JSON.stringify() 第九大特性"></a><code>JSON.stringify()</code> 第九大特性</h2><p>最后，关于 <code>symbol</code> 属性还有一点要说的就是：</p>
+<ul>
+<li><p>所有以 <code>symbol</code> 为属性键的属性都会被完全忽略掉，即便 <code>replacer</code> 参数中强制指定包含了它们。</p>
+<p>  JSON.stringify({ [Symbol.for(“json”)]:”stringify” }, function(k, v) {<br>  if (typeof k &#x3D;&#x3D;&#x3D;”symbol”) {<br>    return v;<br>  }<br>})<br>  &#x2F;&#x2F; undefined</p>
+</li>
+</ul>
+<p>关于 <code>replacer</code> 是什么呢，它是 <code>JSON.stringify()</code> 的第二个参数，我们比较少的会用到，所以很多时候我们会忘记<br><code>JSON.stringify()</code> 第二个、第三个参数，场景不多，但是用的好的话会非常的方便，关于 <code>JSON.stringify()</code> 第九大特性的例子中对<br><code>replacer</code> 参数不明白的同学先别急，其实很简单，我们马上就会在下面的学习中弄懂。</p>
+<h1 id="枕典席文之-JSON-stringify-第二个参数和第三个参数"><a href="#枕典席文之-JSON-stringify-第二个参数和第三个参数" class="headerlink" title="枕典席文之 JSON.stringify() 第二个参数和第三个参数"></a>枕典席文之 <code>JSON.stringify()</code> 第二个参数和第三个参数</h1><h2 id="强大的第二个参数-replacer"><a href="#强大的第二个参数-replacer" class="headerlink" title="强大的第二个参数 replacer"></a>强大的第二个参数 <code>replacer</code></h2><p><code>replacer</code> 参数有两种形式，可以是一个函数或者一个数组。作为函数时，它有两个参数，键（key）和值（value），函数类似就是数组方法<br><code>map</code>、<code>filter</code> 等方法的回调函数，对每一个属性值都会执行一次该函数。如果 <code>replacer</code> 是一个数组，数组的值代表将被序列化成 JSON<br>字符串的属性名。</p>
+<h3 id="replacer-作为函数时"><a href="#replacer-作为函数时" class="headerlink" title="replacer 作为函数时"></a><code>replacer</code> 作为函数时</h3><h4 id="可以打破九大特性的大多数特性"><a href="#可以打破九大特性的大多数特性" class="headerlink" title="可以打破九大特性的大多数特性"></a>可以打破九大特性的大多数特性</h4><p>第二个参数<code>replacer</code> 非常强大， <code>replacer</code> 作为函数时，我们可以打破九大特性的大多数特性，我们直接来看代码吧。</p>
+<pre><code>constdata= {
+  a: &quot;aaa&quot;,
+  b: undefined,
+  c: Symbol(&quot;dd&quot;),
+  fn: function() {
+    return true;
+  }
+};
+// 不用 replacer 参数时JSON.stringify(data);
+
+// &quot;{&quot;a&quot;:&quot;aaa&quot;}&quot;// 使用 replacer 参数作为函数时JSON.stringify(data, (key, value) =&gt; {
+  switch (true) {
+    casetypeof value ===&quot;undefined&quot;:
+      return&quot;undefined&quot;;
+    casetypeof value ===&quot;symbol&quot;:
+      returnvalue.toString();
+    casetypeof value ===&quot;function&quot;:
+      returnvalue.toString();
+    default:
+      break;
+  }
+  return value;
+})
+// &quot;{&quot;a&quot;:&quot;aaa&quot;,&quot;b&quot;:&quot;undefined&quot;,&quot;c&quot;:&quot;Symbol(dd)&quot;,&quot;fn&quot;:&quot;function() {\n    return true;\n  }&quot;}&quot;
+</code></pre>
+<p>虽然使用 toString() 方法有点耍流氓的意思但是不得不说第二个参数很强大。</p>
+<h4 id="传入-replacer-函数的第一个参数"><a href="#传入-replacer-函数的第一个参数" class="headerlink" title="传入 replacer 函数的第一个参数"></a>传入 <code>replacer</code> 函数的第一个参数</h4><p><strong>需要注意的是，replacer 被传入的函数时，第一个参数不是对象的第一个键值对，而是空字符串作为 key 值，value 值是整个对象的键值对：</strong></p>
+<pre><code>constdata= {
+  a: 2,
+  b: 3,
+  c: 4,
+  d: 5
+};
+JSON.stringify(data, (key, value) =&gt; {
+  console.log(value);
+  return value;
+})
+// 第一个被传入 replacer 函数的是 {&quot;&quot;:{a: 2, b: 3, c: 4, d: 5} }// {a: 2, b: 3, c: 4, d: 5}   // 2// 3// 4// 5
+</code></pre>
+<h4 id="实现-map-函数"><a href="#实现-map-函数" class="headerlink" title="实现 map 函数"></a>实现 <code>map</code> 函数</h4><p>我们还可以用它来手写实现一个对象的类似 map 的函数。</p>
+<pre><code>// 实现一个 map 函数constdata= {
+  a: 2,
+  b: 3,
+  c: 4,
+  d: 5
+};
+constobjMap= (obj, fn) =&gt; {
+  if (typeof fn !==&quot;function&quot;) {
+    thrownewTypeError(`${fn} is not a function !`);
+  }
+  returnJSON.parse(JSON.stringify(obj, fn));
+};
+objMap(data, (key, value) =&gt; {
+  if (value %2===0) {
+    return value /2;
+  }
+  return value;
+});
+// {a: 1, b: 3, c: 2, d: 5}
+</code></pre>
+<h3 id="replacer-作为数组时"><a href="#replacer-作为数组时" class="headerlink" title="replacer 作为数组时"></a><code>replacer</code> 作为数组时</h3><p><code>replacer</code> 作为数组时，结果非常简单，数组的值就代表了将被序列化成 JSON 字符串的属性名。</p>
+<pre><code>constjsonObj= {
+  name: &quot;JSON.stringify&quot;,
+  params: &quot;obj,replacer,space&quot;
+};
+
+// 只保留 params 属性的值JSON.stringify(jsonObj, [&quot;params&quot;]);
+// &quot;{&quot;params&quot;:&quot;obj,replacer,space&quot;}&quot;
+</code></pre>
+<h2 id="有意思却没啥用的第三个参数-space"><a href="#有意思却没啥用的第三个参数-space" class="headerlink" title="有意思却没啥用的第三个参数 space"></a>有意思却没啥用的第三个参数 <code>space</code></h2><p><code>space</code> 参数用来控制结果字符串里面的间距。首先看一个例子就是到这东西到底是干啥用的：</p>
+<pre><code>consttiedan= {
+  name: &quot;弹铁蛋同学&quot;,
+  describe: &quot;今天在学 JSON.stringify()&quot;,
+  emotion: &quot;like shit&quot;
+};
+JSON.stringify(tiedan, null, &quot;🐷&quot;);
+// 接下来是输出结果// &quot;{// 🐷&quot;name&quot;: &quot;弹铁蛋同学&quot;,// 🐷&quot;describe&quot;: &quot;今天在学 JSON.stringify()&quot;,// 🐷&quot;emotion&quot;: &quot;like shit&quot;// }&quot;JSON.stringify(tiedan, null, 2);
+// &quot;{//   &quot;name&quot;: &quot;弹铁蛋同学&quot;,//   &quot;describe&quot;: &quot;今天在学 JSON.stringify()&quot;,//   &quot;emotion&quot;: &quot;like shit&quot;// }&quot;
+</code></pre>
+<p>上面代码一眼就能看出第三个参数的作用了，花里胡哨的，其实这个参数还是比较鸡肋的，除了好看没啥特别的用处。我们用 <code>\t</code>、 <code>\n</code><br>等缩进能让输出更加格式化，更适于观看。</p>
+<ul>
+<li><p>如果是一个数字, 则在字符串化时每一级别会比上一级别缩进多这个数字值的空格（最多10个空格）；</p>
+</li>
+<li><p>如果是一个字符串，则每一级别会比上一级别多缩进该字符串（或该字符串的前10个字符）。</p>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h3 id="JSON-stringify-九大特性："><a href="#JSON-stringify-九大特性：" class="headerlink" title="JSON.stringify() 九大特性："></a><code>JSON.stringify()</code> 九大特性：</h3><p><strong>一、对于 <code>undefined</code>、任意的函数以及 <code>symbol</code> 三个特殊的值分别作为对象属性的值、数组元素、单独的值时的不同返回结果。</strong></p>
+<ul>
+<li><p><code>undefined</code>、任意的函数以及 <code>symbol</code> 作为对象属性值时 <code>JSON.stringify()</code> 对跳过（忽略）它们进行序列化</p>
+</li>
+<li><p><code>undefined</code>、任意的函数以及 <code>symbol</code> 作为数组元素值时，<code>JSON.stringify()</code> 将会将它们序列化为 <code>null</code></p>
+</li>
+<li><p><code>undefined</code>、任意的函数以及 <code>symbol</code> 被 <code>JSON.stringify()</code> 作为单独的值进行序列化时都会返回 <code>undefined</code></p>
+</li>
+</ul>
+<p>二、<strong>非数组对象的属性不能保证以特定的顺序出现在序列化后的字符串中。</strong></p>
+<p>三、<strong>转换值如果有 <code>toJSON()</code> 函数，该函数返回什么值，序列化结果就是什么值，并且忽略其他属性的值。</strong></p>
+<p>四、<strong><code>JSON.stringify()</code> 将会正常序列化 <code>Date</code> 的值。</strong></p>
+<p>五、<strong><code>NaN</code> 和 <code>Infinity</code> 格式的数值及 <code>null</code> 都会被当做 <code>null</code>。</strong></p>
+<p>六、<strong>布尔值、数字、字符串的包装对象在序列化过程中会自动转换成对应的原始值。</strong></p>
+<p>七、<strong>其他类型的对象，包括 Map&#x2F;Set&#x2F;WeakMap&#x2F;WeakSet，仅会序列化可枚举的属性。</strong></p>
+<p>八、<strong>对包含循环引用的对象（对象之间相互引用，形成无限循环）执行此方法，会抛出错误。</strong></p>
+<p>九、<strong>所有以 <code>symbol</code> 为属性键的属性都会被完全忽略掉，即便 <code>replacer</code> 参数中强制指定包含了它们。</strong></p>
+<h3 id="JSON-stringify-第二个参数和第三个参数"><a href="#JSON-stringify-第二个参数和第三个参数" class="headerlink" title="JSON.stringify() 第二个参数和第三个参数"></a><code>JSON.stringify()</code> 第二个参数和第三个参数</h3><h4 id="强大的第二个参数："><a href="#强大的第二个参数：" class="headerlink" title="强大的第二个参数："></a>强大的第二个参数：</h4><ul>
+<li>作为函数时，它有两个参数，键（key）和值（value），函数类似就是数组方法 <code>map</code>、<code>filter</code></li>
+</ul>
+<p>等方法的回调函数，对每一个属性值都会执行一次该函数（期间我们还简单实现过一个 <code>map</code> 函数）。</p>
+<ul>
+<li>如果 <code>replacer</code> 是一个数组，数组的值代表将被序列化成 JSON 字符串的属性名。</li>
+</ul>
+<h4 id="华丽的第三个参数："><a href="#华丽的第三个参数：" class="headerlink" title="华丽的第三个参数："></a>华丽的第三个参数：</h4><ul>
+<li><p>如果是一个数字, 则在字符串化时每一级别会比上一级别缩进多这个数字值的空格（最多10个空格）。</p>
+</li>
+<li><p>如果是一个字符串，则每一级别会比上一级别多缩进该字符串（或该字符串的前10个字符）。</p>
+</li>
+</ul>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p>第一个例子的方案三，有小伙伴提示说这个方案会有风险，确实是这样的(<strong>可能会把对象的值给替换掉</strong>)。大家慎用吧，大部分情况下这样使用是 ok<br>的。小伙伴们提供的第四种方案还是很不错的：</p>
+<pre><code>consttodayILearn= {
+  _id: 1,
+  content: &#39;今天学习 JSON.stringify()，我很开心！&#39;,
+  created_at: &#39;Mon Nov 25 2019 14:03:55 GMT+0800 (中国标准时间)&#39;,
+  updated_at: &#39;Mon Nov 25 2019 16:03:55 GMT+0800 (中国标准时间)&#39;
+}
+constmapObj= {
+  _id: &quot;id&quot;,
+  created_at: &quot;createdAt&quot;,
+  updated_at: &quot;updatedAt&quot;
+};
+Object.fromEntries(Object.entries(todayILearn).map(([k, v]) =&gt; [mapObj[k]||k, v]))
+// { // id: 1,//  content: &#39;今天学习 JSON.stringify()，我很开心！&#39;,//  createdAt: &#39;Mon Nov 25 2019 14:03:55 GMT+0800 (中国标准时间)&#39;,//  updatedAt: &#39;Mon Nov 25 2019 16:03:55 GMT+0800 (中国标准时间)&#39; // }
+</code></pre>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p><a target="_blank" rel="noopener" href="https://github.com/NieZhuZhu/Blog/issues/2">面试官连环追问：数组拍平（扁平化） flat 方法实现</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/25224bc.html"><div class="related-post-title">React Hooks 免费视频教程（共11集）</div><div class="related-post-meta"><time>2019-10-01</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/f11ce35e.html"><div class="related-post-title">寒冬求职之你必须要懂的Web安全</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/37fffc1d.html"><div class="related-post-title">原生JavaScript实现查找汉字首字母</div><div class="related-post-meta"><time>2020-08-07</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/ff225eef.html"><div class="related-post-title">细说JS异步发展历程</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/3fd41578.html"><div class="related-post-title">uni-app横竖屏切换之后样式错乱字体变大解决方法</div><div class="related-post-meta"><time>2021-12-12</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/eb94f47d.html">https://xuehuayu.cn/article/eb94f47d.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/1dfea92a.html">React SSR 详解 + 2个项目实战</a><a class="next" href="/article/47fe76f0.html">webpack打包之后js文件引用顺序错乱，vendor顺序错误</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

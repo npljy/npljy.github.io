@@ -1,0 +1,39 @@
+html,
+body,
+div {
+  padding: 0;
+  margin: 0
+}
+
+#mui-player {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+#back-icon-svg {
+  visibility: hidden !important
+}
+
+.full-switch {
+  display: none !important;
+}
+
+.mask {
+  position: fixed;
+  z-index: 999;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 3px;
+  opacity: 0.1;
+  background: transparent;
+}
+.kk-player-tips {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  color: #3cc51f;
+}

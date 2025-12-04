@@ -1,0 +1,499 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>再面试浏览器和网络协议，看完这36点就稳了 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">再面试浏览器和网络协议，看完这36点就稳了</h1><div class="post-meta"><span class="date">2022-02-18</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 8.6k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 30</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/46ee4850.html#waline-comment"><span class="waline-comment-count" data-path="/article/46ee4850.html">0</span><span> 条评论</span></a><div class="post-content"><p>作为一名前端er，日常工作打交道最多（之一）的莫过于熟悉而又陌生的浏览器了，熟悉是每天都会基于浏览器的应用层面之上码业务，陌生是很多人可能跟我一样不熟悉其内部运行原理，比如js是怎样运行的呢？精美样式页面是怎样渲染到电脑屏幕的呢？在开放的互联网它又是怎样保证我们个人信息安全的呢？带着种种疑云开始肝李兵老师的《浏览器基本原理与实践》，不得不说，大家之作，通俗易懂，层层拨开云雾见青天，下面就（非常非常）简单总结一下。</p>
+<span id="more"></span>
+
+<h4 id="Chrome-架构：仅仅打开了-1-个页面，为什么有-4-个进程"><a href="#Chrome-架构：仅仅打开了-1-个页面，为什么有-4-个进程" class="headerlink" title="Chrome 架构：仅仅打开了 1 个页面，为什么有 4 个进程"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=+jFhh6RcKWtwZ4W3QhITyg==.a98UFK/EBtYdR1CN33GfQoWytde5kxjUu8+FAeKwEPoY6Nh+kQAA6Q1eQH9U4WXgpICY+OVTCzD1dPgmPz3pCzkmJF2QMT7H/eddHQixlVDkfvbCHkU87Zi9yM6kpgOnFQTpRAJWOyYVGdlIugBwG/2mSfhh8ZtQKhI0X2A+TFUqnjOMeYDLMsYsND6Jh7eECb7qlSf6+Em7Cc08Q9UBDQNqXIQ8Xaz/LrhkH4uoneU0vQeh6K3T4VyAx6nuvPRfMIpMS/3lqojVM2FifF5KFOxIOow4s+IfOj/Eeet2hdB3lsR3ezBrRi4XvJxZ2tT6PCMFn6n+qT5I664I/WLn2Q==">Chrome 架构：仅仅打开了 1 个页面，为什么有 4 个进程</a></h4><p><strong>线程和进程区别</strong>：多线程可以并行处理任务，线程不能单独存在，它是由进程来启动和管理的。一个进程是一个程序的运行实例。</p>
+<p><strong>线程和进程的关系</strong>：1、进程中任意一线程执行出错，都会导致整个进程的崩溃。2、线程之间共享进程中的数据。3、当一个进程关闭后，操作系统会回收进程所占用的内存。4、进程之间的内容相互隔离。</p>
+<p><strong>单进程<br>浏览器</strong>：1、不稳定。单进程中的插件、渲染线程崩溃导致整个浏览器崩溃。2、不流畅。脚本（死循环）或插件会使浏览器卡顿。3、不安全。插件和脚本可以获取到操作系统任意资源。</p>
+<p><strong>多进程浏览器</strong>：1、解决不稳定。进程相互隔离，一个页面或者插件崩溃时，影响仅仅时当前插件或者页面，不会影响到其他页面。2、解决不流畅。脚本阻塞当前页面渲染进程，不会影响到其他页面。3、解决不安全。采用多进程架构使用沙箱。沙箱看成时操作系统给进程上来一把锁，沙箱的程序可以运行，但是不能在硬盘上写入任何数据，也不能在敏感位置读取任何数据。</p>
+<p><strong>多进程架构</strong>：分为 浏览器进程、渲染进程、GPU 进程、网络进程、插件进程。</p>
+<p><strong>缺点</strong>：1、资源占用高。2、体系架构复杂。</p>
+<p><strong>面向服务架构</strong>：把原来的各种模块重构成独立的服务，每个服务都可以在独立的进程中运行，访问服务必须使用定义好的接口，通过 IPC<br>通讯，使得系统更内聚、松耦合、易维护和拓展。</p>
+<h4 id="TCP-协议：如何保证页面文件能被完整送达浏览器"><a href="#TCP-协议：如何保证页面文件能被完整送达浏览器" class="headerlink" title="TCP 协议：如何保证页面文件能被完整送达浏览器"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=h/OsUKvgdOtOF27PRZk8OQ==.IRmpaQz7WbcPeNTVHNB8pqRe68jdeyTmUz4mgqQxbd5+il4AtzJTJ69k0FwnEhI7yzf5jmnrphTzQeMTQaPI9lig88SUTtE/Yl7MgInRGOUC83sQ+VHjkfkBQaDwG7no0yfdpefFM3acbwqeWuqHd80TV9fq5nBnUNzFj590r1jZ8qmfIx7RkTIWBhrD+kPd2CVmzbhkSyLCzD4qyUIMG5r/NKwFlqFcOsmnmtDbpqR7GzA++NaA8MBXkDR18SrlFqw9ZLRzE3rnBORynszHOBD3I2zdHDk1gS3PXGhDVi9tz22XXdFN0QWjasmze51jTOoQeKp8r/7wehObKU+4y5ev7LmYsFFw7R/Azof9v/4=">TCP 协议：如何保证页面文件能被完整送达浏览器</a></h4><ul>
+<li>IP 头是 IP 数据包开头的信息，包含 IP 版本、源 IP 地址、目标 IP 地址、生存时间等信息；</li>
+<li>UDP 头中除了目的端口，还有源端口号等信息；</li>
+<li>IP 负责把数据包送达目的主机；</li>
+<li>UDP 负责把数据包送达具体应用；</li>
+<li>对于错误的数据包，UDP 不提供重发机制，只是丢弃当前的包，不能保证数据的可靠性，但是传输速度非常块；</li>
+<li>TCP 头除了包含了目标端口和本机端口号外，还提供了用于排序的序列号，保证了数据完整地传输，它的连接可分为三个阶段：建立连接、传输数据和断开连接；</li>
+</ul>
+<h4 id="HTTP-请求流程：为什么很多站点第二次打开速度会很快"><a href="#HTTP-请求流程：为什么很多站点第二次打开速度会很快" class="headerlink" title="HTTP 请求流程：为什么很多站点第二次打开速度会很快"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=ar/GecFA2TKQouSdKzyWzQ==.zZVp08h7V0XSg7bnC3rPe3kT4TcCS7HLochAF5YEdRqoBT/+KJMiUWhD4lGQv33SZEUyPRubHRluZd6iwf5p2dod0BUYZXZsputKWECDINiTAMVFPW7z98rWowoKFi9wKnJCiy0rJId4Dd+Bg5E4Qqkt1zYtoLprlZUddtqdlU8E9sqoc4tXvemw+yabWaglGsLhbSNKc0QKPeq6nWR/Ac62cPccJuq0d8Sj+KzgKJjJleCJez651demyylayy3XKNQOFKlQdbHDeOrkmzZadZhXoZ2V0JyqSCrXRtw0cG8ueJ+UX4/YEAZHviJFWrEQgpM1ZtMHcYG9pFoHO+gsP1P4GOC/leF8n+hkY3QbK9CtrUhYN6YWc+6eEy1c8tQM">HTTP 请求流程：为什么很多站点第二次打开速度会很快</a></h4><ul>
+<li>浏览器中的 HTTP 请求从发起到结束一共经历如下八个阶段：构建请求、查找缓存、准备 IP 和端口、等待 TCP 队列、建立 TCP 连接、发起 HTTP</li>
+</ul>
+<p>请求、服务器处理请求、服务器返回请求和断开连接；</p>
+<ul>
+<li>构建请求。浏览器构建请求行，构建好后，准备发起网络请求；</li>
+<li>查找缓存。在真正发起请求前浏览器会查询缓存中是否有请求资源副本，有则拦截请求，返回资源副本，否则进入网络请求；</li>
+<li>准备 IP 地址和端口。HTTP 网络请求需要和服务器建立 TCP 连接，而建立 TCP 连接需要准备 IP 地址和端口号，浏览器需要请求 DNS</li>
+</ul>
+<p>返回域名对应的 IP，同时会缓存域名解析结果，供下次查询使用；</p>
+<ul>
+<li>等待 TCP 队列。Chrome 机制，同一个域名同时最多只能建立 6 个 TCP 连接；</li>
+<li>建立 TCP 连接。TCP 通过“三次握手”建立连接，传输数据，“四次挥手”断开连接；</li>
+<li>发送 HTTP 请求。建立 TCP 连接后，浏览器就可以和服务器进行 HTTP</li>
+</ul>
+<p>数据传输了，首先会向服务器发送请求行，然后以请求头形式发送一些其他信息，如果是 POST 请求还会发送请求体；</p>
+<ul>
+<li>服务器处理请求。首先服务器会返回响应行，随后，服务器向浏览器发送响应头和响应体。通常服务器返回数据，就要关闭 TCP 连接，如果请求头或者响应头有</li>
+</ul>
+<p>Connection:keep-alive TCP 保持打开状态；</p>
+<h4 id="导航流程：从输入-URL-到页面展示这中间发生了什么"><a href="#导航流程：从输入-URL-到页面展示这中间发生了什么" class="headerlink" title="导航流程：从输入 URL 到页面展示这中间发生了什么"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=0n9MvPJveRquY6eRHlCg5Q==.DL9WvIDOWOXpjcB64QC9A8C3rfjzyKIRF1S/rV7PuNDkvZqJURu2Hck9ziYtSr+lbavukovuoNZLBVyQqcOvjhlwEA3OcpYjcePP8Fle0xRkC61fRH8bCUZW7hU6rTOp0u1acT2Y3P/2LW2PatQakdy3ObEgvRVws5OZvZtPmSMJ2stJF4/wdl0Z+1d5UtJXFiKTqn9oCH0aTmtSuY5XFJxATe713Gh5kWPz/xVMOtM/yMZV5rGzaK4lJtOw4Vr9g0o+VssBTDk1cDkkSQATv1NTkxZzKEHOxzJqfcDK+4cgGwsJ358Pq65tTMdPyOpcjM87K880q2YHWh8cILFBF8h/VkUtdF2NPoeLart4zwI=">导航流程：从输入 URL 到页面展示这中间发生了什么</a></h4><ul>
+<li><p>用户输入 URL 并回车</p>
+</li>
+<li><p>浏览器进程检查 URL，组装协议，构成完整 URL</p>
+</li>
+<li><p>浏览器进程通过进程通信（IPC）把 URL 请求发送给网络进程</p>
+</li>
+<li><p>网络进程接收到 URL 请求后检查本地缓存是否缓存了该请求资源，如果有则将该资源返回给浏览器进程</p>
+</li>
+<li></li>
+</ul>
+<p>如果没有，网络进程向 web 服务器发起 http 请求（网络请求），请求流程如下：</p>
+<ul>
+<li><p>进行 DNS 解析，获取服务器 IP 地址，端口</p>
+</li>
+<li><p>利用 IP 地址和服务器建立 tcp 连接</p>
+</li>
+<li><p>构建请求头信息</p>
+</li>
+<li><p>发送请求头信息</p>
+</li>
+<li><p>服务器响应后，网络进程接收响应头和响应信息，并解析响应内容</p>
+</li>
+<li></li>
+</ul>
+<p>网络进程解析响应流程：</p>
+<ul>
+<li>检查状态码，如果是 301&#x2F;302，则需要重定向，从 Location 自动读取地址，重新进行第 4 步，如果是 200，则继续处理请求</li>
+<li>200 响应处理：检查响应类型 Content-Type，如果是字节流类型，则将该请求提交给下载管理器，该导航流程结束，不再进行后续渲染。如果是 html</li>
+</ul>
+<p>则通知浏览器进程准备渲染进程进行渲染</p>
+<ul>
+<li></li>
+</ul>
+<p>准备渲染进程</p>
+<ul>
+<li><p>浏览器进程检查当前 URL 是否和之前打开的渲染进程根域名是否相同，如果相同，则复用原来的进程，如果不同，则开启新的渲染进程</p>
+</li>
+<li></li>
+</ul>
+<p>传输数据、更新状态</p>
+<ul>
+<li>渲染进程准备好后，浏览器向渲染进程发起“提交文档”的消息，渲染进程接收到消息和网络进程建立传输数据的“管道”</li>
+<li>渲染进程接收完数据后，向浏览器发送“确认提交”</li>
+<li>浏览器进程接收到确认消息后 engine 浏览器界面状态：安全、地址 URL、前进后退的历史状态、更新 web 页面</li>
+</ul>
+<h4 id="渲染流程（上）：HTML、CSS-和-JavaScript-是如何变成页面的"><a href="#渲染流程（上）：HTML、CSS-和-JavaScript-是如何变成页面的" class="headerlink" title="渲染流程（上）：HTML、CSS 和 JavaScript 是如何变成页面的"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=SgV5RR+kE4Jo5tZ3HmJ+Lw==.JdDfH4tZ/fiRlNAJDlkAB/MMO9X4rwM3jx+SQddpwaOERgeIG4w3tf2psbDDgpUU9in96ycyf7s2mjknZWNs2ifMVpT3AXCo4AkrlqHQq7OSSXPvFrC4PaNThlCB64kupEc4NHq5fQ0axYvDisFdODbzsMQoxv/51RGS9Dc35shkRAp5AGGv00FTGkIwPYabIw8B7yuz2IcJVFc2XhgW40BDs1HFG4jGPXJD02DPc6c0/cWtAu3wdUVyaDHxlgs/UJU6U93v/S6AmajmK0SejwTMy4vo2Heb110qKRSoE+rUJ9GB7A4vMRN/K21yyq3Pp+ycSbstcHeUkfEN8kYy4g==">渲染流程（上）：HTML、CSS 和 JavaScript 是如何变成页面的</a></h4><ul>
+<li>浏览器不能直接理解 HTML 数据，需要将其转化为 DOM 树结构；</li>
+<li>生成 DOM 树后，根据 CSS 样式表，计算出 DOM 树所有节点样式；</li>
+<li>创建布局树：遍历 DOM 树所有可见节点，把这些节点加到布局中，不可见节点忽略，如 head 标签下所有内容，display: none 元素；</li>
+</ul>
+<h4 id="渲染流程（下）：HTML、CSS-和-JavaScript-是如何变成页面的"><a href="#渲染流程（下）：HTML、CSS-和-JavaScript-是如何变成页面的" class="headerlink" title="渲染流程（下）：HTML、CSS 和 JavaScript 是如何变成页面的"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=078u0RMBFYSDZ+zLn9rE2A==.3uHvjLrzHNzjlHAsq6pbvgswcaxTcalz0jTUDqvuTuYlMI8N18BHEYORck7thGJvp9mdojzL+hPWNiJFOpuwP108CF+zmo1lISi18NGmG4G0SmFJ90p7LdStasdnIkvFTi4Yy5ICPRz7oDZ0YAVTsN73slca3/050rY1DVPBbZv/UaEcn8f6vg7ZXUOosbRz3tvF1MMVy0n4hKFnoWtIMzD2W0wFjJyspz4xGnbtPzV2X6v7FrLXUFR0jRQg7jflHLwyNbaUz4b37mHYjBqRg6vVghKkidoiIrG0R+bPM5XqWxSUS7S3h/OP5j3vKjrzTk4nTsU5ckxBVmoYg8Oa8Q==">渲染流程（下）：HTML、CSS 和 JavaScript 是如何变成页面的</a></h4><ul>
+<li>分层：层叠上下文属性的元素（比如定位属性元素、透明属性元素、CSS 滤镜属性元素）提升为单独的一层，需要裁剪的地方（比如出现滚动条）也会被创建为图层；</li>
+<li>图层绘制：完成图层树构建后，渲染引擎会对图层树每一层进行绘制，把一个图层拆分成小的绘制指令，再把指令按照顺序组成一个带绘制列表；</li>
+<li>有些情况图层很大，一次绘制所有图层内容，开销太大，合成线程会将图层划分为图块（256x256 或者 512x512）；</li>
+<li>合成线程将图块提交给栅格线程进行栅格化，将图块转换为位图。栅格化过程都会使用 GPU 加速，生成的位图保存周期 GPU 内存中；</li>
+<li>一旦所有图块都被栅格化，合成线程会生成一个绘制图块命令（DrawQuad），然会将命令提交给浏览器进程，viz</li>
+</ul>
+<p>组件接收到该指令，将页面内容绘制到内存中，显示在屏幕上；</p>
+<ul>
+<li>重排：通过 JavaScript 或者 CSS</li>
+</ul>
+<p>修改元素几何位置属性，会触发重新布局，解析后面一系列子阶段；重绘：不引起布局变换，直接进入绘制及其以后子阶段；合成：跳过布局和绘制阶段，执行的后续操作，发生在合成线程，非主线程；</p>
+<h4 id="变量提升：javascript-代码是按顺序执行的吗"><a href="#变量提升：javascript-代码是按顺序执行的吗" class="headerlink" title="变量提升：javascript 代码是按顺序执行的吗"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=HDjBdOsE5RdCVLRlNandOA==.TZHVY6ING/0EjW0SlKo17xo2psnFvStNBX+RrOB0+dLj8ijmx1h16PJTEWwWtgUpGb1goNlc+R9xSvUde+InvMcEnVp6JzS7KCJ+Y1DE4vdWvzmAj0q1gGOoRaVTgxzEY0gisQ3hxIRQP8T+DdyYKXL2pyi1cEqgWkaMD00hHr7+cmpIHzbDU1pII58ydN5nNDdqP07ZxY4EP3r/XxtNdDW6GIS5/BgqY2Lzcfejm4NNFqONhhUVOJJ+/syR05IUh5bvozLzjMlz+RP8vzZnZIUqnhrd9q26CKMZ2/oDoq8=">变量提升：javascript 代码是按顺序执行的吗</a></h4><ul>
+<li>JavaScript 代码在执行之前需要先编译，在编译阶段，变量和函数会被存放到变量环境中，变量默认值会被设置为 undefined；</li>
+<li>在代码执行阶段，JavaScript 引擎会从变量环境中查找自定义的变量和函数；</li>
+<li>如果在编译阶段，窜爱两个相同的函数，那么最终放在变量环境中的是最后定义的那个，后定义的覆盖先定义的；</li>
+</ul>
+<h4 id="调用栈：为什么-JavaScript-代码会出现栈溢出"><a href="#调用栈：为什么-JavaScript-代码会出现栈溢出" class="headerlink" title="调用栈：为什么 JavaScript 代码会出现栈溢出"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=KeGSN31ZkRz5TvSbw1loqg==.//1jVfG5kWcIkncsXe9794k1x6B1snMnDd3j9F0at9LeJ0khxAZt19h0m70p3qT1+sDo4ZfMzZezsmcOVgqTwFsqXrtuiBtBPhlcZAKC94x68WymGTi7XMdNCaKrIwwtl1f5pqL21A2J8Zu+Bs2Z2N4lrmB/2Vk6s2wHDOpSP9qXn2P4fBh97KQyokNl2aqhVnTST3IDObu+GiNKc2JD8dgh2M0zZeM5kExKz8yliqwio/Ypmi4km/odz7TSmr4n2n/3UhzlnJlLYdKojquB2+lrl51M5HuZFVCvbRh8Jto=">调用栈：为什么 JavaScript 代码会出现栈溢出</a></h4><ul>
+<li>每调用一个函数，JavaScript 引擎会为其创建执行上下文压入调用栈，然后，JavaScript 引擎开始执行函数代码。</li>
+<li>如果一个函数 A 调用另外一个函数 B，那么 JavaScript 引擎会为 B 函数创建执行上下文，并将 B 函数的执行上下文压入栈顶。</li>
+<li>当前函数执行完毕后，JavaScript 引擎会将该函数的执行上下文弹出栈。</li>
+<li>当分配的调用栈空间被占满时，会引发“堆栈溢出”问题。</li>
+</ul>
+<h4 id="块级作用域：var-缺陷以及为什么要引入-let-和-const"><a href="#块级作用域：var-缺陷以及为什么要引入-let-和-const" class="headerlink" title="块级作用域：var 缺陷以及为什么要引入 let 和 const"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=i1IQmLccAIQ/axwERdbyeA==.uFp+2YSRO09WqJ8VuGrVW6Q0/9bhJEmFmKWfnT+Sd/xpoQR4XocGUt2/fwrhONXaMr6NqGr18lGIhMv+yUfxJMf902wPtE28DSGfdy+w2H5osWxH3Us18nzVa2WKn7kUP1VWB9+3aFN0Yl5peWXTMMrGhPmkjyHnjEJFG7nEqYBPmVLsFYAi4Bno2E0RUKEoSTUem7V04tRG1ran9yd1XOXk3kbKVkzvcvdkID557uRKbsG07XKD49jP3b9l2uT3WtK8UYRmLiUy3TBTycLSQPMmheQNzFal6OXQS0dlLa0rMhExAyLg0MvNzvqAxDzM">块级作用域：var 缺陷以及为什么要引入 let 和 const</a></h4><ul>
+<li>let、const 申明的变量不会被提升。在 javascript 引擎编译后，会保存在词法环境中。</li>
+<li>块级作用域在代码执行时，将 let、const</li>
+</ul>
+<p>变量存放在词法环境的一个单独的区域。词法环境内部维护一个小型的栈结构，作用域内部变量压入栈顶。作用域执行完，从栈顶弹出。</p>
+<h4 id="作用域链和闭包：代码中出现相同的变量，JavaScript-引擎如何选择"><a href="#作用域链和闭包：代码中出现相同的变量，JavaScript-引擎如何选择" class="headerlink" title="作用域链和闭包：代码中出现相同的变量，JavaScript 引擎如何选择"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=Tg5vs05uHGA08Uh4fU6x4w==.rtb/7lTbrTsoYewcZ4lAzAcyXM8zD6QpHpl+C8tVDCv4rafrihGwEBR8+SMmrfhPfljojlEYINrwCkXWyNGS9rCChW1zy5UcYjl1MS8sAAFlyIKCfIRpdHI8MPhCyfLe3HomJwnn4v5mKe61QBCY02TyXuwYXysvVn/foJEsNl6yjdXp0nQ6BmTh11F30Hbpkdq4NCvfAO7nlbDMdrFmS/fauw/lD+tY61uburaYkVuJVVG4KdL6lhwY21aEvVarVMTdeas8hVVUQA7dwHo2rRat0UL9M5I0j+TIIIB3GBrinR7QfXaHu7xD5Zexxa+y/KKtQo7XLRxHL3l5kqghi/zUBhB1SFBXD68AxIvHriZ2g3ixlkOzsSfte5JlvncJdjr11CGdsqOg+ctl3/1l8CbC1ntV9OESTeCU7w0GPyo=">作用域链和闭包：代码中出现相同的变量，JavaScript 引擎如何选择</a></h4><ul>
+<li>使用一个变量，JavaScript 引擎会在当前的执行上下文中查找变量，如果没有找到，会继续在</li>
+</ul>
+<p>outer（执行环境指向外部执行上下文的引用）所指向的执行上下文中查找；</p>
+<ul>
+<li><p>JavaScript 执行过程，作用域链是由词法作用域决定，而词法作用域是由代码中函数声明的位置决定；</p>
+</li>
+<li></li>
+</ul>
+<p>根据词法作用域的规则，内部函数总是可以访问其外部函数中声明的变量，当通过调用一个外部函数返回一个内部函数后，即使外部函数已经执行结束了，但是内部函数引用外部函数的变量依旧保存在内存中，把这些变量的集合称为闭包；</p>
+<h4 id="this：从-JavaScript-执行上下文视角讲-this"><a href="#this：从-JavaScript-执行上下文视角讲-this" class="headerlink" title="this：从 JavaScript 执行上下文视角讲 this"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=h1YWbj2HGPnmDFeVULFPvQ==.j4pZf1VPrJdNByuOMoMTYOF1HQSy14YAb+gmNFoOxsXnjQmH30SLEyziyD1rao5LzPC+phrSfo/ZPNIR9udKl8RG8LTzUyjGuyrftsPrONxwghleZ1Opq7yHeX3t7OHkPmlnMV0IM4bgekF/Wls4UyiMrSYtMTIF7uUZEsC49yqUa8J+nICj7urgOSy69S2eB2FQKspJ7zu0p7WL0RCb8jEM+jR6y4XsLYY3YNYvWRD65zJIYSauui7QCdqPwN+Q">this：从 JavaScript 执行上下文视角讲 this</a></h4><p>当执行 new CreateObj 的时候，JavaScript 引擎做了四件事：</p>
+<ul>
+<li>首先创建一个控对象 tempObj；</li>
+<li>接着调用 CreateObj.call 方法，并将 tempObj 作为 call 方法的参数，这样当 createObj 的执行上下文创建时，它的</li>
+</ul>
+<p>this 就指向 tempObj 对象；</p>
+<ul>
+<li>然后执行 CreateObj 函数，此时的 CreateObj 函数执行上下文中的 this 指向 tempObj 对象；</li>
+<li>最后返回 tempObj 对象。</li>
+</ul>
+<p>this 的使用分为：</p>
+<ul>
+<li>当函数最为对象的方法调用时，函数中的 this 就是该对象；</li>
+<li>当函数被正常调用时，在严格模式下，this 值是 undefined，非严格模式下 this 指向的是全局对象 window；</li>
+<li>嵌套函数中的 this 不会继承外层函数的 this 值；</li>
+<li>箭头函数没有自己的执行上下文，this 是外层函数的 this。</li>
+</ul>
+<h4 id="栈空间和堆空间：数据是如何存储的"><a href="#栈空间和堆空间：数据是如何存储的" class="headerlink" title="栈空间和堆空间：数据是如何存储的"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=QY/Tyt3YsjRonyjIwg0jxw==.P9IwZfXXOULejaHCTRSVGkszrxapuxk+h8Ju3SVnQ70bwHXsFeGKyj5ulYZClt6YOyydKbKQ/lHzwi7rmQhQYpzEmDiZnhW15HhaYNieG72ZXTODSur1u05iAWCj5qP24nCKgokCBYynAooO3E4OtjSpA6ntVAgaMf27R9HaF0deHtrLBJAuPqmUk8SKOxYhZ9Uuf09rzp+fjbmI/XCyHQ7ARRALLKW3lr9xttpCeNazB/MvCkEv5JNWJePGwUjNQfx+SjJJntFEAws0KRsUhfBtqC0TlsJ4O1WJjJkMfZo=">栈空间和堆空间：数据是如何存储的</a></h4><p>动态语言：在使用时需要检查数据类型的语言。<br>弱类型语言：支持隐式转换的语言。</p>
+<p>JavaScript 中的 8 种数据类型，它们可以分为两大类——原始类型和引用类型。<br>原始类型数据存放在栈中，引用类型数据存放在堆中。堆中的数据是通过引用与变量关系联系起来的。</p>
+<p>从内存视角了解闭包：词法扫描内部函数，引用了外部函数变量，堆空间创建一个“closure”对象，保存变量。</p>
+<h4 id="垃圾回收：垃圾数据如何自动回收"><a href="#垃圾回收：垃圾数据如何自动回收" class="headerlink" title="垃圾回收：垃圾数据如何自动回收"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=zhVpYk/9P1I2SL8iAJI4Zw==.jpBsHt9nL7lLCJRwOyMtKatoxWBt0QTPvBJk0/b0K3q4ArApG5guisEtPcYUgv0oFvWmTI9SPioTb7HCOhPCe8oOSj3HXHzZ6XNzJ3dJYE3s7tVyfLPT4w3BzCJaloWAIp7Lyx55v0/5/vI32OFuYmmdeGVsUeZktLmQBQF7XiS3xIsmP5/pk8M+nvhHAWxKcTXPMso2lqjL6Redrn0DoL037eaLnKcDnebpBk+IQU/cFa6JxzvJjtxY3/70uDQE328E9c0Ro3fqcRZm2/H+3ka3mDn6AK1NMRUe7plQpA0=">垃圾回收：垃圾数据如何自动回收</a></h4><ul>
+<li>栈中数据回收：执行状态指针 ESP 在执行栈中移动，移过某执行上下文，就会被销毁；</li>
+<li>堆中数据回收：V8 引擎采用标记-清除算法；</li>
+<li>V8 把堆分为两个区域——新生代和老生代，分别使用副、主垃圾回收器；</li>
+<li>副垃圾回收器负责新生代垃圾回收，小对象（1 ～ 8M）会被分配到该区域处理；</li>
+<li>新生代采用 scavenge</li>
+</ul>
+<p>算法处理：将新生代空间分为两半，一半空闲，一半存对象，对对象区域做标记，存活对象复制排列到空闲区域，没有内存碎片，完成后，清理对象区域，角色反转；</p>
+<ul>
+<li>新生代区域两次垃圾回收还存活的对象晋升至老生代区域；</li>
+<li>主垃圾回收器负责老生区垃圾回收，大对象，存活时间长；</li>
+<li>新生代区域采用标记-清除算法回收垃圾：从根元素开始，递归，可到达的元素活动元素，否则是垃圾数据；</li>
+<li>为了不造成卡顿，标记过程被切分为一个个子标记，交替进行。</li>
+</ul>
+<h4 id="编译器和解析器：V8-如何执行一段-JavaScript-代码的"><a href="#编译器和解析器：V8-如何执行一段-JavaScript-代码的" class="headerlink" title="编译器和解析器：V8 如何执行一段 JavaScript 代码的"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=ZSNm+jBqpSd7Y+qiHQmRxA==.cVKn10t8gzekufmHrKjlKHyE3jnNYYYWZzPsGKEWHPc+EFsAv1HQ9LwCKjHLVUVeDHFyX4nOB75aZaRqql0yJtnFiKSGfi1ng9+WhQmq+Jg/jHp9D6GHdver9LmPcHIEkx72e7d/u32UF1R4HnQGiQ/zLTZ9r0xLXQAYgqVOhUBcQaKh8WYBmMU9y1RGqPHwEmiAmeM7ku3XmJG3rZlhLpOMx+lH/PmyI0ukghmQH87PtLDuXwQwCjtM0kT4L4NAaF+CSfZ3FxfY2ccyuLbz6Yk1/9LWU32C6vngFyFguZCQEcyGR9rDlf+sIPDOgARk">编译器和解析器：V8 如何执行一段 JavaScript 代码的</a></h4><ul>
+<li>计算机语言可以分为两种：编译型和解释型语言。编译型语言经过编译器编译后保留机器能读懂的二进制文件，比如 C&#x2F;C++，go</li>
+</ul>
+<p>语言。解释型语言是在程序运行时通过解释器对程序进行动态解释和执行，比如 Python，JavaScript 语言。</p>
+<ul>
+<li>编译型语言的编译过程：编译器首先将代码进行词法分析、语法分析，生成抽象语法树（AST），然后优化代码，最后生成处理器能够理解的机器码；</li>
+<li>解释型语言解释过程：解释器会对代码进行词法分析、语法分析，并生产抽象语法树（AST），不过它会再基于抽象语法树生成字节码，最后根据字节码执行程序；</li>
+<li>AST 的生成：第一阶段是分词（词法分析），将一行行源码拆解成一个个 token（语法上不可再分、最小单个字符）。第二阶段是解析（语法分析），将上一步生成的</li>
+</ul>
+<p>token 数据，根据语法规则转为 AST，这一阶段会检查语法错误；</p>
+<ul>
+<li>字节码存在的意义：直接将 AST 转化为机器码，执行效率是非常高，但是消耗大量内存，从而先转化为字节码解决内存问题；</li>
+<li>解释器 ignition</li>
+</ul>
+<p>在解释执行字节码，同时会手机代码信息，发现某一部分代码是热点代码（HotSpot），编译器把热点的字节码转化为机器码，并保存起来，下次使用；</p>
+<ul>
+<li>字节码配合解释器和编译器的计数实现称为即时编译（JIT）。</li>
+</ul>
+<h4 id="消息队列和事件循环：页面是怎么活起来的"><a href="#消息队列和事件循环：页面是怎么活起来的" class="headerlink" title="消息队列和事件循环：页面是怎么活起来的"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=CyJ/k5c5UXnYf2/6Yqeh0w==.+fTguKMEuLlezhfoRw05XJ7lvKWYQ8EVcc37H1U9sagNUi9mgOzDKpw1F53HNXiXv6cqsK4t7FgJOdfSIe+Wt1f10FRfTYrl/J4Q94q+wyukS7Todzokzq2+B7lZ+ciAZ+b1qVWhhbtAcLUD4shpLjgNm08O361QSKiYrKyGuR2XtrJH3Kmx7lW9JQZxmN2HBSPiO2Hsrws7UhcsUNGyXb26MmjdiGBzspYokrDQxkhE36Rw2ZzeSncTcojOao/Ncl8cxNIuXknCf7uZ4zcqV0DpKE0gZ/dPgeo6KQMhgQYflw2pWhVUB43C6bN3qVSPLU6jDro6OFPdr9geaD+m3g==">消息队列和事件循环：页面是怎么活起来的</a></h4><ul>
+<li>每个渲染进程都有一个主线程，主线程会处理 DOM，计算样式，处理布局，JavaScript 任务以及各种输入事件；</li>
+<li>维护一个消息队列，新任务（比如 IO 线程）添加到消息队列尾部，主线程循环地从消息队列头部读取任务，执行任务；</li>
+<li>解决处理优先级高的任务：消息队列的中的任务称为宏任务，每个宏任务中都会包含一个微任务队列，在执行宏任务的过程中，如果 DOM</li>
+</ul>
+<p>有变化，将该变化添加到微任务队列中；</p>
+<ul>
+<li>解决单个任务执行时长过久：JavaScript 通过回调功能来规避。</li>
+</ul>
+<h4 id="webapi：setTimeout-是怎么实现的"><a href="#webapi：setTimeout-是怎么实现的" class="headerlink" title="webapi：setTimeout 是怎么实现的"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=Xd/mNwjDf+DrZblcBg+GLQ==.Do4vnAqL8Syx3bvW/lk+4hJ7y+8HQq4OCpH1a8eTG4h55ucqJ7U6DNY8GkPiQkfuUZQeZ9RWGvev7J6/7aHG4/0m8TbjOXxSjKOTIdUWTgT5Q7M/VdrZ4GyRbWycZHwP72/T754QN+r87Ih3jHOdfk5Aer2pbw2zYMGfoLpqqOnV9bKWNhBdeoq0T2DoyfN/Z286mPxAgkuqSSIREFmShw==">webapi：setTimeout 是怎么实现的</a></h4><ul>
+<li>JavaScript 调用 setTimeout 设置回调函数的时候，渲染进程会创建一个回调任务，延时执行队列存放定时器任务；</li>
+<li>当定时器任务到期，就会从延时队列中取出并执行；</li>
+<li>如果当前任务执行时间过久，会影响延时到期定时器任务的执行；</li>
+<li>如果 setTimeout 存在嵌套调用（5 次以上），判断该函数方法被阻塞，那么系统会设置最短时间间隔为 4 秒；</li>
+<li>未激活的页面，setTimeout 执行最小间隔是 1000 毫秒，目的是为了降低加载损耗；</li>
+<li>延时执行时间最大值是 24.8 天，因为延时值是以 32 个 bit 存储的；</li>
+<li>setTimeout 设置的回调函数中的 this 指向全局 window。</li>
+</ul>
+<h4 id="webpai：XMLHttpRequest-是怎么实现的"><a href="#webpai：XMLHttpRequest-是怎么实现的" class="headerlink" title="webpai：XMLHttpRequest 是怎么实现的"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=Twu2PTCsWO7+VysqohRAGg==.XE20MPg7WX+3Z+egXb588oEHDzmVP6MZqX+2ubXyLlQkmK8WCSVyKxz1xEzCXDm4fNpXpQkL1bH3gFoSp94ZlalUjui1VeLFB/wM1JgLsYdFMRbA7sHsyeBQ+ZcoNR31ECWh+5gI74nCuWiv6jg7Q8fZFErSYD+wlaxcGS4lxKtXtOSoRLgs2fHF3lcFH98aTfLsKDiSL47QjzwcIhzPXA==">webpai：XMLHttpRequest 是怎么实现的</a></h4><ul>
+<li>XMLHttpRequest onreadystatechange 处理流程：未初始化 -&gt; OPENED -&gt; HEADERS_RECEIVED -&gt;</li>
+</ul>
+<p>LOADING -&gt; DONE；</p>
+<ul>
+<li>渲染进程会将请求发送给网络进程，然后网络进程负责资源下载，等网络进程接收到数据后，利用 IPC 通知渲染进程；</li>
+<li>渲染进程接收到消息之后，会将 xhr 回调函数封装成任务并添加到消息队列中，等主线程循环系统执行到该任务的时候，会根据相关状态来调用回调函数。</li>
+</ul>
+<h4 id="宏任务和微任务：不是所有的任务都是一个待遇"><a href="#宏任务和微任务：不是所有的任务都是一个待遇" class="headerlink" title="宏任务和微任务：不是所有的任务都是一个待遇"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=9WMnHJ6euVXt1D5O8OzynA==.Xr+c1OVMlb3lbRJ8e3xpG3M6X79HDv1a4ij8kAulZNfqCTcnn65dwxC0A75ModrG19bmimexc6gja8eabNhAB1g/Y2LlEYGFzWB1k1AB22G9FQWRseHz3S4x0REQfHzzxDvi6e6YigV5SNIWMcpZQQhrdQ7ylmYAMI3xc/VivacOHHNmFA55AiywhzeSD1V5S3eOI3mnUT4QrPcIlpaoq18QoHaGI7dLqljE4U5xqGw2wLZTuY7ek+lPhhHyc1Iil8F0YhxsCex1AtGjf30XISf90kRnvRztaiDpEc9TGiRwD4SqwXG7uQOUqTOQ9uhdwtEgxpYgTGGc2GGXgLMMkDSjU4zNGAR3YEPyrxNZB2g=">宏任务和微任务：不是所有的任务都是一个待遇</a></h4><ul>
+<li>消息队列中的任务为宏任务。渲染进程内部会维护多个消息队列，比如延时执行队列和普通消息队列，主线程采用 for 循环，不断地从这些任务队列中取出任务并执行；</li>
+<li>微任务是一个需要异步执行的函数，执行时机是在主函数执行结束之后、当前宏任务结束之前；</li>
+<li>V8 在执行 javascript 脚本时，会为其创建一个全局执行上下文，同时会创建一个微任务队列；</li>
+<li>执行微任务过程中产生的微任务不会推迟到下个宏任务中执行，而是在当前宏任务中继续执行；</li>
+</ul>
+<h4 id="使用-Promise-告别回调函数"><a href="#使用-Promise-告别回调函数" class="headerlink" title="使用 Promise 告别回调函数"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=bEeUyBMAJaYQj5xs2taGGQ==.8iXKAqC6nZwe9GjO8wSoj+cu5oxftYCPXycbUjMa5wMmYbUqkuG8as9+9Qv2b8FJ74EUowvQExcT2wVbRZi3Q+kUFqP07wWolN2R8EChj3AC7qtj6zR+4y+EepByo+wPElffvuku9N1XC026ioatsfckJrN+K4i3y6IzyDLXG10uphQ4+eCoisbwWZqodSi7LSe/BFAoK3NWF3xuS7Ecog==">使用 Promise 告别回调函数</a></h4><ul>
+<li><p>使用 Promise 解决了回调地狱问题，消灭嵌套和多次处理；</p>
+</li>
+<li><p>模拟实现 Promise</p>
+<p>  functionBromise(executor) {<br>var _onResolve &#x3D; nullthis.then &#x3D; function (onResolve) {<br>  _onResolve &#x3D; onResolve<br>}<br>functionresolve(value) {<br>  setTimeout(() &#x3D;&gt; {<br>    _onResolve(value)<br>  }, 0)<br>}<br>executor(resolve, null)<br>  }</p>
+</li>
+</ul>
+<h4 id="async-await-使用同步方式写异步代码"><a href="#async-await-使用同步方式写异步代码" class="headerlink" title="async await 使用同步方式写异步代码"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=hTtmwAUeKRgyK1osAOH/Ig==./akyGZnIc70uhNu+lsPCYAOtbWTh9rR7qQCq84Xm+DcZQ+y2J3w4Qz+7wVU8SMfBJStty+dNLLgIEn7xItbObXGXqtIbDqT+stiO1EpqEhxTL9mZ3Bob+qhQBYe6nqYwSgHvvJN2Bzw8p3qIwFGo0PjwpXxHYQn0/yUkBDtteYw9qa+0gq0cCMkUGrj53hTIvzj/MV1J7cPk4kQ+a0ESIqavmXwI5WWvQk60dWyReLuCEalrRydw+e3EmYyVgGAt">async await 使用同步方式写异步代码</a></h4><ul>
+<li>生成器函数是一个带星号函数，而且是可以暂停执行和回复执行的；</li>
+<li>生成器函数内部执行一段代码，遇到 yield 关键字，javascript 引擎返回关键字后面的内容给外部，并且暂停该函数的执行；</li>
+<li>外部函数可以同步 next 方法恢复函数的执行；</li>
+<li>协程是一种比线程更加轻量级的存在，协程可以看成是跑在线程上的任务，一个线程可以存在多个协程，但是同时只能执行一个协程，如果 A 协程启动 B 协程，A 为</li>
+</ul>
+<p>B 的父协程；</p>
+<ul>
+<li>协程不被操作协同内核所管理，而完全由程序所控制，这样性能提升；</li>
+<li><code>await xxx</code> 会创建一个 Promise 对象，将 <code>xxx</code> 任务提交给微任务队列；</li>
+<li>暂停当前协程的执行，将主线程的控制权力转交给父协程执行，同时将 Promise 对象返回给父协程，继续执行父协程；</li>
+<li>父协程执行结束之前会检查微任务队列，微任务队列中有 <code>resolve(xxx)</code> 等待执行，触发 then 的回调函数；</li>
+<li>回调函数被激活后，会将主线程的控制权交给协程，继续执行后续语句，完成后将控制权还给父协程。</li>
+</ul>
+<h4 id="页面性能分析：利用-chrome-做-web-性能分析"><a href="#页面性能分析：利用-chrome-做-web-性能分析" class="headerlink" title="页面性能分析：利用 chrome 做 web 性能分析"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=5Clm1M0Gi5edXEquWZXF6A==.s5Bmwe9MNfTUFvbP2CHxWNPpiU0ZOqAnd/hMP6vjt7/UtgyYNfQObRK76ceueg3FoFUDofYzP0GBgi/qvFbw4orXU09YjrFjJBlGQ38wK7YZZ+eaRkHMil1884yX9aIi9p6578HjSBWI3wuSw31Nq7s6t59qFlarRncxn5k3FvGBdqQfEtemKfDd9yrJMR/5oVRNtdWtt3ViZQDnLf1S9DJQEl79i8gY+3Y1NyNpS7R1fxgnDwSfZ0SEzvqi3r1Kxx/BNmEEUPx3pDVhrQiJ6IwTHzp+//yA9kx9aFPQYqg=">页面性能分析：利用 chrome 做 web 性能分析</a></h4><ul>
+<li>Chrome 开发者工具（简称 DevTools）是一组网页制作和调试的工具，内嵌于 Google Chrome 浏览器中。它一共包含了 10</li>
+</ul>
+<p>个功能面板，包括了<br>Elements、Console、Sources、NetWork、Performance、Memory、Application、Security、Audits<br>和 Layers。</p>
+<h4 id="DOM-树：JavaScript-是如何影响-DOM-树构建的"><a href="#DOM-树：JavaScript-是如何影响-DOM-树构建的" class="headerlink" title="DOM 树：JavaScript 是如何影响 DOM 树构建的"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=0DNA0QfcJKP7hnrHQ7AKxg==.pOyFY3cwRU+QM/o1NszENhKXW0qLLtNnYCsCpqHykp2qDQAceo95146HKBMhqGDb814dPRIfG1cqb6kGNvX2GawZMxaHqRH54PUm7S4mbPU0bUmdk5RBVGHuFDwM4t+i6mhBgYgIGhT/Xh8h3luRHwIKNb+qeB9VuyZ0YEdlLtBLO2oURKJ20p0uxvYjR0RiL1Rt9wprQw3025xQ49LBSfuGBV/N6vZg7uZw7tHeFSrZUzq1q1RLAzsODiJ8xfvL">DOM 树：JavaScript 是如何影响 DOM 树构建的</a></h4><ul>
+<li>HTML 解析器（HTMLParse）负责将 HTML 字节流转换为 DOM 结构；</li>
+<li>HTML 解析器并不是等整个文档加载完成之后再解析，而是网络进程加载流多少数据，便解析多少数据；</li>
+<li>字节流转换成 DOM 三个阶段：1、字节流转换为 Token；2、维护一个 Token 栈，遇到 StartTag Token 入栈，遇到 EndTag</li>
+</ul>
+<p>Token 出栈；3、为每个 Token 创建一个 DOM 节点；</p>
+<ul>
+<li>JavaScript 文件和 CSS 样式表文件都会阻塞 DOM 解析；</li>
+</ul>
+<h4 id="渲染流水线：CSS-如何影响首次加载时的白屏时间？"><a href="#渲染流水线：CSS-如何影响首次加载时的白屏时间？" class="headerlink" title="渲染流水线：CSS 如何影响首次加载时的白屏时间？"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=MnJExBRqSbBfodjQtYuKgA==.wVblMGzPAN0PYS68Qhe9y1FPmNMRbRZc4ygjVS5bW2tGIvsw7u2c5PvPIF5OQcOtiHI7E2QLyhnsyFN1fXAKF16CB152b1adRNZrmlj6nF0PQSA34l75Qd3mczJtJVypE8Nzrmd02QwaH0PL9tBuERYZkGacuekybPX3stPKkoVQV0HsS0xIYE/DYeSioVEeWlpr4KrBB2/F3dVcW/n9AKCOQx8I6PbjZZMIodZ/rQXk/6GvqaeqjRmppMXLTF3nbWNNfaAtuX2R5k+zBqGLmL1iAypeC3nTqFAQ6RRBcIrBnHL1hRWcViHEacVLNSK1L7M+d0n7pkNiEUfXReUtMjsLYYmqCw2CVFlT9hOa35U=">渲染流水线：CSS 如何影响首次加载时的白屏时间？</a></h4><ul>
+<li>DOM 构建结束之后，css 文件还未下载完成，渲染流水线空闲，因为下一步是合成布局树，合成布局树需要 CSSOM 和 DOM，这里需要等待 CSS</li>
+</ul>
+<p>加载结束并解析成 CSSOM；</p>
+<ul>
+<li>CSSOM 两个作用：提供给 JavaScript 操作样式表能力，为布局树的合成提供基础样式信息；</li>
+<li>在执行 JavaScript 脚本之前，如果页面中包含了外部 CSS 文件的引用，或者通过 style 标签内置了 CSS</li>
+</ul>
+<p>内容，那么渲染引擎还需要将这些内容转化为 CSSOM，因为 JavaScript 有修改 CSSOM 的能力，所以在执行 JavaScript 之前，还需要依赖<br>CSSOM。也就是说 CSS 在部分情况下也会阻塞 DOM 的生成。</p>
+<h4 id="分层和合成机制：为什么-CSS-动画比-JavaScript-高效"><a href="#分层和合成机制：为什么-CSS-动画比-JavaScript-高效" class="headerlink" title="分层和合成机制：为什么 CSS 动画比 JavaScript 高效"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=tJjm7PYlwT8d/oFvmutcRg==.hhMVfCxt4s0PjhGHdB7sf2Aiv/gQXWa5MDNpTsq46FlHN0VFLxO0X3YzPfDq2wwJAJlybB1vdn5FmQe7/Hi1opG5H4/DMacYv036fvvwfKGDviUsnqBinHn6dFj/JsuF5KY2SrrirDUJAx+hVWPu1N52kX3Oj0fhSdL2CiRkGuezFE+bu09sMtahIJxred0SZyG+ODDF67ppbrBI/v5fBTfyfZBqTG+pog3OtBDJYOfr+hyJm+ag2H/KH+Rqsgjp4VI4jb2G06DT6+kKchZkM2lb5rWcG2WH7D9HeLwK3NbJva+oSq9dfDkD5YHyabtK">分层和合成机制：为什么 CSS 动画比 JavaScript 高效</a></h4><ul>
+<li>显示器固定刷新频率是 60HZ，即每秒更新 60 张图片，图片来自显卡的前缓冲区；</li>
+<li>显卡的职责是合成新的图像，保存在后缓冲区，然后后缓冲区和前缓冲区互换，显卡更新频率和显示前刷新频率不一致，就会造成视觉上的卡顿；</li>
+<li>渲染流水线生成的每一副图片称为一帧，生成一帧的方式有重排、重绘和合成三种；</li>
+<li>重排会根据 CSSOM 和 DOM 计算布局树，重绘没有重新布局阶段；</li>
+<li>生成布局树之后，渲染引擎根据布局树特点转化为层树，每一层解析出绘制列表；</li>
+<li>栅格线程根据绘制列表中的指令生成图片，每一层对应一张图片，合成线程将这些图片合成一张图片，发送到后缓存区；</li>
+<li>合成线程会将每个图层分割成大小固定的图块，优先绘制靠近视口的图块；</li>
+</ul>
+<h4 id="页面性能：如何系统优化页面"><a href="#页面性能：如何系统优化页面" class="headerlink" title="页面性能：如何系统优化页面"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=oFLuHRzl45UC4plGeofYxQ==.HUtCnO6TEbRwsoc0dkc3AGGFu6NQPiaJfgGVsjKNBTpoMlEtZZMNMGKRbpzYL+fQxVVq0AlqIWexyYJ5IhThYk9TDYZF8xNELYPT4PbuDXhiMJ/YlZ45Jo1pbTcuvd0A91CiLnIyYZWVnC0zlK2vOWy4YFl+2qi9KnLEbHzx0FTFtJn4ctJGEPg6NusaFE+5REVW0cJ0VM2yQW5v7hVwn3znDJqohR0WYu0Hnp70EFQPIv7ClcZs4hgtzCswt6Zf">页面性能：如何系统优化页面</a></h4><ul>
+<li>加载阶段：减少关键资源个数，降低关键资源大小，降低关键资源的 RTT 次数；</li>
+<li>交互阶段：减少 JavaScript 脚本执行时间，避免强制同步布局：操作 DOM 的同时获取布局样式会引发，避免布局抖动：多次执行强制布局和抖动，合理利用</li>
+</ul>
+<p>CSS 合成动画：标记 will-change，避免频繁的垃圾回收；</p>
+<ul>
+<li>CSS 实现一些变形、渐变、动画等特效，这是由 CSS 触发的，并且是在合成线程中执行，这个过程称为合成，它不会触发重排或者重绘；</li>
+</ul>
+<h4 id="虚拟-DOM：虚拟-DOM-和真实-DOM-有何不同"><a href="#虚拟-DOM：虚拟-DOM-和真实-DOM-有何不同" class="headerlink" title="虚拟 DOM：虚拟 DOM 和真实 DOM 有何不同"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=5f+ScpHLN9bRYcmqWQzmqA==.SqH9iJw0UwXXIiLjEBLftRTKJuI7VDV35+rBxjqdVcFQ+OUHvv3hiOJeRz5wJ8ePjtTpy9vk8lLMqC+7uk7rDYh+Q076mmtAlTbwmX/7A0KWxfZ44IQzWdMIurn24Vyrzfvgx3+ADTPgp9p13qzZHMWRBJwcYvH9ogM3smgcD7q0ZfhqJj7hnrwhneFwTj2sUnBGWEU2Lt05n+uvy26fesv+c8owqiVyPlvZy5iP4HI97b7KRYiqQjZMHSY0IokT">虚拟 DOM：虚拟 DOM 和真实 DOM 有何不同</a></h4><ul>
+<li>当有数据更新时， React 会生产一个新的虚拟 DOM，然会拿新的虚拟 DOM 和之前的虚拟 DOM</li>
+</ul>
+<p>进行比较，这个过程找出变化的节点，然后将变化的节点应用到 DOM 上；</p>
+<ul>
+<li>最开始的时候，比较两个 DOM 的过程是在一个递归函数里执行的，其核心算法是 reconciliation。通常情况，这个比较过程执行很快，不过虚拟 DOM</li>
+</ul>
+<p>比较复杂时，执行比较函数可能占据主线程比较久的时间，这样会导致其他任务的等待，造成页面卡顿。React 团队重写了 reconciliation 算法，称为<br>Fiber reconciler，之前老的算法称为 Stack reconciler；</p>
+<h4 id="PWA：解决-web-应用哪些问题"><a href="#PWA：解决-web-应用哪些问题" class="headerlink" title="PWA：解决 web 应用哪些问题"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=YV88FA3sQelt8t42WLL+IA==.SNzmCYECw4WtKrRaQnuBq8WmM+q6icdXJFBsgeV/ZOZPatA/HdqepynZykLB5+kaD67dYVzRdK5779KXJBjo0ptBgIaPVp9yuNuu2YB8XBGENrVVuaL5ZrQoKtHPgZVH8EIDKvtLaQw9e9SELpjlZtPgCvhYzapsjKAJZHbnH5pYdDyhMWtVkgGUcyzPqAMZFzs71/2Lyxzp8M18kFURWb7xcZZqf7gYnRi5dL/XD3w=">PWA：解决 web 应用哪些问题</a></h4><ul>
+<li>PWA（Progressive Web App），渐进式 Web 应用。一个渐进式过渡方案，让普通站点过渡到 Web</li>
+</ul>
+<p>应用，降低站点改造代价，逐渐支持新技术，而不是一步到位；</p>
+<ul>
+<li>PWA 引入 ServiceWorker 来试着解决离线存储和消息推送问题，引入 mainfest.json 来解决一级入口问题；</li>
+<li>暗转了 ServiceWorker 模块之后，WebApp 请求资源时，会先通过 ServiceWorker，让它判断是返回 Serviceworker</li>
+</ul>
+<p>缓存的资源还是重新去网络请求资源，一切的控制权交给 ServiceWorker 来处理；</p>
+<ul>
+<li>在目前的 Chrome 架构中，Service Worker</li>
+</ul>
+<p>是运行在浏览器进程中的，因为浏览器进程生命周期是最长的，所以在浏览器的生命周期内，能够为所有的页面提供服务；</p>
+<h4 id="WebComponent：像搭积木一样构建-web-应用"><a href="#WebComponent：像搭积木一样构建-web-应用" class="headerlink" title="WebComponent：像搭积木一样构建 web 应用"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=sPxJodGETrVbdPxKLDmTKg==.C/jOBuIVjbQDdQ0SMbFviC6ASLog7aEzLJL2Og6RVnZHOd4hnTeHi0UrDQXmq+vJJDZZZB/ONWnv0/JPTvtSpxKBdPRyjKcevgZuFftHvWL22On2I9cTxTDWpu9yIv6soT/3AmFP0F6keoKvgHO57dKaqEMtnoChF0cVP/mbsdtnPca/u8GDdswlhw0Mpp9CvpxLC4vsU8SLX6hxT52QWJ5ynoPKZXT894LCsCqt+dwnQa4ecZNVTii0jo1tgfAT">WebComponent：像搭积木一样构建 web 应用</a></h4><ul>
+<li>CSS 的全局属性会阻碍组件化，DOM 也是阻碍组件化的一个因素，因为页面中只有一个 DOM，任何地方都可以直接读取和修改 DOM；</li>
+<li>WebComponent 提供了对局部试图封装能力，可以让 DOM、CSSOM 和 JavaScript 运行在局部环境中；</li>
+<li>template 创建模版，查找模版内容，创建影子 DOM，模版添加到影子 DOM 上；</li>
+<li>影子 DOM 可以隔离全局 CSS 和 DOM，但是 JavaScript 是不会被隔离的；</li>
+</ul>
+<h4 id="HTTP1：HTTP1-性能优化"><a href="#HTTP1：HTTP1-性能优化" class="headerlink" title="HTTP1：HTTP1 性能优化"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=UidB9qzPJ7hft4RvM5ppXw==.Lvv4PW3JOTkLaJTw5aVCAYBE4K2mh5NeNW0SmZO9usaf8i1mQSWP6Un6ziuIIJrY3sQV0/40jU3wzgPxW6QyW603HKILYg4pbdP4cyukWA7HfX66P5XtROSlbNNVRd4h4emeOe1bxZmL9NyfoYnE6+G+ru119fxewHbX/R7FJEc=">HTTP1：HTTP1 性能优化</a></h4><ul>
+<li>HTTP&#x2F;0.9 基于 TCP 协议，三次握手建立连接，发送一个 GET 请求行（没有请求头和请求体），服务器接收请求之后，读取对应 HTML 文件，数据以</li>
+</ul>
+<p>ASCII 字符流返回，传输完成断开连接；</p>
+<ul>
+<li>HTTP&#x2F;1.0</li>
+</ul>
+<p>增加请求头和响应头来进行协商，在发起请求时通过请求头告诉服务器它期待返回什么类型问题、什么形式压缩、什么语言以及文件编码。引入来状态吗，Cache 机制等；</p>
+<ul>
+<li>HTTP&#x2F;1.1 改进持久化连接，解决建立 TCP 连接、传输数据和断开连接带来的大量开销，支持在一个 TCP 连接上可以传输多个 HTTP</li>
+</ul>
+<p>请求，目前浏览器对于一个域名同时允许建立 6 个 TCP 持久连接；</p>
+<ul>
+<li>HTTP&#x2F;1.1 引入 Chunk transfer</li>
+</ul>
+<p>支持动态生成内容：服务器将数据分割成若干任意大小的数据块，每个数据块发送时附上上个数据块的长度，最后使用一个零长度的块作为发送数据完成的标志。在<br>HTTP&#x2F;1.1 需要在响应头中设置完整的数据大小，如 Content-Length。</p>
+<h4 id="HTTP2：如何提升网络速度"><a href="#HTTP2：如何提升网络速度" class="headerlink" title="HTTP2：如何提升网络速度"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=e8dTRn2orbpfWIH/MEgHjw==.0pu3lCjJFLgAzc98oGe3A/vl5fxahgTjXuwkM35yCX6cxOYZDGfygKWF+erkvW01ohrFlJvY2UuHMiTYj7CFGpwYDCUnoaBUSMhyxIMTEIS7iRKj4WCz6+mIxbdNWX8KubSzPzlnJ0Mc+fcg+ckh9Jqda/xcnwp9mE1e5PfYpdPG19W282JfoDi7vdxJGKAgYT5C2iKh5zAqego7gS7Mcg==">HTTP2：如何提升网络速度</a></h4><ul>
+<li>HTTP&#x2F;1.1 主要问题：TCP 慢启动；同时开启多条 TCP 连接，会竞争固定宽带；对头阻塞问题；</li>
+<li>HTTP&#x2F;2 在一个域名下只使用一个 TCP 长连接和消除对头阻塞问题；</li>
+<li>多路复用的实现：HTTP&#x2F;2 添加了二进制分帧层，将发送或响应数据经过二进制分帧处理，转化为一个个带有请求 ID</li>
+</ul>
+<p>编号的帧，服务器或者浏览器接收到响应帧后，根据相同 ID 帧合并为一条完整信息；</p>
+<ul>
+<li>设置请求优先级：发送请求可以设置请求优先级，服务器可以优先处理；</li>
+<li>服务器推送：请求一个 HTML 页面，服务器可以知道引用了哪些 JavaScript 和 CSS 文件，附带一起发送给浏览器；</li>
+<li>头部压缩：对请求头和响应头进行压缩；</li>
+</ul>
+<h4 id="HTTP3：甩掉-TCP、TCL-包袱，构建高效网络"><a href="#HTTP3：甩掉-TCP、TCL-包袱，构建高效网络" class="headerlink" title="HTTP3：甩掉 TCP、TCL 包袱，构建高效网络"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=WPP2EPfRQFVjAkZIu0o2Fg==.ONJEDxkNMhZY3nIyYNqmwdkDnf21nX/V1ROMFNjYSEf/+2SXgVk3xZhnNeFUK4WvJ2o24GPcMcnYW6ufly9hAt6PwQfYd3+5Ss/Ry5SJ8t6hwFsjfKsL7o79djh3w8mDf/EyXlgLtRMnGrbxMt9p1L2cRoOQGKufv0WDIFXZJwlqQeo2PWeDkPCLxSYiogmi+GAmJ2f5uTg4/w+YWB1eVwRiFMXSJAdfLhBZ708gSPIuD/aSVEjO9OzlZir4PqTG3TISuZEAy5dBnC7U9N1SnA==">HTTP3：甩掉 TCP、TCL 包袱，构建高效网络</a></h4><ul>
+<li>虽然 HTTP&#x2F;2 解决了应用层面的对头阻塞问题，不过和 HTTP&#x2F;1.1 一样，HTTP&#x2F;2 依然是基于 TCP 协议，而 TCP</li>
+</ul>
+<p>最初是为了单连接而设计；</p>
+<ul>
+<li>TCP</li>
+</ul>
+<p>可以看成是计算机之间的一个虚拟管道，数据从一端发送到另一端会被拆分为一个个按照顺序排列的数据包，如果在传输过程中，有一个数据因为网络故障或者其他原因丢失，那么整个连接会处于暂停状态，只有等到该数据重新传输；</p>
+<ul>
+<li>由于 TCP 协议僵化，也不可能使用新的协议，HTTP&#x2F;3 选择了一个折衷的方法，基于现有的 UDP 协议，实现类似 TC 片多路复用，传输可靠等功能，称为</li>
+</ul>
+<p>QULC 协议；</p>
+<ul>
+<li>QULC 实现类似 TCP 流量控制，传输可靠功能；集成 TLS 加密功能；实现多路复用功能；</li>
+</ul>
+<h4 id="同源策略：为什么-XMLHttpRequst-不能跨域请求"><a href="#同源策略：为什么-XMLHttpRequst-不能跨域请求" class="headerlink" title="同源策略：为什么 XMLHttpRequst 不能跨域请求"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=Ee52c13eHqJ7jOB3+6B/2A==.qrwmPTn6Dm8yFkgJ5t0ZtOpuplSh4nzBS8uF2guSgG1yEnZ2NghvEbCo5sE43kJFmzFOOwJwOhjdW/fHBmJIc1wkJ8FHz+qU5gl3O9OeigELBwZKBEBvloRxm83JuRrZg+rPpIP3xMGg2ls62JDmRZleXXwjvX8tYzwLnZIh5PESSEqLzVMKniYtR/b8pRQ9hwrCeoj/qzbimKHc8a8fxzGo9iLlmcLIt8pGZ0LRDq35MLfZ+NxIqgvWXVygGoTtDij0sBFPfasfqgP1mDLVVql3tyUJ0PPUP0LzHR8rHw3SozKHPXsGQvHMSTcqI/aH">同源策略：为什么 XMLHttpRequst 不能跨域请求</a></h4><ul>
+<li>协议、域名和端口号相同的 URL 是同源的；</li>
+<li>同源策略会隔离不同源的 DOM、页面数据和网络通信；</li>
+<li>页面可以引用第三方资源，不过暴露出诸如 XSS 问题，引入内容安全策略 CSP 限制；</li>
+<li>默认 XMLHttpRequest 和 Fetch 不能跨站请求资源，引入跨域资源共享（CORS）进行跨域访问控制；</li>
+</ul>
+<h4 id="跨站脚本攻击-XSS：为什么-cookie-中有-httpOnly-属性"><a href="#跨站脚本攻击-XSS：为什么-cookie-中有-httpOnly-属性" class="headerlink" title="跨站脚本攻击 XSS：为什么 cookie 中有 httpOnly 属性"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=nBTLgeAAUFTJT9VGOBNf1g==.VvwHuMAfEIK6ElbFAYCSiOyPzWzfwMFF/mzRhs4X3C9+jiHhbXyEs005P4sl7G38kKJO/2zfFdlF0XziNcSrgXU9Jj45b1okKP+/8H3ra4e7qBLBN5Aqi8ecWcWsAqlFtfvy+afUmRtel+7VmoyMNw34OPXnvc9/d3R/g73CdmMECfOjGB5YUEAkhnlJK7wks6fB+jmiyx5LVQiPbjiu7xxjQrqbj2QtC0bT72vRuOzjnlJbIc3ksEhHL/4W5Eiw2vndQ53NFRf7Vff9rBOHTAr914di6oFzLv+ksAQTC30=">跨站脚本攻击 XSS：为什么 cookie 中有 httpOnly 属性</a></h4><ul>
+<li>XSS 跨站脚本，往 HTML 文件中注入恶意代码，对用户实施攻击；</li>
+<li>XSS 攻击主要有存储型 XSS 攻击、反射型 XSS 攻击和 DOM 的 XSS 攻击；</li>
+<li>阻止 XSS 攻击：服务器对脚本进行过滤或转码，利用 CSP 策略，使用 HttpOnly；</li>
+</ul>
+<h4 id="CSRF-攻击：陌生连接不要随便点"><a href="#CSRF-攻击：陌生连接不要随便点" class="headerlink" title="CSRF 攻击：陌生连接不要随便点"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=V7Y1vqnmkG09SEKLISGK1g==.NPoB42luudwYGMpSAxSw+CLE9i4w6z3pzq1HaDwtFuylo8vcs3bRSoIfoxVHSqgeHbfCWztl+ad60Lq6qKMy0lkFCxnwEzvlEJlMGJfEx5qruXXZiOy2BA9KlWN1P+o/+B32BLZ7W3kEpOCaKT95vXALc/RpmiBgrUO39oAXSn/Y6JvulhZK85kNbK0shmCXbsbmmxkVcIJhxTGQ0jfp50oFH2WN2KxdVlAN/5RrLzdRV+qLnXE2f15BmKDHSsxY">CSRF 攻击：陌生连接不要随便点</a></h4><ul>
+<li>CSRF 跨站请求伪造，利用用户的登录状态，通过第三方站点攻击；</li>
+<li>避免 CSRF 攻击：利用 SameSite（三种模式：Strict、Lax、None） 让浏览器禁止第三方站点发起请求携带关键</li>
+</ul>
+<p>Cookie；验证请求的来源站点，请求头中的 Referer 和 Origin 属性；利用 CSRF Token；</p>
+<h4 id="沙盒：页面和系统之间的隔离墙"><a href="#沙盒：页面和系统之间的隔离墙" class="headerlink" title="沙盒：页面和系统之间的隔离墙"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=TY46V1bTsG/FwY2prj7KxA==.EbunNmiU46Os3BwnYRXAMEjUANEhcg7yN6puPCnUuyW+XMIEMTNV/QbtjD0LHpdwxYrReFZlqTA9RY6HuQ2BN+9FebKHPfvzE0rZY53jzBa+2HyM5ITIDh0g8dt83NyH1Gfvui5JtqwHjCn0L5iKq5Ml9wJTQ7vGE8Vl4arKNkcjvpCoq+a0fiQ4BeQt0NnmORv3DIPRJJM8BWIjEpYxLvf0q8JPS2KLRGsGGFlRDdH1Q79QVnBEyVvjTBWueKmVsWBg/54z9SM4hs35bO9OCQ==">沙盒：页面和系统之间的隔离墙</a></h4><ul>
+<li><p>浏览器被划分为浏览器内核和渲染内核两个核心模块，其中浏览器内核石油网络进程、浏览器主进程和 GPU 进程组成的，渲染内核就是渲染进程；</p>
+</li>
+<li></li>
+</ul>
+<p>浏览器中的安全沙箱是利用操作系统提供的安全技术，让渲染进程在执行过程中无法访问或者修改操作系统中的数据，在渲染进程需要访问系统资源的时候，需要通过浏览器内核来实现，然后将访问的结果通过<br>IPC 转发给渲染进程；</p>
+<ul>
+<li>站点隔离（Site Isolation）将同一站点（包含相同根域名和相同协议的地址）中相互关联的页面放到同一个渲染进程中执行；</li>
+<li>实现站点隔离，就可以将恶意的 iframe 隔离在恶意进程内部，使得它无法继续访问其他 iframe 进程的内容，因此无法攻击其他站点；</li>
+</ul>
+<h4 id="HTTPS：让数据传输更安全"><a href="#HTTPS：让数据传输更安全" class="headerlink" title="HTTPS：让数据传输更安全"></a><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=5+izJPuX/JH0xYgwSnAvQw==.xGO225bg9VVXol2egy+TA4CHHpxRqWvNi7Z6Tj4YXKjqg+YyJaQRXi7/V4oBpg5UK+QZmkR+JPb8x9bewEhLg2O74ynXyj1CU+5PD1EhsDVlBhr0SiTRi9qeVq7pJxfnAUM9CsroNK6mYD6JDyDG9xDXXLi8BC5PTbkKbr523e1P8d4Z3clef5FWgSOA1FsGIILJNJzMsXPi07XprzELww==">HTTPS：让数据传输更安全</a></h4><ul>
+<li>在 TCP 和 HTTP 之间插入一个安全层，所有经过安全层的数据都会被加密或者解密；</li>
+<li>对称加密：浏览器发送加密套件列表和一个随机数 client-random，服务器会从加密套件中选取一个加密套件，然后生成一个随机数</li>
+</ul>
+<p>service-random，返回给浏览器。这样浏览器和服务器都有相同 client-random 和<br>service-random，再用相同的方法将两者混合生成一个密钥 master secret，双方就可以进行数据加密传输了；</p>
+<ul>
+<li>对称加密缺点：client-random 和 service-random</li>
+</ul>
+<p>的过程都是明文，黑客可以拿到协商的加密套件和双方随机数，生成密钥，数据可以被破解；</p>
+<ul>
+<li>非对称加密：浏览器发送加密套件列表给服务器，服务器选择一个加密套件，返回加密套件和公钥，浏览器用公钥加密数据，服务器用私钥解密；</li>
+<li>非对称加密缺点：加密效率太低，不能保证服务器发送给浏览器的数据安全，黑客可以获取公钥；</li>
+<li>对称加密结合非对称加密：浏览器发送对称加密套件列表、非对称加密列表和随机数 client-random 给服务器，服务器生成随机数</li>
+</ul>
+<p>service-random，选择加密套件和公钥返回给浏览器，浏览器利用 client-random 和 service-random 计算出<br>pre-master，然后利用公钥给 pre-master 加密，向服务器发送加密后的数据，服务器用私钥解密出 pre-master 数据，结合<br>client-random 和 service-random 生成对称密钥，使用对称密钥传输加密数据；</p>
+<ul>
+<li>引入数字证书是为了证明“我就是我”，防止 DNS 被劫持，伪造服务器；</li>
+<li>证书的作用：一个是向浏览器证明服务器的身份，另一个是包含服务器公钥；</li>
+<li>数字签名过程：CA 使用 Hash 函数技术明文信息，得出信息摘要，然后 CA 使用私钥对信息摘要进行加密，加密后的秘文就是数字签名；</li>
+<li>验证数字签名：读取证书明文信息，使用相同 Hash 函数计算得到信息摘要 A，再利用 CA 的公钥解密得到 B，对比 A 和 B，如果一致，则确认证书合法；</li>
+</ul>
+<blockquote>
+<p>作者 wuwhs<br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040896436">https://segmentfault.com/a/1190000040896436</a></p>
+</blockquote>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/abd7db04.html"><div class="related-post-title">控制文本的行数，末行超出显示省略号...</div><div class="related-post-meta"><time>2020-10-09</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/bee8f892.html"><div class="related-post-title">前端入门和进阶学习笔记，超详细的Web前端学习图文教程</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/507688e3.html"><div class="related-post-title">chrome调试技巧</div><div class="related-post-meta"><time>2020-01-09</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/47fe76f0.html"><div class="related-post-title">webpack打包之后js文件引用顺序错乱，vendor顺序错误</div><div class="related-post-meta"><time>2019-12-12</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/7366770b.html"><div class="related-post-title">实现双向绑定Proxy比defineproperty优劣如何</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/46ee4850.html">https://xuehuayu.cn/article/46ee4850.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/bf7e7421.html">git多账号配置</a><a class="next" href="/article/624d1918.html">React + TypeScript 从零开发Popup组件并发布到 npm</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

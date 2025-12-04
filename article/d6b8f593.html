@@ -1,0 +1,888 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>前端工程化 - 剖析npm的包管理机制 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">前端工程化 - 剖析npm的包管理机制</h1><div class="post-meta"><span class="date">2019-12-18</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 11.1k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 44</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/d6b8f593.html#waline-comment"><span class="waline-comment-count" data-path="/article/d6b8f593.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5df789066fb9a0161f30580c</code></p>
+<p>现如今，前端开发的同学已经离不开 <code>npm</code><br>这个包管理工具，其优秀的包版本管理机制承载了整个繁荣发展的<code>NodeJS</code>社区，理解其内部机制非常有利于加深我们对模块开发的理解、各项前端工程化的配置以加快我们排查问题（相信不少同学收到过各种依赖问题的困扰）的速度。</p>
+<p>本文从三个角度：<code>package.json</code>、版本管理、依赖安装结合具体实例对 <code>npm</code> 的包管理机制进行了详细分析。</p>
+<span id="more"></span>
+
+<h2 id="一、剖析-package-json"><a href="#一、剖析-package-json" class="headerlink" title="一、剖析 package.json"></a>一、剖析 package.json</h2><p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef28758e8c0?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>在 <code>Node.js</code> 中，模块是一个库或框架，也是一个 <code>Node.js</code> 项目。<code>Node.js</code> 项目遵循模块化的架构，当我们创建了一个<br><code>Node.js</code> 项目，意味着创建了一个模块，这个模块必须有一个描述文件，即<br><code>package.json</code>。它是我们最常见的配置文件，但是它里面的配置你真的有详细了解过吗？配置一个合理的 <code>package.json</code><br>文件直接决定着我们项目的质量，所以首先带大家分析下 <code>package.json</code> 的各项详细配置。</p>
+<h3 id="1-1-必备属性"><a href="#1-1-必备属性" class="headerlink" title="1.1 必备属性"></a>1.1 必备属性</h3><p><code>package.json</code> 中有非常多的属性，其中必须填写的只有两个：<code>name</code> 和 <code>version</code> ，这两个属性组成一个 <code>npm</code> 模块的唯一标识。</p>
+<h4 id="npm包命名规则"><a href="#npm包命名规则" class="headerlink" title="npm包命名规则"></a>npm包命名规则</h4><p><code>name</code> 即模块名称，其命名时需要遵循官方的一些规范和建议：</p>
+<ul>
+<li>包名会成为模块<code>url</code>、命令行中的一个参数或者一个文件夹名称，任何非<code>url</code>安全的字符在包名中都不能使用，可以使用</li>
+</ul>
+<p><code>validate-npm-package-name</code> 包来检测包名是否合法。</p>
+<ul>
+<li><p>语义化包名，可以帮助开发者更快的找到需要的包，并且避免意外获取错误的包。</p>
+</li>
+<li><p>若包名称中存在一些符号，将符号去除后不得与现有包名重复</p>
+</li>
+</ul>
+<p>例如：由于<code>react-native</code>已经存在，<code>react.native</code>、<code>reactnative</code>都不可以再创建。</p>
+<ul>
+<li>如果你的包名与现有的包名太相近导致你不能发布这个包，那么推荐将这个包发布到你的作用域下。</li>
+</ul>
+<p>例如：用户名 <code>conard</code>，那么作用域为 <code>@conard</code>，发布的包可以是<code>@conard/react</code>。</p>
+<h4 id="查看包是否被占用"><a href="#查看包是否被占用" class="headerlink" title="查看包是否被占用"></a>查看包是否被占用</h4><p><code>name</code> 是一个包的唯一标识，不得和其他包名重复，我们可以执行 <code>npm view packageName</code> 查看包是否被占用，并可以查看它的一些基本信息：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef28368aba9?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>若包名称从未被使用过，则会抛出 <code>404</code> 错误：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef28544db20?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>另外，你还可以去 <code>https://www.npmjs.com/</code> 查询更多更详细的包信息。</p>
+<h3 id="1-2描述信息"><a href="#1-2描述信息" class="headerlink" title="1.2描述信息"></a>1.2描述信息</h3><h4 id="基本描述"><a href="#基本描述" class="headerlink" title="基本描述"></a>基本描述</h4><pre><code>{
+  &quot;description&quot;: &quot;An enterprise-class UI design language and React components implementation&quot;,
+  &quot;keywords&quot;: [
+    &quot;ant&quot;,
+    &quot;component&quot;,
+    &quot;components&quot;,
+    &quot;design&quot;,
+    &quot;framework&quot;,
+    &quot;frontend&quot;,
+    &quot;react&quot;,
+    &quot;react-component&quot;,
+    &quot;ui&quot;
+  ]
+}
+复制代码
+</code></pre>
+<p><code>description</code>用于添加模块的的描述信息，方便别人了解你的模块。</p>
+<p><code>keywords</code>用于给你的模块添加关键字。</p>
+<p>当然，他们的还有一个非常重要的作用，就是利于模块检索。当你使用 <code>npm search</code> 检索模块时，会到<code>description</code> 和 <code>keywords</code><br>中进行匹配。写好 <code>description</code> 和 <code>keywords</code> 有利于你的模块获得更多更精准的曝光：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef2871aa774?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h4 id="开发人员"><a href="#开发人员" class="headerlink" title="开发人员"></a>开发人员</h4><p>描述开发人员的字段有两个：<code>author</code> 和 <code>contributors</code>， <code>author</code> 指包的主要作者，一个 <code>author</code> 对应一个人。<br><code>contributors</code> 指贡献者信息，一个 <code>contributors</code> 对应多个贡献者，值为数组，对人的描述可以是一个字符串，也可以是下面的结构：</p>
+<pre><code>{
+    &quot;name&quot; : &quot;ConardLi&quot;,
+    &quot;email&quot; : &quot;lisqPersion@163.com&quot;,
+    &quot;url&quot; : &quot;https://github.com/ConardLi&quot;
+}
+复制代码
+</code></pre>
+<h4 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h4><pre><code>{
+  &quot;homepage&quot;: &quot;http://ant.design/&quot;,
+  &quot;bugs&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ant-design/ant-design/issues&quot;
+  },
+  &quot;repository&quot;: {
+    &quot;type&quot;: &quot;git&quot;,
+    &quot;url&quot;: &quot;https://github.com/ant-design/ant-design&quot;
+  },
+}
+复制代码
+</code></pre>
+<p><code>homepage</code> 用于指定该模块的主页。</p>
+<p><code>repository</code> 用于指定模块的代码仓库。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef285e805c7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p><code>bugs</code> 指定一个地址或者一个邮箱，对你的模块存在疑问的人可以到这里提出问题。</p>
+<h3 id="1-3-依赖配置"><a href="#1-3-依赖配置" class="headerlink" title="1.3 依赖配置"></a>1.3 依赖配置</h3><p>我们的项目可能依赖一个或多个外部依赖包，根据依赖包的不同用途，我们将他们配置在下面几个属性下：<code>dependencies、devDependencies、peerDependencies、bundledDependencies、optionalDependencies</code>。</p>
+<h4 id="配置规则"><a href="#配置规则" class="headerlink" title="配置规则"></a>配置规则</h4><p>在介绍几种依赖配置之前，首先我们来看一下依赖的配置规则，你看到的依赖包配置可能是下面这样的：</p>
+<pre><code>  &quot;dependencies&quot;: {
+      &quot;antd&quot;: &quot;ant-design/ant-design#4.0.0-alpha.8&quot;,
+      &quot;axios&quot;: &quot;^1.2.0&quot;,
+      &quot;test-js&quot;: &quot;file:../test&quot;,
+      &quot;test2-js&quot;: &quot;http://cdn.com/test2-js.tar.gz&quot;,
+      &quot;core-js&quot;: &quot;^1.1.5&quot;,
+  }
+复制代码
+</code></pre>
+<p>依赖配置遵循下面几种配置规则：</p>
+<ul>
+<li><p><code>依赖包名称:VERSION</code></p>
+</li>
+<li><p><code>VERSION</code>是一个遵循<code>SemVer</code>规范的版本号配置，<code>npm install</code> 时将到npm服务器下载符合指定版本范围的包。</p>
+</li>
+<li><p><code>依赖包名称:DWONLOAD_URL</code></p>
+</li>
+<li><p><code>DWONLOAD_URL</code> 是一个可下载的<code>tarball</code>压缩包地址，模块安装时会将这个<code>.tar</code>下载并安装到本地。</p>
+</li>
+<li><p><code>依赖包名称:LOCAL_PATH</code></p>
+</li>
+<li><p><code>LOCAL_PATH</code> 是一个本地的依赖包路径，例如</p>
+</li>
+</ul>
+<p><code>file:../pacakges/pkgName</code>。适用于你在本地测试一个<code>npm</code>包，不应该将这种方法应用于线上。</p>
+<ul>
+<li><code>依赖包名称:GITHUB_URL</code></li>
+<li><code>GITHUB_URL</code> 即 <code>github</code> 的 <code>username/modulename</code></li>
+</ul>
+<p>的写法，例如：<code>ant-design/ant-design</code>，你还可以在后面指定 <code>tag</code> 和 <code>commit id</code>。</p>
+<ul>
+<li><p><code>依赖包名称:GIT_URL</code></p>
+</li>
+<li><p><code>GIT_URL</code> 即我们平时clone代码库的 <code>git url</code>，其遵循以下形式：</p>
+<p>  <protocol>:&#x2F;&#x2F;[<user>[:<password>]@]<hostname>[:<port>][:][&#x2F;]<path>[#<commit-ish> | #semver:<semver>]复制代码</p>
+</li>
+</ul>
+<p>其中 <code>protocal</code> 可以是以下几种形式：</p>
+<ul>
+<li><code>git://github.com/user/project.git#commit-ish</code></li>
+<li><code>git+ssh://user@hostname:project.git#commit-ish</code></li>
+<li><code>git+ssh://user@hostname/project.git#commit-ish</code></li>
+<li><code>git+http://user@hostname/project/blah.git#commit-ish</code></li>
+<li><code>git+https://user@hostname/project/blah.git#commit-ish</code></li>
+</ul>
+<h4 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a>dependencies</h4><p><code>dependencies</code> 指定了项目运行所依赖的模块，开发环境和生产环境的依赖模块都可以配置到这里，例如</p>
+<pre><code>  &quot;dependencies&quot;: {
+      &quot;lodash&quot;: &quot;^4.17.13&quot;,
+      &quot;moment&quot;: &quot;^2.24.0&quot;,
+  }
+复制代码
+</code></pre>
+<h4 id="devDependencies"><a href="#devDependencies" class="headerlink" title="devDependencies"></a>devDependencies</h4><p>有一些包有可能你只是在开发环境中用到，例如你用于检测代码规范的 <code>eslint</code> ,用于进行测试的 <code>jest</code><br>，用户使用你的包时即使不安装这些依赖也可以正常运行，反而安装他们会耗费更多的时间和资源，所以你可以把这些依赖添加到 <code>devDependencies</code><br>中，这些依赖照样会在你本地进行 <code>npm install</code> 时被安装和管理，但是不会被安装到生产环境：</p>
+<pre><code>  &quot;devDependencies&quot;: {
+      &quot;jest&quot;: &quot;^24.3.1&quot;,
+      &quot;eslint&quot;: &quot;^6.1.0&quot;,
+  }
+复制代码
+</code></pre>
+<h4 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h4><p><code>peerDependencies</code> 用于指定你正在开发的模块所依赖的版本以及用户安装的依赖包版本的兼容性。</p>
+<p>上面的说法可能有点太抽象，我们直接拿 <code>ant-design</code> 来举个例子，<code>ant-design</code> 的 <code>package.json</code> 中有如下配置：</p>
+<pre><code>  &quot;peerDependencies&quot;: {
+    &quot;react&quot;: &quot;&gt;=16.0.0&quot;,
+    &quot;react-dom&quot;: &quot;&gt;=16.0.0&quot;
+  }
+复制代码
+</code></pre>
+<p>当你正在开发一个系统，使用了 <code>ant-design</code> ，所以也肯定需要依赖 <code>React</code>。同时， <code>ant-design</code> 也是需要依赖 <code>React</code><br>的，它要保持稳定运行所需要的 <code>React</code> 版本是<code>16.0.0</code>，而你开发时依赖的 <code>React</code> 版本是 <code>15.x</code>：</p>
+<p>这时，<code>ant-design</code> 要使用 <code>React</code>，并将其引入：</p>
+<pre><code>import * as React from&#39;react&#39;;
+import * as ReactDOM from&#39;react-dom&#39;;
+复制代码
+</code></pre>
+<p>这时取到的是宿主环境也就是你的环境中的 <code>React</code> 版本，这就可能造成一些问题。在 <code>npm2</code> 的时候，指定上面的 <code>peerDependencies</code><br>将意味着强制宿主环境安装 <code>react@&gt;=16.0.0和react-dom@&gt;=16.0.0</code> 的版本。</p>
+<p><code>npm3</code> 以后不会再要求 <code>peerDependencies</code> 所指定的依赖包被强制安装，相反 <code>npm3</code><br>会在安装结束后检查本次安装是否正确，如果不正确会给用户打印警告提示。</p>
+<pre><code>  &quot;dependencies&quot;: {
+    &quot;react&quot;: &quot;15.6.0&quot;,
+    &quot;antd&quot;: &quot;^3.22.0&quot;
+  }
+复制代码
+</code></pre>
+<p>例如，我在项目中依赖了 <code>antd</code> 的最新版本，然后依赖了 <code>react</code> 的 <code>15.6.0</code>版本，在进行依赖安装时将给出以下警告：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef2b2a3e5c4?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h4 id="optionalDependencies"><a href="#optionalDependencies" class="headerlink" title="optionalDependencies"></a>optionalDependencies</h4><p>某些场景下，依赖包可能不是强依赖的，这个依赖包的功能可有可无，当这个依赖包无法被获取到时，你希望 <code>npm install</code><br>继续运行，而不会导致失败，你可以将这个依赖放到 <code>optionalDependencies</code> 中，注意 <code>optionalDependencies</code><br>中的配置将会覆盖掉 <code>dependencies</code> 所以只需在一个地方进行配置。</p>
+<p>当然，引用 <code>optionalDependencies</code> 中安装的依赖时，一定要做好异常处理，否则在模块获取不到时会导致报错。</p>
+<h4 id="bundledDependencies"><a href="#bundledDependencies" class="headerlink" title="bundledDependencies"></a>bundledDependencies</h4><p>和以上几个不同，<code>bundledDependencies</code> 的值是一个数组，数组里可以指定一些模块，这些模块将在这个包发布时被一起打包。</p>
+<pre><code>  &quot;bundledDependencies&quot;: [&quot;package1&quot; , &quot;package2&quot;]
+复制代码
+</code></pre>
+<h3 id="1-4-协议"><a href="#1-4-协议" class="headerlink" title="1.4 协议"></a>1.4 协议</h3><pre><code>{
+    &quot;license&quot;: &quot;MIT&quot;
+}
+复制代码
+</code></pre>
+<p><code>license</code><br>字段用于指定软件的开源协议，开源协议里面详尽表述了其他人获得你代码后拥有的权利，可以对你的的代码进行何种操作，何种操作又是被禁止的。同一款协议有很多变种，协议太宽松会导致作者丧失对作品的很多权利，太严格又不便于使用者使用及作品的传播，所以开源作者要考虑自己对作品想保留哪些权利，放开哪些限制。</p>
+<blockquote>
+</blockquote>
+<p>软件协议可分为开源和商业两类，对于商业协议，或者叫法律声明、许可协议，每个软件会有自己的一套行文，由软件作者或专门律师撰写，对于大多数人来说不必自己花时间和精力去写繁长的许可协议，选择一份广为流传的开源协议就是个不错的选择。</p>
+<p>以下就是几种主流的开源协议：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef2b7fb2674?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<ul>
+<li><code>MIT</code>：只要用户在项目副本中包含了版权声明和许可声明，他们就可以拿你的代码做任何想做的事情，你也无需承担任何责任。</li>
+<li><code>Apache</code>：类似于 <code>MIT</code>，同时还包含了贡献者向用户提供专利授权相关的条款。</li>
+<li><code>GPL</code>：修改项目代码的用户再次分发源码或二进制代码时，必须公布他的相关修改。</li>
+</ul>
+<p>如果你对开源协议有更详细的要求，可以到 <a target="_blank" rel="noopener" href="https://choosealicense.com/">choosealicense.com&#x2F;</a><br>获取更详细的开源协议说明。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef2b2f744d8?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h3 id="1-5-目录、文件相关"><a href="#1-5-目录、文件相关" class="headerlink" title="1.5 目录、文件相关"></a>1.5 目录、文件相关</h3><h4 id="程序入口"><a href="#程序入口" class="headerlink" title="程序入口"></a>程序入口</h4><pre><code>{
+  &quot;main&quot;: &quot;lib/index.js&quot;,
+}
+复制代码
+</code></pre>
+<p><code>main</code> 属性可以指定程序的主入口文件，例如，上面 <code>antd</code> 指定的模块入口 <code>lib/index.js</code> ，当我们在代码用引入 <code>antd</code><br>时：<code>import { notification } from &#39;antd&#39;;</code> 实际上引入的就是 <code>lib/index.js</code> 中暴露出去的模块。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef2bd8639b2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h4 id="命令行工具入口"><a href="#命令行工具入口" class="headerlink" title="命令行工具入口"></a>命令行工具入口</h4><p>当你的模块是一个命令行工具时，你需要为命令行工具指定一个入口，即指定你的命令名称和本地可指定文件的对应关系。如果是全局安装，npm<br>将会使用符号链接把可执行文件链接到 <code>/usr/local/bin</code>，如果是本地安装，会链接到 <code>./node_modules/.bin/</code>。</p>
+<pre><code>{
+    &quot;bin&quot;: {
+    &quot;conard&quot;: &quot;./bin/index.js&quot;
+  }
+}
+复制代码
+</code></pre>
+<p>例如上面的配置：当你的包安装到全局时：<code>npm</code> 会在 <code>/usr/local/bin</code>下创建一个以 <code>conard</code> 为名字的软链接，指向全局安装下来的<br><code>conard</code> 包下面的 <code>&quot;./bin/index.js&quot;</code>。这时你在命令行执行 <code>conard</code> 则会调用链接到的这个js文件。</p>
+<blockquote>
+<p>这里不再过多展开，更多内容在我后续的命令行工具文章中会进行详细讲解。</p>
+</blockquote>
+<h4 id="发布文件配置"><a href="#发布文件配置" class="headerlink" title="发布文件配置"></a>发布文件配置</h4><pre><code>{
+    &quot;files&quot;: [
+      &quot;dist&quot;,
+      &quot;lib&quot;,
+      &quot;es&quot;
+    ]
+}
+复制代码
+</code></pre>
+<p><code>files</code> 属性用于描述你 <code>npm publish</code> 后推送到 <code>npm</code><br>服务器的文件列表，如果指定文件夹，则文件夹内的所有内容都会包含进来。我们可以看到下载后的包是下面的目录结构：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef2d5915089?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<blockquote>
+<p>另外，你还可以通过配置一个 <code>.npmignore</code> 文件来排除一些文件, 防止大量的垃圾文件推送到 <code>npm</code>, 规则上和你用的 <code>.gitignore</code></p>
+</blockquote>
+<p>是一样的。<code>.gitignore</code> 文件也可以充当<code>.npmignore</code> 文件。</p>
+<h4 id="man"><a href="#man" class="headerlink" title="man"></a>man</h4><p><code>man</code> 命令是 <code>Linux</code> 下的帮助指令，通过 <code>man</code> 指令可以查看 <code>Linux</code> 中的指令帮助、配置文件帮助和编程帮助等信息。</p>
+<p>如果你的 <code>node.js</code> 模块是一个全局的命令行工具，在 <code>package.json</code> 通过 <code>man</code> 属性可以指定 <code>man</code> 命令查找的文档地址。</p>
+<p><code>man</code> 文件必须以数字结尾，或者如果被压缩了，以 <code>.gz</code> 结尾。数字表示文件将被安装到 <code>man</code> 的哪个部分。如果 <code>man</code><br>文件名称不是以模块名称开头的，安装的时候会给加上模块名称前缀。</p>
+<p>例如下面这段配置：</p>
+<pre><code>{
+  &quot;man&quot; : [
+    &quot;/Users/isaacs/dev/npm/cli/man/man1/npm-access.1&quot;,
+    &quot;/Users/isaacs/dev/npm/cli/man/man1/npm-audit.1&quot;
+  ]
+}
+复制代码
+</code></pre>
+<p>在命令行输入 <code>man npm-audit</code> ：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef2c221c0cd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h4 id="规范项目目录"><a href="#规范项目目录" class="headerlink" title="规范项目目录"></a>规范项目目录</h4><p>一个 <code>node.js</code> 模块是基于 <code>CommonJS</code> 模块化规范实现的，严格按照 <code>CommonJS</code> 规范，模块目录下除了必须包含包描述文件<br><code>package.json</code> 以外，还需要包含以下目录：</p>
+<ul>
+<li><code>bin</code>：存放可执行二进制文件的目录</li>
+<li><code>lib</code>：存放js代码的目录</li>
+<li><code>doc</code>：存放文档的目录</li>
+<li><code>test</code>：存放单元测试用例代码的目录</li>
+<li>…</li>
+</ul>
+<p>在模块目录中你可能没有严格按照以上结构组织或命名，你可以通过在 <code>package.json</code> 指定 <code>directories</code><br>属性来指定你的目录结构和上述的规范结构的对应情况。除此之外 <code>directories</code> 属性暂时没有其他应用。</p>
+<pre><code>{
+  &quot;directories&quot;: {
+    &quot;lib&quot;: &quot;src/lib/&quot;,
+    &quot;bin&quot;: &quot;src/bin/&quot;,
+    &quot;man&quot;: &quot;src/man/&quot;,
+    &quot;doc&quot;: &quot;src/doc/&quot;,
+    &quot;example&quot;: &quot;src/example/&quot;
+  }
+}
+复制代码
+</code></pre>
+<blockquote>
+<p>不过官方文档表示，虽然目前这个属性没有什么重要作用，未来可能会整出一些花样出来，例如：doc 中存放的 markdown 文件、example</p>
+</blockquote>
+<p>中存放的示例文件，可能会友好的展示出来。</p>
+<h3 id="1-6-脚本配置"><a href="#1-6-脚本配置" class="headerlink" title="1.6 脚本配置"></a>1.6 脚本配置</h3><h4 id="script"><a href="#script" class="headerlink" title="script"></a>script</h4><pre><code>{
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;jest --config .jest.js --no-cache&quot;,
+    &quot;dist&quot;: &quot;antd-tools run dist&quot;,
+    &quot;compile&quot;: &quot;antd-tools run compile&quot;,
+    &quot;build&quot;: &quot;npm run compile &amp;&amp; npm run dist&quot;
+  }
+}
+复制代码
+</code></pre>
+<p><code>scripts</code> 用于配置一些脚本命令的缩写，各个脚本可以互相组合使用，这些脚本可以覆盖整个项目的生命周期，配置后可使用 <code>npm run command</code><br>进行调用。如果是 <code>npm</code> 关键字，则可以直接调用。例如，上面的配置制定了以下几个命令：<code>npm run test</code>、<code>npm run dist</code>、<code>npm run compile</code>、<code>npm run build</code>。</p>
+<h4 id="config"><a href="#config" class="headerlink" title="config"></a>config</h4><p><code>config</code><br>字段用于配置脚本中使用的环境变量，例如下面的配置，可以在脚本中使用<code>process.env.npm_package_config_port</code>进行获取。</p>
+<pre><code>{
+  &quot;config&quot; : { &quot;port&quot; : &quot;8080&quot; }
+}
+复制代码
+</code></pre>
+<h3 id="1-7-发布配置"><a href="#1-7-发布配置" class="headerlink" title="1.7 发布配置"></a>1.7 发布配置</h3><h4 id="preferGlobal"><a href="#preferGlobal" class="headerlink" title="preferGlobal"></a>preferGlobal</h4><p>如果你的 <code>node.js</code> 模块主要用于安装到全局的命令行工具，那么该值设置为 <code>true</code><br>，当用户将该模块安装到本地时，将得到一个警告。这个配置并不会阻止用户安装，而是会提示用户防止错误使用而引发一些问题。</p>
+<h4 id="private"><a href="#private" class="headerlink" title="private"></a>private</h4><p>如果将 <code>private</code> 属性设置为 <code>true</code>，npm将拒绝发布它，这是为了防止一个私有模块被无意间发布出去。</p>
+<p>![xuehuayu.cn](data:image&#x2F;svg+xml;utf8,<?xml version=&quot;1.0&quot;?>&lt;svg</p>
+<p>xmlns&#x3D;&quot;<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>&quot; version&#x3D;&quot;1.1&quot;<br>width&#x3D;&quot;1088&quot; height&#x3D;&quot;318&quot;&gt;</svg>)</p>
+<h4 id="publishConfig"><a href="#publishConfig" class="headerlink" title="publishConfig"></a>publishConfig</h4><pre><code>  &quot;publishConfig&quot;: {
+    &quot;registry&quot;: &quot;https://registry.npmjs.org/&quot;
+  },
+复制代码
+</code></pre>
+<p>发布模块时更详细的配置，例如你可以配置只发布某个 <code>tag</code>、配置发布到的私有 <code>npm</code> 源。更详细的配置可以参考<br><a target="_blank" rel="noopener" href="http://caibaojian.com/npm/misc/config.html">npm-config</a></p>
+<h4 id="os"><a href="#os" class="headerlink" title="os"></a>os</h4><p>假如你开发了一个模块，只能跑在 <code>darwin</code> 系统下，你需要保证 <code>windows</code> 用户不会安装到你的模块，从而避免发生不必要的错误。</p>
+<p>使用 <code>os</code> 属性可以帮助你完成以上的需求，你可以指定你的模块只能被安装在某些系统下，或者指定一个不能安装的系统黑名单：</p>
+<pre><code>&quot;os&quot; : [ &quot;darwin&quot;, &quot;linux&quot; ]
+&quot;os&quot; : [ &quot;!win32&quot; ]
+复制代码
+</code></pre>
+<p>例如，我把一个测试模块指定一个系统黑名单：<code>&quot;os&quot; : [ &quot;!darwin&quot; ]</code>，当我在此系统下安装它时会爆出如下错误：</p>
+<p>![xuehuayu.cn](data:image&#x2F;svg+xml;utf8,<?xml version=&quot;1.0&quot;?>&lt;svg</p>
+<p>xmlns&#x3D;&quot;<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>&quot; version&#x3D;&quot;1.1&quot;<br>width&#x3D;&quot;969&quot; height&#x3D;&quot;137&quot;&gt;</svg>)</p>
+<blockquote>
+<p>在node环境下可以使用 process.platform 来判断操作系统。</p>
+</blockquote>
+<h4 id="cpu"><a href="#cpu" class="headerlink" title="cpu"></a>cpu</h4><p>和上面的 <code>os</code> 类似，我们可以用 <code>cpu</code> 属性更精准的限制用户安装环境：</p>
+<pre><code>&quot;cpu&quot; : [ &quot;x64&quot;, &quot;ia32&quot; ]
+&quot;cpu&quot; : [ &quot;!arm&quot;, &quot;!mips&quot; ]
+复制代码
+</code></pre>
+<blockquote>
+<p>在node环境下可以使用 process.arch 来判断 cpu 架构。</p>
+</blockquote>
+<h2 id="二、剖析包版本管理机制"><a href="#二、剖析包版本管理机制" class="headerlink" title="二、剖析包版本管理机制"></a>二、剖析包版本管理机制</h2><p><code>Nodejs</code>成功离不开 <code>npm</code> 优秀的依赖管理系统。在介绍整个依赖系统之前，必须要了解 <code>npm</code>如何管理依赖包的版本，本章将介绍 <code>npm包</code><br>的版本发布规范、如何管理各种依赖包的版本以及一些关于包版本的最佳实践。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef301559a8e?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h3 id="2-1-查看npm包版本"><a href="#2-1-查看npm包版本" class="headerlink" title="2.1 查看npm包版本"></a>2.1 查看npm包版本</h3><p>你可以执行 <code>npm view package version</code> 查看某个 <code>package</code> 的最新版本。</p>
+<p>执行 <code>npm view conard versions</code> 查看某个 <code>package</code> 在npm服务器上所有发布过的版本。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3016562c8?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>执行 <code>npm ls</code> 可查看当前仓库依赖树上所有包的版本信息。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef302c760fe?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h3 id="2-2-SemVer规范"><a href="#2-2-SemVer规范" class="headerlink" title="2.2 SemVer规范"></a>2.2 SemVer规范</h3><p><code>npm包</code> 中的模块版本都需要遵循 <code>SemVer</code>规范——由 <code>Github</code> 起草的一个具有指导意义的，统一的版本号表示规则。实际上就是<br><code>Semantic Version</code>（语义化版本）的缩写。</p>
+<blockquote>
+<p>SemVer规范官网： <a target="_blank" rel="noopener" href="https://semver.org/">semver.org&#x2F;</a></p>
+</blockquote>
+<h4 id="标准版本"><a href="#标准版本" class="headerlink" title="标准版本"></a>标准版本</h4><p><code>SemVer</code>规范的标准版本号采用 <code>X.Y.Z</code> 的格式，其中 X、Y 和 Z 为非负的整数，且禁止在数字前方补零。X 是主版本号、Y 是次版本号、而 Z<br>为修订号。每个元素必须以数值来递增。</p>
+<ul>
+<li>主版本号(<code>major</code>)：当你做了不兼容的API 修改</li>
+<li>次版本号(<code>minor</code>)：当你做了向下兼容的功能性新增</li>
+<li>修订号(<code>patch</code>)：当你做了向下兼容的问题修正。</li>
+</ul>
+<p>例如：<code>1.9.1 -&gt; 1.10.0 -&gt; 1.11.0</code></p>
+<h4 id="先行版本"><a href="#先行版本" class="headerlink" title="先行版本"></a>先行版本</h4><p>当某个版本改动比较大、并非稳定而且可能无法满足预期的兼容性需求时，你可能要先发布一个先行版本。</p>
+<p>先行版本号可以加到“主版本号.次版本号.修订号”的后面，先加上一个连接号再加上一连串以句点分隔的标识符和版本编译信息。</p>
+<ul>
+<li>内部版本(<code>alpha</code>):</li>
+<li>公测版本(<code>beta</code>):</li>
+<li>正式版本的候选版本<code>rc</code>: 即 <code>Release candiate</code></li>
+</ul>
+<h4 id="React的版本"><a href="#React的版本" class="headerlink" title="React的版本"></a>React的版本</h4><p>下面我们来看看 <code>React</code> 的历史版本：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3224e9335?imageslim" alt="xuehuayu.cn"></p>
+<p>可见是严格按照 <code>SemVer</code> 规范来发版的：</p>
+<ul>
+<li>版本号严格按照 <code>主版本号.次版本号.修订号</code> 格式命名</li>
+<li>版本是严格递增的，：<code>16.8.0 -&gt; 16.8.1 -&gt; 16.8.2</code></li>
+<li>发布重大版本或版本改动较大时，先发布<code>alpha</code>、<code>beta</code>、<code>rc</code>等先行版本</li>
+</ul>
+<h4 id="发布版本"><a href="#发布版本" class="headerlink" title="发布版本"></a>发布版本</h4><p>在修改 <code>npm</code> 包某些功能后通常需要发布一个新的版本，我们通常的做法是直接去修改 <code>package.json</code><br>到指定版本。如果操作失误，很容易造成版本号混乱，我们可以借助符合 <code>Semver</code> 规范的命令来完成这一操作：</p>
+<ul>
+<li><code>npm version patch</code> : 升级修订版本号</li>
+<li><code>npm version minor</code> : 升级次版本号</li>
+<li><code>npm version major</code> : 升级主版本号</li>
+</ul>
+<h3 id="2-3-版本工具使用"><a href="#2-3-版本工具使用" class="headerlink" title="2.3 版本工具使用"></a>2.3 版本工具使用</h3><p>在开发中肯定少不了对一些版本号的操作，如果这些版本号符合 <code>SemVer</code>规范<br>，我们可以借助用于操作版本的npm包<code>semver</code>来帮助我们进行比较版本大小、提取版本信息等操作。</p>
+<blockquote>
+<p>Npm 也使用了该工具来处理版本相关的工作。</p>
+</blockquote>
+<pre><code>npm install semver
+复制代码
+</code></pre>
+<ul>
+<li><p>比较版本号大小</p>
+<p>  semver.gt(‘1.2.3’, ‘9.8.7’) &#x2F;&#x2F; false<br>  semver.lt(‘1.2.3’, ‘9.8.7’) &#x2F;&#x2F; true复制代码</p>
+</li>
+<li><p>判断版本号是否符合规范，返回解析后符合规范的版本号。</p>
+<p>  semver.valid(‘1.2.3’) &#x2F;&#x2F; ‘1.2.3’<br>  semver.valid(‘a.b.c’) &#x2F;&#x2F; null复制代码</p>
+</li>
+<li><p>将其他版本号强制转换成semver版本号</p>
+<p>  semver.valid(semver.coerce(‘v2’)) &#x2F;&#x2F; ‘2.0.0’<br>  semver.valid(semver.coerce(‘42.6.7.9.3-alpha’)) &#x2F;&#x2F; ‘42.6.7’复制代码</p>
+</li>
+<li><p>一些其他用法</p>
+<p>  semver.clean(‘  &#x3D;v1.2.3   ‘) &#x2F;&#x2F; ‘1.2.3’<br>  semver.satisfies(‘1.2.3’, ‘1.x || &gt;&#x3D;2.5.0 || 5.0.0 - 7.2.3’) &#x2F;&#x2F; true<br>  semver.minVersion(‘&gt;&#x3D;1.0.0’) &#x2F;&#x2F; ‘1.0.0’复制代码</p>
+</li>
+</ul>
+<p>以上都是semver最常见的用法，更多详细内容可以查看<br>semver文档：<a target="_blank" rel="noopener" href="https://github.com/npm/node-semver">github.com&#x2F;npm&#x2F;node-se…</a></p>
+<h3 id="2-4-依赖版本管理"><a href="#2-4-依赖版本管理" class="headerlink" title="2.4 依赖版本管理"></a>2.4 依赖版本管理</h3><p>我们经常看到，在 <code>package.json</code> 中各种依赖的不同写法：</p>
+<pre><code>  &quot;dependencies&quot;: {
+    &quot;signale&quot;: &quot;1.4.0&quot;,
+    &quot;figlet&quot;: &quot;*&quot;,
+    &quot;react&quot;: &quot;16.x&quot;,
+    &quot;table&quot;: &quot;~5.4.6&quot;,
+    &quot;yargs&quot;: &quot;^14.0.0&quot;
+  }
+复制代码
+</code></pre>
+<p>前面三个很容易理解：</p>
+<ul>
+<li><code>&quot;signale&quot;: &quot;1.4.0&quot;</code>: 固定版本号</li>
+<li><code>&quot;figlet&quot;: &quot;*&quot;</code>: 任意版本（<code>&gt;=0.0.0</code>）</li>
+<li><code>&quot;react&quot;: &quot;16.x&quot;</code>: 匹配主要版本（<code>&gt;=16.0.0 &lt;17.0.0</code>）</li>
+<li><code>&quot;react&quot;: &quot;16.3.x&quot;</code>: 匹配主要版本和次要版本（<code>&gt;=16.3.0 &lt;16.4.0</code>）</li>
+</ul>
+<p>再来看看后面两个，版本号中引用了 <code>~</code> 和 <code>^</code> 符号：</p>
+<ul>
+<li><code>~</code>: 当安装依赖时获取到有新版本时，安装到 <code>x.y.z</code> 中 <code>z</code> 的最新的版本。即保持主版本号、次版本号不变的情况下，保持修订号的最新版本。</li>
+<li><code>^</code>: 当安装依赖时获取到有新版本时，安装到 <code>x.y.z</code> 中 <code>y</code> 和 <code>z</code> 都为最新版本。</li>
+</ul>
+<p>即保持主版本号不变的情况下，保持次版本号、修订版本号为最新版本。</p>
+<p>在 <code>package.json</code> 文件中最常见的应该是 <code>&quot;yargs&quot;: &quot;^14.0.0&quot;</code> 这种格式的 依赖, 因为我们在使用 <code>npm install package</code>安装包时，<code>npm</code>默认安装当前最新版本，然后在所安装的版本号前加<code>^</code> 号。</p>
+<p>注意，当主版本号为 <code>0</code> 的情况，会被认为是一个不稳定版本，情况与上面不同：</p>
+<ul>
+<li>主版本号和次版本号都为 <code>0</code>: <code>^0.0.z</code>、<code>~0.0.z</code> 都被当作固定版本，安装依赖时均不会发生变化。</li>
+<li>主版本号为 <code>0</code>: <code>^0.y.z</code> 表现和 <code>~0.y.z</code> 相同，只保持修订号为最新版本。</li>
+</ul>
+<blockquote>
+<p>1.0.0 的版本号用于界定公共</p>
+</blockquote>
+<p>API。当你的软件发布到了正式环境，或者有稳定的API时，就可以发布1.0.0版本了。所以，当你决定对外部发布一个正式版本的npm包时，把它的版本标为1.0.0。</p>
+<h3 id="2-5-锁定依赖版本"><a href="#2-5-锁定依赖版本" class="headerlink" title="2.5 锁定依赖版本"></a>2.5 锁定依赖版本</h3><h4 id="lock文件"><a href="#lock文件" class="headerlink" title="lock文件"></a>lock文件</h4><p>实际开发中，经常会因为各种依赖不一致而产生奇怪的问题，或者在某些场景下，我们不希望依赖被更新，建议在开发中使用 <code>package-lock.json</code>。</p>
+<p>锁定依赖版本意味着在我们不手动执行更新的情况下，每次安装依赖都会安装固定版本。保证整个团队使用版本号一致的依赖。</p>
+<p>每次安装固定版本，无需计算依赖版本范围，大部分场景下能大大加速依赖安装时间。</p>
+<blockquote>
+<p>使用 package-lock.json 要确保npm的版本在5.6以上，因为在5.0 - 5.6中间，对</p>
+</blockquote>
+<p>package-lock.json的处理逻辑进行过几次更新，5.6版本后处理逻辑逐渐稳定。</p>
+<p>关于 <code>package-lock.json</code> 详细的结构，我们会在后面的章节进行解析。</p>
+<h4 id="定期更新依赖"><a href="#定期更新依赖" class="headerlink" title="定期更新依赖"></a>定期更新依赖</h4><p>我们的目的是保证团队中使用的依赖一致或者稳定，而不是永远不去更新这些依赖。实际开发场景下，我们虽然不需要每次都去安装新的版本，仍然需要定时去升级依赖版本，来让我们享受依赖包升级带来的问题修复、性能提升、新特性更新。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef31ae6c1eb?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>使用 <code>npm outdated</code> 可以帮助我们列出有哪些还没有升级到最新版本的依赖：</p>
+<ul>
+<li>黄色表示不符合我们指定的语意化版本范围 - 不需要升级</li>
+<li>红色表示符合指定的语意化版本范围 - 需要升级</li>
+</ul>
+<p>执行 <code>npm update</code> 会升级所有的红色依赖。</p>
+<h3 id="2-6-依赖版本选择的最佳实践"><a href="#2-6-依赖版本选择的最佳实践" class="headerlink" title="2.6 依赖版本选择的最佳实践"></a>2.6 依赖版本选择的最佳实践</h3><h4 id="版本发布"><a href="#版本发布" class="headerlink" title="版本发布"></a>版本发布</h4><ul>
+<li>对外部发布一个正式版本的npm包时，把它的版本标为<code>1.0.0</code>。</li>
+<li>某个包版本发行后，任何修改都必须以新版本发行。</li>
+<li>版本号严格按照 <code>主版本号.次版本号.修订号</code> 格式命名</li>
+<li>版本号发布必须是严格递增的</li>
+<li>发布重大版本或版本改动较大时，先发布<code>alpha、beta、rc</code>等先行版本</li>
+</ul>
+<h4 id="依赖范围选择"><a href="#依赖范围选择" class="headerlink" title="依赖范围选择"></a>依赖范围选择</h4><ul>
+<li></li>
+</ul>
+<p>主工程依赖了很多子模块，都是团队成员开发的<code>npm</code>包，此时建议把版本前缀改为<code>~</code>，如果锁定的话每次子依赖更新都要对主工程的依赖进行升级，非常繁琐，如果对子依赖完全信任，直接开启<code>^</code>每次升级到最新版本。</p>
+<ul>
+<li>主工程跑在<code>docker</code>线上，本地还在进行子依赖开发和升级，在<code>docker</code>版本发布前要锁定所有依赖版本，确保本地子依赖发布后线上不会出问题。</li>
+</ul>
+<h4 id="保持依赖一致"><a href="#保持依赖一致" class="headerlink" title="保持依赖一致"></a>保持依赖一致</h4><ul>
+<li>确保<code>npm</code>的版本在<code>5.6</code>以上，确保默认开启 <code>package-lock.json</code> 文件。</li>
+<li>由初始化成员执行 <code>npm inatall</code> 后，将 <code>package-lock.json</code> 提交到远程仓库。不要直接提交</li>
+</ul>
+<p><code>node_modules</code>到远程仓库。</p>
+<ul>
+<li>定期执行 <code>npm update</code> 升级依赖，并提交 <code>lock</code> 文件确保其他成员同步更新依赖，不要手动更改 <code>lock</code> 文件。</li>
+</ul>
+<h4 id="依赖变更"><a href="#依赖变更" class="headerlink" title="依赖变更"></a>依赖变更</h4><ul>
+<li>升级依赖: 修改 <code>package.json</code>文件的依赖版本，执行 <code>npm install</code></li>
+<li>降级依赖: 直接执行 <code>npm install package@version</code>(改动<code>package.json</code>不会对依赖进行降级)</li>
+<li>注意改动依赖后提交<code>lock</code>文件</li>
+</ul>
+<h2 id="三、剖析-npm-install-原理"><a href="#三、剖析-npm-install-原理" class="headerlink" title="三、剖析 npm install 原理"></a>三、剖析 npm install 原理</h2><p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef327ccaba5?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p><code>npm install</code> 大概会经过上面的几个流程，这一章就来讲一讲各个流程的实现细节、发展以及为何要这样实现。</p>
+<h3 id="3-1-嵌套结构"><a href="#3-1-嵌套结构" class="headerlink" title="3.1 嵌套结构"></a>3.1 嵌套结构</h3><p>我们都知道，执行 <code>npm install</code> 后，依赖包被安装到了 <code>node_modules</code> ，下面我们来具体了解下，<code>npm</code> 将依赖包安装到<br><code>node_modules</code> 的具体机制是什么。</p>
+<p>在 <code>npm</code> 的早期版本， <code>npm</code> 处理依赖的方式简单粗暴，以递归的形式，严格按照 <code>package.json</code> 结构以及子依赖包的<br><code>package.json</code> 结构将依赖安装到他们各自的 <code>node_modules</code> 中。直到有子依赖包不在依赖其他模块。</p>
+<p>举个例子，我们的模块 <code>my-app</code> 现在依赖了两个模块：<code>buffer</code>、<code>ignore</code>：</p>
+<pre><code>{
+  &quot;name&quot;: &quot;my-app&quot;,
+  &quot;dependencies&quot;: {
+    &quot;buffer&quot;: &quot;^5.4.3&quot;,
+    &quot;ignore&quot;: &quot;^5.1.4&quot;,
+  }
+}
+复制代码
+</code></pre>
+<p><code>ignore</code>是一个纯 <code>JS</code> 模块，不依赖任何其他模块，而 <code>buffer</code> 又依赖了下面两个模块：<code>base64-js</code> 、 <code>ieee754</code>。</p>
+<pre><code>{
+  &quot;name&quot;: &quot;buffer&quot;,
+  &quot;dependencies&quot;: {
+    &quot;base64-js&quot;: &quot;^1.0.2&quot;,
+    &quot;ieee754&quot;: &quot;^1.1.4&quot;
+  }
+}
+复制代码
+</code></pre>
+<p>那么，执行 <code>npm install</code> 后，得到的 <code>node_modules</code> 中模块目录结构就是下面这样的：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef33997d7f2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>这样的方式优点很明显， <code>node_modules</code> 的结构和 <code>package.json</code> 结构一一对应，层级结构明显，并且保证了每次安装目录结构都是相同的。</p>
+<p>但是，试想一下，如果你依赖的模块非常之多，你的 <code>node_modules</code> 将非常庞大，嵌套层级非常之深：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef33d822969?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<ul>
+<li>在不同层级的依赖中，可能引用了同一个模块，导致大量冗余。</li>
+<li>在 <code>Windows</code> 系统中，文件路径最大长度为260个字符，嵌套层级过深可能导致不可预知的问题。</li>
+</ul>
+<h3 id="3-2-扁平结构"><a href="#3-2-扁平结构" class="headerlink" title="3.2 扁平结构"></a>3.2 扁平结构</h3><p>为了解决以上问题，<code>NPM</code> 在 <code>3.x</code> 版本做了一次较大更新。其将早期的嵌套结构改为扁平结构：</p>
+<ul>
+<li>安装模块时，不管其是直接依赖还是子依赖的依赖，优先将其安装在 <code>node_modules</code> 根目录。</li>
+</ul>
+<p>还是上面的依赖结构，我们在执行 <code>npm install</code> 后将得到下面的目录结构：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3518941f2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3519475d1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>此时我们若在模块中又依赖了 <code>base64-js@1.0.1</code> 版本：</p>
+<pre><code>{
+  &quot;name&quot;: &quot;my-app&quot;,
+  &quot;dependencies&quot;: {
+    &quot;buffer&quot;: &quot;^5.4.3&quot;,
+    &quot;ignore&quot;: &quot;^5.1.4&quot;,
+    &quot;base64-js&quot;: &quot;1.0.1&quot;,
+  }
+}
+复制代码
+</code></pre>
+<ul>
+<li>当安装到相同模块时，判断已安装的模块版本是否符合新模块的版本范围，如果符合则跳过，不符合则在当前模块的 <code>node_modules</code> 下安装该模块。</li>
+</ul>
+<p>此时，我们在执行 <code>npm install</code> 后将得到下面的目录结构：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef355ae3b37?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef35ae17872?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>对应的，如果我们在项目代码中引用了一个模块，模块查找流程如下：</p>
+<ul>
+<li>在当前模块路径下搜索</li>
+<li>在当前模块 <code>node_modules</code> 路径下搜素</li>
+<li>在上级模块的 <code>node_modules</code> 路径下搜索</li>
+<li>…</li>
+<li>直到搜索到全局路径中的 <code>node_modules</code></li>
+</ul>
+<p>假设我们又依赖了一个包 <code>buffer2@^5.4.3</code>，而它依赖了包 <code>base64-js@1.0.3</code>，则此时的安装结构是下面这样的：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef377260d67?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>所以 <code>npm 3.x</code> 版本并未完全解决老版本的模块冗余问题，甚至还会带来新的问题。</p>
+<p>试想一下，你的APP假设没有依赖 <code>base64-js@1.0.1</code> 版本，而你同时依赖了依赖不同 <code>base64-js</code> 版本的 <code>buffer</code> 和<br><code>buffer2</code>。由于在执行 <code>npm install</code> 的时候，按照 <code>package.json</code> 里依赖的顺序依次解析，则 <code>buffer</code> 和<br><code>buffer2</code> 在 <code>package.json</code> 的放置顺序则决定了 <code>node_modules</code> 的依赖结构：</p>
+<p>先依赖<code>buffer2</code>：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3824eba10?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>先依赖<code>buffer</code>：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef38a55f11e?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>另外，为了让开发者在安全的前提下使用最新的依赖包，我们在 <code>package.json</code><br>通常只会锁定大版本，这意味着在某些依赖包小版本更新后，同样可能造成依赖结构的改动，依赖结构的不确定性可能会给程序带来不可预知的问题。</p>
+<h3 id="3-3-Lock文件"><a href="#3-3-Lock文件" class="headerlink" title="3.3 Lock文件"></a>3.3 Lock文件</h3><p>为了解决 <code>npm install</code> 的不确定性问题，在 <code>npm 5.x</code> 版本新增了 <code>package-lock.json</code> 文件，而安装方式还沿用了<br><code>npm 3.x</code> 的扁平化的方式。</p>
+<p><code>package-lock.json</code> 的作用是锁定依赖结构，即只要你目录下有 <code>package-lock.json</code> 文件，那么你每次执行 <code>npm install</code>后生成的<code>node_modules</code> 目录结构一定是完全相同的。</p>
+<p>例如，我们有如下的依赖结构：</p>
+<pre><code>{
+  &quot;name&quot;: &quot;my-app&quot;,
+  &quot;dependencies&quot;: {
+    &quot;buffer&quot;: &quot;^5.4.3&quot;,
+    &quot;ignore&quot;: &quot;^5.1.4&quot;,
+    &quot;base64-js&quot;: &quot;1.0.1&quot;,
+  }
+}
+复制代码
+</code></pre>
+<p>在执行 <code>npm install</code> 后生成的 <code>package-lock.json</code> 如下：</p>
+<pre><code>{
+  &quot;name&quot;: &quot;my-app&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;dependencies&quot;: {
+    &quot;base64-js&quot;: {
+      &quot;version&quot;: &quot;1.0.1&quot;,
+      &quot;resolved&quot;: &quot;https://registry.npmjs.org/base64-js/-/base64-js-1.0.1.tgz&quot;,
+      &quot;integrity&quot;: &quot;sha1-aSbRsZT7xze47tUTdW3i/Np+pAg=&quot;
+    },
+    &quot;buffer&quot;: {
+      &quot;version&quot;: &quot;5.4.3&quot;,
+      &quot;resolved&quot;: &quot;https://registry.npmjs.org/buffer/-/buffer-5.4.3.tgz&quot;,
+      &quot;integrity&quot;: &quot;sha512-zvj65TkFeIt3i6aj5bIvJDzjjQQGs4o/sNoezg1F1kYap9Nu2jcUdpwzRSJTHMMzG0H7bZkn4rNQpImhuxWX2A==&quot;,
+      &quot;requires&quot;: {
+        &quot;base64-js&quot;: &quot;^1.0.2&quot;,
+        &quot;ieee754&quot;: &quot;^1.1.4&quot;
+      },
+      &quot;dependencies&quot;: {
+        &quot;base64-js&quot;: {
+          &quot;version&quot;: &quot;1.3.1&quot;,
+          &quot;resolved&quot;: &quot;https://registry.npmjs.org/base64-js/-/base64-js-1.3.1.tgz&quot;,
+          &quot;integrity&quot;: &quot;sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==&quot;
+        }
+      }
+    },
+    &quot;ieee754&quot;: {
+      &quot;version&quot;: &quot;1.1.13&quot;,
+      &quot;resolved&quot;: &quot;https://registry.npmjs.org/ieee754/-/ieee754-1.1.13.tgz&quot;,
+      &quot;integrity&quot;: &quot;sha512-4vf7I2LYV/HaWerSo3XmlMkp5eZ83i+/CDluXi/IGTs/O1sejBNhTtnxzmRZfvOUqj7lZjqHkeTvpgSFDlWZTg==&quot;
+    },
+    &quot;ignore&quot;: {
+      &quot;version&quot;: &quot;5.1.4&quot;,
+      &quot;resolved&quot;: &quot;https://registry.npmjs.org/ignore/-/ignore-5.1.4.tgz&quot;,
+      &quot;integrity&quot;: &quot;sha512-MzbUSahkTW1u7JpKKjY7LCARd1fU5W2rLdxlM4kdkayuCwZImjkpluF9CM1aLewYJguPDqewLam18Y6AU69A8A==&quot;
+    }
+  }
+}
+复制代码
+</code></pre>
+<p>我们来具体看看上面的结构：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3a81eb51f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>最外面的两个属性 <code>name</code> 、<code>version</code> 同 <code>package.json</code> 中的 <code>name</code> 和 <code>version</code> ，用于描述当前包名称和版本。</p>
+<p><code>dependencies</code> 是一个对象，对象和 <code>node_modules</code> 中的包结构一一对应，对象的 <code>key</code> 为包名称，值为包的一些描述信息：</p>
+<ul>
+<li><code>version</code>：包版本 —— 这个包当前安装在 <code>node_modules</code> 中的版本</li>
+<li><code>resolved</code>：包具体的安装来源</li>
+<li><code>integrity</code>：包 <code>hash</code> 值，基于 <code>Subresource Integrity</code> 来验证已安装的软件包是否被改动过、是否已失效</li>
+<li><code>requires</code>：对应子依赖的依赖，与子依赖的 <code>package.json</code> 中 <code>dependencies</code>的依赖项相同。</li>
+<li><code>dependencies</code>：结构和外层的 <code>dependencies</code> 结构相同，存储安装在子依赖 <code>node_modules</code> 中的依赖包。</li>
+</ul>
+<p>这里注意，并不是所有的子依赖都有 <code>dependencies</code> 属性，只有子依赖的依赖和当前已安装在根目录的 <code>node_modules</code><br>中的依赖冲突之后，才会有这个属性。</p>
+<p>例如，回顾下上面的依赖关系：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef35ae17872?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>我们在 <code>my-app</code> 中依赖的 <code>base64-js@1.0.1</code> 版本与 <code>buffer</code> 中依赖的 <code>base64-js@^1.0.2</code> 发生冲突，所以<br><code>base64-js@1.0.1</code> 需要安装在 <code>buffer</code> 包的 <code>node_modules</code> 中，对应了 <code>package-lock.json</code> 中<br><code>buffer</code> 的 <code>dependencies</code> 属性。这也对应了 <code>npm</code> 对依赖的扁平化处理方式。</p>
+<p>所以，根据上面的分析， <code>package-lock.json</code> 文件 和 <code>node_modules</code> 目录结构是一一对应的，即项目目录下存在<br><code>package-lock.json</code> 可以让每次安装生成的依赖目录结构保持相同。</p>
+<p>另外，项目中使用了 <code>package-lock.json</code> 可以显著加速依赖安装时间。</p>
+<p>我们使用 <code>npm i --timing=true --loglevel=verbose</code> 命令可以看到 <code>npm install</code><br>的完整过程，下面我们来对比下使用 <code>lock</code> 文件和不使用 <code>lock</code> 文件的差别。在对比前先清理下<code>npm</code> 缓存。</p>
+<p>不使用 <code>lock</code> 文件：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef39713273a?imageslim" alt="xuehuayu.cn"></p>
+<p>使用 <code>lock</code> 文件：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3b5e532e0?imageslim" alt="xuehuayu.cn"></p>
+<p>可见， <code>package-lock.json</code><br>中已经缓存了每个包的具体版本和下载链接，不需要再去远程仓库进行查询，然后直接进入文件完整性校验环节，减少了大量网络请求。</p>
+<h4 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h4><p>开发系统应用时，建议把 <code>package-lock.json</code> 文件提交到代码版本仓库，从而保证所有团队开发者以及 <code>CI</code> 环节可以在执行 <code>npm install</code> 时安装的依赖版本都是一致的。</p>
+<p>在开发一个 <code>npm</code>包 时，你的 <code>npm</code>包<br>是需要被其他仓库依赖的，由于上面我们讲到的扁平安装机制，如果你锁定了依赖包版本，你的依赖包就不能和其他依赖包共享同一 <code>semver</code><br>范围内的依赖包，这样会造成不必要的冗余。所以我们不应该把<code>package-lock.json</code> 文件发布出去（ <code>npm</code> 默认也不会把<br><code>package-lock.json</code> 文件发布出去）。</p>
+<h3 id="3-4-缓存"><a href="#3-4-缓存" class="headerlink" title="3.4 缓存"></a>3.4 缓存</h3><p>在执行 <code>npm install</code> 或 <code>npm update</code>命令下载依赖后，除了将依赖包安装在<code>node_modules</code><br>目录下外，还会在本地的缓存目录缓存一份。</p>
+<p>通过 <code>npm config get cache</code> 命令可以查询到：在 <code>Linux</code> 或 <code>Mac</code> 默认是用户主目录下的 <code>.npm/_cacache</code><br>目录。</p>
+<p>在这个目录下又存在两个目录：<code>content-v2</code>、<code>index-v5</code>，<code>content-v2</code> 目录用于存储<br><code>tar</code>包的缓存，而<code>index-v5</code>目录用于存储<code>tar</code>包的 <code>hash</code>。</p>
+<p>npm 在执行安装时，可以根据 <code>package-lock.json</code> 中存储的 <code>integrity、version、name</code> 生成一个唯一的 <code>key</code><br>对应到 <code>index-v5</code> 目录下的缓存记录，从而找到 <code>tar</code>包的 <code>hash</code>，然后根据 <code>hash</code> 再去找缓存的 <code>tar</code>包直接使用。</p>
+<p>我们可以找一个包在缓存目录下搜索测试一下，在 <code>index-v5</code> 搜索一下包路径：</p>
+<pre><code>grep &quot;https://registry.npmjs.org/base64-js/-/base64-js-1.0.1.tgz&quot; -r index-v5
+复制代码
+</code></pre>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3b8fb68f5?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>然后我们将json格式化：</p>
+<pre><code>{
+  &quot;key&quot;: &quot;pacote:version-manifest:https://registry.npmjs.org/base64-js/-/base64-js-1.0.1.tgz:sha1-aSbRsZT7xze47tUTdW3i/Np+pAg=&quot;,
+  &quot;integrity&quot;: &quot;sha512-C2EkHXwXvLsbrucJTRS3xFHv7Mf/y9klmKDxPTE8yevCoH5h8Ae69Y+/lP+ahpW91crnzgO78elOk2E6APJfIQ==&quot;,
+  &quot;time&quot;: 1575554308857,
+  &quot;size&quot;: 1,
+  &quot;metadata&quot;: {
+    &quot;id&quot;: &quot;base64-js@1.0.1&quot;,
+    &quot;manifest&quot;: {
+      &quot;name&quot;: &quot;base64-js&quot;,
+      &quot;version&quot;: &quot;1.0.1&quot;,
+      &quot;engines&quot;: {
+        &quot;node&quot;: &quot;&gt;= 0.4&quot;
+      },
+      &quot;dependencies&quot;: {},
+      &quot;optionalDependencies&quot;: {},
+      &quot;devDependencies&quot;: {
+        &quot;standard&quot;: &quot;^5.2.2&quot;,
+        &quot;tape&quot;: &quot;4.x&quot;
+      },
+      &quot;bundleDependencies&quot;: false,
+      &quot;peerDependencies&quot;: {},
+      &quot;deprecated&quot;: false,
+      &quot;_resolved&quot;: &quot;https://registry.npmjs.org/base64-js/-/base64-js-1.0.1.tgz&quot;,
+      &quot;_integrity&quot;: &quot;sha1-aSbRsZT7xze47tUTdW3i/Np+pAg=&quot;,
+      &quot;_shasum&quot;: &quot;6926d1b194fbc737b8eed513756de2fcda7ea408&quot;,
+      &quot;_shrinkwrap&quot;: null,
+      &quot;bin&quot;: null,
+      &quot;_id&quot;: &quot;base64-js@1.0.1&quot;
+    },
+    &quot;type&quot;: &quot;finalized-manifest&quot;
+  }
+}
+复制代码
+</code></pre>
+<p>上面的 <code>_shasum</code> 属性 <code>6926d1b194fbc737b8eed513756de2fcda7ea408</code> 即为 <code>tar</code> 包的 <code>hash</code>，<br><code>hash</code>的前几位 <code>6926</code> 即为缓存的前两层目录，我们进去这个目录果然找到的压缩后的依赖包：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3bc635b03?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<blockquote>
+<p>以上的缓存策略是从 npm v5 版本开始的，在 npm v5 版本之前，每个缓存的模块在 ~&#x2F;.npm</p>
+</blockquote>
+<p>文件夹中以模块名的形式直接存储，储存结构是{cache}&#x2F;{name}&#x2F;{version}。</p>
+<p><code>npm</code> 提供了几个命令来管理缓存数据：</p>
+<ul>
+<li><code>npm cache add</code>：官方解释说这个命令主要是 <code>npm</code> 内部使用，但是也可以用来手动给一个指定的 package 添加缓存。</li>
+<li><code>npm cache clean</code>：删除缓存目录下的所有数据，为了保证缓存数据的完整性，需要加上 <code>--force</code> 参数。</li>
+<li><code>npm cache verify</code>：验证缓存数据的有效性和完整性，清理垃圾数据。</li>
+</ul>
+<p>基于缓存数据，npm 提供了离线安装模式，分别有以下几种：</p>
+<ul>
+<li><code>--prefer-offline</code>： 优先使用缓存数据，如果没有匹配的缓存数据，则从远程仓库下载。</li>
+<li><code>--prefer-online</code>： 优先使用网络数据，如果网络数据请求失败，再去请求缓存数据，这种模式可以及时获取最新的模块。</li>
+<li><code>--offline</code>： 不请求网络，直接使用缓存数据，一旦缓存数据不存在，则安装失败。</li>
+</ul>
+<h3 id="3-5-文件完整性"><a href="#3-5-文件完整性" class="headerlink" title="3.5 文件完整性"></a>3.5 文件完整性</h3><p>上面我们多次提到了文件完整性，那么什么是文件完整性校验呢？</p>
+<p>在下载依赖包之前，我们一般就能拿到 <code>npm</code> 对该依赖包计算的 <code>hash</code> 值，例如我们执行 <code>npm info</code> 命令，紧跟<br><code>tarball</code>(下载链接) 的就是 <code>shasum</code>(<code>hash</code>) ：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3c2a2dac0?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>用户下载依赖包到本地后，需要确定在下载过程中没有出现错误，所以在下载完成之后需要在本地在计算一次文件的 <code>hash</code> 值，如果两个 <code>hash</code><br>值是相同的，则确保下载的依赖是完整的，如果不同，则进行重新下载。</p>
+<h3 id="3-6-整体流程"><a href="#3-6-整体流程" class="headerlink" title="3.6 整体流程"></a>3.6 整体流程</h3><p>好了，我们再来整体总结下上面的流程：</p>
+<ul>
+<li>检查 <code>.npmrc</code> 文件：优先级为：项目级的 <code>.npmrc</code> 文件 &gt; 用户级的 <code>.npmrc</code> 文件&gt; 全局级的 <code>.npmrc</code> 文件 &gt;</li>
+</ul>
+<p>npm 内置的 <code>.npmrc</code> 文件</p>
+<ul>
+<li><p>检查项目中有无 <code>lock</code> 文件。</p>
+</li>
+<li><p>无 <code>lock</code> 文件：</p>
+</li>
+<li><p>从 <code>npm</code> 远程仓库获取包信息</p>
+</li>
+<li><p>根据 <code>package.json</code> 构建依赖树，构建过程：</p>
+</li>
+<li><p>构建依赖树时，不管其是直接依赖还是子依赖的依赖，优先将其放置在 <code>node_modules</code> 根目录。</p>
+</li>
+<li><p>当遇到相同模块时，判断已放置在依赖树的模块版本是否符合新模块的版本范围，如果符合则跳过，不符合则在当前模块的 <code>node_modules</code> 下放置该模块。</p>
+</li>
+<li><p>注意这一步只是确定逻辑上的依赖树，并非真正的安装，后面会根据这个依赖结构去下载或拿到缓存中的依赖包</p>
+</li>
+<li><p>在缓存中依次查找依赖树中的每个包</p>
+</li>
+<li><p>不存在缓存：</p>
+</li>
+<li><p>从 <code>npm</code> 远程仓库下载包</p>
+</li>
+<li><p>校验包的完整性</p>
+</li>
+<li><p>校验不通过：</p>
+</li>
+<li><p>重新下载</p>
+</li>
+<li><p>校验通过：</p>
+</li>
+<li><p>将下载的包复制到 <code>npm</code> 缓存目录</p>
+</li>
+<li><p>将下载的包按照依赖结构解压到 <code>node_modules</code></p>
+</li>
+<li><p>存在缓存：将缓存按照依赖结构解压到 <code>node_modules</code></p>
+</li>
+<li><p>将包解压到 <code>node_modules</code></p>
+</li>
+<li><p>生成 <code>lock</code> 文件</p>
+</li>
+<li><p>有 <code>lock</code> 文件：</p>
+</li>
+<li><p>检查 <code>package.json</code> 中的依赖版本是否和 <code>package-lock.json</code> 中的依赖有冲突。</p>
+</li>
+<li><p>如果没有冲突，直接跳过获取包信息、构建依赖树过程，开始在缓存中查找包信息，后续过程相同</p>
+</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef327ccaba5?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>上面的过程简要描述了 <code>npm install</code> 的大概过程，这个过程还包含了一些其他的操作，例如执行你定义的一些生命周期函数，你可以执行 <code>npm install package --timing=true --loglevel=verbose</code> 来查看某个包具体的安装流程和细节。</p>
+<h3 id="3-7-yarn"><a href="#3-7-yarn" class="headerlink" title="3.7 yarn"></a>3.7 yarn</h3><p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3dde095ab?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p><code>yarn</code> 是在 <code>2016</code> 年发布的，那时 <code>npm</code> 还处于 <code>V3</code> 时期，那时候还没有 <code>package-lock.json</code><br>文件，就像上面我们提到的：不稳定性、安装速度慢等缺点经常会受到广大开发者吐槽。此时，<code>yarn</code> 诞生：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3e0ee2fbd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>上面是官网提到的 <code>yarn</code> 的优点，在那个时候还是非常吸引人的。当然，后来 <code>npm</code><br>也意识到了自己的问题，进行了很多次优化，在后面的优化（<code>lock</code>文件、缓存、默认-s…）中，我们多多少少能看到 <code>yarn</code> 的影子，可见 <code>yarn</code><br>的设计还是非常优秀的。</p>
+<p><code>yarn</code> 也是采用的是 <code>npm v3</code> 的扁平结构来管理依赖，安装依赖后默认会生成一个 <code>yarn.lock</code> 文件，还是上面的依赖关系，我们看看<br><code>yarn.lock</code> 的结构：</p>
+<pre><code># THIS IS AN AUTOGENERATED FILE. DO NOT EDIT THIS FILE DIRECTLY.# yarn lockfile v1
+
+base64-js@1.0.1:
+  version &quot;1.0.1&quot;
+  resolved &quot;https://registry.yarnpkg.com/base64-js/-/base64-js-1.0.1.tgz#6926d1b194fbc737b8eed513756de2fcda7ea408&quot;
+  integrity sha1-aSbRsZT7xze47tUTdW3i/Np+pAg=
+
+base64-js@^1.0.2:
+  version &quot;1.3.1&quot;
+  resolved &quot;https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.1.tgz#58ece8cb75dd07e71ed08c736abc5fac4dbf8df1&quot;
+  integrity sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==
+
+buffer@^5.4.3:
+  version &quot;5.4.3&quot;
+  resolved &quot;https://registry.yarnpkg.com/buffer/-/buffer-5.4.3.tgz#3fbc9c69eb713d323e3fc1a895eee0710c072115&quot;
+  integrity sha512-zvj65TkFeIt3i6aj5bIvJDzjjQQGs4o/sNoezg1F1kYap9Nu2jcUdpwzRSJTHMMzG0H7bZkn4rNQpImhuxWX2A==
+  dependencies:
+    base64-js &quot;^1.0.2&quot;
+    ieee754 &quot;^1.1.4&quot;
+
+ieee754@^1.1.4:
+  version &quot;1.1.13&quot;
+  resolved &quot;https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.13.tgz#ec168558e95aa181fd87d37f55c32bbcb6708b84&quot;
+  integrity sha512-4vf7I2LYV/HaWerSo3XmlMkp5eZ83i+/CDluXi/IGTs/O1sejBNhTtnxzmRZfvOUqj7lZjqHkeTvpgSFDlWZTg==
+
+ignore@^5.1.4:
+  version &quot;5.1.4&quot;
+  resolved &quot;https://registry.yarnpkg.com/ignore/-/ignore-5.1.4.tgz#84b7b3dbe64552b6ef0eca99f6743dbec6d97adf&quot;
+  integrity sha512-MzbUSahkTW1u7JpKKjY7LCARd1fU5W2rLdxlM4kdkayuCwZImjkpluF9CM1aLewYJguPDqewLam18Y6AU69A8A==
+
+复制代码
+</code></pre>
+<p>可见其和 <code>package-lock.json</code> 文件还是比较类似的，还有一些区别就是：</p>
+<ul>
+<li><code>package-lock.json</code> 使用的是 <code>json</code> 格式，<code>yarn.lock</code> 使用的是一种自定义格式</li>
+<li><code>yarn.lock</code> 中子依赖的版本号不是固定的，意味着单独又一个 <code>yarn.lock</code> 确定不了 <code>node_modules</code> 目录结构，还需要和</li>
+</ul>
+<p><code>package.json</code> 文件进行配合。而 <code>package-lock.json</code> 只需要一个文件即可确定。</p>
+<p><code>yarn</code> 的缓策略看起来和 <code>npm v5</code> 之前的很像，每个缓存的模块被存放在独立的文件夹，文件夹名称包含了模块名称、版本号等信息。使用命令 <code>yarn cache dir</code> 可以查看缓存数据的目录：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0eef3eb66af39?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<blockquote>
+<p><code>yarn</code> 默认使用 <code>prefer-online</code> 模式，即优先使用网络数据，如果网络数据请求失败，再去请求缓存数据。</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://juejin.im/post/5a6008c2f265da3e5033cd93">juejin.im&#x2F;post&#x2F;5a6008…</a></p>
+</li>
+<li></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/305539244/answer/551386426">www.zhihu.com/question/30…</a></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37285173">zhuanlan.zhihu.com&#x2F;p&#x2F;37285173</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://semver.org/lang/zh-CN/">semver.org&#x2F;lang&#x2F;zh-CN&#x2F;</a></p>
+</li>
+<li></li>
+</ul>
+<h2 id="deadhorse-me-nodejs-2014…"><a href="#deadhorse-me-nodejs-2014…" class="headerlink" title="deadhorse.me&#x2F;nodejs&#x2F;2014…"></a><a target="_blank" rel="noopener" href="http://deadhorse.me/nodejs/2014/04/27/semver-in-nodejs.html">deadhorse.me&#x2F;nodejs&#x2F;2014…</a></h2><p><a target="_blank" rel="noopener" href="http://caibaojian.com/npm/files/package.json.html">caibaojian.com&#x2F;npm&#x2F;files&#x2F;p…</a></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>希望阅读完本篇文章能对你有如下帮助：</p>
+<ul>
+<li>了解 <code>pacakge.json</code> 中的各项详细配置从而对项目工程化配置有更进一步的见解</li>
+<li>掌握 <code>npm</code> 的版本管理机制，能合理配置依赖版本</li>
+<li>理解 <code>npm install</code> 安装原理，能合理运用 <code>npm</code>缓存、<code>package-lock.json</code></li>
+</ul>
+<p>文中如有错误，欢迎在评论区指正，如果这篇文章帮助到了你，欢迎点赞和关注。</p>
+<p>想阅读更多优质文章、可关注我的<a target="_blank" rel="noopener" href="https://github.com/ConardLi/ConardLi.github.io">github博客</a>，你的star✨、点赞和关注是我持续创作的动力！</p>
+<p>推荐关注我的微信公众号【code秘密花园】，每天推送高质量文章，我们一起交流成长。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/9/1/16ced1f6bae445fa?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/b53ad9a1.html"><div class="related-post-title">免费全栈工程师视频教程</div><div class="related-post-meta"><time>2019-10-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/8c6832b5.html"><div class="related-post-title">TypeScript中as const断言和const声明变量的区别是什么？</div><div class="related-post-meta"><time>2025-10-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">TypeScript</span></div></div></a><a class="related-post-item" href="/article/8571937c.html"><div class="related-post-title">来自新时代的 CSS</div><div class="related-post-meta"><time>2019-12-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/a91910b6.html"><div class="related-post-title">create-react-app，webpack配置超强解析</div><div class="related-post-meta"><time>2025-01-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">React</span><span class="category-badge">Webpack</span></div></div></a><a class="related-post-item" href="/article/22c6e105.html"><div class="related-post-title">CSS实现自适应分隔线的N种方法</div><div class="related-post-meta"><time>2020-02-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/d6b8f593.html">https://xuehuayu.cn/article/d6b8f593.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/16554c83.html">VS Code 成主宰、Vue 备受热捧！2019 前端开发趋势必读</a><a class="next" href="/article/8628a584.html">前端实现弹幕效果的方法总结(包含css3和canvas的实现方式)</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

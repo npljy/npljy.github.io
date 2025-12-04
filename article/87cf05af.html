@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>11 种在大多数教程中找不到的JavaScript技巧 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">11 种在大多数教程中找不到的JavaScript技巧</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 9</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/87cf05af.html#waline-comment"><span class="waline-comment-count" data-path="/article/87cf05af.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.html.cn/web/javascript/14151.html</code></p>
+<p>在这篇文章中，将分享11条我认为特别有用的技巧。这篇文章是为初学者准备的，但希望即使是中级JavaScript开发人员也能在这个列表中找到一些新的东西。</p>
+<span id="more"></span>
+
+<p><img src="https://img.php.cn/upload/article/000/000/006/5dd5fe17c5036748.jpg" alt="xuehuayu.cn"></p>
+<h2 id="1-过滤唯一值"><a href="#1-过滤唯一值" class="headerlink" title="1..过滤唯一值"></a>1..过滤唯一值</h2><p><code>Set</code>对象类型是在ES6中引入的，配合展开操作<code>...</code>一起，我们可以使用它来创建一个新数组，该数组只有唯一的值。</p>
+<pre><code>const array = [1, 1, 2, 3, 5, 5, 1]
+const uniqueArray = [...new Set(array)];
+console.log(uniqueArray); // Result: [1, 2, 3, 5]
+</code></pre>
+<p>在ES6之前，隔离惟一值将涉及比这多得多的代码。</p>
+<p>此技巧适用于包含基本类型的数组：<code>undefined</code>，<code>null</code>，<code>boolean</code>，<code>string</code>和<code>number</code>。<br>（如果你有一个包含对象，函数或其他数组的数组，你需要一个不同的方法！）</p>
+<h2 id="2-与或运算"><a href="#2-与或运算" class="headerlink" title="2. 与或运算"></a>2. 与或运算</h2><p>三元运算符是编写简单（有时不那么简单）条件语句的快速方法，如下所示：</p>
+<pre><code>x &gt; 100 ? &#39;Above 100&#39; : &#39;Below 100&#39;;
+x &gt; 100 ? (x &gt; 200 ? &#39;Above 200&#39; : &#39;Between 100-200&#39;) : &#39;Below 100&#39;;
+</code></pre>
+<p>但有时使用三元运算符处理也会很复杂。 相反，我们可以使用’与’<code>&amp;&amp;</code>和’或’<code>||</code> 逻辑运算符以更简洁的方式书写表达式。<br>这通常被称为“短路”或“短路运算”。</p>
+<h4 id="它是怎么工作的"><a href="#它是怎么工作的" class="headerlink" title="它是怎么工作的"></a><strong>它是怎么工作的</strong></h4><p>假设我们只想返回两个或多个选项中的一个。</p>
+<p>使用<code>&amp;&amp;</code>将返回第一个条件为<code>假</code>的值。如果每个操作数的计算值都为<code>true</code>，则返回最后一个计算过的表达式。</p>
+<pre><code>let one = 1, two = 2, three = 3;
+console.log(one &amp;&amp; two &amp;&amp; three); // Result: 3
+console.log(0 &amp;&amp; null); // Result: 0
+</code></pre>
+<p>使用<code>||</code>将返回第一个条件为<code>真</code>的值。如果每个操作数的计算结果都为<code>false</code>，则返回最后一个计算过的表达式。</p>
+<pre><code>let one = 1, two = 2, three = 3;
+console.log(one || two || three); // Result: 1
+console.log(0 || null); // Result: null
+</code></pre>
+<h4 id="例一"><a href="#例一" class="headerlink" title="例一"></a><strong>例一</strong></h4><p>假设我们想返回一个变量的长度，但是我们不知道变量的类型。</p>
+<p>我们可以使用<code>if/else</code>语句来检查<code>foo</code>是可接受的类型，但是这可能会变得非常冗长。或运行可以帮助我们简化操作：</p>
+<pre><code>return (foo || []).length
+</code></pre>
+<p>如果变量<code>foo</code>是true，它将被返回。否则，将返回空数组的长度:<code>0</code>。</p>
+<h4 id="例二"><a href="#例二" class="headerlink" title="例二"></a><strong>例二</strong></h4><p>你是否遇到过访问嵌套对象属性的问题？ 你可能不知道对象或其中一个子属性是否存在，这可能会导致令人沮丧的错误。</p>
+<p>假设我们想在<code>this.state</code>中访问一个名为<code>data</code>的属性，但是在我们的程序成功返回一个获取请求之前，<code>data</code> 是未定义的。</p>
+<p>根据我们使用它的位置，调用<code>this.state.data</code>可能会阻止我们的应用程序运行。 为了解决这个问题，我们可以将其做进一步的判断：</p>
+<pre><code>if (this.state.data) {
+  return this.state.data;
+} else {
+  return &#39;Fetching Data&#39;;
+}
+</code></pre>
+<p>但这似乎很重复。 ‘<code>或&#39;</code> 运算符提供了更简洁的解决方案：</p>
+<pre><code>return (this.state.data || &#39;Fetching Data&#39;);
+</code></pre>
+<h4 id="一个新特性-Optional-Chaining"><a href="#一个新特性-Optional-Chaining" class="headerlink" title="一个新特性: Optional Chaining"></a><strong>一个新特性: Optional Chaining</strong></h4><p>过去在 Object 属性链的调用中，很容易因为某个属性不存在而导致之后出现<code>Cannot read property xxx of undefined</code>的错误。</p>
+<p>那 <code>optional chaining</code> 就是添加了<code>?.</code>这么个操作符，它会先判断前面的值，如果是 <code>null</code> 或<br><code>undefined</code>，就结束调用、返回 <code>undefined</code>。</p>
+<p>例如，我们可以将上面的示例重构为 <code>this.state.data?.()</code>。或者，如果我们主要关注<code>state</code><br>是否已定义，我们可以返回<code>this.state？.data</code>。</p>
+<p>该提案目前处于第1阶段，作为一项实验性功能。 你可以在这里阅读它，你现在可以通过Babel使用你的JavaScript，将<br>@babel&#x2F;plugin-proposal-optional-chaining添加到你的<code>.babelrc</code>文件中。</p>
+<h2 id="3-转换为布尔值"><a href="#3-转换为布尔值" class="headerlink" title="3.转换为布尔值"></a>3.转换为布尔值</h2><p>除了常规的布尔值<code>true</code>和<code>false</code>之外，JavaScript还将所有其他值视为 <strong>‘truthy’</strong> 或**‘falsy’**。</p>
+<p>除非另有定义，否则 JavaScript 中的所有值都是’truthy’，除了<br><code>0</code>，<code>“”</code>，<code>null</code>，<code>undefined</code>，<code>NaN</code>，当然还有<code>false</code>，这些都是**’falsy’**</p>
+<p>我们可以通过使用负算运算符轻松地在<code>true</code>和<code>false</code>之间切换。它也会将类型转换为“boolean”。</p>
+<pre><code>const isTrue  = !0;
+const isFalse = !1;
+const alsoFalse = !!0;
+console.log(isTrue); // Result: true
+console.log(typeof true); // Result: &quot;boolean&quot;
+</code></pre>
+<h2 id="4-转换为字符串"><a href="#4-转换为字符串" class="headerlink" title="4. 转换为字符串"></a>4. 转换为字符串</h2><p>要快速地将数字转换为字符串，我们可以使用连接运算符<code>+</code>后跟一组空引号<code>&quot;&quot;</code>。</p>
+<pre><code>const val = 1 + &quot;&quot;;
+console.log(val); // Result: &quot;1&quot;
+console.log(typeof val); // Result: &quot;string&quot;
+</code></pre>
+<h2 id="5-转换为数字"><a href="#5-转换为数字" class="headerlink" title="5. 转换为数字"></a>5. 转换为数字</h2><p>使用加法运算符<code>+</code>可以快速实现相反的效果。</p>
+<pre><code>let int = &quot;15&quot;;
+int = +int;
+console.log(int); // Result: 15
+console.log(typeof int); Result: &quot;number&quot;
+</code></pre>
+<p>这也可以用于将布尔值转换为数字，如下所示</p>
+<pre><code>  console.log(+true);  // Return: 1
+  console.log(+false); // Return: 0
+</code></pre>
+<p>在某些上下文中，<code>+</code>将被解释为连接操作符，而不是加法操作符。当这种情况发生时(你希望返回一个整数，而不是浮点数)，您可以使用两个波浪号:<code>~~</code>。</p>
+<p>连续使用两个波浪有效地否定了操作，因为<code>— ( — n — 1) — 1 = n + 1 — 1 = n</code>。 换句话说，<code>~—16</code> 等于<code>15。</code></p>
+<pre><code>const int = ~~&quot;15&quot;
+console.log(int); // Result: 15
+console.log(typeof int); Result: &quot;number&quot;
+</code></pre>
+<p>虽然我想不出很多用例，但是按位NOT运算符也可以用在布尔值上：<code>~true = -2</code>和<code>~false = -1</code>。</p>
+<h2 id="6-性能更好的运算"><a href="#6-性能更好的运算" class="headerlink" title="6.性能更好的运算"></a>6.性能更好的运算</h2><p>从ES7开始，可以使用指数运算符<code>**</code>作为幂的简写，这比编写<code>Math.pow(2, 3)</code> 更快。<br>这是很简单的东西，但它之所以出现在列表中，是因为没有多少教程更新过这个操作符。</p>
+<pre><code>console.log(2 ** 3); // Result: 8
+</code></pre>
+<p>这不应该与通常用于表示指数的^符号相混淆，但在JavaScript中它是按位<code>异或</code>运算符。</p>
+<p>在ES7之前，只有以<code>2</code>为基数的幂才存在简写，使用按位左移操作符<code>&lt;&lt;</code></p>
+<pre><code>Math.pow(2, n);
+2 &lt;&lt; (n - 1);
+2**n;
+</code></pre>
+<p>例如，<code>2 &lt;&lt; 3 = 16</code>等于<code>2 ** 4 = 16</code>。</p>
+<h2 id="7-快速浮点数转整数"><a href="#7-快速浮点数转整数" class="headerlink" title="7. 快速浮点数转整数"></a>7. 快速浮点数转整数</h2><p>如果希望将浮点数转换为整数，可以使用<code>Math.floor()</code>、<code>Math.ceil()</code>或<code>Math.round()</code>。但是还有一种更快的方法可以使用<code>|</code>(位或运算符)将浮点数截断为整数。</p>
+<pre><code>console.log(23.9 | 0);  // Result: 23
+console.log(-23.9 | 0); // Result: -23
+</code></pre>
+<p><code>|</code>的行为取决于处理的是正数还是负数，所以最好只在确定的情况下使用这个快捷方式。</p>
+<p>如果<code>n</code>为正，则<code>n | 0</code>有效地向下舍入。 如果<code>n</code>为负数，则有效地向上舍入。 更准确地说，此操作将删除小数点后面的任何内容，将浮点数截断为整数。</p>
+<p>你可以使用<code>~~</code>来获得相同的舍入效果，如上所述，实际上任何位操作符都会强制浮点数为整数。这些特殊操作之所以有效，是因为一旦强制为整数，值就保持不变。</p>
+<h4 id="删除最后一个数字"><a href="#删除最后一个数字" class="headerlink" title="删除最后一个数字"></a><strong>删除最后一个数字</strong></h4><p><code>按位或</code>运算符还可以用于从整数的末尾删除任意数量的数字。这意味着我们不需要使用这样的代码来在类型之间进行转换。</p>
+<pre><code>let str = &quot;1553&quot;;
+Number(str.substring(0, str.length - 1));
+</code></pre>
+<p>相反，按位或运算符可以这样写：</p>
+<pre><code>console.log(1553 / 10   | 0)  // Result: 155
+console.log(1553 / 100  | 0)  // Result: 15
+console.log(1553 / 1000 | 0)  // Result: 1
+</code></pre>
+<h2 id="8-类中的自动绑定"><a href="#8-类中的自动绑定" class="headerlink" title="8. 类中的自动绑定"></a>8. 类中的自动绑定</h2><p>我们可以在类方法中使用ES6箭头表示法，并且通过这样做可以隐含绑定。<br>这通常会在我们的类构造函数中保存几行代码，我们可以愉快地告别重复的表达式，例如<code>this.myMethod = this.myMethod.bind(this)</code></p>
+<pre><code>import React, { Component } from React;
+export default class App extends Compononent {
+  constructor(props) {
+  super(props);
+  this.state = {};
+  }
+myMethod = () =&gt; {
+    // This method is bound implicitly!
+  }
+render() {
+    return (
+      &lt;&gt;
+        &lt;p&gt;
+          {this.myMethod()}
+        &lt;/p&gt;
+      &lt;/&gt;
+    )
+  }
+};
+</code></pre>
+<h2 id="9-数组截断"><a href="#9-数组截断" class="headerlink" title="9. 数组截断"></a>9. 数组截断</h2><p>如果要从数组的末尾删除值，有比使用<code>splice()</code>更快的方法。</p>
+<p>例如，如果你知道原始数组的大小，您可以重新定义它的<code>length</code>属性，就像这样</p>
+<pre><code>let array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+array.length = 4;
+console.log(array); // Result: [0, 1, 2, 3]
+</code></pre>
+<p>这是一个特别简洁的解决方案。但是，我发现<code>slice()</code>方法的运行时更快。如果速度是你的主要目标，考虑使用：</p>
+<pre><code>let array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+array = array.slice(0, 4);
+console.log(array); // Result: [0, 1, 2, 3]
+</code></pre>
+<h2 id="10-获取数组中的最后一项"><a href="#10-获取数组中的最后一项" class="headerlink" title="10. 获取数组中的最后一项"></a>10. 获取数组中的最后一项</h2><p>数组方法<code>slice()</code>可以接受负整数，如果提供它，它将接受数组末尾的值，而不是数组开头的值。</p>
+<pre><code>let array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+console.log(array.slice(-1)); // Result: [9]
+console.log(array.slice(-2)); // Result: [8, 9]
+console.log(array.slice(-3)); // Result: [7, 8, 9]
+</code></pre>
+<h2 id="11-格式化JSON代码"><a href="#11-格式化JSON代码" class="headerlink" title="11.格式化JSON代码"></a>11.格式化JSON代码</h2><p>最后，你之前可能已经使用过<code>JSON.stringify</code>，但是您是否意识到它还可以帮助你缩进JSON？</p>
+<p><code>stringify()</code>方法有两个可选参数：一个<code>replacer</code>函数，可用于过滤显示的JSON和一个空格值。</p>
+<pre><code>console.log(JSON.stringify({ alpha: &#39;A&#39;, beta: &#39;B&#39; }, null, &#39;\t&#39;));
+// Result:
+// &#39;{
+//     &quot;alpha&quot;: A,
+//     &quot;beta&quot;: B
+// }&#39;
+</code></pre>
+<p><code>原文地址：https://medium.com/@bretcameron/12-javascript-tricks-you-wont-find-in-most-tutorials-a9c9331f169d</code></p>
+<p>为了保证的可读性，本文采用意译而非直译。</p>
+<p>更多<a target="_blank" rel="noopener" href="https://www.html.cn/">前端开发</a>知识，请查阅 HTML中文网 ！！</p>
+<p>以上就是11 种在大多数教程中找不到的JavaScript技巧的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/8014ad33.html"><div class="related-post-title">vue计算属性和watch的区别</div><div class="related-post-meta"><time>2021-05-06</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/7366770b.html"><div class="related-post-title">实现双向绑定Proxy比defineproperty优劣如何</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/8f9a9ae3.html"><div class="related-post-title">axios下载流文件</div><div class="related-post-meta"><time>2021-01-26</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/f11ce35e.html"><div class="related-post-title">寒冬求职之你必须要懂的Web安全</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/30e2cc00.html"><div class="related-post-title">react预览pdf和图片遇到的一些坑</div><div class="related-post-meta"><time>2020-04-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/87cf05af.html">https://xuehuayu.cn/article/87cf05af.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/be0b32cd.html">如何在 JS 循环中正确使用 async 与 await</a><a class="next" href="/article/52b578ac.html">20个棘手的ES6面试问题来提高JavaScript技能</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

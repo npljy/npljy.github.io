@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>Ajax跨域，这应该是最全的解决方案了 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">Ajax跨域，这应该是最全的解决方案了</h1><div class="post-meta"><span class="date">2019-10-08</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 7</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/e131c1de.html#waline-comment"><span class="waline-comment-count" data-path="/article/e131c1de.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5a3770e6518825127e7456a4#heading-29</code></p>
+<p>从刚接触前端开发起，<code>跨域</code>这个词就一直以很高的频率在身边重复出现，一直到现在，已经调试过N个跨域相关的问题了，16年时也整理过一篇相关文章，但是感觉还是差了点什么，于是现在重新梳理了一下。</p>
+<span id="more"></span>
+
+<p>个人见识有限，如有差错，请多多见谅，欢迎提出issue，另外看到这个标题，请勿喷~</p>
+<h2 id="题纲"><a href="#题纲" class="headerlink" title="题纲"></a>题纲</h2><p>关于跨域，有N种类型，本文只专注于<code>ajax请求跨域</code>(,ajax跨域只是属于浏览器”同源策略”中的一部分,其它的还有Cookie跨域iframe跨域,LocalStorage跨域等这里不做介绍)，内容大概如下:</p>
+<ul>
+<li><p>什么是ajax跨域</p>
+</li>
+<li><p>原理</p>
+</li>
+<li><p>表现(整理了一些遇到的问题以及解决方案)</p>
+</li>
+<li><p>如何解决ajax跨域</p>
+</li>
+<li><p>JSONP方式</p>
+</li>
+<li><p>CORS方式</p>
+</li>
+<li><p>代理请求方式</p>
+</li>
+<li><p>如何分析ajax跨域</p>
+</li>
+<li><p>http抓包的分析</p>
+</li>
+<li><p>一些示例</p>
+</li>
+</ul>
+<h2 id="什么是ajax跨域"><a href="#什么是ajax跨域" class="headerlink" title="什么是ajax跨域"></a>什么是ajax跨域</h2><h3 id="ajax跨域的原理"><a href="#ajax跨域的原理" class="headerlink" title="ajax跨域的原理"></a>ajax跨域的原理</h3><p>ajax出现请求跨域错误问题,主要原因就是因为浏览器的“同源策略”,可以参考</p>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">浏览器同源政策及其规避方法(阮一峰)</a></p>
+<h3 id="CORS请求原理"><a href="#CORS请求原理" class="headerlink" title="CORS请求原理"></a>CORS请求原理</h3><p>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource<br>sharing）。它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。</p>
+<p>基本上目前所有的浏览器都实现了CORS标准,其实目前几乎所有的浏览器ajax请求都是基于CORS机制的,只不过可能平时前端开发人员并不关心而已(所以说其实现在CORS解决方案主要是考虑后台该如何实现的问题)。</p>
+<p>关于CORS，强烈推荐阅读<br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解(阮一峰)</a></p>
+<p>另外，这里也整理了一个实现原理图(简化版):</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/160689101500462d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h4 id="如何判断是否是简单请求"><a href="#如何判断是否是简单请求" class="headerlink" title="如何判断是否是简单请求?"></a>如何判断是否是简单请求?</h4><p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple<br>request）。只要同时满足以下两大条件，就属于简单请求。</p>
+<ul>
+<li><p>请求方法是以下三种方法之一：HEAD,GET,POST</p>
+</li>
+<li><p>HTTP的头信息不超出以下几种字段：</p>
+</li>
+<li><p>Accept</p>
+</li>
+<li><p>Accept-Language</p>
+</li>
+<li><p>Content-Language</p>
+</li>
+<li><p>Last-Event-ID</p>
+</li>
+<li><p>Content-Type(只限于三个值application&#x2F;x-www-form-urlencoded、</p>
+</li>
+</ul>
+<p>multipart&#x2F;form-data、text&#x2F;plain)</p>
+<p>凡是不同时满足上面两个条件，就属于非简单请求。</p>
+<h3 id="ajax跨域的表现"><a href="#ajax跨域的表现" class="headerlink" title="ajax跨域的表现"></a>ajax跨域的表现</h3><p>说实话，当初整理过一篇文章，然后作为了一个解决方案，但是后来发现仍然有很多人还是不会。无奈只能耗时又耗力的调试。然而就算是我来分析，也只会根据对应的表现来判断是否是跨域，因此这一点是很重要的。</p>
+<p>ajax请求时,如果存在跨域现象,并且没有进行解决,会有如下表现:(注意，是ajax请求，请不要说为什么http请求可以，而ajax不行，因为ajax是伴随着跨域的，所以仅仅是http请求ok是不行的)</p>
+<p>注意:具体的后端跨域配置请看题纲位置。</p>
+<h4 id="第一种现象-No-Access-Control-Allow-Origin-header-is-present-on-the-requested-resource-并且The-response-had-HTTP-status-code-404"><a href="#第一种现象-No-Access-Control-Allow-Origin-header-is-present-on-the-requested-resource-并且The-response-had-HTTP-status-code-404" class="headerlink" title="第一种现象:No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource,并且The response had HTTP status code 404"></a>第一种现象:<code>No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource</code>,并且<code>The response had HTTP status code 404</code></h4><p><img src="https://user-gold-cdn.xitu.io/2017/12/18/1606891015172eb0?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>出现这种情况的原因如下：</p>
+<ul>
+<li><p>本次ajax请求是“非简单请求”,所以请求前会发送一次预检请求(OPTIONS)</p>
+</li>
+<li><p>服务器端后台接口没有允许OPTIONS请求,导致无法找到对应接口地址</p>
+</li>
+</ul>
+<p>解决方案: 后端允许options请求</p>
+<h4 id="第二种现象-No-Access-Control-Allow-Origin-header-is-present-on-the-requested-resource-并且The-response-had-HTTP-status-code-405"><a href="#第二种现象-No-Access-Control-Allow-Origin-header-is-present-on-the-requested-resource-并且The-response-had-HTTP-status-code-405" class="headerlink" title="第二种现象:No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource,并且The response had HTTP status code 405"></a>第二种现象:<code>No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource</code>,并且<code>The response had HTTP status code 405</code></h4><p><img src="https://user-gold-cdn.xitu.io/2017/12/18/1606891017123a05?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>这种现象和第一种有区别,这种情况下，后台方法允许OPTIONS请求,但是一些配置文件中(如<code>安全配置</code>),阻止了OPTIONS请求,才会导致这个现象</p>
+<p>解决方案: 后端关闭对应的安全配置</p>
+<h4 id="第三种现象-No-Access-Control-Allow-Origin-header-is-present-on-the-requested-resource-并且status-200"><a href="#第三种现象-No-Access-Control-Allow-Origin-header-is-present-on-the-requested-resource-并且status-200" class="headerlink" title="第三种现象:No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource,并且status 200"></a>第三种现象:<code>No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource</code>,并且<code>status 200</code></h4><p><img src="https://user-gold-cdn.xitu.io/2017/12/18/1606891014ed6877?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>这种现象和第一种和第二种有区别,这种情况下，服务器端后台允许OPTIONS请求,并且接口也允许OPTIONS请求,但是头部匹配时出现不匹配现象</p>
+<p>比如origin头部检查不匹配,比如少了一些头部的支持(如常见的X-Requested-With头部),然后服务端就会将response返回给前端,前端检测到这个后就触发XHR.onerror,导致前端控制台报错</p>
+<p>解决方案: 后端增加对应的头部支持</p>
+<h4 id="第四种现象-heade-contains-multiple-values"><a href="#第四种现象-heade-contains-multiple-values" class="headerlink" title="第四种现象:heade contains multiple values &#39;*,*&#39;"></a>第四种现象:<code>heade contains multiple values &#39;*,*&#39;</code></h4><p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16068910151429a0?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><img src="https://user-gold-cdn.xitu.io/2017/12/18/160689101708399f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>表现现象是，后台响应的http头部信息有两个<code>Access-Control-Allow-Origin:*</code></p>
+<p>说实话，这种问题出现的主要原因就是进行跨域配置的人不了解原理，导致了重复配置，如:</p>
+<ul>
+<li><p>常见于.net后台(一般在web.config中配置了一次origin,然后代码中又手动添加了一次origin(比如代码手动设置了返回*))</p>
+</li>
+<li><p>常见于.net后台(在IIS和项目的webconfig中同时设置Origin:*)</p>
+</li>
+</ul>
+<p>解决方案(一一对应):</p>
+<ul>
+<li><p>建议删除代码中手动添加的*，只用项目配置中的即可</p>
+</li>
+<li><p>建议删除IIS下的配置*，只用项目配置中的即可</p>
+</li>
+</ul>
+<h2 id="如何解决ajax跨域"><a href="#如何解决ajax跨域" class="headerlink" title="如何解决ajax跨域"></a>如何解决ajax跨域</h2><p>一般ajax跨域解决就是通过JSONP解决或者CORS解决,如以下:(注意，现在已经几乎不会再使用JSONP了，所以JSONP了解下即可)</p>
+<h3 id="JSONP方式解决跨域问题"><a href="#JSONP方式解决跨域问题" class="headerlink" title="JSONP方式解决跨域问题"></a>JSONP方式解决跨域问题</h3><p>jsonp解决跨域问题是一个比较古老的方案(实际中不推荐使用),这里做简单介绍(实际项目中如果要使用JSONP,一般会使用JQ等对JSONP进行了封装的类库来进行ajax请求)</p>
+<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><p>JSONP之所以能够用来解决跨域方案,主要是因为 <code>script</code> 脚本拥有跨域能力,而JSONP正是利用这一点来实现。具体原理如图</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16069ea85abd92fe?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h4 id="实现流程"><a href="#实现流程" class="headerlink" title="实现流程"></a>实现流程</h4><p>JSONP的实现步骤大致如下(参考了来源中的文章)</p>
+<ul>
+<li>客户端网页网页通过添加一个<code>script</code>元素，向服务器请求JSON数据，这种做法不受同源政策限制</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">functionaddScriptTag</span>(src) &#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">  script.<span class="title function_">setAttribute</span>(<span class="string">&quot;type&quot;</span>,<span class="string">&quot;text/javascript&quot;</span>);</span><br><span class="line">  script.<span class="property">src</span> = src;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="title function_">addScriptTag</span>(<span class="string">&#x27;http://example.com/ip?callback=foo&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">functionfoo</span>(data) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;response data: &#x27;</span> + <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>请求时,接口地址是作为构建出的脚本标签的src的,这样,当脚本标签构建出来时,最终的src是接口返回的内容</p>
+<ul>
+<li><p>服务端对应的接口在返回参数外面添加函数包裹层</p>
+<p>  foo({<br>“test”: “testData”<br>  });</p>
+</li>
+<li></li>
+</ul>
+<p>由于<code>script</code>&gt;元素请求的脚本，直接作为代码运行。这时，只要浏览器定义了foo函数，该函数就会立即调用。作为参数的JSON数据被视为JavaScript对象，而不是字符串，因此避免了使用JSON.parse的步骤。</p>
+<p>注意,一般的JSONP接口和普通接口返回数据是有区别的,所以接口如果要做JSONO兼容,需要进行判断是否有对应callback关键字参数,如果有则是JSONP请求,返回JSONP数据,否则返回普通数据</p>
+<p><strong>使用注意</strong></p>
+<p>基于JSONP的实现原理,所以JSONP只能是“GET”请求,不能进行较为复杂的POST和其它请求,所以遇到那种情况,就得参考下面的CORS解决跨域了(所以如今它也基本被淘汰了)</p>
+<h3 id="CORS解决跨域问题"><a href="#CORS解决跨域问题" class="headerlink" title="CORS解决跨域问题"></a>CORS解决跨域问题</h3><p>CORS的原理上文中已经介绍了，这里主要介绍的是，实际项目中，后端应该如何配置以解决问题(因为大量项目实践都是由后端进行解决的)，这里整理了一些常见的后端解决方案:</p>
+<h4 id="PHP后台配置"><a href="#PHP后台配置" class="headerlink" title="PHP后台配置"></a>PHP后台配置</h4><p>PHP后台得配置几乎是所有后台中最为简单的,遵循如下步骤即可:</p>
+<ul>
+<li><p>第一步:配置Php 后台允许跨域</p>
+  <?php
+  header('Access-Control-Allow-Origin: *');
+  header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+  //主要为跨域CORS配置的两大基本信息,Origin和headers复制代码
+</li>
+<li><p>第二步:配置Apache web服务器跨域(httpd.conf中)</p>
+</li>
+</ul>
+<p>原始代码</p>
+<pre><code>&lt;Directory /&gt;
+    AllowOverride none
+    Require all denied
+&lt;/Directory&gt;复制代码
+</code></pre>
+<p>改为以下代码</p>
+<pre><code>&lt;Directory /&gt;
+    Options FollowSymLinks
+    AllowOverride none
+    Order deny,allow
+    Allow from all
+&lt;/Directory&gt;复制代码
+</code></pre>
+<h4 id="Node-js后台配置-express框架"><a href="#Node-js后台配置-express框架" class="headerlink" title="Node.js后台配置(express框架)"></a>Node.js后台配置(express框架)</h4><p>Node.js的后台也相对来说比较简单就可以进行配置。只需用express如下配置:</p>
+<pre><code>app.all(&#39;*&#39;, function(req, res, next) {
+    res.header(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);
+    res.header(&quot;Access-Control-Allow-Headers&quot;, &quot;X-Requested-With&quot;);
+    res.header(&quot;Access-Control-Allow-Methods&quot;, &quot;PUT,POST,GET,DELETE,OPTIONS&quot;);
+    res.header(&quot;X-Powered-By&quot;, &#39; 3.2.1&#39;)
+        //这段仅仅为了方便返回json而已
+    res.header(&quot;Content-Type&quot;, &quot;application/json;charset=utf-8&quot;);
+    if(req.method == &#39;OPTIONS&#39;) {
+        //让options请求快速返回
+        res.sendStatus(200);
+    } else {
+        next();
+    }
+});
+复制代码
+</code></pre>
+<h4 id="JAVA后台配置"><a href="#JAVA后台配置" class="headerlink" title="JAVA后台配置"></a>JAVA后台配置</h4><p>JAVA后台配置只需要遵循如下步骤即可:</p>
+<ul>
+<li>第一步:获取依赖jar包</li>
+</ul>
+<p>下载<br><a target="_blank" rel="noopener" href="https://dailc.github.io/staticResource/blog/basicKnowledge/ajax/resource/cors-filter-2.4.jar">cors-filter-1.7.jar</a>,<br><a target="_blank" rel="noopener" href="https://dailc.github.io/staticResource/blog/basicKnowledge/ajax/resource/java-property-utils-1.9.1.jar">java-property-utils-1.9.jar</a><br>这两个库文件放到lib目录下。(放到对应项目的webcontent&#x2F;WEB-INF&#x2F;lib&#x2F;下)</p>
+<ul>
+<li><p>第二步:如果项目用了Maven构建的,请添加如下依赖到pom.xml中:(非maven请忽视)</p>
+<p>  <dependency><groupId>com.thetransactioncompany</groupId><artifactId>cors-filter</artifactId><version>[ version ]</version></dependency>复制代码</p>
+</li>
+</ul>
+<p>其中版本应该是最新的稳定版本,CORS过滤器</p>
+<ul>
+<li>第三步:添加CORS配置到项目的Web.xml中( App&#x2F;WEB-INF&#x2F;web.xml)</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- The CORS filter with parameters --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CORS<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.thetransactioncompany.cors.CORSFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- <span class="doctag">Note:</span> All parameters are options, if omitted the CORS</span></span><br><span class="line"><span class="comment">          Filter will fall back to the respective default values.</span></span><br><span class="line"><span class="comment">      --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>cors.allowGenericHttpRequests<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>cors.allowOrigin<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>cors.allowSubdomains<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>cors.supportedMethods<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>GET, HEAD, POST, OPTIONS<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>cors.supportedHeaders<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>Accept, Origin, X-Requested-With, Content-Type, Last-Modified<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>cors.exposedHeaders<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这里可以添加一些自己的暴露Headers   --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>X-Test-1, X-Test-2<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>cors.supportsCredentials<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>cors.maxAge<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>3600<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- CORS Filter mapping --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CORS<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>请注意,以上配置文件请放到web.xml的前面,作为第一个filter存在(可以有多个filter的)</p>
+<ul>
+<li>第四步:可能的安全模块配置错误(注意，某些框架中-譬如公司私人框架，有安全模块的，有时候这些安全模块配置会影响跨域配置，这时候可以先尝试关闭它们)</li>
+</ul>
+<h4 id="NET后台配置"><a href="#NET后台配置" class="headerlink" title="NET后台配置"></a>NET后台配置</h4><p>.NET后台配置可以参考如下步骤:</p>
+<ul>
+<li>第一步:网站配置</li>
+</ul>
+<p>打开控制面板，选择管理工具,选择iis;右键单击自己的网站，选择浏览;打开网站所在目录,用记事本打开web.config文件添加下述配置信息,重启网站</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16069eac4d3be645?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>请注意,以上截图较老,如果配置仍然出问题,可以考虑增加更多的headers允许,比如:</p>
+<pre><code>&quot;Access-Control-Allow-Headers&quot;:&quot;X-Requested-With,Content-Type,Accept,Origin&quot;
+</code></pre>
+<ul>
+<li><p>第二步:其它更多配置,如果第一步进行了后,仍然有跨域问题，可能是:</p>
+</li>
+<li><p>接口中有限制死一些请求类型(比如写死了POST等)，这时候请去除限 制</p>
+</li>
+<li><p>接口中，重复配置了<code>Origin:*</code>，请去除即可</p>
+</li>
+<li><p>IIS服务器中，重复配置了<code>Origin:*</code>，请去除即可</p>
+</li>
+</ul>
+<h3 id="代理请求方式解决接口跨域问题"><a href="#代理请求方式解决接口跨域问题" class="headerlink" title="代理请求方式解决接口跨域问题"></a>代理请求方式解决接口跨域问题</h3><p>注意，由于接口代理是有代价的，所以这个仅是开发过程中进行的。</p>
+<p>与前面的方法不同，前面CORS是后端解决，而这个主要是前端对接口进行代理，也就是:</p>
+<ul>
+<li><p>前端ajax请求的是本地接口</p>
+</li>
+<li><p>本地接口接收到请求后向实际的接口请求数据，然后再将信息返回给前端</p>
+</li>
+<li><p>一般用node.js即可代理</p>
+</li>
+</ul>
+<p>关于如何实现代理，这里就不重点描述了，方法和多，也不难，基本都是基于node.js的。</p>
+<p>搜索关键字<code>node.js</code>,<code>代理请求</code>即可找到一大票的方案。</p>
+<h2 id="如何分析ajax跨域"><a href="#如何分析ajax跨域" class="headerlink" title="如何分析ajax跨域"></a>如何分析ajax跨域</h2><p>上述已经介绍了跨域的原理以及如何解决，但实际过程中，发现仍然有很多人对照着类似的文档无法解决跨域问题，主要体现在，前端人员不知道什么时候是跨域问题造成的，什么时候不是，因此这里稍微介绍下如何分析一个请求是否跨域:</p>
+<h3 id="抓包请求数据"><a href="#抓包请求数据" class="headerlink" title="抓包请求数据"></a>抓包请求数据</h3><p>第一步当然是得知道我们的ajax请求发送了什么数据，接收了什么，做到这一步并不难，也不需要<code>fiddler</code>等工具，仅基于<code>Chrome</code>即可</p>
+<ul>
+<li><p><code>Chrome</code>浏览器打开对应发生ajax的页面，<code>F12</code>打开<code>Dev Tools</code></p>
+</li>
+<li><p>发送ajax请求</p>
+</li>
+<li><p>右侧面板-&gt;<code>NetWork</code>-&gt;<code>XHR</code>，然后找到刚才的ajax请求，点进去</p>
+</li>
+</ul>
+<h4 id="示例一-正常的ajax请求"><a href="#示例一-正常的ajax请求" class="headerlink" title="示例一(正常的ajax请求)"></a>示例一(正常的ajax请求)</h4><p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16069eac51a1ad18?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>上述请求是一个正确的请求，为了方便，我把每一个头域的意思都表明了，我们可以清晰的看到，接口返回的响应头域中，包括了</p>
+<pre><code>Access-Control-Allow-Headers: X-Requested-With,Content-Type,Accept
+Access-Control-Allow-Methods: Get,Post,Put,OPTIONS
+Access-Control-Allow-Origin: *
+复制代码
+</code></pre>
+<p>所以浏览器接收到响应时，判断的是正确的请求，自然不会报错，成功的拿到了响应数据。</p>
+<h4 id="示例二-跨域错误的ajax请求"><a href="#示例二-跨域错误的ajax请求" class="headerlink" title="示例二(跨域错误的ajax请求)"></a>示例二(跨域错误的ajax请求)</h4><p>为了方便，我们仍然拿上面的错误表现示例举例。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/1606891014ed6877?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>这个请求中，接口Allow里面没有包括<code>OPTIONS</code>，所以请求出现了跨域、</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16068910151429a0?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>这个请求中，<code>Access-Control-Allow-Origin: *</code>出现了两次，导致了跨域配置没有正确配置，出现了错误。<br>更多跨域错误基本都是类似的，就是以上三样没有满足(Headers,Allow,Origin)，这里不再一一赘述。</p>
+<h4 id="示例三-与跨域无关的ajax请求"><a href="#示例三-与跨域无关的ajax请求" class="headerlink" title="示例三(与跨域无关的ajax请求)"></a>示例三(与跨域无关的ajax请求)</h4><p>当然，也并不是所有的ajax请求错误都与跨域有关，所以请不要混淆，比如以下:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/18/16069eac5185ca66?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"><img src="https://user-gold-cdn.xitu.io/2017/12/18/16069eac516f2de6?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>比如这个请求，它的跨域配置没有一点问题，它出错仅仅是因为request的<code>Accept</code>和response的<code>Content-Type</code>不匹配而已。</p>
+<h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><p>基本上都是这样去分析一个ajax请求，通过<code>Chrome</code>就可以知道了发送了什么数据，收到了什么数据，然后再一一比对就知道问题何在了。</p>
+<h2 id="写在最后的话"><a href="#写在最后的话" class="headerlink" title="写在最后的话"></a>写在最后的话</h2><p>跨域是一个老生常谈的话题，网上也有大量跨域的资料，并且有不少精品(比如阮一峰前辈的)，但是身为一个前端人员不应该浅尝而止，故而才有了本文。</p>
+<p>漫漫前端路，望与诸君共勉之！</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">浏览器同源政策及其规避方法(阮一峰)</a></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解(阮一峰)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/dailc/p/5893341.html">本人之前在cnblog上的文章</a></p>
+</li>
+</ul>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>初次发布<code>2017.03.22</code>于个人博客</p>
+<p><strong>想了想，最终只搬了一篇过来了，其它的在个人博客中</strong></p>
+<ul>
+<li></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://www.dailichun.com/2017/03/22/ajaxCrossDomainSolution.html">www.dailichun.com/2017/03/22/…</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/267e890d.html"><div class="related-post-title">TypeScript和JavaScript混合开发，这或许是配上单元测试的最佳实践</div><div class="related-post-meta"><time>2020-02-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/a1af7fac.html"><div class="related-post-title">js很多人不知道小知识</div><div class="related-post-meta"><time>2021-11-11</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/433d7e2b.html"><div class="related-post-title">electron-vite+react+react-router-dom+antd中useRoutes踩坑</div><div class="related-post-meta"><time>2024-11-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/82ae7b5f.html"><div class="related-post-title">js判断一个对象是否为空</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/9094c2b0.html"><div class="related-post-title">HTTPS 到底加密了什么？</div><div class="related-post-meta"><time>2020-02-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/e131c1de.html">https://xuehuayu.cn/article/e131c1de.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/e3df0284.html">为什么axios先请求options再请求post及解决方法</a><a class="next" href="/article/b53ad9a1.html">免费全栈工程师视频教程</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

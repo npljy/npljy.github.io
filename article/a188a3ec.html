@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd,交叉观察者"><title>利用&quot;交叉观察者&quot;(IntersectionObserver接口)，轻松实现懒加载、吸顶、触底 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">利用&quot;交叉观察者&quot;(IntersectionObserver接口)，轻松实现懒加载、吸顶、触底</h1><div class="post-meta"><span class="date">2019-09-29</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 8</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/a188a3ec.html#waline-comment"><span class="waline-comment-count" data-path="/article/a188a3ec.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5d665133e51d4561c83e7c83#heading-1</code><br>可以先看一下<code>MDN</code>中的介绍：<br><code>IntersectionObserver</code>接口，提供了一种异步观察<code>目标元素与其祖先元素或顶级文档视窗(viewport)交叉状态</code>的方法，祖先元素与视窗(<code>viewport</code>)被称为根(<code>root</code>);</p>
+<span id="more"></span>
+
+<p>直接进入正题，<code>IntersectionObserver</code> 翻译为<br>“<code>交叉观察者</code>“，它的任务就是监听<code>目标元素</code>跟<code>指定父元素</code>（用户可指定，默认为<code>viewport</code>）是否在发生<code>交叉行为</code>，简单理解就是监听<code>目标元素</code>是否进入或者离开了<code>指定父元素</code>的内部（理解这句就行了，管他交不交叉呢），我好像在开车，但是你们没有证据<br>… 😐</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd5e48ee2fc2e9?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>以下的<code>目标元素</code>简称为<code>目标</code>、<code>指定父元素</code>简称为<code>父亲</code>、<code>交叉行为</code>简称为<code>交叉</code>，<code>viewport</code>简称为<code>视窗</code> 👌</p>
+<p>下面会有动图介绍，先忍忍！</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h4 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1. 构造函数"></a>1. 构造函数</h4><pre><code>new IntersectionObserver(callback, options);
+</code></pre>
+<h4 id="2-callback"><a href="#2-callback" class="headerlink" title="2. callback"></a>2. callback</h4><p>发生<code>交叉</code>的回调，接受一个<code>entries</code>参数，返回当前<code>已监听</code>并且发生了<code>交叉</code>的<code>目标</code>集合（后面会举例说明为什么是”<code>且发生了交叉</code>“）：</p>
+<pre><code>new IntersectionObserver(entries =&gt; {
+  entries.forEach(item =&gt; console.log(item));
+  // ...
+});
+</code></pre>
+<p>我们看看<code>item</code>里面包含哪些<code>常用</code>属性：<br>属性说明boundingClientRect空间信息intersectionRatio元素可见区域的占比isIntersecting字面理解为是否正在<code>交叉</code>，可用做判断元素是否可见target目标节点，就跟<code>event.target</code>一样<br>注意：页面初始化的时候会触发一次<code>callback</code>，<code>entries</code>为<code>所有已监听的目标集合</code>✅</p>
+<h4 id="3-options"><a href="#3-options" class="headerlink" title="3. options"></a>3. options</h4><p>顾名思义，它是一个<code>配置</code>参数，对象类型，非必填，<code>常用</code>属性如下：<br>属性说明root指定父元素，默认为<code>视窗</code>rootMargin触发<code>交叉</code>的偏移值，默认为”0px 0px 0px<br>0px”（上左下右，正数为向外扩散，负数则向内收缩）<br>    new IntersectionObserver(callback, {<br>      root: document.querySelector(“xx”),<br>      rootMargin: “0px 0px -100px 0px”<br>    });</p>
+<p>如果设置<code>rootMargin</code>为”<code>20px 0px 30px 30px</code>“，那么元素未到达<code>视窗</code>时，就已经切换为<code>可见</code>状态了：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd6260edf6ebe5?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h4 id="4-常用方法"><a href="#4-常用方法" class="headerlink" title="4. 常用方法"></a>4. 常用方法</h4><p>名称说明参数observe开始监听一个目标元素节点unobserve停止监听一个目标元素节点takeRecords返回所有监听的目标元素集合disconnect停止所有监听</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h4 id="1-假设页面上有一个class-box-的盒子且父元素为视窗："><a href="#1-假设页面上有一个class-box-的盒子且父元素为视窗：" class="headerlink" title="1. 假设页面上有一个class=&quot;box&quot;的盒子且父元素为视窗："></a>1. 假设页面上有一个<code>class=&quot;box&quot;</code>的盒子且父元素为<code>视窗</code>：</h4><pre><code>let box = document.querySelector(&quot;.box&quot;);
+
+let observer = new IntersectionObserver(entries =&gt; {
+  entries.forEach(item =&gt; {
+    let tips = item.isIntersecting ? &quot;进入了父元素的内部&quot; : &quot;离开了父元素的内部&quot;;
+    console.log(tips);
+  });
+});
+
+observer.observe(box); // 监听一个box
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd5ed1eb7a2546?imageslim" alt="xuehuayu.cn"></p>
+<h4 id="2-假设页面上有多个class-box-的盒子且父元素为视窗："><a href="#2-假设页面上有多个class-box-的盒子且父元素为视窗：" class="headerlink" title="2. 假设页面上有多个class=&quot;box&quot;的盒子且父元素为视窗："></a>2. 假设页面上有多个<code>class=&quot;box&quot;</code>的盒子且父元素为<code>视窗</code>：</h4><pre><code>let box = document.querySelectorAll(&quot;.box&quot;);
+
+let observer = new IntersectionObserver(entries =&gt; console.log(`发生交叉行为，目标元素有${entries.length}个`));
+
+box.forEach(item =&gt; observer.observe(item)); // 监听多个box
+</code></pre>
+<p>当所有盒子距离视窗顶部距离<code>一致</code>时，效果如下:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd5fd77e7cf265?imageslim" alt="xuehuayu.cn"></p>
+<p>当所有盒子距离视窗顶部距离<code>不一致</code>时，效果如下:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd5fdc6a297fe1?imageslim" alt="xuehuayu.cn"></p>
+<p>为什么要<code>举例</code>以上两种情况呢，因为<code>entries</code>是返回当前<code>已监听</code>并且发生了<code>交叉</code>的<code>目标集合</code>，第一种情况，大家都<code>一起</code>发生<code>交叉</code>，固每次返回的集合长度都为<code>三</code>；第二种情况则是每个目标<code>轮流</code>发生<code>交叉</code>，且当前只触发了<code>一个</code>，所以每次返回的集合长度只有<code>一</code>✅</p>
+<h4 id="3-指定父元素"><a href="#3-指定父元素" class="headerlink" title="3. 指定父元素"></a>3. 指定父元素</h4><p>假设<code>html</code>如下:</p>
+<pre><code>&lt;div class=&quot;parent&quot;&gt;
+  &lt;div class=&quot;child&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>然后开始监听：</p>
+<pre><code>let child = document.querySelector(&quot;.child&quot;);
+
+let observer = new IntersectionObserver(entries =&gt; {
+  entries.forEach(item =&gt; {
+    console.log(item.isIntersecting ? &quot;可见&quot; : &quot;不可见&quot;);
+  });
+}, {
+  root: document.querySelector(&quot;.parent&quot;)
+});
+
+observer.observe(child); // 开始监听child
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd638b4cff37e2?imageslim" alt="xuehuayu.cn"></p>
+<h2 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h2><h4 id="1-图片懒加载"><a href="#1-图片懒加载" class="headerlink" title="1. 图片懒加载"></a>1. 图片懒加载</h4><p>以前都是监听浏览器滚动，然后遍历拿到每个图片的空间信息，然后判断一些位置信息从而进行图片加载；而现在只需要交给<code>交叉观察者</code>去做；</p>
+<p>假设<code>html</code>结构如下：</p>
+<pre><code>// 多个
+&lt;img src=&quot;&quot; data-origin=&quot;图片链接&quot;&gt;
+</code></pre>
+<p>然后开始监听：</p>
+<pre><code>let images = document.querySelectorAll(&quot;img.lazyload&quot;);
+
+let observer = new IntersectionObserver(entries =&gt; {
+  entries.forEach(item =&gt; {
+    if (item.isIntersecting) {
+      item.target.src = item.target.dataset.origin; // 开始加载图片
+      observer.unobserve(item.target); // 停止监听已开始加载的图片
+    }
+  });
+});
+
+images.forEach(item =&gt; observer.observe(item));
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd60f3b3f1a495?imageslim" alt="xuehuayu.cn"></p>
+<p>把网速调慢：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd60f51f89057d?imageslim" alt="xuehuayu.cn"></p>
+<p>设置<code>rootMargin</code>偏移值为”<code>0px 0px -100px 0px</code>“（底部向内收缩）：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd61d39a83b0a8?imageslim" alt="xuehuayu.cn"></p>
+<p>该方法还有一个好处，那就是当页面上某个节点存在横向滚动条的时候，一样应对自如：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd61a02c0a19ab?imageslim" alt="xuehuayu.cn"></p>
+<p>传统的懒加载只是监听全局滚动条的滚动，像这种小细节还是无法实现的（传统的实现方法并不是判断目标是否出现在<code>视窗</code>，所以横向的图片会一起加载，即使你没有向左滑动），所以这也是<code>交叉观察者</code>的一大优点✅</p>
+<h4 id="2-触底"><a href="#2-触底" class="headerlink" title="2. 触底"></a>2. 触底</h4><p>我们在列表底部放一个<code>参照元素</code>，然后让<code>交叉观察者</code>去监听；</p>
+<p>假设<code>html</code>结构如下：</p>
+<pre><code>&lt;!-- 数据列表 --&gt;
+&lt;ul&gt;
+  &lt;li&gt;index&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- 参照元素 --&gt;
+&lt;div class=&quot;reference&quot;&gt;&lt;/div&gt;
+</code></pre>
+<p>然后监听参照元素：</p>
+<pre><code>new IntersectionObserver(entries =&gt; {
+  let item = entries[0]; // 拿第一个就行，反正只有一个
+  if (item.isIntersecting) console.log(&quot;滚动到了底部，开始请求数据&quot;);
+}).observe(document.querySelector(&quot;.reference&quot;)); // 监听参照元素
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd62f5fa1285fb?imageslim" alt="xuehuayu.cn"></p>
+<h4 id="3-吸顶"><a href="#3-吸顶" class="headerlink" title="3. 吸顶"></a>3. 吸顶</h4><p>实现元素吸顶的方式有很多种，如css的<code>position: sticky</code>，兼容性较差；如果用<code>交叉观察者</code>实现也很方便，同样也要放一个<code>参照元素</code>；</p>
+<p>假设<code>html</code>结构如下：</p>
+<pre><code>&lt;!-- 参照元素 --&gt;
+&lt;div class=&quot;reference&quot;&gt;&lt;/div&gt;
+
+&lt;nav&gt;我可以吸顶&lt;/nav&gt;
+</code></pre>
+<p>假设<code>scss</code>代码如下：</p>
+<pre><code>nav {
+  &amp;.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+</code></pre>
+<p>开始监听：</p>
+<pre><code>let nav = document.querySelector(&#39;nav&#39;);
+let reference = document.querySelector(&quot;.reference&quot;);
+
+new IntersectionObserver(entries =&gt; {
+
+  let item = entries[0];
+  let top = item.boundingClientRect.top;
+
+  // 当参照元素的的top值小于0，也就是在视窗的顶部的时候，开始吸顶，否则移除吸顶
+  if (top &lt; 0) nav.classList.add(&quot;fixed&quot;);
+  else nav.classList.remove(&quot;fixed&quot;);
+
+}).observe(reference);
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd69467ab027cc?imageslim" alt="xuehuayu.cn"></p>
+<p>但是有个问题，当你滚动的慢的时候，会掉进一个死循环：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd6c0564e35a27?imageslim" alt="xuehuayu.cn"></p>
+<p>为了方便观察，我们把参考元素加一个高度跟颜色：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd6c07116980ed?imageslim" alt="xuehuayu.cn"></p>
+<p>问题很明显，当给<code>nav</code>增加<code>fixed</code>定位时，<code>nav</code>脱离了文档流，自然<code>参考元素</code>会往下掉，然后往下掉又发生了<code>交叉</code>，从而去除<code>fixed</code>定位，陷入一个死循环;</p>
+<p>思考了一会，解决办法是，让<code>参考元素</code>绝对定位至<code>nav</code>的上方：</p>
+<pre><code>let nav = document.querySelector(&#39;nav&#39;);
+let reference = document.querySelector(&quot;.reference&quot;);
+
+reference.style.top = nav.offsetTop + &quot;px&quot;;
+
+// 以下代码不变 ...
+</code></pre>
+<p>这样，即使<code>nav</code>脱离的文档流，也不会影响<code>参考元素</code>的位置：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd6cf23d7538f0?imageslim" alt="xuehuayu.cn"></p>
+<h4 id="4-动画展示"><a href="#4-动画展示" class="headerlink" title="4. 动画展示"></a>4. 动画展示</h4><p>相信很多人都需要过这种需求，当某个元素出现的时候就给该元素加个动画，比如渐变、偏移等；</p>
+<p>假设<code>html</code>结构如下：</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<p>假设<code>scss</code>代码如下:</p>
+<pre><code>ul {
+  li {
+    &amp;.show {
+    // 默认从左边进来
+    animation: left 1s ease;
+
+    // 偶数从右边进来
+    &amp;:nth-child(2n) {
+      animation: right 1s ease;
+    }
+    }
+  }
+}
+
+@keyframes left {
+  from {
+    opacity: 0;
+    transform: translate(-20px, 20px); // right动画改成20px, 20px即可
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+</code></pre>
+<p>然后开始监听：</p>
+<pre><code>let list = document.querySelectorAll(&quot;ul li&quot;);
+
+let observer = new IntersectionObserver(entries =&gt; {
+  entries.forEach(item =&gt; {
+    if (item.isIntersecting) {
+      item.target.classList.add(&quot;show&quot;); // 增加show类名
+      observer.unobserve(item.target); // 移除监听
+    }
+  });
+});
+
+list.forEach(item =&gt; observer.observe(item));
+</code></pre>
+<p>效果如下:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/28/16cd6867993fe3ef?imageslim" alt="xuehuayu.cn"></p>
+<h2 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h2><p>IE不兼容，不过有<a target="_blank" rel="noopener" href="https://github.com/w3c/IntersectionObserver/tree/master/polyfill">官方的polyfill</a>✅</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>暂时就发现这么多用途啦，值得注意的是，必须是<code>子元素跟父元素发生交叉</code>，如果你想检查两个<code>非父子关系的交叉</code>，那是<code>不行</code>的嘻嘻，如果你觉得这篇文章不错，请别忘记点个<code>赞</code>跟<code>关注</code>哦~😊</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/6a90feea.html"><div class="related-post-title">异常监控：教你如何优雅的处理前端异常</div><div class="related-post-meta"><time>2019-12-17</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/8ed011c9.html"><div class="related-post-title">TypeScript 3.7 来了，支持 Optional Chaining！</div><div class="related-post-meta"><time>2019-11-09</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/8c69d0b.html"><div class="related-post-title">antd的select选择框的值如何设置为图片</div><div class="related-post-meta"><time>2020-04-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/8c6832b5.html"><div class="related-post-title">TypeScript中as const断言和const声明变量的区别是什么？</div><div class="related-post-meta"><time>2025-10-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">TypeScript</span></div></div></a><a class="related-post-item" href="/article/30e2cc00.html"><div class="related-post-title">react预览pdf和图片遇到的一些坑</div><div class="related-post-meta"><time>2020-04-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/a188a3ec.html">https://xuehuayu.cn/article/a188a3ec.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E4%BA%A4%E5%8F%89%E8%A7%82%E5%AF%9F%E8%80%85/">交叉观察者</a></div><div class="post-nav"><a class="pre" href="/article/9b2f3de1.html">30 seconds of code 30秒就能理解的JavaScript优秀代码</a><a class="next" href="/article/b5946fcc.html">Array.from() 五个超好用的用途</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

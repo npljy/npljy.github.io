@@ -1,0 +1,2037 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>70个JavaScript面试问题 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">70个JavaScript面试问题</h1><div class="post-meta"><span class="date">2020-01-16</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 18.5k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 78</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/42460c42.html#waline-comment"><span class="waline-comment-count" data-path="/article/42460c42.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.html.cn/interview/15926.html</code></p>
+<span id="more"></span>
+
+<h4 id="考题列表"><a href="#考题列表" class="headerlink" title="考题列表"></a>考题列表</h4><ul>
+<li><a href="#_1">1. undefined 和 null 有什么区别？</a></li>
+<li><a href="#_2">2. &amp;&amp; 运算符能做什么</a></li>
+<li><a href="#_3">3. || 运算符能做什么</a></li>
+<li><a href="#_4">4. 使用 + 或一元加运算符是将字符串转换为数字的最快方法吗？</a></li>
+<li><a href="#_5">5. DOM 是什么？</a></li>
+<li><a href="#_6">6. 什么是事件传播?</a></li>
+<li><a href="#_7">7. 什么是事件冒泡？</a></li>
+<li><a href="#_8">8. 什么是事件捕获？</a></li>
+<li><a href="#_9">9. event.preventDefault() 和 event.stopPropagation()方法之间有什么区别？</a></li>
+<li><a href="#_10">10. 如何知道是否在元素中使用了event.preventDefault()方法？</a></li>
+<li><a href="#_11">11. 为什么此代码obj.someprop.x会引发错误?</a></li>
+<li><a href="#_12">12. 什么是event.target？</a></li>
+<li><a href="#_13">13. 什么是event.currentTarget？</a></li>
+<li><a href="#_14">14. &#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D; 有什么区别？</a></li>
+<li><a href="#_15">15. 为什么在 JS 中比较两个相似的对象时返回 false？</a></li>
+<li><a href="#_16">16. !! 运算符能做什么？</a></li>
+<li><a href="#_17">17. 如何在一行中计算多个表达式的值？</a></li>
+<li><a href="#_18">18. 什么是提升？</a></li>
+<li><a href="#_19">19. 什么是作用域？</a></li>
+<li><a href="#_20">20. 什么是闭包？</a></li>
+<li><a href="#_21">21. JavaScript中的虚值是什么？</a></li>
+<li><a href="#_22">22. 如何检查值是否虚值？</a></li>
+<li><a href="#_23">23. ‘use strict’ 是干嘛用的？</a></li>
+<li><a href="#_24">24. JavaScript中 this 值是什么？</a></li>
+<li><a href="#_25">25. 对象的 prototype 是什么？</a></li>
+<li><a href="#_26">26. 什么是IIFE，它的用途是什么？</a></li>
+<li><a href="#_27">27. Function.prototype.apply方法的用途是什么？</a></li>
+<li><a href="#_28">28. Function.prototype.call方法的用途是什么？</a></li>
+<li><a href="#_29">29. Function.prototype.apply 和 Function.prototype.call 之间有什么区别？</a></li>
+<li><a href="#_30">30. Function.prototype.bind的用途是什么？</a></li>
+<li><a href="#_31">31. 什么是函数式编程? JavaScript的哪些特性使其成为函数式语言的候选语言？</a></li>
+<li><a href="#_32">32. 什么是高阶函数？</a></li>
+<li><a href="#_33">33. 为什么函数被称为一等公民？</a></li>
+<li><a href="#_34">34. 手动实现<code>Array.prototype.map</code>方法</a></li>
+<li><a href="#_35">35. 手动实现<code>Array.prototype.filter</code>方法</a></li>
+<li><a href="#_35">35. 手动实现<code>Array.prototype.reduce</code>方法</a></li>
+<li><a href="#_37">37. arguments 的对象是什么？</a></li>
+<li><a href="#_38">38. 如何创建一个没有 prototype(原型) 的对象？</a></li>
+<li><a href="#_39">39. 为什么在调用这个函数时，代码中的<code>b</code>会变成一个全局变量?</a></li>
+<li><a href="#_40">40. ECMAScript是什么？</a></li>
+<li><a href="#_41">41. ES6或ECMAScript 2015有哪些新特性？</a></li>
+<li><a href="#_42">42. <code>var</code>,<code>let</code>和<code>const</code>的区别是什么</a></li>
+<li><a href="#_43">43. 什么是箭头函数？</a></li>
+<li><a href="#_44">44. 什么是类？</a></li>
+<li><a href="#_45">45. 什么是模板字符串？</a></li>
+<li><a href="#_46">46. 什么是对象解构？</a></li>
+<li><a href="#_47">47. 什么是 ES6 模块？</a></li>
+<li><a href="#_48">48. 什么是<code>Set</code>对象，它是如何工作的？</a></li>
+<li><a href="#_49">49. 什么是回调函数？</a></li>
+<li><a href="#_50">50. Promise 是什么？</a></li>
+<li><a href="#_51">51. 什么是 <code>async/await</code> 及其如何工作？</a></li>
+<li><a href="#_52">52. 展开运算符和Rest运算符有什么区别？</a></li>
+<li><a href="#_53">53. 什么是默认参数？</a></li>
+<li><a href="#_54">54. 什么是包装对象（wrapper object）？</a></li>
+<li><a href="#_55">55. 隐式和显式转换有什么区别？</a></li>
+<li><a href="#_56">56. 什么是NaN？ 以及如何检查值是否为 NaN？</a></li>
+<li><a href="#_57">57. 如何判断值是否为数组？</a></li>
+<li><a href="#_58">58. 如何在不使用<code>%</code>模运算符的情况下检查一个数字是否是偶数？</a></li>
+<li><a href="#_59">59. 如何检查对象中是否存在某个属性？</a></li>
+<li><a href="#_60">60. AJAX 是什么？</a></li>
+<li><a href="#_61">61. 如何在JavaScript中创建对象？</a></li>
+<li><a href="#_62">62. Object.seal 和 Object.freeze 方法之间有什么区别？</a></li>
+<li><a href="#_63">63. 对象中的 in 运算符和 hasOwnProperty 方法有什么区别？</a></li>
+<li><a href="#_64">64. 有哪些方法可以处理javascript中的异步代码？</a></li>
+<li><a href="#_65">65. 函数表达式和函数声明之间有什么区别？</a></li>
+<li><a href="#_66">66. 调用函数，可以使用哪些方法？</a></li>
+<li><a href="#_67">67. 什么是缓存及它有什么作用？</a></li>
+<li><a href="#_68">68. 手动实现缓存方法</a></li>
+<li><a href="#_69">69. 为什么typeof null返回 object？ 如何检查一个值是否为 null？</a></li>
+<li><a href="#_70">70. new 关键字有什么作用？</a></li>
+</ul>
+<h3 id="1-undefined-和-null-有什么区别？-1-undefined-和-null-有什么区别？"><a href="#1-undefined-和-null-有什么区别？-1-undefined-和-null-有什么区别？" class="headerlink" title="[1.undefined 和 null 有什么区别？](1.undefined 和 null 有什么区别？)"></a>[1.undefined 和 null 有什么区别？](1.undefined 和 null 有什么区别？)</h3><p>在理解<code>undefined</code>和<code>null</code>之间的差异之前，我们先来看看它们的相似类。</p>
+<p><strong>它们属于 JavaScript 的 7 种基本类型。</strong></p>
+<pre><code>  let primitiveTypes = [&#39;string&#39;,&#39;number&#39;,&#39;null&#39;,&#39;undefined&#39;,&#39;boolean&#39;,&#39;symbol&#39;, &#39;bigint&#39;];
+</code></pre>
+<p>它们是属于虚值，可以使用<code>Boolean(value)</code>或<code>!!value</code>将其转换为布尔值时，值为<code>false</code>。</p>
+<pre><code>console.log(!!null); // false
+console.log(!!undefined); // false
+
+console.log(Boolean(null)); // false
+console.log(Boolean(undefined)); // false
+</code></pre>
+<p>接着来看看它们的区别。</p>
+<p><code>undefined</code>是未指定特定值的变量的默认值，或者没有显式返回值的函数，如：<code>console.log(1)</code>，还包括对象中不存在的属性，这些 JS<br>引擎都会为其分配 <code>undefined</code> 值。</p>
+<pre><code>let _thisIsUndefined;
+const doNothing = () =&gt; {};
+const someObj = {
+  a : &quot;ay&quot;,
+  b : &quot;bee&quot;,
+  c : &quot;si&quot;
+};
+
+console.log(_thisIsUndefined); // undefined
+console.log(doNothing()); // undefined
+console.log(someObj[&quot;d&quot;]); // undefined
+</code></pre>
+<p><code>null</code>是**“不代表任何值的值”**。 <code>null</code>是已明确定义给变量的值。<br>在此示例中，当<code>fs.readFile</code>方法未引发错误时，我们将获得<code>null</code>值。</p>
+<pre><code>fs.readFile(&#39;path/to/file&#39;, (e,data) =&gt; {
+    console.log(e); // 当没有错误发生时，打印 null
+    if(e){
+      console.log(e);
+    }
+    console.log(data);
+  });
+</code></pre>
+<p>在比较<code>null</code>和<code>undefined</code>时，我们使用<code>==</code>时得到<code>true</code>，使用<code>===</code>时得到<code>false</code>:</p>
+<pre><code>  console.log(null == undefined); // true
+  console.log(null === undefined); // false
+</code></pre>
+<h3 id="2-运算符能做什么-2-运算符能做什么"><a href="#2-运算符能做什么-2-运算符能做什么" class="headerlink" title="[2. &amp;&amp; 运算符能做什么](2. &amp;&amp; 运算符能做什么)"></a>[2. &amp;&amp; 运算符能做什么](2. &amp;&amp; 运算符能做什么)</h3><p><code>&amp;&amp;</code> 也可以叫<strong>逻辑与</strong>，在其操作数中找到第一个虚值表达式并返回它，如果没有找到任何虚值表达式，则返回最后一个真值表达式。它采用短路来防止不必要的工作。</p>
+<pre><code>console.log(false &amp;&amp; 1 &amp;&amp; []); // false
+console.log(&quot; &quot; &amp;&amp; true &amp;&amp; 5); // 5
+</code></pre>
+<p><strong>使用<code>if</code>语句</strong></p>
+<pre><code>const router: Router = Router();
+
+router.get(&#39;/endpoint&#39;, (req: Request, res: Response) =&gt; {
+    let conMobile: PoolConnection;
+    try {
+      //do some db operations
+    } catch (e) {
+    if (conMobile) {
+    conMobile.release();
+    }
+  }
+});
+</code></pre>
+<p><strong>使用<code>&amp;&amp;</code>操作符</strong></p>
+<pre><code>const router: Router = Router();
+
+router.get(&#39;/endpoint&#39;, (req: Request, res: Response) =&gt; {
+  let conMobile: PoolConnection;
+  try {
+      //do some db operations
+  } catch (e) {
+    conMobile &amp;&amp; conMobile.release()
+  }
+});
+</code></pre>
+<h3 id="3-运算符能做什么-3-运算符能做什么"><a href="#3-运算符能做什么-3-运算符能做什么" class="headerlink" title="[3. || 运算符能做什么](3. || 运算符能做什么)"></a>[3. || 运算符能做什么](3. || 运算符能做什么)</h3><p><code>||</code>也叫或<code>逻辑或</code>，在其操作数中找到第一个真值表达式并返回它。这也使用了短路来防止不必要的工作。在支持 ES6<br>默认函数参数之前，它用于初始化函数中的默认参数值。</p>
+<pre><code>console.log(null || 1 || undefined); // 1
+
+function logName(name) {
+  var n = name || &quot;Mark&quot;;
+  console.log(n);
+}
+
+logName(); // &quot;Mark&quot;
+</code></pre>
+<h3 id="4-使用-或一元加运算符是将字符串转换为数字的最快方法吗？-4-使用-或一元加运算符是将字符串转换为数字的最快方法吗？"><a href="#4-使用-或一元加运算符是将字符串转换为数字的最快方法吗？-4-使用-或一元加运算符是将字符串转换为数字的最快方法吗？" class="headerlink" title="[4. 使用 + 或一元加运算符是将字符串转换为数字的最快方法吗？](4. 使用 + 或一元加运算符是将字符串转换为数字的最快方法吗？)"></a>[4. 使用 + 或一元加运算符是将字符串转换为数字的最快方法吗？](4. 使用 + 或一元加运算符是将字符串转换为数字的最快方法吗？)</h3><p>根据<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Unary_plus">MDN文档</a>，<code>+</code>是将字符串转换为数字的最快方法，因为如果值已经是数字，它不会执行任何操作。</p>
+<h3 id="5-DOM-是什么？-5-DOM-是什么？"><a href="#5-DOM-是什么？-5-DOM-是什么？" class="headerlink" title="[5. DOM 是什么？](5. DOM 是什么？)"></a>[5. DOM 是什么？](5. DOM 是什么？)</h3><p><strong>DOM</strong> 代表<strong>文档对象模型</strong>，是 HTML 和 XML 文档的接口(API)。当浏览器第一次读取(解析)HTML文档时，它会创建一个大对象，一个基于<br>HTM L文档的非常大的对象，这就是<strong>DOM</strong>。它是一个从 HTML 文档中建模的树状结构。DOM 用于交互和修改DOM结构或特定元素或节点。</p>
+<p>假设我们有这样的 HTML 结构：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Document Object Model&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div&gt;
+      &lt;p&gt;
+          &lt;span&gt;&lt;/span&gt;
+      &lt;/p&gt;
+      &lt;label&gt;&lt;/label&gt;
+      &lt;input&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<p>等价的<strong>DOM</strong>是这样的：</p>
+<p><img src="https://img.php.cn/upload/image/440/587/283/1579139376818807.png" alt="1579139376818807.png"></p>
+<p>JS 中的<code>document</code>对象表示DOM。它为我们提供了许多方法，我们可以使用这些方法来选择元素来更新元素内容，等等。</p>
+<h3 id="6-什么是事件传播-6-什么是事件传播"><a href="#6-什么是事件传播-6-什么是事件传播" class="headerlink" title="[6. 什么是事件传播?](6. 什么是事件传播?)"></a>[6. 什么是事件传播?](6. 什么是事件传播?)</h3><p>当<strong>事件</strong>发生在<strong>DOM</strong>元素上时，该<strong>事件</strong>并不完全发生在那个元素上。<br>在**“冒泡阶段”<strong>中，事件冒泡或向上传播至父级，祖父母，祖父母或父级，直到到达<code>window</code>为止；而在</strong>“捕获阶段”**中，事件从<code>window</code>开始向下触发元素<br>事件或<code>event.target</code>。</p>
+<p>事件传播有三个阶段：</p>
+<ol>
+<li><strong>捕获阶段</strong>–事件从 <code>window</code> 开始，然后向下到每个元素，直到到达目标元素。</li>
+<li><strong>目标阶段</strong>–事件已达到目标元素。</li>
+<li><strong>冒泡阶段</strong>–事件从目标元素冒泡，然后上升到每个元素，直到到达 <code>window</code>。</li>
+</ol>
+<p><img src="https://img.php.cn/upload/image/371/153/737/1579139382783438.png" alt="1579139382783438.png"></p>
+<h3 id="7-什么是事件冒泡？-7-什么是事件冒泡？"><a href="#7-什么是事件冒泡？-7-什么是事件冒泡？" class="headerlink" title="[7. 什么是事件冒泡？](7. 什么是事件冒泡？)"></a>[7. 什么是事件冒泡？](7. 什么是事件冒泡？)</h3><p>当<strong>事件</strong>发生在<strong>DOM</strong>元素上时，该<strong>事件</strong>并不完全发生在那个元素上。<br>在冒泡阶段，事件冒泡，或者事件发生在它的父代，祖父母，祖父母的父代，直到到达<code>window</code>为止。</p>
+<p>假设有如下的 HTML 结构：</p>
+<pre><code>&lt;div class=&quot;grandparent&quot;&gt;
+  &lt;div class=&quot;parent&quot;&gt;
+    &lt;div class=&quot;child&quot;&gt;1&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>对应的 JS 代码:</p>
+<pre><code>function addEvent(el, event, callback, isCapture = false) {
+  if (!el || !event || !callback || typeof callback !== &#39;function&#39;) return;
+  if (typeof el === &#39;string&#39;) {
+    el = document.querySelector(el);
+  };
+  el.addEventListener(event, callback, isCapture);
+}
+
+addEvent(document, &#39;DOMContentLoaded&#39;, () =&gt; {
+  const child = document.querySelector(&#39;.child&#39;);
+  const parent = document.querySelector(&#39;.parent&#39;);
+  const grandparent = document.querySelector(&#39;.grandparent&#39;);
+
+  addEvent(child, &#39;click&#39;, function (e) {
+    console.log(&#39;child&#39;);
+  });
+
+  addEvent(parent, &#39;click&#39;, function (e) {
+    console.log(&#39;parent&#39;);
+  });
+
+  addEvent(grandparent, &#39;click&#39;, function (e) {
+    console.log(&#39;grandparent&#39;);
+  });
+
+  addEvent(document, &#39;click&#39;, function (e) {
+    console.log(&#39;document&#39;);
+  });
+
+  addEvent(&#39;html&#39;, &#39;click&#39;, function (e) {
+    console.log(&#39;html&#39;);
+  })
+
+  addEvent(window, &#39;click&#39;, function (e) {
+    console.log(&#39;window&#39;);
+  })
+
+});
+</code></pre>
+<p><code>addEventListener</code>方法具有第三个可选参数<code>useCapture</code>，其默认值为<code>false</code>，事件将在冒泡阶段中发生，如果为<code>true</code>，则事件将在捕获阶段中发生。<br>如果单击<code>child</code>元素，它将分别在控制台上记录<code>child</code>，<code>parent</code>，<code>grandparent</code>，<code>html</code>，<code>document</code>和<code>window</code>，这就是事件冒泡。</p>
+<h3 id="8-什么是事件捕获？-8-什么是事件捕获？"><a href="#8-什么是事件捕获？-8-什么是事件捕获？" class="headerlink" title="[8. 什么是事件捕获？](8. 什么是事件捕获？)"></a>[8. 什么是事件捕获？](8. 什么是事件捕获？)</h3><p>当事件发生在 <strong>DOM</strong> 元素上时，该事件并不完全发生在那个元素上。在捕获阶段，事件从<code>window</code>开始，一直到触发事件的元素。</p>
+<p>假设有如下的 HTML 结构：</p>
+<pre><code>&lt;div class=&quot;grandparent&quot;&gt;
+  &lt;div class=&quot;parent&quot;&gt;
+    &lt;div class=&quot;child&quot;&gt;1&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>对应的 JS 代码:</p>
+<pre><code>function addEvent(el, event, callback, isCapture = false) {
+  if (!el || !event || !callback || typeof callback !== &#39;function&#39;) return;
+  if (typeof el === &#39;string&#39;) {
+    el = document.querySelector(el);
+  };
+  el.addEventListener(event, callback, isCapture);
+}
+
+addEvent(document, &#39;DOMContentLoaded&#39;, () =&gt; {
+  const child = document.querySelector(&#39;.child&#39;);
+  const parent = document.querySelector(&#39;.parent&#39;);
+  const grandparent = document.querySelector(&#39;.grandparent&#39;);
+
+  addEvent(child, &#39;click&#39;, function (e) {
+    console.log(&#39;child&#39;);
+  });
+
+  addEvent(parent, &#39;click&#39;, function (e) {
+    console.log(&#39;parent&#39;);
+  });
+
+  addEvent(grandparent, &#39;click&#39;, function (e) {
+    console.log(&#39;grandparent&#39;);
+  });
+
+  addEvent(document, &#39;click&#39;, function (e) {
+    console.log(&#39;document&#39;);
+  });
+
+  addEvent(&#39;html&#39;, &#39;click&#39;, function (e) {
+    console.log(&#39;html&#39;);
+  })
+
+  addEvent(window, &#39;click&#39;, function (e) {
+    console.log(&#39;window&#39;);
+  })
+
+});
+</code></pre>
+<p><code>addEventListener</code>方法具有第三个可选参数<code>useCapture</code>，其默认值为<code>false</code>，事件将在冒泡阶段中发生，如果为<code>true</code>，则事件将在捕获阶段中发生。<br>如果单击<code>child</code>元素，它将分别在控制台上打印<code>window</code>，<code>document</code>，<code>html</code>，<code>grandparent</code>和<code>parent</code>，这就是<strong>事件捕获</strong>。</p>
+<h3 id="9-event-preventDefault-和-event-stopPropagation-方法之间有什么区别？-9-event-preventDefault-和-event-stopPropagation-方法之间有什么区别？"><a href="#9-event-preventDefault-和-event-stopPropagation-方法之间有什么区别？-9-event-preventDefault-和-event-stopPropagation-方法之间有什么区别？" class="headerlink" title="[9. event.preventDefault() 和 event.stopPropagation()方法之间有什么区别？](9. event.preventDefault() 和 event.stopPropagation()方法之间有什么区别？)"></a>[9. event.preventDefault() 和 event.stopPropagation()方法之间有什么区别？](9. event.preventDefault() 和 event.stopPropagation()方法之间有什么区别？)</h3><p><code>event.preventDefault()</code> 方法可防止元素的默认行为。 如果在表单元素中使用，它将阻止其提交。 如果在锚元素中使用，它将阻止其导航。<br>如果在上下文菜单中使用，它将阻止其显示或显示。 <code>event.stopPropagation()</code>方法用于阻止捕获和冒泡阶段中当前事件的进一步传播。</p>
+<h3 id="10-如何知道是否在元素中使用了event-preventDefault-方法？-10-如何知道是否在元素中使用了event-preventDefault-方法？"><a href="#10-如何知道是否在元素中使用了event-preventDefault-方法？-10-如何知道是否在元素中使用了event-preventDefault-方法？" class="headerlink" title="[10. 如何知道是否在元素中使用了event.preventDefault()方法？](10. 如何知道是否在元素中使用了event.preventDefault()方法？)"></a>[10. 如何知道是否在元素中使用了<code>event.preventDefault()</code>方法？](10. 如何知道是否在元素中使用了<code>event.preventDefault()</code>方法？)</h3><p>我们可以在事件对象中使用<code>event.defaultPrevented</code>属性。<br>它返回一个布尔值用来表明是否在特定元素中调用了<code>event.preventDefault()</code>。</p>
+<h3 id="11-为什么此代码-obj-someprop-x-会引发错误-11-为什么此代码-obj-someprop-x-会引发错误"><a href="#11-为什么此代码-obj-someprop-x-会引发错误-11-为什么此代码-obj-someprop-x-会引发错误" class="headerlink" title="[11. 为什么此代码 obj.someprop.x 会引发错误?](11. 为什么此代码 obj.someprop.x 会引发错误?)"></a>[11. 为什么此代码 <code>obj.someprop.x</code> 会引发错误?](11. 为什么此代码 <code>obj.someprop.x</code> 会引发错误?)</h3><pre><code>const obj = {};
+console.log(obj.someprop.x);
+</code></pre>
+<p>显然，由于我们尝试访问<code>someprop</code>属性中的<code>x</code>属性，而 someprop 并没有在对象中，所以值为 <code>undefined</code>。<br>记住对象本身不存在的属性，并且其原型的默认值为<code>undefined</code>。因为<code>undefined</code>没有属性<code>x</code>，所以试图访问将会报错。</p>
+<h3 id="12-什么是-event-target-？-12-什么是-event-target-？"><a href="#12-什么是-event-target-？-12-什么是-event-target-？" class="headerlink" title="[12. 什么是 event.target ？](12. 什么是 event.target ？)"></a>[12. 什么是 event.target ？](12. 什么是 event.target ？)</h3><p>简单来说，<code>event.target</code>是发生事件的元素或触发事件的元素。</p>
+<p>假设有如下的 HTML 结构：</p>
+<pre><code>&lt;div onclick=&quot;clickFunc(event)&quot; style=&quot;text-align: center;margin:15px;
+border:1px solid red;border-radius:3px;&quot;&gt;
+    &lt;div style=&quot;margin: 25px; border:1px solid royalblue;border-radius:3px;&quot;&gt;
+        &lt;div style=&quot;margin:25px;border:1px solid skyblue;border-radius:3px;&quot;&gt;
+          &lt;button style=&quot;margin:10px&quot;&gt;
+              Button
+          &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</code></pre>
+<p>JS 代码如下：</p>
+<pre><code>function clickFunc(event) {
+  console.log(event.target);
+}
+</code></pre>
+<p>如果单击 <code>button</code>，即使我们将事件附加在最外面的<code>div</code>上，它也将打印 <code>button</code><br>标签，因此我们可以得出结论<code>event.target</code>是触发事件的元素。</p>
+<h3 id="13-什么是-event-currentTarget？？-13-什么是-event-currentTarget？？"><a href="#13-什么是-event-currentTarget？？-13-什么是-event-currentTarget？？" class="headerlink" title="[13. 什么是 event.currentTarget？？](13. 什么是 event.currentTarget？？)"></a>[13. 什么是 event.currentTarget？？](13. 什么是 event.currentTarget？？)</h3><p><code>event.currentTarget</code>是我们在其上显式附加事件处理程序的元素。</p>
+<p>假设有如下的 HTML 结构：</p>
+<pre><code>&lt;div onclick=&quot;clickFunc(event)&quot; style=&quot;text-align: center;margin:15px;
+border:1px solid red;border-radius:3px;&quot;&gt;
+    &lt;div style=&quot;margin: 25px; border:1px solid royalblue;border-radius:3px;&quot;&gt;
+        &lt;div style=&quot;margin:25px;border:1px solid skyblue;border-radius:3px;&quot;&gt;
+          &lt;button style=&quot;margin:10px&quot;&gt;
+              Button
+          &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</code></pre>
+<p>JS 代码如下：</p>
+<pre><code>function clickFunc(event) {
+  console.log(event.currentTarget);
+}
+</code></pre>
+<p>如果单击 <code>button</code>，即使我们单击该 <code>button</code>，它也会打印最外面的<code>div</code>标签。<br>在此示例中，我们可以得出结论，<code>event.currentTarget</code>是附加事件处理程序的元素。</p>
+<h3 id="14-和-有什么区别？-14-和-有什么区别？"><a href="#14-和-有什么区别？-14-和-有什么区别？" class="headerlink" title="[14. &#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D; 有什么区别？](14. &#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D; 有什么区别？)"></a>[14. &#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D; 有什么区别？](14. &#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D; 有什么区别？)</h3><p><code>==</code>用于一般比较，<code>===</code>用于严格比较，<code>==</code>在比较的时候可以转换数据类型<code>，===</code>严格比较，只要类型不匹配就返回<code>flase</code>。</p>
+<p>先来看看 <code>==</code> 这兄弟：</p>
+<p>强制是将值转换为另一种类型的过程。 在这种情况下，<code>==</code>会执行隐式强制。 在比较两个值之前，<code>==</code>需要执行一些规则。</p>
+<p>假设我们要比较<code>x == y</code>的值。</p>
+<ol>
+<li>如果<code>x</code>和<code>y</code>的类型相同，则 JS 会换成<code>===</code>操作符进行比较。</li>
+<li>如果<code>x</code>为<code>null</code>, <code>y</code>为<code>undefined</code>，则返回<code>true</code>。</li>
+<li>如果<code>x</code>为<code>undefined</code>且<code>y</code>为<code>null</code>，则返回<code>true</code>。</li>
+<li>如果<code>x</code>的类型是<code>number</code>, <code>y</code>的类型是<code>string</code>，那么返回<code>x == toNumber(y)</code>。</li>
+<li>如果<code>x</code>的类型是<code>string</code>, <code>y</code>的类型是<code>number</code>，那么返回<code>toNumber(x) == y</code>。</li>
+<li>如果<code>x</code>为类型是<code>boolean</code>，则返回<code>toNumber(x)== y</code>。</li>
+<li>如果<code>y</code>为类型是<code>boolean</code>，则返回<code>x == toNumber(y)</code>。</li>
+<li>如果<code>x</code>是<code>string</code>、<code>symbol</code>或<code>number</code>，而<code>y</code>是<code>object</code>类型，则返回<code>x == toPrimitive(y)</code>。</li>
+<li>如果<code>x</code>是<code>object</code>，<code>y</code>是<code>string</code>，<code>symbol</code>则返回<code>toPrimitive(x) == y</code>。</li>
+<li>剩下的 返回 <code>false</code></li>
+</ol>
+<p>注意：<code>toPrimitive</code>首先在对象中使用<code>valueOf</code>方法，然后使用<code>toString</code>方法来获取该对象的原始值。</p>
+<p>举个例子。<br>xyx &#x3D;&#x3D; y55true1’1’truenullundefinedtrue0falsetrue’1,2’[1,2]true’[object<br>Object]’{}true<br>这些例子都返回<code>true</code>。</p>
+<p>第一个示例符合<code>条件1</code>，因为<code>x</code>和<code>y</code>具有相同的类型和值。</p>
+<p>第二个示例符合<code>条件4</code>，在比较之前将<code>y</code>转换为数字。</p>
+<p>第三个例子符合<code>条件2</code>。</p>
+<p>第四个例子符合<code>条件7</code>，因为<code>y</code>是<code>boolean</code>类型。</p>
+<p>第五个示例符合<code>条件8</code>。 使用<code>toString()</code>方法将数组转换为字符串，该方法返回<code>1,2</code>。</p>
+<p>最后一个示例符合<code>条件8</code>。 使用<code>toString()</code>方法将对象转换为字符串，该方法返回<code>[object Object]</code>。<br>xyx &#x3D;&#x3D;&#x3D; y55true1’1’falsenullundefinedfalse0falsefalse’1,2’[1,2]false’[object<br>Object]’{}false<br>如果使用<code>===</code>运算符，则第一个示例以外的所有比较将返回<code>false</code>，因为它们的类型不同，而第一个示例将返回<code>true</code>，因为两者的类型和值相同。</p>
+<h3 id="15-为什么在-JS-中比较两个相似的对象时返回-false？-15-为什么在-JS-中比较两个相似的对象时返回-false？"><a href="#15-为什么在-JS-中比较两个相似的对象时返回-false？-15-为什么在-JS-中比较两个相似的对象时返回-false？" class="headerlink" title="[15. 为什么在 JS 中比较两个相似的对象时返回 false？](15. 为什么在 JS 中比较两个相似的对象时返回 false？)"></a>[15. 为什么在 JS 中比较两个相似的对象时返回 false？](15. 为什么在 JS 中比较两个相似的对象时返回 false？)</h3><p>先看下面的例子：</p>
+<pre><code>let a = { a: 1 };
+let b = { a: 1 };
+let c = a;
+
+console.log(a === b); // 打印 false，即使它们有相同的属性
+console.log(a === c); // true
+</code></pre>
+<p>JS 以不同的方式比较对象和基本类型。在基本类型中，JS 通过值对它们进行比较，而在对象中，JS<br>通过引用或存储变量的内存中的地址对它们进行比较。这就是为什么第一个<code>console.log</code>语句返回<code>false</code>，而第二个<code>console.log</code>语句返回<code>true</code>。<code>a</code>和<code>c</code>有相同的引用地址，而<code>a</code>和<code>b</code>没有。</p>
+<h3 id="16-运算符能做什么？-16-运算符能做什么？"><a href="#16-运算符能做什么？-16-运算符能做什么？" class="headerlink" title="[16. !! 运算符能做什么？](16. !! 运算符能做什么？)"></a>[16. !! 运算符能做什么？](16. !! 运算符能做什么？)</h3><p><code>!!</code>运算符可以将右侧的值强制转换为布尔值，这也是将值转换为布尔值的一种简单方法。</p>
+<pre><code>console.log(!!null); // false
+console.log(!!undefined); // false
+console.log(!!&#39;&#39;); // false
+console.log(!!0); // false
+console.log(!!NaN); // false
+console.log(!!&#39; &#39;); // true
+console.log(!!{}); // true
+console.log(!![xuehuayu.cn]); // true
+console.log(!!1); // true
+console.log(!![xuehuayu.cn].length); // false
+</code></pre>
+<h3 id="17-如何在一行中计算多个表达式的值？-17-如何在一行中计算多个表达式的值？"><a href="#17-如何在一行中计算多个表达式的值？-17-如何在一行中计算多个表达式的值？" class="headerlink" title="[17. 如何在一行中计算多个表达式的值？](17. 如何在一行中计算多个表达式的值？)"></a>[17. 如何在一行中计算多个表达式的值？](17. 如何在一行中计算多个表达式的值？)</h3><p>可以使用<code>逗号</code>运算符在一行中计算多个表达式。 它从左到右求值，并返回右边最后一个项目或最后一个操作数的值。</p>
+<pre><code>let x = 5;
+
+x = (x++ , x = addFive(x), x *= 2, x -= 5, x += 10);
+
+function addFive(num) {
+  return num + 5;
+}
+</code></pre>
+<p>上面的结果最后得到<code>x</code>的值为<code>27</code>。首先，我们将<code>x</code>的值增加到<code>6</code>，然后调用函数<code>addFive(6)</code>并将<code>6</code>作为参数传递并将结果重新分配给<code>x</code>，此时<code>x</code>的值为<code>11</code>。之后，将<code>x</code>的当前值乘以<code>2</code>并将其分配给<code>x</code>，<code>x</code>的更新值为<code>22</code>。然后，将<code>x</code>的当前值减去<code>5</code>并将结果分配给<code>x``x</code>更新后的值为<code>17</code>。最后，我们将<code>x</code>的值增加<code>10</code>，然后将更新的值分配给<code>x</code>，最终<code>x</code>的值为<code>27</code>。</p>
+<h3 id="18-什么是提升？-18-什么是提升？"><a href="#18-什么是提升？-18-什么是提升？" class="headerlink" title="[18. 什么是提升？](18. 什么是提升？)"></a>[18. 什么是提升？](18. 什么是提升？)</h3><p><strong>提升</strong>是用来描述变量和函数移动到其(全局或函数)作用域顶部的术语。</p>
+<p>为了理解提升，需要来了解一下<strong>执行上下文</strong>。<strong>执行上下文</strong>是当前正在执行的**“代码环境”**。执行上下文有两个阶段:<code>编译</code>和<code>执行</code>。</p>
+<p><strong>编译</strong>-在此阶段，JS<br>引荐获取所有<strong>函数声明</strong>并将其<strong>提升</strong>到其作用域的顶部，以便我们稍后可以引用它们并获取所有变量声明（使用<code>var</code>关键字进行声明），还会为它们提供默认值：<br><code>undefined</code>。</p>
+<p><strong>执行</strong>——在这个阶段中，它将值赋给之前提升的变量，并执行或调用函数(对象中的方法)。</p>
+<p>**注意:**只有使用<code>var</code>声明的变量，或者函数声明才会被提升，相反，函数表达式或箭头函数，<code>let</code>和<code>const</code>声明的变量，这些都不会被提升。</p>
+<p>假设在全局使用域，有如下的代码：</p>
+<pre><code>console.log(y);
+y = 1;
+console.log(y);
+console.log(greet(&quot;Mark&quot;));
+
+function greet(name){
+  return &#39;Hello &#39; + name + &#39;!&#39;;
+}
+
+var y;
+</code></pre>
+<p>上面分别打印：<code>undefined</code>,<code>1</code>, <code>Hello Mark!</code>。</p>
+<p>上面代码在编译阶段其实是这样的：</p>
+<pre><code>function greet(name) {
+  return &#39;Hello &#39; + name + &#39;!&#39;;
+}
+
+var y; // 默认值 undefined
+
+// 等待“编译”阶段完成，然后开始“执行”阶段
+
+/*
+console.log(y);
+y = 1;
+console.log(y);
+console.log(greet(&quot;Mark&quot;));
+*/
+</code></pre>
+<p>编译阶段完成后，它将启动执行阶段调用方法，并将值分配给变量。</p>
+<pre><code>function greet(name) {
+  return &#39;Hello &#39; + name + &#39;!&#39;;
+}
+
+var y;
+
+//start &quot;execution&quot; phase
+
+console.log(y);
+y = 1;
+console.log(y);
+console.log(greet(&quot;Mark&quot;));
+</code></pre>
+<h3 id="19-什么是作用域？-19-什么是作用域？"><a href="#19-什么是作用域？-19-什么是作用域？" class="headerlink" title="[19. 什么是作用域？](19. 什么是作用域？)"></a>[19. 什么是作用域？](19. 什么是作用域？)</h3><p>JavaScript 中的作用域是我们可以有效访问变量或函数的区域。JS<br>有三种类型的作用域：<strong>全局作用域</strong>、<strong>函数作用域</strong>和<strong>块作用域(ES6)</strong>。</p>
+<ul>
+<li><p><strong>全局作用域</strong>——在全局命名空间中声明的变量或函数位于全局作用域中，因此在代码中的任何地方都可以访问它们。</p>
+<p>  &#x2F;&#x2F;global namespace<br>  var g &#x3D; “global”;</p>
+<p>  function globalFunc(){<br>function innerFunc(){<br>  console.log(g); &#x2F;&#x2F; can access “g” because “g” is a global variable<br>}<br>innerFunc();<br>  }</p>
+</li>
+<li><p><strong>函数作用域</strong>——在函数中声明的变量、函数和参数可以在函数内部访问，但不能在函数外部访问。</p>
+<p>  function myFavoriteFunc(a) {<br>if (true) {<br>  var b &#x3D; “Hello “ + a;<br>}<br>return b;<br>  }</p>
+<p>  myFavoriteFunc(“World”);</p>
+<p>  console.log(a); &#x2F;&#x2F; Throws a ReferenceError “a” is not defined<br>  console.log(b); &#x2F;&#x2F; does not continue here</p>
+</li>
+<li><p><strong>块作用域</strong>-在块<code>{}</code>中声明的变量（<code>let，const</code>）只能在其中访问。</p>
+<pre><code>function testBlock(){
+  if(true){
+    let z = 5;
+  }
+  return z;
+}
+
+testBlock(); // Throws a ReferenceError &quot;z&quot; is not defined
+</code></pre>
+</li>
+</ul>
+<p>作用域也是一组用于查找变量的规则。<br>如果变量在当前作用域中不存在，它将向外部作用域中查找并搜索，如果该变量不存在，它将再次查找直到到达全局作用域，如果找到，则可以使用它，否则引发错误，这种查找过程也称为<strong>作用域链</strong>。</p>
+<pre><code>    /* 作用域链
+
+      内部作用域-&gt;外部作用域-&gt; 全局作用域
+  */
+
+  // 全局作用域
+  var variable1 = &quot;Comrades&quot;;
+  var variable2 = &quot;Sayonara&quot;;
+
+  function outer(){
+  // 外部作用域
+    var variable1 = &quot;World&quot;;
+    function inner(){
+    // 内部作用域
+      var variable2 = &quot;Hello&quot;;
+      console.log(variable2 + &quot; &quot; + variable1);
+    }
+    inner();
+  }
+  outer(); // Hello World
+</code></pre>
+<p><img src="https://img.php.cn/upload/image/709/757/979/1579139493301003.png" alt="1579139493301003.png"></p>
+<h3 id="20-什么是闭包？-20-什么是闭包？"><a href="#20-什么是闭包？-20-什么是闭包？" class="headerlink" title="[20. 什么是闭包？](20. 什么是闭包？)"></a>[20. 什么是闭包？](20. 什么是闭包？)</h3><p>这可能是所有问题中最难的一个问题，因为闭包是一个有争议的话题，这里从个人角度来谈谈，如果不妥，多多海涵。</p>
+<p><strong>闭包</strong>就是一个函数在声明时能够记住当前作用域、父函数作用域、及父函数作用域上的变量和参数的引用，直至通过作用域链上全局作用域，基本上闭包是在声明函数时创建的作用域。</p>
+<p>看看小例子：</p>
+<pre><code>    // 全局作用域
+    var globalVar = &quot;abc&quot;;
+
+    function a(){
+      console.log(globalVar);
+    }
+
+    a(); // &quot;abc&quot;
+</code></pre>
+<p>在此示例中，当我们声明<code>a</code>函数时，全局作用域是<code>a</code>闭包的一部分。</p>
+<p><img src="https://img.php.cn/upload/image/994/868/829/1579139510687958.png" alt="1579139510687958.png"></p>
+<p>变量<code>globalVar</code>在图中没有值的原因是该变量的值可以根据调用函数<code>a</code>的位置和时间而改变。但是在上面的示例中，<code>globalVar</code>变量的值为<code>abc</code>。</p>
+<p>来看一个更复杂的例子：</p>
+<pre><code>var globalVar = &quot;global&quot;;
+var outerVar = &quot;outer&quot;
+
+function outerFunc(outerParam) {
+  function innerFunc(innerParam) {
+    console.log(globalVar, outerParam, innerParam);
+  }
+  return innerFunc;
+}
+
+const x = outerFunc(outerVar);
+outerVar = &quot;outer-2&quot;;
+globalVar = &quot;guess&quot;
+x(&quot;inner&quot;);
+</code></pre>
+<p><img src="https://img.php.cn/upload/image/917/676/301/1579139523486205.png" alt="1579139523486205.png"></p>
+<p>上面打印结果是 <code>guess outer inner</code>。</p>
+<p>当我们调用<code>outerFunc</code>函数并将返回值<code>innerFunc</code>函数分配给变量<code>x</code>时，即使我们为<code>outerVar</code>变量分配了新值<code>outer-2</code>，<code>outerParam</code>也继续保留<code>outer</code>值，因为重新分配是在调用<code>outerFunc</code>之后发生的，并且当我们调用<code>outerFunc</code>函数时，它会在作用域链中查找<code>outerVar</code>的值，此时的<code>outerVar</code>的值将为<br><code>&quot;outer&quot;</code>。</p>
+<p>现在，当我们调用引用了<code>innerFunc</code>的<code>x</code>变量时，<code>innerParam</code>将具有一个<code>inner</code>值，因为这是我们在调用中传递的值，而<code>globalVar</code>变量值为<code>guess</code>，因为在调用<code>x</code>变量之前，我们将一个新值分配给<code>globalVar</code>。</p>
+<p>下面这个示例演示没有理解好闭包所犯的错误：</p>
+<pre><code>const arrFuncs = [];
+for(var i = 0; i &lt; 5; i++){
+  arrFuncs.push(function (){
+    return i;
+  });
+}
+console.log(i); // i is 5
+
+for (let i = 0; i &lt; arrFuncs.length; i++) {
+  console.log(arrFuncs[i]()); // 都打印 5
+}
+</code></pre>
+<p>由于闭包，此代码无法正常运行。<code>var</code>关键字创建一个全局变量，当我们 push 一个函数时，这里返回的全局变量<code>i</code>。<br>因此，当我们在循环后在该数组中调用其中一个函数时，它会打印<code>5</code>，因为我们得到<code>i</code>的当前值为<code>5</code>，我们可以访问它，因为它是全局变量。</p>
+<p>因为闭包在创建变量时会保留该变量的引用而不是其值。 我们可以使用<strong>IIFES</strong>或使用 <code>let</code> 来代替 <code>var</code> 的声明。</p>
+<h3 id="21-JavaScript-中的虚值是什么？-21-JavaScript-中的虚值是什么？"><a href="#21-JavaScript-中的虚值是什么？-21-JavaScript-中的虚值是什么？" class="headerlink" title="[21. JavaScript 中的虚值是什么？](21. JavaScript 中的虚值是什么？)"></a>[21. JavaScript 中的虚值是什么？](21. JavaScript 中的虚值是什么？)</h3><pre><code>  const falsyValues = [&#39;&#39;, 0, null, undefined, NaN, false];
+</code></pre>
+<p>简单的来说虚值就是是在转换为布尔值时变为 <code>false</code> 的值。</p>
+<h3 id="22-如何检查值是否虚值？-22-如何检查值是否虚值？"><a href="#22-如何检查值是否虚值？-22-如何检查值是否虚值？" class="headerlink" title="[22. 如何检查值是否虚值？](22. 如何检查值是否虚值？)"></a>[22. 如何检查值是否虚值？](22. 如何检查值是否虚值？)</h3><p>使用 <code>Boolean</code> 函数或者 <code>!!</code> 运算符。</p>
+<h3 id="23-‘use-strict’-是干嘛用的？-23-‘use-strict’-是干嘛用的？"><a href="#23-‘use-strict’-是干嘛用的？-23-‘use-strict’-是干嘛用的？" class="headerlink" title="[23. ‘use strict’ 是干嘛用的？](23. ‘use strict’ 是干嘛用的？)"></a>[23. ‘use strict’ 是干嘛用的？](23. ‘use strict’ 是干嘛用的？)</h3><p><code>&quot;use strict&quot;</code> 是 <strong>ES5</strong> 特性，它使我们的代码在函数或整个脚本中处于<strong>严格模式</strong>。<strong>严格模式</strong>帮助我们在代码的早期避免<br>bug，并为其添加限制。</p>
+<p><strong>严格模式</strong>的一些限制：</p>
+<ol>
+<li>变量必须声明后再使用</li>
+<li>函数的参数不能有同名属性，否则报错</li>
+<li>不能使用<code>with</code>语句</li>
+<li>不能对只读属性赋值，否则报错</li>
+<li>不能使用前缀 0 表示八进制数，否则报错</li>
+<li>不能删除不可删除的属性，否则报错</li>
+<li>不能删除变量<code>delete prop</code>，会报错，只能删除属性<code>delete global[prop]</code></li>
+<li><code>eval</code>不能在它的外层作用域引入变量</li>
+<li><code>eval</code>和<code>arguments</code>不能被重新赋值</li>
+<li><code>arguments</code>不会自动反映函数参数的变化</li>
+<li>不能使用<code>arguments.callee</code></li>
+<li>不能使用<code>arguments.caller</code></li>
+<li>禁止<code>this</code>指向全局对象</li>
+<li>不能使用<code>fn.caller</code>和<code>fn.arguments</code>获取函数调用的堆栈</li>
+<li>增加了保留字（比如<code>protected</code>、<code>static</code>和<code>interface</code>）</li>
+</ol>
+<p>设立”严格模式”的目的，主要有以下几个：</p>
+<ol>
+<li>消除Javascript语法的一些不合理、不严谨之处，减少一些怪异行为;</li>
+<li>消除代码运行的一些不安全之处，保证代码运行的安全；</li>
+<li>提高编译器效率，增加运行速度；</li>
+<li>为未来新版本的Javascript做好铺垫。</li>
+</ol>
+<h3 id="24-JavaScript-中-this-值是什么？-24-JavaScript-中-this-值是什么？"><a href="#24-JavaScript-中-this-值是什么？-24-JavaScript-中-this-值是什么？" class="headerlink" title="[24. JavaScript 中 this 值是什么？](24. JavaScript 中 this 值是什么？)"></a>[24. JavaScript 中 <code>this</code> 值是什么？](24. JavaScript 中 <code>this</code> 值是什么？)</h3><p>基本上，<code>this</code>指的是当前正在执行或调用该函数的对象的值。<code>this</code>值的变化取决于我们使用它的上下文和我们在哪里使用它。</p>
+<pre><code>const carDetails = {
+  name: &quot;Ford Mustang&quot;,
+  yearBought: 2005,
+  getName(){
+    return this.name;
+  },
+  isRegistered: true
+};
+
+console.log(carDetails.getName()); // Ford Mustang
+</code></pre>
+<p>这通常是我们期望结果的，因为在<code>getName</code>方法中我们返回<code>this.name</code>，在此上下文中，<code>this</code>指向的是<code>carDetails</code>对象，该对象当前是执行函数的“所有者”对象。</p>
+<p>接下我们做些奇怪的事情：</p>
+<pre><code>var name = &quot;Ford Ranger&quot;;
+var getCarName = carDetails.getName;
+
+console.log(getCarName()); // Ford Ranger
+</code></pre>
+<p>上面打印<code>Ford Ranger</code>，这很奇怪，因为在第一个<code>console.log</code>语句中打印的是<code>Ford Mustang</code>。这样做的原因是<code>getCarName</code>方法有一个不同的“所有者”对象，即<code>window</code>对象。在全局作用域中使用<code>var</code>关键字声明变量会在<code>window</code>对象中附加与变量名称相同的属性。请记住，当没有使用<code>“use strict”</code>时，在全局作用域中<code>this</code>指的是<code>window</code>对象。</p>
+<pre><code>console.log(getCarName === window.getCarName); // true
+console.log(getCarName === this.getCarName); // true
+</code></pre>
+<p>本例中的<code>this</code>和<code>window</code>引用同一个对象。</p>
+<p>解决这个问题的一种方法是在函数中使用<code>apply</code>和<code>call</code>方法。</p>
+<pre><code>console.log(getCarName.apply(carDetails)); // Ford Mustang
+console.log(getCarName.call(carDetails));  // Ford Mustang
+</code></pre>
+<p><code>apply</code>和<code>call</code>方法期望第一个参数是一个对象，该对象是函数内部<code>this</code>的值。</p>
+<p><code>IIFE</code>或<strong>立即执行的函数表达式</strong>，在全局作用域内声明的函数，对象内部方法中的匿名函数和内部函数的<code>this</code>具有默认值，该值指向<code>window</code>对象。</p>
+<pre><code>    (function (){
+      console.log(this);
+    })(); // 打印 &quot;window&quot; 对象
+
+    function iHateThis(){
+      console.log(this);
+    }
+
+    iHateThis(); // 打印 &quot;window&quot; 对象
+
+    const myFavoriteObj = {
+      guessThis(){
+        function getName(){
+          console.log(this.name);
+        }
+        getName();
+      },
+      name: &#39;Marko Polo&#39;,
+      thisIsAnnoying(callback){
+        callback();
+      }
+    };
+
+    myFavoriteObj.guessThis(); // 打印 &quot;window&quot; 对象
+    myFavoriteObj.thisIsAnnoying(function (){
+      console.log(this); // 打印 &quot;window&quot; 对象
+    });
+</code></pre>
+<p>如果我们要获取<code>myFavoriteObj</code>对象中的<code>name</code>属性（即<strong>Marko Polo</strong>）的值，则有两种方法可以解决此问题。</p>
+<p>一种是将 <code>this</code> 值保存在变量中。</p>
+<pre><code>const myFavoriteObj = {
+  guessThis(){
+  const self = this; // 把 this 值保存在 self 变量中
+  function getName(){
+    console.log(self.name);
+  }
+  getName();
+  },
+  name: &#39;Marko Polo&#39;,
+  thisIsAnnoying(callback){
+    callback();
+  }
+};
+</code></pre>
+<p>第二种方式是使用箭头函数</p>
+<pre><code>    const myFavoriteObj = {
+      guessThis(){
+          const getName = () =&gt; {
+            //copies the value of &quot;this&quot; outside of this arrow function
+            console.log(this.name);
+          }
+          getName();
+      },
+      name: &#39;Marko Polo&#39;,
+      thisIsAnnoying(callback){
+        callback();
+      }
+    };
+</code></pre>
+<p>箭头函数没有自己的<br><code>this</code>。它复制了这个封闭的词法作用域中<code>this</code>值，在这个例子中，<code>this</code>值在<code>getName</code>内部函数之外，也就是<code>myFavoriteObj</code>对象。</p>
+<h3 id="25-对象的-prototype-原型-是什么？-25-对象的-prototype-原型-是什么？"><a href="#25-对象的-prototype-原型-是什么？-25-对象的-prototype-原型-是什么？" class="headerlink" title="[25. 对象的 prototype(原型) 是什么？](25. 对象的 prototype(原型) 是什么？)"></a>[25. 对象的 prototype(原型) 是什么？](25. 对象的 prototype(原型) 是什么？)</h3><p>简单地说，原型就是对象的蓝图。如果它存在当前对象中，则将其用作属性和方法的回退。它是在对象之间共享属性和功能的方法，这也是JavaScript实现继承的核心。</p>
+<pre><code>const o = {};
+console.log(o.toString()); // logs [object Object]
+</code></pre>
+<p>即使<code>o</code>对象中不存在<code>o.toString</code>方法，它也不会引发错误，而是返回字符串<code>[object Object]</code>。<br>当对象中不存在属性时，它将查看其原型，如果仍然不存在，则将其查找到原型的原型，依此类推，直到在原型链中找到具有相同属性的属性为止。<br>原型链的末尾是<code>Object.prototype</code>。</p>
+<pre><code>console.log(o.toString === Object.prototype.toString); // logs true
+// which means we we&#39;re looking up the Prototype Chain and it reached
+// the Object.prototype and used the &quot;toString&quot; method.
+</code></pre>
+<h3 id="26-什么是-IIFE，它的用途是什么？-26-什么是-IIFE，它的用途是什么？"><a href="#26-什么是-IIFE，它的用途是什么？-26-什么是-IIFE，它的用途是什么？" class="headerlink" title="[26. 什么是 IIFE，它的用途是什么？](26. 什么是 IIFE，它的用途是什么？)"></a>[26. 什么是 IIFE，它的用途是什么？](26. 什么是 IIFE，它的用途是什么？)</h3><p><strong>IIFE</strong>或立即调用的函数表达式是在创建或声明后将被调用或执行的函数。 创建<strong>IIFE的</strong>语法是，将<code>function (){}</code>包裹在在括号<code>()</code>内，然后再用另一个括号<code>()</code>调用它，如：<code>(function(){})()</code></p>
+<pre><code>(function(){
+  ...
+} ());
+
+(function () {
+  ...
+})();
+
+(function named(params) {
+  ...
+})();
+
+(() =&gt; {
+
+});
+
+(function (global) {
+  ...
+})(window);
+
+const utility = (function () {
+  return {
+    ...
+  }
+})
+</code></pre>
+<p>这些示例都是有效的<strong>IIFE</strong>。 倒数第二个救命表明我们可以将参数传递给<strong>IIFE</strong>函数。<br>最后一个示例表明，我们可以将<code>IIFE</code>的结果保存到变量中，以便稍后使用。</p>
+<p><strong>IIFE</strong>的一个主要作用是避免与全局作用域内的其他变量命名冲突或污染全局命名空间，来个例子。</p>
+<pre><code>&lt;script src=&quot;https://cdnurl.com/somelibrary.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>假设我们引入了一个<code>omelibr.js</code>的链接，它提供了一些我们在代码中使用的全局函数，但是这个库有两个方法我们没有使用：<code>createGraph</code>和<code>drawGraph</code>，因为这些方法都有<code>bug</code>。我们想实现自己的<code>createGraph</code>和<code>drawGraph</code>方法。</p>
+<p>解决此问题的一种方法是直接覆盖：</p>
+<pre><code>&lt;script src=&quot;https://cdnurl.com/somelibrary.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    function createGraph() {
+      // createGraph logic here
+    }
+    function drawGraph() {
+      // drawGraph logic here
+    }
+&lt;/script&gt;
+</code></pre>
+<p>当我们使用这个解决方案时，我们覆盖了库提供给我们的那两个方法。</p>
+<p>另一种方式是我们自己改名称：</p>
+<pre><code>&lt;script src=&quot;https://cdnurl.com/somelibrary.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    function myCreateGraph() {
+      // createGraph logic here
+    }
+    function myDrawGraph() {
+      // drawGraph logic here
+    }
+&lt;/script&gt;
+</code></pre>
+<p>当我们使用这个解决方案时，我们把那些函数调用更改为新的函数名。</p>
+<p>还有一种方法就是使用<strong>IIFE</strong>：</p>
+<pre><code>&lt;script src=&quot;https://cdnurl.com/somelibrary.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    const graphUtility = (function () {
+      function createGraph() {
+          // createGraph logic here
+      }
+      function drawGraph() {
+          // drawGraph logic here
+      }
+      return {
+          createGraph,
+          drawGraph
+      }
+    })
+&lt;/script&gt;
+</code></pre>
+<p>在此解决方案中，我们要声明了<code>graphUtility</code><br>变量，用来保存<strong>IIFE</strong>执行的结果，该函数返回一个包含两个方法<code>createGraph</code>和<code>drawGraph</code>的对象。</p>
+<p><strong>IIFE</strong> 还可以用来解决一个常见的面试题：</p>
+<pre><code>var li = document.querySelectorAll(&#39;.list-group &gt; li&#39;);
+for (var i = 0, len = li.length; i &lt; len; i++) {
+    li[i].addEventListener(&#39;click&#39;, function (e) {
+      console.log(i);
+    })
+</code></pre>
+<p>假设我们有一个带有<code>list-group</code>类的<code>ul</code>元素，它有<code>5</code>个<code>li</code>子元素。<br>当我们单击单个<code>li</code>元素时，打印对应的下标值。但在此外上述代码不起作用，这里每次点击 <code>li</code> 打印 <code>i</code> 的值都是<code>5</code>，这是由于闭包的原因。</p>
+<p><strong>闭包</strong>只是函数记住其当前作用域，父函数作用域和全局作用域的变量引用的能力。 当我们在全局作用域内使用<code>var</code>关键字声明变量时，就创建全局变量<code>i</code>。<br>因此，当我们单击<code>li</code>元素时，它将打印<code>5</code>，因为这是稍后在回调函数中引用它时<code>i</code>的值。</p>
+<p>使用 <strong>IIFE</strong> 可以解决此问题：</p>
+<pre><code>var li = document.querySelectorAll(&#39;.list-group &gt; li&#39;);
+for (var i = 0, len = li.length; i &lt; len; i++) {
+    (function (currentIndex) {
+      li[currentIndex].addEventListener(&#39;click&#39;, function (e) {
+          console.log(currentIndex);
+      })
+    })(i);
+}
+</code></pre>
+<p>该解决方案之所以行的通，是因为<strong>IIFE</strong>会为每次迭代创建一个新的作用域，我们捕获<code>i</code>的值并将其传递给<code>currentIndex</code>参数，因此调用<strong>IIFE</strong>时，每次迭代的<code>currentIndex</code>值都是不同的。</p>
+<h3 id="27-Function-prototype-apply-方法的用途是什么？-27-Function-prototype-apply-方法的用途是什么？"><a href="#27-Function-prototype-apply-方法的用途是什么？-27-Function-prototype-apply-方法的用途是什么？" class="headerlink" title="[27. Function.prototype.apply 方法的用途是什么？](27. Function.prototype.apply 方法的用途是什么？)"></a>[27. Function.prototype.apply 方法的用途是什么？](27. Function.prototype.apply 方法的用途是什么？)</h3><p><code>apply()</code> 方法调用一个具有给定this值的函数，以及作为一个数组（或类似数组对象）提供的参数。</p>
+<pre><code>const details = {
+  message: &#39;Hello World!&#39;
+};
+
+function getMessage(){
+  return this.message;
+}
+
+getMessage.apply(details); // &#39;Hello World!&#39;
+</code></pre>
+<blockquote>
+<p><code>call()</code>方法的作用和 <code>apply()</code> 方法类似，区别就是<code>call()</code>方法接受的是参数列表，而<code>apply()</code>方法接受的是一个参数数组。</p>
+</blockquote>
+<pre><code>const person = {
+  name: &quot;Marko Polo&quot;
+};
+
+function greeting(greetingMessage) {
+  return `${greetingMessage} ${this.name}`;
+}
+
+greeting.apply(person, [&#39;Hello&#39;]); // &quot;Hello Marko Polo!&quot;
+</code></pre>
+<h3 id="28-Function-prototype-call-方法的用途是什么？-28-Function-prototype-call-方法的用途是什么？"><a href="#28-Function-prototype-call-方法的用途是什么？-28-Function-prototype-call-方法的用途是什么？" class="headerlink" title="[28. Function.prototype.call 方法的用途是什么？](28. Function.prototype.call 方法的用途是什么？)"></a>[28. <code>Function.prototype.call</code> 方法的用途是什么？](28. <code>Function.prototype.call</code> 方法的用途是什么？)</h3><p><code>call()</code> 方法使用一个指定的 <code>this</code> 值和单独给出的一个或多个参数来调用一个函数。</p>
+<pre><code>const details = {
+  message: &#39;Hello World!&#39;
+};
+
+function getMessage(){
+  return this.message;
+}
+
+getMessage.call(details); // &#39;Hello World!&#39;
+</code></pre>
+<p>注意：该方法的语法和作用与 <code>apply()</code> 方法类似，只有一个区别，就是 <code>call()</code> 方法接受的是一个参数列表，而 <code>apply()</code><br>方法接受的是一个包含多个参数的数组。</p>
+<pre><code>const person = {
+  name: &quot;Marko Polo&quot;
+};
+
+function greeting(greetingMessage) {
+  return `${greetingMessage} ${this.name}`;
+}
+
+greeting.call(person, &#39;Hello&#39;); // &quot;Hello Marko Polo!&quot;
+</code></pre>
+<h3 id="29-Function-prototype-apply-和-Function-prototype-call-之间有什么区别？-29-Function-prototype-apply-和-Function-prototype-call-之间有什么区别？"><a href="#29-Function-prototype-apply-和-Function-prototype-call-之间有什么区别？-29-Function-prototype-apply-和-Function-prototype-call-之间有什么区别？" class="headerlink" title="[29. Function.prototype.apply 和 Function.prototype.call 之间有什么区别？](29. Function.prototype.apply 和 Function.prototype.call 之间有什么区别？)"></a>[29. Function.prototype.apply 和 Function.prototype.call 之间有什么区别？](29. Function.prototype.apply 和 Function.prototype.call 之间有什么区别？)</h3><p><code>apply()</code>方法可以在使用一个指定的 <code>this</code><br>值和一个参数数组（或类数组对象）的前提下调用某个函数或方法。<code>call()</code>方法类似于<code>apply()</code>，不同之处仅仅是<code>call()</code>接受的参数是参数列表。</p>
+<pre><code>const obj1 = {
+  result:0
+};
+
+const obj2 = {
+  result:0
+};
+
+function reduceAdd(){
+    let result = 0;
+    for(let i = 0, len = arguments.length; i &lt; len; i++){
+      result += arguments[i];
+    }
+    this.result = result;
+}
+
+reduceAdd.apply(obj1, [1, 2, 3, 4, 5]); // 15
+reduceAdd.call(obj2, 1, 2, 3, 4, 5); // 15
+</code></pre>
+<h3 id="30-Function-prototype-bind-的用途是什么？-30-Function-prototype-bind-的用途是什么？"><a href="#30-Function-prototype-bind-的用途是什么？-30-Function-prototype-bind-的用途是什么？" class="headerlink" title="[30. Function.prototype.bind 的用途是什么？](30. Function.prototype.bind 的用途是什么？)"></a>[30. Function.prototype.bind 的用途是什么？](30. Function.prototype.bind 的用途是什么？)</h3><p><code>bind()</code> 方法创建一个新的函数，在 <code>bind()</code> 被调用时，这个新函数的 <code>this</code> 被指定为 <code>bind()</code><br>的第一个参数，而其余参数将作为新函数的参数，供调用时使用。</p>
+<pre><code>import React from &#39;react&#39;;
+
+class MyComponent extends React.Component {
+      constructor(props){
+          super(props);
+          this.state = {
+              value : &quot;&quot;
+          }
+          this.handleChange = this.handleChange.bind(this);
+          // 将 “handleChange” 方法绑定到 “MyComponent” 组件
+      }
+
+      handleChange(e){
+        //do something amazing here
+      }
+
+      render(){
+        return (
+              &lt;&gt;
+                &lt;input type={this.props.type}
+                        value={this.state.value}
+                      onChange={this.handleChange}
+                  /&gt;
+              &lt;/&gt;
+        )
+      }
+}
+</code></pre>
+<h3 id="31-什么是函数式编程-JavaScript-的哪些特性使其成为函数式语言的候选语言？-31-什么是函数式编程-JavaScript-的哪些特性使其成为函数式语言的候选语言？"><a href="#31-什么是函数式编程-JavaScript-的哪些特性使其成为函数式语言的候选语言？-31-什么是函数式编程-JavaScript-的哪些特性使其成为函数式语言的候选语言？" class="headerlink" title="[31. 什么是函数式编程? JavaScript 的哪些特性使其成为函数式语言的候选语言？](31. 什么是函数式编程? JavaScript 的哪些特性使其成为函数式语言的候选语言？)"></a>[31. 什么是函数式编程? JavaScript 的哪些特性使其成为函数式语言的候选语言？](31. 什么是函数式编程? JavaScript 的哪些特性使其成为函数式语言的候选语言？)</h3><p>函数式编程（通常缩写为FP）是通过编写纯函数，避免共享状态、可变数据、副作用 来构建软件的过程。数式编程是声明式 的而不是命令式<br>的，应用程序的状态是通过纯函数流动的。与面向对象编程形成对比，面向对象中应用程序的状态通常与对象中的方法共享和共处。</p>
+<p>函数式编程是一种编程范式 ，这意味着它是一种基于一些基本的定义原则（如上所列）思考软件构建的方式。当然，编程范示的其他示例也包括面向对象编程和过程编程。</p>
+<p>函数式的代码往往比命令式或面向对象的代码更简洁，更可预测，更容易测试 - 但如果不熟悉它以及与之相关的常见模式，函数式的代码也可能看起来更密集杂乱，并且<br>相关文献对新人来说是不好理解的。</p>
+<p><strong>JavaScript支持闭包和高阶函数是函数式编程语言的特点。</strong></p>
+<h3 id="32-什么是高阶函数？-32-什么是高阶函数？"><a href="#32-什么是高阶函数？-32-什么是高阶函数？" class="headerlink" title="[32. 什么是高阶函数？](32. 什么是高阶函数？)"></a>[32. 什么是高阶函数？](32. 什么是高阶函数？)</h3><p><strong>高阶函数只是将函数作为参数或返回值的函数。</strong></p>
+<pre><code>function higherOrderFunction(param,callback){
+    return callback(param);
+}
+</code></pre>
+<h3 id="33-为什么函数被称为一等公民？-33-为什么函数被称为一等公民？"><a href="#33-为什么函数被称为一等公民？-33-为什么函数被称为一等公民？" class="headerlink" title="[33. 为什么函数被称为一等公民？](33. 为什么函数被称为一等公民？)"></a>[33. 为什么函数被称为一等公民？](33. 为什么函数被称为一等公民？)</h3><p>在JavaScript中，函数不仅拥有一切传统函数的使用方式（声明和调用），而且可以做到像简单值一样赋值<code>（var func = function(){}）</code>、传参<code>(function func(x,callback){callback();})</code>、返回<code>(function(){return function(){} })</code>，这样的函数也称之为<strong>第一级函数（First-class<br>Function）</strong>。不仅如此，JavaScript中的函数还充当了类的构造函数的作用，同时又是一个<code>Function</code>类的实例(instance)。这样的多重身份让JavaScript的函数变得非常重要。</p>
+<h3 id="34-手动实现-Array-prototype-map-方法-34-手动实现-Array-prototype-map-方法"><a href="#34-手动实现-Array-prototype-map-方法-34-手动实现-Array-prototype-map-方法" class="headerlink" title="[34. 手动实现 Array.prototype.map 方法](34. 手动实现 Array.prototype.map 方法)"></a>[34. 手动实现 <code>Array.prototype.map 方法</code>](34. 手动实现 <code>Array.prototype.map 方法</code>)</h3><p><code>map()</code> 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。</p>
+<pre><code>function map(arr, mapCallback) {
+  // 首先，检查传递的参数是否正确。
+  if (!Array.isArray(arr) || !arr.length || typeof mapCallback !== &#39;function&#39;) {
+    return [];
+  } else {
+    let result = [];
+    // 每次调用此函数时，我们都会创建一个 result 数组
+    // 因为我们不想改变原始数组。
+    for (let i = 0, len = arr.length; i &lt; len; i++) {
+      result.push(mapCallback(arr[i], i, arr));
+      // 将 mapCallback 返回的结果 push 到 result 数组中
+    }
+    return result;
+  }
+}
+</code></pre>
+<h3 id="35-手动实现Array-prototype-filter方法-35-手动实现Array-prototype-filter方法"><a href="#35-手动实现Array-prototype-filter方法-35-手动实现Array-prototype-filter方法" class="headerlink" title="[35. 手动实现Array.prototype.filter方法](35. 手动实现Array.prototype.filter方法)"></a>[35. 手动实现<code>Array.prototype.filter</code>方法](35. 手动实现<code>Array.prototype.filter</code>方法)</h3><p><code>filter()</code> 方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。</p>
+<pre><code>function filter(arr, filterCallback) {
+  // 首先，检查传递的参数是否正确。
+  if (!Array.isArray(arr) || !arr.length || typeof filterCallback !== &#39;function&#39;)
+  {
+    return [];
+  } else {
+    let result = [];
+      // 每次调用此函数时，我们都会创建一个 result 数组
+      // 因为我们不想改变原始数组。
+    for (let i = 0, len = arr.length; i &lt; len; i++) {
+      // 检查 filterCallback 的返回值是否是真值
+      if (filterCallback(arr[i], i, arr)) {
+      // 如果条件为真，则将数组元素 push 到 result 中
+        result.push(arr[i]);
+      }
+    }
+    return result; // return the result array
+  }
+}
+</code></pre>
+<h3 id="36-手动实现Array-prototype-reduce方法-36-手动实现Array-prototype-reduce方法"><a href="#36-手动实现Array-prototype-reduce方法-36-手动实现Array-prototype-reduce方法" class="headerlink" title="[36. 手动实现Array.prototype.reduce方法](36. 手动实现Array.prototype.reduce方法)"></a>[36. 手动实现<code>Array.prototype.reduce</code>方法](36. 手动实现<code>Array.prototype.reduce</code>方法)</h3><p><code>reduce()</code> 方法对数组中的每个元素执行一个由您提供的<code>reducer</code>函数(升序执行)，将其结果汇总为单个返回值。</p>
+<pre><code>function reduce(arr, reduceCallback, initialValue) {
+  // 首先，检查传递的参数是否正确。
+  if (!Array.isArray(arr) || !arr.length || typeof reduceCallback !== &#39;function&#39;)
+  {
+    return [];
+  } else {
+    // 如果没有将initialValue传递给该函数，我们将使用第一个数组项作为initialValue
+    let hasInitialValue = initialValue !== undefined;
+    let value = hasInitialValue ? initialValue : arr[0];
+    、
+
+    // 如果有传递 initialValue，则索引从 1 开始，否则从 0 开始
+    for (let i = hasInitialValue ? 0 : 1, len = arr.length; i &lt; len; i++) {
+      value = reduceCallback(value, arr[i], i, arr);
+    }
+    return value;
+  }
+}
+</code></pre>
+<h3 id="37-arguments-的对象是什么？-37-arguments-的对象是什么？"><a href="#37-arguments-的对象是什么？-37-arguments-的对象是什么？" class="headerlink" title="[37. arguments 的对象是什么？](37. arguments 的对象是什么？)"></a>[37. arguments 的对象是什么？](37. arguments 的对象是什么？)</h3><p><code>arguments</code>对象是函数中传递的参数值的集合。它是一个类似数组的对象，因为它有一个length属性，我们可以使用数组索引表示法<code>arguments[1]</code>来访问单个值，但它没有数组中的内置方法，如：<code>forEach</code>、<code>reduce</code>、<code>filter</code>和<code>map</code>。</p>
+<p>我们可以使用<code>Array.prototype.slice</code>将<code>arguments</code>对象转换成一个数组。</p>
+<pre><code>function one() {
+  return Array.prototype.slice.call(arguments);
+}
+</code></pre>
+<p><strong>注意:箭头函数中没有<code>arguments</code>对象。</strong></p>
+<pre><code>function one() {
+  return arguments;
+}
+const two = function () {
+  return arguments;
+}
+const three = function three() {
+  return arguments;
+}
+
+const four = () =&gt; arguments;
+
+four(); // Throws an error  - arguments is not defined
+</code></pre>
+<p>当我们调用函数<code>four</code>时，它会抛出一个<code>ReferenceError: arguments is not defined error</code>。使用<code>rest</code>语法，可以解决这个问题。</p>
+<pre><code>const four = (...args) =&gt; args;
+</code></pre>
+<p>这会自动将所有参数值放入数组中。</p>
+<h3 id="38-如何创建一个没有-prototype-原型-的对象？-38-如何创建一个没有-prototype-原型-的对象？"><a href="#38-如何创建一个没有-prototype-原型-的对象？-38-如何创建一个没有-prototype-原型-的对象？" class="headerlink" title="[38. 如何创建一个没有 prototype(原型)的对象？](38. 如何创建一个没有 prototype(原型)的对象？)"></a>[38. 如何创建一个没有 prototype(原型)的对象？](38. 如何创建一个没有 prototype(原型)的对象？)</h3><p>我们可以使用<code>Object.create</code>方法创建没有原型的对象。</p>
+<pre><code>const o1 = {};
+console.log(o1.toString()); // [object Object]
+
+const o2 = Object.create(null);
+console.log(o2.toString());
+// throws an error o2.toString is not a function
+</code></pre>
+<h3 id="39-为什么在调用这个函数时，代码中的b会变成一个全局变量-39-为什么在调用这个函数时，代码中的b会变成一个全局变量"><a href="#39-为什么在调用这个函数时，代码中的b会变成一个全局变量-39-为什么在调用这个函数时，代码中的b会变成一个全局变量" class="headerlink" title="[39. 为什么在调用这个函数时，代码中的b会变成一个全局变量?](39. 为什么在调用这个函数时，代码中的b会变成一个全局变量?)"></a>[39. 为什么在调用这个函数时，代码中的<code>b</code>会变成一个全局变量?](39. 为什么在调用这个函数时，代码中的<code>b</code>会变成一个全局变量?)</h3><pre><code>function myFunc() {
+  let a = b = 0;
+}
+
+myFunc();
+</code></pre>
+<p>原因是赋值运算符是从右到左的求值的。这意味着当多个赋值运算符出现在一个表达式中时，它们是从右向左求值的。所以上面代码变成了这样：</p>
+<pre><code>function myFunc() {
+  let a = (b = 0);
+}
+
+myFunc();
+</code></pre>
+<p>首先，表达式<code>b = 0</code>求值，在本例中<code>b</code>没有声明。因此，JS引擎在这个函数外创建了一个全局变量<code>b</code>，之后表达式<code>b = 0</code>的返回值为<code>0</code>，并赋给新的局部变量<code>a</code>。</p>
+<p>我们可以通过在赋值之前先声明变量来解决这个问题。</p>
+<pre><code>function myFunc() {
+  let a,b;
+  a = b = 0;
+}
+myFunc();
+</code></pre>
+<h3 id="40-ECMAScript-是什么？-40-ECMAScript-是什么？"><a href="#40-ECMAScript-是什么？-40-ECMAScript-是什么？" class="headerlink" title="[40. ECMAScript 是什么？](40. ECMAScript 是什么？)"></a>[40. ECMAScript 是什么？](40. ECMAScript 是什么？)</h3><p>ECMAScript 是编写脚本语言的标准，这意味着JavaScript遵循ECMAScript标准中的规范变化，因为它是JavaScript的蓝图。</p>
+<p>ECMAScript 和 Javascript，本质上都跟一门语言有关，一个是语言本身的名字，一个是语言的约束条件<br>只不过发明JavaScript的那个人（Netscape公司），把东西交给了ECMA（European Computer Manufacturers<br>Association），这个人规定一下他的标准，因为当时有java语言了，又想强调这个东西是让ECMA这个人定的规则，所以就这样一个神奇的东西诞生了，这个东西的名称就叫做ECMAScript。</p>
+<p>javaScript &#x3D; ECMAScript + DOM + BOM（自认为是一种广义的JavaScript）</p>
+<p>ECMAScript说什么JavaScript就得做什么！</p>
+<p>JavaScript（狭义的JavaScript）做什么都要问问ECMAScript我能不能这样干！如果不能我就错了！能我就是对的！</p>
+<p>——突然感觉JavaScript好没有尊严，为啥要搞个人出来约束自己，</p>
+<p>那个人被创造出来也好委屈，自己被创造出来完全是因为要约束JavaScript。</p>
+<h3 id="41-ES6或ECMAScript-2015有哪些新特性？-41-ES6或ECMAScript-2015有哪些新特性？"><a href="#41-ES6或ECMAScript-2015有哪些新特性？-41-ES6或ECMAScript-2015有哪些新特性？" class="headerlink" title="[41. ES6或ECMAScript 2015有哪些新特性？](41. ES6或ECMAScript 2015有哪些新特性？)"></a>[41. ES6或ECMAScript 2015有哪些新特性？](41. ES6或ECMAScript 2015有哪些新特性？)</h3><ul>
+<li>箭头函数</li>
+<li>类</li>
+<li>模板字符串</li>
+<li>加强的对象字面量</li>
+<li>对象解构</li>
+<li>Promise</li>
+<li>生成器</li>
+<li>模块</li>
+<li>Symbol</li>
+<li>代理</li>
+<li>Set</li>
+<li>函数默认参数</li>
+<li>rest 和展开</li>
+<li>块作用域</li>
+</ul>
+<h3 id="42-var-let和const的区别是什么？-42-var-let和const的区别是什么？"><a href="#42-var-let和const的区别是什么？-42-var-let和const的区别是什么？" class="headerlink" title="[42. var,let和const的区别是什么？](42. var,let和const的区别是什么？)"></a>[42. <code>var</code>,<code>let</code>和<code>const</code>的区别是什么？](42. <code>var</code>,<code>let</code>和<code>const</code>的区别是什么？)</h3><p><strong><code>var</code>声明的变量会挂载在<code>window</code>上，而<code>let</code>和<code>const</code>声明的变量不会：</strong></p>
+<pre><code>var a = 100;
+console.log(a,window.a);    // 100 100
+
+let b = 10;
+console.log(b,window.b);    // 10 undefined
+
+const c = 1;
+console.log(c,window.c);    // 1 undefined
+</code></pre>
+<p><strong><code>var</code>声明变量存在变量提升，<code>let</code>和<code>const</code>不存在变量提升:</strong></p>
+<pre><code>console.log(a); // undefined  ===&gt;  a已声明还没赋值，默认得到undefined值
+var a = 100;
+
+console.log(b); // 报错：b is not defined  ===&gt; 找不到b这个变量
+let b = 10;
+
+console.log(c); // 报错：c is not defined  ===&gt; 找不到c这个变量
+const c = 10;
+</code></pre>
+<p><strong><code>let</code>和<code>const</code>声明形成块作用域</strong></p>
+<pre><code>if(1){
+  var a = 100;
+  let b = 10;
+}
+
+console.log(a); // 100
+console.log(b)  // 报错：b is not defined  ===&gt; 找不到b这个变量
+
+-------------------------------------------------------------
+
+if(1){
+  var a = 100;
+  const c = 1;
+}
+console.log(a); // 100
+console.log(c)  // 报错：c is not defined  ===&gt; 找不到c这个变量
+</code></pre>
+<p><strong>同一作用域下<code>let</code>和<code>const</code>不能声明同名变量，而<code>var</code>可以</strong></p>
+<pre><code>var a = 100;
+console.log(a); // 100
+
+var a = 10;
+console.log(a); // 10
+-------------------------------------
+let a = 100;
+let a = 10;
+
+//  控制台报错：Identifier &#39;a&#39; has already been declared  ===&gt; 标识符a已经被声明了。
+</code></pre>
+<p><strong>暂存死区</strong></p>
+<pre><code>var a = 100;
+
+if(1){
+    a = 10;
+    //在当前块作用域中存在a使用let/const声明的情况下，给a赋值10时，只会在当前作用域找变量a，
+    // 而这时，还未到声明时候，所以控制台Error:a is not defined
+    let a = 1;
+}
+</code></pre>
+<p><strong>const</strong></p>
+<pre><code>/*
+- 1、一旦声明必须赋值,不能使用null占位。
+*
+- 2、声明后不能再修改
+*
+- 3、如果声明的是复合类型数据，可以修改其属性
+*
+- */
+
+const a = 100;
+
+const list = [];
+list[0] = 10;
+console.log(list);　　// [10]
+
+const obj = {a:100};
+obj.name = &#39;apple&#39;;
+obj.a = 10000;
+console.log(obj);　　// {a:10000,name:&#39;apple&#39;}
+</code></pre>
+<h3 id="43-什么是箭头函数？-43-什么是箭头函数？"><a href="#43-什么是箭头函数？-43-什么是箭头函数？" class="headerlink" title="[43. 什么是箭头函数？](43. 什么是箭头函数？)"></a>[43. 什么是箭头函数？](43. 什么是箭头函数？)</h3><p>箭头函数表达式的语法比函数表达式更简洁，并且没有自己的<code>this</code>，<code>arguments</code>，<code>super</code>或<code>new.target</code>。箭头函数表达式更适用于那些本来需要匿名函数的地方，并且它不能用作构造函数。</p>
+<pre><code>//ES5 Version
+var getCurrentDate = function (){
+  return new Date();
+}
+
+//ES6 Version
+const getCurrentDate = () =&gt; new Date();
+</code></pre>
+<p>在本例中，ES5<br>版本中有<code>function(){}</code>声明和<code>return</code>关键字，这两个关键字分别是创建函数和返回值所需要的。在箭头函数版本中，我们只需要<code>()</code>括号，不需要<br><code>return</code> 语句，因为如果我们只有一个表达式或值需要返回，箭头函数就会有一个隐式的返回。</p>
+<pre><code>//ES5 Version
+function greet(name) {
+  return &#39;Hello &#39; + name + &#39;!&#39;;
+}
+
+//ES6 Version
+const greet = (name) =&gt; `Hello ${name}`;
+const greet2 = name =&gt; `Hello ${name}`;
+</code></pre>
+<p>我们还可以在箭头函数中使用与函数表达式和函数声明相同的参数。如果我们在一个箭头函数中有一个参数，则可以省略括号。</p>
+<pre><code>const getArgs = () =&gt; arguments
+
+const getArgs2 = (...rest) =&gt; rest
+</code></pre>
+<p>箭头函数不能访问<code>arguments</code>对象。所以调用第一个<code>getArgs</code>函数会抛出一个错误。相反，我们可以使用<strong>rest</strong>参数来获得在箭头函数中传递的所有参数。</p>
+<pre><code>const data = {
+  result: 0,
+  nums: [1, 2, 3, 4, 5],
+  computeResult() {
+    // 这里的“this”指的是“data”对象
+    const addAll = () =&gt; {
+      return this.nums.reduce((total, cur) =&gt; total + cur, 0)
+    };
+    this.result = addAll();
+  }
+};
+</code></pre>
+<p>箭头函数没有自己的<code>this</code>值。 它捕获词法作用域函数的<code>this</code>值，在此示例中，<code>addAll</code>函数将复制<code>computeResult</code><br>方法中的<code>this</code>值，如果我们在全局作用域声明箭头函数，则<code>this</code>值为 <code>window</code> 对象。</p>
+<h3 id="44-什么是类？-44-什么是类？"><a href="#44-什么是类？-44-什么是类？" class="headerlink" title="[44. 什么是类？](44. 什么是类？)"></a>[44. 什么是类？](44. 什么是类？)</h3><p><code>类(class)</code>是在 JS 中编写构造函数的新方法。它是使用构造函数的语法糖，在底层中使用仍然是原型和基于原型的继承。</p>
+<pre><code>    //ES5 Version
+    function Person(firstName, lastName, age, address){
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.age = age;
+      this.address = address;
+    }
+
+    Person.self = function(){
+      return this;
+    }
+
+    Person.prototype.toString = function(){
+      return &quot;[object Person]&quot;;
+    }
+
+    Person.prototype.getFullName = function (){
+      return this.firstName + &quot; &quot; + this.lastName;
+    }
+
+    //ES6 Version
+    class Person {
+        constructor(firstName, lastName, age, address){
+            this.lastName = lastName;
+            this.firstName = firstName;
+            this.age = age;
+            this.address = address;
+        }
+
+        static self() {
+            return this;
+        }
+
+        toString(){
+            return &quot;[object Person]&quot;;
+        }
+
+        getFullName(){
+            return `${this.firstName} ${this.lastName}`;
+        }
+    }
+</code></pre>
+<p>重写方法并从另一个类继承。</p>
+<pre><code>//ES5 Version
+Employee.prototype = Object.create(Person.prototype);
+
+function Employee(firstName, lastName, age, address, jobTitle, yearStarted) {
+  Person.call(this, firstName, lastName, age, address);
+  this.jobTitle = jobTitle;
+  this.yearStarted = yearStarted;
+}
+
+Employee.prototype.describe = function () {
+  return `I am ${this.getFullName()} and I have a position of ${this.jobTitle}
+    and I started at ${this.yearStarted}`;
+}
+
+Employee.prototype.toString = function () {
+  return &quot;[object Employee]&quot;;
+}
+
+//ES6 Version
+class Employee extends Person { //Inherits from &quot;Person&quot; class
+  constructor(firstName, lastName, age, address, jobTitle, yearStarted) {
+    super(firstName, lastName, age, address);
+    this.jobTitle = jobTitle;
+    this.yearStarted = yearStarted;
+  }
+
+  describe() {
+    return `I am ${this.getFullName()} and I have a position of ${this.jobTitle}
+      and I started at ${this.yearStarted}`;
+  }
+
+  toString() { // Overriding the &quot;toString&quot; method of &quot;Person&quot;
+    return &quot;[object Employee]&quot;;
+  }
+}
+</code></pre>
+<p><strong>所以我们要怎么知道它在内部使用原型？</strong></p>
+<pre><code>class Something {
+
+}
+
+function AnotherSomething(){
+
+}
+const as = new AnotherSomething();
+const s = new Something();
+
+console.log(typeof Something); // &quot;function&quot;
+console.log(typeof AnotherSomething); // &quot;function&quot;
+console.log(as.toString()); // &quot;[object Object]&quot;
+console.log(as.toString()); // &quot;[object Object]&quot;
+console.log(as.toString === Object.prototype.toString); // true
+console.log(s.toString === Object.prototype.toString); // true
+</code></pre>
+<h3 id="45-什么是模板字符串？-45-什么是模板字符串？"><a href="#45-什么是模板字符串？-45-什么是模板字符串？" class="headerlink" title="[45. 什么是模板字符串？](45. 什么是模板字符串？)"></a>[45. 什么是模板字符串？](45. 什么是模板字符串？)</h3><p>模板字符串是在 JS 中创建字符串的一种新方法。我们可以通过使用反引号使模板字符串化。</p>
+<pre><code>//ES5 Version
+var greet = &#39;Hi I\&#39;m Mark&#39;;
+
+//ES6 Version
+let greet = `Hi I&#39;m Mark`;
+</code></pre>
+<p>在 ES5 中我们需要使用一些转义字符来达到多行的效果，在模板字符串不需要这么麻烦：</p>
+<pre><code>//ES5 Version
+var lastWords = &#39;\n&#39;
+  - &#39;   I  \n&#39;
+  - &#39;   Am  \n&#39;
+  - &#39;Iron Man \n&#39;;
+
+//ES6 Version
+let lastWords = `
+    I
+    Am
+  Iron Man
+`;
+</code></pre>
+<p>在ES5版本中，我们需要添加<code>\n</code>以在字符串中添加新行。 在模板字符串中，我们不需要这样做。</p>
+<pre><code>//ES5 Version
+function greet(name) {
+  return &#39;Hello &#39; + name + &#39;!&#39;;
+}
+
+//ES6 Version
+function greet(name) {
+  return `Hello ${name} !`;
+}
+</code></pre>
+<p>在 ES5 版本中，如果需要在字符串中添加表达式或值，则需要使用<code>+</code>运算符。 在模板字符串s中，我们可以使用<code>${expr}</code>嵌入一个表达式，这使其比 ES5<br>版本更整洁。</p>
+<h3 id="46-什么是对象解构？-46-什么是对象解构？"><a href="#46-什么是对象解构？-46-什么是对象解构？" class="headerlink" title="[46. 什么是对象解构？](46. 什么是对象解构？)"></a>[46. 什么是对象解构？](46. 什么是对象解构？)</h3><p><strong>对象析构</strong>是从对象或数组中获取或提取值的一种新的、更简洁的方法。假设有如下的对象：</p>
+<pre><code>const employee = {
+  firstName: &quot;Marko&quot;,
+  lastName: &quot;Polo&quot;,
+  position: &quot;Software Developer&quot;,
+  yearHired: 2017
+};
+</code></pre>
+<p>从对象获取属性，早期方法是创建一个与对象属性同名的变量。这种方法很麻烦，因为我们要为每个属性创建一个新变量。假设我们有一个大对象，它有很多属性和方法，用这种方法提取属性会很麻烦。</p>
+<pre><code>var firstName = employee.firstName;
+var lastName = employee.lastName;
+var position = employee.position;
+var yearHired = employee.yearHired;
+</code></pre>
+<p>使用解构方式语法就变得简洁多了：</p>
+<pre><code>{ firstName, lastName, position, yearHired } = employee;
+</code></pre>
+<p>我们还可以为属性取别名：</p>
+<pre><code>let { firstName: fName, lastName: lName, position, yearHired } = employee;
+</code></pre>
+<p>当然如果属性值为 <code>undefined</code> 时，我们还可以指定默认值：</p>
+<pre><code>let { firstName = &quot;Mark&quot;, lastName: lName, position, yearHired } = employee;
+</code></pre>
+<h3 id="47-什么是-ES6-模块？-47-什么是-ES6-模块？"><a href="#47-什么是-ES6-模块？-47-什么是-ES6-模块？" class="headerlink" title="[47. 什么是 ES6 模块？](47. 什么是 ES6 模块？)"></a>[47. 什么是 ES6 模块？](47. 什么是 ES6 模块？)</h3><p><strong>模块</strong>使我们能够将代码基础分割成多个文件，以获得更高的可维护性，并且避免将所有代码放在一个大文件中。在 ES6 支持模块之前，有两个流行的模块。</p>
+<ul>
+<li><strong>CommonJS-Node.js</strong></li>
+<li>AMD（异步模块定义）-<strong>浏览器</strong></li>
+</ul>
+<p>基本上，使用模块的方式很简单，<code>import</code>用于从另一个文件中获取功能或几个功能或值，同时<code>export</code>用于从文件中公开功能或几个功能或值。</p>
+<p><strong>导出</strong></p>
+<p>使用 ES5 (CommonJS)</p>
+<pre><code>// 使用 ES5 CommonJS - helpers.js
+exports.isNull = function (val) {
+  return val === null;
+}
+
+exports.isUndefined = function (val) {
+  return val === undefined;
+}
+
+exports.isNullOrUndefined = function (val) {
+  return exports.isNull(val) || exports.isUndefined(val);
+}
+</code></pre>
+<p>使用 ES6 模块</p>
+<pre><code>// 使用 ES6 Modules - helpers.js
+export function isNull(val){
+  return val === null;
+}
+
+export function isUndefined(val) {
+  return val === undefined;
+}
+
+export function isNullOrUndefined(val) {
+  return isNull(val) || isUndefined(val);
+}
+</code></pre>
+<p>在另一个文件中导入函数</p>
+<pre><code>// 使用 ES5 (CommonJS) - index.js
+const helpers = require(&#39;./helpers.js&#39;); // helpers is an object
+const isNull = helpers.isNull;
+const isUndefined = helpers.isUndefined;
+const isNullOrUndefined = helpers.isNullOrUndefined;
+
+// or if your environment supports Destructuring
+const { isNull, isUndefined, isNullOrUndefined } = require(&#39;./helpers.js&#39;);
+-------------------------------------------------------
+
+// ES6 Modules - index.js
+import * as helpers from &#39;./helpers.js&#39;; // helpers is an object
+
+// or
+
+import { isNull, isUndefined, isNullOrUndefined as isValid } from &#39;./helpers.js&#39;;
+
+// using &quot;as&quot; for renaming named exports
+</code></pre>
+<p><strong>在文件中导出单个功能或默认导出</strong></p>
+<p>使用 ES5 (CommonJS)</p>
+<pre><code>// 使用 ES5 (CommonJS) - index.js
+class Helpers {
+  static isNull(val) {
+    return val === null;
+  }
+
+  static isUndefined(val) {
+    return val === undefined;
+  }
+
+  static isNullOrUndefined(val) {
+    return this.isNull(val) || this.isUndefined(val);
+  }
+}
+
+module.exports = Helpers;
+</code></pre>
+<p>使用ES6 Modules</p>
+<pre><code>// 使用 ES6 Modules - helpers.js
+class Helpers {
+  static isNull(val) {
+    return val === null;
+  }
+
+  static isUndefined(val) {
+    return val === undefined;
+  }
+
+  static isNullOrUndefined(val) {
+    return this.isNull(val) || this.isUndefined(val);
+  }
+}
+
+export default Helpers
+</code></pre>
+<p>从另一个文件导入单个功能</p>
+<p>使用ES5 (CommonJS)</p>
+<pre><code>// 使用 ES5 (CommonJS) - index.js
+const Helpers = require(&#39;./helpers.js&#39;);
+console.log(Helpers.isNull(null));
+</code></pre>
+<p>使用 ES6 Modules</p>
+<pre><code>import Helpers from &#39;.helpers.js&#39;
+console.log(Helpers.isNull(null));
+</code></pre>
+<h3 id="48-什么是Set对象，它是如何工作的？-48-什么是Set对象，它是如何工作的？"><a href="#48-什么是Set对象，它是如何工作的？-48-什么是Set对象，它是如何工作的？" class="headerlink" title="[48. 什么是Set对象，它是如何工作的？](48. 什么是Set对象，它是如何工作的？)"></a>[48. 什么是<code>Set</code>对象，它是如何工作的？](48. 什么是<code>Set</code>对象，它是如何工作的？)</h3><p><strong>Set</strong> 对象允许你存储任何类型的唯一值，无论是原始值或者是对象引用。</p>
+<p>我们可以使用<code>Set</code>构造函数创建<code>Set</code>实例。</p>
+<pre><code>const set1 = new Set();
+const set2 = new Set([&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;d&quot;,&quot;e&quot;]);
+</code></pre>
+<p>我们可以使用<code>add</code>方法向<code>Set</code>实例中添加一个新值，因为<code>add</code>方法返回<code>Set</code>对象，所以我们可以以链式的方式再次使用<code>add</code>。如果一个值已经存在于<code>Set</code>对象中，那么它将不再被添加。</p>
+<pre><code>set2.add(&quot;f&quot;);
+set2.add(&quot;g&quot;).add(&quot;h&quot;).add(&quot;i&quot;).add(&quot;j&quot;).add(&quot;k&quot;).add(&quot;k&quot;);
+// 后一个“k”不会被添加到set对象中，因为它已经存在了
+</code></pre>
+<p>我们可以使用<code>has</code>方法检查<code>Set</code>实例中是否存在特定的值。</p>
+<pre><code>set2.has(&quot;a&quot;) // true
+set2.has(&quot;z&quot;) // true
+</code></pre>
+<p>我们可以使用<code>size</code>属性获得<code>Set</code>实例的长度。</p>
+<pre><code>set2.size // returns 10
+</code></pre>
+<p>可以使用<code>clear</code>方法删除 <code>Set</code> 中的数据。</p>
+<pre><code>set2.clear();
+</code></pre>
+<p>我们可以使用<code>Set</code>对象来删除数组中重复的元素。</p>
+<pre><code>const numbers = [1, 2, 3, 4, 5, 6, 6, 7, 8, 8, 5];
+const uniqueNums = [...new Set(numbers)]; // [1,2,3,4,5,6,7,8]
+</code></pre>
+<h3 id="49-什么是回调函数？-49-什么是回调函数？"><a href="#49-什么是回调函数？-49-什么是回调函数？" class="headerlink" title="[ 49. 什么是回调函数？]( 49. 什么是回调函数？)"></a>[ 49. 什么是回调函数？]( 49. 什么是回调函数？)</h3><p><strong>回调函数</strong>是一段可执行的代码段，它作为一个参数传递给其他的代码，其作用是在需要的时候方便调用这段（回调函数）代码。</p>
+<p>在JavaScript中函数也是对象的一种，同样对象可以作为参数传递给函数，因此函数也可以作为参数传递给另外一个函数，这个作为参数的函数就是回调函数。</p>
+<pre><code>const btnAdd = document.getElementById(&#39;btnAdd&#39;);
+
+btnAdd.addEventListener(&#39;click&#39;, function clickCallback(e) {
+    // do something useless
+});
+</code></pre>
+<p>在本例中，我们等待<code>id</code>为<code>btnAdd</code>的元素中的<code>click</code>事件，如果它被单击，则执行<code>clickCallback</code>函数。回调函数向某些数据或事件添加一些功能。</p>
+<p>数组中的<code>reduce</code>、<code>filter</code>和<code>map</code>方法需要一个回调作为参数。回调的一个很好的类比是，当你打电话给某人，如果他们不接，你留下一条消息，你期待他们回调。调用某人或留下消息的行为是事件或数据，回调是你希望稍后发生的操作。</p>
+<h3 id="50-Promise-是什么？-50-Promise-是什么？"><a href="#50-Promise-是什么？-50-Promise-是什么？" class="headerlink" title="[50. Promise 是什么？](50. Promise 是什么？)"></a>[50. Promise 是什么？](50. Promise 是什么？)</h3><p><strong>Promise</strong><br>是异步编程的一种解决方案：从语法上讲，<code>promise</code>是一个对象，从它可以获取异步操作的消息；从本意上讲，它是承诺，承诺它过一段时间会给你一个结果。<code>promise</code>有三种状态：<code>pending(等待态)</code>，<code>fulfiled(成功态)</code>，<code>rejected(失败态)</code>；状态一旦改变，就不会再变。创造<code>promise</code>实例后，它会立即执行。</p>
+<pre><code>fs.readFile(&#39;somefile.txt&#39;, function (e, data) {
+  if (e) {
+    console.log(e);
+  }
+  console.log(data);
+});
+</code></pre>
+<p>如果我们在回调内部有另一个异步操作，则此方法存在问题。 我们将有一个混乱且不可读的代码。 此代码称为**“回调地狱”**。</p>
+<pre><code>// 回调地狱
+fs.readFile(&#39;somefile.txt&#39;, function (e, data) {
+  //your code here
+  fs.readdir(&#39;directory&#39;, function (e, files) {
+    //your code here
+    fs.mkdir(&#39;directory&#39;, function (e) {
+      //your code here
+    })
+  })
+})
+</code></pre>
+<p>如果我们在这段代码中使用<code>promise</code>，它将更易于阅读、理解和维护。</p>
+<pre><code>promReadFile(&#39;file/path&#39;)
+  .then(data =&gt; {
+    return promReaddir(&#39;directory&#39;);
+  })
+  .then(data =&gt; {
+    return promMkdir(&#39;directory&#39;);
+  })
+  .catch(e =&gt; {
+    console.log(e);
+  })
+</code></pre>
+<p><code>promise</code>有三种不同的状态：</p>
+<ul>
+<li>pending：初始状态，完成或失败状态的前一个状态</li>
+<li>fulfilled：操作成功完成</li>
+<li>rejected：操作失败</li>
+</ul>
+<p><code>pending</code> 状态的 <code>Promise</code> 对象会触发 <code>fulfilled/rejected</code><br>状态，在其状态处理方法中可以传入参数&#x2F;失败信息。当操作成功完成时，<strong>Promise</strong> 对象的 <code>then</code> 方法就会被调用；否则就会触发<br><code>catch</code>。如：</p>
+<pre><code>const myFirstPromise = new Promise((resolve, reject) =&gt; {
+    setTimeout(function(){
+        resolve(&quot;成功!&quot;);
+    }, 250);
+});
+
+myFirstPromise.then((data) =&gt; {
+    console.log(&quot;Yay! &quot; + data);
+}).catch((e) =&gt; {...});
+</code></pre>
+<h3 id="51-什么是-async-await-及其如何工作？-51-什么是-async-await-及其如何工作？"><a href="#51-什么是-async-await-及其如何工作？-51-什么是-async-await-及其如何工作？" class="headerlink" title="[51. 什么是 async/await 及其如何工作？](51. 什么是 async/await 及其如何工作？)"></a>[51. 什么是 <code>async/await</code> 及其如何工作？](51. 什么是 <code>async/await</code> 及其如何工作？)</h3><p><code>async/await</code>是 JS 中编写异步或非阻塞代码的新方法。它建立在<strong>Promises</strong>之上，让异步代码的可读性和简洁度都更高。</p>
+<p><code>async/await</code>是 JS 中编写异步或非阻塞代码的新方法。 它建立在<code>Promises</code>之上，相对于 Promise<br>和回调，它的可读性和简洁度都更高。<br>但是，在使用此功能之前，我们必须先学习<code>Promises</code>的基础知识，因为正如我之前所说，它是基于<code>Promise</code>构建的，这意味着幕后使用仍然是<strong>Promise</strong>。</p>
+<p><strong>使用 Promise</strong></p>
+<pre><code>function callApi() {
+  return fetch(&quot;url/to/api/endpoint&quot;)
+    .then(resp =&gt; resp.json())
+    .then(data =&gt; {
+      //do something with &quot;data&quot;
+    }).catch(err =&gt; {
+      //do something with &quot;err&quot;
+    });
+}
+</code></pre>
+<p><strong>使用async&#x2F;await</strong></p>
+<p>在<code>async/await</code>，我们使用 tru&#x2F;catch 语法来捕获异常。</p>
+<pre><code>async function callApi() {
+  try {
+    const resp = await fetch(&quot;url/to/api/endpoint&quot;);
+    const data = await resp.json();
+    //do something with &quot;data&quot;
+  } catch (e) {
+    //do something with &quot;err&quot;
+  }
+}
+</code></pre>
+<p><strong>注意</strong>:使用 <code>async</code>关键声明函数会隐式返回一个<strong>Promise</strong>。</p>
+<pre><code>const giveMeOne = async () =&gt; 1;
+
+giveMeOne()
+  .then((num) =&gt; {
+    console.log(num); // logs 1
+  });
+</code></pre>
+<p><strong>注意:</strong><code>await</code>关键字只能在<code>async function</code>中使用。在任何非<strong>async<br>function</strong>的函数中使用<code>await</code>关键字都会抛出错误。<code>await</code>关键字在执行下一行代码之前等待右侧表达式(可能是一个<strong>Promise</strong>)返回。</p>
+<pre><code>const giveMeOne = async () =&gt; 1;
+
+function getOne() {
+  try {
+    const num = await giveMeOne();
+    console.log(num);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+// Uncaught SyntaxError: await is only valid in async function
+
+async function getTwo() {
+  try {
+    const num1 = await giveMeOne(); // 这行会等待右侧表达式执行完成
+    const num2 = await giveMeOne();
+    return num1 + num2;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+await getTwo(); // 2
+</code></pre>
+<h3 id="52-展开-spread-运算符和-剩余-Rest-运算符有什么区别？-52-展开-spread-运算符和-剩余-Rest-运算符有什么区别？"><a href="#52-展开-spread-运算符和-剩余-Rest-运算符有什么区别？-52-展开-spread-运算符和-剩余-Rest-运算符有什么区别？" class="headerlink" title="[52. 展开(spread )运算符和 剩余(Rest) 运算符有什么区别？](52. 展开(spread )运算符和 剩余(Rest) 运算符有什么区别？)"></a>[52. 展开(spread )运算符和 剩余(Rest) 运算符有什么区别？](52. 展开(spread )运算符和 剩余(Rest) 运算符有什么区别？)</h3><p>展开运算符(spread)是三个点(<code>...</code>)，可以将一个数组转为用逗号分隔的参数序列。说的通俗易懂点，有点像化骨绵掌，把一个大元素给打散成一个个单独的小元素。</p>
+<p>剩余运算符也是用三个点(<code>...</code>)表示，它的样子看起来和展开操作符一样，但是它是用于解构数组和对象。在某种程度上，剩余元素和展开元素相反，展开元素会“展开”数组变成多个元素，剩余元素会收集多个元素和“压缩”成一个单一的元素。</p>
+<pre><code>function add(a, b) {
+  return a + b;
+};
+
+const nums = [5, 6];
+const sum = add(...nums);
+console.log(sum);
+</code></pre>
+<p>在本例中，我们在调用<code>add</code>函数时使用了展开操作符，对<code>nums</code>数组进行展开。所以参数<code>a</code>的值是<code>5</code> ，<code>b</code>的值是<code>6</code>，所以<code>sum</code> 是<code>11</code>。</p>
+<pre><code>function add(...rest) {
+  return rest.reduce((total,current) =&gt; total + current);
+};
+
+console.log(add(1, 2)); // 3
+console.log(add(1, 2, 3, 4, 5)); // 15
+</code></pre>
+<p>在本例中，我们有一个<code>add</code>函数，它接受任意数量的参数，并将它们全部相加，然后返回总数。</p>
+<pre><code>const [first, ...others] = [1, 2, 3, 4, 5];
+console.log(first); // 1
+console.log(others); // [2,3,4,5]
+</code></pre>
+<p>这里，我们使用剩余操作符提取所有剩余的数组值，并将它们放入除第一项之外的其他数组中。</p>
+<h3 id="53-什么是默认参数？-53-什么是默认参数？"><a href="#53-什么是默认参数？-53-什么是默认参数？" class="headerlink" title="[53. 什么是默认参数？](53. 什么是默认参数？)"></a>[53. 什么是默认参数？](53. 什么是默认参数？)</h3><p>默认参数是在 JS 中定义默认变量的一种新方法，它在ES6或ECMAScript 2015版本中可用。</p>
+<pre><code>//ES5 Version
+function add(a,b){
+  a = a || 0;
+  b = b || 0;
+  return a + b;
+}
+
+//ES6 Version
+function add(a = 0, b = 0){
+  return a + b;
+}
+add(1); // returns 1
+</code></pre>
+<p>我们还可以在默认参数中使用解构。</p>
+<pre><code>function getFirst([first, ...rest] = [0, 1]) {
+  return first;
+}
+
+getFirst();  // 0
+getFirst([10,20,30]);  // 10
+
+function getArr({ nums } = { nums: [1, 2, 3, 4] }){
+    return nums;
+}
+
+getArr(); // [1, 2, 3, 4]
+getArr({nums:[5,4,3,2,1]}); // [5,4,3,2,1]
+</code></pre>
+<p>我们还可以使用先定义的参数再定义它们之后的参数。</p>
+<pre><code>function doSomethingWithValue(value = &quot;Hello World&quot;, callback = () =&gt; { console.log(value) }) {
+  callback();
+}
+doSomethingWithValue(); //&quot;Hello World&quot;
+</code></pre>
+<h3 id="54-什么是包装对象（wrapper-object）？-54-什么是包装对象（wrapper-object）？"><a href="#54-什么是包装对象（wrapper-object）？-54-什么是包装对象（wrapper-object）？" class="headerlink" title="[54. 什么是包装对象（wrapper object）？](54. 什么是包装对象（wrapper object）？)"></a>[54. 什么是包装对象（wrapper object）？](54. 什么是包装对象（wrapper object）？)</h3><p>我们现在复习一下JS的数据类型，JS数据类型被分为两大类，<strong>基本类型</strong>和<strong>引用类型</strong>。</p>
+<p>基本类型：<code>Undefined</code>,<code>Null</code>,<code>Boolean</code>,<code>Number</code>,<code>String</code>,<code>Symbol</code>,<code>BigInt</code></p>
+<p>引用类型：<code>Object</code>,<code>Array</code>,<code>Date</code>,<code>RegExp</code>等，说白了就是对象。</p>
+<p>其中引用类型有方法和属性，但是基本类型是没有的，但我们经常会看到下面的代码：</p>
+<pre><code>let name = &quot;marko&quot;;
+
+console.log(typeof name); // &quot;string&quot;
+console.log(name.toUpperCase()); // &quot;MARKO&quot;
+</code></pre>
+<p><code>name</code>类型是<br><code>string</code>，属于基本类型，所以它没有属性和方法，但是在这个例子中，我们调用了一个<code>toUpperCase()</code>方法，它不会抛出错误，还返回了对象的变量值。</p>
+<p>原因是基本类型的值被临时转换或强制转换为<strong>对象</strong>，因此<code>name</code>变量的行为类似于<strong>对象</strong>。<br>除<code>null</code>和<code>undefined</code>之外的每个基本类型都有自己<strong>包装对象</strong>。也就是：<code>String</code>，<code>Number</code>，<code>Boolean</code>，<code>Symbol</code>和<code>BigInt</code>。<br>在这种情况下，<code>name.toUpperCase()</code>在幕后看起来如下：</p>
+<pre><code>console.log(new String(name).toUpperCase()); // &quot;MARKO&quot;
+</code></pre>
+<p>在完成访问属性或调用方法之后，新创建的对象将立即被丢弃。</p>
+<h3 id="55-隐式和显式转换有什么区别）？-55-隐式和显式转换有什么区别）？"><a href="#55-隐式和显式转换有什么区别）？-55-隐式和显式转换有什么区别）？" class="headerlink" title="[55. 隐式和显式转换有什么区别）？](55. 隐式和显式转换有什么区别）？)"></a>[55. 隐式和显式转换有什么区别）？](55. 隐式和显式转换有什么区别）？)</h3><p>隐式强制转换是一种将值转换为另一种类型的方法，这个过程是自动完成的，无需我们手动操作。</p>
+<p>假设我们下面有一个例子。</p>
+<pre><code>console.log(1 + &#39;6&#39;); // 16
+console.log(false + true); // 1
+console.log(6 * &#39;2&#39;); // 12
+</code></pre>
+<p>第一个<code>console.log</code>语句结果为<code>16</code>。在其他语言中，这会抛出编译时错误，但在 JS<br>中，<code>1</code>被转换成字符串，然后与<code>+运</code>算符连接。我们没有做任何事情，它是由 JS 自动完成。</p>
+<p>第二个<code>console.log</code>语句结果为<code>1</code>，JS 将<code>false</code>转换为<code>boolean</code> 值为 <code>0</code>，,<code>true</code>为<code>1</code>，因此结果为<code>1</code>。</p>
+<p>第三个<code>console.log</code>语句结果<code>12</code>，它将<code>&#39;2&#39;</code>转换为一个数字，然后乘以<code>6 * 2</code>，结果是12。</p>
+<p>而显式强制是将值转换为另一种类型的方法，我们需要手动转换。</p>
+<pre><code>console.log(1 + parseInt(&#39;6&#39;));
+</code></pre>
+<p>在本例中，我们使用<code>parseInt</code>函数将<code>&#39;6&#39;</code>转换为<code>number</code> ，然后使用<code>+</code>运算符将<code>1</code>和<code>6</code>相加。</p>
+<h3 id="56-什么是NaN？-以及如何检查值是否为NaN？-56-什么是NaN？-以及如何检查值是否为NaN？"><a href="#56-什么是NaN？-以及如何检查值是否为NaN？-56-什么是NaN？-以及如何检查值是否为NaN？" class="headerlink" title="[56. 什么是NaN？ 以及如何检查值是否为NaN？](56. 什么是NaN？ 以及如何检查值是否为NaN？)"></a>[56. 什么是NaN？ 以及如何检查值是否为NaN？](56. 什么是NaN？ 以及如何检查值是否为NaN？)</h3><p><code>NaN</code>表示**“非数字”**是 JS 中的一个值，该值是将数字转换或执行为非数字值的运算结果，因此结果为<code>NaN</code>。</p>
+<pre><code>let a;
+
+console.log(parseInt(&#39;abc&#39;)); // NaN
+console.log(parseInt(null)); // NaN
+console.log(parseInt(undefined)); // NaN
+console.log(parseInt(++a)); // NaN
+console.log(parseInt({} * 10)); // NaN
+console.log(parseInt(&#39;abc&#39; - 2)); // NaN
+console.log(parseInt(0 / 0)); // NaN
+console.log(parseInt(&#39;10a&#39; * 10)); // NaN
+</code></pre>
+<p>JS 有一个内置的<code>isNaN</code>方法，用于测试值是否为isNaN值，但是这个函数有一个奇怪的行为。</p>
+<pre><code>console.log(isNaN()); // true
+console.log(isNaN(undefined)); // true
+console.log(isNaN({})); // true
+console.log(isNaN(String(&#39;a&#39;))); // true
+console.log(isNaN(() =&gt; { })); // true
+</code></pre>
+<p>所有这些<code>console.log</code>语句都返回<code>true</code>，即使我们传递的值不是<code>NaN</code>。</p>
+<p>在<code>ES6</code>中，建议使用<code>Number.isNaN</code>方法，因为它确实会检查该值（如果确实是<code>NaN</code>），或者我们可以使自己的辅助函数检查此问题，因为在 JS<br>中，<strong>NaN</strong>是唯一的值，它不等于自己。</p>
+<pre><code>function checkIfNaN(value) {
+  return value !== value;
+}
+</code></pre>
+<h3 id="57-如何判断值是否为数组？-57-如何判断值是否为数组？"><a href="#57-如何判断值是否为数组？-57-如何判断值是否为数组？" class="headerlink" title="[57. 如何判断值是否为数组？](57. 如何判断值是否为数组？)"></a>[57. 如何判断值是否为数组？](57. 如何判断值是否为数组？)</h3><p>我们可以使用<code>Array.isArray</code>方法来检查值是否为<strong>数组</strong>。 当传递给它的参数是数组时，它返回<code>true</code>，否则返回<code>false</code>。</p>
+<pre><code>console.log(Array.isArray(5));  // false
+console.log(Array.isArray(&quot;&quot;)); // false
+console.log(Array.isArray()); // false
+console.log(Array.isArray(null)); // false
+console.log(Array.isArray({ length: 5 })); // false
+
+console.log(Array.isArray([])); // true
+</code></pre>
+<p>如果环境不支持此方法，则可以使用<code>polyfill</code>实现。</p>
+<pre><code>function isArray(value){
+  return Object.prototype.toString.call(value) === &quot;[object Array]&quot;
+}
+</code></pre>
+<p>当然还可以使用传统的方法：</p>
+<pre><code>let a = []
+if (a instanceof Array) {
+  console.log(&#39;是数组&#39;)
+} else {
+  console.log(&#39;非数组&#39;)
+}
+</code></pre>
+<h3 id="58-如何在不使用-模运算符的情况下检查一个数字是否是偶数？-58-如何在不使用-模运算符的情况下检查一个数字是否是偶数？"><a href="#58-如何在不使用-模运算符的情况下检查一个数字是否是偶数？-58-如何在不使用-模运算符的情况下检查一个数字是否是偶数？" class="headerlink" title="[58. 如何在不使用%模运算符的情况下检查一个数字是否是偶数？](58. 如何在不使用%模运算符的情况下检查一个数字是否是偶数？)"></a>[58. 如何在不使用<code>%</code>模运算符的情况下检查一个数字是否是偶数？](58. 如何在不使用<code>%</code>模运算符的情况下检查一个数字是否是偶数？)</h3><p>我们可以对这个问题使用按位<code>&amp;</code>运算符，<code>&amp;</code>对其操作数进行运算，并将其视为二进制值，然后执行与运算。</p>
+<pre><code>function isEven(num) {
+  if (num &amp; 1) {
+    return false
+  } else {
+    return true
+  }
+}
+</code></pre>
+<p><code>0</code> 二进制数是 <code>000</code><br><code>1</code> 二进制数是 <code>001</code><br><code>2</code> 二进制数是 <code>010</code><br><code>3</code> 二进制数是 <code>011</code><br><code>4</code> 二进制数是 <code>100</code><br><code>5</code> 二进制数是 <code>101</code><br><code>6</code> 二进制数是 <code>110</code><br><code>7</code> 二进制数是 <code>111</code></p>
+<p>以此类推…</p>
+<p>与运算的规则如下：<br>aba &amp; b000010111<br>因此，当我们执行<code>console.log(5&amp;1)</code>这个表达式时，结果为<code>1</code>。首先，<code>&amp;</code>运算符将两个数字都转换为二进制，因此<code>5</code>变为<code>101</code>，<code>1</code>变为<code>001</code>。</p>
+<p>然后，它使用按位怀运算符比较每个位（<code>0</code>和<code>1</code>）。 <code>101&amp;001</code>，从表中可以看出，如果<code>a &amp; b</code>为<code>1</code>，所以<code>5&amp;1</code>结果为<code>1</code>。<br>101 &amp; 001101001001</p>
+<ul>
+<li>首先我们比较最左边的<code>1&amp;0</code>，结果是<code>0</code>。</li>
+<li>然后我们比较中间的<code>0&amp;0</code>，结果是<code>0</code>。</li>
+<li>然后我们比较最后<code>1&amp;1</code>，结果是<code>1</code>。</li>
+<li>最后，得到一个二进制数<code>001</code>，对应的十进制数，即<code>1</code>。</li>
+</ul>
+<p>由此我们也可以算出<code>console.log(4 &amp; 1)</code> 结果为<code>0</code>。知道<code>4</code>的最后一位是<code>0</code>，而<code>0 &amp; 1</code><br>将是<code>0</code>。如果你很难理解这一点，我们可以使用递归函数来解决此问题。</p>
+<p>function isEven(num) {</p>
+<pre><code>  if (num &lt; 0 || num === 1) return false;
+  if (num == 0) return true;
+  return isEven(num - 2);
+</code></pre>
+<p>}</p>
+<h3 id="59-如何检查对象中是否存在某个属性？-59-如何检查对象中是否存在某个属性？"><a href="#59-如何检查对象中是否存在某个属性？-59-如何检查对象中是否存在某个属性？" class="headerlink" title="[59. 如何检查对象中是否存在某个属性？](59. 如何检查对象中是否存在某个属性？)"></a>[59. 如何检查对象中是否存在某个属性？](59. 如何检查对象中是否存在某个属性？)</h3><p>检查对象中是否存在属性有三种方法。</p>
+<p>第一种使用 <code>in</code> 操作符号：</p>
+<pre><code>const o = {
+  &quot;prop&quot; : &quot;bwahahah&quot;,
+  &quot;prop2&quot; : &quot;hweasa&quot;
+};
+
+console.log(&quot;prop&quot; in o); // true
+console.log(&quot;prop1&quot; in o); // false
+</code></pre>
+<p>第二种使用 <code>hasOwnProperty</code> 方法，<code>hasOwnProperty()</code><br>方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性（也就是，是否有指定的键）。</p>
+<pre><code>console.log(o.hasOwnProperty(&quot;prop2&quot;)); // true
+console.log(o.hasOwnProperty(&quot;prop1&quot;)); // false
+</code></pre>
+<p>第三种使用括号符号<code>obj[&quot;prop&quot;]</code>。如果属性存在，它将返回该属性的值，否则将返回<code>undefined</code>。</p>
+<pre><code>console.log(o[&quot;prop&quot;]); // &quot;bwahahah&quot;
+console.log(o[&quot;prop1&quot;]); // undefined
+</code></pre>
+<h3 id="60-AJAX-是什么？-60-AJAX-是什么？"><a href="#60-AJAX-是什么？-60-AJAX-是什么？" class="headerlink" title="[60. AJAX 是什么？](60. AJAX 是什么？)"></a>[60. AJAX 是什么？](60. AJAX 是什么？)</h3><p>即异步的 <strong>JavaScript 和 XML</strong>，是一种用于创建快速动态网页的技术，传统的网页（不使用<br>AJAX）如果需要更新内容，必需重载整个网页面。使用<strong>AJAX</strong>则不需要加载更新整个网页，实现部分内容更新</p>
+<p>用到AJAX的技术：</p>
+<ul>
+<li><strong>HTML</strong> - 网页结构</li>
+<li><strong>CSS</strong> - 网页的样式</li>
+<li><strong>JavaScript</strong> - 操作网页的行为和更新DOM</li>
+<li><strong>XMLHttpRequest API</strong> - 用于从服务器发送和获取数据</li>
+<li><strong>PHP，Python，Nodejs</strong> - 某些服务器端语言</li>
+</ul>
+<h3 id="61-如何在-JS-中创建对象？-61-如何在-JS-中创建对象？"><a href="#61-如何在-JS-中创建对象？-61-如何在-JS-中创建对象？" class="headerlink" title="[61. 如何在 JS 中创建对象？](61. 如何在 JS 中创建对象？)"></a>[61. 如何在 JS 中创建对象？](61. 如何在 JS 中创建对象？)</h3><p><strong>使用对象字面量：</strong></p>
+<pre><code>  const o = {
+    name: &quot;Mark&quot;,
+    greeting() {
+      return `Hi, I&#39;m ${this.name}`;
+    }
+  };
+
+  o.greeting(); //returns &quot;Hi, I&#39;m Mark&quot;
+</code></pre>
+<p><strong>使用构造函数：</strong></p>
+<pre><code>function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.greeting = function () {
+    return `Hi, I&#39;m ${this.name}`;
+}
+
+const mark = new Person(&quot;Mark&quot;);
+
+mark.greeting(); //returns &quot;Hi, I&#39;m Mark&quot;
+</code></pre>
+<p><strong>使用 Object.create 方法：</strong></p>
+<pre><code>const n = {
+    greeting() {
+      return `Hi, I&#39;m ${this.name}`;
+    }
+};
+
+const o = Object.create(n); // sets the prototype of &quot;o&quot; to be &quot;n&quot;
+
+o.name = &quot;Mark&quot;;
+
+console.log(o.greeting()); // logs &quot;Hi, I&#39;m Mark&quot;
+</code></pre>
+<h3 id="62-Object-seal-和-Object-freeze-方法之间有什么区别？-62-Object-seal-和-Object-freeze-方法之间有什么区别？"><a href="#62-Object-seal-和-Object-freeze-方法之间有什么区别？-62-Object-seal-和-Object-freeze-方法之间有什么区别？" class="headerlink" title="[62. Object.seal 和 Object.freeze 方法之间有什么区别？](62. Object.seal 和 Object.freeze 方法之间有什么区别？)"></a>[62. Object.seal 和 Object.freeze 方法之间有什么区别？](62. Object.seal 和 Object.freeze 方法之间有什么区别？)</h3><p>这两种方法之间的区别在于，当我们对一个对象使用Object.freeze方法时，该对象的属性是不可变的，这意味着我们不能更改或编辑这些属性的值。而在Obj.Engor方法中，我们可以改变现有的属性。**<br>**</p>
+<p><strong>Object.freeze()</strong></p>
+<p><code>Object.freeze()</code><br>方法可以冻结一个对象。一个被冻结的对象再也不能被修改；冻结了一个对象则不能向这个对象添加新的属性，不能删除已有属性，不能修改该对象已有属性的可枚举性、可配置性、可写性，以及不能修改已有属性的值。此外，冻结一个对象后该对象的原型也不能被修改<code>。freeze()</code><br>返回和传入的参数相同的对象。</p>
+<p><strong>Object.seal()</strong></p>
+<blockquote>
+<p>Object.seal()方法封闭一个对象，阻止添加新属性并将所有现有属性标记为不可配置。当前属性的值只要可写就可以改变。</p>
+</blockquote>
+<p>方法的相同点：</p>
+<ol>
+<li>ES5新增。</li>
+<li>对象不可能扩展，也就是不能再添加新的属性或者方法。</li>
+<li>对象已有属性不允许被删除。</li>
+<li>对象属性特性不可以重新配置。</li>
+</ol>
+<p>方法不同点：</p>
+<ul>
+<li><p><code>Object.seal</code>方法生成的密封对象，如果属性是可写的，那么可以修改属性值。</p>
+</li>
+<li><p><code>Object.freeze</code>方法生成的冻结对象，属性都是不可写的，也就是属性值无法更改。</p>
+</li>
+</ul>
+<h3 id="63-in-运算符和-Object-hasOwnProperty-方法有什么区别？-63-in-运算符和-Object-hasOwnProperty-方法有什么区别？"><a href="#63-in-运算符和-Object-hasOwnProperty-方法有什么区别？-63-in-运算符和-Object-hasOwnProperty-方法有什么区别？" class="headerlink" title="[63. in 运算符和 Object.hasOwnProperty 方法有什么区别？](63. in 运算符和 Object.hasOwnProperty 方法有什么区别？)"></a>[63. <code>in</code> 运算符和 <code>Object.hasOwnProperty</code> 方法有什么区别？](63. <code>in</code> 运算符和 <code>Object.hasOwnProperty</code> 方法有什么区别？)</h3><p>如你所知，这两个特性都检查对象中是否存在属性，它将返回truefalse。它们之间的区别在于，in操作符还会检查对象的原型链，如果属性在当前对象中没有找到，而hasOwnProperty方法只检查属性是否存在于当前对象中，而忽略原型链。**<br>**</p>
+<p><strong>hasOwnPropert方法</strong></p>
+<p><code>hasOwnPropert()</code>方法返回值是一个布尔值，指示对象自身属性中是否具有指定的属性，因此这个方法会忽略掉那些从原型链上继承到的属性。</p>
+<p>看下面的例子：</p>
+<pre><code>Object.prototype.phone= &#39;15345025546&#39;;
+
+let obj = {
+    name: &#39;西门大官人&#39;,
+    age: &#39;28&#39;
+}
+console.log(obj.hasOwnProperty(&#39;phone&#39;)) // false
+console.log(obj.hasOwnProperty(&#39;name&#39;)) // true
+</code></pre>
+<p>可以看到，如果在函数原型上定义一个变量<code>phone</code>，<code>hasOwnProperty</code>方法会直接忽略掉。</p>
+<p><strong>in 运算符</strong></p>
+<p>如果指定的属性在指定的对象或其原型链中，则<code>in</code> 运算符返回<code>true</code>。</p>
+<p>还是用上面的例子来演示：</p>
+<pre><code>console.log(&#39;phone&#39; in obj) // true
+</code></pre>
+<p>可以看到<code>in</code>运算符会检查它或者其原型链是否包含具有指定名称的属性。</p>
+<h3 id="64-有哪些方法可以处理-JS-中的异步代码？-64-有哪些方法可以处理-JS-中的异步代码？"><a href="#64-有哪些方法可以处理-JS-中的异步代码？-64-有哪些方法可以处理-JS-中的异步代码？" class="headerlink" title="[64. 有哪些方法可以处理 JS 中的异步代码？](64. 有哪些方法可以处理 JS 中的异步代码？)"></a>[64. 有哪些方法可以处理 JS 中的异步代码？](64. 有哪些方法可以处理 JS 中的异步代码？)</h3><ul>
+<li>回调</li>
+<li>Promise</li>
+<li>async&#x2F;await</li>
+<li>还有一些库： async.js, bluebird, q, co</li>
+</ul>
+<h3 id="65-函数表达式和函数声明之间有什么区别？-65-函数表达式和函数声明之间有什么区别？"><a href="#65-函数表达式和函数声明之间有什么区别？-65-函数表达式和函数声明之间有什么区别？" class="headerlink" title="[65. 函数表达式和函数声明之间有什么区别？](65. 函数表达式和函数声明之间有什么区别？)"></a>[65. 函数表达式和函数声明之间有什么区别？](65. 函数表达式和函数声明之间有什么区别？)</h3><p>看下面的例子：</p>
+<pre><code>hoistedFunc();
+notHoistedFunc();
+
+function hoistedFunc(){
+  console.log(&quot;注意：我会被提升&quot;);
+}
+
+var notHoistedFunc = function(){
+  console.log(&quot;注意：我没有被提升&quot;);
+}
+</code></pre>
+<p><code>notHoistedFunc</code>调用抛出异常：<code>Uncaught TypeError: notHoistedFunc is not a function</code>，而<code>hoistedFunc</code>调用不会，因为<code>hoistedFunc</code>会被提升到作用域的顶部，而<code>notHoistedFunc</code> 不会。</p>
+<h3 id="66-调用函数，可以使用哪些方法？-66-调用函数，可以使用哪些方法？"><a href="#66-调用函数，可以使用哪些方法？-66-调用函数，可以使用哪些方法？" class="headerlink" title="[66. 调用函数，可以使用哪些方法？](66. 调用函数，可以使用哪些方法？)"></a>[66. 调用函数，可以使用哪些方法？](66. 调用函数，可以使用哪些方法？)</h3><p>在 JS 中有4种方法可以调用函数。</p>
+<ul>
+<li><strong>作为函数调用</strong>——如果一个函数没有作为方法、构造函数、<code>apply</code>、<code>call</code> 调用时，此时 <code>this</code> 指向的是 <code>window</code></li>
+</ul>
+<p>对象（非严格模式）</p>
+<pre><code>  //Global Scope
+
+  function add(a,b){
+    console.log(this);
+    return a + b;
+  }
+
+  add(1,5); // 打印 &quot;window&quot; 对象和 6
+
+  const o = {
+    method(callback){
+      callback();
+    }
+  }
+
+  o.method(function (){
+      console.log(this); // 打印 &quot;window&quot; 对象
+  });
+</code></pre>
+<ul>
+<li><p><strong>作为方法调用</strong>——如果一个对象的属性有一个函数的值，我们就称它为<strong>方法</strong>。调用该方法时，该方法的<code>this</code>值指向该对象。</p>
+<p>  const details &#x3D; {<br>name : “Marko”,<br>getName(){<br>  return this.name;<br>}<br>  }</p>
+<p>  details.getName(); &#x2F;&#x2F; Marko<br>  &#x2F;&#x2F; the “this” value inside “getName” method will be the “details” object</p>
+</li>
+<li></li>
+</ul>
+<p><strong>作为构造函数的调用</strong>-如果在函数之前使用<code>new</code>关键字调用了函数，则该函数称为<code>构造函数</code>。构造函数里面会默认创建一个空对象，并将<code>this</code>指向该对象。</p>
+<pre><code>function Employee(name, position, yearHired) {
+  // creates an empty object {}
+  // then assigns the empty object to the &quot;this&quot; keyword
+  // this = {};
+  this.name = name;
+  this.position = position;
+  this.yearHired = yearHired;
+  // inherits from Employee.prototype
+  // returns the &quot;this&quot; value implicitly if no
+  // explicit return statement is specified
+};
+
+const emp = new Employee(&quot;Marko Polo&quot;, &quot;Software Developer&quot;, 2017);
+</code></pre>
+<ul>
+<li><p><strong>使用<code>apply</code>和<code>call</code>方法调用</strong>——如果我们想显式地指定一个函数的<code>this</code>值，我们可以使用这些方法，这些方法对所有函数都可用。</p>
+<p>  const obj1 &#x3D; {<br>result:0<br>  };</p>
+<p>  const obj2 &#x3D; {<br>result:0<br>  };</p>
+<p>  function reduceAdd(){<br>  let result &#x3D; 0;<br>  for(let i &#x3D; 0, len &#x3D; arguments.length; i &lt; len; i++){<br>    result +&#x3D; arguments[i];<br>  }<br>  this.result &#x3D; result;<br>  }</p>
+<p>  reduceAdd.apply(obj1, [1, 2, 3, 4, 5]);  &#x2F;&#x2F; reduceAdd 函数中的 this 对象将是 obj1<br>  reduceAdd.call(obj2, 1, 2, 3, 4, 5); &#x2F;&#x2F; reduceAdd 函数中的 this 对象将是 obj2</p>
+</li>
+</ul>
+<h3 id="67-什么是缓存及它有什么作用？-67-什么是缓存及它有什么作用？"><a href="#67-什么是缓存及它有什么作用？-67-什么是缓存及它有什么作用？" class="headerlink" title="[67. 什么是缓存及它有什么作用？](67. 什么是缓存及它有什么作用？)"></a>[67. 什么是缓存及它有什么作用？](67. 什么是缓存及它有什么作用？)</h3><p>缓存是建立一个函数的过程，这个函数能够记住之前计算的结果或值。使用缓存函数是为了避免在最后一次使用相同参数的计算中已经执行的函数的计算。这节省了时间，但也有不利的一面，即我们将消耗更多的内存来保存以前的结果。</p>
+<h3 id="68-手动实现缓存方法-68-手动实现缓存方法"><a href="#68-手动实现缓存方法-68-手动实现缓存方法" class="headerlink" title="[68. 手动实现缓存方法](68. 手动实现缓存方法)"></a>[68. 手动实现缓存方法](68. 手动实现缓存方法)</h3><pre><code>function memoize(fn) {
+  const cache = {};
+  return function (param) {
+    if (cache[param]) {
+      console.log(&#39;cached&#39;);
+      return cache[param];
+    } else {
+      let result = fn(param);
+      cache[param] = result;
+      console.log(`not cached`);
+      return result;
+    }
+  }
+}
+
+const toUpper = (str =&quot;&quot;)=&gt; str.toUpperCase();
+
+const toUpperMemoized = memoize(toUpper);
+
+toUpperMemoized(&quot;abcdef&quot;);
+toUpperMemoized(&quot;abcdef&quot;);
+</code></pre>
+<p>这个缓存函数适用于接受一个参数。 我们需要改变下，让它接受多个参数。</p>
+<pre><code>const slice = Array.prototype.slice;
+function memoize(fn) {
+  const cache = {};
+  return (...args) =&gt; {
+    const params = slice.call(args);
+    console.log(params);
+    if (cache[params]) {
+      console.log(&#39;cached&#39;);
+      return cache[params];
+    } else {
+      let result = fn(...args);
+      cache[params] = result;
+      console.log(`not cached`);
+      return result;
+    }
+  }
+}
+const makeFullName = (fName, lName) =&gt; `${fName} ${lName}`;
+const reduceAdd = (numbers, startingValue = 0) =&gt;
+  numbers.reduce((total, cur) =&gt; total + cur, startingValue);
+
+const memoizedMakeFullName = memoize(makeFullName);
+const memoizedReduceAdd = memoize(reduceAdd);
+
+memoizedMakeFullName(&quot;Marko&quot;, &quot;Polo&quot;);
+memoizedMakeFullName(&quot;Marko&quot;, &quot;Polo&quot;);
+
+memoizedReduceAdd([1, 2, 3, 4, 5], 5);
+memoizedReduceAdd([1, 2, 3, 4, 5], 5);
+</code></pre>
+<h3 id="69-为什么typeof-null-返回-object？-如何检查一个值是否为-null？-69-为什么typeof-null-返回-object？-如何检查一个值是否为-null？"><a href="#69-为什么typeof-null-返回-object？-如何检查一个值是否为-null？-69-为什么typeof-null-返回-object？-如何检查一个值是否为-null？" class="headerlink" title="[69. 为什么typeof null 返回 object？ 如何检查一个值是否为 null？](69. 为什么typeof null 返回 object？ 如何检查一个值是否为 null？)"></a>[69. 为什么typeof null 返回 object？ 如何检查一个值是否为 null？](69. 为什么typeof null 返回 object？ 如何检查一个值是否为 null？)</h3><p><code>typeof null == &#39;object&#39;</code>总是返回<code>true</code>，因为这是自 JS 诞生以来<code>null</code>的实现。曾经有人提出将<code>typeof null == &#39;object&#39;</code>修改为<code>typeof null == &#39;null&#39;</code>，但是被拒绝了，因为这将导致更多的<strong>bug</strong>。</p>
+<p>我们可以使用严格相等运算符<code>===</code>来检查值是否为<code>null</code>。</p>
+<pre><code>function isNull(value){
+  return value === null;
+}
+</code></pre>
+<h3 id="70-new-关键字有什么作用？-70-new-关键字有什么作用？"><a href="#70-new-关键字有什么作用？-70-new-关键字有什么作用？" class="headerlink" title="[70. new 关键字有什么作用？](70. new 关键字有什么作用？)"></a>[70. new 关键字有什么作用？](70. new 关键字有什么作用？)</h3><p><code>new</code>关键字与构造函数一起使用以创建对象在JavaScript中。</p>
+<p>下面看看例子：</p>
+<pre><code>function Employee(name, position, yearHired) {
+  this.name = name;
+  this.position = position;
+  this.yearHired = yearHired;
+};
+
+const emp = new Employee(&quot;Marko Polo&quot;, &quot;Software Developer&quot;, 2017);
+</code></pre>
+<p><code>new</code>关键字做了<code>4</code>件事:</p>
+<ul>
+<li>创建空对象 <code>{}</code></li>
+<li>将空对象分配给 <code>this</code> 值</li>
+<li>将空对象的<code>__proto__</code>指向构造函数的<code>prototype</code></li>
+<li>如果没有使用显式<code>return</code>语句，则返回<code>this</code></li>
+</ul>
+<p>根据上面描述的，它将首先创建一个空对象{}，然后它将this值赋给这个空对象this&#x3D;{}，并向这个对象添加属性。因为我们没有显式的return语句，所以它会自动为我们返回this。</p>
+<p>英文原文地址：<a target="_blank" rel="noopener" href="https://dev.to/macmacky/70-javascript-interview-questions-5gfi#61-what-are-the-ways-of-making-objects-in-javascript">https://dev.to/macmacky/70-javascript-interview-questions-5gfi#61-what-are-the-ways-of-making-objects-in-javascript</a></p>
+<p>为了保证的可读性，本文采用意译而非直译。</p>
+<p>更多<a target="_blank" rel="noopener" href="https://www.html.cn/">web开发</a>知识，请查阅 HTML中文网 ！！</p>
+<p>以上就是70个JavaScript面试问题的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/8c6832b5.html"><div class="related-post-title">TypeScript中as const断言和const声明变量的区别是什么？</div><div class="related-post-meta"><time>2025-10-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">TypeScript</span></div></div></a><a class="related-post-item" href="/article/b83c551d.html"><div class="related-post-title">uniapp的webview嵌套页面中的js,css等文件如何替换</div><div class="related-post-meta"><time>2021-11-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/bf25fb10.html"><div class="related-post-title">巧用 CSS 实现酷炫的充电动画</div><div class="related-post-meta"><time>2019-12-26</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/c8b81ddd.html"><div class="related-post-title">Mozilla 为开发者推出新的网页调试 Firefox Replay</div><div class="related-post-meta"><time>2019-12-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/f11ce35e.html"><div class="related-post-title">寒冬求职之你必须要懂的Web安全</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/42460c42.html">https://xuehuayu.cn/article/42460c42.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/fc812490.html">字节跳动面试官：请你实现一个大文件上传和断点续传</a><a class="next" href="/article/a4a6ee64.html">面试常考手写代码学习技巧总结</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

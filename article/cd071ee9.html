@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>React新旧生命周期一览 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">React新旧生命周期一览</h1><div class="post-meta"><span class="date">2019-10-01</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.3k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 5</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/cd071ee9.html#waline-comment"><span class="waline-comment-count" data-path="/article/cd071ee9.html">0</span><span> 条评论</span></a><div class="post-content"><p>React16.3.0开始，生命周期进行了一些变化。本文主要介绍React16.3.0之后的生命周期。<br>16版本之前的react组件的生命周期相信大家已经很熟悉。16版本的react对组件的生命周期函数进行了一些修改,下面进行详细说明。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/3">React新旧生命周期一览</a></li>
+</ul>
+<span id="more"></span>
+
+<h3 id="React16-3-0之前生命周期"><a href="#React16-3-0之前生命周期" class="headerlink" title="React16.3.0之前生命周期"></a>React16.3.0之前生命周期</h3><blockquote>
+<p>创建期:</p>
+</blockquote>
+<ol>
+<li>constructor(props, context)</li>
+<li>componentWillMount()</li>
+<li>render()</li>
+<li>componentDidMount()</li>
+</ol>
+<blockquote>
+<p>运行时:</p>
+</blockquote>
+<p><strong>props发生变化时</strong></p>
+<ol>
+<li>componentWillReceiveProps(nextProps, nextContext)</li>
+<li>shouldComponentUpdate(nextProps, nextState, nextContext)</li>
+<li>componentWillUpdate(nextProps, nextState, nextContext)</li>
+<li>render</li>
+<li>componentDidUpdate(prevProps, prevState, snapshot)</li>
+</ol>
+<p><strong>state发生变化时</strong></p>
+<ol>
+<li>shouldComponentUpdate(nextProps, nextState, nextContext)</li>
+<li>componentWillUpdate(nextProps, nextState, nextContext)</li>
+<li>render</li>
+<li>componentDidUpdate(prevProps, prevState, snapshot)</li>
+</ol>
+<blockquote>
+<p>卸载时</p>
+</blockquote>
+<p>componentWillUnmount()</p>
+<h3 id="React16-3-0之后的生命周期"><a href="#React16-3-0之后的生命周期" class="headerlink" title="React16.3.0之后的生命周期"></a>React16.3.0之后的生命周期</h3><blockquote>
+<p>创建期:</p>
+</blockquote>
+<ol>
+<li>constructor(props, context)</li>
+<li>static getDerivedStateFromProps(props, status)</li>
+<li>render()</li>
+<li>componentDidMount()</li>
+</ol>
+<p>或者如下生命周期:</p>
+<ol>
+<li>constructor(props, context)</li>
+<li>componentWillMount() &#x2F; UNSAFE_componentWillMount()</li>
+<li>render()</li>
+<li>componentDidMount()</li>
+</ol>
+<p>注意: getDerivedStateFromProps&#x2F;getSnapshotBeforeUpdate 和<br>componentWillMount&#x2F;componentWillReceiveProps&#x2F;componentWillUpdate<br>如果同时存在，React会在控制台给出警告信息，且仅执行 getDerivedStateFromProps&#x2F;getSnapshotBeforeUpdate<br>【<a href="mailto:&#82;&#x65;&#97;&#x63;&#116;&#64;&#x31;&#x36;&#46;&#x37;&#x2e;&#48;">React@16.7.0</a>】</p>
+<blockquote>
+<p>运行时:</p>
+</blockquote>
+<p><strong>props发生变化时</strong></p>
+<ol>
+<li>static getDerivedStateFromProps(props, status)</li>
+<li>shouldComponentUpdate(nextProps, nextState, nextContext)</li>
+<li>render</li>
+<li>getSnapshotBeforeUpdate(prevProps, prevState)</li>
+<li>componentDidUpdate(prevProps, prevState, snapshot)</li>
+</ol>
+<p>或者如下生命周期:</p>
+<ol>
+<li>componentWillReceiveProps(nextProps,<br>nextContext)&#x2F;UNSAFE_componentWillReceiveProps</li>
+<li>shouldComponentUpdate(nextProps, nextState, nextContext)</li>
+<li>componentWillUpdate(nextProps, nextState, nextContext)</li>
+<li>render</li>
+<li>componentDidUpdate(prevProps, prevState, snapshot)</li>
+</ol>
+<p><strong>state发生变化时</strong></p>
+<ol>
+<li>static getDerivedStateFromProps(props, status)</li>
+<li>shouldComponentUpdate(nextProps, nextState, nextContext)</li>
+<li>render</li>
+<li>getSnapshotBeforeUpdate(prevProps, prevState)</li>
+<li>componentDidUpdate(prevProps, prevState, snapshot)</li>
+</ol>
+<p>或者如下生命周期:</p>
+<ol>
+<li>shouldComponentUpdate(nextProps, nextState, nextContext)</li>
+<li>componentWillUpdate(nextProps, nextState,<br>nextContext)&#x2F;UNSAFE_componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate(prevProps, prevState, snapshot)</li>
+</ol>
+<blockquote>
+<p>销毁时</p>
+</blockquote>
+<p>componentWillUnmount()</p>
+<p>新的生命周期图示:</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/1077b94360d6754685ea2052ab5ca32c9c338bf7/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434537633738613536653634323335626364626434323638363861346133383762332f3239353236"><img src="https://camo.githubusercontent.com/1077b94360d6754685ea2052ab5ca32c9c338bf7/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434537633738613536653634323335626364626434323638363861346133383762332f3239353236" alt="lifeCycle"></a></p>
+<h2 id="生命周期详解"><a href="#生命周期详解" class="headerlink" title="生命周期详解"></a>生命周期详解</h2><h4 id="1-constructor-props-context"><a href="#1-constructor-props-context" class="headerlink" title="1.constructor(props, context)"></a>1.constructor(props, context)</h4><p>constructor生命周期，如不需要，可缺省。通常会在 constructor 方法中初始化 state 和绑定事件处理程序。</p>
+<p>但是，如果写了constructor，那么必须在其中调用super(props);否则可能会引起报错。</p>
+<p>如:</p>
+<pre><code>class Base extends Component {
+    constructor(props) {
+        super();  //应该为 super(props);
+    }
+    state = {
+        name: this.props.name
+    }
+    //....code
+}
+</code></pre>
+<p>抛出异常: Uncaught TypeError: Cannot read property ‘name’ of undefined.</p>
+<p>同样，如果定义了context,在state中需要使用this.context去获取context上的内容，则需要super(props, context);</p>
+<p>不过，如果你缺省constructor,那么在state中，可以放心的使用 this.props 或者是 this.context，不会引起报错。</p>
+<pre><code>class Base extends Component {
+    state = {
+        name: this.props.name,
+        color: this.context.color
+    }
+    //....code
+}
+</code></pre>
+<p>初始化的state同样可以在constructor中定义。如果需要给方法绑定this，那么统一在constructor中进行。</p>
+<h4 id="2-static-getDerivedStateFromProps-props-state"><a href="#2-static-getDerivedStateFromProps-props-state" class="headerlink" title="2.static getDerivedStateFromProps(props, state)"></a>2.static getDerivedStateFromProps(props, state)</h4><p>当组件的state需要根据props来改变的时候可调用此方法。这个方法是在 render() 前会被执行，每次触发render前，都会触发此方法。</p>
+<p>该方法有两个参数props和state; 返回值为state对象, 不需要返回整体state，把需要改变的state返回即可。如果不需要，可以返回null.</p>
+<pre><code>classBaseextendsComponent {
+    state = {
+        age:20
+    }
+    staticgetDerivedStateFromProps(props, state) {
+        return {
+            age:50
+        }
+    }
+    render() {
+        // 50return (
+            &lt;div&gt;{this.state.age}&lt;/div&gt;
+        )
+    }
+}
+</code></pre>
+<p>这个方法允许组件基于 props 的变更来更新其内部状态,以这种方式获得的组件状态被称为派生状态。应该谨慎使用派生状态，可能会引入潜在的错误</p>
+<h4 id="3-render"><a href="#3-render" class="headerlink" title="3.render"></a>3.render</h4><p>React组件中必须要提供的方法。当state或者props任一数据有更新时都会执行。</p>
+<p>render() 是一个纯函数，因此，不要在其中执行setState诸如此类的操作。render必须有一个返回值，返回的数据类型可以有:</p>
+<ul>
+<li>null、String、Number、Array、Boolean。</li>
+<li>React elements</li>
+<li>Fragment</li>
+<li>Portal</li>
+</ul>
+<p>注意不要在render中调用setState</p>
+<h4 id="4-componentDidMount"><a href="#4-componentDidMount" class="headerlink" title="4.componentDidMount"></a>4.componentDidMount</h4><p>componentDidMount()方法是在组件加载完后立即执行，也就是当该组件相关的dom节点插入到dom树中时。该方法在组件生命中只执行一次。</p>
+<p>一般情况，我们会在这里setState(),或者进行接口请求，设置订阅等。</p>
+<pre><code>classBaseextendsComponent {
+    state = {
+        age:20
+    }
+    componentDidMount() {
+        this.fetchDate();
+    }
+    render() {
+        return (
+            &lt;div&gt;{this.state.age}&lt;/div&gt;
+        )
+    }
+    //other code
+}
+</code></pre>
+<h4 id="5-shouldComponentUpdate-nextProps-nextState-nextContext"><a href="#5-shouldComponentUpdate-nextProps-nextState-nextContext" class="headerlink" title="5.shouldComponentUpdate(nextProps, nextState, nextContext)"></a>5.shouldComponentUpdate(nextProps, nextState, nextContext)</h4><p>在渲染新的props或state前，shouldComponentUpdate被调用，默认返回true。forceUpdate()时不会调用此方法。</p>
+<p>如果shouldComponentUpdate()返回false，那么getSnapshotBeforeUpdate,render和componentDidUpdate不会被调用。</p>
+<p>此生命周期主要用于优化性能。</p>
+<h4 id="6-getSnapshotBeforeUpdate-prevProps-prevState"><a href="#6-getSnapshotBeforeUpdate-prevProps-prevState" class="headerlink" title="6.getSnapshotBeforeUpdate(prevProps, prevState)"></a>6.getSnapshotBeforeUpdate(prevProps, prevState)</h4><p>在render()的输出被渲染到DOM之前被调用。使组件能够在它们被更改之前捕获当前值（如滚动位置）。这个生命周期返回的任何值都将作为第三个参数传递给componentDidUpdate().</p>
+<h4 id="7-componentDidUpdate-prevProps-prevState-snapshot"><a href="#7-componentDidUpdate-prevProps-prevState-snapshot" class="headerlink" title="7.componentDidUpdate(prevProps, prevState, snapshot)"></a>7.componentDidUpdate(prevProps, prevState, snapshot)</h4><p>在更新发生后调用<br>componentDidUpdate()。当组件更新时，将此作为一个机会来操作DOM。如将当前的props与以前的props进行比较（例如，如果props没有改变，则可能不需要网络请求。</p>
+<p>如果组件使用 getSnapshotBeforeUpdate()，则它返回的值将作为第三个“快照”参数传递给<br>componentDidUpdate()。否则，这个参数是undefined。</p>
+<h4 id="8-componentWillUnmount"><a href="#8-componentWillUnmount" class="headerlink" title="8.componentWillUnmount()"></a>8.componentWillUnmount()</h4><p>在组件被卸载并销毁之前立即被调用。在此方法中执行任何必要的清理，例如使定时器无效，取消网络请求或清理在componentDidMount（）中创建的任何监听。</p>
+<p><strong>最后，说明一点:</strong></p>
+<p>componentWillMount,componentWillReceiveProps,componentWillUpdate这三个生命周期在React未来版本中会被废弃。</p>
+<p>而UNSAFE_componentWillUpdate,UNSAFE_componentWillReceiveProps,UNSAFE_componentWillUpdate<br>未来版本中仍可继续使用。</p>
+<p>初始化阶段(父组件和子组件):</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/76fe4b48fa45ef5e389eed9098cc22fa483efabc/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434562303335306262373362633661396165346163313136303131393863313766322f3239353233"><img src="https://camo.githubusercontent.com/76fe4b48fa45ef5e389eed9098cc22fa483efabc/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434562303335306262373362633661396165346163313136303131393863313766322f3239353233" alt="mount"></a></p>
+<p>运行阶段:父组件props&#x2F;state更新</p>
+<p>子组件的shouldComponentUpdate返回false，则子组件其后的生命周期都不在进行，但是父组件的生命周期继续执行。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/9ecc4121b82ff19a4a31d4c5cc1785e7893f03d2/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434561643737363439393431396531633937386133633534336561313364393334652f3239353234"><img src="https://camo.githubusercontent.com/9ecc4121b82ff19a4a31d4c5cc1785e7893f03d2/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434561643737363439393431396531633937386133633534336561313364393334652f3239353234" alt="update"></a></p>
+<p>卸载阶段: 卸载父组件</p>
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/20203157/54731656-792d4e00-4bca-11e9-9f61-53fe34688878.png"><img src="https://user-images.githubusercontent.com/20203157/54731656-792d4e00-4bca-11e9-9f61-53fe34688878.png" alt="unmount"></a></p>
+<p>参考:</p>
+<ol>
+<li></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000016935092">https://segmentfault.com/a/1190000016935092</a><br>2.<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/514fe21b9914">https://www.jianshu.com/p/514fe21b9914</a><br>3.<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29311407/article/details/79861522">https://blog.csdn.net/qq_29311407&#x2F;article&#x2F;details&#x2F;79861522</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/80fad23d.html"><div class="related-post-title">js中Map和对象{}的区别</div><div class="related-post-meta"><time>2025-10-24</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">Map</span></div></div></a><a class="related-post-item" href="/article/11cc4180.html"><div class="related-post-title">高频面试题深入解析/ 周刊 02</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/42798c60.html"><div class="related-post-title">vue3+vuex4获取模块state中的值获取模块getters中的值</div><div class="related-post-meta"><time>2021-12-19</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/820a7312.html"><div class="related-post-title">正则匹配:密码，QQ号，邮箱email，手机号码新号段，生日</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/aeda5d77.html"><div class="related-post-title">前端面试之手写Promise</div><div class="related-post-meta"><time>2020-06-12</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/cd071ee9.html">https://xuehuayu.cn/article/cd071ee9.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/5fdacb38.html">React16免费视频教程（共28集）</a><a class="next" href="/article/c5c8f7b9.html">精读《React Hooks 最佳实践》</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

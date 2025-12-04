@@ -1,0 +1,340 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>实现双向绑定Proxy比defineproperty优劣如何 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">实现双向绑定Proxy比defineproperty优劣如何</h1><div class="post-meta"><span class="date">2019-09-29</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.5k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 18</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/7366770b.html#waline-comment"><span class="waline-comment-count" data-path="/article/7366770b.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.jianshu.com/p/2df6dcddb0d7</code><br><strong>双向绑定</strong>其实已经是一个老掉牙的问题了,只要涉及到MVVM框架就不得不谈的知识点,但它毕竟是Vue的三要素之一.<br><strong>Vue三要素</strong></p>
+<ul>
+<li>响应式: 例如如何监听数据变化,其中的实现方法就是我们提到的双向绑定</li>
+<li>模板引擎: 如何解析模板</li>
+<li>渲染: Vue如何将监听到的数据变化和解析后的HTML进行渲染</li>
+</ul>
+<p>可以实现双向绑定的方法有很多,KnockoutJS基于观察者模式的双向绑定,Ember基于数据模型的双向绑定,Angular基于脏检查的双向绑定,本篇文章我们重点讲面试中常见的基于<strong>数据劫持</strong>的双向绑定。</p>
+<span id="more"></span>
+
+<p>常见的基于数据劫持的双向绑定有两种实现,一个是目前Vue在用的<code>Object.defineProperty</code>,另一个是ES2015中新增的<code>Proxy</code>,而Vue的作者宣称将在Vue3.0版本后加入<code>Proxy</code>从而代替<code>Object.defineProperty</code>,通过本文你也可以知道为什么Vue未来会选择<code>Proxy</code>。</p>
+<blockquote>
+<p>严格来讲Proxy应该被称为『代理』而非『劫持』,不过由于作用有很多相似之处,我们在下文中就不再做区分,统一叫『劫持』。</p>
+</blockquote>
+<p>我们可以通过下图清楚看到以上两种方法在<strong>双向绑定</strong>体系中的关系.</p>
+<figure style="display: block; margin: 22px auto; text-align:
+center;">[图片上传中...(image-6f9b58-1526012269856-2)]
+
+<figcaption style="display: block; text-align: center; font-size: 1rem;
+line-height: 1.6; color: rgb(144, 144, 144); margin-top: 2px;"></figcaption>
+
+</figure>
+
+<blockquote>
+<p>基于数据劫持的当然还有已经凉透的<code>Object.observe</code>方法,已被废弃。<br><strong>提前声明:</strong> 我们没有对传入的参数进行及时判断而规避错误,仅仅对核心方法进行了实现.</p>
+</blockquote>
+<hr>
+<h3 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h3><ol>
+<li>基于数据劫持实现的双向绑定的特点</li>
+<li>基于Object.defineProperty双向绑定的特点</li>
+<li>基于Proxy双向绑定的特点</li>
+</ol>
+<hr>
+<h3 id="1-基于数据劫持实现的双向绑定的特点"><a href="#1-基于数据劫持实现的双向绑定的特点" class="headerlink" title="1.基于数据劫持实现的双向绑定的特点"></a>1.基于数据劫持实现的双向绑定的特点</h3><h4 id="1-1-什么是数据劫持"><a href="#1-1-什么是数据劫持" class="headerlink" title="1.1 什么是数据劫持"></a>1.1 什么是数据劫持</h4><p>数据劫持比较好理解,通常我们利用<code>Object.defineProperty</code>劫持对象的访问器,在属性值发生变化时我们可以获取变化,从而进行进一步操作。</p>
+<pre><code>// 这是将要被劫持的对象const data ={
+  name:&#39;&#39;,};functionsay(name){if(name ===&#39;古天乐&#39;){
+    console.log(&#39;给大家推荐一款超好玩的游戏&#39;);}elseif(name ===&#39;渣渣辉&#39;){
+    console.log(&#39;戏我演过很多,可游戏我只玩贪玩懒月&#39;);}else{
+    console.log(&#39;来做我的兄弟&#39;);} }// 遍历对象,对其属性值进行劫持
+Object.keys(data).forEach(function(key){
+  Object.defineProperty(data, key,{
+    enumerable:true,
+    configurable:true,get:function(){
+      console.log(&#39;get&#39;);},set:function(newVal){// 当属性值发生变化时我们可以进行额外操作
+      console.log(`大家好,我系${newVal}`);say(newVal);},});});
+
+data.name =&#39;渣渣辉&#39;;//大家好,我系渣渣辉//戏我演过很多,可游戏我只玩贪玩懒月
+</code></pre>
+<h4 id="1-2-数据劫持的优势"><a href="#1-2-数据劫持的优势" class="headerlink" title="1.2 数据劫持的优势"></a>1.2 数据劫持的优势</h4><p>目前业界分为两个大的流派,一个是以React为首的单向数据绑定,另一个是以Angular、Vue为主的双向数据绑定。</p>
+<blockquote>
+</blockquote>
+<p>其实三大框架都是既可以双向绑定也可以单向绑定,比如React可以手动绑定onChange和value实现双向绑定,也可以调用一些双向绑定库,Vue也加入了props这种单向流的api,不过都并非主流卖点。</p>
+<p>单向或者双向的优劣不在我们的讨论范围,我们需要讨论一下对比其他双向绑定的实现方法,数据劫持的优势所在。</p>
+<ol>
+<li>无需显示调用: 例如Vue运用数据劫持+发布订阅,直接可以通知变化并驱动视图,上面的例子也是比较简单的实现<code>data.name = &#39;渣渣辉&#39;</code>后直接触发变更,而比如Angular的脏检测则需要显示调用<code>markForCheck</code>(可以用zone.js避免显示调用,不展开),react需要显示调用<code>setState</code>。</li>
+<li></li>
+</ol>
+<p>可精确得知变化数据：还是上面的小例子，我们劫持了属性的setter,当属性值改变,我们可以精确获知变化的内容<code>newVal</code>,因此在这部分不需要额外的diff操作,否则我们只知道数据发生了变化而不知道具体哪些数据变化了,这个时候需要大量diff来找出变化值,这是额外性能损耗。</p>
+<h4 id="1-3-基于数据劫持双向绑定的实现思路"><a href="#1-3-基于数据劫持双向绑定的实现思路" class="headerlink" title="1.3 基于数据劫持双向绑定的实现思路"></a>1.3 基于数据劫持双向绑定的实现思路</h4><p><strong>数据劫持</strong>是双向绑定各种方案中比较流行的一种,最著名的实现就是Vue。</p>
+<p>基于数据劫持的双向绑定离不开<code>Proxy</code>与<code>Object.defineProperty</code>等方法对对象&#x2F;对象属性的”劫持”,我们要实现一个完整的双向绑定需要以下几个要点。</p>
+<ol>
+<li>利用<code>Proxy</code>或<code>Object.defineProperty</code>生成的Observer针对对象&#x2F;对象的属性进行”劫持”,在属性发生变化后通知订阅者</li>
+<li>解析器Compile解析模板中的<code>Directive</code>(指令)，收集指令所依赖的方法和数据,等待数据变化然后进行渲染</li>
+<li></li>
+</ol>
+<p>Watcher属于Observer和Compile桥梁,它将接收到的Observer产生的数据变化,并根据Compile提供的指令进行视图渲染,使得数据变化促使视图变化</p>
+<figure style="display: block; margin: 22px auto; text-align:
+center;">[图片上传中...(image-1f5ab-1526012269856-1)]
+
+<figcaption style="display: block; text-align: center; font-size: 1rem;
+line-height: 1.6; color: rgb(144, 144, 144); margin-top: 2px;"></figcaption>
+
+</figure>
+
+<blockquote>
+<p>我们看到，虽然Vue运用了数据劫持，但是依然离不开<strong>发布订阅</strong>的模式，之所以在系列2做了[Event</p>
+</blockquote>
+<p>Bus的实现](<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fjuejin.im%252Fpost%252F5ac2fb886fb9a028b86e328c),%E5%B0%B1%E6%98%AF%E5%9B%A0%E4%B8%BA%E6%88%91%E4%BB%AC%E4%B8%8D%E7%AE%A1%E5%9C%A8%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%BA%9B%E6%A1%86%E6%9E%B6%E7%9A%84%E5%8E%9F%E7%90%86%E8%BF%98%E6%98%AF%E4%B8%80%E4%BA%9B%E6%B5%81%E8%A1%8C%E5%BA%93%EF%BC%88%E4%BE%8B%E5%A6%82Redux%E3%80%81Vuex%EF%BC%89,%E5%9F%BA%E6%9C%AC%E4%B8%8A%E9%83%BD%E7%A6%BB%E4%B8%8D%E5%BC%80**%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85**%E6%A8%A1%E5%BC%8F,%E8%80%8C*Event*%E6%A8%A1%E5%9D%97%E5%88%99%E6%98%AF%E6%AD%A4%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%BB%8F%E5%85%B8%E5%AE%9E%E7%8E%B0,%E6%89%80%E4%BB%A5%E5%A6%82%E6%9E%9C%E4%B8%8D%E7%86%9F%E6%82%89**%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85**%E6%A8%A1%E5%BC%8F,%E5%BB%BA%E8%AE%AE%E8%AF%BB%E4%B8%80%E4%B8%8B%E7%B3%BB%E5%88%972%E7%9A%84%E6%96%87%E7%AB%A0%E3%80%82">https://link.jianshu.com?t=https%3A%2F%2Flink.juejin.im%2F%3Ftarget%3Dhttps%253A%252F%252Fjuejin.im%252Fpost%252F5ac2fb886fb9a028b86e328c),就是因为我们不管在学习一些框架的原理还是一些流行库（例如Redux、Vuex）,基本上都离不开**发布订阅**模式,而*Event*模块则是此模式的经典实现,所以如果不熟悉**发布订阅**模式,建议读一下系列2的文章。</a></p>
+<hr>
+<h3 id="2-基于Object-defineProperty双向绑定的特点"><a href="#2-基于Object-defineProperty双向绑定的特点" class="headerlink" title="2.基于Object.defineProperty双向绑定的特点"></a>2.基于Object.defineProperty双向绑定的特点</h3><p>关于<code>Object.defineProperty</code>的文章在网络上已经汗牛充栋,我们不想花过多时间在<code>Object.defineProperty</code>上面,本节我们主要讲解<code>Object.defineProperty</code>的特点,方便接下来与<code>Proxy</code>进行对比。</p>
+<blockquote>
+</blockquote>
+<p>对<code>Object.defineProperty</code>还不了解的请阅读<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fdeveloper.mozilla.org%252Fzh-CN%252Fdocs%252FWeb%252FJavaScript%252FReference%252FGlobal_Objects%252FObject%252FdefineProperty">文档</a></p>
+<p>两年前就有人写过基于<code>Object.defineProperty</code>实现的<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fsegmentfault.com%252Fa%252F1190000006599500">文章</a>,想深入理解<code>Object.defineProperty</code>实现的推荐阅读,本文也做了相关参考。</p>
+<blockquote>
+<p>上面我们推荐的文章为比较完整的实现(400行代码),我们在本节只提供一个极简版(20行)和一个简化版(150行)的实现,读者可以循序渐进地阅读。</p>
+</blockquote>
+<h4 id="2-1-极简版的双向绑定"><a href="#2-1-极简版的双向绑定" class="headerlink" title="2.1 极简版的双向绑定"></a>2.1 极简版的双向绑定</h4><p>我们都知道,<code>Object.defineProperty</code>的作用就是劫持一个对象的属性,通常我们对属性的<code>getter</code>和<code>setter</code>方法进行劫持,在对象的属性发生变化时进行特定的操作。</p>
+<p>我们就对对象<code>obj</code>的<code>text</code>属性进行劫持,在获取此属性的值时打印<code>&#39;get val&#39;</code>,在更改属性值的时候对DOM进行操作,这就是一个极简的双向绑定。</p>
+<pre><code>const obj ={};
+Object.defineProperty(obj,&#39;text&#39;,{get:function(){
+    console.log(&#39;get val&#39;);&amp;emsp;},set:function(newVal){
+    console.log(&#39;set val:&#39;+ newVal);
+    document.getElementById(&#39;input&#39;).value = newVal;
+    document.getElementById(&#39;span&#39;).innerHTML = newVal;} });const input = document.getElementById(&#39;input&#39;);
+input.addEventListener(&#39;keyup&#39;,function(e){
+  obj.text = e.target.value;})
+</code></pre>
+<p>在线示例<br><a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io%252Fxiaomuzhu%252Fpen%252FgzmEab%252F">极简版双向绑定</a><br>by Iwobi<br>(<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io%252Fxiaomuzhu">@xiaomuzhu</a>)<br>on<br><a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io">CodePen</a>.</p>
+<h4 id="2-2-升级改造"><a href="#2-2-升级改造" class="headerlink" title="2.2 升级改造"></a>2.2 升级改造</h4><p>我们很快会发现，这个所谓的<em>双向绑定</em>貌似并没有什么乱用。。。</p>
+<p>原因如下:</p>
+<ol>
+<li>我们只监听了一个属性,一个对象不可能只有一个属性,我们需要对对象每个属性进行监听。</li>
+<li></li>
+</ol>
+<p>违反开放封闭原则,我们如果了解<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fzh.wikipedia.org%252Fzh-hans%252F%2525E5%2525BC%252580%2525E9%252597%2525AD%2525E5%25258E%25259F%2525E5%252588%252599">开放封闭原则</a>的话,上述代码是明显违反此原则,我们每次修改都需要进入方法内部,这是需要坚决杜绝的。<br>3. 代码耦合严重,我们的数据、方法和DOM都是耦合在一起的，就是传说中的面条代码。</p>
+<p>那么如何解决上述问题？</p>
+<p>Vue的操作就是加入了<strong>发布订阅</strong>模式，结合<code>Object.defineProperty</code>的劫持能力，实现了可用性很高的双向绑定。</p>
+<p>首先，我们以<strong>发布订阅</strong>的角度看我们第一部分写的那一坨代码,会发现它的<em>监听</em>、<em>发布</em>和<em>订阅</em>都是写在一起的,我们首先要做的就是解耦。</p>
+<p>我们先实现一个订阅发布中心，即消息管理员（Dep）,它负责储存订阅者和消息的分发,不管是订阅者还是发布者都需要依赖于它。</p>
+<pre><code>  let uid =0;// 用于储存订阅者并发布消息class Dep {constructor(){// 设置id,用于区分新Watcher和只改变属性值后新产生的Watcherthis.id = uid++;// 储存订阅者的数组this.subs =[];}// 触发target上的Watcher中的addDep方法,参数为dep的实例本身depend(){
+      Dep.target.addDep(this);}// 添加订阅者addSub(sub){this.subs.push(sub);}notify(){// 通知所有的订阅者(Watcher)，触发订阅者的相应逻辑处理this.subs.forEach(sub =&gt; sub.update());} }// 为Dep类设置一个静态属性,默认为null,工作时指向当前的Watcher
+  Dep.target =null;
+</code></pre>
+<p>现在我们需要实现监听者(Observer),用于监听属性值的变化。</p>
+<pre><code>// 监听者,监听对象属性值的变化classObserver{constructor(value){this.value=value;this.walk(value);}// 遍历属性值并监听walk(value){
+      Object.keys(value).forEach(key =&gt;this.convert(key,value[key]));}// 执行监听的具体方法convert(key, val){defineReactive(this.value, key, val);} }
+
+  function defineReactive(obj, key, val){const dep =newDep();// 给当前属性的值添加监听let chlidOb =observe(val);
+    Object.defineProperty(obj, key,{
+      enumerable: true,
+      configurable: true,get:()=&gt;{// 如果Dep类存在target属性，将其添加到dep实例的subs数组中// target指向一个Watcher实例，每个Watcher都是一个订阅者// Watcher实例在实例化过程中，会读取data中的某个属性，从而触发当前get方法if(Dep.target){
+          dep.depend();}return val;},set: newVal =&gt;{if(val === newVal)return;
+        val = newVal;// 对新值进行监听
+        chlidOb =observe(newVal);// 通知所有订阅者，数值被改变了
+        dep.notify();},});}
+
+  function observe(value){// 当值不存在，或者不是复杂数据类型时，不再需要继续深入监听if(!value||typeofvalue!==&#39;object&#39;){return;}returnnewObserver(value);}
+</code></pre>
+<p>那么接下来就简单了,我们需要实现一个订阅者(Watcher)。</p>
+<pre><code>class Watcher {constructor(vm, expOrFn, cb){this.depIds ={};// hash储存订阅者的id,避免重复的订阅者this.vm = vm;// 被订阅的数据一定来自于当前Vue实例this.cb = cb;// 当数据更新时想要做的事情this.expOrFn = expOrFn;// 被订阅的数据this.val =this.get();// 维护更新之前的数据}// 对外暴露的接口，用于在订阅的数据被更新时，由订阅者管理员(Dep)调用update(){this.run();}addDep(dep){// 如果在depIds的hash中没有当前的id,可以判断是新Watcher,因此可以添加到dep的数组中储存// 此判断是避免同id的Watcher被多次储存if(!this.depIds.hasOwnProperty(dep.id)){
+        dep.addSub(this);this.depIds[dep.id]= dep;} }run(){constval=this.get();
+      console.log(val);if(val!==this.val){this.val =val;this.cb.call(this.vm,val);} }get(){// 当前订阅者(Watcher)读取被订阅数据的最新更新后的值时，通知订阅者管理员收集当前订阅者
+      Dep.target =this;constval=this.vm._data[this.expOrFn];// 置空，用于下一个Watcher使用
+      Dep.target =null;returnval;} }
+</code></pre>
+<p>那么我们最后完成Vue,将上述方法挂载在Vue上。</p>
+<pre><code>class Vue {constructor(options ={}){// 简化了$options的处理this.$options = options;// 简化了对data的处理
+      let data=(this._data =this.$options.data);// 将所有data最外层属性代理到Vue实例上
+      Object.keys(data).forEach(key =&gt;this._proxy(key));// 监听数据observe(data);}// 对外暴露调用订阅者的接口，内部主要在指令中使用订阅者
+    $watch(expOrFn, cb){
+      new Watcher(this, expOrFn, cb);}_proxy(key){
+      Object.defineProperty(this, key,{
+        configurable: true,
+        enumerable: true,get:()=&gt;this._data[key],set:val=&gt;{this._data[key]=val;},});} }
+</code></pre>
+<p>看下效果:</p>
+<figure style="display: block; margin: 22px auto; text-align:
+center;">[图片上传中...(image-1da193-1526012269854-0)]
+
+<figcaption style="display: block; text-align: center; font-size: 1rem;
+line-height: 1.6; color: rgb(144, 144, 144); margin-top: 2px;"></figcaption>
+
+</figure>
+
+<p>在线示例<br><a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io%252Fxiaomuzhu%252Fpen%252FjxBRgj%252F">双向绑定实现—无漏洞版</a><br>by Iwobi<br>(<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io%252Fxiaomuzhu">@xiaomuzhu</a>)<br>on<br><a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io">CodePen</a>.</p>
+<p>至此,一个简单的双向绑定算是被我们实现了。</p>
+<h4 id="2-3-Object-defineProperty的缺陷"><a href="#2-3-Object-defineProperty的缺陷" class="headerlink" title="2.3 Object.defineProperty的缺陷"></a>2.3 Object.defineProperty的缺陷</h4><p>其实我们升级版的双向绑定依然存在漏洞,比如我们将属性值改为数组。</p>
+<pre><code>let demo =newVue({
+  data: {list:[1],},});constlist= document.getElementById(&#39;list&#39;);const btn = document.getElementById(&#39;btn&#39;);
+
+btn.addEventListener(&#39;click&#39;,function(){
+  demo.list.push(1);});const render = arr =&gt;{const fragment = document.createDocumentFragment();for(let i =0; i &lt; arr.length; i++){const li = document.createElement(&#39;li&#39;);
+    li.textContent = arr[i];
+    fragment.appendChild(li);}list.appendChild(fragment);};// 监听数组,每次数组变化则触发渲染函数,然而...无法监听
+demo.$watch(&#39;list&#39;,list=&gt;render(list));setTimeout(function(){alert(demo.list);},5000,);
+</code></pre>
+<p>在线示例<br><a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io%252Fxiaomuzhu%252Fpen%252FNMjKxV%252F">双向绑定-数组漏洞</a><br>by Iwobi<br>(<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io%252Fxiaomuzhu">@xiaomuzhu</a>)<br>on<br><a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io">CodePen</a>.</p>
+<p>是的,<code>Object.defineProperty</code>的第一个缺陷,无法监听数组变化。<br>然而<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcn.vuejs.org%252Fv2%252Fguide%252Flist.html%2523%2525E6%252595%2525B0%2525E7%2525BB%252584%2525E6%25259B%2525B4%2525E6%252596%2525B0%2525E6%2525A3%252580%2525E6%2525B5%25258B">Vue的文档</a>提到了Vue是可以检测到数组变化的，但是只有以下八种方法,<code>vm.items[indexOfItem] = newValue</code>这种是无法检测的。</p>
+<pre><code>push()pop()shift()unshift()splice()sort()reverse()
+</code></pre>
+<p>其实作者在这里用了一些奇技淫巧,把无法监听数组的情况hack掉了,以下是方法示例。</p>
+<pre><code>const aryMethods =[&#39;push&#39;,&#39;pop&#39;,&#39;shift&#39;,&#39;unshift&#39;,&#39;splice&#39;,&#39;sort&#39;,&#39;reverse&#39;];const arrayAugmentations =[];
+
+aryMethods.forEach((method)=&gt;{// 这里是原生Array的原型方法let original =Array.prototype[method];// 将push, pop等封装好的方法定义在对象arrayAugmentations的属性上// 注意：是属性而非原型属性
+    arrayAugmentations[method]=function(){
+        console.log(&#39;我被改变啦!&#39;);// 调用对应的原生方法并返回结果returnoriginal.apply(this, arguments);};});let list =[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;];// 将我们要监听的数组的原型指针指向上面定义的空数组对象// 别忘了这个空数组的属性上定义了我们封装好的push等方法
+list.__proto__ = arrayAugmentations;
+list.push(&#39;d&#39;);// 我被改变啦！ 4// 这里的list2没有被重新定义原型指针，所以就正常输出let list2 =[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;];
+list2.push(&#39;d&#39;);// 4
+</code></pre>
+<p>由于只针对了八种方法进行了hack,所以其他数组的属性也是检测不到的,其中的坑很多,可以阅读上面提到的文档。</p>
+<p>我们应该注意到在上文中的实现里,我们多次用遍历方法遍历对象的属性，这就引出了<code>Object.defineProperty</code>的第二个缺陷,只能劫持对象的属性,因此我们需要对每个对象的每个属性进行遍历，如果属性值也是对象那么需要深度遍历,显然能劫持一个完整的对象是更好的选择。</p>
+<pre><code>Object.keys(value).forEach(key=&gt;this.convert(key, value[key]));
+</code></pre>
+<hr>
+<h3 id="3-Proxy实现的双向绑定的特点"><a href="#3-Proxy实现的双向绑定的特点" class="headerlink" title="3.Proxy实现的双向绑定的特点"></a>3.Proxy实现的双向绑定的特点</h3><p>Proxy在ES2015规范中被正式发布,它在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写,我们可以这样认为,Proxy是<code>Object.defineProperty</code>的全方位加强版,具体的文档可以查看<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=http%253A%252F%252Fes6.ruanyifeng.com%252F%2523docs%252Fproxy">此处</a>;</p>
+<h4 id="3-1-Proxy可以直接监听对象而非属性"><a href="#3-1-Proxy可以直接监听对象而非属性" class="headerlink" title="3.1 Proxy可以直接监听对象而非属性"></a>3.1 Proxy可以直接监听对象而非属性</h4><p>我们还是以上文中用<code>Object.defineProperty</code>实现的极简版双向绑定为例,用Proxy进行改写。</p>
+<pre><code>const input = document.getElementById(&#39;input&#39;);const p = document.getElementById(&#39;p&#39;);const obj ={};const newObj =newProxy(obj,{get:function(target, key, receiver){
+    console.log(`getting ${key}!`);return Reflect.get(target, key, receiver);},set:function(target, key, value, receiver){
+    console.log(target, key, value, receiver);if(key ===&#39;text&#39;){
+      input.value = value;
+      p.innerHTML = value;}return Reflect.set(target, key, value, receiver);},});
+
+input.addEventListener(&#39;keyup&#39;,function(e){
+  newObj.text = e.target.value;});
+</code></pre>
+<p>在线示例<br><a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io%252Fxiaomuzhu%252Fpen%252FKRmwRE%252F">Proxy版</a><br>by Iwobi<br>(<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io%252Fxiaomuzhu">@xiaomuzhu</a>)<br>on<br><a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io">CodePen</a>.</p>
+<p>我们可以看到,Proxy直接可以劫持整个对象,并返回一个新对象,不管是操作便利程度还是底层功能上都远强于<code>Object.defineProperty</code>。</p>
+<h4 id="3-2-Proxy可以直接监听数组的变化"><a href="#3-2-Proxy可以直接监听数组的变化" class="headerlink" title="3.2 Proxy可以直接监听数组的变化"></a>3.2 Proxy可以直接监听数组的变化</h4><p>当我们对数组进行操作(push、shift、splice等)时，会触发对应的方法名称和<em>length</em>的变化，我们可以借此进行操作,以上文中<code>Object.defineProperty</code>无法生效的列表渲染为例。</p>
+<pre><code>const list = document.getElementById(&#39;list&#39;);const btn = document.getElementById(&#39;btn&#39;);// 渲染列表const Render ={// 初始化init:function(arr){const fragment = document.createDocumentFragment();for(let i =0; i &lt; arr.length; i++){const li = document.createElement(&#39;li&#39;);
+      li.textContent = arr[i];
+      fragment.appendChild(li);}
+    list.appendChild(fragment);},// 我们只考虑了增加的情况,仅作为示例change:function(val){const li = document.createElement(&#39;li&#39;);
+    li.textContent = val;
+    list.appendChild(li);},};// 初始数组const arr =[1,2,3,4];// 监听数组const newArr =newProxy(arr,{get:function(target, key, receiver){
+    console.log(key);return Reflect.get(target, key, receiver);},set:function(target, key, value, receiver){
+    console.log(target, key, value, receiver);if(key !==&#39;length&#39;){
+      Render.change(value);}return Reflect.set(target, key, value, receiver);},});// 初始化
+window.onload=function(){
+    Render.init(arr);}// push数字
+btn.addEventListener(&#39;click&#39;,function(){
+  newArr.push(6);});
+</code></pre>
+<p>在线示例<br><a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io%252Fxiaomuzhu%252Fpen%252FzjwGoN%252F">Proxy列表渲染</a><br>by Iwobi<br>(<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io%252Fxiaomuzhu">@xiaomuzhu</a>)<br>on<br><a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fcodepen.io">CodePen</a>.</p>
+<p>很显然,Proxy不需要那么多hack（即使hack也无法完美实现监听）就可以无压力监听数组的变化,我们都知道,标准永远优先于hack。</p>
+<h4 id="3-3-Proxy的其他优势"><a href="#3-3-Proxy的其他优势" class="headerlink" title="3.3 Proxy的其他优势"></a>3.3 Proxy的其他优势</h4><p>Proxy有多达13种拦截方法,不限于apply、ownKeys、deleteProperty、has等等是<code>Object.defineProperty</code>不具备的。</p>
+<p>Proxy返回的是一个新对象,我们可以只操作新的对象达到目的,而<code>Object.defineProperty</code>只能遍历对象属性直接修改。</p>
+<p>Proxy作为新标准将受到浏览器厂商重点持续的性能优化，也就是传说中的新标准的性能红利。</p>
+<p>当然,Proxy的劣势就是兼容性问题,而且无法用polyfill磨平,因此Vue的作者才声明需要等到下个大版本(3.0)才能用Proxy重写。</p>
+<h3 id="往期"><a href="#往期" class="headerlink" title="往期"></a>往期</h3><ul>
+<li>[面试官系列(1):</li>
+</ul>
+<p>如何实现深克隆](<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fjuejin.im%252Fpost%252F5abb55ee6fb9a028e33b7e0a">https://link.jianshu.com?t=https%3A%2F%2Flink.juejin.im%2F%3Ftarget%3Dhttps%253A%252F%252Fjuejin.im%252Fpost%252F5abb55ee6fb9a028e33b7e0a</a>)</p>
+<ul>
+<li>[面试官系列(2): Event</li>
+</ul>
+<p>Bus的实现](<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fjuejin.im%252Fpost%252F5ac2fb886fb9a028b86e328c">https://link.jianshu.com?t=https%3A%2F%2Flink.juejin.im%2F%3Ftarget%3Dhttps%253A%252F%252Fjuejin.im%252Fpost%252F5ac2fb886fb9a028b86e328c</a>)</p>
+<ul>
+<li>[面试官系列(3):</li>
+</ul>
+<p>前端路由的实现](<a href="https://link.jianshu.com/?t=https://link.juejin.im/?target=https%253A%252F%252Fjuejin.im%252Fpost%252F5ac61da66fb9a028c71eae1b">https://link.jianshu.com?t=https%3A%2F%2Flink.juejin.im%2F%3Ftarget%3Dhttps%253A%252F%252Fjuejin.im%252Fpost%252F5ac61da66fb9a028c71eae1b</a>)</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/de24b120.html"><div class="related-post-title">预览img图片文件pdf文件如何鉴权配置请求头token</div><div class="related-post-meta"><time>2025-11-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">Frontend</span><span class="category-badge">PDF</span><span class="category-badge">Image</span><span class="category-badge">请求头</span></div></div></a><a class="related-post-item" href="/article/996a092f.html"><div class="related-post-title">如何优雅处理前端异常？</div><div class="related-post-meta"><time>2020-01-13</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/b3d63d9d.html"><div class="related-post-title">Webpack 5 升级实验</div><div class="related-post-meta"><time>2019-10-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/68c9c2c2.html"><div class="related-post-title">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</div><div class="related-post-meta"><time>2025-11-21</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">Frontend</span><span class="category-badge">Redis</span><span class="category-badge">Vercel</span></div></div></a><a class="related-post-item" href="/article/8fefb501.html"><div class="related-post-title">Webpack 是怎样运行的?</div><div class="related-post-meta"><time>2019-12-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/7366770b.html">https://xuehuayu.cn/article/7366770b.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/e1804bda.html">2019年Web前端入门的自学路线</a><a class="next" href="/article/da25e36f.html">随机点名</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

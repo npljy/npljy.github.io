@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>“云”端的语雀：用 JavaScript 全栈打造商业级应用 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">“云”端的语雀：用 JavaScript 全栈打造商业级应用</h1><div class="post-meta"><span class="date">2020-01-13</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 5.9k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 20</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/7547e1a1.html#waline-comment"><span class="waline-comment-count" data-path="/article/7547e1a1.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.yuque.com/seeconf/2020/dn74yy</code><br>语雀是一个专业的云端知识库，面向个人和团队，提供与众不同的知识管理，打造轻松流畅的工作协同，它提供各种格式的在线文档（富文本、表格、设计稿等）编辑能力，支持实时在线多人协同编辑，数据云端保存不丢失。而语雀与其他文档工具最大的不同是，<strong>它通过知识库来对文档进行组织，让知识创作者更好的管理知识。</strong></p>
+<span id="more"></span>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1577972531308-839b9c87-e344-4b99-a1ed-85108407cc83.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<h2 id="语雀技术架构演进"><a href="#语雀技术架构演进" class="headerlink" title="语雀技术架构演进"></a>语雀技术架构演进</h2><h3 id="原型阶段"><a href="#原型阶段" class="headerlink" title="原型阶段"></a>原型阶段</h3><p>语雀诞生于 2016<br>年，当时蚂蚁金融云需要一个工具来承载它的文档。当时负责的技术同学利用业余时间，开始搭建这个文档工具。项目的初期，没有任何人员和资源支持，同时也为了快速验证原型，技术选型上选择了最低成本的方案。</p>
+<p>底层服务完全基于体验技术部内部提供的 BaaS 服务和容器托管平台：</p>
+<ul>
+<li>Object 服务：一个类 MongoDB 的数据存储服务；</li>
+<li>File 服务：阿里云 OSS 的基础上封装的一个文件存储服务；</li>
+<li>DockerLab：一个容器托管平台；</li>
+</ul>
+<p>这些服务和平台都是基于 Node.js 实现，专门给内部创新型应用使用，也正是由于有这些降低创新成本的内部服务，才给工程师们提供了更好的创新环境。</p>
+<p>应用层服务端自然而然的选用了体验技术部开源的 Node.js Web 框架 Egg（蚂蚁内部的封装 Chair），通过一个单体 Web<br>应用实现服务端。应用层客户端也选用了 React 技术栈，结合内部的 antd，并采用 CodeMirror 实现了一个功能强大、体验优雅的 markdown<br>在线编辑器。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1577972519829-93cfa3eb-ade5-4f5e-bca4-34bfcb24af46.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>这时可以算作语雀的“原型阶段”，它仅仅是一个工程师的业余项目，采用内部专为创新应用提供的 BaaS<br>服务和一系列的开源技术解决方案，验证了在线文档工具这个产品原型。</p>
+<blockquote>
+<p>PS：当时我还不在语雀团队，但是巧的是我却在给语雀提供 Object、File 等 BaaS 服务和 Egg.js Web 框架的支持。</p>
+</blockquote>
+<h3 id="内部服务阶段"><a href="#内部服务阶段" class="headerlink" title="内部服务阶段"></a>内部服务阶段</h3><p>随着在线文档工具得到了团队内部的认可，语雀的目标已经不仅仅是金融云的文档工具，而是志在替代 confluence<br>等竞品，成为阿里内部十万员工的知识管理平台。语雀要面向知识创作者，只提供 Markdown<br>编辑器肯定无法让非技术人员更高效的使用语雀。尽管有不少真爱粉因为语雀开始学习甚至爱上了<br>Markdown，但是我们仍然义无反顾的踏入了富文本编辑器领域的深坑。同时和 Word<br>等富文本编辑器不同，我们选择了更“Web”的路线，在富文本编辑器中加入了公式、文本绘图、思维导图等特色功能。而随着语雀在知识管理领域的不断探索，知识管理的三层结构（团队、知识库、文档）开始成型。在此之上的协作、分享、搜索与消息动态等功能越来越复杂单纯的依靠<br>BaaS 服务已经无法满足语雀的业务需求了。</p>
+<p>为了应对业务发展带来的挑战，我们主要从下面几个点进行改造：</p>
+<ul>
+<li>BaaS 服务虽然使用简单成本低，但是它们提供的功能不足以满足语雀业务的发展，同时稳定性上也有不足。所以我们将底层服务由 BaaS 替换成了内部的 IaaS</li>
+</ul>
+<p>服务（MySQL、OSS、缓存、搜索等服务）。</p>
+<ul>
+<li>Web 层仍然采用了 Node.js 与 Egg 框架，但是业务层借鉴 rails 社区的实践开始变成了一个大型单体应用，通过引入 ORM</li>
+</ul>
+<p>构建数据模型层，让代码的分层更清晰；</p>
+<ul>
+<li>前端编辑器从 codeMirror 迁移到 Slate。为了更好的实现语雀编辑器的功能，我们内部 fork 了 Slate</li>
+</ul>
+<p>进行深入开发，同时也自定义了一个独立的内容存储格式，以提供更高效的数据处理和更好的兼容性。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578212013042-91daae18-7550-44e3-9a03-cd24424c1732.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>在内部服务阶段，语雀已经成为了一个正式的产品，和蚂蚁的其他项目没有什么区别了，通过在阿里内部的磨炼，语雀的产品形态基本定型。</p>
+<h3 id="商业化阶段"><a href="#商业化阶段" class="headerlink" title="商业化阶段"></a>商业化阶段</h3><p>随着语雀的内部影响力越来越大，一些离职出去创业的阿里校友们开始找到玉伯：“语雀挺好用的，有没有考虑商业化之后让外面的公司也能够用起来？”<br>经过小半年的酝酿和重构，18 年初，语雀开始正式对外提供服务，进行商业化。</p>
+<p>当一个应用走出公司内到商业化环境中，面临的技术挑战一下子就变大了。最核心的知识创作管理部分的功能越来越复杂，表格、思维导图等新格式的加入，多人实时协同的需求对编辑器技术提出了更高的挑战。而为了更好的服务企业用户与个人用户，<br>语雀在企业服务、会员服务等方面也投入了很大精力。在业务快速发展的同时，服务商业化对质量、安全和稳定性也提出了更高的要求。</p>
+<p>为了应对业务发展，语雀的架构也随之发生了演进：</p>
+<p>我们将底层的依赖完全上云，全部迁移到了阿里云上，阿里云不仅仅提供了基础的存储、计算能力，同时也提供了更丰富的高级服务，同时在稳定性上也有保障。</p>
+<ul>
+<li>丰富的云计算基础服务，保障语雀的服务端可以选用最适合语雀业务的的存储、队列、搜索引擎等基础服务；</li>
+<li>更多人工智能服务给语雀的产品带来了更多的可能性，包括 OCR 识图、智能翻译等服务，最终都直接转化成为了语雀的特色服务；</li>
+</ul>
+<p>而在应用层，语雀的服务端依然还是以一个基于 Egg 框架的大型的 Node.js web<br>应用为主。但是随着功能越来越多，也开始将一些相对比较独立的服务从主服务中拆出去，可以把这些服务分成几类：</p>
+<ul>
+<li>微服务类：例如多人实时协同服务，由于它相对独立，且长连接服务不适合频繁发布，所以我们将其拆成了一个独立的微服务，保持其稳定性；</li>
+<li>任务服务类：像语雀提供的大量本地文件预览服务，会产生一些任务比较消耗资源、依赖复杂。我们将其从主服务中剥离，可以避免不可控的依赖和资源消耗对主服务造成影响；</li>
+<li>函数计算类：类似 plantuml 预览、mermaid</li>
+</ul>
+<p>预览等任务，对响应时间的敏感度不高，且依赖可以打包到阿里云函数计算中，我们会将其放到函数计算中运行，既省钱又安全；</p>
+<p>随着编辑器越来越复杂，在 slate 的基础上进行开发遇到的问题越来越多。最终语雀还是走上了自研编辑器的道路，基于浏览器的 contenteditable<br>实现了富文本编辑器，通过 canvas 实现了表格编辑器，通过 SVG 实现了思维导图编辑器。</p>
+<blockquote>
+<p>语雀富文本编辑器相关的介绍，可以看看 Lake Editor</p>
+</blockquote>
+<p>之父隆昊的分享：<a target="_blank" rel="noopener" href="https://myslide.cn/slides/21863">富文本编辑器的技术演进</a>。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1577982295865-28daa2bb-8ac5-432b-9144-60b584c49bf3.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>语雀的这个阶段（也是现在所处的阶段）是商业化阶段，但是我们仍然保持了一个很小的团队，通过 JavaScript<br>全栈进行研发。底层的服务全面上云，借力云服务打造语雀的特色功能。同时为企业级用户和个人知识工作者者提供知识创作和管理工具。</p>
+<h2 id="JavaScript-全栈"><a href="#JavaScript-全栈" class="headerlink" title="JavaScript 全栈"></a>JavaScript 全栈</h2><p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578020746870-82f9f2ea-c0a5-4c3d-86b6-6b4366e294be.png?x-oss-process=image/resize,w_409" alt="image.png"></p>
+<p>在社交网络上，大家好像对 JavaScript 全栈的看法都比较负面，“样样通，样样松”可能是大家听到全栈工程师这个名词后的第一印象。那为什么语雀选择了<br>JavaScript 全栈的方向呢？</p>
+<h3 id="JavaScript-全栈与产品工程师"><a href="#JavaScript-全栈与产品工程师" class="headerlink" title="JavaScript 全栈与产品工程师"></a>JavaScript 全栈与产品工程师</h3><p><strong>在语雀，我们并不将用 JavaScript 全栈进行开发的工程师定义为全栈工程师，而是</strong><strong>“一专多能”型的****产品工程师</strong>：</p>
+<ul>
+<li>他们是产品的“技术合伙人”，他们对产品有 owner</li>
+</ul>
+<p>感，和产品经理一起参与产品讨论设计，从技术的角度上对产品设计方案提出建议，独立的完成产品功能的全栈研发，并跟踪发布后的产品结果。</p>
+<ul>
+<li>同时他们也是某一个技术领域的领域专家，例如有人可能是服务端领域的专家、测试领域的专家、前端构建领域的专家、CSS</li>
+</ul>
+<p>领域的专家。他们可以用自己的专业领域知识来优化团队研发工具链，提升产品研发效率。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578022059173-6f744678-2dbb-4ebe-96c1-e3a542e18cbe.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>在语雀，产品工程师们的产品研发流程是这样的：</p>
+<ul>
+<li>在产品设计阶段，产品工程师就会参与进去进行讨论，最终会产出一份 final design</li>
+</ul>
+<h2 id="的产品设计稿。由于前期产品工程师参与充分讨论，一般此处定下的产品设计稿到后期的研发过程中不会遇到技术上的问题；"><a href="#的产品设计稿。由于前期产品工程师参与充分讨论，一般此处定下的产品设计稿到后期的研发过程中不会遇到技术上的问题；" class="headerlink" title="的产品设计稿。由于前期产品工程师参与充分讨论，一般此处定下的产品设计稿到后期的研发过程中不会遇到技术上的问题；"></a>的产品设计稿。由于前期产品工程师参与充分讨论，一般此处定下的产品设计稿到后期的研发过程中不会遇到技术上的问题；</h2><p>**随后会在语雀上进行文档化的系统分析设计。**会在语雀上发起异步的评审。一些大的技术方案会有其他的领域专家加入进来一起进行评审，确保将所有的技术难点都梳理清楚；</p>
+<ul>
+<li><p>系统设计清晰后，进入研发阶段；</p>
+</li>
+<li></li>
+</ul>
+<h2 id="对所有的代码，都需要有自动化测试覆盖。对所有新增代码和修改的业务逻辑都需要有完全覆盖的单元测试，对关键链路的功能同时也要提供端到端测试。编写完自动化测试是进入代码评审前的必备流程。"><a href="#对所有的代码，都需要有自动化测试覆盖。对所有新增代码和修改的业务逻辑都需要有完全覆盖的单元测试，对关键链路的功能同时也要提供端到端测试。编写完自动化测试是进入代码评审前的必备流程。" class="headerlink" title="对所有的代码，都需要有自动化测试覆盖。对所有新增代码和修改的业务逻辑都需要有完全覆盖的单元测试，对关键链路的功能同时也要提供端到端测试。编写完自动化测试是进入代码评审前的必备流程。"></a><strong>对所有的代码，都需要有自动化测试覆盖</strong>。对所有新增代码和修改的业务逻辑都需要有完全覆盖的单元测试，对关键链路的功能同时也要提供端到端测试。编写完自动化测试是进入代码评审前的必备流程。</h2><p><strong>阶段性的功能研发完成、测试编写完善后会发起异步的代码评审</strong>。会邀请相关业务的负责人和对应的一些领域专家来进行代码评审。从业务逻辑的正确性，安全性，可维护性等多个角度来进行代码评审。</p>
+<ul>
+<li>最终在发布上线时，必须遵循三板斧原则：<strong>可灰度、可应急、可监控</strong>。避免功能变更可能带来的 bug 影响到大量用户。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578022286126-a86c8d97-8ecc-496b-bb9f-80165ea41ce3.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<blockquote>
+<p>语雀是如何进行全栈 JavaScript</p>
+</blockquote>
+<p>测试的呢？感兴趣的同学可以看看语雀团队大前端自动化测试大牛达峰老师的分享：<a target="_blank" rel="noopener" href="https://www.yuque.com/preview/yuque/0/2020/pdf/84135/1578380717315-17b401af-78d5-4eaf-a4ed-b3a93ccb91d2.pdf">大前端测试的思考和在语雀的实践</a></p>
+<p>通过 JavaScript 全栈，语雀团队可以更高效、高质量的的完成产品研发：</p>
+<ul>
+<li>从代码层面上来说，有大量的代码可以复用，以编辑器举例，它不仅仅可以在 Web 端使用，也可以在桌面端使用。同时许多数据处理的能力还可以在服务端使用。</li>
+<li>从产品研发效率上来说，全栈研发减少了大量沟通成本，在语雀当前的阶段是非常高效的。而 JavaScript</li>
+</ul>
+<p>全栈避免了开发者在不同的语言中进行切换，不用考虑前端使用的 lodash &#x2F; moment 等工具类在其他语言中应该用什么，大大提升全栈的研发效率。</p>
+<ul>
+<li>最后从工程师角度来看，全栈研发让工程师有机会深度参与到产品研发的整个流程中，大家会自发的去思考产品有什么优化点，从技术上能帮助产品做什么。例如语雀最近新上的</li>
+</ul>
+<p>OCR 搜图功能，就是语雀的全栈工程师自发从技术预研到产品落地完成整个产品优化的。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/gif/84135/1578212584972-d9b5aba5-f69d-4e59-9647-f914bf569923.gif" alt="1575255478411-8581a7ad-b76c-4b56-8b5c-ffc9f4338a28.gif"></p>
+<h3 id="JavaScript-全栈与-Node-js"><a href="#JavaScript-全栈与-Node-js" class="headerlink" title="JavaScript 全栈与 Node.js"></a>JavaScript 全栈与 Node.js</h3><p>说到 JavaScript 全栈，有一个绕不过去的技术就是 Node.js。作为一个与前端结合紧密的服务端运行时，基本上就成为了全栈的代言人。那<br>Node.js 是不是真的是一个适合大型商业化项目的语言呢？大家对它都有颇多质疑：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578212599081-64e14731-cef4-4156-aa70-f49c1e97f9f8.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>其实随着 JS 语言的发展，许多问题已经得到了解决，例如 Async Function<br>的出现，可以让开发者以同步的方式编写异步代码，理解起来更简单，异常处理也变简单了。同时随着社区的进一步完善，大量高质量的工具模块、框架涌现出来。语雀的服务端部分基于<br>Egg 框架，已经集成了大量 Web 开发需要的模块和服务，同时基于 Async Function 编程模型也更加简单。TypeScript<br>的出现也打消了许多人对 JavaScript 进行大型项目开发的疑虑。除此之外，语雀还有一些其他的方式来保障代码质量和可维护性（语雀甚至是一个纯<br>JavaScript 项目，没有一行 TypeScript 代码）。</p>
+<p>语雀做的第一件事情就是确定核心系统和外部系统的边界。通过六边形架构（也叫做端口适配器架构），我们把语雀核心系统和外界系统和用户之间的交互固定下来。通过“端口”的形式，来确定输入和输出。外部系统通过“适配器”来将系统对接到语雀暴露的端口之上，只需要按照“端口”定义来实现，外部系统可以自由替换。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578214644595-987bbc0c-bba9-4710-af59-5dd838541e19.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>在这个模型下，Controller 就是语雀暴露给用户接口的 HTTP 适配器。在 Controller<br>中，我们对用户请求参数进行格式校验和转换，检查用户权限，并格式化输出。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578214650855-900e1eee-c8d5-4132-949f-15e28b900666.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>我们定义好语雀与第三方平台和服务之间的交互方式（一般是一系列方法），通过适配器，将不同环境的不同服务封装成统一的方法，并在调用时记录好调用日志。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578214662213-6954bcb5-3f0b-4cb7-9cc3-186726571be6.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>数据模型层即是数据层的 Model，以 Doc 模型举例，它的 meta 信息数据被存储在了 MySQL 中，而文档正文数据被加密后存储在 OSS<br>中。对于语雀核心的业务逻辑来说，完全不感知底层的存储在哪里。更进一步来说，只要语雀是使用 SQL 和数据库进行交互，底层数据可以无缝迁移到 OceanBase<br>等其他支持完整 SQL 语法的数据库中，即使有少量修改也可以在 Model 层封装掉。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578214674364-216e9ea2-792f-4353-8274-80920ed83fe9.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>最终以一次文档发布举例，用户通过调用 HTTP 接口与语雀进行交互，数据会通过 Model 层写入到存储中，包括 MySQL 和<br>OSS，更新文档缓存。同时出发异步消息给其他系统，触发钉钉的<br>WebHook，并将数据同步到搜索引擎中。这些和外界系统的交互通过适配器封装之后各司其职，参数转换、权限校验、日志记录，不仅确保核心逻辑的精简，也让系统调用链路跟踪更加简单。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578035407025-92edc698-721c-4d0c-89bb-6560192b4d15.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<h3 id="混合应用架构"><a href="#混合应用架构" class="headerlink" title="混合应用架构"></a>混合应用架构</h3><p>当系统发展到一定程度后，到底是应该继续在大单体应用上加功能，还是拆分成微服务呢？这两种架构既然存在，肯定有各自的优劣，具体选择那种架构形式，应该是与当前的业务规模和团队分布决定的。所以语雀的技术架构随着语雀的业务形态也变成了一个混合式的技术架构。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578036329226-398129ea-c681-4d88-bf96-cbd58513297c.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>语雀的主服务是一个大型的 Node.js 服务，集中了所有的应用业务逻辑。而在主服务之外，还有一些不同形态的其他服务。</p>
+<ul>
+<li>微服务：一些独立而稳定的功能模块，或者有额外部署架构需求的服务，会通过微服务的形式独立部署，系统间暂时通过 HTTP</li>
+</ul>
+<p>接口进行交互。例如实时协同服务，由于其自身比较独立稳定，而且是长连接服务，不能频繁发布重启，所以将其部署成了一个独立的微服务。</p>
+<ul>
+<li>任务集群：一些 CPU</li>
+</ul>
+<p>密集型的任务，或者依赖了一些复杂的第三方依赖的服务，会放到一个独立的任务集群中。例如各种文件预览服务，可能依赖到了其他服务，且需要消耗大量计算成本，放到任务集群通过队列消除并发后最为合适。</p>
+<ul>
+<li>函数计算：一些对响应时间比较高且可以函数化的服务，我们会尽量迁移到阿里云的函数计算，例如plantuml、mermaid 等文本绘图服务。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578041987857-4c1d300c-40cf-4cd2-afeb-d85454db4300.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>以 mermaid 的渲染举例。用户输入一段 mermaid 代码调用语雀，语雀调用一个部署在阿里云函数计算的函数，在函数中运行 puppeteer 渲染成<br>svg 返回。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578042048278-37709315-51d0-4e89-8061-65d44573f7f6.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>为什么要特别把 Serverless 单独拿出来说呢？还记得之前说 Node.js 是单线程，不适合 CPU 密集型任务么？由于 Serverless<br>的出现，我们可以将这些存在安全风险的，消耗大量 CPU 计算的任务都迁移到函数计算上。它运行在沙箱环境中，不用担心用户的恶意代码造成安全风险，同时将这些 CPU<br>密集型的任务从主服务中剥离，避免出现并发时阻塞主服务。按需付费的方式也可以大大节约成本，不需要为低频功能场景部署一个常驻服务。所以我们会尽量的把这类服务都迁移到<br>Serverless 上（如阿里云函数计算）。</p>
+<h3 id="语言之外的通用领域"><a href="#语言之外的通用领域" class="headerlink" title="语言之外的通用领域"></a>语言之外的通用领域</h3><p>除了语言之外，任何的商业化系统还有更多需要考虑的方面，其中最重要的两点可能就是安全性和稳定性了。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578043152391-b267be82-1266-4339-85dd-e7a7135d0202.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>一个系统从前端、服务端到底层的依赖都存在着各种各样的安全风险：</p>
+<ul>
+<li>前端安全风险：XSS、跳转钓鱼、跨站请求等</li>
+<li>服务端安全风险：水平权限问题、未授权访问、敏感信息泄露、SSRF、SQL 注入等</li>
+<li>云服务的安全风险：短信&#x2F;邮件轰炸、数据泄露风险、内容安全等</li>
+</ul>
+<p>这些安全问题想要解决基本都没有银弹，只能一个个单独处理，但是有一些基本的原则：</p>
+<ul>
+<li><p>不要信任用户的任何输入</p>
+</li>
+<li><p>任何渲染富文本的地方都需要防范 XSS，内容也可能并不是通过 IDE 输入的；</p>
+</li>
+<li><p>要在服务端执行用户的代码一定要放在沙箱中；</p>
+</li>
+<li><p>要从服务端请求用户传递的资源，一定要经过 SSRF 过滤；</p>
+</li>
+<li><p>沉淀标准的编码范式来处理安全风险，且需要在 Code Review 中重点关注</p>
+</li>
+<li><p>所有接口都必须有权限校验；</p>
+</li>
+<li><p>响应序列化方法过滤敏感信息；</p>
+</li>
+<li><p>不允许拼接 SQL；</p>
+</li>
+</ul>
+<p>语雀从商业化一开始就和安全团队通力协作，从内部的安全意识培训、内部安全团队测试，到内部的红蓝攻防、外部的白帽子渗透测试，安全是一场持久战。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578044202506-17f0155f-46c5-4719-909c-16f633bd545a.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>为了保障语雀的稳定性，我们从前端到服务端和云服务上都做了许多工作，和安全一样，稳定性也是一个从前到后的长期工程。语雀的稳定性保障主要在两个维度：</p>
+<ul>
+<li><p>保障服务可用性：从架构设计上要杜绝单点，底层的数据都需要进行容灾和备份，服务需要多单元、可用区部署。同时避免引入不必要的强依赖；</p>
+</li>
+<li></li>
+</ul>
+<p>异常可监控和追溯：从前端的业务埋点日志、异常日志监控，到服务端的全链路日志跟踪和采集，系统性能监控和分析。最终我们可以达到异常可及时感知和追溯，性能问题可以定位分析；</p>
+<p>什么叫做避免引入不必要的强依赖呢？以语雀的场景举例，MySQL 就是一个无法去除的强依赖，而缓存不应该是一个强依赖，但是最早语雀的 session<br>是存储在缓存（Redis）中的，一旦 Redis 集群出问题，用户资料无法获取就导致用户无法登录。这就把缓存变成了一个强依赖。所以我们将 session<br>存储放到了 MySQL 中，Redis<br>就变成了一个弱依赖，它挂了系统还能正常运行。另一个例子，语雀前段时间上线了多人实时协同编辑的功能，而在这个功能上线之前，是通过文档加锁的方式避免多个人同时编辑同一篇文档的。然而多人实时协同引入了另一个服务，一旦实时协同服务挂了，用户就无法编辑文档了，它又变成了语雀系统的一个强依赖，为了解决他，我们在用户连接协同服务失败的时候，自动切换到老的锁模式。这样协同服务也变成了语雀的一个弱依赖。</p>
+<h2 id="语雀如何选择技术栈"><a href="#语雀如何选择技术栈" class="headerlink" title="语雀如何选择技术栈"></a>语雀如何选择技术栈</h2><p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578213447619-0caf242d-def6-4d64-97b0-537bad7db64b.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<p>语雀这几年一步步发展过来，背后的技术一直在演进，但是始终遵循了几条原则：</p>
+<ol>
+<li></li>
+</ol>
+<p>技术栈选型要匹配产品发展阶段。产品在不同的阶段对技术提出的要求是不一样的，越前期，对迭代效率的要求越高，商业化规模化之后，对稳定性、性能的要求就会变高。不需要一上来就用最先进的技术方案，而是需要和产品阶段一起考虑和权衡。<br>2. 技术栈选型要结合团队成员的技术背景。语雀选择 JavaScript 全栈的原因是孵化语雀的团队，大部分都是 JavaScript 背景的程序员，同时<br>Node.js 在蚂蚁也算是一等公民，配套的设施相对完善。<br>3.<br>最重要的一点是，不论选择什么技术栈，安全、稳定、可维护（扩展）都是要考虑清楚的。用什么语言、用什么服务会变化，但是这些基础的安全意识、稳定性意识，如何编写可维护的代码，都是决定项目能否长期发展下去的重要因素。</p>
+<h2 id="纸上得来终觉浅，绝知此事要躬行"><a href="#纸上得来终觉浅，绝知此事要躬行" class="headerlink" title="纸上得来终觉浅，绝知此事要躬行"></a>纸上得来终觉浅，绝知此事要躬行</h2><p><img src="https://cdn.nlark.com/yuque/0/2020/png/84135/1578214233434-8ad83fa4-c363-4470-b035-c4909b19572c.png?x-oss-process=image/resize,w_746" alt="image.png"></p>
+<h2 id="视频-Slide"><a href="#视频-Slide" class="headerlink" title="视频 &amp;&amp; Slide"></a>视频 &amp;&amp; Slide</h2><p>我的演讲视频和 PPT 都已经上传到：<a target="_blank" rel="noopener" href="https://www.yuque.com/seeconf/2020/slide">SEE Conf<br>的语雀专栏</a>，欢迎下载，同时也欢迎到<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/363807174">知乎问答</a>跟我互动。</p>
+<blockquote>
+<p>SEE Conf</p>
+</blockquote>
+<p>是蚂蚁金服体验科技大会，是一个“看见者的大会”，希望技术能看见设计的价值，希望设计能看见技术的力量，彼此看见中互相融合成长，一起让世界更美好。</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/11cc4180.html"><div class="related-post-title">高频面试题深入解析/ 周刊 02</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/189bc751.html"><div class="related-post-title">CSS实现一个粒子动效的按钮</div><div class="related-post-meta"><time>2020-01-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/fd8c55d1.html"><div class="related-post-title">uni-app自定义tabbar导航栏</div><div class="related-post-meta"><time>2021-08-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/a0d00813.html"><div class="related-post-title">移动端 H5 相关问题汇总</div><div class="related-post-meta"><time>2020-02-17</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/8bca9418.html"><div class="related-post-title">Promise的源码实现(完美符合PromiseA+规范)</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/7547e1a1.html">https://xuehuayu.cn/article/7547e1a1.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/1215277f.html">css容易使人蒙圈的几个经典问题</a><a class="next" href="/article/fe3985be.html">前端应该知道的 15个 JavaScript 实用程序库</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

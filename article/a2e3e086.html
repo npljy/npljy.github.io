@@ -1,0 +1,416 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>可靠React组件设计的7个准则之SRP | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">可靠React组件设计的7个准则之SRP</h1><div class="post-meta"><span class="date">2019-09-29</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.5k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 13</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/a2e3e086.html#waline-comment"><span class="waline-comment-count" data-path="/article/a2e3e086.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/42</code><br><code>翻译：刘小夕</code><br><code>原文链接：https://dmitripavlutin.com/7-architectural-attributes-of-a-reliable-react-component/</code></p>
+<p>原文的篇幅<strong>非常</strong>长，不过内容太过于吸引我，还是忍不住要翻译出来。此篇文章对编写可重用和可维护的React组件非常有帮助。但因为篇幅实在太长，我不得不进行了分割，本篇文章重点阐述<br><code>SRP</code>，即单一职责原则。</p>
+<p>我喜欢React组件式开发方式。你可以将复杂的用户界面分割为一个个组件，利用组件的可重用性和抽象的DOM操作。</p>
+<p>基于组件的开发是高效的：一个复杂的系统是由专门的、易于管理的组件构建的。然而，只有设计良好的组件才能确保组合和复用的好处。</p>
+<p>尽管应用程序很复杂，但为了满足最后期限和意外变化的需求，你必须不断地走在架构正确性的细线上。你必须将组件分离为专注于单个任务，并经过良好测试。</p>
+<span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/e0466af2704b7c0b63dbe09ce745685905625aea/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f372f313663366332393930653932323737353f773d3131393426683d36373026663d6a70656726733d3638313831"><img src="https://camo.githubusercontent.com/e0466af2704b7c0b63dbe09ce745685905625aea/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f372f313663366332393930653932323737353f773d3131393426683d36373026663d6a70656726733d3638313831" alt="xuehuayu.cn"></a></p>
+<p>不幸的是，遵循错误的路径总是更加容易：编写具有许多职责的大型组件、紧密耦合组件、忘记单元测试。这些增加了技术债务，使得修改现有功能或创建新功能变得越来越困难。</p>
+<blockquote>
+<p>编写React应用程序时，我经常问自己：</p>
+</blockquote>
+<ul>
+<li>如何正确构造组件？</li>
+<li>在什么时候，一个大的组件应该拆分成更小的组件？</li>
+<li>如何设计防止紧密耦合的组件之间的通信？</li>
+</ul>
+<p>幸运的是，可靠的组件具有共同的特性。让我们来研究这7个有用的标准(本文只阐述 <code>SRP</code>，剩余准则正在途中)，并将其详细到案例研究中。</p>
+<h3 id="单一职责"><a href="#单一职责" class="headerlink" title="单一职责"></a>单一职责</h3><blockquote>
+<p>当一个组件只有一个改变的原因时，它有一个单一的职责。</p>
+</blockquote>
+<p>编写React组件时要考虑的基本准则是单一职责原则。单一职责原则(缩写：<code>SRP</code>)要求组件有一个且只有一个变更的原因。</p>
+<p>组件的职责可以是呈现列表，或者显示日期选择器，或者发出 <code>HTTP</code><br>请求，或者绘制图表，或者延迟加载图像等。你的组件应该只选择一个职责并实现它。当你修改组件实现其职责的方式（例如，更改渲染的列表的数量限制），它有一个更改的原因。</p>
+<p>为什么只有一个理由可以改变很重要？因为这样组件的修改隔离并且受控。单一职责原则制了组件的大小，使其集中在一件事情上。集中在一件事情上的组件便于编码、修改、重用和测试。</p>
+<blockquote>
+<p>下面我们来举几个例子</p>
+</blockquote>
+<p><strong>实例1：一个组件获取远程数据，相应地，当获取逻辑更改时，它有一个更改的原因。</strong></p>
+<p>发生变化的原因是：</p>
+<ul>
+<li>修改服务器URL</li>
+<li>修改响应格式</li>
+<li>要使用其他HTTP请求库</li>
+<li>或仅与获取逻辑相关的任何修改。</li>
+</ul>
+<p><strong>示例2：表组件将数据数组映射到行组件列表，因此在映射逻辑更改时有一个原因需要更改。</strong></p>
+<p>发生变化的原因是：</p>
+<ul>
+<li>你需要限制渲染行组件的数量（例如，最多显示25行）</li>
+<li>当没有要显示的项目时，要求显示提示信息“列表为空”</li>
+<li>或仅与数组到行组件的映射相关的任何修改。</li>
+</ul>
+<p>你的组件有很多职责吗？如果答案是“是”，则按每个单独的职责将组件分成若干块。</p>
+<p>如果您发现SRP有点模糊，请阅读<a target="_blank" rel="noopener" href="https://8thlight.com/blog/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html">本文</a>。</p>
+<p>在项目早期阶段编写的单元将经常更改，直到达到发布阶段。这些更改通常要求组件在隔离状态下易于修改：这也是 SRP 的目标。</p>
+<h4 id="1-1-多重职责陷阱"><a href="#1-1-多重职责陷阱" class="headerlink" title="1.1 多重职责陷阱"></a>1.1 多重职责陷阱</h4><p>当一个组件有多个职责时，就会发生一个常见的问题。乍一看，这种做法似乎是无害的，并且工作量较少：</p>
+<ul>
+<li>你立即开始编码：无需识别职责并相应地规划结构</li>
+<li>一个大的组件可以做到这一切：不需要为每个职责创建组成部分</li>
+<li>无拆分-无开销：无需为拆分组件之间的通信创建 <code>props</code> 和 <code>callbacks</code></li>
+</ul>
+<p>这种幼稚的结构在开始时很容易编码。但是随着应用程序的增加和变得复杂，在以后的修改中会出现困难。同时实现多个职责的组件有许多更改的原因。现在出现的主要问题是：出于某种原因更改组件会无意中影响同一组件实现的其它职责。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/f7e7bdcc886c056fe73619eb67f45f1e9a101443/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663366365653830643463333131643f773d3130313426683d3134303026663d6a70656726733d313838393638"><img src="https://camo.githubusercontent.com/f7e7bdcc886c056fe73619eb67f45f1e9a101443/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663366365653830643463333131643f773d3130313426683d3134303026663d6a70656726733d313838393638" alt="xuehuayu.cn"></a></p>
+<p>不要关闭电灯开关，因为它同样作用于电梯。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/a4ed6a87c4e6c7cfea71dc3f2100740a24646856/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663366430323531343130386433653f773d32303026683d32303026663d6a70656726733d34323334"><img src="https://camo.githubusercontent.com/a4ed6a87c4e6c7cfea71dc3f2100740a24646856/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663366430323531343130386433653f773d32303026683d32303026663d6a70656726733d34323334" alt="xuehuayu.cn"></a></p>
+<p>这种设计很<strong>脆弱</strong>。意外的副作用是很难预测和控制的。</p>
+<p>例如，<code>&lt;ChartAndForm&gt;</code> 同时有两个职责，绘制图表，并处理为该图表提供数据的表单。<code>&lt;ChartandForm&gt;</code><br>就会有两个更改原因：绘制图表和处理表单。</p>
+<p>当你更改表单字段（例如，将 <code>&lt;input&gt;</code> 修改为 <code>&lt;select&gt;</code><br>时，你无意中中断图表的渲染。此外，图表实现是不可重用的，因为它与表单细节耦合在一起。</p>
+<p>解决多重责任问题需要将 <code>&lt;ChartAndForm&gt;</code> 分割为两个组件：<code>&lt;Chart&gt;</code><br>和<code>&lt;Form&gt;</code>。每个组件只有一个职责：绘制图表或处理表单。组件之间的通信是通过<code>props</code> 实现。</p>
+<p>多重责任问题的最坏情况是所谓的上帝组件（上帝对象的类比）。上帝组件倾向于了解并做所有事情。你可能会看到它名为<br><code>&lt;Application&gt;</code>、<code>&lt;Manager&gt;</code> 、<code>&lt;Bigcontainer&gt;</code> 或 <code>&lt;Page&gt;</code>，代码超过500行。</p>
+<p>在组合的帮助下使其符合SRP，从而分解上帝组件。(组合（composition）是一种通过将各组件联合在一起以创建更大组件的方式。组合是 React 的核心。)</p>
+<h4 id="1-2-案例研究：使组件只有一个职责"><a href="#1-2-案例研究：使组件只有一个职责" class="headerlink" title="1.2 案例研究：使组件只有一个职责"></a>1.2 案例研究：使组件只有一个职责</h4><p>设想一个组件向一个专门的服务器发出 <code>HTTP</code> 请求，以获取当前天气。成功获取数据时，该组件使用响应来展示天气信息：</p>
+<pre><code>importaxiosfrom&#39;axios&#39;;
+// 问题: 一个组件有多个职责classWeatherextendsComponent {
+    constructor(props) {
+        super(props);
+        this.state= { temperature:&#39;N/A&#39;, windSpeed:&#39;N/A&#39; };
+    }
+
+    render() {
+        const { temperature, windSpeed } =this.state;
+        return (
+            &lt;div className=&quot;weather&quot;&gt;&lt;div&gt;Temperature: {temperature}°C&lt;/div&gt;&lt;div&gt;Wind: {windSpeed}km/h&lt;/div&gt;&lt;/div&gt;
+        );
+    }
+
+    componentDidMount() {
+        axios.get(&#39;http://weather.com/api&#39;).then(function (response) {
+            const { current } =response.data;
+            this.setState({
+                temperature:current.temperature,
+                windSpeed:current.windSpeed
+            })
+        });
+    }
+}
+</code></pre>
+<p>在处理类似的情况时，问问自己：是否必须将组件拆分为更小的组件？通过确定组件可能会如何根据其职责进行更改，可以最好地回答这个问题。</p>
+<p><strong>这个天气组件有两个改变原因：</strong></p>
+<ol>
+<li><p><code>componentDidMount()</code> 中的 <code>fetch</code> 逻辑：服务器URL或响应格式可能会改变。</p>
+</li>
+<li><p><code>render()</code> 中的天气展示：组件显示天气的方式可以多次更改。</p>
+</li>
+</ol>
+<p>解决方案是将 <code>&lt;Weather&gt;</code> 分为两个组件：每个组件只有一个职责。命名为 <code>&lt;WeatherFetch&gt;</code> 和 <code>&lt;WeatherInfo&gt;</code>。</p>
+<p><code>&lt;WeatherFetch&gt;</code> 组件负责获取天气、提取响应数据并将其保存到 <code>state</code> 中。它改变原因只有一个就是获取数据逻辑改变。</p>
+<pre><code>importaxiosfrom&#39;axios&#39;;
+// 解决措施: 组件只有一个职责就是请求数据classWeatherFetchextendsComponent {
+    constructor(props) {
+        super(props);
+        this.state= { temperature:&#39;N/A&#39;, windSpeed:&#39;N/A&#39; };
+    }
+
+    render() {
+        const { temperature, windSpeed } =this.state;
+        return (
+            &lt;WeatherInfo temperature={temperature} windSpeed={windSpeed} /&gt;
+        );
+    }
+
+    componentDidMount() {
+        axios.get(&#39;http://weather.com/api&#39;).then(function (response) {
+            const { current } =response.data;
+            this.setState({
+                temperature:current.temperature,
+                windSpeed:current.windSpeed
+            });
+        });
+    }
+}
+</code></pre>
+<p>这种结构有什么好处？</p>
+<p>例如，你想要使用 <code>async/await</code> 语法来替代 <code>promise</code> 去服务器获取响应。更改原因：修改获取逻辑</p>
+<pre><code>// 改变原因: 使用 async/await 语法classWeatherFetchextendsComponent {
+    // ..... //asynccomponentDidMount() {
+        constresponse=awaitaxios.get(&#39;http://weather.com/api&#39;);
+        const { current } =response.data;
+        this.setState({
+            temperature:current.temperature,
+            windSpeed:current.windSpeed
+        });
+    }
+}
+</code></pre>
+<p>因为 <code>&lt;WeatherFetch&gt;</code> 只有一个更改原因：修改 <code>fetch</code> 逻辑，所以对该组件的任何修改都是隔离的。使用 <code>async/await</code><br>不会直接影响天气的显示。</p>
+<p><code>&lt;WeatherFetch&gt;</code> 渲染 <code>&lt;WeatherInfo&gt;</code>。后者只负责显示天气，改变原因只可能是视觉显示改变。</p>
+<pre><code>// 解决方案: 组件只有一个职责，就是显示天气functionWeatherInfo({ temperature, windSpeed }) {
+    return (
+        &lt;div className=&quot;weather&quot;&gt;&lt;div&gt;Temperature: {temperature}°C&lt;/div&gt;&lt;div&gt;Wind: {windSpeed} km/h&lt;/div&gt;&lt;/div&gt;
+    );
+}
+</code></pre>
+<p>让我们更改<code>&lt;WeatherInfo&gt;</code>，如不显示 <code>“wind:0 km/h”</code> 而是显示 <code>“wind:calm”</code>。这就是天气视觉显示发生变化的原因：</p>
+<pre><code>// 改变原因: 无风时的显示functionWeatherInfo({ temperature, windSpeed }) {
+    constwindInfo= windSpeed ===0?&#39;calm&#39;:`${windSpeed} km/h`;
+    return (
+        &lt;div className=&quot;weather&quot;&gt;&lt;div&gt;Temperature: {temperature}°C&lt;/div&gt;&lt;div&gt;Wind: {windInfo}&lt;/div&gt;&lt;/div&gt;
+    );
+}
+</code></pre>
+<p>同样，对 <code>&lt;WeatherInfo&gt;</code> 的修改是隔离的，不会影响 <code>&lt;WeatherFetch&gt;</code> 组件。</p>
+<p><code>&lt;WeatherFetch&gt;</code> 和 <code>&lt;WeatherInfo&gt;</code><br>有各自的职责。一种组件的变化对另一种组件的影响很小。这就是单一职责原则的作用：修改隔离，对系统的其他组件产生影响很轻微并且可预测。</p>
+<h4 id="1-3-案例研究：HOC-偏好单一责任原则"><a href="#1-3-案例研究：HOC-偏好单一责任原则" class="headerlink" title="1.3 案例研究：HOC 偏好单一责任原则"></a>1.3 案例研究：HOC 偏好单一责任原则</h4><p>按职责使用分块组件的组合并不总是有助于遵循单一责任原则。另外一种有效实践是高阶组件(缩写为 <code>HOC</code>)</p>
+<blockquote>
+<p>高阶组件是一个接受一个组件并返回一个新组件的函数。</p>
+</blockquote>
+<p><code>HOC</code> 的一个常见用法是为封装的组件增加新属性或修改现有的属性值。这种技术称为属性代理：</p>
+<pre><code>functionwithNewFunctionality(WrappedComponent) {
+    returnclassNewFunctionalityextendsComponent {
+        render() {
+            constnewProp=&#39;Value&#39;;
+            constpropsProxy= {
+                ...this.props,
+                // 修改现有属性:
+                ownProp:this.props.ownProp+&#39; was modified&#39;,
+                // 增加新属性:
+                newProp
+            };
+            return&lt;WrappedComponent {...propsProxy} /&gt;;
+        }
+    }
+}
+constMyNewComponent=withNewFunctionality(MyComponent);
+</code></pre>
+<p>你还可以通过控制输入组件的渲染过程从而控制渲染结果。这种 <code>HOC</code> 技术被称为渲染劫持：</p>
+<pre><code>functionwithModifiedChildren(WrappedComponent) {
+    returnclassModifiedChildrenextendsWrappedComponent {
+        render() {
+            constrootElement=super.render();
+            constnewChildren= [
+                ...rootElement.props.children,
+                // 插入一个元素&lt;div&gt;New child&lt;/div&gt;
+            ];
+            returncloneElement(
+                rootElement,
+                rootElement.props,
+                newChildren
+            );
+        }
+    }
+}
+constMyNewComponent=withModifiedChildren(MyComponent);
+</code></pre>
+<p>如果您想深入了解HOCS实践，我建议您阅读“深入响应高阶组件”。</p>
+<p>让我们通过一个例子来看看HOC的属性代理技术如何帮助分离职责。</p>
+<p>组件 <code>&lt;PersistentForm&gt;</code> 由 <code>input</code> 输入框和按钮 <code>save to storage</code> 组成。更改输入值后，点击 <code>save to storage</code>按钮将其写入到<code>localStorage</code> 中。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/eb3fae12442daf48d1e1d6efd42e73274ef798af/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663366364306337656537656333393f773d3134313026683d35323626663d6a70656726733d3536373432"><img src="https://camo.githubusercontent.com/eb3fae12442daf48d1e1d6efd42e73274ef798af/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f382f382f313663366364306337656537656333393f773d3134313026683d35323626663d6a70656726733d3536373432" alt="xuehuayu.cn"></a></p>
+<p><code>input</code> 的状态在 <code>handlechange(event)</code> 方法中更新。点击按钮，值将保存到本地存储，在 <code>handleclick()</code> 中处理：</p>
+<pre><code>classPersistentFormextendsComponent {
+    constructor(props) {
+        super(props);
+        this.state= { inputValue:localStorage.getItem(&#39;inputValue&#39;) };
+        this.handleChange=this.handleChange.bind(this);
+        this.handleClick=this.handleClick.bind(this);
+    }
+
+    render() {
+        const { inputValue } =this.state;
+        return (
+            &lt;div className=&quot;persistent-form&quot;&gt;&lt;input type=&quot;text&quot; value={inputValue}
+                    onChange={this.handleChange} /&gt;&lt;button onClick={this.handleClick}&gt;Save to storage&lt;/button&gt;&lt;/div&gt;
+        );
+    }
+
+    handleChange(event) {
+        this.setState({
+            inputValue:event.target.value
+        });
+    }
+
+    handleClick() {
+        localStorage.setItem(&#39;inputValue&#39;, this.state.inputValue);
+    }
+}
+</code></pre>
+<p>遗憾的是： <code>&lt;PersistentForm&gt;</code> 有2个职责：管理表单字段；将输入只保存中 <code>localStorage</code>。</p>
+<p>让我们重构一下 <code>&lt;PersistentForm&gt;</code> 组件，使其只有一个职责：展示表单字段和附加的事件处理程序。它不应该知道如何直接使用存储：</p>
+<pre><code>classPersistentFormextendsComponent {
+    constructor(props) {
+        super(props);
+        this.state= { inputValue:props.initialValue };
+        this.handleChange=this.handleChange.bind(this);
+        this.handleClick=this.handleClick.bind(this);
+    }
+
+    render() {
+        const { inputValue } =this.state;
+        return (
+            &lt;div className=&quot;persistent-form&quot;&gt;&lt;input type=&quot;text&quot; value={inputValue}
+                    onChange={this.handleChange} /&gt;&lt;button onClick={this.handleClick}&gt;Save to storage&lt;/button&gt;&lt;/div&gt;
+        );
+    }
+
+    handleChange(event) {
+        this.setState({
+            inputValue:event.target.value
+        });
+    }
+
+    handleClick() {
+        this.props.saveValue(this.state.inputValue);
+    }
+}
+</code></pre>
+<p>组件从属性初始值接收存储的输入值，并使用属性函数 <code>saveValue(newValue)</code> 来保存输入值。这些<code>props</code> 由使用属性代理技术的<br><code>withpersistence()</code> HOC提供。</p>
+<p>现在 <code>&lt;PersistentForm&gt;</code> 符合 <code>SRP</code>。更改的唯一原因是修改表单字段。</p>
+<p>查询和保存到本地存储的职责由 <code>withPersistence()</code> HOC承担：</p>
+<pre><code>functionwithPersistence(storageKey, storage) {
+    returnfunction (WrappedComponent) {
+        returnclassPersistentComponentextendsComponent {
+            constructor(props) {
+                super(props);
+                this.state= { initialValue:storage.getItem(storageKey) };
+            }
+
+            render() {
+                return (
+                    &lt;WrappedComponent
+                        initialValue={this.state.initialValue}
+                        saveValue={this.saveValue}
+                        {...this.props}
+                    /&gt;
+                );
+            }
+
+            saveValue(value) {
+                storage.setItem(storageKey, value);
+            }
+        }
+    }
+}
+</code></pre>
+<p><code>withPersistence()</code>是一个 <code>HOC</code>，其职责是持久的。它不知道有关表单域的任何详细信息。它只聚焦一个工作：为传入的组件提供<br><code>initialValue</code> 字符串和 <code>saveValue()</code> 函数。</p>
+<p>将 <code>&lt;PersistentForm&gt;</code> 和 <code>withpersistence()</code><br>一起使用可以创建一个新组件<code>&lt;LocalStoragePersistentForm&gt;</code>。它与本地存储相连，可以在应用程序中使用：</p>
+<pre><code>constLocalStoragePersistentForm=withPersistence(&#39;key&#39;, localStorage)(PersistentForm);
+
+constinstance=&lt;LocalStoragePersistentForm /&gt;;
+</code></pre>
+<p>只要 <code>&lt;PersistentForm&gt;</code> 正确使用 <code>initialValue</code> 和 <code>saveValue()</code>属性，对该组件的任何修改都不能破坏<br><code>withPersistence()</code> 保存到存储的逻辑。</p>
+<p>反之亦然：只要 <code>withPersistence()</code> 提供正确的 <code>initialValue</code> 和 <code>saveValue()</code>，对 <code>HOC</code><br>的任何修改都不能破坏处理表单字段的方式。</p>
+<p>SRP的效率再次显现出来：修改隔离，从而减少对系统其他部分的影响。</p>
+<p>此外，代码的可重用性也会增加。你可以将任何其他表单 <code>&lt;MyOtherForm&gt;</code> 连接到本地存储：</p>
+<pre><code>constLocalStorageMyOtherForm=withPersistence(&#39;key&#39;, localStorage)(MyOtherForm);
+
+constinstance=&lt;LocalStorageMyOtherForm /&gt;;
+</code></pre>
+<p>你可以轻松地将存储类型更改为 <code>session storage</code>：</p>
+<pre><code>constSessionStoragePersistentForm=withPersistence(&#39;key&#39;, sessionStorage)(PersistentForm);
+
+constinstance=&lt;SessionStoragePersistentForm /&gt;;
+</code></pre>
+<p>初始版本 <code>&lt;PersistentForm&gt;</code> 没有隔离修改和可重用性好处，因为它错误地具有多个职责。</p>
+<p>在不好分块组合的情况下，属性代理和渲染劫持的 <code>HOC</code> 技术可以使得组件只有一个职责。</p>
+<blockquote>
+</blockquote>
+<p><strong>谢谢各位小伙伴愿意花费宝贵的时间阅读本文，如果本文给了您一点帮助或者是启发，请不要吝啬你的赞和Star，您的肯定是我前进的最大动力。</strong><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog">https://github.com/YvetteLau/Blog</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/a4a6ee64.html"><div class="related-post-title">面试常考手写代码学习技巧总结</div><div class="related-post-meta"><time>2020-01-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/16554c83.html"><div class="related-post-title">VS Code 成主宰、Vue 备受热捧！2019 前端开发趋势必读</div><div class="related-post-meta"><time>2019-12-18</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/61d22d90.html"><div class="related-post-title">2019前端面试题及答案（含JavaScript、css）</div><div class="related-post-meta"><time>2019-12-09</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/44ff8f55.html"><div class="related-post-title">面试:在浏览器输入URL回车之后发生了什么？（超详细版）</div><div class="related-post-meta"><time>2019-12-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/afc1abf6.html"><div class="related-post-title">antd的select选择框选项水平横向排列</div><div class="related-post-meta"><time>2020-04-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/a2e3e086.html">https://xuehuayu.cn/article/a2e3e086.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/c2e25d1a.html">可靠React组件设计的7个准则之封装</a><a class="next" href="/article/ff225eef.html">细说JS异步发展历程</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

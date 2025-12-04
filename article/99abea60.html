@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>修复Web应用程序中的内存泄漏 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">修复Web应用程序中的内存泄漏</h1><div class="post-meta"><span class="date">2020-03-23</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.6k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 12</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/99abea60.html#waline-comment"><span class="waline-comment-count" data-path="/article/99abea60.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/2cgZewQAiayUWpU7QjTnjQ</code><br>当我们把web应用从服务端渲染变成了单页面(SPA)的时候，我们突然发现我们需要去关心ui的阻塞、 电脑的风扇旋转速率、<br>手机的耗电程度等等一系列的用户设备问题,而这些问题并不存在或者很少存在于服务端渲染的时代，是的，我们成功的在提升用户交互的同时又创造了其他的问题。</p>
+<span id="more"></span>
+<p>这些问题的其中一个原因就是<br><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651232816&amp;idx=2&amp;sn=949c22914887fe5b639f6ac7b9ec59c2&amp;chksm=bd4943b48a3ecaa205079823523343737f9709349fb15e56ca77a62bb3897e5372fa5f12f3fe&amp;scene=21#wechat_redirect">内存泄漏</a>,<br>一些代码质量较差的SPA很容易消耗MB甚至GB的内存,甚至不断的占用资源,即使应用切换到后台也是如此,最终整个应用会变的卡顿,甚至是页面崩溃.</p>
+<p><img src="https://store.xuehuayu.cn/store/20200323/202003231116-1.webp" alt="xuehuayu.cn"></p>
+<p>当然，ssr渲染的网站也可能会造成服务器的内存泄漏。但是，极不可能造成客户端的内存泄漏，因为每次在页面之间切换时时候，浏览器都会清除之前页面的内存。</p>
+<p>其实，很少有web相关的文章来讲述一些内存泄漏的问题，然而，我确信大部分的SPA应用都会造成内存泄漏，除非这个团队有足够的基础设施来捕获并修复这些问题，在javascript中，很容易意外的分配一些内存但是没有及时的释放它。</p>
+<p>那么，为什么关于web内存泄漏的文章少之又少，我猜测的原因有下面几点：</p>
+<ul>
+<li><p>缺少用户反馈：大多数用户都不会在使用应用的时候去查看任务管理器的，除非是应用崩溃或者是明显的卡顿，否则，你是不可能收到用户的反馈的。</p>
+</li>
+<li><p>缺少数据：Chrome团队并没有提供网站使用内存的数据，应用本身也不会去收集这些信息。</p>
+</li>
+<li><p>缺少工具：目前的工具很难去发现和修复内存泄漏问题。</p>
+</li>
+<li><p>用户缺少关注：由于浏览器很擅长杀死占用过多内存的页面，因此用户常常把页面问题归咎于浏览器而非应用本身。</p>
+</li>
+</ul>
+<p>在这篇文章中，我会分享一些我在解决Web应用程序中的内存泄漏方面的经验，并提供一些示例来说明如何有效地跟踪它们。</p>
+<h4 id="内存泄漏剖析"><a href="#内存泄漏剖析" class="headerlink" title="内存泄漏剖析"></a>内存泄漏剖析</h4><p>现在大部分的前端框架比如：React、Vue、Svelte都是基于组件这种范式来开发的，在这种模式下，常见的内存泄漏方式是这样的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;message&#x27;</span>, <span class="variable language_">this</span>.<span class="property">onMessage</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样就引入了内存泄漏的风险，如果你在组件调用 addEventListener 一些全局对象（比如window. 或者body标签）,并且忘记使用<br>removeEventListener 来销毁,当组件被卸载时，这些事件仍保存在内存中，这样就创造了一个内存泄漏。</p>
+<p>更糟糕的是，由于this.onMessage绑定到了this，你在泄漏这个组件的同时，<br>这个组件的子组件以及相关的dom都会被泄漏出去，子组件有它的子组件，周而复始，很快就变的很糟糕了， 正确的解决办法是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Mount phase</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="property">onMessage</span> = <span class="variable language_">this</span>.<span class="property">onMessage</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>);</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;message&#x27;</span>, <span class="variable language_">this</span>.<span class="property">onMessage</span>);</span><br><span class="line"><span class="comment">// Unmount phase</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;message&#x27;</span>, <span class="variable language_">this</span>.<span class="property">onMessage</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其中需要注意的是，我们保存了函数的绑定来保证你传递到<strong>addEventListener</strong> 和 removeEventListener 中的函数必须是一致的。</p>
+<h4 id="内存泄漏情况"><a href="#内存泄漏情况" class="headerlink" title="内存泄漏情况"></a>内存泄漏情况</h4><p>在我的使用经验中，下面的api是比较容易造成内存泄漏的：</p>
+<ul>
+<li><p>addEventListener 就是其中常见的，需要使用 emoveEventListener 来清除。</p>
+</li>
+<li><p>setTimeout &#x2F; setInterval 如果使用定时器来循环调用方法的时候，需要使用 **clearTimeout&#x2F;</p>
+</li>
+</ul>
+<p>clearInterval**来清空定时器，注意setTimeout如果模拟setInterval循环调用也是会造成内存泄漏的。</p>
+<ul>
+<li>IntersectionObserver, ResizeObserver, MutationObserver,</li>
+</ul>
+<p>这些新的事件监听api方便了开发，但要注意的是，最后还是要使用disconnect来取消监听。</p>
+<ul>
+<li>像Promise, rxjs的Observables,</li>
+</ul>
+<p>node的EventEmitters这些方法，如果没有回调或者取消监听，也会造成内存泄漏（Promise如果没有resolved或者rejected,会连同then()中的代码一起造成泄漏）。</p>
+<ul>
+<li><p>像redux这种挂载在全局的状态管理，如果不注意内存占用就会持续增加不会被清理。</p>
+</li>
+<li><p>如果在没有虚拟dom的计算情况下实现了无限滚动列表，那么DOM节点的数量将无限增加。</p>
+</li>
+</ul>
+<p>当然，还有其他的方式导致内存泄漏，但是这些是最常见的。</p>
+<h4 id="找出内存泄漏"><a href="#找出内存泄漏" class="headerlink" title="找出内存泄漏"></a>找出内存泄漏</h4><p>这是最困难的部分，首先我想说明的是我认为没有什么工具能很好的解决这个问题，我已经尝试了Firefox的内存工具，Edge和IE的内存工具，甚至是Windows<br>Performance Analyzer，相比之下，还是Chrome的DevTools更好用。</p>
+<p>打开开发者工具，选择Memory标签的heap snapshot选项，在Chrome中有其他的内存工具，单我发现这些对找出内存泄漏没有很大的帮助。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200323/202003231116-2.webp" alt="xuehuayu.cn"></p>
+<p>当你点击“Take snapshot” 按钮的时候，你就能捕获到javaScript VM<br>中包括window和定时器回调引用的<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651229805&amp;idx=1&amp;sn=a0d14e8e24e6bf89934e14dae37f1060&amp;chksm=bd4957e98a3edeff3f52e07fea3aa3206f2231894f6f0e4a1e55ec1bcb5d22ef7d2beee6283a&amp;scene=21#wechat_redirect">对象环境</a>，可以把这个快照看成那一瞬间的内存静止状态。</p>
+<p>接下来的操作就是重现一些你认为会造成内存泄漏的场景-比如对话框模态层的开关，当对话框关闭的时候，你的期望应该是内存前后一致，因此，我们需要拍摄另一个快照，然后将其与没有打开对话框的快照进行比较。不得不说，这正是很棒的功能。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200323/202003231116-3.webp" alt="xuehuayu.cn"></p>
+<p>当然，你需要清楚这个工具的一些限制：</p>
+<ul>
+<li></li>
+</ul>
+<p>你需要多生成几个快照（我的经验是三个）来确保<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651235351&amp;idx=1&amp;sn=c6cc0d1043a55f4372f539daebed4a6c&amp;chksm=bd497d938a3ef485efb3d8a4f140d2f82009878814666a0147d428d18f887a5c51d15a4de62c&amp;scene=21#wechat_redirect">内存</a>真正的稳定的大小（检查每个快照，你应该能拿到最终的稳定状态）。</p>
+<ul>
+<li>如果你的程序中有web workers, service workers, iframes, shared</li>
+</ul>
+<p>workers这些特殊的环境，Memory是无法为这些提供快照功能的，因为这些环境有自己的javaScript<br>VM,你需要明确你要分析的是哪个，然后选择对应的进行快照</p>
+<ul>
+<li>有时候快照工具会卡顿甚至是崩溃，你只需要重启即可。</li>
+</ul>
+<h4 id="消除干扰"><a href="#消除干扰" class="headerlink" title="消除干扰"></a>消除干扰</h4><p>我发现最好解决干扰因素的方法是多次复现场景，比如你可以切换弹窗7次（7是比较明显的数值，或者14、21）来代替一次，这样，你就能发现哪些对象是7次都有出现内存泄漏的情况了。（另外一点有用的使用技术是整体运行应用一次，尤其是当你使用代码拆分来异步加载代码的时候，因为加载这些代码需要消耗一定的内存，我们需要排除这种因素）。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200323/202003231116-4.webp" alt="xuehuayu.cn"></p>
+<p>上面的快照是3和6的对比，中间的快照是为了让垃圾回收的更彻底， 注意有些对象泄漏了7次</p>
+<p>此时，你可能会想知道为什么我们要按对象数量来排序而不是内存占用总量，直观的来说，我们正在尝试减少内存泄漏的数量，所以，我们难道不应该更关注内存占用总量吗，原因下面会说到。</p>
+<p>一篇来自Joe<br>Armstrong的文章《你只是想要一个香蕉，但你却得到一只拿着香蕉的大猩猩》向我们说明了，你想要某一部分，却得到了整体，这样并不正确和可靠。让我们回到上面addEventListener这个示例来说明，泄漏的来源是事件监听器，该事件监听器引用一个函数，这个函数又引用一个<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651235926&amp;idx=2&amp;sn=05eca04fd935897f198b512ae01cf821&amp;chksm=bd497fd28a3ef6c490a63b834c5767e60a1417da849359d3f0d01ce7edfb94da6fefae4b9d82&amp;scene=21#wechat_redirect">组件</a>，该组件可能引用大量的东西，比如数组，字符串和其他对象。如果你按整个内存占用量来排序，那么你会找到一堆数组，字符串和对象，这其中大多数可能与泄漏宿主无关，你真正想要找到的是事件<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651230052&amp;idx=1&amp;sn=e26cec7d159de9ed5586e7535e6f8031&amp;chksm=bd4956e08a3edff6ea8ad25c727914c40092e556e0434862f007400bec5e71c54436089d0580&amp;scene=21#wechat_redirect">监听器</a>，但是与它所引用的内容相比，它占用的内存很小。要修复泄漏，你想要的是香蕉，而不是丛林（意思是找到直接对象，而不是其他无关的东西，避免干扰）。</p>
+<p>因此，我们按泄漏的数量来排序，我们会看到7个事件监听器，7个组件，亦或是14个子组件等等，7是个不同寻常的数值，因此会很突出。而且，无论你复现该场景多少次，你都应该做到确切看到泄漏的对象数量。这样可以快速找到泄漏源。</p>
+<h4 id="使用固定链"><a href="#使用固定链" class="headerlink" title="使用固定链"></a>使用固定链</h4><p>快照工具提供了一种固定链来显示哪些对象指向哪些其他对象，从而使内存保持活动状态，这样你就能清楚泄漏对象的分配位置</p>
+<p><img src="https://store.xuehuayu.cn/store/20200323/202003231116-5.webp" alt="xuehuayu.cn"></p>
+<p>固定链会显示哪个对象正在引用泄漏的对象。查看的方式就是上面的对象是由下面的对象引用的</p>
+<p>在上面的图片中， 一个由于闭包（环境上下文）所引用的变量 someObject<br>，被onMessage的监听器引用着，如果你点击旁边的资源链接，你就会跳到改对象位置，很easy</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">classSomeObject</span>(<span class="params"></span>)&#123;<span class="comment">/* ... */</span>&#125;</span><br><span class="line"><span class="keyword">const</span> someObject =<span class="title function_">newSomeObject</span>();</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">onMessage</span> =(<span class="params"></span>)=&gt;&#123;<span class="comment">/* ... */</span>&#125;;</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;message&#x27;</span>, onMessage);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，onMessage这个函数利用闭包引用someObject变量。（这是一个人为的示例；实际内存泄漏可能不那么明显！）</p>
+<p>但是快照工具在固定链上有几个限制：</p>
+<ul>
+<li><p>如果你通过导出内堆文件然后导入查看，你将丢失对分配对象位置引用的所有文件，所以保存文件没什么卵用。</p>
+</li>
+<li><p>如果你使用了WeakMap，chrome会展示这些引用，即使这些对象没有问题，因为其他引用被清理了，WeakMap也会消失，所以这是个干扰项。</p>
+</li>
+<li></li>
+</ul>
+<p>chrome是通过原型来分类这些对象的，因此尽量多的使用具名类和函数而少用匿名类和函数，有助于查找真正的泄漏问题，举例来说，假设我们的泄漏是由object而不是监听器引起的。由于object具有极高的通用性，我们可能看不到其中有7个泄漏。</p>
+<p>这是我识别内存泄漏的基本策略，在过去我已经成功地使用了这种技术来发现许多内存泄漏。当然，这只是个开始，除此之外，你仍需要打点，记录日志，然后尝试修复这些泄漏，这无疑是一个费时费力的过程。</p>
+<h4 id="内存泄漏分析自动化"><a href="#内存泄漏分析自动化" class="headerlink" title="内存泄漏分析自动化"></a>内存泄漏分析自动化</h4><p>在这之前，我想说明的是并没有一个好的方式来实现自动化，chrome有一个非标准的api - performance.memory<br>，但出于用户隐私原因，它并不是很准确，因此无法作为生产环境使用，W3C Web性能工作组也曾讨论内存分析的方案，但尚未达成一致。</p>
+<p>在实验室环境中，您可以使用Chrome标志 –enable-precise-memory-info<br>来增加此API的精确度。你还可以通过调用专有的Chromedriver命令来创建内存快照文件:takeHeapSnapshot,但尽管如此，还是会存在上面的限制。</p>
+<p>由于事件侦听器是最常见的内存泄漏源，因此我使用的另一种技术就是对addEventListener和removeEventListenerAPI进行monkey-patch(猴子补丁)修复，通过引用计数来确保它们最终返回的是零。有个示例供大家参考</p>
+<p>在Chrome<br>DevTools中，你还可以使用getEventListeners()这个方法来查看附加到特定元素的事件监听器。需要注意的是这只能在DevTools中使用。</p>
+<h5 id="有更新："><a href="#有更新：" class="headerlink" title="有更新："></a>有更新：</h5><p>Mathias Bynens向我介绍了另一个有用的DevTools<br>API：queryObjects()，它可以向你显示使用特定构造函数创建的所有对象。Christoph<br>Guttandin也有一篇有趣的博客文章，讲的是如何在Puppeteer中使用此API进行自动内存泄漏检测的。</p>
+<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><p>目前在web应用中查找并修复内存泄漏仍然是很初级的阶段，这篇文章展示了一些对我比较有帮助的技术点，但是这仍旧是既费时又耗力的过程。</p>
+<p>和大部分的性能问题一样，这种做法是值得的，你会发现，做一些上线前的综合测试要比等出现了问题才开始调试要值得的多，尤其是当页面上有多个泄漏，则可能会变成洋葱剥皮练习-当你修复一个泄漏，然后开始查找另一个泄漏，然后重复（整个过程可以虐你到哭）。当然，code<br>review还是可以帮助你发现一些内存泄漏的常见模式。</p>
+<p>JavaScript本质上是一种内存安全的语言，但是讽刺的是我们可以轻而易举的造成内存泄漏。这一部分的原因还是要归咎于UI交互设计，我们由于业务逻辑会监听用户的鼠标，滚轮，键盘等等的交互行为，这些直接埋下了内存泄漏的隐患。但是，通过尝试降低Web应用的内存使用量，我们可以提高运行时性能，避免崩溃，充分发挥用户设备性能。</p>
+<p>感谢Jake Archibald和Yang Guo对本文的意见反馈。感谢Dinko Bajric发明了“选择质数”方法，该方法对内存泄漏分析有很大帮助。</p>
+<h4 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h4><p>其实，对于内存的分析不仅仅是找出内存泄漏，更应该发现由于内存占用问题导致的用户体验问题，现在市面上很多app都是hybrid的，h5页面占了大头，如果容器没有做好容错机制，h5的崩溃很容易造成容器的出错,<br>由于手机客户端的性能瓶颈，无法达到pc端的性能，因此做好性能优化也极为重要，当然这个话题的宽泛超出了内存分析，但我想说的是内存分析也是性能优化的重要一环，有条件的可以看看godp</p>
+<p>关于本文<br>译者：@Jooker<br>译文：<a target="_blank" rel="noopener" href="https://juejin.im/post/5e6346f2e51d4526c70fb949">https://juejin.im/post/5e6346f2e51d4526c70fb949</a><br>作者：@Nolan Lawson<br>原文：<a target="_blank" rel="noopener" href="https://nolanlawson.com/2020/02/19/fixing-memory-leaks-in-web-applications/">https://nolanlawson.com/2020/02/19/fixing-memory-leaks-in-web-applications/</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/a1723f81.html"><div class="related-post-title">Chrome 神器，这些神奇的技巧你用过没？</div><div class="related-post-meta"><time>2020-01-19</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/db279178.html"><div class="related-post-title">我写CSS的常用套路(附demo的效果实现与源码）</div><div class="related-post-meta"><time>2020-01-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/2c1fef23.html"><div class="related-post-title">干货 | 学习XSS从入门到熟悉</div><div class="related-post-meta"><time>2021-06-04</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/e835e96a.html"><div class="related-post-title">写给前端的正则表达式入门</div><div class="related-post-meta"><time>2019-12-11</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/f8afe4b5.html"><div class="related-post-title">高频面试题深入解析/ 周刊 04</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/99abea60.html">https://xuehuayu.cn/article/99abea60.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/479a031b.html">ES6语法知识点补充</a><a class="next" href="/article/1aca6da1.html">一文完全吃透 JavaScript 继承(面试必备良药)</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

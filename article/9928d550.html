@@ -1,0 +1,477 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>CSS第四级选择器 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">CSS第四级选择器</h1><div class="post-meta"><span class="date">2019-10-24</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.3k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 16</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/9928d550.html#waline-comment"><span class="waline-comment-count" data-path="/article/9928d550.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5da6e7aee51d4524cc224d78</code></p>
+<p>选择器是 CSS 的核心部分。你用来做一些操作比如说选择某种类型的所有元素，就像下面这样：</p>
+<span id="more"></span>
+
+<blockquote>
+<p>译文出自：<a target="_blank" rel="noopener" href="https://lightningminers.github.io/articles/">闪电矿工翻译组</a><br>原文地址: [CSS selectors level</p>
+</blockquote>
+<p>4](<a target="_blank" rel="noopener" href="https://blog.logrocket.com/css-selectors-level-4-b5da36bcd54c/">https://blog.logrocket.com/css-selectors-level-4-b5da36bcd54c/</a>)</p>
+<blockquote>
+<p>原文作者: <a target="_blank" rel="noopener" href="https://blog.logrocket.com/author/ehrrera/"> Esteban Herrera</a><br>仓库原文链接：<a target="_blank" rel="noopener" href="https://github.com/lightningminers/article/issues/53">issue</a><br>译者: <a target="_blank" rel="noopener" href="https://github.com/thisang">thisang</a></p>
+</blockquote>
+<pre><code>div {
+  /* 一些应用在所有 div 元素上的样式 */
+}
+复制代码
+</code></pre>
+<p>或者你可以选择一个在它的父元素下的最后一个子元素：</p>
+<pre><code>ulli:last-child {
+  /* 一些只应用在列表的最后一个子元素上的样式 */
+}
+复制代码
+</code></pre>
+<p>当然，你也可以去做一些更复杂的事情，比如说选择选择列表中除了最后一个子元素之外的所有子元素。</p>
+<p>事实上，这样做的方法不止一种，一些方法甚至更复杂。</p>
+<p>例如，比较以下这两个：</p>
+<pre><code>ulli {
+  /* 一些应用在所有子元素上的样式 */
+}
+ulli:last-child {
+  /* 一些样式用来重置上面生效的样式，因为上面的样式不适用于上面最后一个子元素 */
+}
+复制代码
+
+uili:nth-last-child(n+2) {
+  /* 一些应用在除了最后一个子元素之外的所有子元素上面的样式 */
+}
+复制代码
+</code></pre>
+<p><code>ul li</code>属于第一级选择器。</p>
+<p><code>last-child</code>和<code>nth-last-child</code>属于第三级选择器。</p>
+<p>你可以把级别看作是 CSS<br>选择器的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors#Specifications">版本</a>，其中每个级别都会添加一些功能更强大的选择器。</p>
+<p>在这篇文章中，我会根据截至 2019 年 1<br>月的<a target="_blank" rel="noopener" href="https://drafts.csswg.org/selectors-4/">草案规范</a>，和你一起过一遍下一代选择器（第四级），主要有以下分类：</p>
+<ul>
+<li>逻辑组合</li>
+<li>属性选择器</li>
+<li>语言伪类</li>
+<li>位置伪类</li>
+<li>用户操作伪类</li>
+<li>输入伪类</li>
+<li>树结构伪类</li>
+<li>网格结构伪类</li>
+</ul>
+<p>在我写这篇文章的时候，第四级选择器的规范还处于草案阶段。直到官方推荐之前，它可能还会改，而且你可能还会发现很多选择器甚至都还没有被一些浏览器支持或者需要添加一些前缀（<code>:-moz-</code>或<code>:-webkit-</code>）。</p>
+<p>对于每一个选择器，我都会提供一个<a target="_blank" rel="noopener" href="https://caniuse.com/#home">can I<br>use</a>的链接以便你可以看到哪些浏览器支持它（如果有的话）、一些简短的介绍、一个例子、和一个<br>Codepen 的链接，这样你就能自己去尝试一下（即使它暂时无法使用，因为将来可能会改）。</p>
+<p>好了，让我们中逻辑组合选择器开始。</p>
+<h4 id="逻辑组合选择器"><a href="#逻辑组合选择器" class="headerlink" title="逻辑组合选择器"></a>逻辑组合选择器</h4><p>这个类别包括通过组合选择其他选择器而起作用的选择器。</p>
+<h4 id="not-selector1-selector2"><a href="#not-selector1-selector2" class="headerlink" title=":not(selector1,selector2,...)"></a><code>:not(selector1,selector2,...)</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-not-sel-list">浏览器支持</a></p>
+<p>它选择那些与传入的参数不匹配的元素列表。例如：</p>
+<pre><code>p:not(.beginning, .middle){
+  color: red;
+}
+复制代码
+</code></pre>
+<p>这会给所有的没有<code>.beginning</code>和<code>.middle</code>类的<code>p</code>元素设置颜色为红色的样式。</p>
+<p>这个选择器的第三级版本只能允许一个选择器，而不是两个或更多的的选择器。例如，上面的样式可以写成：</p>
+<pre><code>p:not(.beginning):not(.middle){
+  color: red;
+}
+复制代码
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/xMGxvY">在 Codepen 上试试</a></p>
+<h4 id="is-selector1-selector2"><a href="#is-selector1-selector2" class="headerlink" title=":is(selector1,selector2)"></a><code>:is(selector1,selector2)</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-matches-pseudo">浏览器支持</a></p>
+<p>它选择那些与传入的参数匹配的元素列表。例如：</p>
+<pre><code>p:is(.beginning, .middle){
+  color: blur;
+}
+复制代码
+</code></pre>
+<p>这会给所有的具有<code>.beginning</code>和<code>.middle</code>类的<code>p</code>元素设置颜色为蓝色的样式。</p>
+<p>自从上一个工作草案版本以来最重大的变化之一就是<a target="_blank" rel="noopener" href="https://github.com/w3c/csswg-drafts/issues/3258"><code>:matches()</code>选择器被更名为<code>:is()</code></a>并且已经被<br>Safari（<a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-matches-pseudo">唯一一个完全支持这个选择器的浏览器</a>）弃用，因此它和与之相反的选择器<code>:not()</code>可以更好的配对。</p>
+<p>如果要向后兼容，可以用<code>:is()</code>作为<code>:matches()</code>的别名。</p>
+<p>然而，<code>:matches()</code>以前叫做<code>:any()</code>，因此大多数浏览器都支持带前缀的伪类：</p>
+<pre><code>p:-webkit-any(.beginning, .middle){
+  color: blue;
+}
+p:-moz-any(.beginning, .middle) {
+  color: blue;
+}
+复制代码
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/daYRLJ">在 Codepen 上试试</a></p>
+<h4 id="where-selector1-selector"><a href="#where-selector1-selector" class="headerlink" title=":where(selector1,selector,...)"></a><code>:where(selector1,selector,...)</code></h4><p>在我写这篇文章的时候，还没有任何一个浏览器支持这个选择器。</p>
+<p>它具有和<code>:is()</code>相同的语法和功能，但是不管这个选择器接受多少个参数，这个选择器的权重都是 0。</p>
+<p>权重是 CSS 的应用规则。如果两个选择器同时应用在同一个元素上面，则权重高的那个生效。如果不同规则具有相同的权重，那么应用在这个元素上的最后一个规则将会生效。</p>
+<p>这个选择器可以用来实现筛选和覆盖与之关联的元素的样式。</p>
+<p>下面是一个权重的例子：</p>
+<pre><code>a:not(:hover) {
+  text-decoration: none;
+}
+nava {
+  /* 不会生效 */text-decoration: underline;
+}
+/* 使用新的第四级选择器 :where */a:where(:not(:hover)) {
+  text-decoration: none;
+}
+nava{
+  /* 生效 */text-decoration: underline;
+}
+复制代码
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/daYzZg">在 Codepen 上试试</a></p>
+<h4 id="has-reslativeSelector1-reslativeSelector2"><a href="#has-reslativeSelector1-reslativeSelector2" class="headerlink" title=":has(reslativeSelector1,reslativeSelector2,...)"></a><code>:has(reslativeSelector1,reslativeSelector2,...)</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-has">浏览器支持</a>（在写这篇文章的时候，还没有任何一个浏览器支持这个选择器）</p>
+<p>这个选择器将一个相对选择器列表作为参数。它选择那些在指定范围内匹配相对选择器列表的元素。</p>
+<p>例如：</p>
+<pre><code>p:has(strong, em) {
+  color: red;
+}
+复制代码
+</code></pre>
+<p>这会给所有的包含<code>&lt;strong&gt;</code>或者<code>&lt;em&gt;</code>元素的<code>p</code>元素添加一个颜色为红色的样式。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/QYjmYX">在 Codepen 上试试</a></p>
+<h4 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h4><p>这类选择器包含那些应用在元素属性上的选择器。</p>
+<h4 id="foo-”bar”i"><a href="#foo-”bar”i" class="headerlink" title="[foo&#x3D;”bar”i]"></a>[foo&#x3D;”bar”i]</h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-case-insensitive">浏览器支持</a></p>
+<p>它选择那些<code>foo</code>属性的值等于<code>bar</code>的元素，忽略大小写。</p>
+<p>例如：</p>
+<pre><code>p[class=&quot;text&quot; i] {
+  color: green;
+}
+复制代码
+</code></pre>
+<p>这会给所有的<code>class</code>属性的值为<code>Text</code>、<code>TEXT</code>、或者是<code>text</code>、又或者是其他组合的<code>p</code>元素添加一个颜色为绿色的样式。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/pGjVEg">在 Codepen 上试试</a></p>
+<h4 id="foo-bar-s"><a href="#foo-bar-s" class="headerlink" title="[foo=&quot;bar&quot;s]"></a><code>[foo=&quot;bar&quot;s]</code></h4><p>在我写这篇文章的时候，还没有任何一个浏览器支持这个选择器。</p>
+<p>它选择那些<code>foo</code>属性的值严格等于<code>bar</code>的元素。</p>
+<p>例如：</p>
+<pre><code>p[class=&quot;text&quot; s]{
+  color: green;
+}
+复制代码
+</code></pre>
+<p>这会给所有<code>class</code>属性的值为<code>text</code>（例如，不是<code>Text</code>）的<code>p</code>元素添加一个颜色为绿色的样式。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/yZYjbJ">在 Codepen 上试试</a></p>
+<h4 id="语言伪类？"><a href="#语言伪类？" class="headerlink" title="语言伪类？"></a>语言伪类？</h4><p>这类选择器包括那些使用语言相关设置的选择器。</p>
+<h4 id="dir-ltr"><a href="#dir-ltr" class="headerlink" title=":dir(ltr)"></a><code>:dir(ltr)</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#search=dir">浏览器支持</a></p>
+<p>它选择那些具有从左到右方向性的元素，其中文档语言指定如何确定方向性。与之对应的：<code>:dir(rtl)</code>表示具有从右到左方向性的元素。其他值是无效的也不会匹配任何元素。</p>
+<p>例如：</p>
+<pre><code>p:dir(rtl) {
+  background-color: red;
+}
+复制代码
+</code></pre>
+<p>这会给设置了从左到右方向的<code>p</code>元素添加一个背景色为红色的样式。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/GzpdwV">在 Codepen 上试试</a></p>
+<h4 id="lang-zh-hant"><a href="#lang-zh-hant" class="headerlink" title=":lang(zh,&quot;*-hant&quot;)"></a><code>:lang(zh,&quot;*-hant&quot;)</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#search=%3Alang">浏览器支持</a></p>
+<p>在我写这篇文章的时候，还没有任何一个浏览器支持这个第四级选择器。</p>
+<p>它选择那些被标记为中文的元素（或者选择其他语言标记的元素，只需要把<code>zh</code>改为其他的语言代码就可以了）或者用繁体字书写的元素（或者在其他字符的系统中，将<code>-hant</code>替换为其它字符代码）。</p>
+<p>实际上，第二级选择器里面就有这个选择器，但是在第四级选择器里面新增了通配符和逗号分隔列表。</p>
+<p>它接收一个或多个以逗号为分隔的语言代码作为参数。如果语言代码里面包含<code>*</code>，则必须对它们进行正确的转义（<code>:lang(es-\*)</code>）或字符串引号（<code>:lang(&quot;es-*&quot;)</code>）。</p>
+<p>例如：</p>
+<pre><code>p:lang(&quot;*-CH&quot;) {
+  background-color: red;
+}
+复制代码
+</code></pre>
+<p>这会给所有被标记为使用瑞士语言的<code>p</code>元素添加一个背景色为红色的背景色。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/YByjzp">在 Codepen 上试试</a></p>
+<h4 id="位置伪类"><a href="#位置伪类" class="headerlink" title="位置伪类"></a>位置伪类</h4><p>这类选择器包括那些与超链接有关得选择器。</p>
+<h4 id="any-link"><a href="#any-link" class="headerlink" title=":any-link"></a><code>:any-link</code></h4><p>在<a target="_blank" rel="noopener" href="https://caniuse.com/#home">Can I use</a>上并没有这个选择器的兼容性介绍，但是大多数主流浏览器都支持这个选择器。</p>
+<p>它选择那些具有<code>href</code>属性的元素（例如<code>&lt;a&gt;或&lt;link&gt;</code>。或者说，所有与<code>:link</code>或<code>:visited</code>伪类匹配的元素。</p>
+<p>例如：</p>
+<pre><code>a:any-link {
+  color: red;
+}
+复制代码
+</code></pre>
+<p>这会给所有具有<code>href</code>属性的的所有<code>a</code>元素添加一个颜色为红色的样式。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/vbNaeJ">在 Codepen 上试试</a></p>
+<h4 id="local-link"><a href="#local-link" class="headerlink" title=":local-link"></a><code>:local-link</code></h4><p>在我写这篇文章的时候，还没有任何一个浏览器支持这个第四级选择器。</p>
+<p>它选择那些链接到当前 URL 的元素。如果链接的指向包括 URL 片段，则 URL 片段和和当前 URL 也必须要匹配。比如不匹配，则在比较中不考虑当前 URL<br>的片段 URL 部分。</p>
+<p>例如：</p>
+<pre><code>a:local-link {
+  text-decoration: none;
+}
+复制代码
+</code></pre>
+<p>这会给所有的具有<code>href</code>属性的指向当前页面的<code>a</code>元素（也许它们是导航菜单的一部分）去掉下划线。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/GzpBwG">在 Codepen 上试试</a></p>
+<h4 id="用户操作伪类"><a href="#用户操作伪类" class="headerlink" title="用户操作伪类"></a>用户操作伪类</h4><p>这类选择器包括那些用户正在操作的元素的选择器。</p>
+<p><code>:focus-within</code></p>
+<p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-focus-within">浏览器支持</a></p>
+<p>它选择那些与<code>:focus</code>伪类匹配的元素（当元素具有焦点时）或具有与<code>:focus</code>匹配的子元素。</p>
+<p>例如，使用如下的一个表单：</p>
+<pre><code>&lt;from&gt;&lt;inputtype=&quot;text&quot;id=&quot;name&quot;placeholder=&quot;Enter your name&quot; /&gt;&lt;/from&gt;复制代码
+</code></pre>
+<p>当表单里的输入框获得焦点的时候，它会给表单添加一个边框。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/BMoGWx">在 Codepen 上试试</a></p>
+<h4 id="focus-visible"><a href="#focus-visible" class="headerlink" title=":focus-visible"></a><code>:focus-visible</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-focus-visible">浏览器支持</a></p>
+<p>它选择一个处于焦点状态的元素（与<code>:focus</code>伪类匹配），浏览器通常会为了让获得焦点的元素清晰可见，给它添加一个焦点环。</p>
+<p>和<code>:focus</code>的区别和细微。</p>
+<p>如果<code>:focus-visible</code>匹配了，<code>:focus</code>一定会匹配，但是反过来就不一定了，它取决于浏览器（如果启用了聚焦环的绘制）和获取焦点的元素（通过鼠标点击或者<br>tab 键）。</p>
+<p>Firefox 把这个选择器实现为<code>:-moz-focusring</code>伪类。</p>
+<p>例如，在某些场景下，有以下样式：</p>
+<pre><code>/* 标准第四级选择器 */:focus-visible {
+  background-color: lightgary;
+}
+/* 基于 Firefox 的第四级选择器 */:moz-focusring {
+  background-color: lightgary;
+}
+复制代码
+</code></pre>
+<p>只有在元素通过 tab 获得焦点的时候才会生效。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/KJdbMp">在 Codepen 上试试</a></p>
+<h4 id="输入伪类"><a href="#输入伪类" class="headerlink" title="输入伪类"></a>输入伪类</h4><p>这类选择包括那些应用于接受用户输入的元素的选择器。</p>
+<p><code>:read-write</code> and <code>:read-only</code></p>
+<p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-read-only-write">浏览器支持</a></p>
+<p><code>:read-write</code>选择可读可写的元素（例如那些不具有 <code>readonly</code>属性的<code>&lt;input&gt;</code>的元素）。</p>
+<p><code>:read-only</code>选择那些只能读的元素（例如具有<code>readonly</code>属性的<code>&lt;input&gt;</code>的元素）。</p>
+<p>然而，这些选择器不仅仅选择<code>&lt;input&gt;</code>或<code>&lt;textarea&gt;</code>元素，它们也可以选择用户能输入的任何选择，例如将<code>contenteditable</code>属性设置为<code>true</code>的<code>&lt;p&gt;</code>元素。</p>
+<p>例如：</p>
+<pre><code>:read-write {
+  background-color: lightyellow;
+}
+
+:read-only {
+  background-color: lightgary;
+}
+
+/* Firefox */:-moz-read-write {
+  background-color: lightyellow;
+}
+
+:moz-read-only {
+  background-color: lightgary;
+}
+复制代码
+</code></pre>
+<p>这会把页面上所有的不可编辑元素背景色设置为浅灰色，把可以编辑的元素的背景色设置为浅黄色。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/JxGXWw">在 Codepen 上试试</a></p>
+<h4 id="placeholder-shown"><a href="#placeholder-shown" class="headerlink" title=":placeholder-shown"></a><code>:placeholder-shown</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-placeholder-shown">浏览器支持</a></p>
+<p>它选择一个当前正在显示占位符文本的输入框元素。</p>
+<p>例如：</p>
+<pre><code>input:placeholder-shown {
+  color: red;
+}
+复制代码
+</code></pre>
+<p>这会给当前显示占位符文本的<code>input</code>元素设置一个颜色为红色的样式，注意这里设置的只是光标的颜色。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/jdWrbp">在 Codepen 上试试</a></p>
+<h4 id="default"><a href="#default" class="headerlink" title=":default"></a><code>:default</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-default-pseudo">浏览器支持</a></p>
+<p>它选择那些在一组相关元素里面作为默认选项的元素。通常用于按钮和选择列表 &#x2F; 菜单。</p>
+<p>例如：</p>
+<pre><code>input:default {
+  box-shadow: 002px2px green;
+}
+
+input:defaut + lable {
+  color: green;
+}
+复制代码
+</code></pre>
+<p>这会给默认<code>&lt;input&gt;</code>元素的标签设置绿色阴影和颜色。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/wNMWjx">在 Codepen 上试试</a></p>
+<h4 id="indeterminate"><a href="#indeterminate" class="headerlink" title=":indeterminate"></a><code>:indeterminate</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-indeterminate-pseudo">浏览器支持</a></p>
+<p>它选择那些处于不确定状态的元素。例如，单选框组和复选框组里包含的那些未被选中的元素，或者进度百分比未知的进度条。</p>
+<p>例如：</p>
+<pre><code>input[type=&quot;radio&quot;]:indeterminate + label {
+  color: red;
+}
+复制代码
+</code></pre>
+<p>如果组中还没有任何一个元素被选，。这会给这个组的标签添加一个颜色为红色的样式。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/yZeaBL">在 Codepen 上试试</a></p>
+<h4 id="valid-和-invalid"><a href="#valid-和-invalid" class="headerlink" title=":valid 和 :invalid"></a><code>:valid</code> 和 <code>:invalid</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=form-validation">浏览器支持</a></p>
+<p>它选择那些根据有效性语义或值的有效或无效的元素。如果没有定义值的有效性规则，则这个元素既不满足<code>:valid</code>也不满足<code>:invalid</code>。</p>
+<p>例如：对于一个输入类型为<code>email</code>的元素：</p>
+<pre><code>input:invalid {
+  color: red;
+}
+input:valid {
+  color: green;
+}
+复制代码
+</code></pre>
+<p>这会根据元素里面输入的电子邮件是否有效为依据去为元素的文本设置不同颜色。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/xMZEjp">在 Codepen 上试试</a></p>
+<h4 id="in-range-和-out-of-range"><a href="#in-range-和-out-of-range" class="headerlink" title=":in-range 和 :out-of-range"></a><code>:in-range</code> 和 <code>:out-of-range</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-in-out-of-range">浏览器支持</a></p>
+<p>这些选择器只适用于那些具有范围限制的元素，例如，定义了最大最小值的元素。如果没有定义，则都不匹配。</p>
+<p>例如：一个设置了最小只为 1 最大值为 5 的输入框。</p>
+<pre><code>input:out-of-range {
+  color: red;
+}
+
+input:in-range {
+  color: green;
+}
+复制代码
+</code></pre>
+<p>这会给依据输入的值设置不同的颜色样式。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/RvroLN">在 Codepen 上试试</a></p>
+<p>在某些情况下，某些选择器会具有与<code>:valid</code>和<code>:invalid</code>相同的效果。</p>
+<h4 id="required和-optional"><a href="#required和-optional" class="headerlink" title=":required和:optional"></a><code>:required</code>和<code>:optional</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=form-validation">浏览器支持<code>:required</code></a></p>
+<p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-optional-pseudo">浏览器支持<code>:optional</code></a></p>
+<p>这些选择器分别适用于在提交表单的之前必填的和选填的表单元素。那些非表单元素不会被匹配。</p>
+<p>例如：</p>
+<pre><code>input:optional {
+  color: gray;
+}
+input:required {
+  color: red;
+}
+复制代码
+</code></pre>
+<p>这会给那些必填的元素添加设置红色的样式，给非必填的元素添加灰色的样式。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/QYyGRQ">在 Codepen 上试试</a></p>
+<h4 id="树结构伪类"><a href="#树结构伪类" class="headerlink" title="树结构伪类"></a>树结构伪类</h4><p>这类选择器包括那些允许基于文档树中的信息进行选择，但是不能由其它选择器表示的选择器，例如元素相对于其父元素的位置。</p>
+<h4 id="nth-child-n-of-selector-和-nth-last-child-n-of-selector"><a href="#nth-child-n-of-selector-和-nth-last-child-n-of-selector" class="headerlink" title=":nth-child(n [of selector]?) 和 :nth-last-child(n [of selector]?)"></a><code>:nth-child(n [of selector]?)</code> 和 <code>:nth-last-child(n [of selector]?)</code></h4><p><a target="_blank" rel="noopener" href="https://caniuse.com/#feat=css-nth-child-of">浏览器支持</a>（在我写这篇文章的时候，还没有任何一个浏览器支持这个第四级选择器。）</p>
+<p><code>:nth-child</code>选择器匹配作为其父级的第 n<br>个子元素。<code>:nth-last-child</code>也一样的，只不过它是从最后一个元素开始计数的。你可以使用<a target="_blank" rel="noopener" href="https://css-tricks.com/examples/nth-child-tester/"><code>:nth</code>测试</a>来了解它们之间的区别，并进一步了解<br><a target="_blank" rel="noopener" href="https://drafts.csswg.org/css-syntax-3/#anb-microsyntax">An+B 表示法</a>。</p>
+<p>在这篇文章的开头，我举了一个<code>:nth.last-child</code>的例子，我说这个第三级的选择器。然而，对于第四级选择器，这个选择器接收一个可选的<code>of</code>选择器用来筛选仅与该选择器匹配的子元素。</p>
+<p>除了功能更加强大之外，它的声明方式也可以不同。例如：</p>
+<pre><code>li.item:nth-child(-n+2)复制代码
+</code></pre>
+<p>选择前面两个具有<code>item</code>类的<code>&lt;li&gt;</code>元素。</p>
+<p>它和以下的不同：</p>
+<pre><code>:nth-child(-n+2ofli.item)
+复制代码
+</code></pre>
+<p>这会选择前面两个带有<code>item</code>类的<code>&lt;li&gt;</code>元素即使它们并不是列表的前两个元素。</p>
+<p>尝试一下（在支持该选择器的浏览器中，例如 Safari）：</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/NoxgEE">例一</a></p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/pGgwpG">例二</a></p>
+<h4 id="网格结构伪类"><a href="#网格结构伪类" class="headerlink" title="网格结构伪类"></a>网格结构伪类</h4><p>这类选择器包括使用表格的列的选择器。</p>
+<h4 id="F-E"><a href="#F-E" class="headerlink" title="F || E"></a><code>F || E</code></h4><p>在我写这篇文章的时候，还没有任何一个浏览器支持这个选择器。</p>
+<p>列组合器选择器（||）选择类型 E 的元素，该元素表示表中的单元格并属于由类型 F 的元素表示的列。</p>
+<p>例如，有如下表：<br>IDDescriptionPrice1Computer$9992Tablet$499<br>对于以下样式</p>
+<pre><code>col.selected || td {
+  background-color: lightyellow;
+}
+复制代码
+</code></pre>
+<p>这会给所选列（价格）的单元格（<code>&lt;td&gt;元素</code>）设置浅黄色的背景色。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/xMZLQY">在 Codepen 上试试</a></p>
+<h4 id="nth-col-An-B-和-nth-last-col-An-B"><a href="#nth-col-An-B-和-nth-last-col-An-B" class="headerlink" title=":nth-col(An+B)和:nth-last-col(An+B)"></a><code>:nth-col(An+B)</code>和<code>:nth-last-col(An+B)</code></h4><p>在我写这篇文章的时候，这个选择器还没有被任何一个浏览器支持。</p>
+<p>你可以把这些选择器看作是<code>:nth-child</code>和<code>:nth-last-child</code>的列版本。</p>
+<p><code>:nth-col(An+B)</code>选择网格或表格中的一个在该元素之间还有 An+B-1 个元素的元素（n 为 0 或任意一个整数）。</p>
+<p>例如：</p>
+<pre><code>col.nth-col(1) {
+  background-color: lightyellow;
+}
+col.nth-last-col(1) {
+  background-color: lightgreen;
+}
+复制代码
+</code></pre>
+<p>这会给表格的第一列元素添加一个浅黄色背景色，。被最后一列元素添加一个浅绿色背景色。</p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/eh3rrera/pen/RvrLwm">在 Codepen 上试试</a></p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>第四级选择器使您可以轻松声明复杂的选择规则。</p>
+<p>我们涵盖了2019年1月《编辑器草案》规范中定义的大多数选择器，但是，我遗漏了一些可能会很快消失或很快改变的选择器，或者关于它们的信息不多（除了不受支持）<br>任何浏览器）：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://drafts.csswg.org/selectors-4/#target-within-pseudo"><code>:target-within</code></a></p>
+</li>
+<li></li>
+</ul>
+<h2 id="scope（不要将它和作用域样式混淆）"><a href="#scope（不要将它和作用域样式混淆）" class="headerlink" title=":scope（不要将它和作用域样式混淆）"></a><a target="_blank" rel="noopener" href="https://drafts.csswg.org/selectors-4/#the-scope-pseudo"><code>:scope</code></a>（不要将它和作用域样式混淆）</h2><p><a target="_blank" rel="noopener" href="https://drafts.csswg.org/selectors-4/#time-pseudos">时间伪类</a>（你可以在<a target="_blank" rel="noopener" href="http://css4.rocks/time-dimensional-pseudo-classes.php">这里</a>了解更多信息）</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://drafts.csswg.org/selectors-4/#blank"><code>:blank</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://drafts.csswg.org/selectors-4/#user-pseudos"><code>:user-invalid</code></a></li>
+</ul>
+<p>但绝对要注意这些以及第4级选择器的其余部分。</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/fd15746b.html"><div class="related-post-title">前端面试之JS手写new方法</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/44ff8f55.html"><div class="related-post-title">面试:在浏览器输入URL回车之后发生了什么？（超详细版）</div><div class="related-post-meta"><time>2019-12-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/bf6d70b6.html"><div class="related-post-title">js根据月份计算第一天和最后一天</div><div class="related-post-meta"><time>2024-01-10</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/8b6aa213.html"><div class="related-post-title">浅谈React性能优化的方向</div><div class="related-post-meta"><time>2019-11-21</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/64189b69.html"><div class="related-post-title">Hbuilder格式化插件js-beautify配置</div><div class="related-post-meta"><time>2021-12-31</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/9928d550.html">https://xuehuayu.cn/article/9928d550.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/569b7b15.html">Node.js 13.0 正式发布</a><a class="next" href="/article/f004ee59.html">webpack 5 之持久化缓存指南</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

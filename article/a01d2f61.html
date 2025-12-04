@@ -1,0 +1,507 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>Promise的三兄弟：all(), race()以及allSettled() | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">Promise的三兄弟：all(), race()以及allSettled()</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.1k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 13</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/a01d2f61.html#waline-comment"><span class="waline-comment-count" data-path="/article/a01d2f61.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/K9tbMPHd_jPm-5t_vrXS0w</code></p>
+<p>从ES6 开始，我们大都使用的是 <code>Promise.all()</code>和<code>Promise.race()</code>，<code>Promise.allSettled()</code><br>提案已经到第4阶段，因此将会成为<code>ECMAScript 2020</code>的一部分。</p>
+<span id="more"></span>
+
+<p><img src="https://img.php.cn/upload/article/000/000/006/5dc38083af027708.jpg" alt="xuehuayu.cn"></p>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><p><strong>Promise.all(promises: Iterable<Promise>): Promise<Array></strong></p>
+<ul>
+<li><code>Promise.all(iterable)</code> 方法返回一个 <code>Promise</code> 实例，此实例在 <code>iterable</code> 参数内所有的 <code>promise</code></li>
+</ul>
+<p>都“完成（resolved）”或参数中不包含 <code>promise</code> 时回调完成（resolve）；如果参数中 <code>promise</code><br>有一个失败（rejected），此实例回调失败（reject），失败原因的是第一个失败 <code>promise</code> 的结果</p>
+<p><strong>Promise.race(promises: Iterable<Promise>): Promise</strong></p>
+<ul>
+<li><strong>Promise.race(iterable)</strong> 方法返回一个 <code>promise</code>，一旦迭代器中的某个<code>promise</code>解决或拒绝，返回的</li>
+</ul>
+<p><code>promise</code>就会解决或拒绝。</p>
+<p><strong>Promise.allSettled(promises: Iterable<Promise>):<br>Promise&lt;Array<SettlementObject>&gt;</strong></p>
+<ul>
+<li></li>
+</ul>
+<p>**Promise.allSettled()**方法返回一个<code>promise</code>，该<code>promise</code>在所有给定的<code>promise</code>已被解析或被拒绝后解析，并且每个对象都描述每个<code>promise</code>的结果。</p>
+<h2 id="2-回顾-Promise-状态"><a href="#2-回顾-Promise-状态" class="headerlink" title="2. 回顾: Promise 状态"></a>2. 回顾: Promise 状态</h2><p>给定一个返回<code>Promise</code>的异步操作，以下这些是<code>Promise</code>的可能状态：</p>
+<ul>
+<li>pending: 初始状态，既不是成功，也不是失败状态。</li>
+<li>fulfilled: 意味着操作成功完成。</li>
+<li>rejected: 意味着操作失败。</li>
+<li>Settled： <code>Promise</code>要么被完成，要么被拒绝。<code>Promise</code>一旦达成，它的状态就不再改变。</li>
+</ul>
+<p><img src="https://img.php.cn/upload/image/175/208/404/1573093063915131.png" alt="1573093063915131.png"></p>
+<h2 id="3-什么是组合"><a href="#3-什么是组合" class="headerlink" title="3.什么是组合"></a>3.什么是组合</h2><p>又称部分-整体模式，将对象整合成树形结构以表示“部分整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性，它基于两种函数：</p>
+<ul>
+<li>基元函数(简短:基元)创建原子块。</li>
+<li>组合函数（简称：组合）将原子和&#x2F;或复合件组合在一起以形成复合件。</li>
+</ul>
+<p>对于 JS 的 Promises 来说</p>
+<ul>
+<li>基元函数包括:<code>Promise.resolve()</code>、<code>Promise.reject()</code></li>
+<li>组合函数：<code>Promise.all()</code>, <code>Promise.race()</code>, <code>Promise.allSettled()</code></li>
+</ul>
+<h2 id="4-Promise-all"><a href="#4-Promise-all" class="headerlink" title="4. Promise.all()"></a>4. Promise.all()</h2><p><code>Promise.all()</code>的类型签名:</p>
+<ul>
+<li><strong>Promise.all(promises: Iterable<Promise>): Promise<Array></strong></li>
+</ul>
+<p>返回情况：</p>
+<p><strong>完成（Fulfillment）：</strong><br>如果传入的可迭代对象为空，<code>Promise.all</code> 会同步地返回一个已完成（<code>resolved</code>）状态的<code>promise</code>。<br>如果所有传入的 <code>promise</code> 都变为完成状态，或者传入的可迭代对象内没有 <code>promise</code>，<code>Promise.all</code> 返回的 <code>promise</code><br>异步地变为完成。<br>在任何情况下，<code>Promise.all</code> 返回的 <code>promise</code> 的完成状态的结果都是一个数组，它包含所有的传入迭代参数对象的值（也包括非 promise<br>值）。</p>
+<p><strong>失败&#x2F;拒绝（Rejection）：</strong><br>如果传入的 <code>promise</code> 中有一个失败（<code>rejected</code>），<code>Promise.all</code> 异步地将失败的那个结果给失败状态的回调函数，而不管其它<br><code>promise</code> 是否完成。</p>
+<p>来个例子：</p>
+<pre><code>    const promises = [
+      Promise.resolve(&#39;a&#39;),
+      Promise.resolve(&#39;b&#39;),
+      Promise.resolve(&#39;c&#39;),
+    ];
+    Promise.all(promises)
+      .then((arr) =&gt; assert.deepEqual(
+        arr, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+      ));
+</code></pre>
+<p>如果其中的一个 promise 被拒绝，那么又是什么情况：</p>
+<pre><code>    const promises = [
+      Promise.resolve(&#39;a&#39;),
+      Promise.resolve(&#39;b&#39;),
+      Promise.reject(&#39;ERROR&#39;),
+    ];
+    Promise.all(promises)
+      .catch((err) =&gt; assert.equal(
+        err, &#39;ERROR&#39;
+      ));
+</code></pre>
+<p>下图说明<code>Promise.all()</code>是如何工作的</p>
+<p><img src="https://img.php.cn/upload/image/492/848/339/1573093085354076.png" alt="1573093085354076.png"></p>
+<h4 id="4-1-异步-map-与-Promise-all"><a href="#4-1-异步-map-与-Promise-all" class="headerlink" title="4.1 异步 .map() 与 Promise.all()"></a>4.1 异步 .map() 与 Promise.all()</h4><p>数组转换方法，如<code>.map()</code>、<code>.filter()</code>等，用于同步计算。例如</p>
+<pre><code>    function timesTwoSync(x) {
+      return 2 * x;
+    }
+    const arr = [1, 2, 3];
+    const result = arr.map(timesTwoSync);
+    assert.deepEqual(result, [2, 4, 6]);
+</code></pre>
+<p>如果<code>.map()</code>的回调是基于<code>Promise</code>的函数会发生什么？ 使用这种方式 <code>.map()</code>返回的的结果是一个<code>Promises</code>数组。</p>
+<p><code>Promises</code>数组不是普通代码可以使用的数据，但我们可以通过<code>Promise.all()</code>来解决这个问题：它将Promises数组转换为<code>Promise</code>，并使用一组普通值数组来实现。</p>
+<pre><code>    function timesTwoAsync(x) {
+      return new Promise(resolve =&gt; resolve(x * 2));
+    }
+    const arr = [1, 2, 3];
+    const promiseArr = arr.map(timesTwoAsync);
+    Promise.all(promiseArr)
+      .then(result =&gt; {
+        assert.deepEqual(result, [2, 4, 6]);
+      });
+</code></pre>
+<h4 id="更实际工作上关于-map-示例"><a href="#更实际工作上关于-map-示例" class="headerlink" title="更实际工作上关于 .map()示例"></a>更实际工作上关于 .map()示例</h4><p>接下来，咱们使用<code>.map()</code>和<code>Promise.all()</code>从<code>Web</code>下载文件。 首先，咱们需要以下帮助函数：</p>
+<pre><code>    function downloadText(url) {
+      return fetch(url)
+        .then((response) =&gt; { // (A)
+          if (!response.ok) { // (B)
+            throw new Error(response.statusText);
+          }
+          return response.text(); // (C)
+        });
+    }
+</code></pre>
+<p><code>downloadText()</code>使用基于<code>Promise</code>的fetch API 以字符串流的方式下载文件：</p>
+<ul>
+<li>首先，它异步检索响应（第A行）。</li>
+<li>response.ok（B行）检查是否存在“找不到文件”等错误。</li>
+<li>如果没有错误，使用<code>.text()</code>(第C行)以字符串的形式取回文件的内容。</li>
+</ul>
+<p>在下面的示例中，咱们 下载了两个文件</p>
+<pre><code>    const urls = [
+      &#39;http://example.com/first.txt&#39;,
+      &#39;http://example.com/second.txt&#39;,
+    ];
+
+    const promises = urls.map(
+      url =&gt; downloadText(url));
+
+    Promise.all(promises)
+      .then(
+        (arr) =&gt; assert.deepEqual(
+          arr, [&#39;First!&#39;, &#39;Second!&#39;]
+        ));
+</code></pre>
+<h4 id="Promise-all-的一个简版实现"><a href="#Promise-all-的一个简版实现" class="headerlink" title="Promise.all()的一个简版实现"></a>Promise.all()的一个简版实现</h4><pre><code>    function all(iterable) {
+      return new Promise((resolve, reject) =&gt; {
+        let index = 0;
+        for (const promise of iterable) {
+          // Capture the current value of `index`
+          const currentIndex = index;
+          promise.then(
+            (value) =&gt; {
+              if (anErrorOccurred) return;
+              result[currentIndex] = value;
+              elementCount++;
+              if (elementCount === result.length) {
+                resolve(result);
+              }
+            },
+            (err) =&gt; {
+              if (anErrorOccurred) return;
+              anErrorOccurred = true;
+              reject(err);
+            });
+          index++;
+        }
+        if (index === 0) {
+          resolve([]);
+          return;
+        }
+        let elementCount = 0;
+        let anErrorOccurred = false;
+        const result = new Array(index);
+      });
+    }
+</code></pre>
+<h2 id="5-Promise-race"><a href="#5-Promise-race" class="headerlink" title="5. Promise.race()"></a>5. Promise.race()</h2><p><code>Promise.race()</code>方法的定义：</p>
+<p><strong>Promise.race(promises: Iterable<Promise>): Promise</strong></p>
+<p><strong>Promise.race(iterable)</strong> 方法返回一个 <code>promise</code>，一旦迭代器中的某个<code>promise</code>解决或拒绝，返回的<br><code>promise</code>就会解决或拒绝。来几个例子，瞧瞧：</p>
+<pre><code>const promises = [
+  new Promise((resolve, reject) =&gt;
+    setTimeout(() =&gt; resolve(&#39;result&#39;), 100)), // (A)
+  new Promise((resolve, reject) =&gt;
+    setTimeout(() =&gt; reject(&#39;ERROR&#39;), 200)), // (B)
+];
+Promise.race(promises)
+  .then((result) =&gt; assert.equal( // (C)
+    result, &#39;result&#39;));
+</code></pre>
+<p>在第 <code>A</code> 行，<code>Promise</code> 是完成状态 ，所以 第 <code>C</code> 行会执行（尽管第 <code>B</code> 行被拒绝）。</p>
+<p>如果 Promise 被拒绝首先执行，在来看看情况是嘛样的：</p>
+<pre><code>    const promises = [
+      new Promise((resolve, reject) =&gt;
+        setTimeout(() =&gt; resolve(&#39;result&#39;), 200)),
+      new Promise((resolve, reject) =&gt;
+        setTimeout(() =&gt; reject(&#39;ERROR&#39;), 100)),
+    ];
+    Promise.race(promises)
+      .then(
+        (result) =&gt; assert.fail(),
+        (err) =&gt; assert.equal(
+          err, &#39;ERROR&#39;));
+</code></pre>
+<p>注意，由于 <code>Promse</code> 先被拒绝，所以 <code>Promise.race()</code> 返回的是一个被拒绝的 <code>Promise</code></p>
+<p>这意味着<code>Promise.race（[]）</code>的结果永远不会完成。</p>
+<p>下图演示了<code>Promise.race()</code>的工作原理：</p>
+<p><img src="https://img.php.cn/upload/image/473/488/834/1573093105471466.png" alt="1573093105471466.png"></p>
+<h4 id="Promise-race-在-Promise-超时下的情况"><a href="#Promise-race-在-Promise-超时下的情况" class="headerlink" title="Promise.race() 在 Promise 超时下的情况"></a>Promise.race() 在 Promise 超时下的情况</h4><p>在本节中，我们将使用<code>Promise.race()</code>来处理超时的 <code>Promise</code>。 以下辅助函数:</p>
+<pre><code>    function resolveAfter(ms, value=undefined) {
+      return new Promise((resolve, reject) =&gt; {
+        setTimeout(() =&gt; resolve(value), ms);
+      });
+    }
+</code></pre>
+<p><code>resolveAfter()</code> 主要做的是在指定的时间内，返回一个状态为 <code>resolve</code> 的 <code>Promise</code>，值为为传入的 <code>value</code></p>
+<p>调用上面方法：</p>
+<pre><code>    function timeout(timeoutInMs, promise) {
+      return Promise.race([
+        promise,
+        resolveAfter(timeoutInMs,
+          Promise.reject(new Error(&#39;Operation timed out&#39;))),
+      ]);
+    }
+</code></pre>
+<p><code>timeout()</code> 返回一个<code>Promise</code>，该 <code>Promise</code> 的状态取决于传入 <code>promise</code> 状态 。</p>
+<p>其中 <code>timeout</code> 函数中的 <code>resolveAfter(timeoutInMs, Promise.reject(new Error(&#39;Operation timed out&#39;))</code>，通过<code>resolveAfter</code>定义可知，该结果返回的是一个被拒绝状态的<code>Promise</code>。</p>
+<p>再来看看<code>timeout(timeoutInMs, promise)</code>的运行情况。如果传入<code>promise</code>在指定的时间之前状态为完成时，<code>timeout</code><br>返回结果就是一个完成状态的 <code>Promise</code>,可以通过<code>.then</code>的第一个回调参数处理返回的结果。</p>
+<pre><code>    timeout(200, resolveAfter(100, &#39;Result!&#39;))
+      .then(result =&gt; assert.equal(result, &#39;Result!&#39;));
+</code></pre>
+<p>相反，如果是在指定的时间之后完成，刚 <code>timeout</code> 返回结果就是一个拒绝状态的 <code>Promise</code>,从而触发<code>catch</code>方法指定的回调函数。</p>
+<pre><code>    timeout(100, resolveAfter(2000, &#39;Result!&#39;))
+      .catch(err =&gt; assert.deepEqual(err, new Error(&#39;Operation timed out&#39;)));
+</code></pre>
+<p>重要的是要了解“Promise 超时”的真正含义：</p>
+<ol>
+<li>如果传入入<code>Promise</code> 较到的得到解决，其结果就会给返回的 <code>Promise</code>。</li>
+<li>如果没有足够快得到解决，输出的 <code>Promise</code> 的状态为拒绝。</li>
+</ol>
+<p>也就是说，超时只会阻止传入的Promise，影响输出 Promise（因为Promise只能解决一次）， 但它并没有阻止传入<code>Promise</code>的异步操作。</p>
+<h4 id="5-2-Promise-race-的一个简版实现"><a href="#5-2-Promise-race-的一个简版实现" class="headerlink" title="5.2 Promise.race() 的一个简版实现"></a>5.2 Promise.race() 的一个简版实现</h4><p>以下是 <code>Promise.race()</code>的一个简化实现(它不执行安全检查)</p>
+<pre><code>    function race(iterable) {
+      return new Promise((resolve, reject) =&gt; {
+        for (const promise of iterable) {
+          promise.then(
+            (value) =&gt; {
+              if (settlementOccurred) return;
+              settlementOccurred = true;
+              resolve(value);
+            },
+            (err) =&gt; {
+              if (settlementOccurred) return;
+              settlementOccurred = true;
+              reject(err);
+            });
+        }
+        let settlementOccurred = false;
+      });
+    }
+</code></pre>
+<h2 id="6-Promise-allSettled"><a href="#6-Promise-allSettled" class="headerlink" title="6.Promise.allSettled()"></a>6.Promise.allSettled()</h2><p><code>“Promise.allSettled”</code>这一特性是由<strong>Jason Williams</strong>，<strong>Robert Pamely</strong>和<strong>Mathias<br>Bynens</strong>提出。</p>
+<p><code>promise.allsettle()</code>方法的定义：</p>
+<ul>
+<li><strong>Promise</strong>.allSettled(promises: Iterable&lt;**Promise**&gt;)</li>
+</ul>
+<p>: <strong>Promise</strong>&lt;<strong>Array</strong><SettlementObject>&gt;</p>
+<p>它返回一个<code>Array</code>的<code>Promise</code>，其元素具有以下类型特征：</p>
+<pre><code>    type SettlementObject&lt;T&gt; = FulfillmentObject&lt;T&gt; | RejectionObject;
+
+    interface FulfillmentObject&lt;T&gt; {
+      status: &#39;fulfilled&#39;;
+      value: T;
+    }
+
+    interface RejectionObject {
+      status: &#39;rejected&#39;;
+      reason: unknown;
+    }
+</code></pre>
+<p><code>Promise.allSettled()</code>方法返回一个promise，该promise在所有给定的promise已被解析或被拒绝后解析，并且每个对象都描述每个promise的结果。</p>
+<p>举例说明, 比如各位用户在页面上面同时填了3个独立的表单, 这三个表单分三个接口提交到后端, 三个接口独立, 没有顺序依赖,<br>这个时候我们需要等到请求全部完成后给与用户提示表单提交的情况</p>
+<p>在多个<code>promise</code>同时进行时咱们很快会想到使用<code>Promise.all</code>来进行包装, 但是由于<code>Promise.all</code>的短路特性,<br>三个提交中若前面任意一个提交失败, 则后面的表单也不会进行提交了, 这就与咱们需求不符合.</p>
+<p><code>Promise.allSettled</code>跟<code>Promise.all</code>类似, 其参数接受一个<code>Promise</code>的数组, 返回一个新的<code>Promise</code>,<br>唯一的不同在于, 其不会进行短路, 也就是说当<code>Promise</code>全部处理完成后我们可以拿到每个<code>Promise</code>的状态, 而不管其是否处理成功.</p>
+<p>下图说明<code>promise.allsettle()</code>是如何工作的</p>
+<p><img src="https://img.php.cn/upload/image/472/225/575/1573093129698473.png" alt="1573093129698473.png"></p>
+<h4 id="6-1-Promise-allSettled-例子"><a href="#6-1-Promise-allSettled-例子" class="headerlink" title="6.1 Promise.allSettled() 例子"></a>6.1 Promise.allSettled() 例子</h4><p>这是<code>Promise.allSettled()</code> 使用方式快速演示示例</p>
+<pre><code>    Promise.allSettled([
+      Promise.resolve(&#39;a&#39;),
+      Promise.reject(&#39;b&#39;),
+    ])
+    .then(arr =&gt; assert.deepEqual(arr, [
+      { status: &#39;fulfilled&#39;, value:  &#39;a&#39; },
+      { status: &#39;rejected&#39;,  reason: &#39;b&#39; },
+    ]));
+</code></pre>
+<h4 id="6-2-Promise-allSettled-较复杂点的例子"><a href="#6-2-Promise-allSettled-较复杂点的例子" class="headerlink" title="6.2 Promise.allSettled() 较复杂点的例子"></a>6.2 Promise.allSettled() 较复杂点的例子</h4><p>这个示例类似于<code>.map()</code>和<code>Promise.all()</code>示例(我们从其中借用了<code>downloadText()</code>函数):我们下载多个文本文件，这些文件的<code>url</code>存储在一个数组中。但是，这一次，咱们不希望在出现错误时停止，而是希望继续执行。<code>Promise.allSettled()</code>允许咱们这样做：</p>
+<pre><code>    const urls = [
+      &#39;http://example.com/exists.txt&#39;,
+      &#39;http://example.com/missing.txt&#39;,
+    ];
+
+    const result = Promise.allSettled(
+      urls.map(u =&gt; downloadText(u)));
+    result.then(
+      arr =&gt; assert.deepEqual(
+        arr,
+        [
+          {
+            status: &#39;fulfilled&#39;,
+            value: &#39;Hello!&#39;,
+          },
+          {
+            status: &#39;rejected&#39;,
+            reason: new Error(&#39;Not Found&#39;),
+          },
+        ]
+    ));
+</code></pre>
+<h4 id="6-3-Promise-allSettled-的简化实现"><a href="#6-3-Promise-allSettled-的简化实现" class="headerlink" title="6.3 Promise.allSettled() 的简化实现"></a>6.3 Promise.allSettled() 的简化实现</h4><p>这是<code>promise.allsettle()</code>的简化实现(不执行安全检查)</p>
+<pre><code>    function allSettled(iterable) {
+      return new Promise((resolve, reject) =&gt; {
+        function addElementToResult(i, elem) {
+          result[i] = elem;
+          elementCount++;
+          if (elementCount === result.length) {
+            resolve(result);
+          }
+        }
+
+        let index = 0;
+        for (const promise of iterable) {
+          // Capture the current value of `index`
+          const currentIndex = index;
+          promise.then(
+            (value) =&gt; addElementToResult(
+              currentIndex, {
+                status: &#39;fulfilled&#39;,
+                value
+              }),
+            (reason) =&gt; addElementToResult(
+              currentIndex, {
+                status: &#39;rejected&#39;,
+                reason
+              }));
+          index++;
+        }
+        if (index === 0) {
+          resolve([]);
+          return;
+        }
+        let elementCount = 0;
+        const result = new Array(index);
+      });
+    }
+</code></pre>
+<h2 id="7-短路特性"><a href="#7-短路特性" class="headerlink" title="7. 短路特性"></a>7. 短路特性</h2><p><code>Promise.all()</code> 和 <code>romise.race()</code> 都具有 短路特性</p>
+<ul>
+<li><strong>Promise.all()</strong>： 如果参数中 <code>promise</code> 有一个失败（rejected），此实例回调失败（reject）</li>
+</ul>
+<p><strong>Promise.race()</strong>：如果参数中某个<code>promise</code>解决或拒绝，返回的 promise就会解决或拒绝。</p>
+<h2 id="8-并发性和-Promise-all"><a href="#8-并发性和-Promise-all" class="headerlink" title="8.并发性和 Promise.all()"></a>8.并发性和 Promise.all()</h2><h4 id="8-1-顺序执行与并发执行"><a href="#8-1-顺序执行与并发执行" class="headerlink" title="8.1 顺序执行与并发执行"></a>8.1 顺序执行与并发执行</h4><p>考虑下面的代码：</p>
+<pre><code>    asyncFunc1()
+      .then(result1 =&gt; {
+        assert.equal(result1, &#39;one&#39;);
+        return asyncFunc2();
+      })
+      .then(result2 =&gt; {
+        assert.equal(result2, &#39;two&#39;);
+      });
+</code></pre>
+<p>使用<code>.then()</code>顺序执行基于<code>Promise</code>的函数：只有在 <code>asyncFunc1()</code>的结果被解决后才会执行<code>asyncFunc2()</code> 。</p>
+<p>而 <code>Promise.all()</code> 是并发执行的</p>
+<pre><code>    Promise.all([asyncFunc1(), asyncFunc2()])
+      .then(arr =&gt; {
+        assert.deepEqual(arr, [&#39;one&#39;, &#39;two&#39;]);
+      });
+</code></pre>
+<h4 id="8-2-并发技巧：关注操作何时开始"><a href="#8-2-并发技巧：关注操作何时开始" class="headerlink" title="8.2 并发技巧：关注操作何时开始"></a>8.2 并发技巧：关注操作何时开始</h4><p>确定并发异步代码的技巧:关注异步操作何时启动，而不是如何处理它们的<strong>Promises</strong>。</p>
+<p>例如，下面的每个函数都同时执行<code>asyncFunc1()</code>和<code>asyncFunc2()</code>，因为它们几乎同时启动。</p>
+<pre><code>    function concurrentAll() {
+      return Promise.all([asyncFunc1(), asyncFunc2()]);
+    }
+
+    function concurrentThen() {
+      const p1 = asyncFunc1();
+      const p2 = asyncFunc2();
+      return p1.then(r1 =&gt; p2.then(r2 =&gt; [r1, r2]));
+    }
+</code></pre>
+<p>另一方面，以下两个函数依次执行<code>asyncFunc1()</code>和<code>asyncFunc2()</code>:<br><code>asyncFunc2()</code>仅在<code>asyncFunc1()</code>的解决之后才调用。</p>
+<pre><code>    function sequentialThen() {
+      return asyncFunc1()
+        .then(r1 =&gt; asyncFunc2()
+          .then(r2 =&gt; [r1, r2]));
+    }
+
+    function sequentialAll() {
+      const p1 = asyncFunc1();
+      const p2 = p1.then(() =&gt; asyncFunc2());
+      return Promise.all([p1, p2]);
+    }
+</code></pre>
+<h4 id="8-3-Promise-all-与-Fork-Join-分治编程"><a href="#8-3-Promise-all-与-Fork-Join-分治编程" class="headerlink" title="8.3 Promise.all() 与 Fork-Join 分治编程"></a>8.3 Promise.all() 与 Fork-Join 分治编程</h4><p><code>Promise.all()</code> 与并发模式“fork join”松散相关。重温一下咱们前面的一个例子：</p>
+<pre><code>    Promise.all([
+        // (A) fork
+        downloadText(&#39;http://example.com/first.txt&#39;),
+        downloadText(&#39;http://example.com/second.txt&#39;),
+      ])
+      // (B) join
+      .then(
+        (arr) =&gt; assert.deepEqual(
+          arr, [&#39;First!&#39;, &#39;Second!&#39;]
+        ));
+</code></pre>
+<ul>
+<li>Fork：在<code>A</code>行中，分割两个异步任务并同时执行它们。</li>
+<li>Join：在<code>B</code>行中，对每个小任务得到的结果进行汇总。</li>
+</ul>
+<p>原文：<a target="_blank" rel="noopener" href="https://2ality.com/2019/08/promise-combinators.html">https://2ality.com/2019/08/promise-combinators.html</a></p>
+<p>为了保证的可读性，本文采用意译而非直译。</p>
+<p>以上就是Promise的三兄弟：all(), race()以及allSettled()的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/fd8c55d1.html"><div class="related-post-title">uni-app自定义tabbar导航栏</div><div class="related-post-meta"><time>2021-08-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/362fd171.html"><div class="related-post-title">Chrome浏览器垃圾回收机制与内存泄漏分析</div><div class="related-post-meta"><time>2019-10-31</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/7a3ef8f.html"><div class="related-post-title">即将到来的es2022新特性</div><div class="related-post-meta"><time>2022-02-15</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/5b7240b9.html"><div class="related-post-title">虚拟DOM和diff算法</div><div class="related-post-meta"><time>2021-08-06</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/e318761e.html"><div class="related-post-title">嗨，你真的懂this吗？</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/a01d2f61.html">https://xuehuayu.cn/article/a01d2f61.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/98b4db70.html">前端面试之webpack面试常见问题</a><a class="next" href="/article/c5b2a99.html">12个提高 JavaScript 技能的概念！</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

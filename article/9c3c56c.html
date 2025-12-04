@@ -1,0 +1,766 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,原创,FrontEnd,面试,vue,webpack,babel"><title>vue、react、webpack、babel 前端知识体系总结 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">vue、react、webpack、babel 前端知识体系总结</h1><div class="post-meta"><span class="date">2023-03-06</span><span> | </span><span class="original">原创 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.8k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 21</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/9c3c56c.html#waline-comment"><span class="waline-comment-count" data-path="/article/9c3c56c.html">0</span><span> 条评论</span></a><div class="post-content"><p>vue、react、webpack、babel 前端知识体系总结</p>
+<span id="more"></span>
+
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><h4 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h4><ul>
+<li>原始html内容，有xss风险</li>
+</ul>
+<h4 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h4><ul>
+<li>有缓存，data不变不会重新计算</li>
+</ul>
+<h4 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h4><p>监听引用类型，使用下面方法深度监听，但是<strong>拿不到<code>oldVal</code></strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">watch</span>:&#123;</span><br><span class="line">    <span class="attr">info</span>: &#123;</span><br><span class="line">        handler (oldVal, val) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>((oldVal, val)</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">deep</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="class-写法"><a href="#class-写法" class="headerlink" title="class 写法"></a>class 写法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data () &#123;</span><br><span class="line">    <span class="attr">isblack</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">isRed</span>: <span class="literal">false</span>,</span><br><span class="line"></span><br><span class="line">    <span class="attr">black</span>: <span class="string">&quot;black&quot;</span>,</span><br><span class="line">    <span class="attr">red</span>: <span class="string">&quot;red&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">:<span class="keyword">class</span>=&#123;<span class="attr">black</span>: isblack, <span class="attr">red</span>: isRed&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">class</span>=[black, red]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="style"><a href="#style" class="headerlink" title="style"></a>style</h4><ul>
+<li>object 类型</li>
+<li>驼峰写法</li>
+</ul>
+<h4 id="v-if-和-v-show-区别"><a href="#v-if-和-v-show-区别" class="headerlink" title="v-if 和 v-show 区别"></a>v-if 和 v-show 区别</h4><ul>
+<li>v-if 是否渲染，更新不频繁使用</li>
+<li>v-show 是通过 css 的 display 控制显示与隐藏，频繁切换使用</li>
+</ul>
+<h4 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h4><ul>
+<li>也可以遍历对象</li>
+<li>key，不能乱写，尽量不用index，不用random</li>
+<li><code>v-for</code> 优先级比<code>v-if</code>高</li>
+</ul>
+<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><h5 id="event参数，自定义参数"><a href="#event参数，自定义参数" class="headerlink" title="event参数，自定义参数"></a>event参数，自定义参数</h5><ul>
+<li>没有参数，直接可以获取</li>
+<li>有参数，用<code>$event</code></li>
+<li><code>event</code>是原生对象</li>
+</ul>
+<h5 id="事件修饰符，按键修饰符"><a href="#事件修饰符，按键修饰符" class="headerlink" title="事件修饰符，按键修饰符"></a>事件修饰符，按键修饰符</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@click.stop.prevent</span><br><span class="line">@click.ctrl.exact</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="！（观察）事件被绑定到哪里"><a href="#！（观察）事件被绑定到哪里" class="headerlink" title="！（观察）事件被绑定到哪里"></a>！（观察）事件被绑定到哪里</h5><p><code>event.target</code>的值表明事件是挂在<strong>当前元素</strong>上的</p>
+<h4 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h4><h5 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h5><ul>
+<li>v-model.trim</li>
+<li>v-model.lazy</li>
+<li>v-model.number</li>
+</ul>
+<h2 id="组件使用"><a href="#组件使用" class="headerlink" title="组件使用"></a>组件使用</h2><h3 id="props"><a href="#props" class="headerlink" title="props"></a>props</h3><p>简写</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">props</span>:[<span class="string">&#x27;list&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>复杂写法，常用，可以定义类型和默认值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">props</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">Array</span>,</span><br><span class="line">    <span class="attr">default</span>:&#123;</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="emit"><a href="#emit" class="headerlink" title="$emit"></a>$emit</h3><p>父组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Input</span> @add=<span class="string">&quot;clickhandler&quot;</span>/&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>子组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">methods</span>:&#123;</span><br><span class="line">    <span class="title function_">addTitle</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.$emit(<span class="string">&#x27;add&#x27;</span>, title)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="组件通信-自定义事件（兄弟组件通信）"><a href="#组件通信-自定义事件（兄弟组件通信）" class="headerlink" title="组件通信 - 自定义事件（兄弟组件通信）"></a>组件通信 - 自定义事件（兄弟组件通信）</h3><p><strong>vue 具有自定义事件能力 $on、$off、$emit</strong></p>
+<p><strong>组件卸载时，解除事件绑定，销毁子组件，定时器等</strong></p>
+<h3 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h3><h4 id="单个组件"><a href="#单个组件" class="headerlink" title="单个组件"></a>单个组件</h4><ul>
+<li>created：vue实例化完成</li>
+<li>mounted：渲染完成</li>
+</ul>
+<h4 id="父子组件"><a href="#父子组件" class="headerlink" title="父子组件"></a>父子组件</h4><ul>
+<li>组件实例创建： 先父后子</li>
+<li>组件渲染： 先子后父【子组件渲染完，才能挂载】</li>
+</ul>
+<h3 id="高级特性"><a href="#高级特性" class="headerlink" title="高级特性"></a>高级特性</h3><h4 id="自定义-v-model"><a href="#自定义-v-model" class="headerlink" title="自定义 v-model"></a>自定义 v-model</h4><p>父组件中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;CunstomVModal v-model=&#123;name&#125;&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>子组件中 CunstomVModal</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;input type=&quot;text&quot; :value=&quot;txt&quot; @input=&quot;$emit(&#x27;chage&#x27;, $event.target.value)&quot;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        model:&#123;</span><br><span class="line">            prop: &#x27;txt&#x27;,</span><br><span class="line">            event:&#x27;chage&#x27;</span><br><span class="line">        &#125;,</span><br><span class="line">        props:&#123;</span><br><span class="line">            txt: String,</span><br><span class="line">            default () &#123;</span><br><span class="line">                return &#x27;&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="nextTick、refs"><a href="#nextTick、refs" class="headerlink" title="$nextTick、refs"></a>$nextTick、refs</h4><ul>
+<li>vue 是异步渲染</li>
+<li>data 改变之后，dom不会like渲染</li>
+<li>$nextTick 会在dom渲染之后被处罚，以获取最新的dom节点</li>
+</ul>
+<h4 id="slot"><a href="#slot" class="headerlink" title="slot"></a>slot</h4><ul>
+<li>基本使用</li>
+<li>作用于插槽</li>
+<li>具名插槽</li>
+</ul>
+<h4 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h4><ul>
+<li>:is&#x3D;”component-name”</li>
+<li>需要根据数据，动态渲染的场景。即组件类型不确定</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;component :is=&quot;compName&quot;&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  import myComp from &#x27;./myComp&#x27;</span><br><span class="line">    components:&#123;</span><br><span class="line">        myComp</span><br><span class="line">    &#125;,</span><br><span class="line">    data () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            compName: &#x27;myComp&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="异步组件"><a href="#异步组件" class="headerlink" title="异步组件"></a>异步组件</h4><ul>
+<li>import()</li>
+<li>按需加载，异步加载大组件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  components:&#123;</span><br><span class="line">  Demo: () =&gt; import(&#x27;./ImportDemo&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="keep-alive"><a href="#keep-alive" class="headerlink" title="keep-alive"></a>keep-alive</h4><ul>
+<li>缓存组件</li>
+<li>频繁切换，不需要重复渲染</li>
+<li>vue常见性能优化</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 每个组件只渲染一次，且不会销毁。</span><br><span class="line">// 简单的用v-show就行，稍微复杂的用keep-alive</span><br><span class="line">&lt;keep-alive&gt;</span><br><span class="line">    &lt;A v-if=&quot;a&quot;&gt;&lt;/A&gt;</span><br><span class="line">    &lt;B v-if=&quot;b&quot;&gt;&lt;/B&gt;</span><br><span class="line">    &lt;C v-if=&quot;c&quot;&gt;&lt;/C&gt;</span><br><span class="line">&lt;/keep-alive&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="mixin"><a href="#mixin" class="headerlink" title="mixin"></a>mixin</h4><ul>
+<li>多个组件有相同的逻辑，抽离出来</li>
+<li>mixin并不是完美的解决方案，会有一些问题</li>
+<li>vue 3 提出的 composition API 旨在解决这些问题</li>
+</ul>
+<hr>
+<h5 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h5><ul>
+<li>变量来源不明确，不利于阅读</li>
+<li>多个mixin可能会造成命名冲突</li>
+<li>mixin和组件可能会出现多对多的关系，复杂度较高</li>
+</ul>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;sript&gt;</span><br><span class="line">    import Mixin from &#x27;./mixin&#x27;</span><br><span class="line">    export default &#123;</span><br><span class="line">        mixins: [Mixin],</span><br><span class="line">        data () &#123;</span><br><span class="line">            return &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/sript&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="vuex-使用"><a href="#vuex-使用" class="headerlink" title="vuex 使用"></a>vuex 使用</h4><ul>
+<li>基本概念、基本使用、API</li>
+<li>state的数据结构设计</li>
+</ul>
+<h5 id="vuex基本概念"><a href="#vuex基本概念" class="headerlink" title="vuex基本概念"></a>vuex基本概念</h5><ul>
+<li>state</li>
+<li>gettters</li>
+<li>action</li>
+<li>mutation</li>
+</ul>
+<h5 id="用于vue组件"><a href="#用于vue组件" class="headerlink" title="用于vue组件"></a>用于vue组件</h5><ul>
+<li>dispatch</li>
+<li>commit</li>
+<li>mapstate</li>
+<li>mapGetters</li>
+<li>mapActions</li>
+<li>mapMutations</li>
+</ul>
+<h4 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h4><h5 id="路由模式："><a href="#路由模式：" class="headerlink" title="路由模式："></a>路由模式：</h5><ul>
+<li><p>hash</p>
+<ul>
+<li>window.onhashchange</li>
+<li>会出发网页跳转，</li>
+<li>可前进后退，</li>
+<li>不会提交到server端，强制刷新也不会</li>
+<li>可刷新</li>
+</ul>
+</li>
+<li><p>H5 history</p>
+<ul>
+<li>history.pushState</li>
+<li>window.onpopstate</li>
+<li>不可刷新（需要后端支持）</li>
+</ul>
+</li>
+</ul>
+<h5 id="路由配置："><a href="#路由配置：" class="headerlink" title="路由配置："></a>路由配置：</h5><ul>
+<li>动态路由 {path: ‘&#x2F;user&#x2F;:id?’, component: User}</li>
+<li>懒加载 {path: ‘&#x2F;user&#x2F;:id?’, component: () &#x3D;&gt; import(‘.&#x2F;user’)}</li>
+</ul>
+<h3 id="Vue原理"><a href="#Vue原理" class="headerlink" title="Vue原理"></a>Vue原理</h3><h4 id="如何里面MVVM"><a href="#如何里面MVVM" class="headerlink" title="如何里面MVVM"></a>如何里面MVVM</h4><ul>
+<li><p>很久以前的视图</p>
+<ul>
+<li>asp jsp php 已经有组件化了</li>
+<li>传统组件，只是静态渲染，更新依赖于操作dom</li>
+</ul>
+</li>
+<li><p>数据驱动视图（vue MVVM，react setState）</p>
+</li>
+</ul>
+<h4 id="vue-响应式"><a href="#vue-响应式" class="headerlink" title="vue 响应式"></a>vue 响应式</h4><ul>
+<li><p>组件data的数据一旦变化，立刻出发视图更新</p>
+</li>
+<li><p>核心API - Object.defineProperty</p>
+<ul>
+<li>get</li>
+<li>set</li>
+</ul>
+</li>
+<li><p>Object.defineProperty 的一些缺点 （Vue3.0 使用 Proxy）</p>
+</li>
+<li><p>proxy 兼容性不太好，且无法 polyfill</p>
+</li>
+</ul>
+<h5 id="Object-defineProperty-缺点"><a href="#Object-defineProperty-缺点" class="headerlink" title="Object.defineProperty 缺点"></a>Object.defineProperty 缺点</h5><ul>
+<li>深度监听，需要递归到底，一次性计算量大</li>
+<li>新增，删除 无法监听，需要用 Vue.set 和 Vue.delete</li>
+<li>无法监听数组，需要专门处理</li>
+</ul>
+<h5 id="Proxy-实现响应式"><a href="#Proxy-实现响应式" class="headerlink" title="Proxy 实现响应式"></a>Proxy 实现响应式</h5><ul>
+<li><p>基本使用</p>
+</li>
+<li><p>Reflect</p>
+</li>
+<li><p>实现响应式</p>
+</li>
+<li><p>对比 defineProperty 提高性能</p>
+<ul>
+<li>set第一层属性的时候，触发set</li>
+<li>set第二层属性的时候触发第一层属性的get</li>
+<li>所以在get的时候，返回一个 新的proxy对象即可 深度监听，而且是惰性监听</li>
+<li>所以性能比defineProperty好</li>
+</ul>
+</li>
+</ul>
+<h4 id="虚拟DOM-和-diff"><a href="#虚拟DOM-和-diff" class="headerlink" title="虚拟DOM 和 diff"></a>虚拟DOM 和 diff</h4><ul>
+<li>DOM操作非常耗性能，js是执行非常快的</li>
+<li>vue和react是数据驱动视图</li>
+</ul>
+<h5 id="vdom"><a href="#vdom" class="headerlink" title="vdom"></a>vdom</h5><p>用js模拟dom结构，计算出最小的变更，操作dom</p>
+<h5 id="snabbdom"><a href="#snabbdom" class="headerlink" title="snabbdom"></a>snabbdom</h5><ul>
+<li>h函数，返回vnode（js）</li>
+<li>patch(container, vnode) 初次渲染</li>
+<li>patch(oldVnode, newVnode) 更新，新旧vnode都有children，那么updateChildren</li>
+<li>patch(oldVnode, null) 销毁清空</li>
+</ul>
+<h5 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h5><ul>
+<li>只比较同一层级，不跨级比较</li>
+<li>tag不相同，直接删掉重建，不再深度比较</li>
+<li>tag和key都相同，则认为是相同节点，不再深度比较</li>
+</ul>
+<h5 id="模板编译"><a href="#模板编译" class="headerlink" title="模板编译"></a>模板编译</h5><ul>
+<li>vue将模板编译为render函数</li>
+<li>执行render函数生成vnode，patch</li>
+<li>触发响应式，监听data属性getter setter</li>
+</ul>
+<blockquote>
+<ul>
+<li>with语法</li>
+<li>vue组件可以用render代替template</li>
+</ul>
+</blockquote>
+<h6 id="初次渲染过程"><a href="#初次渲染过程" class="headerlink" title="初次渲染过程"></a>初次渲染过程</h6><ul>
+<li>解析为render函数</li>
+<li>触发响应式，监听data属性getter setter</li>
+<li>执行render函数，生成vnode，patch</li>
+</ul>
+<h6 id="更新过程"><a href="#更新过程" class="headerlink" title="更新过程"></a>更新过程</h6><ul>
+<li>修改data，触发setter，（此前在getter中已被监听）</li>
+<li>重新执行render函数，生成newVnode</li>
+<li>patch(oldVnode, newVnode)</li>
+</ul>
+<h5 id="组件异步渲染"><a href="#组件异步渲染" class="headerlink" title="组件异步渲染"></a>组件异步渲染</h5><ul>
+<li>$nextTick</li>
+<li>汇总data修改，一次性更新视图</li>
+<li>减少dom操作次数，提高性能</li>
+</ul>
+<h4 id="Vue3"><a href="#Vue3" class="headerlink" title="Vue3"></a>Vue3</h4><h5 id="新功能"><a href="#新功能" class="headerlink" title="新功能"></a>新功能</h5><ul>
+<li>createApp</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// vue2</span><br><span class="line">const app = new Vue(&#123;&#125;)</span><br><span class="line">Vue.use()</span><br><span class="line">Vue.mixin()</span><br><span class="line">Vue.component()</span><br><span class="line">Vue.directive()</span><br><span class="line">// vue3</span><br><span class="line">const app = Vue.createApp(&#123;&#125;)</span><br><span class="line">app.use()</span><br><span class="line">app.mixin()</span><br><span class="line">app.component()</span><br><span class="line">app.directive()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>emits属性</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">emits: [&#x27;onClickhandler&#x27;] // 建议 onXxx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>生命周期</p>
+<ul>
+<li>beforeDestroy 改为 beforeUnmount</li>
+<li>destroyed 改为 unmounted</li>
+</ul>
+</li>
+<li><p>多事件处理， @click&#x3D;”one($event),two($event)”</p>
+</li>
+<li><p>Fragment, 模板不需要包在一个根组件中了，template下面可以写多个标签</p>
+</li>
+<li><p>移除.sync改为v-model参数</p>
+</li>
+<li><p>异步组件的引用方式， defindAsyncComponent</p>
+</li>
+<li><p>移除filter，如：v-if&#x3D;”boolA | boolB”</p>
+</li>
+<li><p>Teleport，<teleport to="body"></teleport></p>
+</li>
+<li><p>Suspense</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;Suspense&gt;</span><br><span class="line">  &lt;template&gt;</span><br><span class="line">    &lt;Test1/&gt; &lt;!-- 是一个异步组件 --&gt;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">  &lt;!-- 具名插槽</span><br><span class="line">    即：Suspense 组件内部，有两个slot，</span><br><span class="line">    其中一个具名为 fallback</span><br><span class="line">  --&gt;</span><br><span class="line">  &lt;tempalte #fallback&gt;</span><br><span class="line">    Loading...</span><br><span class="line">  &lt;/tempalte&gt;</span><br><span class="line">&lt;/Suspense&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Composition API</p>
+<ul>
+<li>reactive</li>
+<li>ref toRef toRefs</li>
+<li>readonly</li>
+<li>computed</li>
+<li>watch watchEffect</li>
+<li>钩子函数生命周期</li>
+</ul>
+</li>
+</ul>
+<h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><ul>
+<li><p>proxy 实现响应式</p>
+<ul>
+<li>对值类型无能为力，所以要用 ref</li>
+</ul>
+</li>
+<li><p>编译优化</p>
+<ul>
+<li>PatchFlag 静态标记</li>
+<li>hoistStatic 静态提升</li>
+<li>cacheHandler 缓存事件</li>
+<li>SSR 优化</li>
+<li>Tree-shaking 优化</li>
+</ul>
+</li>
+</ul>
+<h5 id="Vue3-比-vue2-优势"><a href="#Vue3-比-vue2-优势" class="headerlink" title="Vue3 比 vue2 优势"></a>Vue3 比 vue2 优势</h5><ul>
+<li>性能更好</li>
+<li>体积更小</li>
+<li>更好的ts支持</li>
+<li>更好的代码组织</li>
+<li>更好的逻辑抽离</li>
+<li>更多的新功能</li>
+</ul>
+<h5 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h5><ul>
+<li>beforeDestroy 改为 beforeUnmount</li>
+<li>destroyed 改为 unmounted</li>
+<li>其他沿用vue2的生命周期</li>
+<li>setup等于 beforeCreate 和 created</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import &#123; onBeforeMount &#125; from &#x27;vue&#x27;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">    &lt;!-- 其他代码 --&gt;</span><br><span class="line">    setup () &#123;</span><br><span class="line">        onBeforeMount(() =&gt;  &#123;</span><br><span class="line">            console.log(&#x27;onBeforeMount&#x27;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;!-- 其他代码 --&gt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="Composition-API-对比-Options-API"><a href="#Composition-API-对比-Options-API" class="headerlink" title="Composition API 对比 Options API"></a>Composition API 对比 Options API</h5><ul>
+<li>更好的代码组织</li>
+<li>更好的逻辑复用(options api 分散于生命周期中，代码越多越明显)</li>
+<li>更好的类型推导(直接this.a 和 this.fn，不利于类型判断 )</li>
+<li>不建议共用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">    data () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            a: 10</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        fn () &#123;</span><br><span class="line">            const a = this.a</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted: &#123;</span><br><span class="line">        this.fn()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="ref-toRef-toRefs"><a href="#ref-toRef-toRefs" class="headerlink" title="ref toRef toRefs"></a>ref toRef toRefs</h5><ul>
+<li>toRef 将一个响应式对象中的某个属性变为ref</li>
+<li>toRefs 将一个响应式对象变为普通对象，这个普通对象的每个属性变为ref</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;&#123;&#123;name&#125;&#125;&#123;&#123;ageRef&#125;&#125;&lt;/div&gt;</span><br><span class="line">    &lt;div ref=&quot;eleRef&quot;&gt;我是文字&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    import &#123; ref, toRef, toRefs, reactive, onMounted &#125; from &#x27;vue&#x27;</span><br><span class="line"></span><br><span class="line">    export default &#123;</span><br><span class="line">        name: &#x27;Ref&#x27;,</span><br><span class="line">        setup() &#123;</span><br><span class="line">            const eleRef = ref(null)</span><br><span class="line">            const ageRef = ref(20)</span><br><span class="line">            // 两者保持引用关系↓</span><br><span class="line">            // 不能返回解构的state，会丢失响应式</span><br><span class="line">            const state = reactive(&#123;</span><br><span class="line">                name: &#x27;张三&#x27;</span><br><span class="line">            &#125;)</span><br><span class="line">            const nameRef = toRef(state, &#x27;name&#x27;)</span><br><span class="line">            nameRef.value = &#x27;李四&#x27; // state中的name也会改变</span><br><span class="line">            state.name = &#x27;王五&#x27; // nameRef的值也会改变</span><br><span class="line">            // 两者保持引用关系 ↑</span><br><span class="line">            ageRef.value = 30</span><br><span class="line">            onMounted(() =&gt; &#123;</span><br><span class="line">                console.log(eleRef.value.innerHTML)</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">            // const stateRefs = toRefs(state)</span><br><span class="line">            // const &#123;name: nameRef&#125; = stateRefs</span><br><span class="line">            // return stateRefs // toRefs的返回</span><br><span class="line"></span><br><span class="line">            // 其他返回</span><br><span class="line">            return &#123;</span><br><span class="line">                ageRef,</span><br><span class="line">                eleRef</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="为什么要用-Ref"><a href="#为什么要用-Ref" class="headerlink" title="为什么要用 Ref"></a>为什么要用 Ref</h5><ul>
+<li>返回 值类型，会丢失响应式</li>
+<li>如在setup、computed、合成函数，都有可能返回 值类型</li>
+<li>vue如果不定义ref。用户将自造ref，反而更混乱</li>
+</ul>
+<h5 id="为什么要-value"><a href="#为什么要-value" class="headerlink" title="为什么要.value"></a>为什么要.value</h5><ul>
+<li>ref 是个对象（不丢失响应式），value存储值</li>
+<li>通过.value属性的get和set实现响应式</li>
+<li>用于模板、reactive时，（vue可以自己控制）不需要.value，其他情况都需要</li>
+</ul>
+<h5 id="Composition-API-实现逻辑复用"><a href="#Composition-API-实现逻辑复用" class="headerlink" title="Composition API 实现逻辑复用"></a>Composition API 实现逻辑复用</h5><ul>
+<li>抽离逻辑代码到一个函数</li>
+<li>函数命名约定为 useXxx 格式</li>
+<li>setup中引用 useXxx 函数</li>
+</ul>
+<h5 id="Proxy-实现响应式-1"><a href="#Proxy-实现响应式-1" class="headerlink" title="Proxy 实现响应式"></a>Proxy 实现响应式</h5><ul>
+<li><p>基本使用</p>
+</li>
+<li><p>Reflect</p>
+</li>
+<li><p>实现响应式</p>
+</li>
+<li><p>对比 defineProperty 提高性能</p>
+<ul>
+<li>set第一层属性的时候，触发set</li>
+<li>set第二层属性的时候触发第一层属性的get</li>
+<li>所以在get的时候，返回一个 新的proxy对象即可 深度监听，而且是惰性监听</li>
+<li>所以性能比defineProperty好</li>
+</ul>
+</li>
+</ul>
+<h5 id="watch-和-watchEffect-的区别"><a href="#watch-和-watchEffect-的区别" class="headerlink" title="watch 和 watchEffect 的区别"></a>watch 和 watchEffect 的区别</h5><ul>
+<li>两者都可以监听data属性变化</li>
+<li>watch 需要明确监听哪个属性</li>
+<li>watchEffect会根据其中的属性，自动监听其变化</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// watch 默认不会立即执行</span><br><span class="line">// 监听ref</span><br><span class="line">watch(nameRef, (newVal, oldVal) =&gt; &#123;&#125;, [options])</span><br><span class="line">// 监听响应式</span><br><span class="line">watch(() =&gt; state.name, (newState, oldState) =&gt; &#123;&#125;, [options])</span><br><span class="line"></span><br><span class="line">watchEffect(() =&gt; &#123;</span><br><span class="line">    // 初始化就会执行一次，收集监听的数据</span><br><span class="line">    console.log(&#x27;watchEffect&#x27;)</span><br><span class="line">&#125;)</span><br><span class="line">watchEffect(() =&gt; &#123;</span><br><span class="line">    // 写了 state.name 就监听， 不写的不会监听</span><br><span class="line">    console.log(state.name)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="setup中如何获取组件实例"><a href="#setup中如何获取组件实例" class="headerlink" title="setup中如何获取组件实例"></a>setup中如何获取组件实例</h5><ul>
+<li>在setup 和 Composition API 中没有this</li>
+<li>可通过 getCurrentInstance 获取当前实例</li>
+<li>若使用 options API 可照常使用 this</li>
+</ul>
+<h5 id="vue3-为何比-vue2-快"><a href="#vue3-为何比-vue2-快" class="headerlink" title="vue3 为何比 vue2 快"></a>vue3 为何比 vue2 快</h5><ul>
+<li>Proxy 响应式</li>
+<li>PatchFlag &#x2F;&#x2F; 标记节点类型</li>
+<li>hoistStatic &#x2F;&#x2F; 缓存静态节点，多个节点合并</li>
+<li>cacheHandler &#x2F;&#x2F;</li>
+<li>SSR 优化</li>
+<li>tree-shaking</li>
+</ul>
+<h6 id="PatchFlag"><a href="#PatchFlag" class="headerlink" title="PatchFlag"></a>PatchFlag</h6><ul>
+<li>编译模板时，动态节点做标记</li>
+<li>标记分为不同类型，如 TEXT PROPS</li>
+<li>diff算法时，可以区分静态节点，以及不同类型的节点</li>
+</ul>
+<h6 id="hoistStatic"><a href="#hoistStatic" class="headerlink" title="hoistStatic"></a>hoistStatic</h6><ul>
+<li>将静态节点的定义，提升到父作用域，缓存起来</li>
+<li>多个相邻的静态节点，会被合并起来</li>
+<li>典型的拿空间换时间的优化策略</li>
+</ul>
+<h6 id="cacheHandler"><a href="#cacheHandler" class="headerlink" title="cacheHandler"></a>cacheHandler</h6><ul>
+<li>将事件缓存起来</li>
+</ul>
+<h5 id="vite-ES6-module"><a href="#vite-ES6-module" class="headerlink" title="vite - ES6 module"></a>vite - ES6 module</h5><h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><h3 id="基本使用-1"><a href="#基本使用-1" class="headerlink" title="基本使用"></a>基本使用</h3><h4 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h4><ul>
+<li>不可变值，为了SCU</li>
+<li>可能异步可能同步</li>
+<li>可能会被合并</li>
+</ul>
+<h5 id="是同步还是异步"><a href="#是同步还是异步" class="headerlink" title="是同步还是异步"></a>是同步还是异步</h5><ul>
+<li>直接使用是异步的</li>
+<li>在setTimeout或者自定义的dom事件中是同步的</li>
+</ul>
+<h5 id="何时会合并"><a href="#何时会合并" class="headerlink" title="何时会合并"></a>何时会合并</h5><ul>
+<li>对象形式，会被合并</li>
+<li>函数形式，不会合并</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">this.setState((state, props) =&gt; &#123;&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>直接修改state的值，影响性能</li>
+</ul>
+<h4 id="事件为何要bind-this"><a href="#事件为何要bind-this" class="headerlink" title="事件为何要bind this"></a>事件为何要bind this</h4><ul>
+<li>class生成的实例中，this是undefined</li>
+</ul>
+<h4 id="Reaact-高级特性"><a href="#Reaact-高级特性" class="headerlink" title="Reaact 高级特性"></a>Reaact 高级特性</h4><ul>
+<li>函数组件</li>
+<li>非受控组件</li>
+<li>Portals ReactDOM.createPortals()</li>
+<li>context</li>
+<li>异步组件，import() React.lazy React.Suspense</li>
+<li>性能优化，SCU 核心问题是 不可变值</li>
+<li>高阶组件HOC</li>
+<li>render props</li>
+</ul>
+<h5 id="jsx-本质是什么"><a href="#jsx-本质是什么" class="headerlink" title="jsx 本质是什么"></a>jsx 本质是什么</h5><ul>
+<li>React.createElement 函数，执行返回 vnode</li>
+</ul>
+<h5 id="事件合成机制"><a href="#事件合成机制" class="headerlink" title="事件合成机制"></a>事件合成机制</h5><ul>
+<li>div 冒泡至 document，合成统一的react event，dispatchEvent事件派发交由对应的处理器执行</li>
+<li>更好的兼容性和跨平台</li>
+<li>挂载到根节点，减少内存消耗，避免频繁解绑</li>
+<li>方便统一管理（如事务机制）</li>
+</ul>
+<h5 id="transaction-事务机制"><a href="#transaction-事务机制" class="headerlink" title="transaction 事务机制"></a>transaction 事务机制</h5><p>Transaction类的主要作用使用提供的包装（Wrapper）来包装一个函数。<br>Transaction会接受一个方法<br>func，和一组Wrapper。Transaction会在func执行之前，执行一组Wrapper中的initialize方法。而后执行func方法，在func方法执行完了之后，执行Wrapper提供的所有close方法。</p>
+<h5 id="fiber"><a href="#fiber" class="headerlink" title="fiber"></a>fiber</h5><ul>
+<li><p>props state</p>
+</li>
+<li><p>render 生成 vnode</p>
+</li>
+<li><p>patch(ele, vnode)</p>
+<ul>
+<li>reconciliation 执行diff算法，纯js计算<ul>
+<li>进行任务拆分</li>
+<li>DOM需要渲染时暂停，空闲时恢复</li>
+<li>window.requestIdleCallback</li>
+</ul>
+</li>
+<li>commit 阶段，将diff结果渲染到dom中</li>
+</ul>
+</li>
+</ul>
+<h5 id="react-性能优化"><a href="#react-性能优化" class="headerlink" title="react 性能优化"></a>react 性能优化</h5><ul>
+<li>渲染列表key</li>
+<li>及时销毁事件</li>
+<li>合理使用异步组件</li>
+<li>减少 bind 次数</li>
+<li>合理使用 scu pure memo</li>
+<li>合理使用 immutablejs</li>
+<li>打包webpack优化</li>
+<li>前端通用优化 图片懒加载等</li>
+<li>SSR</li>
+</ul>
+<h5 id="React-和-Vue-区别"><a href="#React-和-Vue-区别" class="headerlink" title="React 和 Vue 区别"></a>React 和 Vue 区别</h5><p>1、共同</p>
+<ul>
+<li>支持组件化</li>
+<li>数据驱动视图</li>
+<li>vdom操作dom</li>
+</ul>
+<p>2、不同</p>
+<ul>
+<li>React 使用 jsx 拥抱js（文件都是.js结尾），Vue使用模板拥抱html（文件是.vue结尾）</li>
+<li>React 函数式编程，Vue 声明式编程</li>
+<li>React 更多需要自力更生，Vue 把想要的都给你</li>
+</ul>
+<h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><h3 id="升级webpack5-级周边插件后。需要做的调整"><a href="#升级webpack5-级周边插件后。需要做的调整" class="headerlink" title="升级webpack5 级周边插件后。需要做的调整"></a>升级webpack5 级周边插件后。需要做的调整</h3><ul>
+<li><p>package.json的dev-server命令改了，</p>
+<ul>
+<li>4: “dev”:”webpack-dev-server –config build&#x2F;webpack.dev.js”</li>
+<li>5: “dev”:”webpack serve –config build&#x2F;webpack.dev.js”</li>
+</ul>
+</li>
+<li><p>webpack-merge</p>
+<ul>
+<li>4: const { smart } &#x3D; require(‘webpack-merge’)</li>
+<li>5: const { merge } &#x3D; require(‘webpack-merge’)</li>
+</ul>
+</li>
+<li><p>CleanWebpackplugin</p>
+<ul>
+<li>4: const CleanWebpackplugin &#x3D; require(‘clean-webpack-plugin’)</li>
+<li>5: const { CleanWebpackplugin } &#x3D; require(‘clean-webpack-plugin’)</li>
+</ul>
+</li>
+<li><p>modules.rules</p>
+<ul>
+<li>4: loader: [‘xxx-loader’]</li>
+<li>5: use: [‘xxx-loader’]</li>
+</ul>
+</li>
+<li><p>filename hash h小写</p>
+<ul>
+<li>4: filename: ‘bundle.[contentHash:8].js’</li>
+<li>5: filename: ‘bundle.[contenthash:8].js’</li>
+</ul>
+</li>
+</ul>
+<h3 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h3><ul>
+<li>拆分配置 和 merge</li>
+<li>启动本地服务 webpack-dev-server</li>
+<li>处理 ES6</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">modules.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">entry</span>: path.<span class="title function_">join</span>(srcPath, <span class="string">&#x27;index&#x27;</span>),</span><br><span class="line">    <span class="attr">modules</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                <span class="attr">loader</span>: [<span class="string">&#x27;babel-loader&#x27;</span>],</span><br><span class="line">                <span class="attr">include</span>: srcPath,</span><br><span class="line">                <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .babelrc</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;presets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;@babel/preset-env&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;plugins&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>处理样式</p>
+</li>
+<li><p>处理图片</p>
+<ul>
+<li>file-loader 将图片变为url形式</li>
+<li>url-loader 将图片变为base64形式，减少http请求，很小没必要再进行http请求</li>
+</ul>
+</li>
+<li><p>模块化</p>
+</li>
+</ul>
+<h3 id="高级配置"><a href="#高级配置" class="headerlink" title="高级配置"></a>高级配置</h3><h4 id="多入口"><a href="#多入口" class="headerlink" title="多入口"></a>多入口</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="attr">index</span>: path.<span class="title function_">join</span>(srcPath, <span class="string">&#x27;index.js&#x27;</span>),</span><br><span class="line">    <span class="attr">other</span>: path.<span class="title function_">join</span>(srcPath, <span class="string">&#x27;other.js&#x27;</span>),</span><br><span class="line">&#125;,</span><br><span class="line"><span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].[contentHash:8].js&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: distPath</span><br><span class="line">&#125;</span><br><span class="line"><span class="attr">plugins</span>: [</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>(&#123;</span><br><span class="line">        <span class="attr">template</span>: path.<span class="title function_">join</span>(srcPath, <span class="string">&#x27;index.html&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;index.html&#x27;</span>,</span><br><span class="line">        <span class="attr">chunks</span>: [<span class="string">&#x27;index&#x27;</span>] <span class="comment">// 要引入什么js文件</span></span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>(&#123;</span><br><span class="line">        <span class="attr">template</span>: path.<span class="title function_">join</span>(srcPath, <span class="string">&#x27;other.html&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;other.html&#x27;</span>,</span><br><span class="line">        <span class="attr">chunks</span>: [<span class="string">&#x27;other&#x27;</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="抽离css文件"><a href="#抽离css文件" class="headerlink" title="抽离css文件"></a>抽离css文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">coonst <span class="title class_">MiniCssExtracctplugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;mini-css-extract-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">TerserJSPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;terser-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">OptimizeCssAssetsplugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;optimize-css-assets-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">                <span class="attr">loader</span>: [</span><br><span class="line">                    <span class="title class_">MiniCssExtracctplugin</span>.<span class="property">loader</span>,</span><br><span class="line">                    <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;postcss-loader&#x27;</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MiniCssExtracctplugin</span>(&#123;</span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;css/main.[contentHash:8].css&#x27;</span></span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimizer</span>: [<span class="keyword">new</span> <span class="title class_">TerserJSPlugin</span>(&#123;&#125;), <span class="keyword">new</span> <span class="title class_">OptimizeCssAssetsplugin</span>(&#123;&#125;)]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="压缩-optimization"><a href="#压缩-optimization" class="headerlink" title="压缩 optimization"></a>压缩 optimization</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">TerserJSPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;terser-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">OptimizeCssAssetsplugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;optimize-css-assets-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    &lt;!-- 其他配置 --&gt;</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimizer</span>: [<span class="keyword">new</span> <span class="title class_">TerserJSPlugin</span>(&#123;&#125;), <span class="keyword">new</span> <span class="title class_">OptimizeCssAssetsplugin</span>(&#123;&#125;)]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="抽离公共代码"><a href="#抽离公共代码" class="headerlink" title="抽离公共代码"></a>抽离公共代码</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    &lt;!-- 其他配置 --&gt;</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimizer</span>: [],</span><br><span class="line">        <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">            <span class="comment">// initial 不处理异步</span></span><br><span class="line">            <span class="comment">// async 只处理异步</span></span><br><span class="line">            <span class="comment">// all 全部</span></span><br><span class="line">            <span class="attr">chunks</span>: <span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">            <span class="attr">cacheGroups</span>: &#123;</span><br><span class="line">                <span class="comment">// 引用关系 关联 HtmlWebpackPlugin chunks 配置</span></span><br><span class="line">                <span class="comment">// 第三方模块</span></span><br><span class="line">                <span class="attr">vendor</span>: &#123;</span><br><span class="line">                    <span class="attr">name</span>: <span class="string">&#x27;vendor&#x27;</span>, <span class="comment">// chunk 名称</span></span><br><span class="line">                    <span class="attr">priority</span>: <span class="number">1</span>, <span class="comment">// 权限更高，有限抽离，重要！</span></span><br><span class="line">                    <span class="attr">test</span>: <span class="regexp">/node_modules/</span>, <span class="comment">//</span></span><br><span class="line">                    <span class="attr">minSize</span>: <span class="number">0</span>, <span class="comment">// 大小限制，实际开发不要写0</span></span><br><span class="line">                    <span class="attr">minChunks</span>: <span class="number">1</span>, <span class="comment">// 最少复用过几次</span></span><br><span class="line">                &#125;,</span><br><span class="line">                  <span class="attr">vendor</span>: &#123;</span><br><span class="line">                    <span class="attr">name</span>: <span class="string">&#x27;common&#x27;</span>, <span class="comment">// chunk 名称</span></span><br><span class="line">                    <span class="attr">priority</span>: <span class="number">0</span>, <span class="comment">// 权限更高，有限抽离，重要！</span></span><br><span class="line">                    <span class="attr">minSize</span>: <span class="number">0</span>, <span class="comment">// 大小限制</span></span><br><span class="line">                    <span class="attr">minChunks</span>: <span class="number">2</span>, <span class="comment">// 最少复用过几次</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="异步加载"><a href="#异步加载" class="headerlink" title="异步加载"></a>异步加载</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义 chunk</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">&#x27;./dynamic-data.js&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">default</span>.<span class="property">message</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="module-chunk-bundle-区别"><a href="#module-chunk-bundle-区别" class="headerlink" title="module chunk bundle 区别"></a>module chunk bundle 区别</h3><ul>
+<li>module：就是写的代码，只要可以引入的都是module</li>
+<li>chunk：多模块合并成的，比如：index.js以及它引入的其他文件的集合</li>
+<li>bundle：最终的输出文件</li>
+</ul>
+<h3 id="性能优化，构建速度"><a href="#性能优化，构建速度" class="headerlink" title="性能优化，构建速度"></a>性能优化，构建速度</h3><ul>
+<li>优化babel-loader</li>
+<li>IgnorePlugin</li>
+<li>noParse</li>
+<li>happypack</li>
+<li>parallelUglifyPlugin</li>
+<li>自动刷新</li>
+<li>热更新</li>
+<li>DllPlugin</li>
+</ul>
+<h4 id="优化babel-loader"><a href="#优化babel-loader" class="headerlink" title="优化babel-loader"></a>优化babel-loader</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">    <span class="attr">use</span>: [<span class="string">&#x27;babel-loader?cacheDirectory&#x27;</span>], <span class="comment">// 开启缓存</span></span><br><span class="line">    <span class="attr">include</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;src&#x27;</span>), <span class="comment">// 明确范围</span></span><br><span class="line">    <span class="comment">// 排除范围， 两者选一即可</span></span><br><span class="line">    <span class="comment">// exclude: path.resolve(__dirname, &#x27;node_modules&#x27;)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="IgnorePlugin，直接不引入，代码中没有"><a href="#IgnorePlugin，直接不引入，代码中没有" class="headerlink" title="IgnorePlugin，直接不引入，代码中没有"></a>IgnorePlugin，直接不引入，代码中没有</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不引入所有语言包</span></span><br><span class="line"><span class="keyword">new</span> webpack.<span class="title class_">IgnorePlugin</span>(<span class="regexp">/\.\/locale/</span>, <span class="regexp">/moment/</span>)</span><br><span class="line"><span class="comment">// 手动引入中文</span></span><br><span class="line">moment.<span class="title function_">locale</span>(<span class="string">&#x27;zh-cn&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="noParse，引入，但不打包"><a href="#noParse，引入，但不打包" class="headerlink" title="noParse，引入，但不打包"></a>noParse，引入，但不打包</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">modules.<span class="property">exports</span>=&#123;</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">noParse</span>: [<span class="regexp">/react\.min\.js/</span>],</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;&#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="happyPack-多线程打包"><a href="#happyPack-多线程打包" class="headerlink" title="happyPack 多线程打包"></a>happyPack 多线程打包</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">HappyPack</span> = <span class="built_in">require</span>(<span class="string">&#x27;happypack&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">modules</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                <span class="attr">use</span>: [<span class="string">&#x27;happypack/loader?id=babel&#x27;</span>],</span><br><span class="line">                <span class="attr">include</span>: srcPath</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Happypack</span>(&#123;</span><br><span class="line">            <span class="attr">id</span>: <span class="string">&#x27;babel&#x27;</span>,</span><br><span class="line">            <span class="attr">loaders</span>: [<span class="string">&#x27;babel-loader?cacheDirectory&#x27;</span>]</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="ParallelUglifyPlugin-多进程压缩js"><a href="#ParallelUglifyPlugin-多进程压缩js" class="headerlink" title="ParallelUglifyPlugin 多进程压缩js"></a>ParallelUglifyPlugin 多进程压缩js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">ParallelUglifyPlugin</span>(&#123;</span><br><span class="line">    <span class="attr">uglifyJS</span>: &#123;</span><br><span class="line">        <span class="comment">// 还是使用 uglifyjs 压缩，只是开启了多进程</span></span><br><span class="line">        <span class="attr">output</span>: &#123;</span><br><span class="line">            <span class="attr">beautify</span>: <span class="literal">false</span>, <span class="comment">// 最紧凑的输出</span></span><br><span class="line">            <span class="attr">comments</span>: <span class="literal">false</span> <span class="comment">// 删除所有注释</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">compress</span>: &#123;</span><br><span class="line">            <span class="comment">// 删除所有 console 语句，可兼容ie</span></span><br><span class="line">            <span class="attr">drop_console</span>: <span class="literal">true</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="自动刷新"><a href="#自动刷新" class="headerlink" title="自动刷新"></a>自动刷新</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="comment">// 开启之后, webpack-dev-server 会自动开启刷新浏览器</span></span><br><span class="line">    <span class="attr">watch</span>: <span class="literal">true</span>, <span class="comment">// 默认false</span></span><br><span class="line">    <span class="attr">watchOptions</span>: &#123;</span><br><span class="line">        <span class="attr">ignored</span>: <span class="regexp">/node_modules/</span>, <span class="comment">// 忽略</span></span><br><span class="line">        <span class="attr">aggregateTimeout</span>: <span class="number">300</span>, <span class="comment">// 监听变化后等300ms再执行,防止太快</span></span><br><span class="line">        <span class="attr">poll</span>: <span class="number">1000</span> <span class="comment">// 每隔1000ms 询问一次</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="DllPlugin"><a href="#DllPlugin" class="headerlink" title="DllPlugin"></a>DllPlugin</h4><ul>
+<li>前端框架如 vue react ， 体积大，构建慢</li>
+<li>较稳定，不常升级版本</li>
+<li>同一个版本只构建一次即可，不用每次都重新构建</li>
+<li>webpack 内置</li>
+<li>打包出dll文件</li>
+<li>DllReferencePlugin - 使用dll文件</li>
+</ul>
+<p>1、打包dll配置 webpacl.dll.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="comment">// 把 React 相关模块的放到一个单独的动态链接库</span></span><br><span class="line">    <span class="attr">react</span>: [<span class="string">&#x27;react&#x27;</span>, <span class="string">&#x27;react-dom&#x27;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].dll.js&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: distPath,</span><br><span class="line">    <span class="attr">library</span>: <span class="string">&#x27;_dll_[name]&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">DllPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;_dll_[name]&#x27;</span>,</span><br><span class="line">      <span class="attr">path</span>: path.<span class="title function_">join</span>(distPath, <span class="string">&#x27;[name].mainfest.json&#x27;</span>),</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、修改index.html模板</p>
+<p>添加</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./react.dll.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3、配置webpack.dev.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">moduls</span>: &#123;</span><br><span class="line">  <span class="attr">rules</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">      <span class="attr">loader</span>: [<span class="string">&#x27;babel-loader&#x27;</span>],</span><br><span class="line">      <span class="attr">include</span>: srcPath,</span><br><span class="line">      <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>  <span class="comment">// 使用dll，所以不需要转换了</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="attr">plugins</span>: [</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">DllReferencePlugin</span>(&#123;</span><br><span class="line">    <span class="attr">mainfest</span>: <span class="built_in">require</span>(path.<span class="title function_">join</span>(distPath, <span class="string">&#x27;react.mainfest.json&#x27;</span>))</span><br><span class="line">  &#125;)</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="webpack-优化构建速度-（可用于生产环境）"><a href="#webpack-优化构建速度-（可用于生产环境）" class="headerlink" title="webpack 优化构建速度 （可用于生产环境）"></a>webpack 优化构建速度 （可用于生产环境）</h4><ul>
+<li>优化 babel-loader</li>
+<li>IgnorePlugin</li>
+<li>noParse</li>
+<li>happyPack</li>
+<li>parellelUglifyPlugin</li>
+</ul>
+<h4 id="webpack-优化构建速度-（不可用于生产环境）"><a href="#webpack-优化构建速度-（不可用于生产环境）" class="headerlink" title="webpack 优化构建速度 （不可用于生产环境）"></a>webpack 优化构建速度 （不可用于生产环境）</h4><ul>
+<li>自动刷新</li>
+<li>热更新</li>
+<li>DllPlugin</li>
+</ul>
+<h4 id="webpack性能优化-产出代码"><a href="#webpack性能优化-产出代码" class="headerlink" title="webpack性能优化 - 产出代码"></a>webpack性能优化 - 产出代码</h4><ul>
+<li><p>体积更小</p>
+</li>
+<li><p>合理分包，不重复引用</p>
+</li>
+<li><p>速度更快，内损使用更少</p>
+</li>
+<li><p>小图片base64编码</p>
+</li>
+<li><p>bundle + hash</p>
+</li>
+<li><p>懒加载 import 语法</p>
+</li>
+<li><p>提取公共代码 splitChunks</p>
+</li>
+<li><p>IgnorePlugin</p>
+</li>
+<li><p>cdn加速</p>
+</li>
+<li><p>使用 production</p>
+</li>
+<li><p>Scope Hosting 改变打包作用域</p>
+</li>
+</ul>
+<h5 id="使用-production"><a href="#使用-production" class="headerlink" title="使用 production"></a>使用 production</h5><ul>
+<li>自动开启代码压缩</li>
+<li>Vue React 等会自动删除调试代码（如开发环境的warning）</li>
+<li>启动 Tree-Shaking</li>
+</ul>
+<h5 id="Scope-Hosting"><a href="#Scope-Hosting" class="headerlink" title="Scope Hosting"></a>Scope Hosting</h5><ul>
+<li>代码体积更小</li>
+<li>创建函数作用域更少</li>
+<li>代码可读性更好</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">ModuleConcatenationPlugin</span> =</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;webpack/lib/optmize/ModuleConcatenationPlugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">resolve</span>: &#123;</span><br><span class="line">    <span class="comment">// 针对npm中的第三方模块有限采用 jsnext:main 中指向的es6 模块化语法的文件</span></span><br><span class="line">    <span class="attr">mainFields</span>: [<span class="string">&#x27;jsnext:main&#x27;</span>, <span class="string">&#x27;browser&#x27;</span>, <span class="string">&#x27;main&#x27;</span>]</span><br><span class="line">  &#125;，</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 开启 Scope Hosting</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">ModuleConcatenationPlugin</span>()</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="babel"><a href="#babel" class="headerlink" title="babel"></a>babel</h2><ul>
+<li><p>环境搭建 ， 基本配置</p>
+<ul>
+<li>.babelrc 配置</li>
+<li>presets 和 plugins</li>
+</ul>
+</li>
+<li><p>babel-polyfill</p>
+</li>
+<li><p>babel-runtime</p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .babelrc</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;presets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;@babel/preset-env&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;useBuiltins&quot;</span><span class="punctuation">:</span> <span class="string">&quot;usage&quot;</span><span class="punctuation">,</span> <span class="comment">// 按需引入</span></span><br><span class="line">        <span class="attr">&quot;corejs&quot;</span><span class="punctuation">:</span> <span class="number">3</span> <span class="comment">// 版本3</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;plugins&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="babel-polyfill"><a href="#babel-polyfill" class="headerlink" title="babel-polyfill"></a>babel-polyfill</h3><ul>
+<li>babel 7.4 之后弃用 babel-polyfill</li>
+<li>推荐直接使用 core-js 和 regenerator</li>
+</ul>
+<h3 id="babel-polyfill-问题"><a href="#babel-polyfill-问题" class="headerlink" title="babel-polyfill 问题"></a>babel-polyfill 问题</h3><ul>
+<li>污染全局环境，使用babel-runtime解决</li>
+</ul>
+<p>.babelrc中</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;plugins&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;@babel/plugin-transform-runtime&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;absoluteRuntime&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;corejs&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;helpers&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;regenerator&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;useESModules&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/e856e555.html"><div class="related-post-title">vue实现按钮切换背景移动效果</div><div class="related-post-meta"><time>2024-07-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/964be38c.html"><div class="related-post-title">How to retrieve committed code after switching back to the development branch when you committed code on a historical version using git checkout</div><div class="related-post-meta"><time>2025-08-18</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">Git</span></div></div></a><a class="related-post-item" href="/article/59b456eb.html"><div class="related-post-title">React服务端渲染框架Next.js入门(共12集)</div><div class="related-post-meta"><time>2019-10-01</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/dbb269ad.html"><div class="related-post-title">uni-app/vue手写签名</div><div class="related-post-meta"><time>2021-06-17</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/37fffc1d.html"><div class="related-post-title">原生JavaScript实现查找汉字首字母</div><div class="related-post-meta"><time>2020-08-07</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/9c3c56c.html">https://xuehuayu.cn/article/9c3c56c.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><a href="/tags/React/">React</a><a href="/tags/vue/">vue</a><a href="/tags/webpack/">webpack</a><a href="/tags/babel/">babel</a></div><div class="post-nav"><a class="pre" href="/article/122d294.html">某某某小说app接口抓包分析</a><a class="next" href="/article/84c9ccd6.html">精读《SolidJS》</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

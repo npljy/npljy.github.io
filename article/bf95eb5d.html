@@ -1,0 +1,659 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd,数据结构,算法"><title>要面试了，数据结构和算法太弱怎么办 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">要面试了，数据结构和算法太弱怎么办</h1><div class="post-meta"><span class="date">2020-03-27</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 8k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 27</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/bf95eb5d.html#waline-comment"><span class="waline-comment-count" data-path="/article/bf95eb5d.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文：https://mp.weixin.qq.com/s/T6ZIKIoY17zTg3NL3jk2iQ</code><br>据我了解，前端程序员有相当一部分不是科班出身，以至于对“数据结构”和“算法”的基础概念都不是很清晰，这直接导致很多人在看到有关这部分的内容就会望而却步。<br>实际上，当你了解了“数据结构”和“算法”存在的真正意义，以及一些实际的应用场景，对它有了一个整体的认知之后，你可能会对它产生强烈的兴趣。当然，它带将带给你的收益也是相当可观的。<br>很多前端同学在看到“数据结构”和“算法”后会有一定的抵触心理，或者尝试去练习，但是被难倒，从而放弃。<br>这很大一部分原因是因为你还不够了解学习他们的意义，或者没有掌握合理的练习方法。<br>实际上，当你有了一定的目的性，并且有了合理的练习方法，再来学习这部分内容会变得得心应手。<br>在本文中，我就来分享一下我学习“数据结构”和“算法”的一些经验和方法。<br>后面我也会针对所有常见的数据结构和算法分类，进行全方位的梳理。</p>
+<span id="more"></span>
+
+<h2 id="一、导读"><a href="#一、导读" class="headerlink" title="一、导读"></a>一、导读</h2><h3 id="1-1-类别说明"><a href="#1-1-类别说明" class="headerlink" title="1.1 类别说明"></a>1.1 类别说明</h3><p>数据结构和算法的种类非常之多，拿树举例，树的种类包括：二叉树、B树、B+树、Trie树、红黑树等等，本文只选择了二叉树。</p>
+<p>对前端来讲，没有必要对某些比较偏的类型和解法多做了解，一是浪费宝贵的时间，二是应用的不多。</p>
+<p>本文选择的数据结构和算法的类别均是出现频率最高，以及应用最广的类别。</p>
+<h3 id="1-2-题目说明"><a href="#1-2-题目说明" class="headerlink" title="1.2 题目说明"></a>1.2 题目说明</h3><p>另外，做题时找对典型题目非常重要，可以让你更快速更高效的掌握知识，本文后面也会给出每种类型的典型题目供大家参考。</p>
+<p>题目来源：</p>
+<ul>
+<li><p><code>awesome-coding-js</code>：我的前端算法开源项目，包括我做过的题目以及详细解析</p>
+</li>
+<li><p><code>leetcode</code></p>
+</li>
+<li><p><code>剑指offer</code></p>
+</li>
+</ul>
+<p><img src="https://store.xuehuayu.cn/store/20200327/1.webp" alt="xuehuayu.cn"></p>
+<p>另外，我会在后面长期更新一个前端算法的专栏，对每类数据结构和算法进行详细的讲解，敬请期待。</p>
+<h2 id="二、为什么要学习数据结构和算法"><a href="#二、为什么要学习数据结构和算法" class="headerlink" title="二、为什么要学习数据结构和算法"></a>二、为什么要学习数据结构和算法</h2><p>在学习某块内容之前，我们一定要首先明确为什么要学，而不是盲目的跟风。</p>
+<p>这将更有利于你从学习的过程中获得收益，而且会为你的学习带来动力。</p>
+<p>首先明确一点，学习数据结构和算法不一定就是记住二叉树、堆、栈、队列等的解题方法也不是死记硬背一些题目，如果你仅仅停留在这样的表面思想，那么你学习起来会非常痛苦。</p>
+<h3 id="2-1-解决问题的思想"><a href="#2-1-解决问题的思想" class="headerlink" title="2.1 解决问题的思想"></a>2.1 解决问题的思想</h3><p>计算机只是一个很冰冷的机器，你给他下发什么样的指令，它就能作出什么样的反应。</p>
+<p>而开发工程师要做的是如何把实际的问题转化成计算机的指令，如何转化，来看看《数据结构》的经典说法：</p>
+<blockquote>
+<p>设计出数据结构， 在施加以算法就行了。</p>
+</blockquote>
+<p>所以，很重要的一点，数据结构和算法对建立解决问题的思想非常重要。</p>
+<blockquote>
+<p>如果说 Java 是自动档轿车，C 就是手动档吉普。数据结构呢？是变速箱的工作原理。你完全可以不知道变速箱怎样工作，就把自动档的车子从 A 开到</p>
+</blockquote>
+<p>B，而且未必就比懂得的人慢。写程序这件事，和开车一样，经验可以起到很大作用，但如果你不知道底层是怎么工作的，就永远只能开车，既不会修车，也不能造车。如果你对这两件事都不感兴趣也就罢了，数据结构懂得用就好。但若你此生在编程领域还有点更高的追求，数据结构是绕不开的课题。</p>
+<h3 id="2-2-面试"><a href="#2-2-面试" class="headerlink" title="2.2 面试"></a>2.2 面试</h3><p>这是非常现实的一点，也是很多前端学习数据结构和算法的原因。</p>
+<p>一般对待算法的态度会分为以下几类：</p>
+<p><code>Google</code>、<br><code>Microsoft</code>等知名外企在面试工程师时，算法是起决定性因素的，前端工程师也是一样，基本是每一轮都会考察，即使你有非常强的背景，也有可能因为一两道算法答的不好而与这样的企业失之交臂。</p>
+<p>第二类，算法占重要因素的，国内的某些大厂在面试时，也会把数据结构和算法作为重要的参考因素，基本是面试必考，如果你达不到一定的要求，会直接挂掉。</p>
+<p>第三类，起加分作用，很多公司不会把数据结构和算法作为硬性要求，但是也会象征性的出一些题目，当你把一道算法题答的很漂亮，这绝对是加分项。</p>
+<p>可见，学好数据结构和算法对你跳槽更好的公司或者拿到更高的薪水，是非常重要的。</p>
+<h2 id="三、如何准备"><a href="#三、如何准备" class="headerlink" title="三、如何准备"></a>三、如何准备</h2><p>了解了数据结构和算法的重要性，那么究竟该用什么样的方法去准备呢？</p>
+<h3 id="3-1-全方位了解"><a href="#3-1-全方位了解" class="headerlink" title="3.1 全方位了解"></a>3.1 全方位了解</h3><p>在学习和练习之前，你一定要对数据结构和算法做一个全方位的了解，对数据结构和算法的定义、分类做一个全面的理解，如果这部分做的不好，你在做题时将完全不知道你在做什么，从而陷入盲目寻找答案的过程，这个过程非常痛苦，而且往往收益甚微。</p>
+<p>本文后面的章节，我会对常见的数据结构和算法做一个全方位的梳理。</p>
+<h3 id="3-2-分类练习"><a href="#3-2-分类练习" class="headerlink" title="3.2 分类练习"></a>3.2 分类练习</h3><p>当你对数据结构和算法有了一个整体的认知之后，就可以开始练习了。</p>
+<p>注意，一定是分类练习！分类练习！分类练习！重要的事情说三遍。</p>
+<p>我曾见过非常多的同学带着一腔热血就开始刷题了，从 <code>leetcode</code>第一题开始，刚开始往往非常有动力，可能还会发个朋友圈或者沸点什么的😅，然后就没有然后了。</p>
+<p>因为前几题非常简单，可能会给你一定的自信，但是，按序号来的话，很快就会遇到 <code>hard</code>。或者有的人，干脆只刷简单，先把所有的简单刷完。</p>
+<p>但是，这样盲目的刷题，效果是非常差的，有可能你坚持下来，刷了几百道，也能有点效果，但是整个过程可能非常慢，而且效果远远没有分类练习要好。</p>
+<p>所谓分类练习，即按每种类别练习，例如：这段时间只练习二叉树的题目，后面开始练习回溯算法的题目。</p>
+<p>在开始练习之前，你往往还需要对这种具体的类别进行一个详细的了解，对其具体的定义、相关的概念和应用、可能出现的题目类型进行梳理，然后再开始。</p>
+<h3 id="3-3-定期回顾和总结"><a href="#3-3-定期回顾和总结" class="headerlink" title="3.3 定期回顾和总结"></a>3.3 定期回顾和总结</h3><p>在对一个类型针对练习一些题目之后，你就可以发现一定的规律，某一些题目是这样解，另一些题目是那样解…这是一个很正常的现象，每种类型的题目肯定是存在一定规律的。</p>
+<p>这时候就可以开始对此类题目进行总结了，针对此类问题，以及其典型的题目，发现的解题方法，进行总结。当下次你再遇到这种类型的题目，你就能很快想到解题思路，从而很快的解答。</p>
+<p>所以，当你看到一个题目，首先你要想到它属于哪种数据结构或算法，然后要想到这是一个什么类型的问题，然后是此类问题的解决方法。</p>
+<p>如果你看到一个新的问题还不能做到上面这样，那说明你对此类题目的掌握程度还不够，你还要多花一些经历来进行练习。</p>
+<p>当然，后面我会把我在这部分的总结分享出来，帮助大家少走一些弯路。</p>
+<h3 id="3-4-题目的选择"><a href="#3-4-题目的选择" class="headerlink" title="3.4 题目的选择"></a>3.4 题目的选择</h3><p>关于题目来源，这里我推荐先看《剑指 <code>offer</code>》，然后是 <code>leetcode</code>，《剑指<br><code>offer</code>》上能找到非常多的典型题目，这对你发现和总结规律非常重要。看完再去刷 <code>leetcode</code>你会发现更加轻松。</p>
+<p>关于难度的选择， 这里我建议 <code>leetcode</code>简单、中等难度即可，因为我们要做的是寻找规律，即掌握典型题目即可，当你掌握了这些规律，再去解一些<br><code>hard</code>的问题，也是可以的，只是多花些时间的问题。切忌不要一开始就在很多刁钻古怪的问题上耗费太多时间。</p>
+<p>经过上面的方法，我在练习一段时间后，基本 <code>leetcode</code>中等难度的问题可以在 <code>20min</code>内<br><code>AC</code>，另外在最近跳槽的过程中，基本所有的算法问题我都能很快的手写出来，或者很快的想到解题思路。希望大家在看到我的经验和方法后也能达到这样的效果，或者做的比我更好。</p>
+<h2 id="四、时间复杂度和空间复杂度"><a href="#四、时间复杂度和空间复杂度" class="headerlink" title="四、时间复杂度和空间复杂度"></a>四、时间复杂度和空间复杂度</h2><p>在开始学习之前，我们首先要搞懂时间复杂度和空间复杂度的概念，它们的高低共同决定着一段代码质量的好坏：</p>
+<h3 id="4-1-时间复杂度"><a href="#4-1-时间复杂度" class="headerlink" title="4.1 时间复杂度"></a>4.1 时间复杂度</h3><p>一个算法的时间复杂度反映了程序运行从开始到结束所需要的时间。把算法中基本操作重复执行的次数（频度）作为算法的时间复杂度。</p>
+<p>没有循环语句，记作 <code>O(1)</code>，也称为常数阶。只有一重循环，则算法的基本操作的执行频度与问题规模n呈线性增大关系，记作 <code>O（n）</code>，也叫线性阶。</p>
+<p>常见的时间复杂度有：</p>
+<ul>
+<li><p><code>O(1)</code>: Constant Complexity: Constant 常数复杂度</p>
+</li>
+<li><p><code>O(log n)</code>: Logarithmic Complexity: 对数复杂度</p>
+</li>
+<li><p><code>O(n)</code>: Linear Complexity: 线性时间复杂度</p>
+</li>
+<li><p><code>O(n^2)</code>: N square Complexity 平⽅方</p>
+</li>
+<li><p><code>O(n^3)</code>: N square Complexity ⽴立⽅方</p>
+</li>
+<li><p><code>O(2^n)</code>: Exponential Growth 指数</p>
+</li>
+<li><p><code>O(n!)</code>: Factorial 阶乘</p>
+</li>
+</ul>
+<p><img src="https://store.xuehuayu.cn/store/20200327/2.webp" alt="xuehuayu.cn"></p>
+<h3 id="4-2-空间复杂度"><a href="#4-2-空间复杂度" class="headerlink" title="4.2 空间复杂度"></a>4.2 空间复杂度</h3><p>一个程序的空间复杂度是指运行完一个程序所需内存的大小。利用程序的空间复杂度，可以对程序的运行所需要的内存多少有个预先估计。</p>
+<p>一个程序执行时除了需要存储空间和存储本身所使用的指令、常数、变量和输入数据外，还需要一些对数据进行操作的工作单元和存储一些为现实计算所需信息的辅助空间。</p>
+<h2 id="五、数据结构"><a href="#五、数据结构" class="headerlink" title="五、数据结构"></a>五、数据结构</h2><p>数据结构这个词相信大家都不陌生，在很多场景下可能都听过，但你有没有考虑过“数据结构”究竟是一个什么东西呢？</p>
+<blockquote>
+<p>数据结构即数据元素相互之间存在的一种和多种特定的关系集合。</p>
+</blockquote>
+<p>一般你可以从两个维度来理解它，逻辑结构和存储结构。</p>
+<h3 id="5-1-逻辑结构"><a href="#5-1-逻辑结构" class="headerlink" title="5.1 逻辑结构"></a>5.1 逻辑结构</h3><p><img src="https://store.xuehuayu.cn/store/20200327/3.webp" alt="xuehuayu.cn"></p>
+<p>简单的来说逻辑结构就是数据之间的关系，逻辑结构大概统一的可以分成两种：线性结构、非线性结构。</p>
+<p>线性结构：是一个有序数据元素的集合。其中数据元素之间的关系是一对一的关系，即除了第一个和最后一个数据元素之外，其它数据元素都是首尾相接的。</p>
+<p>常用的线性结构有: 栈，队列，链表，线性表。</p>
+<p>—非线性结构：各个数据元素不再保持在一个线性序列中，每个数据元素可能与零个或者多个其他数据元素发生联系。</p>
+<p>常见的非线性结构有 二维数组，树等。</p>
+<h3 id="5-2-存储结构"><a href="#5-2-存储结构" class="headerlink" title="5.2 存储结构"></a>5.2 存储结构</h3><p>逻辑结构指的是数据间的关系，而存储结构是逻辑结构用计算机语言的实现。常见的存储结构有顺序存储、链式存储、索引存储以及散列存储。</p>
+<p>例如：数组在内存中的位置是连续的，它就属于顺序存储；链表是主动建立数据间的关联关系的，在内存中却不一定是连续的，它属于链式存储；还有顺序和逻辑上都不存在顺序关系，但是你可以通过一定的方式去放问它的哈希表，数据散列存储。</p>
+<h3 id="5-3-数据结构-二叉树"><a href="#5-3-数据结构-二叉树" class="headerlink" title="5.3 数据结构-二叉树"></a>5.3 数据结构-二叉树</h3><p>树是用来模拟具有树状结构性质的数据集合。根据它的特性可以分为非常多的种类，对于我们来讲，掌握二叉树这种结构就足够了，它也是树最简单、应用最广泛的种类。</p>
+<blockquote>
+<p>二叉树是一种典型的树树状结构。如它名字所描述的那样，二叉树是每个节点最多有两个子树的树结构，通常子树被称作“左子树”和“右子树”。</p>
+</blockquote>
+<p><img src="https://store.xuehuayu.cn/store/20200327/4.webp" alt="xuehuayu.cn"></p>
+<h4 id="5-3-1-二叉树遍历"><a href="#5-3-1-二叉树遍历" class="headerlink" title="5.3.1 二叉树遍历"></a>5.3.1 二叉树遍历</h4><blockquote>
+<p>重点中的重点，最好同时掌握递归和非递归版本，递归版本很容易书写，但是真正考察基本功的是非递归版本。</p>
+</blockquote>
+<ul>
+<li><p>二叉树的中序遍历</p>
+</li>
+<li><p>二叉树的前序遍历</p>
+</li>
+<li><p>二叉树的后序遍历</p>
+</li>
+</ul>
+<blockquote>
+<p>根据前序遍历和中序遍历的特点重建二叉树，逆向思维，很有意思的题目</p>
+</blockquote>
+<ul>
+<li><p>重建二叉树</p>
+</li>
+<li><p>求二叉树的遍历</p>
+</li>
+</ul>
+<h4 id="5-3-2-二叉树的对称性"><a href="#5-3-2-二叉树的对称性" class="headerlink" title="5.3.2 二叉树的对称性"></a>5.3.2 二叉树的对称性</h4><ul>
+<li><p>对称的二叉树</p>
+</li>
+<li><p>二叉树的镜像</p>
+</li>
+</ul>
+<h4 id="5-3-3-二叉搜索树"><a href="#5-3-3-二叉搜索树" class="headerlink" title="5.3.3 二叉搜索树"></a>5.3.3 二叉搜索树</h4><blockquote>
+<p>二叉搜索树是特殊的二叉树，考察二叉搜索树的题目一般都是考察二叉搜索树的特性，所以掌握好它的特性很重要。</p>
+</blockquote>
+<ol>
+<li><p>若任意节点的左⼦子树不不空，则左⼦子树上所有结点的值均⼩小于它的 根结点的值;</p>
+</li>
+<li><p>若任意节点的右⼦子树不不空，则右⼦子树上所有结点的值均⼤大于它的 根结点的值;</p>
+</li>
+<li><p>任意节点的左、右⼦子树也分别为⼆二叉查找树。</p>
+</li>
+</ol>
+<ul>
+<li><p>二叉搜索树的第k个节点</p>
+</li>
+<li><p>二叉搜索树的后序遍历</p>
+</li>
+</ul>
+<h4 id="5-3-4-二叉树的深度"><a href="#5-3-4-二叉树的深度" class="headerlink" title="5.3.4 二叉树的深度"></a>5.3.4 二叉树的深度</h4><blockquote>
+<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。<br>平衡二叉树：左右子树深度之差大于1</p>
+</blockquote>
+<ul>
+<li><p>二叉树的最大深度</p>
+</li>
+<li><p>二叉树的最小深度</p>
+</li>
+<li><p>平衡二叉树</p>
+</li>
+</ul>
+<h3 id="5-4-数据结构-链表"><a href="#5-4-数据结构-链表" class="headerlink" title="5.4 数据结构-链表"></a>5.4 数据结构-链表</h3><p>用一组任意存储的单元来存储线性表的数据元素。一个对象存储着本身的值和下一个元素的地址。</p>
+<ul>
+<li><p>需要遍历才能查询到元素，查询慢。</p>
+</li>
+<li><p>插入元素只需断开连接重新赋值，插入快。</p>
+</li>
+</ul>
+<p><img src="https://store.xuehuayu.cn/store/20200327/5.webp" alt="xuehuayu.cn"></p>
+<p>链表在开发中也是经常用到的数据结构， <code>React16</code>的 <code>FiberNode</code>连接起来形成的 <code>FiberTree</code>, 就是个单链表结构。</p>
+<h4 id="5-4-1-基本应用"><a href="#5-4-1-基本应用" class="headerlink" title="5.4.1 基本应用"></a>5.4.1 基本应用</h4><blockquote>
+<p>主要是对链表基本概念和特性的应用，如果基础概念掌握牢靠，此类问题即可迎刃而解</p>
+</blockquote>
+<ul>
+<li><p>从尾到头打印链表</p>
+</li>
+<li><p>删除链表中的节点</p>
+</li>
+<li><p>反转链表</p>
+</li>
+<li><p>复杂链表的复制</p>
+</li>
+</ul>
+<h4 id="5-4-2-环类题目"><a href="#5-4-2-环类题目" class="headerlink" title="5.4.2 环类题目"></a>5.4.2 环类题目</h4><blockquote>
+<p>环类题目即从判断一个单链表是否存在循环而扩展衍生的问题</p>
+</blockquote>
+<ul>
+<li><p>环形链表</p>
+</li>
+<li><p>链表环的入口节点</p>
+</li>
+<li><p>约瑟夫环</p>
+</li>
+</ul>
+<h4 id="5-4-3-双指针"><a href="#5-4-3-双指针" class="headerlink" title="5.4.3 双指针"></a>5.4.3 双指针</h4><blockquote>
+<p>双指针的思想在链表和数组中的题目都经常会用到，主要是利用两个或多个不同位置的指针，通过速度和方向的变换解决问题。</p>
+</blockquote>
+<ul>
+<li><p>两个指针从不同位置出发：一个从始端开始，另一个从末端开始；</p>
+</li>
+<li><p>两个指针以不同速度移动：一个指针快一些，另一个指针慢一些。</p>
+</li>
+</ul>
+<p>对于单链表，因为我们只能在一个方向上遍历链表，所以第一种情景可能无法工作。然而，第二种情景，也被称为慢指针和快指针技巧，是非常有用的。</p>
+<ul>
+<li><p>两个链表的公共节点</p>
+</li>
+<li><p>链表倒数第k个节点</p>
+</li>
+<li><p>相交链表</p>
+</li>
+</ul>
+<h4 id="5-4-4-双向链表"><a href="#5-4-4-双向链表" class="headerlink" title="5.4.4 双向链表"></a>5.4.4 双向链表</h4><p>双链还有一个引用字段，称为 <code>prev</code>字段。有了这个额外的字段，您就能够知道当前结点的前一个结点。</p>
+<ul>
+<li>扁平化多级双向链表</li>
+</ul>
+<h3 id="5-5-数据结构-数组"><a href="#5-5-数据结构-数组" class="headerlink" title="5.5 数据结构-数组"></a>5.5 数据结构-数组</h3><p>数组是我们在开发中最常见到的数据结构了，用于按顺序存储元素的集合。但是元素可以随机存取，因为数组中的每个元素都可以通过数组索引来识别。插入和删除时要移动后续元素，还要考虑扩容问题，插入慢。</p>
+<p>数组与日常的业务开发联系非常紧密，如何巧妙的用好数组是我们能否开发出高质量代码的关键。</p>
+<h4 id="5-5-1-双指针"><a href="#5-5-1-双指针" class="headerlink" title="5.5.1 双指针"></a>5.5.1 双指针</h4><blockquote>
+<p>上面链表中提到的一类题目，主要是利用两个或多个不同位置的指针，通过速度和方向的变换解决问题。注意这种技巧经常在排序数组中使用。</p>
+</blockquote>
+<ul>
+<li><p>调整数组顺序使奇数位于偶数前面</p>
+</li>
+<li><p>和为S的两个数字</p>
+</li>
+<li><p>和为S的连续正整数序列</p>
+</li>
+</ul>
+<h4 id="5-5-2-N数之和问题"><a href="#5-5-2-N数之和问题" class="headerlink" title="5.5.2 N数之和问题"></a>5.5.2 N数之和问题</h4><blockquote>
+<p>非常常见的问题，基本上都是一个套路，主要考虑如何比暴利法降低时间复杂度，而且也会用到上面的双指针技巧</p>
+</blockquote>
+<ul>
+<li><p>两数之和</p>
+</li>
+<li><p>三数之和</p>
+</li>
+<li><p>四数之和</p>
+</li>
+</ul>
+<h4 id="5-5-3-二维数组"><a href="#5-5-3-二维数组" class="headerlink" title="5.5.3 二维数组"></a>5.5.3 二维数组</h4><blockquote>
+<p>建立一定的抽象建模能力，将实际中的很多问题进行抽象</p>
+</blockquote>
+<ul>
+<li><p>构建乘积数组</p>
+</li>
+<li><p>顺时针打印矩阵</p>
+</li>
+</ul>
+<h4 id="5-5-4-数据统计"><a href="#5-5-4-数据统计" class="headerlink" title="5.5.4 数据统计"></a>5.5.4 数据统计</h4><blockquote>
+<p>数组少不了的就是统计和计算，此类问题考察如何用更高效的方法对数组进行统计计算。</p>
+</blockquote>
+<ul>
+<li><p>数组中出现次数超过数组长度一半的数字</p>
+</li>
+<li><p>连续子数组的最大和</p>
+</li>
+<li><p>扑克牌顺子</p>
+</li>
+<li><p>第一个只出现一次的字符</p>
+</li>
+</ul>
+<h3 id="5-6-数据结构-栈和队列"><a href="#5-6-数据结构-栈和队列" class="headerlink" title="5.6 数据结构-栈和队列"></a>5.6 数据结构-栈和队列</h3><p>在上面的数组中，我们可以通过索引随机访问元素，但是在某些情况下，我们可能要限制数据的访问顺序，于是有了两种限制访问顺序的数据结构：栈（后进先出）、队列（先进先出）</p>
+<p><img src="https://store.xuehuayu.cn/store/20200327/6.webp" alt="xuehuayu.cn"></p>
+<ul>
+<li><p>队列和栈的互相实现</p>
+</li>
+<li><p>包含min函数的栈</p>
+</li>
+<li><p>栈的压入弹出序列</p>
+</li>
+<li><p>滑动窗口最大值</p>
+</li>
+<li><p>接雨水</p>
+</li>
+</ul>
+<h3 id="5-7-数据结构-哈希表"><a href="#5-7-数据结构-哈希表" class="headerlink" title="5.7 数据结构-哈希表"></a>5.7 数据结构-哈希表</h3><p>哈希的基本原理是将给定的键值转换为偏移地址来检索记录。</p>
+<p>键转换为地址是通过一种关系（公式）来完成的，这就是哈希（散列）函数。</p>
+<p>虽然哈希表是一种有效的搜索技术，但是它还有些缺点。两个不同的关键字，由于哈希函数值相同，因而被映射到同一表位置上。该现象称为冲突。发生冲突的两个关键字称为该哈希函数的同义词。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200327/7.webp" alt="xuehuayu.cn"></p>
+<blockquote>
+<p>如何设计哈希函数以及如何避免冲突就是哈希表的常见问题。好的哈希函数的选择有两条标准：</p>
+</blockquote>
+<ul>
+<li><p>1.简单并且能够快速计算</p>
+</li>
+<li><p>2.能够在址空间中获取键的均匀人分布</p>
+</li>
+</ul>
+<p>例如下面的题目：</p>
+<ul>
+<li>常数时间插入、删除和获取随机元素</li>
+</ul>
+<blockquote>
+</blockquote>
+<p>当用到哈希表时我们通常是要开辟一个额外空间来记录一些计算过的值，同时我们又要在下一次计算的过程中快速检索到它们，例如上面提到的两数之和、三数之和等都利用了这种思想。</p>
+<ul>
+<li><p>两数之和</p>
+</li>
+<li><p>三数之和</p>
+</li>
+<li><p>字符流中第一个不重复的字符</p>
+</li>
+<li><p>宝石与石头</p>
+</li>
+</ul>
+<h3 id="5-8-数据结构-堆"><a href="#5-8-数据结构-堆" class="headerlink" title="5.8 数据结构-堆"></a>5.8 数据结构-堆</h3><p><img src="https://store.xuehuayu.cn/store/20200327/8.webp" alt="xuehuayu.cn"></p>
+<p>堆的底层实际上是一棵完全二叉树，可以用数组实现</p>
+<ul>
+<li><p>每个的节点元素值不小于其子节点 - 最大堆</p>
+</li>
+<li><p>每个的节点元素值不大于其子节点 - 最小堆</p>
+</li>
+</ul>
+<blockquote>
+<p>堆在处理某些特殊场景时可以大大降低代码的时间复杂度，例如在庞大的数据中找到最大的几个数或者最小的几个数，可以借助堆来完成这个过程。</p>
+</blockquote>
+<ul>
+<li><p>堆的基本操作</p>
+</li>
+<li><p>数据流中的中位数</p>
+</li>
+<li><p>最小的k个数</p>
+</li>
+</ul>
+<h2 id="六、算法"><a href="#六、算法" class="headerlink" title="六、算法"></a>六、算法</h2><h3 id="6-1-排序"><a href="#6-1-排序" class="headerlink" title="6.1 排序"></a>6.1 排序</h3><p>排序或许是前端接触最多的算法了，很多人的算法之路是从一个冒泡排序开始的，排序的方法有非常多中，它们各自有各自的应用场景和优缺点，这里我推荐如下6种应用最多的排序方法，如果你有兴趣也可以研究下其他几种。</p>
+<ul>
+<li>快速排序</li>
+</ul>
+<blockquote>
+<p>选择一个目标值，比目标值小的放左边，比目标值大的放右边，目标值的位置已排好，将左右两侧再进行快排。</p>
+</blockquote>
+<ul>
+<li>归并排序</li>
+</ul>
+<blockquote>
+<p>将大序列二分成小序列，将小序列排序后再将排序后的小序列归并成大序列。</p>
+</blockquote>
+<ul>
+<li>选择排序</li>
+</ul>
+<blockquote>
+<p>每次排序取一个最大或最小的数字放到前面的有序序列中。</p>
+</blockquote>
+<ul>
+<li>插入排序</li>
+</ul>
+<blockquote>
+<p>将左侧序列看成一个有序序列，每次将一个数字插入该有序序列。插入时，从有序序列最右侧开始比较，若比较的数较大，后移一位。</p>
+</blockquote>
+<ul>
+<li>冒泡排序</li>
+</ul>
+<blockquote>
+<p>循环数组，比较当前元素和下一个元素，如果当前元素比下一个元素大，向上冒泡。下一次循环继续上面的操作，不循环已经排序好的数。</p>
+</blockquote>
+<ul>
+<li>堆排序</li>
+</ul>
+<blockquote>
+<p>创建一个大顶堆，大顶堆的堆顶一定是最大的元素。交换第一个元素和最后一个元素，让剩余的元素继续调整为大顶堆。从后往前以此和第一个元素交换并重新构建，排序完成。</p>
+</blockquote>
+<h3 id="6-2-二分查找"><a href="#6-2-二分查找" class="headerlink" title="6.2 二分查找"></a>6.2 二分查找</h3><p>查找是计算机中最基本也是最有用的算法之一。它描述了在有序集合中搜索特定值的过程。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200327/9.webp" alt="xuehuayu.cn"></p>
+<p>二分查找维护查找空间的左、右和中间指示符，并比较查找目标或将查找条件应用于集合的中间值；如果条件不满足或值不相等，则清除目标不可能存在的那一半，并在剩下的一半上继续查找，直到成功为止。如果查以空的一半结束，则无法满足条件，并且无法找到目标。</p>
+<ul>
+<li><p>二维数组查找</p>
+</li>
+<li><p>旋转数组的最小数字</p>
+</li>
+<li><p>在排序数组中查找数字</p>
+</li>
+<li><p>x 的平方根</p>
+</li>
+<li><p>猜数字大小</p>
+</li>
+</ul>
+<h3 id="6-3-递归"><a href="#6-3-递归" class="headerlink" title="6.3 递归"></a>6.3 递归</h3><p>递归是一种解决问题的有效方法，在递归过程中，函数将自身作为子例程调用。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200327/10.webp" alt="xuehuayu.cn"></p>
+<p>你可能想知道如何实现调用自身的函数。诀窍在于，每当递归函数调用自身时，它都会将给定的问题拆解为子问题。递归调用继续进行，直到到子问题无需进一步递归就可以解决的地步。</p>
+<p>为了确保递归函数不会导致无限循环，它应具有以下属性：</p>
+<ul>
+<li><p>一个简单的基本案例 —— 能够不使用递归来产生答案的终止方案。</p>
+</li>
+<li><p>一组规则，也称作递推关系，可将所有其他情况拆分到基本案例。</p>
+</li>
+</ul>
+<h4 id="6-3-1-重复计算"><a href="#6-3-1-重复计算" class="headerlink" title="6.3.1 重复计算"></a>6.3.1 重复计算</h4><p>一些问题使用递归考虑，思路是非常清晰的，但是却不推荐使用递归，例如下面的几个问题：</p>
+<ul>
+<li><p>斐波拉契数列</p>
+</li>
+<li><p>跳台阶</p>
+</li>
+<li><p>矩形覆盖</p>
+</li>
+</ul>
+<p>这几个问题使用递归都有一个共同的缺点，那就是包含大量的重复计算，如果递归层次比较深的话，直接会导致JS进程崩溃。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200327/11.webp" alt="xuehuayu.cn"></p>
+<p>你可以使用 <code>记忆化</code>的方法来避免重复计算，即开辟一个额外空间来存储已经计算过的值，但是这样又会浪费一定的内存空间。因此上面的问题一般会使用动态规划求解。</p>
+<blockquote>
+<p>所以，在使用递归之前，一定要判断代码是否含有重复计算，如果有的话，不推荐使用递归。</p>
+</blockquote>
+<p>递归是一种思想，而非一个类型，很多经典算法都是以递归为基础，因此这里就不再给出更多问题。</p>
+<h3 id="6-4-广度优先搜索"><a href="#6-4-广度优先搜索" class="headerlink" title="6.4 广度优先搜索"></a>6.4 广度优先搜索</h3><p>广度优先搜索（ <code>BFS</code>）是一种遍历或搜索数据结构（如树或图）的算法，也可以在更抽象的场景中使用。</p>
+<p>它的特点是越是接近根结点的结点将越早地遍历。</p>
+<p>例如，我们可以使用 <code>BFS</code> 找到从起始结点到目标结点的路径，特别是最短路径。</p>
+<p>在 <code>BFS</code>中，结点的处理顺序与它们添加到队列的顺序是完全相同的顺序，即先进先出，所以广度优先搜索一般使用队列实现。</p>
+<ul>
+<li><p>从上到下打印二叉树</p>
+</li>
+<li><p>单词接龙</p>
+</li>
+<li><p>员工的重要性</p>
+</li>
+<li><p>岛屿数量</p>
+</li>
+</ul>
+<h3 id="6-5-深度优先搜索"><a href="#6-5-深度优先搜索" class="headerlink" title="6.5 深度优先搜索"></a>6.5 深度优先搜索</h3><p>和广度优先搜索一样，深度优先搜索（ <code>DFS</code>）是用于在树&#x2F;图中遍历&#x2F;搜索的一种重要算法。</p>
+<p>与 <code>BFS</code> 不同，更早访问的结点可能不是更靠近根结点的结点。因此，你在 <code>DFS</code> 中找到的第一条路径可能不是最短路径。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200327/12.webp" alt="xuehuayu.cn"></p>
+<p>在 <code>DFS</code>中，结点的处理顺序是完全相反的顺序，就像它们被添加到栈中一样，它是后进先出。所以深度优先搜索一般使用栈实现。</p>
+<ul>
+<li><p>二叉树的中序遍历</p>
+</li>
+<li><p>二叉树的最大深度</p>
+</li>
+<li><p>路径总和</p>
+</li>
+<li><p>课程表</p>
+</li>
+<li><p>岛屿数量</p>
+</li>
+</ul>
+<h3 id="6-6-回溯算法"><a href="#6-6-回溯算法" class="headerlink" title="6.6 回溯算法"></a>6.6 回溯算法</h3><p>从解决问题每一步的所有可能选项里系统选择出一个可行的解决方案。</p>
+<p>在某一步选择一个选项后，进入下一步，然后面临新的选项。重复选择，直至达到最终状态。</p>
+<p>回溯法解决的问题的所有选项可以用树状结构表示。</p>
+<ul>
+<li><p>在某一步有n个可能的选项，该步骤可看作树中一个节点。</p>
+</li>
+<li><p>节点每个选项看成节点连线，到达它的n个子节点。</p>
+</li>
+<li><p>叶节点对应终结状态。</p>
+</li>
+<li><p>叶节点满足约束条件，则为一个可行的解决方案。</p>
+</li>
+<li><p>叶节点不满足约束条件，回溯到上一个节点，并尝试其他叶子节点。</p>
+</li>
+<li><p>节点所有子节点均不满足条件，再回溯到上一个节点。</p>
+</li>
+<li><p>所有状态均不能满足条件，问题无解。</p>
+</li>
+</ul>
+<p><img src="https://store.xuehuayu.cn/store/20200327/13.webp" alt="xuehuayu.cn"></p>
+<p>回溯算法适合由多个步骤组成的问题，并且每个步骤都有多个选项。</p>
+<ul>
+<li><p>二叉树中和为某一值的路径</p>
+</li>
+<li><p>字符串的排列</p>
+</li>
+<li><p>和为sum的n个数</p>
+</li>
+<li><p>矩阵中的路径</p>
+</li>
+<li><p>机器人的运动范围</p>
+</li>
+<li><p>N皇后问题</p>
+</li>
+</ul>
+<h3 id="6-7-动态规划"><a href="#6-7-动态规划" class="headerlink" title="6.7 动态规划"></a>6.7 动态规划</h3><p>动态规划往往是最能有效考察算法和设计能力的题目类型，面对这类题目最重要的是抓住问题的阶段，了解每个阶段的状态，从而分析阶段之间的关系转化。</p>
+<p>适用于动态规划的问题，需要满足最优子结构和无后效性，动态规划的求解过程，在于找到状态转移方程，进行自底向上的求解。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200327/14.webp" alt="xuehuayu.cn"></p>
+<p>自底向上的求解，可以帮你省略大量的复杂计算，例如上面的斐波拉契数列，使用递归的话时间复杂度会呈指数型增长，而动态规划则让此算法的时间复杂度保持在 <code>O(n)</code>。</p>
+<h4 id="6-7-1-路径问题"><a href="#6-7-1-路径问题" class="headerlink" title="6.7.1 路径问题"></a>6.7.1 路径问题</h4><ul>
+<li><p>最小路径和</p>
+</li>
+<li><p>不同路径</p>
+</li>
+<li><p>不同路径 II</p>
+</li>
+<li><p>形成字符串的最短路径</p>
+</li>
+</ul>
+<h4 id="6-7-2-买卖股票类问题"><a href="#6-7-2-买卖股票类问题" class="headerlink" title="6.7.2 买卖股票类问题"></a>6.7.2 买卖股票类问题</h4><ul>
+<li><p>买卖股票的最佳时机</p>
+</li>
+<li><p>买卖股票的最佳时机 III</p>
+</li>
+<li><p>打家劫舍</p>
+</li>
+<li><p>打家劫舍 II</p>
+</li>
+</ul>
+<h4 id="子序列问题"><a href="#子序列问题" class="headerlink" title="子序列问题"></a>子序列问题</h4><ul>
+<li><p>不同的子序列</p>
+</li>
+<li><p>乘积最大子序列</p>
+</li>
+<li><p>最长上升子序列</p>
+</li>
+<li><p>最长回文子序列</p>
+</li>
+</ul>
+<h3 id="6-8-贪心算法"><a href="#6-8-贪心算法" class="headerlink" title="6.8 贪心算法"></a>6.8 贪心算法</h3><p>贪心算法：对问题求解的时候，总是做出在当前看来是最好的做法。</p>
+<p>适用贪心算法的场景：问题能够分解成子问题来解决，子问题的最优解能递推到最终问题的最优解。这种子问题最优解成为最优子结构</p>
+<p><img src="https://store.xuehuayu.cn/store/20200327/15.webp" alt="xuehuayu.cn"></p>
+<h4 id="6-8-1-买卖股票类问题"><a href="#6-8-1-买卖股票类问题" class="headerlink" title="6.8.1 买卖股票类问题"></a>6.8.1 买卖股票类问题</h4><ul>
+<li><p>买卖股票的最佳时机 II</p>
+</li>
+<li><p>买卖股票的最佳时机含手续费</p>
+</li>
+</ul>
+<h4 id="6-8-2-货币选择问题"><a href="#6-8-2-货币选择问题" class="headerlink" title="6.8.2 货币选择问题"></a>6.8.2 货币选择问题</h4><ul>
+<li><p>零钱兑换</p>
+</li>
+<li><p>零钱兑换 II</p>
+</li>
+</ul>
+<h3 id="6-9-贪心算法、动态规划、回溯的区别"><a href="#6-9-贪心算法、动态规划、回溯的区别" class="headerlink" title="6.9 贪心算法、动态规划、回溯的区别"></a>6.9 贪心算法、动态规划、回溯的区别</h3><p>贪心算法与动态规划的不同在于它对每个子问题的解决方案都作出选择，不能回退，动态规划则会保存以前的运算结果，并根据以前的结果对当前进行选择，有回退功能，而回溯算法就是大量的重复计算来获得最优解。</p>
+<p><img src="https://store.xuehuayu.cn/store/20200327/16.webp" alt="xuehuayu.cn"></p>
+<p>有很多算法题目都是可以用这三种思想同时解答的，但是总有一种最适合的解法，这就需要不断的练习和总结来进行深入的理解才能更好的选择解决办法。</p>
+<h2 id="七、前端编码能力"><a href="#七、前端编码能力" class="headerlink" title="七、前端编码能力"></a>七、前端编码能力</h2><p>这部分是与前端开发贴近最紧密的一部分了，在写业务代码的同时，我们也应该关心一些类库或框架的内部实现。</p>
+<p>大多数情况下，我们在写业务的时候不需要手动实现这些轮子，但是它们非常考察一个前端程序员的编码功底，如果你有一定的算法和数据结构基础，很多源码看起来就非常简单。</p>
+<p>下面我拣选了一些问题：</p>
+<ul>
+<li><p>手动实现call、apply、bind</p>
+</li>
+<li><p>EventEmitter</p>
+</li>
+<li><p>防抖</p>
+</li>
+<li><p>节流</p>
+</li>
+<li><p>浅拷贝和深拷贝</p>
+</li>
+<li><p>数组去重、扁平、最值</p>
+</li>
+<li><p>数组乱序-洗牌算法</p>
+</li>
+<li><p>函数柯里化</p>
+</li>
+<li><p>手动实现JSONP</p>
+</li>
+<li><p>模拟实现promise</p>
+</li>
+<li><p>手动实现ES5继承</p>
+</li>
+<li><p>手动实现instanceof</p>
+</li>
+</ul>
+<h2 id="八、小结"><a href="#八、小结" class="headerlink" title="八、小结"></a>八、小结</h2><p>本文的部分图片来源于网络，如有侵权，请联系我删除，谢谢。</p>
+<p>本文并没有对每个点进行深入的分析，而是从为什么、怎么做、做什么的角度对数据结构和算法进行的全面分析（针对前端角度），希望看完本片文章能对你有如下帮助：</p>
+<ul>
+<li><p>对数据结构和算法建立一个较全面的认知体系</p>
+</li>
+<li><p>掌握快速学习数据结构和算法的方法</p>
+</li>
+<li><p>了解数据结构和算法的重要分类和经典题型</p>
+</li>
+</ul>
+<p>如果你还想更深入的学习数据结构和算法，请关注我的后续文章。</p>
+<p>推荐我的算法总结：<code>awesome-coding-js</code>：<a target="_blank" rel="noopener" href="https://github.com/ConardLi/awesome-coding-js">https://github.com/ConardLi/awesome-coding-js</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/e131c1de.html"><div class="related-post-title">Ajax跨域，这应该是最全的解决方案了</div><div class="related-post-meta"><time>2019-10-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/362fd171.html"><div class="related-post-title">Chrome浏览器垃圾回收机制与内存泄漏分析</div><div class="related-post-meta"><time>2019-10-31</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/55e10b84.html"><div class="related-post-title">字符串的ES5和ES6方法</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/fc812490.html"><div class="related-post-title">字节跳动面试官：请你实现一个大文件上传和断点续传</div><div class="related-post-meta"><time>2020-01-17</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/e1de1ab.html"><div class="related-post-title">前端面试题汇总大全（含答案）-- 持续更新</div><div class="related-post-meta"><time>2019-12-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/bf95eb5d.html">https://xuehuayu.cn/article/bf95eb5d.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="post-nav"><a class="pre" href="/article/ae37b645.html">超详细JS的事件循环机制</a><a class="next" href="/article/b10cbe97.html">一个前端失业者的面试之旅</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

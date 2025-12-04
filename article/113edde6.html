@@ -1,0 +1,1171 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>寒冬求职季之你必须要懂的原生JS(中) | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">寒冬求职季之你必须要懂的原生JS(中)</h1><div class="post-meta"><span class="date">2019-10-03</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 12.3k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 50</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/113edde6.html#waline-comment"><span class="waline-comment-count" data-path="/article/113edde6.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/28</code></p>
+<p>互联网寒冬之际，各大公司都缩减了HC，甚至是采取了“裁员”措施，在这样的大环境之下，想要获得一份更好的工作，必然需要付出更多的努力。</p>
+<p>一年前，也许你搞清楚闭包，this，原型链，就能获得认可。但是现在，很显然是不行了。本文梳理出了一些面试中有一定难度的高频原生JS问题，部分知识点可能你之前从未关注过，或者看到了，却没有仔细研究，但是它们却非常重要。本文将以真实的面试题的形式来呈现知识点，大家在阅读时，建议不要先看我的答案，而是自己先思考一番。尽管，本文所有的答案，都是我在翻阅各种资料，思考并验证之后，才给出的(<strong>绝非复制粘贴而来</strong>)。但因水平有限，本人的答案未必是最优的，如果您有更好的答案，欢迎给我留言。</p>
+<span id="more"></span>
+
+<p>本文篇幅较长，但是满满的都是干货！并且还埋伏了可爱的表情包，希望小伙伴们能够坚持读完。</p>
+<p>写文超级真诚的小姐姐祝愿大家都能找到心仪的工作。</p>
+<p>如果你还没读过上篇【上篇和中篇并无依赖关系，您可以读过本文之后再阅读上篇】，可戳<a target="_blank" rel="noopener" href="https://juejin.im/post/5cab0c45f265da2513734390">【面试篇】寒冬求职季之你必须要懂的原生JS(上)</a></p>
+<p><strong>小姐姐花了近百个小时才完成这篇文章，篇幅较长，希望大家阅读时多花点耐心，力求真正的掌握相关知识点。</strong></p>
+<h3 id="1-说一说JS异步发展史"><a href="#1-说一说JS异步发展史" class="headerlink" title="1.说一说JS异步发展史"></a>1.说一说JS异步发展史</h3><p>异步最早的解决方案是回调函数，如事件的回调，setInterval&#x2F;setTimeout中的回调。但是回调函数有一个很常见的问题，就是回调地狱的问题(稍后会举例说明);</p>
+<p>为了解决回调地狱的问题，社区提出了Promise解决方案，ES6将其写进了语言标准。Promise解决了回调地狱的问题，但是Promise也存在一些问题，如错误不能被try<br>catch，而且使用Promise的链式调用，其实并没有从根本上解决回调地狱的问题，只是换了一种写法。</p>
+<p>ES6中引入 Generator 函数，Generator是一种异步编程解决方案，Generator 函数是协程在 ES6<br>的实现，最大特点就是可以交出函数的执行权，Generator 函数可以看出是异步任务的容器，需要暂停的地方，都用yield语句注明。但是 Generator<br>使用起来较为复杂。</p>
+<p>ES7又提出了新的异步解决方案:async&#x2F;await，async是 Generator 函数的语法糖，async&#x2F;await<br>使得异步代码看起来像同步代码，异步编程发展的目标就是让异步逻辑的代码看起来像同步一样。</p>
+<blockquote>
+<p>1.回调函数: callback</p>
+</blockquote>
+<pre><code>//node读取文件fs.readFile(xxx, &#39;utf-8&#39;, function(err, data) {
+    //code
+});
+</code></pre>
+<p>回调函数的使用场景(包括但不限于):</p>
+<ol>
+<li>事件回调</li>
+<li>Node API</li>
+<li>setTimeout&#x2F;setInterval中的回调函数</li>
+</ol>
+<p>异步回调嵌套会导致代码难以维护，并且不方便统一处理错误，不能try catch 和<br>回调地狱(如先读取A文本内容，再根据A文本内容读取B再根据B的内容读取C…)。</p>
+<pre><code>fs.readFile(A, &#39;utf-8&#39;, function(err, data) {
+    fs.readFile(B, &#39;utf-8&#39;, function(err, data) {
+        fs.readFile(C, &#39;utf-8&#39;, function(err, data) {
+            fs.readFile(D, &#39;utf-8&#39;, function(err, data) {
+                //....
+            });
+        });
+    });
+});
+</code></pre>
+<blockquote>
+<p>2.Promise</p>
+</blockquote>
+<p>Promise 主要解决了回调地狱的问题，Promise 最早由社区提出和实现，ES6 将其写进了语言标准，统一了用法，原生提供了Promise对象。</p>
+<p>那么我们看看Promise是如何解决回调地狱问题的，仍然以上文的readFile为例。</p>
+<pre><code>functionread(url) {
+    returnnewPromise((resolve, reject) =&gt; {
+        fs.readFile(url, &#39;utf8&#39;, (err, data) =&gt; {
+            if(err) reject(err);
+            resolve(data);
+        });
+    });
+}
+read(A).then(data=&gt; {
+    returnread(B);
+}).then(data=&gt; {
+    returnread(C);
+}).then(data=&gt; {
+    returnread(D);
+}).catch(reason=&gt; {
+    console.log(reason);
+});
+</code></pre>
+<p>想要运行代码看效果，请戳(小姐姐使用的是VS的 Code Runner 执行代码):<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/blob/master/JS/Async/promise.js">https://github.com/YvetteLau/Blog/blob/master/JS/Async/promise.js</a></p>
+<p>思考一下在Promise之前，你是如何处理异步并发问题的，假设有这样一个需求：读取三个文件内容，都读取成功后，输出最终的结果。有了Promise之后，又如何处理呢？代码可戳:<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/blob/master/JS/Async/index.js">https://github.com/YvetteLau/Blog/blob/master/JS/Async/index.js</a></p>
+<p>注: 可以使用 bluebird 将接口 promise化;</p>
+<p><strong>引申:</strong> Promise有哪些优点和问题呢？</p>
+<blockquote>
+<p>3.Generator</p>
+</blockquote>
+<p>Generator 函数是 ES6 提供的一种异步编程解决方案，整个 Generator<br>函数就是一个封装的异步任务，或者说是异步任务的容器。异步操作需要暂停的地方，都用 yield 语句注明。</p>
+<p>Generator 函数一般配合 yield 或 Promise<br>使用。Generator函数返回的是迭代器。对生成器和迭代器不了解的同学，请自行补习下基础。下面我们看一下 Generator 的简单使用:</p>
+<pre><code>function*gen() {
+    let a =yield111;
+    console.log(a);
+    let b =yield222;
+    console.log(b);
+    let c =yield333;
+    console.log(c);
+    let d =yield444;
+    console.log(d);
+}
+let t =gen();
+//next方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值t.next(1); //第一次调用next函数时，传递的参数无效t.next(2); //a输出2;t.next(3); //b输出2; t.next(4); //c输出3;t.next(5); //d输出3;
+</code></pre>
+<p>为了让大家更好的理解上面代码是如何执行的，我画了一张图，分别对应每一次的next方法调用:</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/2ca8d09a5bc1add25a11cab2362d73d3c1fcc634/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434536633839663561376332343263343264303066663265316566666137383364332f3239343930"><img src="https://camo.githubusercontent.com/2ca8d09a5bc1add25a11cab2362d73d3c1fcc634/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434536633839663561376332343263343264303066663265316566666137383364332f3239343930" alt="xuehuayu.cn"></a></p>
+<p>仍然以上文的readFile为例，使用 Generator + co库来实现:</p>
+<pre><code>constfs=require(&#39;fs&#39;);
+constco=require(&#39;co&#39;);
+constbluebird=require(&#39;bluebird&#39;);
+constreadFile=bluebird.promisify(fs.readFile);
+
+function*read() {
+    yieldreadFile(A, &#39;utf-8&#39;);
+    yieldreadFile(B, &#39;utf-8&#39;);
+    yieldreadFile(C, &#39;utf-8&#39;);
+    //....
+}
+co(read()).then(data=&gt; {
+    //code
+}).catch(err=&gt; {
+    //code
+});
+</code></pre>
+<p>不使用co库，如何实现？能否自己写一个最简的my_co？请戳:<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/blob/master/JS/Async/generator.js">https://github.com/YvetteLau/Blog/blob/master/JS/Async/generator.js</a></p>
+<p>PS: 如果你还不太了解 Generator&#x2F;yield，建议阅读ES6相关文档。</p>
+<blockquote>
+<p>4.async&#x2F;await</p>
+</blockquote>
+<p>ES7中引入了 async&#x2F;await 概念。async其实是一个语法糖，它的实现就是将Generator函数和自动执行器（co），包装在一个函数中。</p>
+<p>async&#x2F;await 的优点是代码清晰，不用像 Promise 写很多 then 链，就可以处理回调地狱的问题。错误可以被try catch。</p>
+<p>仍然以上文的readFile为例，使用 Generator + co库来实现:</p>
+<pre><code>constfs=require(&#39;fs&#39;);
+constbluebird=require(&#39;bluebird&#39;);
+constreadFile=bluebird.promisify(fs.readFile);
+
+asyncfunctionread() {
+    awaitreadFile(A, &#39;utf-8&#39;);
+    awaitreadFile(B, &#39;utf-8&#39;);
+    awaitreadFile(C, &#39;utf-8&#39;);
+    //code
+}
+
+read().then((data) =&gt; {
+    //code
+}).catch(err=&gt; {
+    //code
+});
+</code></pre>
+<p>可执行代码，请戳：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/blob/master/JS/Async/async.js">https://github.com/YvetteLau/Blog/blob/master/JS/Async/async.js</a></p>
+<p>思考一下 async&#x2F;await 如何处理异步并发问题的？<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/blob/master/JS/Async/index.js">https://github.com/YvetteLau/Blog/blob/master/JS/Async/index.js</a></p>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/10">说一说JS异步发展史</a></p>
+<hr>
+<h3 id="2-谈谈对-async-await-的理解，async-await-的实现原理是什么"><a href="#2-谈谈对-async-await-的理解，async-await-的实现原理是什么" class="headerlink" title="2.谈谈对 async&#x2F;await 的理解，async&#x2F;await 的实现原理是什么?"></a>2.谈谈对 async&#x2F;await 的理解，async&#x2F;await 的实现原理是什么?</h3><p>async&#x2F;await 就是 Generator 的语法糖，使得异步操作变得更加方便。来张图对比一下:</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/bfc3602899e269cd425732846fb928b62b5aa5cf/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434564316332353132343739373437633530643035616432613930666434333536372f3239343932"><img src="https://camo.githubusercontent.com/bfc3602899e269cd425732846fb928b62b5aa5cf/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434564316332353132343739373437633530643035616432613930666434333536372f3239343932" alt="xuehuayu.cn"></a></p>
+<p>async 函数就是将 Generator 函数的星号（*）替换成 async，将 yield 替换成await。</p>
+<blockquote>
+<p>我们说 async 是 Generator 的语法糖，那么这个糖究竟甜在哪呢？</p>
+</blockquote>
+<p>1）async函数内置执行器，函数调用之后，会自动执行，输出最后结果。而Generator需要调用next或者配合co模块使用。</p>
+<p>2）更好的语义，async和await，比起星号和yield，语义更清楚了。async表示函数里有异步操作，await表示紧跟在后面的表达式需要等待结果。</p>
+<p>3）更广的适用性。co模块约定，yield命令后面只能是 Thunk 函数或 Promise 对象，而async 函数的 await 命令后面，可以是<br>Promise 对象和原始类型的值。</p>
+<p>4）返回值是Promise，async函数的返回值是 Promise 对象，Generator的返回值是 Iterator，Promise<br>对象使用起来更加方便。</p>
+<blockquote>
+<p>async 函数的实现原理，就是将 Generator 函数和自动执行器，包装在一个函数里。</p>
+</blockquote>
+<p>具体代码试下如下(和spawn的实现略有差异，个人觉得这样写更容易理解)，如果你想知道如何一步步写出 my_co ，可戳:<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/blob/master/JS/Async/my_async.js">https://github.com/YvetteLau/Blog/blob/master/JS/Async/my_async.js</a></p>
+<pre><code>functionmy_co(it) {
+    returnnewPromise((resolve, reject) =&gt; {
+        functionnext(data) {
+            try {
+                var { value, done } =it.next(data);
+            }catch(e){
+                returnreject(e);
+            }
+            if (!done) {
+                //done为true,表示迭代完成//value 不一定是 Promise，可能是一个普通值。使用 Promise.resolve 进行包装。Promise.resolve(value).then(val=&gt; {
+                    next(val);
+                }, reject);
+            } else {
+                resolve(value);
+            }
+        }
+        next(); //执行一次next
+    });
+}
+function*test() {
+    yieldnewPromise((resolve, reject) =&gt; {
+        setTimeout(resolve, 100);
+    });
+    yieldnewPromise((resolve, reject) =&gt; {
+        // throw Error(1);resolve(10)
+    });
+    yield10;
+    return1000;
+}
+
+my_co(test()).then(data=&gt; {
+    console.log(data); //输出1000
+}).catch((err) =&gt; {
+    console.log(&#39;err: &#39;, err);
+});
+</code></pre>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/11">谈谈对 async&#x2F;await 的理解，async&#x2F;await<br>的实现原理是什么?</a></p>
+<hr>
+<h3 id="3-使用-async-await-需要注意什么？"><a href="#3-使用-async-await-需要注意什么？" class="headerlink" title="3.使用 async&#x2F;await 需要注意什么？"></a>3.使用 async&#x2F;await 需要注意什么？</h3><ol>
+<li><p>await 命令后面的Promise对象，运行结果可能是 rejected，此时等同于 async 函数返回的 Promise<br>对象被reject。因此需要加上错误处理，可以给每个 await 后的 Promise 增加 catch 方法；也可以将 await 的代码放在<br><code>try...catch</code> 中。</p>
+</li>
+<li><p>多个await命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。</p>
+<p> &#x2F;&#x2F;下面两种写法都可以同时触发&#x2F;&#x2F;法一asyncfunctionf1() {<br> awaitPromise.all([<br>     newPromise((resolve) &#x3D;&gt; {<br>         setTimeout(resolve, 600);<br>     }),<br>     newPromise((resolve) &#x3D;&gt; {<br>         setTimeout(resolve, 600);<br>     })<br> ])<br> }<br> &#x2F;&#x2F;法二asyncfunctionf2() {<br> let fn1 &#x3D;newPromise((resolve) &#x3D;&gt; {<br>         setTimeout(resolve, 800);<br>     });<br><br> let fn2 &#x3D;newPromise((resolve) &#x3D;&gt; {<br>         setTimeout(resolve, 800);<br>     })<br> await fn1;<br> await fn2;<br> }</p>
+</li>
+<li><p>await命令只能用在async函数之中，如果用在普通函数，会报错。</p>
+</li>
+<li><p>async 函数可以保留运行堆栈。</p>
+<p> &#x2F;*** 函数a内部运行了一个异步任务b()。当b()运行的时候，函数a()不会中断，而是继续执行。* 等到b()运行结束，可能a()早就* 运行结束了，b()所在的上下文环境已经消失了。* 如果b()或c()报错，错误堆栈将不包括a()。<em>&#x2F;functionb() {<br> returnnewPromise((resolve, reject) &#x3D;&gt; {<br>     setTimeout(resolve, 200)<br> });<br> }<br> functionc() {<br> throwError(10);<br> }<br> consta&#x3D; () &#x3D;&gt; {<br> b().then(() &#x3D;&gt;c());<br> };<br> a();<br> &#x2F;</em>** 改成async函数*&#x2F;constm&#x3D;async () &#x3D;&gt; {<br> awaitb();<br> c();<br> };<br> m();</p>
+</li>
+</ol>
+<p>报错信息如下，可以看出 async 函数可以保留运行堆栈。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/1e7b66f33a49a42372dc145e48ab72409da1db98/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434566376663356434393334336538346164356434323933613362643766616134342f3239343934"><img src="https://camo.githubusercontent.com/1e7b66f33a49a42372dc145e48ab72409da1db98/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434566376663356434393334336538346164356434323933613362643766616134342f3239343934" alt="xuehuayu.cn"></a></p>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/12">使用 async&#x2F;await<br>需要注意什么？</a></p>
+<hr>
+<h3 id="4-如何实现-Promise-race？"><a href="#4-如何实现-Promise-race？" class="headerlink" title="4.如何实现 Promise.race？"></a>4.如何实现 Promise.race？</h3><p>在代码实现前，我们需要先了解 Promise.race 的特点：</p>
+<ol>
+<li>Promise.race返回的仍然是一个Promise.</li>
+</ol>
+<p>它的状态与第一个完成的Promise的状态相同。它可以是完成（ resolves），也可以是失败（rejects），这要取决于第一个Promise是哪一种状态。</p>
+<ol start="2">
+<li><p>如果传入的参数是不可迭代的，那么将会抛出错误。</p>
+</li>
+<li><p>如果传的参数数组是空，那么返回的 promise 将永远等待。</p>
+</li>
+<li><p>如果迭代包含一个或多个非承诺值和&#x2F;或已解决&#x2F;拒绝的承诺，则 Promise.race 将解析为迭代中找到的第一个值。</p>
+<p> Promise.race&#x3D;function (promises) {<br> &#x2F;&#x2F;promises 必须是一个可遍历的数据结构，否则抛错returnnewPromise((resolve, reject) &#x3D;&gt; {<br>     if (typeof promises[Symbol.iterator] !&#x3D;&#x3D;’function’) {<br>         &#x2F;&#x2F;真实不是这个错误Promise.reject(‘args is not iteratable!’);<br>     }<br>     if (promises.length&#x3D;&#x3D;&#x3D;0) {<br>         return;<br>     } else {<br>         for (let i &#x3D;0; i &lt;promises.length; i++) {<br>             Promise.resolve(promises[i]).then((data) &#x3D;&gt; {<br>                 resolve(data);<br>                 return;<br>             }, (err) &#x3D;&gt; {<br>                 reject(err);<br>                 return;<br>             });<br>         }<br>     }<br> });<br> }</p>
+</li>
+</ol>
+<p>测试代码:</p>
+<pre><code>//一直在等待态Promise.race([]).then((data) =&gt; {
+    console.log(&#39;success &#39;, data);
+}, (err) =&gt; {
+    console.log(&#39;err &#39;, err);
+});
+//抛错Promise.race().then((data) =&gt; {
+    console.log(&#39;success &#39;, data);
+}, (err) =&gt; {
+    console.log(&#39;err &#39;, err);
+});
+Promise.race([
+    newPromise((resolve, reject) =&gt; { setTimeout(() =&gt; { resolve(100) }, 1000) }),
+    newPromise((resolve, reject) =&gt; { setTimeout(() =&gt; { resolve(200) }, 200) }),
+    newPromise((resolve, reject) =&gt; { setTimeout(() =&gt; { reject(100) }, 100) })
+]).then((data) =&gt; {
+    console.log(data);
+}, (err) =&gt; {
+    console.log(err);
+});
+</code></pre>
+<p><strong>引申:</strong><br>Promise.all&#x2F;Promise.reject&#x2F;Promise.resolve&#x2F;Promise.prototype.finally&#x2F;Promise.prototype.catch<br>的实现原理，如果还不太会，戳:<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/2">Promise源码实现</a></p>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/13">如何实现<br>Promise.race？</a></p>
+<hr>
+<h3 id="5-可遍历数据结构的有什么特点？"><a href="#5-可遍历数据结构的有什么特点？" class="headerlink" title="5.可遍历数据结构的有什么特点？"></a>5.可遍历数据结构的有什么特点？</h3><p>一个对象如果要具备可被 for…of 循环调用的 Iterator 接口，就必须在其 Symbol.iterator<br>的属性上部署遍历器生成方法(或者原型链上的对象具有该方法)</p>
+<p><strong>PS:</strong> 遍历器对象根本特征就是具有next方法。每次调用next方法，都会返回一个代表当前成员的信息对象，具有value和done两个属性。</p>
+<pre><code>//如为对象添加Iterator 接口;let obj = {
+    name:&quot;Yvette&quot;,
+    age:18,
+    job:&#39;engineer&#39;,
+    [Symbol.iterator]() {
+        constself=this;
+        constkeys=Object.keys(self);
+        let index =0;
+        return {
+            next() {
+                if (index &lt;keys.length) {
+                    return {
+                        value: self[keys[index++]],
+                        done:false
+                    };
+                } else {
+                    return { value:undefined, done:true };
+                }
+            }
+        };
+    }
+};
+
+for(let item of obj) {
+    console.log(item); //Yvette  18  engineer
+}
+</code></pre>
+<p>使用 Generator 函数(遍历器对象生成函数)简写 Symbol.iterator 方法，可以简写如下:</p>
+<pre><code>let obj = {
+    name:&quot;Yvette&quot;,
+    age:18,
+    job:&#39;engineer&#39;,
+    - [Symbol.iterator] () {
+        constself=this;
+        constkeys=Object.keys(self);
+        for (let index =0;index &lt;keys.length; index++) {
+            yield self[keys[index]];//yield表达式仅能使用在 Generator 函数中
+        }
+    }
+};
+</code></pre>
+<blockquote>
+<p>原生具备 Iterator 接口的数据结构如下。</p>
+</blockquote>
+<ul>
+<li>Array</li>
+<li>Map</li>
+<li>Set</li>
+<li>String</li>
+<li>TypedArray</li>
+<li>函数的 arguments 对象</li>
+<li>NodeList 对象</li>
+<li>ES6 的数组、Set、Map 都部署了以下三个方法: entries() &#x2F; keys() &#x2F; values()，调用后都返回遍历器对象。</li>
+</ul>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/14">可遍历数据结构的有什么特点？</a></p>
+<hr>
+<h3 id="6-requestAnimationFrame-和-setTimeout-setInterval-有什么区别？使用-requestAnimationFrame-有哪些好处？"><a href="#6-requestAnimationFrame-和-setTimeout-setInterval-有什么区别？使用-requestAnimationFrame-有哪些好处？" class="headerlink" title="6.requestAnimationFrame 和 setTimeout&#x2F;setInterval 有什么区别？使用 requestAnimationFrame 有哪些好处？"></a>6.requestAnimationFrame 和 setTimeout&#x2F;setInterval 有什么区别？使用 requestAnimationFrame 有哪些好处？</h3><p>在 requestAnimationFrame 之前，我们主要使用 setTimeout&#x2F;setInterval 来编写JS动画。</p>
+<p>编写动画的关键是循环间隔的设置，一方面，循环间隔足够短，动画效果才能显得平滑流畅；另一方面，循环间隔还要足够长，才能确保浏览器有能力渲染产生的变化。</p>
+<p>大部分的电脑显示器的刷新频率是60HZ，也就是每秒钟重绘60次。大多数浏览器都会对重绘操作加以限制，不超过显示器的重绘频率，因为即使超过那个频率用户体验也不会提升。因此，最平滑动画的最佳循环间隔是<br>1000ms &#x2F; 60 ，约为16.7ms。</p>
+<p>setTimeout&#x2F;setInterval 有一个显著的缺陷在于时间是不精确的，setTimeout&#x2F;setInterval<br>只能保证延时或间隔不小于设定的时间。因为它们实际上只是把任务添加到了任务队列中，但是如果前面的任务还没有执行完成，它们必须要等待。</p>
+<p>requestAnimationFrame<br>才有的是系统时间间隔，保持最佳绘制效率，不会因为间隔时间过短，造成过度绘制，增加开销；也不会因为间隔时间太长，使用动画卡顿不流畅，让各种网页动画效果能够有一个统一的刷新机制，从而节省系统资源，提高系统性能，改善视觉效果。</p>
+<p>综上所述，requestAnimationFrame 和 setTimeout&#x2F;setInterval 在编写动画时相比，优点如下:</p>
+<p>1.requestAnimationFrame 不需要设置时间，采用系统时间间隔，能达到最佳的动画效果。</p>
+<p>2.requestAnimationFrame 会把每一帧中的所有DOM操作集中起来，在一次重绘或回流中就完成。</p>
+<p>3.当 requestAnimationFrame() 运行在后台标签页或者隐藏的 <code>&lt;iframe&gt;</code> 里时，requestAnimationFrame()<br>会被暂停调用以提升性能和电池寿命（大多数浏览器中）。</p>
+<p>requestAnimationFrame 使用(试试使用requestAnimationFrame写一个移动的小球，从A移动到B初):</p>
+<pre><code>functionstep(timestamp) {
+    //code...window.requestAnimationFrame(step);
+}
+window.requestAnimationFrame(step);
+</code></pre>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/15">requestAnimationFrame 和 setTimeout&#x2F;setInterval<br>有什么区别？使用 requestAnimationFrame<br>有哪些好处？</a></p>
+<hr>
+<h3 id="7-JS-类型转换的规则是什么？"><a href="#7-JS-类型转换的规则是什么？" class="headerlink" title="7.JS 类型转换的规则是什么？"></a>7.JS 类型转换的规则是什么？</h3><p>类型转换的规则三言两语说不清，真想哇得一声哭出来~<br><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/a81da42a57352299f279307e21a5a93d11bf26fa/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535353735373135363134362664693d353431643036376439636363663432383164333332396566636635393538313226696d67747970653d30267372633d68747470253341253246253246696d672e676966686f6d652e636f6d25324667696625324673253246323031383130303125324633396639656330616635633033646364616633313531613934363434353762632e6a7067"><img src="https://camo.githubusercontent.com/a81da42a57352299f279307e21a5a93d11bf26fa/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535353735373135363134362664693d353431643036376439636363663432383164333332396566636635393538313226696d67747970653d30267372633d68747470253341253246253246696d672e676966686f6d652e636f6d25324667696625324673253246323031383130303125324633396639656330616635633033646364616633313531613934363434353762632e6a7067" alt="xuehuayu.cn"></a></p>
+<p>JS中类型转换分为 强制类型转换 和 隐式类型转换 。</p>
+<ul>
+<li><p>通过 Number()、parseInt()、parseFloat()、toString()、String()、Boolean(),进行强制类型转换。</p>
+</li>
+<li><p>逻辑运算符(&amp;&amp;、 ||、 !)、运算符(+、-、*、&#x2F;)、关系操作符(&gt;、 &lt;、 &lt;&#x3D; 、&gt;&#x3D;)、相等运算符(&#x3D;&#x3D;)或者 if&#x2F;while</p>
+</li>
+</ul>
+<p>的条件，可能会进行隐式类型转换。</p>
+<p><strong>强制类型转换</strong></p>
+<blockquote>
+<p>1.Number() 将任意类型的参数转换为数值类型</p>
+</blockquote>
+<p>规则如下:</p>
+<ul>
+<li>如果是布尔值，true和false分别被转换为1和0</li>
+<li>如果是数字，返回自身</li>
+<li>如果是 null，返回 0</li>
+<li>如果是 undefined，返回 <code>NAN</code></li>
+<li>如果是字符串，遵循以下规则:</li>
+</ul>
+<ol>
+<li>如果字符串中只包含数字(或者是 <code>0X</code> &#x2F; <code>0x</code> 开头的十六进制数字字符串，允许包含正负号)，则将其转换为十进制</li>
+<li>如果字符串中包含有效的浮点格式，将其转换为浮点数值</li>
+<li>如果是空字符串，将其转换为0</li>
+<li>如不是以上格式的字符串，均返回 <code>NaN</code></li>
+</ol>
+<ul>
+<li>如果是Symbol，抛出错误</li>
+<li>如果是对象，则调用对象的 <code>valueOf()</code> 方法，然后依据前面的规则转换返回的值。如果转换的结果是 <code>NaN</code> ，则调用对象的</li>
+</ul>
+<p><code>toString()</code> 方法，再次依照前面的规则转换返回的字符串值。</p>
+<p>部分内置对象调用默认的 <code>valueOf</code> 的行为:<br>对象返回值Array数组本身（对象类型）Boolean布尔值（原始类型）Date从 UTC 1970 年 1 月 1<br>日午夜开始计算，到所封装的日期所经过的毫秒数Function函数本身（对象类型）Number数字值（原始类型）Object对象本身（对象类型）String字符串值（原始类型）</p>
+<pre><code>Number(&#39;0111&#39;); //111Number(&#39;0X11&#39;) //17Number(null); //0Number(&#39;&#39;); //0Number(&#39;1a&#39;); //NaNNumber(-0X11);//-17
+</code></pre>
+<blockquote>
+<p>2.parseInt(param, radix)</p>
+</blockquote>
+<p>如果第一个参数传入的是字符串类型:</p>
+<ol>
+<li>忽略字符串前面的空格，直至找到第一个非空字符，如果是空字符串，返回NaN</li>
+<li>如果第一个字符不是数字符号或者正负号，返回NaN</li>
+<li>如果第一个字符是数字&#x2F;正负号，则继续解析直至字符串解析完毕或者遇到一个非数字符号为止</li>
+</ol>
+<p>如果第一个参数传入的Number类型:</p>
+<ol>
+<li>数字如果是0开头，则将其当作八进制来解析(如果是一个八进制数)；如果以0x开头，则将其当作十六进制来解析</li>
+</ol>
+<p>如果第一个参数是 null 或者是 undefined，或者是一个对象类型：</p>
+<ol>
+<li>返回 NaN</li>
+</ol>
+<p>如果第一个参数是数组：</p>
+<ol>
+<li>去数组的第一个元素，按照上面的规则进行解析</li>
+</ol>
+<p>如果第一个参数是Symbol类型：</p>
+<ol>
+<li>抛出错误</li>
+</ol>
+<p>如果指定radix参数，以radix为基数进行解析</p>
+<pre><code>parseInt(&#39;0111&#39;); //111parseInt(0111); //八进制数 73parseInt(&#39;&#39;);//NaNparseInt(&#39;0X11&#39;); //17parseInt(&#39;1a&#39;) //1parseInt(&#39;a1&#39;); //NaNparseInt([&#39;10aa&#39;,&#39;aaa&#39;]);//10parseInt([]);//NaN; parseInt(undefined);
+</code></pre>
+<blockquote>
+<p>parseFloat</p>
+</blockquote>
+<p>规则和<code>parseInt</code>基本相同，接受一个Number类型或字符串，如果是字符串中，那么只有第一个小数点是有效的。</p>
+<blockquote>
+<p>toString()</p>
+</blockquote>
+<p>规则如下:</p>
+<ul>
+<li><p>如果是Number类型，输出数字字符串</p>
+</li>
+<li><p>如果是 null 或者是 undefined，抛错</p>
+</li>
+<li><p>如果是数组，那么将数组展开输出。空数组，返回<code>&#39;&#39;</code></p>
+</li>
+<li><p>如果是对象，返回 <code>[object Object]</code></p>
+</li>
+<li><p>如果是Date, 返回日期的文字表示法</p>
+</li>
+<li><p>如果是函数，输出对应的字符串(如下demo)</p>
+</li>
+<li><p>如果是Symbol，输出Symbol字符串</p>
+<p>  let arry &#x3D; [];<br>  let obj &#x3D; {a:1};<br>  let sym &#x3D;Symbol(100);<br>  let date &#x3D;newDate();<br>  letfn&#x3D;function() {console.log(‘稳住，我们能赢！’)}<br>  let str &#x3D;’hello world’;<br>  console.log([].toString()); &#x2F;&#x2F; ‘’console.log([1, 2, 3, undefined, 5, 6].toString());&#x2F;&#x2F;1,2,3,,5,6console.log(arry.toString()); &#x2F;&#x2F; 1,2,3console.log(obj.toString()); &#x2F;&#x2F; [object Object]console.log(date.toString()); &#x2F;&#x2F; Sun Apr 21 2019 16:11:39 GMT+0800 (CST)console.log(fn.toString());&#x2F;&#x2F; function () {console.log(‘稳住，我们能赢！’)}console.log(str.toString());&#x2F;&#x2F; ‘hello world’console.log(sym.toString());&#x2F;&#x2F; Symbol(100)console.log(undefined.toString());&#x2F;&#x2F; 抛错console.log(null.toString());&#x2F;&#x2F; 抛错</p>
+</li>
+</ul>
+<blockquote>
+<p>String()</p>
+</blockquote>
+<p><code>String()</code> 的转换规则与 <code>toString()</code> 基本一致，最大的一点不同在于 <code>null</code> 和 <code>undefined</code>，使用 String<br>进行转换，null 和 undefined对应的是字符串 <code>&#39;null&#39;</code> 和 <code>&#39;undefined&#39;</code></p>
+<blockquote>
+<p>Boolean</p>
+</blockquote>
+<p>除了 undefined、 null、 false、 ‘’、 0(包括 +0，-0)、 NaN 转换出来是false，其它都是true.</p>
+<p><strong>隐式类型转换</strong></p>
+<blockquote>
+<p>&amp;&amp; 、|| 、 ! 、 if&#x2F;while 的条件判断</p>
+</blockquote>
+<p>需要将数据转换成 Boolean 类型，转换规则同 Boolean 强制类型转换</p>
+<blockquote>
+<p>运算符: + - * &#x2F;</p>
+</blockquote>
+<p><code>+</code> 号操作符，不仅可以用作数字相加，还可以用作字符串拼接。</p>
+<p>仅当 <code>+</code> 号两边都是数字时，进行的是加法运算。如果两边都是字符串，直接拼接，无需进行隐式类型转换。</p>
+<p>除了上面的情况外，如果操作数是对象、数值或者布尔值，则调用toString()方法取得字符串值(toString转换规则)。对于 undefined 和<br>null，分别调用String()显式转换为字符串，然后再进行拼接。</p>
+<pre><code>console.log({}+10); //[object Object]10console.log([1, 2, 3, undefined, 5, 6] +10);//1,2,3,,5,610
+</code></pre>
+<p><code>-</code>、<code>*</code>、<code>/</code> 操作符针对的是运算，如果操作值之一不是数值，则被隐式调用Number()函数进行转换。如果其中有一个转换除了为NaN，结果为NaN.</p>
+<blockquote>
+<p>关系操作符: &#x3D;&#x3D;、&gt;、&lt; 、&lt;&#x3D;、&gt;&#x3D;</p>
+</blockquote>
+<p><code>&gt;</code> , <code>&lt;</code> ，<code>&lt;=</code> ，<code>&gt;=</code></p>
+<ol>
+<li>如果两个操作值都是数值，则进行数值比较</li>
+<li>如果两个操作值都是字符串，则比较字符串对应的字符编码值</li>
+<li>如果有一方是Symbol类型，抛出错误</li>
+<li>除了上述情况之外，都进行Number()进行类型转换，然后再进行比较。</li>
+</ol>
+<p><strong>注：</strong> NaN是非常特殊的值，它不和任何类型的值相等，包括它自己，同时它与任何类型的值比较大小时都返回false。</p>
+<pre><code>console.log(10&gt; {});//返回false./** *{}.valueOf ---&gt; {} *{}.toString() ---&gt; &#39;[object Object]&#39; ---&gt; NaN *NaN 和 任何类型比大小，都返回 false*/
+</code></pre>
+<blockquote>
+<p>相等操作符：<code>==</code></p>
+</blockquote>
+<ol>
+<li>如果类型相同，无需进行类型转换。</li>
+<li>如果其中一个操作值是 null 或者是 undefined，那么另一个操作符必须为 null 或者 undefined 时，才返回 true，否则都返回<br>false.</li>
+<li>如果其中一个是 Symbol 类型，那么返回 false.</li>
+<li>两个操作值是否为 string 和 number，就会将字符串转换为 number</li>
+<li>如果一个操作值是 boolean，那么转换成 number</li>
+<li>如果一个操作值为 object 且另一方为 string、number 或者 symbol，是的话就会把 object<br>转为原始类型再进行判断(调用object的valueOf&#x2F;toString方法进行转换)</li>
+</ol>
+<blockquote>
+<p>对象如何转换成原始数据类型</p>
+</blockquote>
+<p>如果部署了 [Symbol.toPrimitive] 接口，那么调用此接口，若返回的不是基础数据类型，跑出错误。</p>
+<p>如果没有部署 [Symbol.toPrimitive] 接口，那么先返回 valueOf() 的值，若返回的不是基础类型的值，再返回 toString()<br>的值，若返回的不是基础类型的值， 则抛出异常。</p>
+<pre><code>//先调用 valueOf, 后调用 toStringlet obj = {
+    [Symbol.toPrimitive]() {
+        return200;
+    },
+    valueOf() {
+        return300;
+    },
+    toString() {
+        return&#39;Hello&#39;;
+    }
+}
+//如果 valueOf 返回的不是基本数据类型，则会调用 toString， //如果 toString 返回的也不是基本数据类型，会抛出错误console.log(obj +200); //400
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/738bdd3de5c5e57c92f8b4671784ce8a568325f9/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535353834393332383738302664693d646464316631363166303135393766316538366166363838376630383561346126696d67747970653d30267372633d687474702533412532462532466d6d62697a2e717069632e636e2532466d6d62697a5f6a7067253246706c4149696139376d7439625147784d57344e64696376345a744239786a69623967795768705a64476961307a664c574b384e78734630456c5a4b507a475569625a796b43696136306773724d5064385078534e477576553972527725324636343025334677785f666d742533446a706567"><img src="https://camo.githubusercontent.com/738bdd3de5c5e57c92f8b4671784ce8a568325f9/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535353834393332383738302664693d646464316631363166303135393766316538366166363838376630383561346126696d67747970653d30267372633d687474702533412532462532466d6d62697a2e717069632e636e2532466d6d62697a5f6a7067253246706c4149696139376d7439625147784d57344e64696376345a744239786a69623967795768705a64476961307a664c574b384e78734630456c5a4b507a475569625a796b43696136306773724d5064385078534e477576553972527725324636343025334677785f666d742533446a706567" alt="xuehuayu.cn"></a></p>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/16">JS<br>类型转换的规则是什么？</a></p>
+<hr>
+<h3 id="8-简述下对-webWorker-的理解？"><a href="#8-简述下对-webWorker-的理解？" class="headerlink" title="8.简述下对 webWorker 的理解？"></a>8.简述下对 webWorker 的理解？</h3><p>HTML5则提出了 Web Worker<br>标准，表示js允许多线程，但是子线程完全受主线程控制并且不能操作dom，只有主线程可以操作dom，所以js本质上依然是单线程语言。</p>
+<p>web<br>worker就是在js单线程执行的基础上开启一个子线程，进行程序处理，而不影响主线程的执行，当子线程执行完之后再回到主线程上，在这个过程中不影响主线程的执行。子线程与主线程之间提供了数据交互的接口postMessage和onmessage，来进行数据发送和接收。</p>
+<pre><code>var worker =newWorker(&#39;./worker.js&#39;); //创建一个子线程worker.postMessage(&#39;Hello&#39;);
+worker.onmessage=function (e) {
+    console.log(e.data); //Hiworker.terminate(); //结束线程
+};
+
+//worker.jsonmessage=function (e) {
+    console.log(e.data); //HellopostMessage(&quot;Hi&quot;); //向主进程发送消息
+};
+</code></pre>
+<p>仅是最简示例代码，项目中通常是将一些耗时较长的代码，放在子线程中运行。</p>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/17">简述下对 webWorker<br>的理解</a></p>
+<hr>
+<h3 id="9-ES6模块和CommonJS模块的差异？"><a href="#9-ES6模块和CommonJS模块的差异？" class="headerlink" title="9.ES6模块和CommonJS模块的差异？"></a>9.ES6模块和CommonJS模块的差异？</h3><ol>
+<li>ES6模块在编译时，就能确定模块的依赖关系，以及输入和输出的变量。</li>
+</ol>
+<p>CommonJS 模块，运行时加载。</p>
+<ol start="2">
+<li><p>ES6 模块自动采用严格模式，无论模块头部是否写了 <code>&quot;use strict&quot;;</code> (严格模式有哪些限制？[&#x2F;&#x2F;链接])</p>
+</li>
+<li><p>require 可以做动态加载，import 语句做不到，import 语句必须位于顶层作用域中。</p>
+</li>
+<li><p>ES6 模块中顶层的 this 指向 undefined，ommonJS 模块的顶层 this 指向当前模块。</p>
+</li>
+<li><p>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</p>
+</li>
+</ol>
+<p>CommonJS 模块输出的是值的拷贝，也就是说，一旦输出一个值，模块内部的变化就影响不到这个值。如：</p>
+<pre><code>//name.jsvar name =&#39;William&#39;;
+setTimeout(() =&gt; name =&#39;Yvette&#39;, 200);
+module.exports= {
+    name
+};
+//index.jsconstname=require(&#39;./name&#39;);
+console.log(name); //WilliamsetTimeout(() =&gt;console.log(name), 300); //William
+</code></pre>
+<p>对比 ES6 模块看一下:</p>
+<p>ES6 模块的运行机制与 CommonJS 不一样。JS 引擎对脚本静态分析的时候，遇到模块加载命令 import<br>，就会生成一个只读引用。等到脚本真正执行时，再根据这个只读引用，到被加载的那个模块里面去取值。</p>
+<pre><code>//name.jsvar name =&#39;William&#39;;
+setTimeout(() =&gt; name =&#39;Yvette&#39;, 200);
+export { name };
+//index.jsimport { name } from&#39;./name&#39;;
+console.log(name); //WilliamsetTimeout(() =&gt;console.log(name), 300); //Yvette
+</code></pre>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/18">ES6模块和CommonJS模块的差异？</a></p>
+<hr>
+<h3 id="10-浏览器事件代理机制的原理是什么？"><a href="#10-浏览器事件代理机制的原理是什么？" class="headerlink" title="10.浏览器事件代理机制的原理是什么？"></a>10.浏览器事件代理机制的原理是什么？</h3><p>在说浏览器事件代理机制原理之前，我们首先了解一下事件流的概念，早期浏览器，IE采用的是事件捕获事件流，而Netscape采用的则是事件捕获。”DOM2级事件”把事件流分为三个阶段，捕获阶段、目标阶段、冒泡阶段。现代浏览器也都遵循此规范。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/a2473ce916b426657cf69829e09e1b1fcd75620b/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434539303731353332353935313534383966356338386539663038373438363533312f3239343838"><img src="https://camo.githubusercontent.com/a2473ce916b426657cf69829e09e1b1fcd75620b/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434539303731353332353935313534383966356338386539663038373438363533312f3239343838" alt="xuehuayu.cn"></a></p>
+<blockquote>
+<p>那么事件代理是什么呢？</p>
+</blockquote>
+<p>事件代理又称为事件委托，在祖先级DOM元素绑定一个事件，当触发子孙级DOM元素的事件时，利用事件冒泡的原理来触发绑定在祖先级DOM的事件。因为事件会从目标元素一层层冒泡至document对象。</p>
+<blockquote>
+<p>为什么要事件代理？</p>
+</blockquote>
+<ol>
+<li><p>添加到页面上的事件数量会影响页面的运行性能，如果添加的事件过多，会导致网页的性能下降。采用事件代理的方式，可以大大减少注册事件的个数。</p>
+</li>
+<li><p>事件代理的当时，某个子孙元素是动态增加的，不需要再次对其进行事件绑定。</p>
+</li>
+<li><p>不用担心某个注册了事件的DOM元素被移除后，可能无法回收其事件处理程序，我们只要把事件处理程序委托给更高层级的元素，就可以避免此问题。</p>
+</li>
+</ol>
+<blockquote>
+<p>如将页面中的所有click事件都代理到document上:</p>
+</blockquote>
+<p>addEventListener<br>接受3个参数，分别是要处理的事件名、处理事件程序的函数和一个布尔值。布尔值默认为false。表示冒泡阶段调用事件处理程序，若设置为true，表示在捕获阶段调用事件处理程序。</p>
+<pre><code>document.addEventListener(&#39;click&#39;, function (e) {
+    console.log(e.target);
+    /**    * 捕获阶段调用调用事件处理程序，eventPhase是 1;     * 处于目标，eventPhase是2     * 冒泡阶段调用事件处理程序，eventPhase是 1；*/console.log(e.eventPhase);
+
+});
+</code></pre>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/19">浏览器事件代理机制的原理是什么？</a></p>
+<hr>
+<h3 id="11-js如何自定义事件？"><a href="#11-js如何自定义事件？" class="headerlink" title="11.js如何自定义事件？"></a>11.js如何自定义事件？</h3><blockquote>
+<p>自定义 DOM 事件(不考虑IE9之前版本)</p>
+</blockquote>
+<p>自定义事件有三种方法,一种是使用 <code>new Event()</code>, 另一种是 <code>createEvent(&#39;CustomEvent&#39;)</code> , 另一种是 <code>new customEvent()</code></p>
+<ol>
+<li>使用 <code>new Event()</code></li>
+</ol>
+<p>获取不到 <code>event.detail</code></p>
+<pre><code>let btn =document.querySelector(&#39;#btn&#39;);
+let ev =newEvent(&#39;alert&#39;, {
+    bubbles:true,    //事件是否冒泡;默认值false
+    cancelable:true, //事件能否被取消;默认值false
+    composed:false
+});
+btn.addEventListener(&#39;alert&#39;, function (event) {
+    console.log(event.bubbles); //trueconsole.log(event.cancelable); //trueconsole.log(event.detail); //undefined
+}, false);
+btn.dispatchEvent(ev);
+</code></pre>
+<ol>
+<li>使用 <code>createEvent(&#39;CustomEvent&#39;)</code> (DOM3)</li>
+</ol>
+<p>要创建自定义事件，可以调用 <code>createEvent(&#39;CustomEvent&#39;)</code>，返回的对象有 initCustomEvent 方法，接受以下四个参数:</p>
+<ul>
+<li><p>type: 字符串，表示触发的事件类型，如此处的’alert’</p>
+</li>
+<li><p>bubbles: 布尔值： 表示事件是否冒泡</p>
+</li>
+<li><p>cancelable: 布尔值，表示事件是否可以取消</p>
+</li>
+<li><p>detail: 任意值，保存在 event 对象的 detail 属性中</p>
+<p>  let btn &#x3D;document.querySelector(‘#btn’);<br>  let ev &#x3D;btn.createEvent(‘CustomEvent’);<br>  ev.initCustomEvent(‘alert’, true, true, ‘button’);<br>  btn.addEventListener(‘alert’, function (event) {<br>  console.log(event.bubbles); &#x2F;&#x2F;trueconsole.log(event.cancelable);&#x2F;&#x2F;trueconsole.log(event.detail); &#x2F;&#x2F;button<br>  }, false);<br>  btn.dispatchEvent(ev);</p>
+</li>
+</ul>
+<ol>
+<li>使用 <code>new customEvent()</code> (DOM4)</li>
+</ol>
+<p>使用起来比 <code>createEvent(&#39;CustomEvent&#39;)</code> 更加方便</p>
+<pre><code>var btn =document.querySelector(&#39;#btn&#39;);
+/* * 第一个参数是事件类型 * 第二个参数是一个对象*/var ev =newCustomEvent(&#39;alert&#39;, {
+    bubbles:&#39;true&#39;,
+    cancelable:&#39;true&#39;,
+    detail:&#39;button&#39;
+});
+btn.addEventListener(&#39;alert&#39;, function (event) {
+    console.log(event.bubbles); //trueconsole.log(event.cancelable);//trueconsole.log(event.detail); //button
+}, false);
+btn.dispatchEvent(ev);
+</code></pre>
+<blockquote>
+<p>自定义非 DOM 事件(观察者模式)</p>
+</blockquote>
+<p>EventTarget类型有一个单独的属性handlers，用于存储事件处理程序（观察者）。</p>
+<p>addHandler() 用于注册给定类型事件的事件处理程序；</p>
+<p>fire() 用于触发一个事件；</p>
+<p>removeHandler() 用于注销某个事件类型的事件处理程序。</p>
+<pre><code>functionEventTarget(){
+    this.handlers= {};
+}
+
+EventTarget.prototype= {
+    constructor:EventTarget,
+    addHandler:function(type,handler){
+        if(typeofthis.handlers[type] ===&quot;undefined&quot;){
+            this.handlers[type] = [];
+        }
+        this.handlers[type].push(handler);
+    },
+    fire:function(event){
+        if(!event.target){
+            event.target=this;
+        }
+        if(this.handlers[event.type] instanceofArray){
+            consthandlers=this.handlers[event.type];
+            handlers.forEach((handler)=&gt;{
+                handler(event);
+            });
+        }
+    },
+    removeHandler:function(type,handler){
+        if(this.handlers[type] instanceofArray){
+            consthandlers=this.handlers[type];
+            for(var i =0,len =handlers.length; i &lt; len; i++){
+                if(handlers[i] === handler){
+                    break;
+                }
+            }
+            handlers.splice(i,1);
+        }
+    }
+}
+//使用functionhandleMessage(event){
+    console.log(event.message);
+}
+//创建一个新对象var target =newEventTarget();
+//添加一个事件处理程序target.addHandler(&quot;message&quot;, handleMessage);
+//触发事件target.fire({type:&quot;message&quot;, message:&quot;Hi&quot;}); //Hi//删除事件处理程序target.removeHandler(&quot;message&quot;,handleMessage);
+//再次触发事件，没有事件处理程序target.fire({type:&quot;message&quot;,message:&quot;Hi&quot;});
+</code></pre>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/20">js如何自定义事件？</a></p>
+<hr>
+<h3 id="12-跨域的方法有哪些？原理是什么？"><a href="#12-跨域的方法有哪些？原理是什么？" class="headerlink" title="12.跨域的方法有哪些？原理是什么？"></a>12.跨域的方法有哪些？原理是什么？</h3><p>知其然知其所以然，在说跨域方法之前，我们先了解下什么叫跨域，浏览器有同源策略，只有当“协议”、“域名”、“端口号”都相同时，才能称之为是同源，其中有一个不同，即是跨域。</p>
+<p>那么同源策略的作用是什么呢？同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。</p>
+<p>那么我们又为什么需要跨域呢？一是前端和服务器分开部署，接口请求需要跨域，二是我们可能会加载其它网站的页面作为iframe内嵌。</p>
+<blockquote>
+<p><strong>跨域的方法有哪些？</strong></p>
+</blockquote>
+<blockquote>
+<p>常用的跨域方法</p>
+</blockquote>
+<ol>
+<li>jsonp</li>
+</ol>
+<p>尽管浏览器有同源策略，但是 <code>&lt;script&gt;</code> 标签的 src 属性不会被同源策略所约束，可以获取任意服务器上的脚本并执行。jsonp<br>通过插入script标签的方式来实现跨域，参数只能通过url传入，仅能支持get请求。</p>
+<p>实现原理:</p>
+<p>Step1: 创建 callback 方法</p>
+<p>Step2: 插入 script 标签</p>
+<p>Step3: 后台接受到请求，解析前端传过去的 callback 方法，返回该方法的调用，并且数据作为参数传入该方法</p>
+<p>Step4: 前端执行服务端返回的方法调用</p>
+<p>下面代码仅为说明 jsonp 原理，项目中请使用成熟的库。分别看一下前端和服务端的简单实现：</p>
+<pre><code>//前端代码functionjsonp({url, params, cb}) {
+    returnnewPromise((resolve, reject) =&gt; {
+        //创建script标签let script =document.createElement(&#39;script&#39;);
+        //将回调函数挂在 window 上window[cb] =function(data) {
+            resolve(data);
+            //代码执行后，删除插入的script标签document.body.removeChild(script);
+        }
+        //回调函数加在请求地址上
+        params = {...params, cb} //wb=b&amp;cb=showlet arrs = [];
+        for(let key in params) {
+            arrs.push(`${key}=${params[key]}`);
+        }
+        script.src=`${url}?${arrs.join(&#39;&amp;&#39;)}`;
+        document.body.appendChild(script);
+    });
+}
+//使用functionsayHi(data) {
+    console.log(data);
+}
+jsonp({
+    url: &#39;http://localhost:3000/say&#39;,
+    params: {
+        //code
+    },
+    cb: &#39;sayHi&#39;
+}).then(data=&gt; {
+    console.log(data);
+});
+
+//express启动一个后台服务let express =require(&#39;express&#39;);
+let app =express();
+
+app.get(&#39;/say&#39;, (req, res) =&gt; {
+    let {cb} =req.query; //获取传来的callback函数名，cb是keyres.send(`${cb}(&#39;Hello!&#39;)`);
+});
+app.listen(3000);
+</code></pre>
+<p>从今天起，jsonp的原理就要了然于心啦~</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/da697b5a89d21a4544f5e0cf8de43c929168f013/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535353735373433333833392664693d363736623835333332326663393662656330336563643534383664363965313526696d67747970653d30267372633d687474702533412532462532467777772e313771712e636f6d253246696d675f6269616f71696e6725324636393837313631332e6a706567"><img src="https://camo.githubusercontent.com/da697b5a89d21a4544f5e0cf8de43c929168f013/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535353735373433333833392664693d363736623835333332326663393662656330336563643534383664363965313526696d67747970653d30267372633d687474702533412532462532467777772e313771712e636f6d253246696d675f6269616f71696e6725324636393837313631332e6a706567" alt="xuehuayu.cn"></a></p>
+<ol>
+<li>cors</li>
+</ol>
+<p>jsonp 只能支持 get 请求，cors 可以支持多种请求。cors 并不需要前端做什么工作。</p>
+<blockquote>
+<p>简单跨域请求:</p>
+</blockquote>
+<p>只要服务器设置的Access-Control-Allow-Origin Header和请求来源匹配，浏览器就允许跨域</p>
+<ol>
+<li><p>请求的方法是get，head或者post。</p>
+</li>
+<li><p>Content-Type是application&#x2F;x-www-form-urlencoded, multipart&#x2F;form-data 或<br>text&#x2F;plain中的一个值，或者不设置也可以，一般默认就是application&#x2F;x-www-form-urlencoded。</p>
+</li>
+<li><p>请求中没有自定义的HTTP头部，如x-token。(应该是这几种头部<br>Accept，Accept-Language，Content-Language，Last-Event-ID，Content-Type）</p>
+<p> &#x2F;&#x2F;简单跨域请求app.use((req, res, next) &#x3D;&gt; {<br> res.setHeader(‘Access-Control-Allow-Origin’, ‘XXXX’);<br> });</p>
+</li>
+</ol>
+<blockquote>
+<p>带预检(Preflighted)的跨域请求</p>
+</blockquote>
+<p>不满于简单跨域请求的，即是带预检的跨域请求。服务端需要设置 Access-Control-Allow-Origin (允许跨域资源请求的域) 、<br>Access-Control-Allow-Methods (允许的请求方法) 和 Access-Control-Allow-Headers (允许的请求头)</p>
+<pre><code>app.use((req, res, next) =&gt; {
+    res.setHeader(&#39;Access-Control-Allow-Origin&#39;, &#39;XXX&#39;);
+    res.setHeader(&#39;Access-Control-Allow-Headers&#39;, &#39;XXX&#39;); //允许返回的头res.setHeader(&#39;Access-Control-Allow-Methods&#39;, &#39;XXX&#39;);//允许使用put方法请求接口res.setHeader(&#39;Access-Control-Max-Age&#39;, 6); //预检的存活时间if(req.method===&quot;OPTIONS&quot;) {
+        res.end(); //如果method是OPTIONS，不做处理
+    }
+});
+</code></pre>
+<p>更多CORS的知识可以访问: <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS">HTTP访问控制（CORS）
+</a></p>
+<ol>
+<li>nginx 反向代理</li>
+</ol>
+<p>使用nginx反向代理实现跨域，只需要修改nginx的配置即可解决跨域问题。</p>
+<p>A网站向B网站请求某个接口时，向B网站发送一个请求，nginx根据配置文件接收这个请求，代替A网站向B网站来请求。</p>
+<p>nginx拿到这个资源后再返回给A网站，以此来解决了跨域问题。</p>
+<p>例如nginx的端口号为 8090，需要请求的服务器端口号为 3000。（localhost:8090 请求 localhost:3000&#x2F;say）</p>
+<p>nginx配置如下:</p>
+<pre><code>server {
+    listen       8090;
+
+    server_name  localhost;
+
+    location / {
+        root   /Users/liuyan35/Test/Study/CORS/1-jsonp;
+        index  index.html index.htm;
+    }
+    location /say {
+        rewrite  ^/say/(.*)$ /$1 break;
+        proxy_pass   http://localhost:3000;
+        add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;
+        add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;
+        add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;
+    }
+    # others
+}
+</code></pre>
+<ol>
+<li>websocket</li>
+</ol>
+<p>Websocket 是 HTML5 的一个持久化的协议，它实现了浏览器与服务器的全双工通信，同时也是跨域的一种解决方案。</p>
+<p>Websocket 不受同源策略影响，只要服务器端支持，无需任何配置就支持跨域。</p>
+<p>前端页面在 8080 的端口。</p>
+<pre><code>let socket =newWebSocket(&#39;ws://localhost:3000&#39;); //协议是wssocket.onopen=function() {
+    socket.send(&#39;Hi,你好&#39;);
+}
+socket.onmessage=function(e) {
+    console.log(e.data)
+}
+</code></pre>
+<p>服务端 3000端口。可以看出websocket无需做跨域配置。</p>
+<pre><code>letWebSocket=require(&#39;ws&#39;);
+let wss =newWebSocket.Server({port:3000});
+wss.on(&#39;connection&#39;, function(ws) {
+    ws.on(&#39;message&#39;, function(data) {
+        console.log(data); //接受到页面发来的消息&#39;Hi,你好&#39;ws.send(&#39;Hi&#39;); //向页面发送消息
+    });
+});
+</code></pre>
+<ol>
+<li>postMessage</li>
+</ol>
+<p>postMessage<br>通过用作前端页面之前的跨域，如父页面与iframe页面的跨域。window.postMessage方法，允许跨窗口通信，不论这两个窗口是否同源。</p>
+<p>话说工作中两个页面之前需要通信的情况并不多，我本人工作中，仅使用过两次，一次是H5页面中发送postMessage信息，ReactNative的webview中接收此此消息，并作出相应处理。另一次是可轮播的页面，某个轮播页使用的是iframe页面，为了解决滑动的事件冲突，iframe页面中去监听手势，发送消息告诉父页面是否左滑和右滑。</p>
+<blockquote>
+<p>子页面向父页面发消息</p>
+</blockquote>
+<p>父页面</p>
+<pre><code>window.addEventListener(&#39;message&#39;, (e) =&gt; {
+    this.props.movePage(e.data);
+}, false);
+</code></pre>
+<p>子页面(iframe):</p>
+<pre><code>if(/*左滑*/) {
+    window.parent&amp;&amp;window.parent.postMessage(-1, &#39;*&#39;)
+}elseif(/*右滑*/){
+    window.parent&amp;&amp;window.parent.postMessage(1, &#39;*&#39;)
+}
+</code></pre>
+<blockquote>
+<p>父页面向子页面发消息</p>
+</blockquote>
+<p>父页面:</p>
+<pre><code>let iframe =document.querySelector(&#39;#iframe&#39;);
+iframe.onload=function() {
+    iframe.contentWindow.postMessage(&#39;hello&#39;, &#39;http://localhost:3002&#39;);
+}
+</code></pre>
+<p>子页面:</p>
+<pre><code>window.addEventListener(&#39;message&#39;, function(e) {
+    console.log(e.data);
+    e.source.postMessage(&#39;Hi&#39;, e.origin); //回消息
+});
+</code></pre>
+<ol>
+<li>node 中间件</li>
+</ol>
+<p>node 中间件的跨域原理和nginx代理跨域，同源策略是浏览器的限制，服务端没有同源策略。</p>
+<p>node中间件实现跨域的原理如下:</p>
+<p>1.接受客户端请求</p>
+<p>2.将请求 转发给服务器。</p>
+<p>3.拿到服务器 响应 数据。</p>
+<p>4.将 响应 转发给客户端。</p>
+<blockquote>
+<p>不常用跨域方法</p>
+</blockquote>
+<p>以下三种跨域方式很少用，如有兴趣，可自行查阅相关资料。</p>
+<ol>
+<li><p>window.name + iframe</p>
+</li>
+<li><p>location.hash + iframe</p>
+</li>
+<li><p>document.domain (主域需相同)</p>
+</li>
+</ol>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/21">跨域的方法有哪些？原理是什么？</a></p>
+<hr>
+<h3 id="13-js异步加载的方式有哪些？"><a href="#13-js异步加载的方式有哪些？" class="headerlink" title="13.js异步加载的方式有哪些？"></a>13.js异步加载的方式有哪些？</h3><ol>
+<li><p><code>&lt;script&gt;</code> 的 defer 属性，HTML4 中新增</p>
+</li>
+<li><p><code>&lt;script&gt;</code> 的 async 属性，HTML5 中新增</p>
+</li>
+</ol>
+<p><code>&lt;script&gt;</code>标签打开defer属性，脚本就会异步加载。渲染引擎遇到这一行命令，就会开始下载外部脚本，但不会等它下载和执行，而是直接执行后面的命令。</p>
+<p>defer 和 async 的区别在于: defer要等到整个页面在内存中正常渲染结束，才会执行；</p>
+<p>async一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染。defer是“渲染完再执行”，async是“下载完就执行”。</p>
+<p>如果有多个 defer 脚本，会按照它们在页面出现的顺序加载。</p>
+<p>多个async脚本是不能保证加载顺序的。</p>
+<ol>
+<li><p>动态插入 script 脚本</p>
+<p> functiondownloadJS() {<br> varelement &#x3D;document.createElement(“script”);<br> element.src&#x3D;”XXX.js”;<br> document.body.appendChild(element);<br> }<br> &#x2F;&#x2F;何时的时候，调用上述方法</p>
+</li>
+<li><p>有条件的动态创建脚本</p>
+</li>
+</ol>
+<p>如页面 onload 之后，</p>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/22">js异步加载的方式有哪些？</a></p>
+<hr>
+<h3 id="14-下面代码a在什么情况中打印出1？"><a href="#14-下面代码a在什么情况中打印出1？" class="headerlink" title="14.下面代码a在什么情况中打印出1？"></a>14.下面代码a在什么情况中打印出1？</h3><pre><code>//?if(a ==1&amp;&amp; a ==2&amp;&amp; a ==3) {
+    console.log(1);
+}
+</code></pre>
+<p>1.在类型转换的时候，我们知道了对象如何转换成原始数据类型。如果部署了<br>[Symbol.toPrimitive]，那么返回的就是<a href="Symbol.toPrimitive">Symbol.toPrimitive</a>的返回值。当然，我们也可以把此函数部署在valueOf或者是toString接口上，效果相同。</p>
+<pre><code>//利用闭包延长作用域的特性let a = {
+    [Symbol.toPrimitive]: (function() {
+            let i =1;
+            returnfunction() {
+                return i++;
+            }
+    })()
+}
+</code></pre>
+<p>（1）. 比较 a &#x3D;&#x3D; 1 时，会调用 [Symbol.toPrimitive]，此时 i 是 1，相等。</p>
+<p>（2）. 继续比较 a &#x3D;&#x3D; 2,调用 [Symbol.toPrimitive]，此时 i 是 2，相等。</p>
+<p>（3）. 继续比较 a &#x3D;&#x3D; 3,调用 [Symbol.toPrimitive]，此时 i 是 3，相等。</p>
+<p>2.利用Object.definePropert在window&#x2F;global上定义a属性，获取a属性时，会调用get.</p>
+<pre><code>let val =1;
+Object.defineProperty(window, &#39;a&#39;, {
+  get: function() {
+    return val++;
+  }
+});
+</code></pre>
+<p>3.利用数组的特性。</p>
+<pre><code>var a = [1,2,3];
+a.join=a.shift;
+</code></pre>
+<p>数组的 <code>toString</code> 方法返回一个字符串，该字符串由数组中的每个元素的 toString() 返回值经调用 join() 方法连接（由逗号隔开）组成。</p>
+<p>因此，我们可以重新 join 方法。返回第一个元素，并将其删除。</p>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/23">下面代码a在什么情况中打印出1？
+</a></p>
+<hr>
+<h3 id="15-下面这段代码的输出是什么？"><a href="#15-下面这段代码的输出是什么？" class="headerlink" title="15.下面这段代码的输出是什么？"></a>15.下面这段代码的输出是什么？</h3><pre><code>functionFoo() {
+    getName=function() {console.log(1)};
+    returnthis;
+}
+Foo.getName=function() {console.log(2)};
+Foo.prototype.getName=function() {console.log(3)};
+vargetName=function() {console.log(4)};
+functiongetName() {console.log(5)};
+
+Foo.getName();
+getName();
+Foo().getName();
+getName();
+newFoo.getName();
+newFoo().getName();
+newnewFoo().getName();
+</code></pre>
+<p>**说明：**一道经典的面试题，仅是为了帮助大家回顾一下知识点，加深理解，真实工作中，是不可能这样写代码的，否则，肯定会被打死的。</p>
+<p>1.首先预编译阶段，变量声明与函数声明提升至其对应作用域的最顶端。</p>
+<p>因此上面的代码编译后如下(函数声明的优先级先于变量声明):</p>
+<pre><code>functionFoo() {
+    getName=function() {console.log(1)};
+    returnthis;
+}
+var getName;
+functiongetName() {console.log(5)};
+Foo.getName=function() {console.log(2)};
+Foo.prototype.getName=function() {console.log(3)};
+getName=function() {console.log(4)};
+</code></pre>
+<p>2.<code>Foo.getName()</code>;直接调用Foo上getName方法，输出2</p>
+<p>3.<code>getName()</code>;输出4，getName被重新赋值了</p>
+<p>4.<code>Foo().getName()</code>;执行Foo()，window的getName被重新赋值，返回this;浏览器环境中，非严格模式，this 指向<br>window，this.getName();输出为1.</p>
+<p>如果是严格模式，this 指向 undefined，此处会抛出错误。</p>
+<p>如果是node环境中，this 指向<br>global，node的全局变量并不挂在global上，因为global.getName对应的是undefined，不是一个function，会抛出错误。</p>
+<p>5.<code>getName()</code>;已经抛错的自然走不动这一步了；继续浏览器非严格模式；window.getName被重新赋过值，此时再调用，输出的是1</p>
+<p>6.<code>new Foo.getName()</code>;考察<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence">运算符优先级</a>的知识，new<br>无参数列表，对应的优先级是18；成员访问操作符 <code>.</code> , 对应的优先级是 19。因此相当于是 <code>new (Foo.getName)()</code>;new操作符会执行构造函数中的方法，因此此处输出为 2.</p>
+<p>7.<code>new Foo().getName()</code>；new<br>带参数列表，对应的优先级是19，和成员访问操作符<code>.</code>优先级相同。同级运算符，按照从左到右的顺序依次计算。<code>new Foo()</code>先初始化 Foo<br>的实例化对象，实例上没有getName方法，因此需要原型上去找，即找到了 <code>Foo.prototype.getName</code>，输出3</p>
+<p>8.<code>new new Foo().getName()</code>; new 带参数列表，优先级19，因此相当于是 <code>new (new Foo()).getName()</code>；先初始化 Foo 的实例化对象，然后将其原型上的 getName 函数作为构造函数再次 new ，输出3</p>
+<p>因此最终结果如下:</p>
+<pre><code>Foo.getName(); //2getName();//4Foo().getName();//1getName();//1newFoo.getName();//2newFoo().getName();//3newnewFoo().getName();//3
+</code></pre>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/24">下面这段代码的输出是什么？</a></p>
+<hr>
+<h3 id="16-实现双向绑定-Proxy-与-Object-defineProperty-相比优劣如何"><a href="#16-实现双向绑定-Proxy-与-Object-defineProperty-相比优劣如何" class="headerlink" title="16.实现双向绑定 Proxy 与 Object.defineProperty 相比优劣如何?"></a>16.实现双向绑定 Proxy 与 Object.defineProperty 相比优劣如何?</h3><ol>
+<li><p>Object.definedProperty<br>的作用是劫持一个对象的属性，劫持属性的getter和setter方法，在对象的属性发生变化时进行特定的操作。而 Proxy 劫持的是整个对象。</p>
+</li>
+<li><p>Proxy 会返回一个代理对象，我们只需要操作新对象即可，而 <code>Object.defineProperty</code> 只能遍历对象属性直接修改。</p>
+</li>
+<li><p>Object.definedProperty 不支持数组，更准确的说是不支持数组的各种API，因为如果仅仅考虑arry[i] &#x3D; value<br>这种情况，是可以劫持的，但是这种劫持意义不大。而 Proxy 可以支持数组的各种API。</p>
+</li>
+<li><p>尽管 Object.defineProperty 有诸多缺陷，但是其兼容性要好于 Proxy.</p>
+</li>
+</ol>
+<p>PS: Vue2.x 使用 Object.defineProperty 实现数据双向绑定，V3.0 则使用了 Proxy.</p>
+<pre><code>//拦截器let obj = {};
+let temp =&#39;Yvette&#39;;
+Object.defineProperty(obj, &#39;name&#39;, {
+    get() {
+        console.log(&quot;读取成功&quot;);
+        return temp
+    },
+    set(value) {
+        console.log(&quot;设置成功&quot;);
+        temp = value;
+    }
+});
+
+obj.name=&#39;Chris&#39;;
+console.log(obj.name);
+</code></pre>
+<p><strong>PS:</strong> Object.defineProperty 定义出来的属性，默认是不可枚举，不可更改，不可配置【无法delete】</p>
+<p>我们可以看到 Proxy<br>会劫持整个对象，读取对象中的属性或者是修改属性值，那么就会被劫持。但是有点需要注意，复杂数据类型，监控的是引用地址，而不是值，如果引用地址没有改变，那么不会触发set。</p>
+<pre><code>let obj = {name:&#39;Yvette&#39;, hobbits: [&#39;travel&#39;, &#39;reading&#39;], info: {
+    age: 20,
+    job: &#39;engineer&#39;
+} };
+let p =newProxy(obj, {
+    get(target, key) { //第三个参数是 proxy， 一般不使用console.log(&#39;读取成功&#39;);
+        returnReflect.get(target, key);
+    },
+    set(target, key, value) {
+        if(key ===&#39;length&#39;) return true; //如果是数组长度的变化，返回。console.log(&#39;设置成功&#39;);
+        returnReflect.set([target, key, value]);
+    }
+});
+p.name=20; //设置成功p.age=20; //设置成功; 不需要事先定义此属性p.hobbits.push(&#39;photography&#39;); //读取成功;注意不会触发设置成功p.info.age=18; //读取成功;不会触发设置成功
+</code></pre>
+<p>最后，我们再看下对于数组的劫持，Object.definedProperty 和 Proxy 的差别</p>
+<p>Object.definedProperty 可以将数组的索引作为属性进行劫持，但是仅支持直接对 arry[i] 进行操作，不支持数组的API，非常鸡肋。</p>
+<pre><code>let arry = []
+Object.defineProperty(arry, &#39;0&#39;, {
+    get() {
+        console.log(&quot;读取成功&quot;);
+        return temp
+    },
+    set(value) {
+        console.log(&quot;设置成功&quot;);
+        temp = value;
+    }
+});
+
+arry[0] =10; //触发设置成功arry.push(10); //不能被劫持
+</code></pre>
+<p>Proxy 可以监听到数组的变化，支持各种API。注意数组的变化触发get和set可能不止一次，如有需要，自行根据key值决定是否要进行处理。</p>
+<pre><code>let hobbits = [&#39;travel&#39;, &#39;reading&#39;];
+let p =newProxy(hobbits, {
+    get(target, key) {
+        // if(key === &#39;length&#39;) return true; //如果是数组长度的变化，返回。console.log(&#39;读取成功&#39;);
+        returnReflect.get(target, key);
+    },
+    set(target, key, value) {
+        // if(key === &#39;length&#39;) return true; //如果是数组长度的变化，返回。console.log(&#39;设置成功&#39;);
+        returnReflect.set([target, key, value]);
+    }
+});
+p.splice(0,1) //触发get和set，可以被劫持p.push(&#39;photography&#39;);//触发get和setp.slice(1); //触发get；因为 slice 是不会修改原数组的
+</code></pre>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/25">实现双向绑定 Proxy 与 Object.defineProperty<br>相比优劣如何?</a></p>
+<hr>
+<h3 id="17-Object-is-与比较操作符-、-有什么区别？"><a href="#17-Object-is-与比较操作符-、-有什么区别？" class="headerlink" title="17.Object.is() 与比较操作符 ===、== 有什么区别？"></a>17.<code>Object.is()</code> 与比较操作符 <code>===</code>、<code>==</code> 有什么区别？</h3><p>以下情况，Object.is认为是相等</p>
+<pre><code>两个值都是 undefined
+两个值都是 null
+两个值都是 true 或者都是 false
+两个值是由相同个数的字符按照相同的顺序组成的字符串
+两个值指向同一个对象
+两个值都是数字并且
+都是正零 +0
+都是负零 -0
+都是 NaN
+都是除零和 NaN 外的其它同一个数字
+</code></pre>
+<p>Object.is() 类似于 &#x3D;&#x3D;&#x3D;，但是有一些细微差别，如下：</p>
+<ol>
+<li><p>NaN 和 NaN 相等</p>
+</li>
+<li><p>-0 和 +0 不相等</p>
+<p> console.log(Object.is(NaN, NaN));&#x2F;&#x2F;trueconsole.log(NaN&#x3D;&#x3D;&#x3D;NaN);&#x2F;&#x2F;falseconsole.log(Object.is(-0, +0)); &#x2F;&#x2F;falseconsole.log(-0&#x3D;&#x3D;&#x3D;+0); &#x2F;&#x2F;true</p>
+</li>
+</ol>
+<p>Object.is 和 <code>==</code>差得远了， <code>==</code> 在类型不同时，需要进行类型转换，前文已经详细说明。</p>
+<p>如果你有更好的答案或想法，欢迎在这题目对应的github下留言：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/26">Object.is() 与比较操作符 <code>===</code>、<code>==</code><br>有什么区别?</a></p>
+<hr>
+<h3 id="18-什么是事件循环？Node事件循环和JS事件循环的差异是什么？"><a href="#18-什么是事件循环？Node事件循环和JS事件循环的差异是什么？" class="headerlink" title="18.什么是事件循环？Node事件循环和JS事件循环的差异是什么？"></a>18.什么是事件循环？Node事件循环和JS事件循环的差异是什么？</h3><p>最后一道题留给大家回答，再写下去，篇幅实在太长。</p>
+<p>针对这道题，后面会专门写一篇文章~</p>
+<p><strong>留下你的答案:</strong><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/27">什么是事件循环？Node事件循环和JS事件循环的差异是什么？</a></p>
+<p>关于浏览器的event-loop可以看我之前的文章：<a target="_blank" rel="noopener" href="https://juejin.im/post/5c947bca5188257de704121d">搞懂浏览器的EventLoop</a></p>
+<hr>
+<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章:"></a>参考文章:</h4><ol>
+<li><a target="_blank" rel="noopener" href="https://www.imooc.com/article/38600">https://www.imooc.com/article/38600</a></li>
+<li><a target="_blank" rel="noopener" href="http://es6.ruanyifeng.com/">http://es6.ruanyifeng.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.imooc.com/article/72500">https://www.imooc.com/article/72500</a></li>
+<li></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LuckyWinty/p/5796190.html">https://www.cnblogs.com/LuckyWinty/p/5796190.html</a><br>5.<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a76dc7e0c5a1">https://www.jianshu.com/p/a76dc7e0c5a1</a><br>6. <a target="_blank" rel="noopener" href="https://www.v2ex.com/t/351261">https://www.v2ex.com/t/351261</a></p>
+<blockquote>
+<h3 id="后续写作计划-写作顺序不定"><a href="#后续写作计划-写作顺序不定" class="headerlink" title="后续写作计划(写作顺序不定)"></a>后续写作计划(写作顺序不定)</h3></blockquote>
+<p>1.《寒冬求职季之你必须要懂的原生JS》(下)</p>
+<p>2.《寒冬求职季之你必须要知道的CSS》</p>
+<p>3.《寒冬求职季之你必须要懂的前端安全》</p>
+<p>4.《寒冬求职季之你必须要懂的一些浏览器知识》</p>
+<p>5.《寒冬求职季之你必须要知道的性能优化》</p>
+<p>6.《寒冬求职季之你必须要懂的webpack原理》</p>
+<p><strong>针对React技术栈:</strong></p>
+<p>1.《寒冬求职季之你必须要懂的React》系列</p>
+<p>2.《寒冬求职季之你必须要懂的ReactNative》系列</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/97caf4bcf03761926ba45cf5660af9b9e48fa4c1/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535353836393832393734352664693d393664353038333338343739653236366638316434636230616161313533316526696d67747970653d30267372633d68747470253341253246253246696d672e74756b6578772e636f6d253246696d67253246373233666634623731306439646436312e6a7067"><img src="https://camo.githubusercontent.com/97caf4bcf03761926ba45cf5660af9b9e48fa4c1/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535353836393832393734352664693d393664353038333338343739653236366638316434636230616161313533316526696d67747970653d30267372633d68747470253341253246253246696d672e74756b6578772e636f6d253246696d67253246373233666634623731306439646436312e6a7067" alt="xuehuayu.cn"></a></p>
+<p>本文的写成耗费了非常多的时间，在这个过程中，我也学习到了很多知识，谢谢各位小伙伴愿意花费宝贵的时间阅读本文，如果本文给了您一点帮助或者是启发，请不要吝啬你的赞和Star，您的肯定是我前进的最大动力。</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/6a610663.html"><div class="related-post-title">浏览器与前端性能灵魂之问，请问你能接得住几个？</div><div class="related-post-meta"><time>2019-12-24</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/480a4f2d.html"><div class="related-post-title">新型肺炎疫情最新动态播报汇总</div><div class="related-post-meta"><time>2020-01-19</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/da4a92bd.html"><div class="related-post-title">9102了，你还不会移动端真机调试？</div><div class="related-post-meta"><time>2019-09-30</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/cbfb6f83.html"><div class="related-post-title">寒冬求职季之你必须要懂的原生JS(上)</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/64189b69.html"><div class="related-post-title">Hbuilder格式化插件js-beautify配置</div><div class="related-post-meta"><time>2021-12-31</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/113edde6.html">https://xuehuayu.cn/article/113edde6.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/f11ce35e.html">寒冬求职之你必须要懂的Web安全</a><a class="next" href="/article/cbfb6f83.html">寒冬求职季之你必须要懂的原生JS(上)</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

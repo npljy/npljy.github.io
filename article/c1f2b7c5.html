@@ -1,0 +1,447 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>高频面试题深入解析 / 周刊 01 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">高频面试题深入解析 / 周刊 01</h1><div class="post-meta"><span class="date">2019-10-03</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.9k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 15</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/c1f2b7c5.html#waline-comment"><span class="waline-comment-count" data-path="/article/c1f2b7c5.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/31</code></p>
+<span id="more"></span>
+
+<h3 id="关于【Step-By-Step】"><a href="#关于【Step-By-Step】" class="headerlink" title="关于【Step-By-Step】"></a>关于【Step-By-Step】</h3><p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step">Step-By-Step</a> (点击进入项目) 是我于<br><code>2019-05-20</code> 开始的一个项目，项目愿景：一步一个脚印，量变引起质变。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step">Step-By-Step</a><br>仅会在工作日发布面试题，主要考虑到部分小伙伴平时工作较为繁忙，或周末有出游计划。每个周末我会仔细阅读大家的答案，整理最一份较优答案出来，因本人水平有限，有误的地方，大家及时指正。参与答题的小伙伴，可以对比自己的回答。</p>
+<p><strong>答题不是目的</strong>，不希望大家仅仅是简单的搜索答案，复制粘贴到issue下。更多的是希望大家及时查漏补缺 &#x2F; 巩固相关知识。</p>
+<hr>
+<h3 id="1-如何正确判断this的指向？-2019-05-20"><a href="#1-如何正确判断this的指向？-2019-05-20" class="headerlink" title="1.如何正确判断this的指向？(2019-05-20)"></a>1.如何正确判断this的指向？(2019-05-20)</h3><p>如果用一句话说明 this 的指向，那么即是: 谁调用它，this 就指向谁。</p>
+<p>但是仅通过这句话，我们很多时候并不能准确判断 this 的指向。因此我们需要借助一些规则去帮助自己：</p>
+<p>this 的指向可以按照以下顺序判断:</p>
+<h4 id="1-全局环境中的-this"><a href="#1-全局环境中的-this" class="headerlink" title="1. 全局环境中的 this"></a>1. 全局环境中的 this</h4><p>浏览器环境：无论是否在严格模式下，在全局执行环境中（在任何函数体外部）this 都指向全局对象 <code>window</code>;</p>
+<p>node 环境：无论是否在严格模式下，在全局执行环境中（在任何函数体外部），this 都是空对象 <code>{}</code>;</p>
+<h4 id="2-是否是-new-绑定"><a href="#2-是否是-new-绑定" class="headerlink" title="2. 是否是 new 绑定"></a>2. 是否是 <code>new</code> 绑定</h4><p>如果是 <code>new</code> 绑定，并且构造函数中没有返回 function 或者是 object，那么 this 指向这个新对象。如下:</p>
+<blockquote>
+<p>构造函数返回值不是 function 或 object。</p>
+</blockquote>
+<pre><code>functionSuper(age) {
+    this.age= age;
+}
+
+let instance =newSuper(&#39;26&#39;);
+console.log(instance.age); //26
+</code></pre>
+<blockquote>
+<p>构造函数返回值是 function 或 object，这种情况下 this 指向的是返回的对象。</p>
+</blockquote>
+<pre><code>functionSuper(age) {
+    this.age= age;
+    let obj = {a:&#39;2&#39;};
+    return obj;
+}
+
+let instance =newSuper(&#39;hello&#39;);
+console.log(instance.age); //undefined
+</code></pre>
+<p>你可以想知道为什么会这样？我们来看一下 <code>new</code> 的实现原理:</p>
+<ol>
+<li><p>创建一个新对象。</p>
+</li>
+<li><p>这个新对象会被执行 <code>[[原型]]</code> 连接。</p>
+</li>
+<li><p>属性和方法被加入到 this 引用的对象中。并执行了构造函数中的方法.</p>
+</li>
+<li><p>如果函数没有返回其他对象，那么 this 指向这个新对象，否则 this 指向构造函数中返回的对象。</p>
+<p> functionnew(func) {<br> let target &#x3D; {};<br> target.<strong>proto</strong>&#x3D;func.prototype;<br> let res &#x3D;func.call(target);<br> &#x2F;&#x2F;排除 null 的情况if (res &amp;&amp;typeof(res) &#x3D;&#x3D;”object”||typeof(res) &#x3D;&#x3D;”function”) {<br>   return res;<br> }<br> return target;<br> }</p>
+</li>
+</ol>
+<h4 id="3-函数是否通过-call-apply-调用，或者使用了-bind-绑定，如果是，那么this绑定的就是指定的对象【归结为显式绑定】。"><a href="#3-函数是否通过-call-apply-调用，或者使用了-bind-绑定，如果是，那么this绑定的就是指定的对象【归结为显式绑定】。" class="headerlink" title="3. 函数是否通过 call,apply 调用，或者使用了 bind 绑定，如果是，那么this绑定的就是指定的对象【归结为显式绑定】。"></a>3. 函数是否通过 call,apply 调用，或者使用了 bind 绑定，如果是，那么this绑定的就是指定的对象【归结为显式绑定】。</h4><pre><code>functioninfo(){
+    console.log(this.age);
+}
+var person = {
+    age: 20,
+    info
+}
+var age =28;
+var info =person.info;
+info.call(person);   //20info.apply(person);  //20info.bind(person)(); //20
+</code></pre>
+<p>这里同样需要注意一种<strong>特殊</strong>情况，如果 call,apply 或者 bind 传入的第一个参数值是 <code>undefined</code> 或者 <code>null</code>，严格模式下<br>this 的值为传入的值 null &#x2F;undefined。非严格模式下，实际应用的默认绑定规则，this<br>指向全局对象(node环境为global，浏览器环境为window)</p>
+<pre><code>functioninfo(){
+    //node环境中:非严格模式 global，严格模式为null//浏览器环境中:非严格模式 window，严格模式为nullconsole.log(this);
+    console.log(this.age);
+}
+var person = {
+    age: 20,
+    info
+}
+var age =28;
+var info =person.info;
+//严格模式抛出错误；//非严格模式，node下输出undefined（因为全局的age不会挂在 global 上）//非严格模式。浏览器环境下输出 28（因为全局的age会挂在 window 上）info.call(null);
+</code></pre>
+<h4 id="4-隐式绑定，函数的调用是在某个对象上触发的，即调用位置上存在上下文对象。典型的隐式调用为-xxx-fn"><a href="#4-隐式绑定，函数的调用是在某个对象上触发的，即调用位置上存在上下文对象。典型的隐式调用为-xxx-fn" class="headerlink" title="4. 隐式绑定，函数的调用是在某个对象上触发的，即调用位置上存在上下文对象。典型的隐式调用为: xxx.fn()"></a>4. 隐式绑定，函数的调用是在某个对象上触发的，即调用位置上存在上下文对象。典型的隐式调用为: <code>xxx.fn()</code></h4><pre><code>functioninfo(){
+    console.log(this.age);
+}
+var person = {
+    age: 20,
+    info
+}
+var age =28;
+person.info(); //20;执行的是隐式绑定
+</code></pre>
+<h4 id="5-默认绑定，在不能应用其它绑定规则时使用的默认规则，通常是独立函数调用。"><a href="#5-默认绑定，在不能应用其它绑定规则时使用的默认规则，通常是独立函数调用。" class="headerlink" title="5. 默认绑定，在不能应用其它绑定规则时使用的默认规则，通常是独立函数调用。"></a>5. 默认绑定，在不能应用其它绑定规则时使用的默认规则，通常是独立函数调用。</h4><p>非严格模式： node环境，执行全局对象 global，浏览器环境，执行全局对象 window。</p>
+<p>严格模式：执行 undefined</p>
+<pre><code>functioninfo(){
+    console.log(this.age);
+}
+var age =28;
+//严格模式；抛错//非严格模式，node下输出 undefined（因为全局的age不会挂在 global 上）//非严格模式。浏览器环境下输出 28（因为全局的age会挂在 window 上）//严格模式抛出，因为 this 此时是 undefinedinfo();
+</code></pre>
+<h4 id="6-箭头函数的情况："><a href="#6-箭头函数的情况：" class="headerlink" title="6. 箭头函数的情况："></a>6. 箭头函数的情况：</h4><p>箭头函数没有自己的this，继承外层上下文绑定的this。</p>
+<pre><code>let obj = {
+    age: 20,
+    info: function() {
+        return () =&gt; {
+            console.log(this.age); //this继承的是外层上下文绑定的this
+        }
+    }
+}
+
+let person = {age:28};
+let info =obj.info();
+info(); //20let info2 =obj.info.call(person);
+info2(); //28
+</code></pre>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step/issues/1">点击查看更多</a></p>
+</blockquote>
+<h3 id="2-JS中原始类型有哪几种？null-是对象吗？原始数据类型和复杂数据类型有什么区别？-2019-05-21"><a href="#2-JS中原始类型有哪几种？null-是对象吗？原始数据类型和复杂数据类型有什么区别？-2019-05-21" class="headerlink" title="2.JS中原始类型有哪几种？null 是对象吗？原始数据类型和复杂数据类型有什么区别？(2019-05-21)"></a>2.JS中原始类型有哪几种？null 是对象吗？原始数据类型和复杂数据类型有什么区别？(2019-05-21)</h3><h4 id="目前，JS原始类型有六种，分别为"><a href="#目前，JS原始类型有六种，分别为" class="headerlink" title="目前，JS原始类型有六种，分别为:"></a>目前，JS原始类型有六种，分别为:</h4><ul>
+<li>Boolean</li>
+<li>String</li>
+<li>Number</li>
+<li>Undefined</li>
+<li>Null</li>
+<li>Symbol(ES6新增)</li>
+</ul>
+<p>ES10新增了一种基本数据类型：BigInt</p>
+<p>复杂数据类型只有一种: Object</p>
+<p>null 不是一个对象，尽管 <code>typeof null</code> 输出的是 <code>object</code>，这是一个历史遗留问题，JS 的最初版本中使用的是 32<br>位系统，为了性能考虑使用低位存储变量的类型信息，000 开头代表是对象，<code>null</code> 表示为全零，所以将它错误的判断为 <code>object</code> 。</p>
+<h4 id="基本数据类型和复杂数据类型的区别为"><a href="#基本数据类型和复杂数据类型的区别为" class="headerlink" title="基本数据类型和复杂数据类型的区别为:"></a>基本数据类型和复杂数据类型的区别为:</h4><ol>
+<li>内存的分配不同</li>
+</ol>
+<ul>
+<li><p>基本数据类型存储在栈中。</p>
+</li>
+<li><p>复杂数据类型存储在堆中，栈中存储的变量，是指向堆中的引用地址。</p>
+</li>
+</ul>
+<ol>
+<li>访问机制不同</li>
+</ol>
+<ul>
+<li><p>基本数据类型是按值访问</p>
+</li>
+<li></li>
+</ul>
+<p>复杂数据类型按引用访问，JS不允许直接访问保存在堆内存中的对象，在访问一个对象时，首先得到的是这个对象在堆内存中的地址，然后再按照这个地址去获得这个对象中的值。</p>
+<ol>
+<li>复制变量时不同(a&#x3D;b)</li>
+</ol>
+<ul>
+<li><p>基本数据类型：a&#x3D;b;是将b中保存的原始值的副本赋值给新变量a，a和b完全独立，互不影响</p>
+</li>
+<li><p>复杂数据类型：a&#x3D;b;将b保存的对象内存的引用地址赋值给了新变量a;a和b指向了同一个堆内存地址，其中一个值发生了改变，另一个也会改变。</p>
+<p>  let b &#x3D; {<br>  age: 10<br>  }</p>
+<p>  let a &#x3D; b;<br>  a.age&#x3D;20;<br>  console.log(a); &#x2F;&#x2F;{ age: 20 }</p>
+</li>
+</ul>
+<ol>
+<li>参数传递的不同(实参&#x2F;形参)</li>
+</ol>
+<p>函数传参都是按值传递(栈中的存储的内容)：基本数据类型，拷贝的是值；复杂数据类型，拷贝的是引用地址</p>
+<pre><code>//基本数据类型let b =10functionchange(info) {
+    info=20;
+}
+//info=b;基本数据类型，拷贝的是值得副本，二者互不干扰change(b);
+console.log(b);//10
+
+//复杂数据类型let b = {
+    age: 10
+}
+
+functionchange(info) {
+    info.age=20;
+}
+//info=b;根据第三条差异，可以看出，拷贝的是地址的引用，修改互相影响。change(b);
+console.log(b);//{ age: 20 }
+</code></pre>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step/issues/5">点击查看更多</a></p>
+</blockquote>
+<h3 id="3-说一说你对HTML5语义化的理解-2019-05-22"><a href="#3-说一说你对HTML5语义化的理解-2019-05-22" class="headerlink" title="3.说一说你对HTML5语义化的理解(2019-05-22)"></a>3.说一说你对HTML5语义化的理解(2019-05-22)</h3><p>语义化意味着顾名思义，HTML5的语义化指的是合理正确的使用语义化的标签来创建页面结构，如<br>header,footer,nav，从标签上即可以直观的知道这个标签的作用，而不是滥用div。</p>
+<h4 id="语义化的优点有"><a href="#语义化的优点有" class="headerlink" title="语义化的优点有:"></a>语义化的优点有:</h4><ul>
+<li>代码结构清晰，易于阅读，利于开发和维护</li>
+<li>方便其他设备解析（如屏幕阅读器）根据语义渲染网页。</li>
+<li>有利于搜索引擎优化（SEO），搜索引擎爬虫会根据不同的标签来赋予不同的权重</li>
+</ul>
+<h4 id="语义化标签主要有："><a href="#语义化标签主要有：" class="headerlink" title="语义化标签主要有："></a>语义化标签主要有：</h4><ul>
+<li>title：主要用于页面的头部的信息介绍</li>
+<li>header：定义文档的页眉</li>
+<li>nav：主要用于页面导航</li>
+<li>main：规定文档的主要内容。对于文档来说应当是唯一的。它不应包含在文档中重复出现的内容，比如侧栏、导航栏、版权信息、站点标志或搜索表单。</li>
+<li>article：独立的自包含内容</li>
+<li>h1~h6：定义标题</li>
+<li>ul: 用来定义无序列表</li>
+<li>ol: 用来定义有序列表</li>
+<li>address：定义文档或文章的作者&#x2F;拥有者的联系信息。</li>
+<li>canvas：用于绘制图像</li>
+<li>dialog：定义一个对话框、确认框或窗口</li>
+<li>aside：定义其所处内容之外的内容。<code>&lt;aside&gt;</code> 的内容可用作文章的侧栏。</li>
+<li>section：定义文档中的节（section、区段）。比如章节、页眉、页脚或文档中的其他部分。</li>
+<li>figure：规定独立的流内容（图像、图表、照片、代码等等）。figure 元素的内容应该与主内容相关，但如果被删除，则不应对文档流产生影响。</li>
+<li>details：描述文档或者文档某一部分细节</li>
+<li>mark：义带有记号的文本。</li>
+</ul>
+<h4 id="语义化应用"><a href="#语义化应用" class="headerlink" title="语义化应用"></a>语义化应用</h4><p>例如使用这些可视化标签，构建下面的页面结构：</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/f2fea7383cb61407e11a615750bfd29c2270b5cc/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434534666639316465326462616234643833666362353330386630383666656666342f3239353032"><img src="https://camo.githubusercontent.com/f2fea7383cb61407e11a615750bfd29c2270b5cc/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434534666639316465326462616234643833666362353330386630383666656666342f3239353032" alt="xuehuayu.cn"></a></p>
+<p>对于早期不支持 HTML5 的浏览器，如IE8及更早之前的版本，我们可以引入 html5shiv 来支持。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step/issues/8">点击查看更多</a></p>
+</blockquote>
+<h3 id="4-如何让-a-1-a-2-a-3-的值为true？"><a href="#4-如何让-a-1-a-2-a-3-的值为true？" class="headerlink" title="4.如何让 (a &#x3D;&#x3D; 1 &amp;&amp; a &#x3D;&#x3D; 2 &amp;&amp; a &#x3D;&#x3D; 3) 的值为true？"></a>4.如何让 (a &#x3D;&#x3D; 1 &amp;&amp; a &#x3D;&#x3D; 2 &amp;&amp; a &#x3D;&#x3D; 3) 的值为true？</h3><h4 id="4-1-利用隐式转换规则"><a href="#4-1-利用隐式转换规则" class="headerlink" title="4.1 利用隐式转换规则"></a>4.1 利用隐式转换规则</h4><p><code>==</code> 操作符在左右数据类型不一致时，会先进行隐式转换。</p>
+<p><code>a == 1 &amp;&amp; a == 2 &amp;&amp; a == 3</code> 的值意味着其不可能是基本数据类型。因为如果 a 是 null 或者是 undefined<br>bool类型，都不可能返回true。</p>
+<p>因此可以推测 a 是复杂数据类型，JS 中复杂数据类型只有 <code>object</code>，回忆一下，Object 转换为原始类型会调用什么方法？</p>
+<ul>
+<li><p>如果部署了 <code>[Symbol.toPrimitive]</code> 接口，那么调用此接口，若返回的不是基本数据类型，抛出错误。</p>
+</li>
+<li><p>如果没有部署 <code>[Symbol.toPrimitive]</code> 接口，那么根据要转换的类型，先调用 <code>valueOf</code> &#x2F; <code>toString</code></p>
+</li>
+</ul>
+<ol>
+<li><p>非Date类型对象，<code>hint</code> 是 <code>default</code> 时，调用顺序为：<code>valueOf</code> &gt;&gt;&gt; <code>toString</code>，即<code>valueOf</code><br>返回的不是基本数据类型，才会继续调用 <code>toString</code>，如果<code>toString</code> 返回的还不是基本数据类型，那么抛出错误。</p>
+</li>
+<li><p>如果 <code>hint</code> 是 <code>string</code>(Date对象的hint默认是string) ，调用顺序为：<code>toString</code> &gt;&gt;&gt;<br><code>valueOf</code>，即<code>toString</code> 返回的不是基本数据类型，才会继续调用 <code>valueOf</code>，如果<code>valueOf</code><br>返回的还不是基本数据类型，那么抛出错误。</p>
+</li>
+<li><p>如果 <code>hint</code> 是 <code>number</code>，调用顺序为： <code>valueOf</code> &gt;&gt;&gt; <code>toString</code></p>
+<p> var obj &#x3D; {<br> <a href="hint">Symbol.toPrimitive</a> {<br>     console.log(hint);<br>     return10;<br> },<br> valueOf() {<br>     console.log(‘valueOf’);<br>     return20;<br> },<br> toString() {<br>     console.log(‘toString’);<br>     return’hello’;<br> }<br> }<br> console.log(obj +’yvette’); &#x2F;&#x2F;default&#x2F;&#x2F;如果没有部署 [Symbol.toPrimitive]接口，调用顺序为<code>valueOf</code> &gt;&gt;&gt; <code>toString</code>console.log(obj &#x3D;&#x3D;’yvette’); &#x2F;&#x2F;default&#x2F;&#x2F;如果没有部署 [Symbol.toPrimitive]接口，调用顺序为<code>valueOf</code> &gt;&gt;&gt; <code>toString</code>console.log(obj *10);&#x2F;&#x2F;number&#x2F;&#x2F;如果没有部署 [Symbol.toPrimitive]接口，调用顺序为<code>valueOf</code> &gt;&gt;&gt; <code>toString</code>console.log(Number(obj));&#x2F;&#x2F;number&#x2F;&#x2F;如果没有部署 [Symbol.toPrimitive]接口，调用顺序为<code>valueOf</code> &gt;&gt;&gt; <code>toString</code>console.log(String(obj));&#x2F;&#x2F;string&#x2F;&#x2F;如果没有部署 [Symbol.toPrimitive]接口，调用顺序为<code>toString</code> &gt;&gt;&gt; <code>valueOf</code></p>
+</li>
+</ol>
+<p>那么对于这道题，只要 <code>[Symbol.toPrimitive]</code> 接口，第一次返回的值是 1，然后递增，即成功成立。</p>
+<pre><code>let a = {
+    [Symbol.toPrimitive]: (function(hint) {
+            let i =1;
+            //闭包的特性之一：i 不会被回收returnfunction() {
+                return i++;
+            }
+    })()
+}
+console.log(a ==1&amp;&amp; a ==2&amp;&amp; a ==3); //true
+</code></pre>
+<p>调用 <code>valueOf</code> 接口的情况：</p>
+<pre><code>let a = {
+    valueOf: (function() {
+        let i =1;
+        //闭包的特性之一：i 不会被回收returnfunction() {
+            return i++;
+        }
+    })()
+}
+console.log(a ==1&amp;&amp; a ==2&amp;&amp; a ==3); //true
+</code></pre>
+<p>另外，除了i自增的方法外，还可以利用 正则，如下</p>
+<pre><code>let a = {
+    reg: /\d/g,
+    valueOf () {
+        returnthis.reg.exec(123)[0]
+    }
+}
+console.log(a ==1&amp;&amp; a ==2&amp;&amp; a ==3); //true
+</code></pre>
+<p>调用 <code>toString</code> 接口的情况，不再做说明。</p>
+<h4 id="4-2-利用数据劫持"><a href="#4-2-利用数据劫持" class="headerlink" title="4.2 利用数据劫持"></a>4.2 利用数据劫持</h4><p>使用 <code>Object.defineProperty</code> 定义的属性，在获取属性时，会调用 <code>get</code> 方法。利用这个特性，我们在 <code>window</code> 对象上定义<br><code>a</code> 属性，如下：</p>
+<pre><code>let i =1;
+Object.defineProperty(window, &#39;a&#39;, {
+    get: function() {
+        return i++;
+    }
+});
+console.log(a ==1&amp;&amp; a ==2&amp;&amp; a ==3); //true
+</code></pre>
+<p>ES6 新增了 <code>Proxy</code> ，此处我们同样可以利用 <code>Proxy</code> 去实现，如下：</p>
+<pre><code>let a =newProxy({}, {
+    i: 1,
+    get: function () {
+        return () =&gt;this.i++;
+    }
+});
+console.log(a ==1&amp;&amp; a ==2&amp;&amp; a ==3); // true
+</code></pre>
+<h4 id="4-3-数组的-toString-接口默认调用数组的-join-方法，重写数组的-join-方法。"><a href="#4-3-数组的-toString-接口默认调用数组的-join-方法，重写数组的-join-方法。" class="headerlink" title="4.3 数组的 toString 接口默认调用数组的 join 方法，重写数组的 join 方法。"></a>4.3 数组的 <code>toString</code> 接口默认调用数组的 <code>join</code> 方法，重写数组的 <code>join</code> 方法。</h4><pre><code>let a = [1, 2, 3];
+a.join=a.shift;
+console.log(a ==1&amp;&amp; a ==2&amp;&amp; a ==3); //true
+</code></pre>
+<h4 id="4-4-利用-with-关键字"><a href="#4-4-利用-with-关键字" class="headerlink" title="4.4 利用 with 关键字"></a>4.4 利用 <code>with</code> 关键字</h4><p>我本人对 <code>with</code> 向来是敬而远之的。不过 <code>with</code> 的确也是此题方法之一：</p>
+<pre><code>let i =0;
+
+with ({
+    geta() {
+        return++i;
+    }
+}) {
+    console.log(a ==1&amp;&amp; a ==2&amp;&amp; a ==3); //true
+}
+</code></pre>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step/issues/9">点击查看更多</a></p>
+</blockquote>
+<h3 id="5-防抖-debounce-函数的作用是什么？有哪些应用场景，请实现一个防抖函数。"><a href="#5-防抖-debounce-函数的作用是什么？有哪些应用场景，请实现一个防抖函数。" class="headerlink" title="5.防抖(debounce)函数的作用是什么？有哪些应用场景，请实现一个防抖函数。"></a>5.防抖(debounce)函数的作用是什么？有哪些应用场景，请实现一个防抖函数。</h3><h4 id="防抖函数的作用"><a href="#防抖函数的作用" class="headerlink" title="防抖函数的作用"></a>防抖函数的作用</h4><p>防抖函数的作用就是控制函数在一定时间内的执行次数。防抖意味着N秒内函数只会被执行一次，如果N秒内再次被触发，则重新计算延迟时间。</p>
+<p>举例说明：小思最近在减肥，但是她非常贪吃。为此，与其男朋友约定好，如果10天不吃零食，就可以购买一个包(不要问为什么是包，因为包治百病)。但是如果中间吃了一次零食，那么就要重新计算时间，直到小思坚持10天没有吃零食，才能购买一个包。所以，管不住嘴的小思，没有机会买包(悲伤的故事)…这就是<strong>防抖</strong>。</p>
+<p>不管吃没吃零食，每10天买一个包，中间想买包，忍着，等到第十天的时候再买，这种情况是<strong>节流</strong>。如何控制女朋友的消费，各位攻城狮们，get到了吗？防抖可比节流有效多了！</p>
+<h4 id="防抖应用场景"><a href="#防抖应用场景" class="headerlink" title="防抖应用场景"></a>防抖应用场景</h4><ol>
+<li>搜索框输入查询，如果用户一直在输入中，没有必要不停地调用去请求服务端接口，等用户停止输入的时候，再调用，设置一个合适的时间间隔，有效减轻服务端压力。</li>
+<li>表单验证</li>
+<li>按钮提交事件。</li>
+<li>浏览器窗口缩放，resize事件等。</li>
+</ol>
+<h4 id="防抖函数实现"><a href="#防抖函数实现" class="headerlink" title="防抖函数实现"></a>防抖函数实现</h4><p><code>immediate</code> 为 true 时，表示开始会立即触发一次。</p>
+<p><code>immediate</code> 为 false 时，表示最后一次一定会触发。</p>
+<p><code>loadsh</code> 中的 <code>debounce</code> 的第三个参数 <code>option</code> ，提供了 <code>leading</code> 和 <code>trailing</code> 两个参数。</p>
+<pre><code>functiondebounce(func, wait, immediate=true) {
+    let timeout, context, args;
+        // 延迟执行函数constlater= () =&gt;setTimeout(() =&gt; {
+            // 延迟函数执行完毕，清空定时器
+            timeout =null// 延迟执行的情况下，函数会在延迟函数中执行// 使用到之前缓存的参数和上下文if (!immediate) {
+                func.apply(context, args);
+                context = args =null;
+            }
+        }, wait);
+        letdebounced=function (...params) {
+            if (!timeout) {
+                timeout =later();
+                if (immediate) {
+                    //立即执行func.apply(this, params);
+                } else {
+                    //闭包
+                    context =this;
+                    args = params;
+                }
+            } else {
+                clearTimeout(timeout);
+                timeout =later();
+            }
+        }
+    debounced.cancel=function () {
+        clearTimeout(timeout);
+        timeout =null;
+    };
+    return debounced;
+};
+</code></pre>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step/issues/10">点击查看更多</a></p>
+</blockquote>
+<p>参考文章：</p>
+<p>[1]<br><a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/6.0/#sec-completion-record-specification-type">https://www.ecma-international.org/ecma-262/6.0/#sec-completion-record-specification-type</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://juejin.im/post/5c96d0c751882511c832ff7b">嗨，你真的懂this吗？</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://juejin.im/post/5cab0c45f265da2513734390">【面试篇】寒冬求职季之你必须要懂的原生JS(上)</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://juejin.im/post/5cbd1e33e51d45789161d053">【面试篇】寒冬求职季之你必须要懂的原生JS(中)</a></p>
+<p>谢谢各位小伙伴愿意花费宝贵的时间阅读本文，如果本文给了您一点帮助或者是启发，请不要吝啬你的赞和Star，您的肯定是我前进的最大动力。<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog">https://github.com/YvetteLau/Blog</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/a974109a.html"><div class="related-post-title">48个 JS 开发常用工具函数</div><div class="related-post-meta"><time>2019-12-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/8d86d7a8.html"><div class="related-post-title">Vue3 Native Implementation of Image Comparison</div><div class="related-post-meta"><time>2025-09-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">Vue3</span></div></div></a><a class="related-post-item" href="/article/79ca3a42.html"><div class="related-post-title">CSS伪元素指南</div><div class="related-post-meta"><time>2019-10-31</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/ae650adc.html"><div class="related-post-title">Promise.any无效？通过Promise.all实现Promise.any</div><div class="related-post-meta"><time>2021-12-20</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/56378e04.html"><div class="related-post-title">TypeScript 泛型（Generics）必须在方法名后面写 &lt;T&gt; 吗?</div><div class="related-post-meta"><time>2025-10-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">TypeScript</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/c1f2b7c5.html">https://xuehuayu.cn/article/c1f2b7c5.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/356e7afa.html">精读《最佳前端面试题》及面试官技巧</a><a class="next" href="/article/c3a5c18.html">这儿有20道大厂面试题等你查收</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

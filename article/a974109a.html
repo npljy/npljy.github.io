@@ -1,0 +1,695 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>48个 JS 开发常用工具函数 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">48个 JS 开发常用工具函数</h1><div class="post-meta"><span class="date">2019-12-02</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.7k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 19</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/a974109a.html#waline-comment"><span class="waline-comment-count" data-path="/article/a974109a.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://segmentfault.com/a/1190000019601333</code></p>
+<span id="more"></span>
+
+<h2 id="1、isStatic：检测数据是不是除了symbol外的原始数据"><a href="#1、isStatic：检测数据是不是除了symbol外的原始数据" class="headerlink" title="1、isStatic：检测数据是不是除了symbol外的原始数据"></a>1、isStatic：检测数据是不是除了symbol外的原始数据</h2><pre><code>function isStatic(value) {
+    return(
+        typeofvalue === &#39;string&#39; ||
+        typeofvalue === &#39;number&#39; ||
+        typeofvalue === &#39;boolean&#39; ||
+        typeofvalue === &#39;undefined&#39; ||
+        value === null
+    )
+}
+</code></pre>
+<h2 id="2、isPrimitive：检测数据是不是原始数据"><a href="#2、isPrimitive：检测数据是不是原始数据" class="headerlink" title="2、isPrimitive：检测数据是不是原始数据"></a>2、isPrimitive：检测数据是不是原始数据</h2><pre><code>function isPrimitive(value) {
+    return isStatic(value) || typeofvalue === &#39;symbol&#39;
+}
+</code></pre>
+<h2 id="3、isObject：判断数据是不是引用类型的数据-例如：-arrays-functions-objects-regexes-new-Number-0-以及-new-String-‘’"><a href="#3、isObject：判断数据是不是引用类型的数据-例如：-arrays-functions-objects-regexes-new-Number-0-以及-new-String-‘’" class="headerlink" title="3、isObject：判断数据是不是引用类型的数据 (例如： arrays, functions, objects, regexes, new Number(0),以及 new String(‘’))"></a>3、isObject：判断数据是不是引用类型的数据 (例如： arrays, functions, objects, regexes, new Number(0),以及 new String(‘’))</h2><pre><code>functionisObject(value) {
+      let type = typeof value;
+      returnvalue != null &amp;&amp; (type== &#39;object&#39; || type== &#39;function&#39;);
+}
+</code></pre>
+<h2 id="4、isObjectLike：检查-value-是否是-类对象。-如果一个值是类对象，那么它不应该是-null，而且-typeof-后的结果是-“object”"><a href="#4、isObjectLike：检查-value-是否是-类对象。-如果一个值是类对象，那么它不应该是-null，而且-typeof-后的结果是-“object”" class="headerlink" title="4、isObjectLike：检查 value 是否是 类对象。 如果一个值是类对象，那么它不应该是 null，而且 typeof 后的结果是 “object”"></a>4、isObjectLike：检查 value 是否是 类对象。 如果一个值是类对象，那么它不应该是 null，而且 typeof 后的结果是 “object”</h2><pre><code>function isObjectLike(value) {
+      returnvalue != null &amp;&amp; typeofvalue == &#39;object&#39;;
+}
+</code></pre>
+<h2 id="5、getRawType：获取数据类型，返回结果为-Number、String、Object、Array等"><a href="#5、getRawType：获取数据类型，返回结果为-Number、String、Object、Array等" class="headerlink" title="5、getRawType：获取数据类型，返回结果为 Number、String、Object、Array等"></a>5、getRawType：获取数据类型，返回结果为 Number、String、Object、Array等</h2><pre><code>functiongetRawType(value) {
+    returnObject.prototype.toString.call(value).slice(8, -1)
+}
+//getoRawType([]) ==&gt; Array
+</code></pre>
+<h2 id="6、isPlainObject：判断数据是不是Object类型的数据"><a href="#6、isPlainObject：判断数据是不是Object类型的数据" class="headerlink" title="6、isPlainObject：判断数据是不是Object类型的数据"></a>6、isPlainObject：判断数据是不是Object类型的数据</h2><pre><code>functionisPlainObject(obj) {
+    returnObject.prototype.toString.call(obj) === &#39;[object Object]&#39;
+}
+</code></pre>
+<h2 id="7、isArray：判断数据是不是数组类型的数据"><a href="#7、isArray：判断数据是不是数组类型的数据" class="headerlink" title="7、isArray：判断数据是不是数组类型的数据"></a>7、isArray：判断数据是不是数组类型的数据</h2><pre><code>functionisArray(arr) {
+    returnObject.prototype.toString.call(arr) === &#39;[object Array]&#39;
+}
+</code></pre>
+<p>将isArray挂载到Array上</p>
+<pre><code>Array.isArray = Array.isArray || isArray;
+</code></pre>
+<h2 id="8、isRegExp：判断数据是不是正则对象"><a href="#8、isRegExp：判断数据是不是正则对象" class="headerlink" title="8、isRegExp：判断数据是不是正则对象"></a>8、isRegExp：判断数据是不是正则对象</h2><pre><code>function isRegExp(value) {
+    return Object.prototype.toString.call(value) === &#39;[object RegExp]&#39;
+}
+</code></pre>
+<h2 id="9、isDate：判断数据是不是时间对象"><a href="#9、isDate：判断数据是不是时间对象" class="headerlink" title="9、isDate：判断数据是不是时间对象"></a>9、isDate：判断数据是不是时间对象</h2><pre><code>function isDate(value) {
+    return Object.prototype.toString.call(value) === &#39;[object Date]&#39;
+}
+</code></pre>
+<h2 id="10、isNative：判断-value-是不是浏览器内置函数"><a href="#10、isNative：判断-value-是不是浏览器内置函数" class="headerlink" title="10、isNative：判断 value 是不是浏览器内置函数"></a>10、isNative：判断 value 是不是浏览器内置函数</h2><p>内置函数toString后的主体代码块为 [native code]<br>，而非内置函数则为相关代码，所以非内置函数可以进行拷贝(toString后掐头去尾再由Function转)</p>
+<pre><code>functionisNative(value){
+    returntypeof value === &#39;function&#39; &amp;&amp; /native code/.test(value.toString())
+}
+</code></pre>
+<h2 id="11、isFunction：检查-value-是不是函数"><a href="#11、isFunction：检查-value-是不是函数" class="headerlink" title="11、isFunction：检查 value 是不是函数"></a>11、isFunction：检查 value 是不是函数</h2><pre><code>functionisFunction(value) {
+    returnObject.prototype.toString.call(value) === &#39;[object Function]&#39;
+}
+</code></pre>
+<h2 id="12、isLength：检查-value-是否为有效的类数组长度"><a href="#12、isLength：检查-value-是否为有效的类数组长度" class="headerlink" title="12、isLength：检查 value 是否为有效的类数组长度"></a>12、isLength：检查 value 是否为有效的类数组长度</h2><pre><code>function isLength(value) {
+      returntypeofvalue == &#39;number&#39; &amp;&amp; value &gt; -1 &amp;&amp; value % 1 == 0 &amp;&amp; value &lt;= Number.MAX_SAFE_INTEGER;
+}
+</code></pre>
+<h2 id="13、isArrayLike：检查-value-是否是类数组"><a href="#13、isArrayLike：检查-value-是否是类数组" class="headerlink" title="13、isArrayLike：检查 value 是否是类数组"></a>13、isArrayLike：检查 value 是否是类数组</h2><p>如果一个值被认为是类数组，那么它不是一个函数，并且value.length是个整数，大于等于 0，小于或等于<br>Number.MAX_SAFE_INTEGER。这里字符串也将被当作类数组</p>
+<pre><code>function isArrayLike(value) {
+      returnvalue != null &amp;&amp; isLength(value.length) &amp;&amp; !isFunction(value);
+}
+</code></pre>
+<h2 id="14、isEmpty：检查-value-是否为空"><a href="#14、isEmpty：检查-value-是否为空" class="headerlink" title="14、isEmpty：检查 value 是否为空"></a>14、isEmpty：检查 value 是否为空</h2><p>如果是null，直接返回true；如果是类数组，判断数据长度；如果是Object对象，判断是否具有属性；如果是其他数据，直接返回false(也可改为返回true)</p>
+<pre><code>function isEmpty(value) {
+    if (value == null) {
+        return true;
+    }
+    if (isArrayLike(value)) {
+        return !value.length;
+    }elseif(isPlainObject(value)){
+          for (let key invalue) {
+            if (hasOwnProperty.call(value, key)) {
+              returnfalse;
+            }
+        }
+        return true;
+    }
+    returnfalse;
+}
+</code></pre>
+<h2 id="15、cached：记忆函数：缓存函数的运算结果"><a href="#15、cached：记忆函数：缓存函数的运算结果" class="headerlink" title="15、cached：记忆函数：缓存函数的运算结果"></a>15、cached：记忆函数：缓存函数的运算结果</h2><pre><code>functioncached(fn) {
+    let cache = Object.create(null);
+    returnfunctioncachedFn(str) {
+        let hit = cache[str];
+        return hit || (cache[str] = fn(str))
+    }
+}
+</code></pre>
+<h2 id="16、camelize：横线转驼峰命名"><a href="#16、camelize：横线转驼峰命名" class="headerlink" title="16、camelize：横线转驼峰命名"></a>16、camelize：横线转驼峰命名</h2><pre><code>let camelizeRE = /-(\w)/g;
+functioncamelize(str) {
+    return str.replace(camelizeRE, function(_, c) {
+        return c ? c.toUpperCase() : &#39;&#39;;
+    })
+}
+//ab-cd-ef ==&gt; abCdEf//使用记忆函数let _camelize = cached(camelize)
+</code></pre>
+<h2 id="17、hyphenate：驼峰命名转横线命名：拆分字符串，使用-相连，并且转换为小写"><a href="#17、hyphenate：驼峰命名转横线命名：拆分字符串，使用-相连，并且转换为小写" class="headerlink" title="17、hyphenate：驼峰命名转横线命名：拆分字符串，使用 - 相连，并且转换为小写"></a>17、hyphenate：驼峰命名转横线命名：拆分字符串，使用 - 相连，并且转换为小写</h2><pre><code>let hyphenateRE = /\B([A-Z])/g;
+functionhyphenate(str){
+    return str.replace(hyphenateRE, &#39;-$1&#39;).toLowerCase()
+}
+//abCd ==&gt; ab-cd//使用记忆函数let _hyphenate = cached(hyphenate);
+</code></pre>
+<h2 id="18、capitalize：字符串首位大写"><a href="#18、capitalize：字符串首位大写" class="headerlink" title="18、capitalize：字符串首位大写"></a>18、capitalize：字符串首位大写</h2><pre><code>functioncapitalize(str){
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
+// abc ==&gt; Abc//使用记忆函数let _capitalize = cached(capitalize)
+</code></pre>
+<h2 id="19、extend：将属性混合到目标对象中"><a href="#19、extend：将属性混合到目标对象中" class="headerlink" title="19、extend：将属性混合到目标对象中"></a>19、extend：将属性混合到目标对象中</h2><pre><code>function extend(to, _from) {
+    for(let key in _from) {
+        to[key] = _from[key];
+    }
+    returnto
+}
+</code></pre>
+<h2 id="20、Object-assign：对象属性复制，浅拷贝"><a href="#20、Object-assign：对象属性复制，浅拷贝" class="headerlink" title="20、Object.assign：对象属性复制，浅拷贝"></a>20、Object.assign：对象属性复制，浅拷贝</h2><pre><code>Object.assign = Object.assign || function(){
+    if(arguments.length == 0) thrownewTypeError(&#39;Cannot convert undefined or null to object&#39;);
+
+    let target = arguments[0],
+        args = Array.prototype.slice.call(arguments, 1),
+        key
+    args.forEach(function(item){
+        for(key in item){
+            item.hasOwnProperty(key) &amp;&amp; ( target[key] = item[key] )
+        }
+    })
+    return target
+}
+</code></pre>
+<p>使用Object.assign可以浅克隆一个对象：</p>
+<pre><code>let clone= Object.assign({}, target)
+</code></pre>
+<p>简单的深克隆可以使用JSON.parse()和JSON.stringify()，这两个api是解析json数据的，所以只能解析除symbol外的原始类型及数组和对象</p>
+<pre><code>let clone= JSON.parse( JSON.stringify(target) )
+</code></pre>
+<h2 id="21、clone：克隆数据，可深度克隆"><a href="#21、clone：克隆数据，可深度克隆" class="headerlink" title="21、clone：克隆数据，可深度克隆"></a>21、clone：克隆数据，可深度克隆</h2><p>这里列出了原始类型，时间、正则、错误、数组、对象的克隆规则，其他的可自行补充</p>
+<pre><code>function clone(value, deep) {
+    if (isPrimitive(value)) {
+        returnvalue
+    }
+
+    if (isArrayLike(value)) { //是类数组value = Array.prototype.slice.call(value)
+        return deep ? value.map(item =&gt; clone(item, deep)) : value
+    } elseif (isPlainObject(value)) { //是对象let target = {}, key;
+        for (key invalue) {
+            value.hasOwnProperty(key) &amp;&amp; (target[key] = deep ? clone(value[key], deep) : value[key])
+        }
+        return target
+    }
+
+    let type = getRawType(value)
+
+    switch (type) {
+        case&#39;Date&#39;:
+        case&#39;RegExp&#39;:
+        case&#39;Error&#39;: value = new window[type](value); break;
+    }
+    returnvalue
+}~~~~
+</code></pre>
+<h2 id="22、识别各种浏览器及平台"><a href="#22、识别各种浏览器及平台" class="headerlink" title="22、识别各种浏览器及平台"></a>22、识别各种浏览器及平台</h2><pre><code>//运行环境是浏览器let inBrowser = typeofwindow !== &#39;undefined&#39;;
+//运行环境是微信let inWeex = typeof WXEnvironment !== &#39;undefined&#39; &amp;&amp; !!WXEnvironment.platform;
+let weexPlatform = inWeex &amp;&amp; WXEnvironment.platform.toLowerCase();
+//浏览器 UA 判断let UA = inBrowser &amp;&amp; window.navigator.userAgent.toLowerCase();
+let isIE = UA &amp;&amp; /msie|trident/.test(UA);
+let isIE9 = UA &amp;&amp; UA.indexOf(&#39;msie 9.0&#39;) &gt; 0;
+let isEdge = UA &amp;&amp; UA.indexOf(&#39;edge/&#39;) &gt; 0;
+let isAndroid = (UA &amp;&amp; UA.indexOf(&#39;android&#39;) &gt; 0) || (weexPlatform === &#39;android&#39;);
+let isIOS = (UA &amp;&amp; /iphone|ipad|ipod|ios/.test(UA)) || (weexPlatform === &#39;ios&#39;);
+let isChrome = UA &amp;&amp; /chrome\/\d+/.test(UA) &amp;&amp; !isEdge;
+</code></pre>
+<h2 id="23、getExplorerInfo：获取浏览器信息"><a href="#23、getExplorerInfo：获取浏览器信息" class="headerlink" title="23、getExplorerInfo：获取浏览器信息"></a>23、getExplorerInfo：获取浏览器信息</h2><pre><code>function getExplorerInfo() {
+    let t = navigator.userAgent.toLowerCase();
+    return 0 &lt;= t.indexOf(&quot;msie&quot;) ? { //ie &lt; 11type: &quot;IE&quot;,
+        version: Number(t.match(/msie ([\d]+)/)[1])
+    } : !!t.match(/trident\/.+?rv:(([\d.]+))/) ? { // ie 11type: &quot;IE&quot;,
+        version: 11
+    } : 0 &lt;= t.indexOf(&quot;edge&quot;) ? {
+        type: &quot;Edge&quot;,
+        version: Number(t.match(/edge\/([\d]+)/)[1])
+    } : 0 &lt;= t.indexOf(&quot;firefox&quot;) ? {
+        type: &quot;Firefox&quot;,
+        version: Number(t.match(/firefox\/([\d]+)/)[1])
+    } : 0 &lt;= t.indexOf(&quot;chrome&quot;) ? {
+        type: &quot;Chrome&quot;,
+        version: Number(t.match(/chrome\/([\d]+)/)[1])
+    } : 0 &lt;= t.indexOf(&quot;opera&quot;) ? {
+        type: &quot;Opera&quot;,
+        version: Number(t.match(/opera.([\d]+)/)[1])
+    } : 0 &lt;= t.indexOf(&quot;Safari&quot;) ? {
+        type: &quot;Safari&quot;,
+        version: Number(t.match(/version\/([\d]+)/)[1])
+    } : {
+        type: t,
+        version: -1
+    }
+}
+</code></pre>
+<h2 id="24、isPCBroswer：检测是否为PC端浏览器模式"><a href="#24、isPCBroswer：检测是否为PC端浏览器模式" class="headerlink" title="24、isPCBroswer：检测是否为PC端浏览器模式"></a>24、isPCBroswer：检测是否为PC端浏览器模式</h2><pre><code>function isPCBroswer() {
+    let e = navigator.userAgent.toLowerCase()
+        , t = &quot;ipad&quot; == e.match(/ipad/i)
+        , i = &quot;iphone&quot; == e.match(/iphone/i)
+        , r = &quot;midp&quot; == e.match(/midp/i)
+        , n = &quot;rv:1.2.3.4&quot; == e.match(/rv:1.2.3.4/i)
+        , a = &quot;ucweb&quot; == e.match(/ucweb/i)
+        , o = &quot;android&quot; == e.match(/android/i)
+        , s = &quot;windows ce&quot; == e.match(/windows ce/i)
+        , l = &quot;windows mobile&quot; == e.match(/windows mobile/i);
+    return !(t || i || r || n || a || o || s || l)
+}
+</code></pre>
+<h2 id="25、unique：数组去重，返回一个新数组"><a href="#25、unique：数组去重，返回一个新数组" class="headerlink" title="25、unique：数组去重，返回一个新数组"></a>25、unique：数组去重，返回一个新数组</h2><pre><code>function unique(arr){
+    if(!isArrayLink(arr)){ //不是类数组对象return arr
+    }
+    let result = []
+    let objarr = []
+    let obj = Object.create(null)
+
+    arr.forEach(item =&gt; {
+        if(isStatic(item)){//是除了symbol外的原始数据letkey = item + &#39;_&#39; + getRawType(item);
+            if(!obj[key]){
+                obj[key] = true
+                result.push(item)
+            }
+        }else{//引用类型及symbolif(!objarr.includes(item)){
+                objarr.push(item)
+                result.push(item)
+            }
+        }
+    })
+
+    return resulte
+}
+</code></pre>
+<h2 id="26、Set简单实现"><a href="#26、Set简单实现" class="headerlink" title="26、Set简单实现"></a>26、Set简单实现</h2><pre><code>window.Set = window.Set || (function () {
+    functionSet(arr) {
+        this.items = arr ? unique(arr) : [];
+        this.size = this.items.length; // Array的大小
+    }
+    Set.prototype = {
+        add: function (value) {
+            // 添加元素,若元素已存在,则跳过，返回 Set 结构本身。if (!this.has(value)) {
+                this.items.push(value);
+                this.size++;
+            }
+            returnthis;
+        },
+        clear: function () {
+            //清除所有成员，没有返回值。this.items = []
+            this.size = 0
+        },
+        delete: function (value) {
+            //删除某个值，返回一个布尔值，表示删除是否成功。returnthis.items.some((v, i) =&gt; {
+                if(v === value){
+                    this.items.splice(i,1)
+                    return true
+                }
+                returnfalse
+            })
+        },
+        has: function (value) {
+            //返回一个布尔值，表示该值是否为Set的成员。returnthis.items.some(v =&gt; v === value)
+        },
+        values: function () {
+            returnthis.items
+        },
+    }
+
+    returnSet;
+}());
+</code></pre>
+<h2 id="27、repeat：生成一个重复的字符串，有n个str组成，可修改为填充为数组等"><a href="#27、repeat：生成一个重复的字符串，有n个str组成，可修改为填充为数组等" class="headerlink" title="27、repeat：生成一个重复的字符串，有n个str组成，可修改为填充为数组等"></a>27、repeat：生成一个重复的字符串，有n个str组成，可修改为填充为数组等</h2><pre><code>function repeat(str, n) {
+    let res = &#39;&#39;;while(n) {
+        if(n % 2 === 1) {
+            res += str;
+        }
+        if(n &gt; 1) {
+            str += str;
+        }
+        n &gt;&gt;= 1;
+    }
+    return res
+};//repeat(&#39;123&#39;,3) ==&gt; 123123123
+</code></pre>
+<h2 id="28、dateFormater：格式化时间"><a href="#28、dateFormater：格式化时间" class="headerlink" title="28、dateFormater：格式化时间"></a>28、dateFormater：格式化时间</h2><pre><code>functiondateFormater(formater, t){
+    letdate = t ? newDate(t) : newDate(),
+        Y = date.getFullYear() + &#39;&#39;,
+        M = date.getMonth() + 1,
+        D = date.getDate(),
+        H = date.getHours(),
+        m = date.getMinutes(),
+        s = date.getSeconds();
+    return formater.replace(/YYYY|yyyy/g,Y)
+        .replace(/YY|yy/g,Y.substr(2,2))
+        .replace(/MM/g,(M&lt;10?&#39;0&#39;:&#39;&#39;) + M)
+        .replace(/DD/g,(D&lt;10?&#39;0&#39;:&#39;&#39;) + D)
+        .replace(/HH|hh/g,(H&lt;10?&#39;0&#39;:&#39;&#39;) + H)
+        .replace(/mm/g,(m&lt;10?&#39;0&#39;:&#39;&#39;) + m)
+        .replace(/ss/g,(s&lt;10?&#39;0&#39;:&#39;&#39;) + s)
+}
+// dateFormater(&#39;YYYY-MM-DD HH:mm&#39;, t) ==&gt; 2019-06-26 18:30// dateFormater(&#39;YYYYMMDDHHmm&#39;, t) ==&gt; 201906261830
+</code></pre>
+<h2 id="29、dateStrForma：将指定字符串由一种时间格式转化为另一种"><a href="#29、dateStrForma：将指定字符串由一种时间格式转化为另一种" class="headerlink" title="29、dateStrForma：将指定字符串由一种时间格式转化为另一种"></a>29、dateStrForma：将指定字符串由一种时间格式转化为另一种</h2><p>from的格式应对应str的位置</p>
+<pre><code>function dateStrForma(str, from, to){
+    //&#39;20190626&#39;&#39;YYYYMMDD&#39;&#39;YYYY年MM月DD日&#39;
+    str += &#39;&#39;
+    let Y = &#39;&#39;if(~(Y = from.indexOf(&#39;YYYY&#39;))){
+        Y = str.substr(Y, 4)
+        to = to.replace(/YYYY|yyyy/g,Y)
+    }elseif(~(Y = from.indexOf(&#39;YY&#39;))){
+        Y = str.substr(Y, 2)
+        to = to.replace(/YY|yy/g,Y)
+    }
+
+    let k,i
+    [&#39;M&#39;,&#39;D&#39;,&#39;H&#39;,&#39;h&#39;,&#39;m&#39;,&#39;s&#39;].forEach(s =&gt;{
+        i = from.indexOf(s+s)
+        k = ~i ? str.substr(i, 2) : &#39;&#39;
+        to = to.replace(s+s, k)
+    })
+    return to
+}
+// dateStrForma(&#39;20190626&#39;, &#39;YYYYMMDD&#39;, &#39;YYYY年MM月DD日&#39;) ==&gt;2019年06月26日
+// dateStrForma(&#39;121220190626&#39;, &#39;----YYYYMMDD&#39;, &#39;YYYY年MM月DD日&#39;) ==&gt;2019年06月26日
+// dateStrForma(&#39;2019年06月26日&#39;, &#39;YYYY年MM月DD日&#39;, &#39;YYYYMMDD&#39;) ==&gt;20190626
+
+// 一般的也可以使用正则来实现
+//&#39;2019年06月26日&#39;.replace(/(\d{4})年(\d{2})月(\d{2})日/, &#39;$1-$2-$3&#39;) ==&gt;2019-06-26
+</code></pre>
+<h2 id="30、getPropByPath：根据字符串路径获取对象属性-‘obj-0-count’"><a href="#30、getPropByPath：根据字符串路径获取对象属性-‘obj-0-count’" class="headerlink" title="30、getPropByPath：根据字符串路径获取对象属性 : ‘obj[0].count’"></a>30、getPropByPath：根据字符串路径获取对象属性 : ‘obj[0].count’</h2><pre><code>functiongetPropByPath(obj, path, strict) {
+      let tempObj = obj;
+      path = path.replace(/\[(\w+)\]/g, &#39;.$1&#39;); //将[0]转化为.0
+      path = path.replace(/^\./, &#39;&#39;); //去除开头的.let keyArr = path.split(&#39;.&#39;); //根据.切割let i = 0;
+      for (let len = keyArr.length; i &lt; len - 1; ++i) {
+        if (!tempObj &amp;&amp; !strict) break;
+        let key = keyArr[i];
+        if (key in tempObj) {
+            tempObj = tempObj[key];
+        } else {
+            if (strict) {//开启严格模式，没找到对应key值，抛出错误thrownewError(&#39;please transfer a valid prop path to form item!&#39;);
+            }
+            break;
+        }
+      }
+      return {
+        o: tempObj, //原始数据
+        k: keyArr[i], //key值
+        v: tempObj ? tempObj[keyArr[i]] : null// key值对应的值
+      };
+};
+</code></pre>
+<h2 id="31、GetUrlParam：获取Url参数，返回一个对象"><a href="#31、GetUrlParam：获取Url参数，返回一个对象" class="headerlink" title="31、GetUrlParam：获取Url参数，返回一个对象"></a>31、GetUrlParam：获取Url参数，返回一个对象</h2><pre><code>functionGetUrlParam(){
+    let url = document.location.toString();
+    let arrObj = url.split(&quot;?&quot;);
+    let params = Object.create(null)
+    if (arrObj.length &gt; 1){
+        arrObj = arrObj[1].split(&quot;&amp;&quot;);
+        arrObj.forEach(item=&gt;{
+            item = item.split(&quot;=&quot;);
+            params[item[0]] = item[1]
+        })
+    }
+    return params;
+}
+// ?a=1&amp;b=2&amp;c=3 ==&gt; {a: &quot;1&quot;, b: &quot;2&quot;, c: &quot;3&quot;}
+</code></pre>
+<h2 id="32、downloadFile：base64数据导出文件，文件下载"><a href="#32、downloadFile：base64数据导出文件，文件下载" class="headerlink" title="32、downloadFile：base64数据导出文件，文件下载"></a>32、downloadFile：base64数据导出文件，文件下载</h2><pre><code>functiondownloadFile(filename, data){
+    let DownloadLink = document.createElement(&#39;a&#39;);
+
+    if ( DownloadLink ){
+        document.body.appendChild(DownloadLink);
+        DownloadLink.style = &#39;display: none&#39;;
+        DownloadLink.download = filename;
+        DownloadLink.href = data;
+
+        if ( document.createEvent ){
+            let DownloadEvt = document.createEvent(&#39;MouseEvents&#39;);
+
+            DownloadEvt.initEvent(&#39;click&#39;, true, false);
+            DownloadLink.dispatchEvent(DownloadEvt);
+        }
+        elseif ( document.createEventObject )
+            DownloadLink.fireEvent(&#39;onclick&#39;);
+        elseif (typeof DownloadLink.onclick == &#39;function&#39; )
+            DownloadLink.onclick();
+
+        document.body.removeChild(DownloadLink);
+    }
+}
+</code></pre>
+<h2 id="33、toFullScreen：全屏"><a href="#33、toFullScreen：全屏" class="headerlink" title="33、toFullScreen：全屏"></a>33、toFullScreen：全屏</h2><pre><code>functiontoFullScreen(){
+    let el = document.documentElement;
+    let rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
+
+    //typeof rfs != &quot;undefined&quot; &amp;&amp; rfsif (rfs) {
+        rfs.call(el);
+    }elseif (typeofwindow.ActiveXObject !== &quot;undefined&quot;) {
+        //for IE，这里其实就是模拟了按下键盘的F11，使浏览器全屏let wscript = new ActiveXObject(&quot;WScript.Shell&quot;);
+        if (wscript != null) {
+            wscript.SendKeys(&quot;{F11}&quot;);
+        }
+    }else{
+        alert(&quot;浏览器不支持全屏&quot;);
+    }
+}
+</code></pre>
+<h2 id="34、exitFullscreen：退出全屏"><a href="#34、exitFullscreen：退出全屏" class="headerlink" title="34、exitFullscreen：退出全屏"></a>34、exitFullscreen：退出全屏</h2><pre><code>functionexitFullscreen(){
+    let el = parent.document;
+    let cfs = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullScreen;
+
+    //typeof cfs != &quot;undefined&quot; &amp;&amp; cfsif (cfs) {
+        cfs.call(el);
+    }elseif (typeofwindow.ActiveXObject !== &quot;undefined&quot;) {
+        //for IE，这里和fullScreen相同，模拟按下F11键退出全屏let wscript = new ActiveXObject(&quot;WScript.Shell&quot;);
+        if (wscript != null) {
+            wscript.SendKeys(&quot;{F11}&quot;);
+        }
+    }else{
+        alert(&quot;切换失败,可尝试Esc退出&quot;)
+    }
+}
+</code></pre>
+<h2 id="35、requestAnimationFrame：window动画"><a href="#35、requestAnimationFrame：window动画" class="headerlink" title="35、requestAnimationFrame：window动画"></a>35、requestAnimationFrame：window动画</h2><pre><code>window.requestAnimationFrame = window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    function (callback) {
+        //为了使setTimteout的尽可能的接近每秒60帧的效果window.setTimeout(callback, 1000 / 60);
+    };
+
+window.cancelAnimationFrame = window.cancelAnimationFrame ||
+    Window.webkitCancelAnimationFrame ||
+    window.mozCancelAnimationFrame ||
+    window.msCancelAnimationFrame ||
+    window.oCancelAnimationFrame ||
+    function (id) {
+        //为了使setTimteout的尽可能的接近每秒60帧的效果window.clearTimeout(id);
+    }
+</code></pre>
+<h2 id="36、-isNaN：检查数据是否是非数字值"><a href="#36、-isNaN：检查数据是否是非数字值" class="headerlink" title="36、_isNaN：检查数据是否是非数字值"></a>36、_isNaN：检查数据是否是非数字值</h2><p>原生的isNaN会把参数转换成数字(valueof)，而null、true、false以及长度小于等于1的数组(元素为非NaN数据)会被转换成数字，这不是我想要的。Symbol类型的数据不具有valueof接口，所以isNaN会抛出错误，这里放在后面，可避免错误</p>
+<pre><code>function_isNaN(v){
+    return !(typeof v === &#39;string&#39; || typeof v === &#39;number&#39;) || isNaN(v)
+}
+</code></pre>
+<h2 id="37、max：求取数组中非NaN数据中的最大值"><a href="#37、max：求取数组中非NaN数据中的最大值" class="headerlink" title="37、max：求取数组中非NaN数据中的最大值"></a>37、max：求取数组中非NaN数据中的最大值</h2><pre><code>functionmax(arr){
+    arr = arr.filter(item =&gt; !_isNaN(item))
+    return arr.length ? Math.max.apply(null, arr) : undefined
+}
+//max([1, 2, &#39;11&#39;, null, &#39;fdf&#39;, []]) ==&gt; 11
+</code></pre>
+<h2 id="38、min：求取数组中非NaN数据中的最小值"><a href="#38、min：求取数组中非NaN数据中的最小值" class="headerlink" title="38、min：求取数组中非NaN数据中的最小值"></a>38、min：求取数组中非NaN数据中的最小值</h2><pre><code>functionmin(arr){
+    arr = arr.filter(item =&gt; !_isNaN(item))
+    return arr.length ? Math.min.apply(null, arr) : undefined
+}
+//min([1, 2, &#39;11&#39;, null, &#39;fdf&#39;, []]) ==&gt; 1
+</code></pre>
+<h2 id="39、random：返回一个lower-upper之间的随机数"><a href="#39、random：返回一个lower-upper之间的随机数" class="headerlink" title="39、random：返回一个lower - upper之间的随机数"></a>39、random：返回一个lower - upper之间的随机数</h2><p>lower、upper无论正负与大小，但必须是非NaN的数据</p>
+<pre><code>function random(lower, upper){
+    lower = +lower || 0upper = +upper || 0return Math.random() * (upper - lower) + lower;
+}
+//random(0, 0.5) ==&gt; 0.3567039135734613//random(2, 1) ===&gt; 1.6718418553475423//random(-2, -1) ==&gt; -1.4474325452361945
+</code></pre>
+<h2 id="40、Object-keys：返回一个由一个给定对象的自身可枚举属性组成的数组"><a href="#40、Object-keys：返回一个由一个给定对象的自身可枚举属性组成的数组" class="headerlink" title="40、Object.keys：返回一个由一个给定对象的自身可枚举属性组成的数组"></a>40、Object.keys：返回一个由一个给定对象的自身可枚举属性组成的数组</h2><pre><code>Object.keys = Object.keys || function keys(object) {
+    if(object===null||object===undefined){
+        thrownewTypeError(&#39;Cannot convert undefined or null to object&#39;);
+    }
+    let result = []
+    if(isArrayLike(object) ||isPlainObject(object)){
+        for (let key in object) {
+            object.hasOwnProperty(key) &amp;&amp; ( result.push(key) )
+        }
+    }
+    return result
+}
+</code></pre>
+<h2 id="41、Object-values：返回一个给定对象自身的所有可枚举属性值的数组"><a href="#41、Object-values：返回一个给定对象自身的所有可枚举属性值的数组" class="headerlink" title="41、Object.values：返回一个给定对象自身的所有可枚举属性值的数组"></a>41、Object.values：返回一个给定对象自身的所有可枚举属性值的数组</h2><pre><code>Object.values = Object.values || function values(object) {
+    if(object === null || object === undefined){
+        thrownew TypeError(&#39;Cannot convert undefined or null to object&#39;);
+    }
+    let result = []
+    if(isArrayLike(object) || isPlainObject(object)){
+        for (let key inobject) {
+            object.hasOwnProperty(key) &amp;&amp; ( result.push(object[key]) )
+        }
+    }
+    return result
+}
+</code></pre>
+<h2 id="42、arr-fill：使用-value-值来填充-array，从start位置开始-到end位置结束（但不包含end位置），返回原数组"><a href="#42、arr-fill：使用-value-值来填充-array，从start位置开始-到end位置结束（但不包含end位置），返回原数组" class="headerlink" title="42、arr.fill：使用 value 值来填充 array，从start位置开始, 到end位置结束（但不包含end位置），返回原数组"></a>42、arr.fill：使用 value 值来填充 array，从start位置开始, 到end位置结束（但不包含end位置），返回原数组</h2><pre><code>Array.prototype.fill = Array.prototype.fill || functionfill(value, start, end) {
+    let ctx = this
+    let length = ctx.length;
+
+    start = parseInt(start)
+    if(isNaN(start)){
+        start = 0
+    }elseif (start &lt; 0) {
+        start = -start &gt; length ? 0 : (length + start);
+      }
+
+      end = parseInt(end)
+      if(isNaN(end) || end &gt; length){
+          end = length
+      }elseif (end &lt; 0) {
+        end += length;
+    }
+
+    while (start &lt; end) {
+        ctx[start++] = value;
+    }
+    return ctx;
+}
+//Array(3).fill(2) ===&gt; [2, 2, 2]
+</code></pre>
+<h2 id="43、arr-includes：用来判断一个数组是否包含一个指定的值，如果是返回-true，否则false，可指定开始查询的位置"><a href="#43、arr-includes：用来判断一个数组是否包含一个指定的值，如果是返回-true，否则false，可指定开始查询的位置" class="headerlink" title="43、arr.includes：用来判断一个数组是否包含一个指定的值，如果是返回 true，否则false，可指定开始查询的位置"></a>43、arr.includes：用来判断一个数组是否包含一个指定的值，如果是返回 true，否则false，可指定开始查询的位置</h2><pre><code>Array.prototype.includes = Array.prototype.includes || functionincludes(value, start){
+    let ctx = thislet length = ctx.length;
+
+    start = parseInt(start)
+    if(isNaN(start)){
+        start = 0
+    }elseif (start &lt; 0) {
+        start = -start &gt; length ? 0 : (length + start);
+      }
+
+    let index = ctx.indexOf(value)
+
+    return index &gt;= start;
+}
+</code></pre>
+<h2 id="44、arr-find：返回数组中通过测试（函数fn内判断）的第一个元素的值"><a href="#44、arr-find：返回数组中通过测试（函数fn内判断）的第一个元素的值" class="headerlink" title="44、arr.find：返回数组中通过测试（函数fn内判断）的第一个元素的值"></a>44、arr.find：返回数组中通过测试（函数fn内判断）的第一个元素的值</h2><pre><code>Array.prototype.find = Array.prototype.find || functionfind(fn, ctx){
+    fn = fn.bind(ctx)
+
+    let result;
+    this.some((value, index, arr), thisValue) =&gt; {
+        return fn(value, index, arr) ? (result = value, true) : false
+    })
+
+    return result
+}
+</code></pre>
+<h2 id="45、arr-findIndex-：返回数组中通过测试（函数fn内判断）的第一个元素的下标"><a href="#45、arr-findIndex-：返回数组中通过测试（函数fn内判断）的第一个元素的下标" class="headerlink" title="45、arr.findIndex ：返回数组中通过测试（函数fn内判断）的第一个元素的下标"></a>45、arr.findIndex ：返回数组中通过测试（函数fn内判断）的第一个元素的下标</h2><pre><code>Array.prototype.findIndex = Array.prototype.findIndex || functionfindIndex(fn, ctx){
+    fn = fn.bind(ctx)
+
+    let result;
+    this.some((value, index, arr), thisValue) =&gt; {
+        return fn(value, index, arr) ? (result = index, true) : false
+    })
+
+    return result
+}
+</code></pre>
+<h2 id="46、performance-timing：利用performance-timing进行性能分析"><a href="#46、performance-timing：利用performance-timing进行性能分析" class="headerlink" title="46、performance.timing：利用performance.timing进行性能分析"></a>46、performance.timing：利用performance.timing进行性能分析</h2><pre><code>window.onload = function(){
+    setTimeout(function(){
+        let t = performance.timing
+        console.log(&#39;DNS查询耗时 ：&#39; + (t.domainLookupEnd - t.domainLookupStart).toFixed(0))
+        console.log(&#39;TCP链接耗时 ：&#39; + (t.connectEnd - t.connectStart).toFixed(0))
+        console.log(&#39;request请求耗时 ：&#39; + (t.responseEnd - t.responseStart).toFixed(0))
+        console.log(&#39;解析dom树耗时 ：&#39; + (t.domComplete - t.domInteractive).toFixed(0))
+        console.log(&#39;白屏时间 ：&#39; + (t.responseStart - t.navigationStart).toFixed(0))
+        console.log(&#39;domready时间 ：&#39; + (t.domContentLoadedEventEnd - t.navigationStart).toFixed(0))
+        console.log(&#39;onload时间 ：&#39; + (t.loadEventEnd - t.navigationStart).toFixed(0))
+
+        if(t = performance.memory){
+            console.log(&#39;js内存使用占比 ：&#39; + (t.usedJSHeapSize / t.totalJSHeapSize * 100).toFixed(2) + &#39;%&#39;)
+        }
+    })
+}
+</code></pre>
+<h2 id="47、禁止某些键盘事件"><a href="#47、禁止某些键盘事件" class="headerlink" title="47、禁止某些键盘事件"></a>47、禁止某些键盘事件</h2><pre><code>document.addEventListener(&#39;keydown&#39;, function(event){
+    return !(
+        112 == event.keyCode || //F1123 == event.keyCode || //F12event.ctrlKey &amp;&amp; 82 == event.keyCode || //ctrl + Revent.ctrlKey &amp;&amp; 78 == event.keyCode || //ctrl + Nevent.shiftKey &amp;&amp; 121 == event.keyCode || //shift + F10event.altKey &amp;&amp; 115 == event.keyCode || //alt + F4&quot;A&quot; == event.srcElement.tagName &amp;&amp; event.shiftKey //shift + 点击a标签
+    ) || (event.returnValue = false)
+});
+</code></pre>
+<h2 id="48、禁止右键、选择、复制"><a href="#48、禁止右键、选择、复制" class="headerlink" title="48、禁止右键、选择、复制"></a>48、禁止右键、选择、复制</h2><pre><code>[&#39;contextmenu&#39;, &#39;selectstart&#39;, &#39;copy&#39;].forEach(function(ev){
+    document.addEventListener(ev, function(event){
+        return event.returnValue = false
+    })
+});
+</code></pre>
+<p>github地址：<a target="_blank" rel="noopener" href="https://github.com/hfhan/tools">https://github.com/hfhan/tools</a><a target="_blank" rel="noopener" href="https://github.com/hfhan/tools">https://github.com/hfhan/tools</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/6cb984a0.html"><div class="related-post-title">Webpack 深入浅出之公司级分享总结(内附完整ppt)</div><div class="related-post-meta"><time>2019-12-21</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/99ccac15.html"><div class="related-post-title">require().default：require模块的时候后面为什么要加一个default</div><div class="related-post-meta"><time>2020-10-20</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/61a6b50f.html"><div class="related-post-title">高频面试题深入解析/ 周刊 07</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/fd15746b.html"><div class="related-post-title">前端面试之JS手写new方法</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/433d7e2b.html"><div class="related-post-title">electron-vite+react+react-router-dom+antd中useRoutes踩坑</div><div class="related-post-meta"><time>2024-11-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/a974109a.html">https://xuehuayu.cn/article/a974109a.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/8fefb501.html">Webpack 是怎样运行的?</a><a class="next" href="/article/dc8dc705.html">ES6，ES7，ES8，ES9，ES10新特性一览</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

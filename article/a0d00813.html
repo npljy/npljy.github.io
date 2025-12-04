@@ -1,0 +1,404 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>移动端 H5 相关问题汇总 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">移动端 H5 相关问题汇总</h1><div class="post-meta"><span class="date">2020-02-17</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 5k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 20</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/a0d00813.html#waline-comment"><span class="waline-comment-count" data-path="/article/a0d00813.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/suoyuesmile/suo-blog/blob/master/articals/h5/0003.md</code><br>作为一个开发了多个 H5<br>项目的前端工程师，在开发过程中难免会遇到一些兼容性等<strong>爬过坑</strong>的问题。现在我将这些问题一一汇总一下，并在后面给出<strong>坑产生的原理</strong>，和<strong>现阶段常规的填坑方案</strong>。由此来做一个阶段性的总结。<br>下面列举了我遇到的一些常规问题，如有遇到其他问题请在评论区补充，之后我也会实践后加以补充，感谢！（经常更新该文）</p>
+<span id="more"></span>
+
+<h2 id="移动端-H5-相关问题汇总："><a href="#移动端-H5-相关问题汇总：" class="headerlink" title="移动端 H5 相关问题汇总："></a>移动端 H5 相关问题汇总：</h2><ul>
+<li><strong>1px 问题</strong></li>
+<li><strong>响应式布局</strong></li>
+<li><strong>iOS 滑动不流畅</strong></li>
+<li><strong>iOS 上拉边界下拉出现白色空白</strong></li>
+<li><strong>页面件放大或缩小不确定性行为</strong></li>
+<li><strong>click 点击穿透与延迟</strong></li>
+<li><strong>软键盘弹出将页面顶起来、收起未回落问题</strong></li>
+<li><strong>iPhone X 底部栏适配问题</strong></li>
+<li><strong>保存页面为图片和二维码问题和解决方案</strong></li>
+<li><strong>微信公众号 H5 分享问题</strong></li>
+<li><strong>H5 调用 SDK 相关问题及解决方案</strong></li>
+<li><strong>H5 调试相关方案与策略</strong></li>
+</ul>
+<h2 id="移动端-H5-相关基础技术概览"><a href="#移动端-H5-相关基础技术概览" class="headerlink" title="移动端 H5 相关基础技术概览"></a>移动端 H5 相关基础技术概览</h2><p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/fd55251b2784c435753d675301fb4bfa7aef733b/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f32342f313666333638373230643365623432313f773d3232303626683d3131343026663d6a70656726733d323437373332"><img src="https://camo.githubusercontent.com/fd55251b2784c435753d675301fb4bfa7aef733b/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f32342f313666333638373230643365623432313f773d3232303626683d3131343026663d6a70656726733d323437373332" alt="xuehuayu.cn"></a></p>
+<h1 id="原理与实践"><a href="#原理与实践" class="headerlink" title="原理与实践"></a>原理与实践</h1><p>之前两篇文章已经详细的论述了<strong>1px</strong> 问题与 <strong>响应式布局</strong>问题，并给出了原理和解决方案。</p>
+<blockquote>
+</blockquote>
+<p>防止丢失，<strong>点赞收藏</strong>后跳转至快捷通道：<a target="_blank" rel="noopener" href="https://juejin.im/entry/5df32ffd6fb9a016194afb5e"><strong>1px</strong></a>通道与<a target="_blank" rel="noopener" href="https://juejin.im/entry/5df613c3f265da33ca400e72">响应式布局</a>通道</p>
+<p>接下来呢，我们看看其他问题的原理和解决方案吧。</p>
+<blockquote>
+<p>以下解决方案，均经过我测试成功，健康安全，请放下食用。由于篇幅原因，某些非核心解决方案的实现细节暂未谈论，需要自行研究。</p>
+</blockquote>
+<h2 id="iOS-滑动不流畅"><a href="#iOS-滑动不流畅" class="headerlink" title="iOS 滑动不流畅"></a>iOS 滑动不流畅</h2><h3 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h3><p>上下滑动页面会产生卡顿，手指离开页面，页面立即停止运动。整体表现就是滑动不流畅，没有滑动惯性。</p>
+<h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><p><strong>为什么 iOS 的 webview 中 滑动不流畅，它是如何定义的？</strong></p>
+<p>最终我在 <code>safari</code> 文档里面寻找到了答案（文档链接在参考资料项）。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/dae1dc14e59ea49999123abbf133f60bd8f5fa2a/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f31392f313666316461616237633431653034343f773d3134323026683d3131303426663d6a70656726733d313635343933"><img src="https://camo.githubusercontent.com/dae1dc14e59ea49999123abbf133f60bd8f5fa2a/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f31392f313666316461616237633431653034343f773d3134323026683d3131303426663d6a70656726733d313635343933" alt="xuehuayu.cn"></a></p>
+<p>原来在 iOS 5.0 以及之后的版本，滑动有定义有两个值 <code>auto</code> 和 <code>touch</code>，默认值为 <code>auto</code>。</p>
+<pre><code>-webkit-overflow-scrolling: touch; /* 当手指从触摸屏上移开，会保持一段时间的滚动 */-webkit-overflow-scrolling: auto; /* 当手指从触摸屏上移开，滚动会立即停止 */
+</code></pre>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="1-在滚动容器上增加滚动-touch-方法"><a href="#1-在滚动容器上增加滚动-touch-方法" class="headerlink" title="1.在滚动容器上增加滚动 touch 方法"></a>1.在滚动容器上增加滚动 touch 方法</h4><p>将<code>-webkit-overflow-scrolling</code> 值设置为 <code>touch</code></p>
+<pre><code>.wrapper {
+    -webkit-overflow-scrolling: touch;
+}
+</code></pre>
+<blockquote>
+<p>设置滚动条隐藏： <code>.container ::-webkit-scrollbar {display: none;}</code></p>
+</blockquote>
+<p>可能会导致使用<code>position:fixed;</code> 固定定位的元素，随着页面一起滚动</p>
+<h4 id="2-设置-overflow"><a href="#2-设置-overflow" class="headerlink" title="2.设置 overflow"></a>2.设置 overflow</h4><p>设置外部 <code>overflow</code> 为 <code>hidden</code>,设置内容元素 <code>overflow</code> 为 <code>auto</code>。内部元素超出 body 即产生滚动，超出的部分<br>body 隐藏。</p>
+<pre><code>body {
+    overflow-y: hidden;
+}
+.wrapper {
+    overflow-y: auto;
+}
+</code></pre>
+<blockquote>
+<p>两者结合使用更佳！</p>
+</blockquote>
+<h2 id="iOS-上拉边界下拉出现白色空白"><a href="#iOS-上拉边界下拉出现白色空白" class="headerlink" title="iOS 上拉边界下拉出现白色空白"></a>iOS 上拉边界下拉出现白色空白</h2><h3 id="表现-1"><a href="#表现-1" class="headerlink" title="表现"></a>表现</h3><p>手指按住屏幕下拉，屏幕顶部会多出一块白色区域。手指按住屏幕上拉，底部多出一块白色区域。</p>
+<h3 id="产生原因-1"><a href="#产生原因-1" class="headerlink" title="产生原因"></a>产生原因</h3><p>在 iOS 中，手指按住屏幕上下拖动，会触发 <code>touchmove</code> 事件。这个事件触发的对象是整个 <code>webview</code><br>容器，容器自然会被拖动，剩下的部分会成空白。</p>
+<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="1-监听事件禁止滑动"><a href="#1-监听事件禁止滑动" class="headerlink" title="1. 监听事件禁止滑动"></a>1. 监听事件禁止滑动</h4><p>移动端触摸事件有三个，分别定义为</p>
+<pre><code>1. touchstart ：手指放在一个DOM元素上。
+2. touchmove ：手指拖曳一个DOM元素。
+3. touchend ：手指从一个DOM元素上移开。
+</code></pre>
+<p>显然我们需要控制的是 <code>touchmove</code> 事件，由此我在 W3C 文档中找到了这样一段话</p>
+<blockquote>
+<p>Note that the rate at which the user agent sends touchmove events is</p>
+</blockquote>
+<p>implementation-defined, and may depend on hardware capabilities and other<br>implementation details.</p>
+<blockquote>
+<p>If the preventDefault method is called on the first touchmove event of an</p>
+</blockquote>
+<p>active touch point, it should prevent any default action caused by any touchmove<br>event associated with the same active touch point, such as scrolling.</p>
+<p><strong><code>touchmove</code> 事件的速度是可以实现定义的，取决于硬件性能和其他实现细节</strong></p>
+<p><strong><code>preventDefault</code> 方法，阻止同一触点上所有默认行为，比如滚动。</strong></p>
+<p>由此我们找到解决方案，通过监听 <code>touchmove</code>，让需要滑动的地方滑动，不需要滑动的地方禁止滑动。</p>
+<blockquote>
+<p>值得注意的是我们要过滤掉具有滚动容器的元素。</p>
+</blockquote>
+<p>实现如下：</p>
+<pre><code>document.body.addEventListener(&#39;touchmove&#39;,function(e){if(e._isScroller)return;// 阻止默认事件e.preventDefault();},{passive: false});
+</code></pre>
+<h4 id="2-滚动妥协填充空白，装饰成其他功能"><a href="#2-滚动妥协填充空白，装饰成其他功能" class="headerlink" title="2. 滚动妥协填充空白，装饰成其他功能"></a>2. 滚动妥协填充空白，装饰成其他功能</h4><p>在很多时候，我们可以不去解决这个问题，换一直思路。根据场景，<strong>我们可以将下拉作为一个功能性的操作</strong>。</p>
+<p><strong>比如： 下拉后刷新页面</strong></p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/c3c6e29337d2f01a03f3fde0edde261edaa636aa/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f32302f313666323139643137613666643434383f773d37353426683d3133323626663d6a70656726733d313833353730"><img src="https://camo.githubusercontent.com/c3c6e29337d2f01a03f3fde0edde261edaa636aa/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f32302f313666323139643137613666643434383f773d37353426683d3133323626663d6a70656726733d313833353730" alt="xuehuayu.cn"></a></p>
+<h2 id="页面放大或缩小不确定性行为"><a href="#页面放大或缩小不确定性行为" class="headerlink" title="页面放大或缩小不确定性行为"></a>页面放大或缩小不确定性行为</h2><h3 id="表现-2"><a href="#表现-2" class="headerlink" title="表现"></a>表现</h3><p>双击或者双指张开手指页面元素，页面会放大或缩小。</p>
+<h3 id="产生原因-2"><a href="#产生原因-2" class="headerlink" title="产生原因"></a>产生原因</h3><p>HTML 本身会产生放大或缩小的行为，比如在 PC<br>浏览器上，可以自由控制页面的放大缩小。但是在移动端，我们是不需要这个行为的。所以，我们需要禁止该不确定性行为，来提升用户体验。</p>
+<h3 id="原理与解决方案"><a href="#原理与解决方案" class="headerlink" title="原理与解决方案"></a>原理与解决方案</h3><p>HTML <code>meta</code> 元标签标准中有个 中 <code>viewport</code> 属性，用来控制页面的缩放，一般用于移动端。如下图 MDN 中介绍</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/3c5a1f8607485339b7e2d3676d8a93c02fd3bff4/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f31392f313666316366353238653738373439383f773d3132393426683d3132303226663d6a70656726733d333235303130"><img src="https://camo.githubusercontent.com/3c5a1f8607485339b7e2d3676d8a93c02fd3bff4/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f31392f313666316366353238653738373439383f773d3132393426683d3132303226663d6a70656726733d333235303130" alt="xuehuayu.cn"></a><br>移动端常规写法</p>
+<pre><code>&lt;metaname=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+</code></pre>
+<p>因此我们可以设置 <code>maximum-scale</code>、<code>minimum-scale</code> 与 <code>user-scalable=no</code> 用来避免这个问题</p>
+<pre><code>&lt;metaname=viewportcontent=&quot;width=device-width, initial-scale=1.0, minimum-scale=1.0 maximum-scale=1.0, user-scalable=no&quot;&gt;
+</code></pre>
+<h2 id="click-点击事件延时与穿透"><a href="#click-点击事件延时与穿透" class="headerlink" title="click 点击事件延时与穿透"></a>click 点击事件延时与穿透</h2><h3 id="表现-3"><a href="#表现-3" class="headerlink" title="表现"></a>表现</h3><p>监听元素 <code>click</code> 事件，点击元素触发时间延迟约 <code>300ms</code>。</p>
+<p>点击蒙层，蒙层消失后，下层元素点击触发。</p>
+<h3 id="产生原因-3"><a href="#产生原因-3" class="headerlink" title="产生原因"></a>产生原因</h3><h4 id="为什么会产生-click-延时？"><a href="#为什么会产生-click-延时？" class="headerlink" title="为什么会产生 click 延时？"></a>为什么会产生 click 延时？</h4><p>iOS 中的 safari，为了实现双击缩放操作，在单击 300ms 之后，如果未进行第二次点击，则执行 <code>click</code><br>单击操作。也就是说来判断用户行为是否为双击产生的。但是，在 App 中，无论是否需要双击缩放这种行为，<code>click</code> 单击都会产生 300ms 延迟。</p>
+<h4 id="为什么会产生-click-点击穿透？"><a href="#为什么会产生-click-点击穿透？" class="headerlink" title="为什么会产生 click 点击穿透？"></a>为什么会产生 click 点击穿透？</h4><p>双层元素叠加时，在上层元素上绑定 <code>touch</code> 事件，下层元素绑定 <code>click</code> 事件。由于 <code>click</code> 发生在 <code>touch</code><br>之后，点击上层元素，元素消失，下层元素会触发 <code>click</code> 事件，由此产生了点击穿透的效果。</p>
+<h3 id="原理与解决方案-1"><a href="#原理与解决方案-1" class="headerlink" title="原理与解决方案"></a>原理与解决方案</h3><h4 id="解决方案一：使用-touchstart-替换-click"><a href="#解决方案一：使用-touchstart-替换-click" class="headerlink" title="解决方案一：使用 touchstart 替换 click"></a>解决方案一：使用 touchstart 替换 click</h4><p>前面已经介绍了，移动设备不仅支持点击，还支持几个触摸事件。<br>那么我们现在基本思路就是用 <code>touch</code> 事件代替<code>click</code> 事件。</p>
+<p>将 <code>click</code> 替换成 <code>touchstart</code> 不仅解决了 <code>click</code> 事件都延时问题，还解决了穿透问题。因为穿透问题是在 <code>touch</code> 和<br><code>click</code> 混用时产生。</p>
+<p>在原生中使用</p>
+<pre><code>el.addEventListener(&quot;touchstart&quot;,()=&gt;{console.log(&quot;ok&quot;);},false);
+</code></pre>
+<p>在 vue 中使用</p>
+<pre><code>&lt;button@touchstart=&quot;handleTouchstart()&quot;&gt;点击&lt;/button&gt;
+</code></pre>
+<p>开源解决方案中，也是既提供了 <code>click</code> 事件，又提供了<code>touchstart</code> 事件。如 vant 中的 <code>button</code> 组件</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/30a48da02fce60e7dccd243bbbce4bb7325b069c/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f31392f313666316431333330303332313635353f773d3135313226683d33363826663d6a70656726733d3539373630"><img src="https://camo.githubusercontent.com/30a48da02fce60e7dccd243bbbce4bb7325b069c/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f31392f313666316431333330303332313635353f773d3135313226683d33363826663d6a70656726733d3539373630" alt="xuehuayu.cn"></a></p>
+<p><strong>那么，是否可以将 <code>click</code> 事件全部替换成 <code>touchstart</code> 呢？为什么开源框架还会给出 <code>click</code> 事件呢？</strong></p>
+<p>我们想象一种情景，同时需要点击和滑动的场景下。如果将 <code>click</code> 替换成 <code>touchstart</code> 会怎样？</p>
+<blockquote>
+<p>事件触发顺序: <code>touchstart</code>, <code>touchmove</code>, <code>touchend</code>, <code>click</code>。</p>
+</blockquote>
+<p>很容易想象，在我需要<code>touchmove</code>滑动时候，优先触发了<code>touchstart</code>的点击事件，是不是已经产生了冲突呢？</p>
+<p>所以呢，在具有滚动的情况下，还是建议使用 <code>click</code> 处理。</p>
+<p>在接下来的<code>fastclick</code>开源库中也做了如下处理。<br>针对 <code>touchstart</code> 和 <code>touchend</code>，截取了部分源码。</p>
+<pre><code>// If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:// 1) the user does a fling scroll on the scrollable layer// 2) the user stops the fling scroll with another tap// then the event.target of the last &#39;touchend&#39; event will be the element that was under the user&#39;s finger// when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check// is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).this.updateScrollParent(targetElement);
+
+// Don&#39;t send a synthetic click event if the target element is contained within a parent layer that was scrolled// and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).scrollParent=targetElement.fastClickScrollParent;if(scrollParent&amp;&amp;scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop){return true;}
+</code></pre>
+<p>主要目的就是，在使用 <code>touchstart</code> 合成 <code>click</code> 事件时，保证其不在滚动的父元素之下。</p>
+<h4 id="解决方案二：-使用-fastclick-库"><a href="#解决方案二：-使用-fastclick-库" class="headerlink" title="解决方案二： 使用 fastclick 库"></a>解决方案二： 使用 fastclick 库</h4><p>使用 <code>npm/yarn</code> 安装后使用</p>
+<pre><code>importFastClickfrom&#39;fastclick&#39;;FastClick.attach(document.body,options);
+</code></pre>
+<p>同样，使用<code>fastclick</code>库后，<code>click</code> 延时和穿透问题都没了</p>
+<p>按照我的惯例，只要涉及开源库，那么我们一定要去了解它实现的原理。主要是将现有的原生事件集合封装合成一个兼容性较强的事件集合。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js">fastclick源码</a><br>核心代码不长， 1000 行不到。有兴趣可以了解一下!</p>
+<h2 id="软键盘将页面顶起来、收起未回落问题"><a href="#软键盘将页面顶起来、收起未回落问题" class="headerlink" title="软键盘将页面顶起来、收起未回落问题"></a>软键盘将页面顶起来、收起未回落问题</h2><h3 id="表现-4"><a href="#表现-4" class="headerlink" title="表现"></a>表现</h3><p>Android 手机中，点击 <code>input</code> 框时，键盘弹出，将页面顶起来，导致页面样式错乱。</p>
+<p>移开焦点时，键盘收起，键盘区域空白，未回落。</p>
+<h3 id="产生原因-4"><a href="#产生原因-4" class="headerlink" title="产生原因"></a>产生原因</h3><p>我们在app 布局中会有个固定的底部。安卓一些版本中，输入弹窗出来，会将解压 <code>absolute</code> 和 <code>fixed</code> 定位的元素。导致可视区域变小，布局错乱。</p>
+<h3 id="原理与解决方案-2"><a href="#原理与解决方案-2" class="headerlink" title="原理与解决方案"></a>原理与解决方案</h3><p>软键盘将页面顶起来的解决方案，主要是通过监听页面高度变化，强制恢复成弹出前的高度。</p>
+<pre><code>// 记录原有的视口高度constoriginalHeight=document.body.clientHeight||document.documentElement.clientHeight;window.onresize=function(){varresizeHeight=document.documentElement.clientHeight||document.body.clientHeight;if(resizeHeight&lt;originalHeight){// 恢复内容区域高度// const container = document.getElementById(&quot;container&quot;)// 例如 container.style.height = originalHeight;} }
+</code></pre>
+<p>键盘不能回落问题出现在 iOS 12+ 和 wechat 6.7.4+ 中，而在微信 H5 开发中是比较常见的 Bug。</p>
+<p>兼容原理，1.判断版本类型 2.更改滚动的可视区域</p>
+<pre><code>constisWechat=window.navigator.userAgent.match(/MicroMessenger\/([\d\.]+)/i);if(!isWechat)return;constwechatVersion=wechatInfo[1];constversion=(navigator.appVersion).match(/OS (\d+)*(\d+)*?(\d+)?/);// 如果设备类型为iOS 12+ 和wechat 6.7.4+，恢复成原来的视口if(+wechatVersion.replace(/\./g,&#39;&#39;) &gt;= 674&amp;&amp;+version[1] &gt;= 12){window.scrollTo(0,Math.max(document.body.clientHeight,document.documentElement.clientHeight));}
+</code></pre>
+<blockquote>
+<p><code>window.scrollTo(x-coord, y-coord)</code>，其中&#96;window.scrollTo(0,</p>
+</blockquote>
+<p>clientHeight)&#96;恢复成原来的视口</p>
+<h2 id="iPhone-X系列安全区域适配问题"><a href="#iPhone-X系列安全区域适配问题" class="headerlink" title="iPhone X系列安全区域适配问题"></a>iPhone X系列安全区域适配问题</h2><h3 id="表现-5"><a href="#表现-5" class="headerlink" title="表现"></a>表现</h3><p>头部刘海两侧区域或者底部区域，出现刘海遮挡文字，或者呈现黑底或白底空白区域。</p>
+<h3 id="产生原因-5"><a href="#产生原因-5" class="headerlink" title="产生原因"></a>产生原因</h3><p>iPhone X 以及它以上的系列，都采用<strong>刘海屏设计</strong>和<strong>全面屏手势</strong>。头部、底部、侧边都需要做特殊处理。才能适配 iPhone X 的特殊情况。</p>
+<h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><p><strong>设置安全区域，填充危险区域，危险区域不做操作和内容展示。</strong></p>
+<blockquote>
+<p>危险区域指头部不规则区域，底部横条区域，左右触发区域。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/e3113d3bf82f463084d4e51e4ee5dd804d7aa77f/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f31392f313666316433313135306537396362393f773d3131313826683d35393426663d6a70656726733d3439313234"><img src="https://camo.githubusercontent.com/e3113d3bf82f463084d4e51e4ee5dd804d7aa77f/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f31392f313666316433313135306537396362393f773d3131313826683d35393426663d6a70656726733d3439313234" alt="xuehuayu.cn"></a><br>具体操作为：<code>viewport-fit``meta</code> 标签设置为 <code>cover</code>，获取所有区域填充。<br>判断设备是否属于 iPhone X，给头部底部增加<strong>适配层</strong></p>
+<blockquote>
+<p><code>viewport-fit</code> 有 3 个值分别为：</p>
+<ul>
+<li><code>auto</code>：此值不影响初始布局视图端口，并且整个web页面都是可查看的。</li>
+<li><code>contain</code>：<br>视图端口按比例缩放，以适合显示内嵌的最大矩形。</li>
+<li><code>cover</code>：视图端口被缩放以填充设备显示。强烈建议使用 <code>safe area inset</code> 变量，以确保重要内容不会出现在显示之外。</li>
+</ul>
+</blockquote>
+<h4 id="设置-viewport-fit-为-cover"><a href="#设置-viewport-fit-为-cover" class="headerlink" title="设置 viewport-fit 为 cover"></a>设置 viewport-fit 为 <code>cover</code></h4><pre><code>&lt;metaname=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover&quot;&gt;
+</code></pre>
+<h4 id="增加适配层"><a href="#增加适配层" class="headerlink" title="增加适配层"></a>增加适配层</h4><p>使用 <code>safe area inset</code> 变量</p>
+<pre><code>/* 适配 iPhone X 顶部填充*/@supports (top: env(safe-area-inset-top)){
+  body,
+  .header{
+      padding-top: constant(safe-area-inset-top,40px);
+      padding-top: env(safe-area-inset-top,40px);
+      padding-top: var(safe-area-inset-top,40px);
+  }
+}
+/* 判断iPhoneX 将 footer 的 padding-bottom 填充到最底部 */@supports (bottom: env(safe-area-inset-bottom)){
+    body,
+    .footer{
+        padding-bottom: constant(safe-area-inset-bottom,20px);
+        padding-bottom: env(safe-area-inset-bottom,20px);
+        padding-top: var(safe-area-inset-bottom,20px);
+    }
+}
+</code></pre>
+<blockquote>
+<p><code>safe-area-inset-top</code>, <code>safe-area-inset-right</code>, <code>safe-area-inset-bottom</code>,</p>
+</blockquote>
+<p><code>safe-area-inset-left``safe-area-inset-*</code>由四个定义了视口边缘内矩形的 <code>top</code>, <code>right</code>, <code>bottom</code><br>和 <code>left</code> 的环境变量组成，这样可以安全地放入内容，而不会有被非矩形的显示切断的风险。对于矩形视口，例如普通的笔记本电脑显示器，其值等于零。<br>对于非矩形显示器（如圆形表盘，<code>iPhoneX</code> 屏幕），在用户代理设置的四个值形成的矩形内，所有内容均可见。</p>
+<p>其中 <code>env()</code> 用法为 <code>env( &lt;custom-ident&gt; , &lt;declaration-value&gt;? )</code>，第一个参数为自定义的区域，第二个为备用值。</p>
+<p>其中 <code>var()</code> 用法为 <code>var( &lt;custom-property-name&gt; , &lt;declaration-value&gt;? )</code>，作用是在<br><code>env()</code> 不生效的情况下，给出一个备用值。</p>
+<p><code>constant（）</code> 被 <code>css</code> 2017-2018 年为草稿阶段，是否已被标准化未知。而其他iOS<br>浏览器版本中是否有此函数未知，作为兼容处理而添加进去。</p>
+<p>详情请查看文章末尾的参考资料。</p>
+<h4 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h4><p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/c2eaef48e9887a3709118acbcd181adf338e1b97/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f32302f313666323132666639393865316563313f773d3230323426683d35363826663d6a70656726733d313432363938"><img src="https://camo.githubusercontent.com/c2eaef48e9887a3709118acbcd181adf338e1b97/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f32302f313666323132666639393865316563313f773d3230323426683d35363826663d6a70656726733d313432363938" alt="xuehuayu.cn"></a></p>
+<h2 id="页面生成为图片和二维码问题"><a href="#页面生成为图片和二维码问题" class="headerlink" title="页面生成为图片和二维码问题"></a>页面生成为图片和二维码问题</h2><h3 id="表现-6"><a href="#表现-6" class="headerlink" title="表现"></a>表现</h3><p>在工作中有需要将页面生成图片或者二维码的需求。可能我们第一想到的，交给后端来生成更简单。但是这样我们需要把页面代码全部传给后端，网络性能消耗太大。</p>
+<h3 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="生成二维码"><a href="#生成二维码" class="headerlink" title="生成二维码"></a>生成二维码</h4><p>使用 QRCode 生成二维码</p>
+<pre><code>importQRCodefrom&#39;qrcode&#39;;// 使用 async 生成图片constoptions={};consturl=window.location.href;asyncurl=&gt;{try{console.log(awaitQRCode.toDataURL(url,options))}catch(err){console.error(err);} }
+</code></pre>
+<p>将 <code>await QRCode.toDataURL(url, options)</code> 赋值给 图片 <code>url</code> 即可</p>
+<h4 id="生成图片"><a href="#生成图片" class="headerlink" title="生成图片"></a>生成图片</h4><p>主要是使用 <code>htmlToCanvas</code> 生成 <code>canvas</code> 画布</p>
+<pre><code>importhtml2canvasfrom&#39;html2canvas&#39;;html2canvas(document.body).then(function(canvas){document.body.appendChild(canvas);});
+</code></pre>
+<p>但是不单单在此处就完了，由于是 <code>canvas</code> 的原因。移动端生成出来的图片比较模糊。</p>
+<p>我们使用一个新的 <code>canvas</code> 方法多倍生成，放入一倍容器里面，达到更加清晰的效果，通过超链接下载图片<br><strong>下载文件简单实现，更完整的实现方式之后更新</strong></p>
+<pre><code>constscaleSize=2;constnewCanvas=document.createElement(&quot;canvas&quot;);consttarget=document.querySelector(&#39;div&#39;);constwidth=parseInt(window.getComputedStyle(target).width);constheight=parseInt(window.getComputedStyle(target).height);newCanvas.width=width * scaleSize;newCanvas.height=widthh * scaleSize;newCanvas.style.width=width+&quot;px&quot;;newCanvas.style.height=width+&quot;px&quot;;constcontext=newCanvas.getContext(&quot;2d&quot;);context.scale(scaleSize,scaleSize);html2canvas(document.querySelector(&#39;.demo&#39;),{canvas: newCanvas}).then(function(canvas){// 简单的通过超链接设置下载功能document.querySelector(&quot;.btn&quot;).setAttribute(&#39;href&#39;,canvas.toDataURL());}
+</code></pre>
+<blockquote>
+<p>根据需要设置 <code>scaleSize</code> 大小</p>
+</blockquote>
+<h2 id="微信公众号分享问题"><a href="#微信公众号分享问题" class="headerlink" title="微信公众号分享问题"></a>微信公众号分享问题</h2><h3 id="表现-7"><a href="#表现-7" class="headerlink" title="表现"></a>表现</h3><p>在微信公众号 H5 开发中，页面内部点击分享按钮调用 SDK，方法不生效。</p>
+<h3 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="解决方法：添加一层蒙层，做分享引导。"><a href="#解决方法：添加一层蒙层，做分享引导。" class="headerlink" title="解决方法：添加一层蒙层，做分享引导。"></a>解决方法：添加一层蒙层，做分享引导。</h4><p>因为页面内部点击分享按钮无法直接调用，而分享功能需要点击右上角更多来操作。</p>
+<p>然后用户可能不知道通过右上角小标里面的功能分享。又想引导用户分享，这时应该怎么做呢？</p>
+<p>技术无法实现的，从产品出发。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/f37734d29e8e4cb0df21bdd06be8aefc796b0094/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f32302f313666316566613633323037313939623f773d33323826683d35373426663d6a70656726733d3535323135"><img src="https://camo.githubusercontent.com/f37734d29e8e4cb0df21bdd06be8aefc796b0094/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f32302f313666316566613633323037313939623f773d33323826683d35373426663d6a70656726733d3535323135" alt="xuehuayu.cn"></a></p>
+<p><strong>如果技术上实现复杂，或者直接不能实现。不要强行钻牛角尖哦，学会怼产品，也是程序员必备的能力之一。</strong></p>
+<h2 id="H5-调用-SDK-相关解决方案"><a href="#H5-调用-SDK-相关解决方案" class="headerlink" title="H5 调用 SDK 相关解决方案"></a>H5 调用 SDK 相关解决方案</h2><h3 id="产生原因-6"><a href="#产生原因-6" class="headerlink" title="产生原因"></a>产生原因</h3><p>在 Hybrid App 中使用 H5 是最常见的不过了，刚接触的，肯定会很生疏模糊。不知道 H5 和 Hybrid 是怎么交互的。怎样同时支持 iOS 和<br>Android 呢？现在来谈谈 Hybrid 技术要点，<strong>原生与 H5 的通信</strong>。</p>
+<h3 id="解决方案-5"><a href="#解决方案-5" class="headerlink" title="解决方案"></a>解决方案</h3><p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/aa24f4426f66ff6f5e8938b4aba395a5a2ab0a55/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f32302f313666323162633765346431393036353f773d3137343026683d34343826663d6a70656726733d3632363136"><img src="https://camo.githubusercontent.com/aa24f4426f66ff6f5e8938b4aba395a5a2ab0a55/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f32302f313666323162633765346431393036353f773d3137343026683d34343826663d6a70656726733d3632363136" alt="xuehuayu.cn"></a><br>使用 <code>DSBridge</code> 同时支持 iOS 与 Android</p>
+<blockquote>
+<p>文档见参考资料</p>
+</blockquote>
+<h4 id="SDK小组-提供方法"><a href="#SDK小组-提供方法" class="headerlink" title="SDK小组 提供方法"></a>SDK小组 提供方法</h4><ol>
+<li>注册方法 <code>bridge.register</code></li>
+</ol>
+<p>  bridge.register(‘enterApp’,function(){broadcast.emit(‘ENTER_APP’)})</p>
+<ol start="2">
+<li>回调方法 <code>bridge.call</code></li>
+</ol>
+<p>  exportconstgetSDKVersion&#x3D;()&#x3D;&gt;bridge.call(‘BLT.getSDKVersion’)</p>
+<h4 id="事件监听与触发法"><a href="#事件监听与触发法" class="headerlink" title="事件监听与触发法"></a>事件监听与触发法</h4><pre><code>constbroadcast={on: function(name,fn,pluralable){this._on(name,fn,pluralable,false)},once: function(name,fn,pluralable){this._on(name,fn,pluralable,true)},_on: function(name,fn,pluralable,once){leteventData=broadcast.dataletfnObj={fn: fn,once: once}if(pluralable&amp;&amp;Object.prototype.hasOwnProperty.call(eventData,&#39;name&#39;)){eventData[name].push(fnObj)}else{eventData[name]=[fnObj]}returnthis},emit: function(name,data,thisArg){letfn,fnList,i,lenthisArg=thisArg|| null
+    fnList=broadcast.data[name]||[]for(i=0,len=fnList.length;i&lt;len;i++){fn=fnList[i].fnfn.apply(thisArg,[data,name])if(fnList[i].once){fnList.splice(i,1)i--len--} }returnthis},data: {} }exportdefaultbroadcast
+</code></pre>
+<h4 id="踩坑注意"><a href="#踩坑注意" class="headerlink" title="踩坑注意"></a>踩坑注意</h4><p>方法调用前，一定要判断 SDK 是否提供该方法<br>如果 Android 提供该方法，iOS 上调用就会出现一个方法<strong>调用失败等弹窗</strong>。<br>怎么解决呢？</p>
+<p>提供一个判断是否 Android、iOS。根据设备进行判断</p>
+<pre><code>export const hasNativeMethod = (name) =&gt;
+  return bridge.hasNativeMethod(&#39;BYJ.&#39; + name)
+}
+
+export const getSDKVersion = function() {
+  if (hasNativeMethod(&#39;getSDKVersion&#39;)) {
+    bridge.call(&#39;BYJ.getSDKVersion&#39;)
+  }
+}
+</code></pre>
+<blockquote>
+<p>同一功能需要iOS，Android方法名相同，这样更好处理哦</p>
+</blockquote>
+<h2 id="H5-调试相关方案策略"><a href="#H5-调试相关方案策略" class="headerlink" title="H5 调试相关方案策略"></a>H5 调试相关方案策略</h2><h3 id="表现-8"><a href="#表现-8" class="headerlink" title="表现"></a>表现</h3><p>调试代码一般就是为了<strong>查看数据</strong>和<strong>定位 bug</strong>。分为两种场景，一种是开发和测试时调试，一种是生产环境上调试。</p>
+<blockquote>
+<p>为什么有生产环境上调试呢？有些时候测试环境上没法复现这个 bug，测试环境和生产环境不一致，此时就需要紧急生产调试。</p>
+</blockquote>
+<p>在 PC 端开发时，我们可以直接掉出控制台，使用浏览器提供的工具操作devtools或者查看日志。但是在 App 内部我们怎么做呢？</p>
+<h3 id="原理与解决方案-3"><a href="#原理与解决方案-3" class="headerlink" title="原理与解决方案"></a>原理与解决方案</h3><h4 id="1-vconsole-控制台插件"><a href="#1-vconsole-控制台插件" class="headerlink" title="1. vconsole 控制台插件"></a>1. <code>vconsole</code> 控制台插件</h4><p>使用方法也很简单</p>
+<pre><code>importVconsolefrom&#39;vconsole&#39;newVconsole()
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/b28b828c1e3b83cf1f182821711cb880c773b7fd/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f31392f313666316435376263363438653231363f773d3132303826683d39303626663d6a70656726733d3536383636"><img src="https://camo.githubusercontent.com/b28b828c1e3b83cf1f182821711cb880c773b7fd/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031392f31322f31392f313666316435376263363438653231363f773d3132303826683d39303626663d6a70656726733d3536383636" alt="xuehuayu.cn"></a></p>
+<p>有兴趣看看它实现的基本原理，我们关注的点应该在 <strong>vsconsole 如何打印出我们所有 log<br>的</strong><a target="_blank" rel="noopener" href="https://github.com/Tencent/vConsole/blob/dev/src/core/core.js">腾讯开源vconsole</a></p>
+<p>上述方法仅用于开发和测试。<strong>生产环境中不允许出现，所以，使用时需要对环境进行判断。</strong></p>
+<pre><code>importVconsolefrom&#39;vconsole&#39;if(process.env.NODE_ENV !== &#39;production&#39;){newVconsole()}
+</code></pre>
+<h4 id="2-代理-spy-debugger"><a href="#2-代理-spy-debugger" class="headerlink" title="2. 代理 + spy-debugger"></a>2. 代理 + spy-debugger</h4><p>操作稍微有点麻烦，不过我会详细写出，大致分为 4 个步骤</p>
+<ol>
+<li>安装插件(全局安装)</li>
+</ol>
+<p>  sudo npm install spy-debugger -g</p>
+<ol start="2">
+<li>手机与电脑置于同一 wifi 下，手机设置代理</li>
+</ol>
+<p>设置手机的 HTTP 代理，代理 IP 地址设置为 PC 的 IP 地址，端口为<code>spy-debugger</code>的启动端口</p>
+<blockquote>
+<p>spy-debugger 默认端口：9888</p>
+</blockquote>
+<blockquote>
+<p>Android ：设置 - WLAN - 长按选中网络 - 修改网络 - 高级 - 代理设置 - 手动</p>
+</blockquote>
+<blockquote>
+<p>IOS ：设置 - Wi-Fi - 选中网络, 点击感叹号, HTTP 代理手动</p>
+</blockquote>
+<ol>
+<li>手机打开浏览器或者 app 中 H5 页面</li>
+<li>打开桌面日志网站进行调试，点击 npm 控制台监听地址。查看抓包和 H5 页面结构</li>
+</ol>
+<p><strong>这种方式可以调试生成环境的页面，不需要修改代码，可以应付大多数调试需求</strong></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本篇文章耗费作者一个多星期的业余时间，存手工敲打 4500<br>+字，同时收集，整理之前很多坑点和边写作边<strong>思考</strong>和<strong>总结</strong>。如果能对你有帮助，便是它最大的价值。都看到这里还不<strong>点赞</strong>，太过不去啦！😄</p>
+<p>由于技术水平有限，文章中如有错误地方，请在评论区指出，感谢！</p>
+<p>关于移动端 H5 的文章告一段落了，之后实践中遇到的问题都将在此文中更新。另外准备做一个移动端 H5 开源项目。多关注下<br><a target="_blank" rel="noopener" href="https://github.com/suoyuesmile/suo-blog">我的github</a>动态哦！</p>
+<p>之后，应该回去研究下<strong>开源和面试题相关内容</strong>分享，想持续了解更多，不妨<strong>点赞</strong>和<strong>关注</strong>呗。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>[Safari CSS</li>
+</ul>
+<p>Reference](<a target="_blank" rel="noopener" href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html#//apple_ref/css/property/-webkit-overflow-scrolling">https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html#//apple_ref/css/property/-webkit-overflow-scrolling</a>)</p>
+<ul>
+<li><a href="/suoyuesmile/suo-blog/blob/master/articals/h5">MDN touch 事件</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/var">MDN css var()</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/env">MDN css env()</a></li>
+<li><a target="_blank" rel="noopener" href="https://drafts.csswg.org/css-env-1/">csswg env() drafts</a></li>
+<li>[fastclick</li>
+</ul>
+<p>源码](<a target="_blank" rel="noopener" href="https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js">https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js</a>)</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/wendux/DSBridge-Android">DSBridge-Android</a> &amp;</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/wendux/DSBridge-IOS">DSBridge-iOS</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/davidshimjs/qrcodejs">qrcodejs 源码</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/niklasvh/html2canvas">html2canvas 源码</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lolDragon/p/7795174.html">关于H5页面在iPhoneX适配</a></li>
+<li><a target="_blank" rel="noopener" href="https://youzan.github.io/vant/#/zh-CN/button">vant 相关文档</a></li>
+</ul>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/781e9036.html"><div class="related-post-title">随机生成指定数据</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/f3bb9dc8.html"><div class="related-post-title">Proxy及其优点</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/79a06f0e.html"><div class="related-post-title">git checkout到历史版本后又提交了代码切回开发分支后如何找回提交的代码</div><div class="related-post-meta"><time>2025-08-18</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">Git</span></div></div></a><a class="related-post-item" href="/article/30cd405a.html"><div class="related-post-title">leetCode-括号生成</div><div class="related-post-meta"><time>2020-06-18</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/30e2cc00.html"><div class="related-post-title">react预览pdf和图片遇到的一些坑</div><div class="related-post-meta"><time>2020-04-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/a0d00813.html">https://xuehuayu.cn/article/a0d00813.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/d2b0a7bb.html">手把手教你如何在Github上面精准搜索开源项目</a><a class="next" href="/article/3406f3b5.html">如何使div自适应内容的宽度和高度</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

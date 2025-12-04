@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>CSS 开发必知必会的 16 个DevTools技巧 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">CSS 开发必知必会的 16 个DevTools技巧</h1><div class="post-meta"><span class="date">2019-10-31</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 11</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/583f82b4.html#waline-comment"><span class="waline-comment-count" data-path="/article/583f82b4.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/Fb4LYMlrAN8s4FdRw1JefQ</code></p>
+<p>大多数开发者基本都使用浏览器的开发者工具调试前端，但即使用了好几年 Chrome 的开发者工具，我仍然会遇到从未见过的技巧和功能。</p>
+<span id="more"></span>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0C54BJjxJdILA9LYYn7ibhhXeIFHZEnvYd1rbldbAjMd8xyWrWjoGfKg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<p>在本文中，我写了许多在开发者工具中与 CSS 相关的功能和技巧，我认为它们将把你的 CSS 开发水平提升至一个新的台阶。其中一些技巧不仅仅针对<br>CSS，但是我还是把它们放在了一起。</p>
+<p>一些是有关于工作流与调试的简单技巧，另一些则是最近几年推出的新功能。它们大多数基于 Chrome 的开发者工具，但也涵盖了一些 Firefox 的技巧。</p>
+<h2 id="审查通过-JavaScript-显示的元素的-CSS"><a href="#审查通过-JavaScript-显示的元素的-CSS" class="headerlink" title="审查通过 JavaScript 显示的元素的 CSS"></a>审查通过 JavaScript 显示的元素的 CSS</h2><p>在开发者工具的 Elements 面板查找大多数元素的 CSS 并不困难。大多数情况下你只需要右键该元素，点击检查，然后（如有必要）仔细点在 Elements<br>面板找到它。一旦元素被选中，它的 CSS 会出现在 Styles 面板，随时可以编辑。</p>
+<p>有时一个元素会因为一些基于 JavaScript 的用户操作动态显示，例如 click 或者 mouseover。审查它们最直观的方法是暂时更改你的<br>JavaScript 或 CSS 使它们默认可见，以便于你在无需模仿用户操作的情况下处理它。</p>
+<p>但如果你在寻找一种更快捷的方法仅使用开发者工具让元素可见，可以遵循以下步骤：</p>
+<ol>
+<li><p>打开开发者工具</p>
+</li>
+<li><p>打开 Sources 面板</p>
+</li>
+<li><p>执行用户操作让对象可见（例如鼠标悬停）</p>
+</li>
+<li><p>在元素可见的时候按下 F8（与“暂停脚本执行”按钮相同）</p>
+</li>
+<li><p>点击开发者工具左上角的“选取元素”按钮</p>
+</li>
+<li><p>点击页面上的元素</p>
+</li>
+</ol>
+<p>我们可以通过 <a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/3.3/javascript/#tooltips">Bootstrap 的<br>tooltips</a><br>测试，只有鼠标悬浮在链接上触发 JavaScript 它才会显示，下面是演示：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0ickCXoDxHl3PYtJp8DKutKDsf1S5Uwa2lJibM19o07iaDVOoNicjwicexQw/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571968531980529.gif"></p>
+<p>如你所见在 GIF<br>的开头，我一开始无法选中元素来审查它，因为鼠标一旦移开它就消失了。但如果我在它可见的时候停止脚本运行，它将保持可见状态以便我可以正确地检查它。当然，如果元素只是简单的<br>CSS <code>:hover</code> 效果，那么我可以用 Styles 面板的 “Toggle Element State”（:hov 按钮）切换状态来让它显示。但由<br>JavaScript 切换样式的情况下，停止脚本也许是获取它们 CSS 样式的最佳方法。</p>
+<h2 id="通过CSS选择器搜索元素"><a href="#通过CSS选择器搜索元素" class="headerlink" title="通过CSS选择器搜索元素"></a>通过CSS选择器搜索元素</h2><p>你也许知道你可以用内置功能（CTRL + F 或者 CMD + F）在 Elements 面板搜索一个元素。但注意看 “find” 栏，它会给你以下提示：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0TiaERnwkVVA4Uv7qPy4q63cmLFFBP9Unl31uonbWveaiaId9ZZQNyLOg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="1571968789626679.png"></p>
+<p>正如我在截图中指出的那样，你可以通过字符串、选择器以及 XPath 寻找元素。之前我一直都在使用字符串，直到最近我才意识到我可以使用选择器。</p>
+<p>你不一定要使用你 CSS 中用过的选择器，它可以是任意合法的 CSS<br>选择器。查找功能将告诉你选择器是否与任何元素匹配。这对查找元素很有用，还有助于测试选择器是否有效。</p>
+<p>下面是一个使用 <code>body &gt; div</code> 选择器来搜索以及遍历 <code>body</code> 所有直接子 <code>div</code> 元素的 demo：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0ibTPVqQC2fTpphs8K9r0vA0n2h4kHGI6ZFibHDjhkeZqE7iaOeRtfFywQ/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571968698142511.gif"></p>
+<p>如上所述，这些搜索可以通过任意合法选择器完成，类似于 JavsScript 的 <code>querySelector()</code> 和 <code>querySelectorAll()</code><br>方法。</p>
+<h2 id="直接编辑盒模型"><a href="#直接编辑盒模型" class="headerlink" title="直接编辑盒模型"></a>直接编辑盒模型</h2><p>盒模型是你开始使用 CSS 首先学习的东西之一。由于这是 CSS 布局的一个重要部分，开发者工具允许你直接编辑盒模型。</p>
+<p>如果你审查了页面上的一个元素，请在右侧面板单击 Styles 面板旁的 Computed 面板。你将看到该元素的可视化盒模型图示，上面有各部分的数值：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0bFBv6kkTpx3zt9qaWWpiblFhXZVxo1qiag1QaUibn22fvadmLNyLjEK1g/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="1571968808894907.png"></p>
+<p>但是也许您不知道可以双击这些值来对其进行编辑：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0bYYmKOjxLS9jcyM5br5icwibkicQkvkgBaXicb38dDQiaT9zCppIp1pbMKA/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571968833251032.gif"></p>
+<p>所做的任何更改都会以与在 Styles 面板中编辑 CSS 时相同的方式反映在页面上。</p>
+<h2 id="在“Styles”面板递增或递减属性值"><a href="#在“Styles”面板递增或递减属性值" class="headerlink" title="在“Styles”面板递增或递减属性值"></a>在“Styles”面板递增或递减属性值</h2><p>你可能已经意识到可以在 Styles 面板中编辑 CSS。只需单击属性或值，然后键入更改即可。</p>
+<p>但也许你没有意识到数值可以以不同的方式递增或递减。</p>
+<ul>
+<li><p>上方向键 &#x2F; 下方向键可以使属性值以 1 递增 &#x2F; 递减</p>
+</li>
+<li><p>ALT + 上方向键 &#x2F; 下方向键可以使属性值以 0.1 递增 &#x2F; 递减</p>
+</li>
+<li><p>SHIFT + 上方向键 &#x2F; 下方向键可以使属性值以 10 递增 &#x2F; 递减</p>
+</li>
+<li><p>CTRL + 上方向键 &#x2F; 下方向键可以使属性值以 100 递增 &#x2F; 递减</p>
+</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0DJfMiamZfK9QDc7ojSiaH1uWYZu91fj3fMmGq6ib4pnAxnJSfcYiakGicrg/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571968925588793.gif"></p>
+<p>你也可以使用 Page Up 或 Page Down 按钮代替方向键。</p>
+<h2 id="“Sources”面板的文本编辑器功能"><a href="#“Sources”面板的文本编辑器功能" class="headerlink" title="“Sources”面板的文本编辑器功能"></a>“Sources”面板的文本编辑器功能</h2><p>比起别的地方，你也许更熟悉在 Styles 面板进行编辑，然而 Sources 面板是开发者工具中被高度低估一个功能，它模仿了常规代码编辑器和 IDE<br>的工作方式。</p>
+<p>以下是一些你可以在 Sources 面板（打开开发者工具并点击 “Sources” 按钮）可以做的有用的事情。</p>
+<p>使用 CTRL 键进行多项选择</p>
+<p>如果需要在单个文件中选择多个区域，可以通过按住 CTRL 键并选择所需内容来完成此操作，即使它不是连续文本也是如此。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0VZMWEQ7yjduliaw1YQicNVODjHBcWBAIauBGYcfcJ55qFtXNgCiaeAibgg/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969022471508.gif"></p>
+<p>在上面的 demo 中，我在 Sources 面板中选择了 main.css<br>文件的三个任意部分，然后将它们粘贴回文档中。此外，你还可以通过多个光标在多个地方进行同时输入，使用 CTRL 键单击多个位置即可。</p>
+<p>使用 ALT 键选择列</p>
+<p>有的时候，你可能希望选择一列文本，但通常情况下无法办到。某些文本编辑器允许你使用 ALT 键来完成此操作，在 Sources 面板中也是如此。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0bakTU83p5LcribbxNicRvfibTQS7BPooCfu3gpdebiaQ1H8fg8A1K0JoCw/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969085660425.gif"></p>
+<h2 id="使用-CTRL-SHIFT-O-组合键通过-CSS-选择器搜索元素"><a href="#使用-CTRL-SHIFT-O-组合键通过-CSS-选择器搜索元素" class="headerlink" title="使用 CTRL + SHIFT + O 组合键通过 CSS 选择器搜索元素"></a>使用 CTRL + SHIFT + O 组合键通过 CSS 选择器搜索元素</h2><p>在 Sources 面板打开文件后，按下 CTRL + SHIFT + O 组合键，可以打开一个输入框让你跳转到任意地方，这是 Sublime 一个著名的功能。</p>
+<p>按下 CTRL + SHIFT + O 之后，你可以输入你在本文件中想查找元素的 CSS 选择器，开发者工具会给你提供匹配选项，点击可跳转到文件的指定位置。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0GWj3jwr6XIrZaHXgdpcNnrtvP6wialy1icHIpLmJ7xxkd2vrwAEiaa15w/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969150874796.gif"></p>
+<h2 id="Chrome-和-Firefox-的响应式设计功能"><a href="#Chrome-和-Firefox-的响应式设计功能" class="headerlink" title="Chrome 和 Firefox 的响应式设计功能"></a>Chrome 和 Firefox 的响应式设计功能</h2><p>你也许已经看过一些让你只需点击几下就得以测试你的响应式布局的网站，其实，你可以用 Chrome 的设备模式做同样的事情。</p>
+<p>打开你的开发者工具，点击左上角的 “Toggle device toolbar” 按钮（快捷键 CTRL + SHIFT + M）：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0zmicpQxv4klao6zsSLlVrkpFxr3fo44HFaUYVUkmvE6VTOPQgsIjLQw/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969199882218.gif"></p>
+<p>如你所见，设备工具栏有多个选项可根据设备大小和设备类型更改视图，你甚至可以通过手动调整宽度和高度数值或拖动视口区域中的手柄来手动进行更改。</p>
+<p>Firefox 附加的 “@media rules” 面板具有类似的功能，它允许你从站点的样式表中单击断点。你可以在下面的 demo<br>中看到我在我的一个网站上使用它。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm03RsmYyxug4v3t0Uod7tn9SvplPq82lDV3DCiceJhjOJwicq6ia1mF0BoQ/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969251354146.gif"></p>
+<h2 id="DevTools的颜色功能"><a href="#DevTools的颜色功能" class="headerlink" title="DevTools的颜色功能"></a>DevTools的颜色功能</h2><p>在 CSS 中处理颜色值是常态。开发者工具让可以你更简单地编辑、测试颜色值。以下是你可以做的事情：</p>
+<p>对比度</p>
+<p>首先，开发者工具有查看可访问性功能，当你在 Styles 面板看到 Color<br>属性值时，你可以点击颜色值旁边的方块打开颜色采集器。在颜色采集器里面，你将看到对比度选项指示你所选择的文本颜色搭配背景是否有可访问的对比度。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0FeeBj7mxaHFTaxBmoV6t1gZiaHafmHjT3HOTYIoehhq4vxib5bGG6XicQ/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969331582875.gif"></p>
+<p>正如你在上面 demo<br>所看到的，颜色采集器在色谱中显示出弯曲的白线。这个线表示最小可接受对比度开始和结束的位置。当我将颜色值移到白线上方时，对比度旁的绿勾将会消失，表明对比度较差。</p>
+<p>调色板</p>
+<p>除了查看可访问性的功能之外，你还可以访问不同的调色板，包括 Material Design 调色板以及与当前查看页面关联的调色板。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0se4KCVhuhdsraibFJfSTvR9qf4faP8iciafsC7MMxdYfia1pa8wicLGHhrQ/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969369338561.gif"></p>
+<p>切换颜色值语法</p>
+<p>最后，在开发者工具中一个鲜为人知的小知识是在查看颜色值时你可以切换颜色值的语法。默认情况下，Styles 面板会显示 CSS<br>里写的颜色的语法。但是开发者工具允许你按住 shift，点击颜色值左边的小方块，在 hex、RGBA 以及 HSLA 之间切换颜色值的语法：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0Lg1FwyOKTcvsdIAzyLOyibqENRN7NNu7ib3jAkUU4vMfXOFE3vf3CfzA/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969409332508.gif"></p>
+<h2 id="编辑-CSS-阴影"><a href="#编辑-CSS-阴影" class="headerlink" title="编辑 CSS 阴影"></a>编辑 CSS 阴影</h2><p>text-shadow 和 box-shadow 的 CSS 手写起来很乏味，语法很容易忘记，且两种阴影的语法略有不同。</p>
+<p>方便的是，Chrome 的开发者工具允许你使用可视化编辑器添加 text-shadow 或 box-shadow。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0yBaEDQtRkdqeeUsEe6G5fFSPWC9OnGCwp0oB39cXn0KODRPvvrvHqg/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969459325889.gif"></p>
+<p>正如 demo 中显示的，你可以用 Styles 面板中任意样式右下角的选项栏给任意元素添加 text-shadow 或<br>box-shadow。阴影添加后，你可以用可视化编辑器编辑不同的属性值。已存在的阴影可以通过点击属性值左边的小方块重新呼出可视化编辑器。</p>
+<h2 id="Firefox-的-Grid-布局检查器"><a href="#Firefox-的-Grid-布局检查器" class="headerlink" title="Firefox 的 Grid 布局检查器"></a>Firefox 的 Grid 布局检查器</h2><p>现在大多数常用的浏览器都支持 Grid 布局，越来越多的开发者将它们用作默认的布局方法。Firefox 的开发者工具如今把 Grid 选项作为特色功能放到了<br>Layout 选项卡中。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0AJHM5c5FzbTPDt9gZUibwibyRHvDszcw82RS8jof2pGyZAAhYDWn0lFA/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969520161562.gif"></p>
+<p>这个功能允许你开启一个全覆盖的网格帮助可视化 Grid 布局的不同部分。你还可以显示行号、区域名称，甚至可以选择无限延伸网格线 —— 如果这对你有用的话。在示例<br>demo 中，我在使用 Jen Simmons 的示例网站，它是响应式的，因此当布局因为不同视口改变时，你可以看到可视化网格的好处。</p>
+<h2 id="Firefox-的-CSS-filter-编辑器"><a href="#Firefox-的-CSS-filter-编辑器" class="headerlink" title="Firefox 的 CSS filter 编辑器"></a>Firefox 的 CSS filter 编辑器</h2><p>filter 是现在几乎在移动端和 PC 端都支持的另一个新功能。Firefox 再次提供了一个好用的小工具帮助你编辑 filter 的值。</p>
+<p>一旦你代码里有 filter（提示：如果你不知道实际语法，你可以先写上 <code>filter: none</code>），你将注意到 filter<br>值左边有一个黑白相间的堆叠方块，点击它可以打开 filter 编辑器。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0Sl5bDgPPohRoUE0sLL3icUUCVNtIoyNv7oTCmeXYbDyl3eKzGpaIJVg/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"></p>
+<p>您可以将多个过滤器添加到单个值，删除单个过滤器值，还可以拖放单个过滤器以重新排列其应用顺序。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0WXZCrXAR7u3pLdTqGwI0d8F70dtqtG3JhvnDduSGp7SibepQhfxmgrg/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969658583431.gif"></p>
+<h2 id="在-Chrome-的-Styles-面板编辑-CSS-动画"><a href="#在-Chrome-的-Styles-面板编辑-CSS-动画" class="headerlink" title="在 Chrome 的 Styles 面板编辑 CSS 动画"></a>在 Chrome 的 Styles 面板编辑 CSS 动画</h2><p>在 Chrome 的 Styles 面板编辑静态元素非常简单，那么编辑使用 <code>animation</code> 属性以及 <code>@keyframes</code> 创建的动画呢？</p>
+<p>开发者工具有两种编辑动画的方法。首先，当你审查一个元素或者在 Elements 面板选择一个元素，该元素的所有样式都会出现在 Styles 面板 ——<br>包括已定义的 <code>@keyframes</code>。在下面的 demo 中，我选择了一个带动画的元素，然后调整了一些关键帧设置。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm08bc9ibicrZUicZYJZnT9mekfG6DDmo3NuiczuPiaqS51mBCrhE4BsW5vbcQ/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"></p>
+<p>但这并不是全部，Chrome 的开发者工具提供了一个 Animation<br>面板让你可以使用可视化时间线编辑一个动画及它的各个不同部分。你可以通过点击开发者工具右上方的 “Customize and control DevTools”<br>按钮（三个竖点按钮），选择更多工具，开启 Animations 面板。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0KRaqkmjDM6YTMoVILJlqzAYgEgVVPVsWUWTuOmLn2icLLNDiaN78WVIQ/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"></p>
+<p>如上所示，你可以编辑每个动画元素的时间轴，然后在完成编辑后，你可以浏览动画以查看页面上的更改。这是设计和调试复杂 CSS 动画的一个很酷的功能！</p>
+<h2 id="在DevTools中查看未使用的-CSS"><a href="#在DevTools中查看未使用的-CSS" class="headerlink" title="在DevTools中查看未使用的 CSS"></a>在DevTools中查看未使用的 CSS</h2><p>最近有大量工具可以帮助你追踪未在特定页面上使用的 CSS。这样你就可以选择完全删除它们或仅在必要时加载它们。这将具有明显的性能优势。</p>
+<p>Chrome 允许你通过开发者工具的 “Coverage” 面板查看未使用的 CSS。这个面板可以通过上文提到的点击开发者面板右上角的 “Customize<br>and control DevTools” 选项（三个竖点按钮），选择“更多工具”，找到 “Coverage” 开启。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/bvJcENXBjrduRwWiaRhWFzNkaPp3Cwhm0qC0cL2CfplbpfuqJZicmqJPgiaGY2u5HLR93EV8zJGHYRSk6JXiaE8icKg/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="1571969903534314.gif"></p>
+<p>如 demo 所示，一旦你打开了 Coverage 面板，你可以在 Sources 面板打开一个源文件。当文件打开时，你将注意到 CSS<br>文件中每条样式右侧都有绿色或红色的线，指示样式是否在当前页面被应用。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>你的浏览器开发工具是 CSS 编辑和调试的宝库。当你将以上建议与 Chrome 的功能例如 ——<br>Workspaces（允许你把在开发者工具所做的变更保存到本地文件）—— 结合，整个调试过程会变得更加完整。</p>
+<p>我希望这些技巧与建议将提升你在未来的项目中编辑与调试 CSS 的能力。</p>
+<p><code>原文地址：https://www.heartinternet.uk/blog/16-devtools-tips-and-tricks-every-css-developer-need-to-know/</code></p>
+<p>↓↓↓打开“阅读原文”在线阅读</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/bvJcENXBjrfbiayr64XtQ0zIMHCJLK8IwUjRzAaoTLJbibErNhkPeUloeFyGcg35ze4cJd9KbpGS8AVyjh22iccRw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/f8d6fc99.html"><div class="related-post-title">React Hooks 详解+项目实战</div><div class="related-post-meta"><time>2019-11-06</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/586ec14f.html"><div class="related-post-title">Web性能领域常见的专业术语</div><div class="related-post-meta"><time>2019-12-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/26a1123e.html"><div class="related-post-title">使用node运行electron时报Error: spawn electron-forge ENOENT解决办法</div><div class="related-post-meta"><time>2019-10-26</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/9f9f2ad3.html"><div class="related-post-title">vue3原生实现图片对比</div><div class="related-post-meta"><time>2025-09-10</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">Vue3</span></div></div></a><a class="related-post-item" href="/article/ae0c22e3.html"><div class="related-post-title">React实战视频教程</div><div class="related-post-meta"><time>2019-10-01</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/583f82b4.html">https://xuehuayu.cn/article/583f82b4.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/34a8fa1a.html">优化CSS并加速网站的21种方法</a><a class="next" href="/article/79ca3a42.html">CSS伪元素指南</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

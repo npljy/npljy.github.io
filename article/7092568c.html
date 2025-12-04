@@ -1,0 +1,1541 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>一步步从零开始用 webpack 搭建一个大型项目 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">一步步从零开始用 webpack 搭建一个大型项目</h1><div class="post-meta"><span class="date">2019-12-23</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 7.6k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 38</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/7092568c.html#waline-comment"><span class="waline-comment-count" data-path="/article/7092568c.html">0</span><span> 条评论</span></a><div class="post-content"><blockquote>
+<p>作者：前端技匠 公号 &#x2F; 罗学 （本文来自作者投稿）</p>
+</blockquote>
+<p><code>原文地址：https://mp.weixin.qq.com/s/a0QFhcbwkhXStBfMOe7exA</code></p>
+<blockquote>
+<p>很多人都或多或少使用过 webpack，但是很少有人能够系统的学习 webpack</p>
+</blockquote>
+<p>配置，遇到错误的时候就会一脸懵，不知道从哪查起？性能优化时也不知道能做什么，网上的优化教程是不是符合自己的项目？等一系列问题！本文从最基础配置一步步到一个完善的大型项目的过程。让你对<br>webpack 再也不会畏惧，让它真正成为你的得力助手！</p>
+<span id="more"></span>
+
+<p>本文从下面几个课题来实现</p>
+<ul>
+<li>课题 1：初探 webpack？探究 webpack 打包原理</li>
+<li>课题 2：搭建开发环境跟生产环境</li>
+<li>课题 3：基础配置之loader</li>
+<li>课时 4：webpack性能优化</li>
+<li>课时 5：手写loader实现可选链</li>
+<li>课时 6：webpack编译优化</li>
+<li>课时 7：多页面配置</li>
+<li>课时 8：手写一个webpack插件</li>
+<li>课时 9：构建 ssr</li>
+</ul>
+<h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p><a target="_blank" rel="noopener" href="https://github.com/luoxue-victor/learn_webpack/">https://github.com/luoxue-victor/learn_webpack/</a></p>
+<h3 id="脚手架"><a href="#脚手架" class="headerlink" title="脚手架"></a>脚手架</h3><pre><code>npm i -g webpack-box
+</code></pre>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code>webpack-box dev   # 开发环境
+webpack-box build # 生产环境
+webpack-box dll   # 编译差分包
+webpack-box dev index   # 指定页面编译（多页面）
+webpack-box build index # 指定页面编译（多页面）
+webpack-box build index --report # 开启打包分析
+webpack-box build:ssr  # 编译ssr
+webpack-box ssr:server # 在 server 端运行
+</code></pre>
+<p>在 package.json 中使用</p>
+<pre><code>{
+&quot;scripts&quot;: {
+&quot;dev&quot;: &quot;webpack-box dev&quot;,
+&quot;build&quot;: &quot;webpack-box build&quot;,
+&quot;dll&quot;: &quot;webpack-box dll&quot;,
+&quot;build:ssr&quot;: &quot;webpack-box build:ssr&quot;,
+&quot;ssr:server&quot;: &quot;webpack-box ssr:server&quot;
+  }
+}
+</code></pre>
+<p>使用</p>
+<pre><code>npm run build --report # 开启打包分析
+</code></pre>
+<p>扩展配置</p>
+<p>box.config.js</p>
+<pre><code>module.exports = function (config) {
+/**
+    - @param {object} dll 开启差分包
+    - @param {object} pages 多页面配置 通过 box run/build index 来使用
+    - @param {function} chainWebpack
+    - @param {string} entry 入口
+    - @param {string} output 出口
+    - @param {string} publicPath
+    - @param {string} port
+    */
+return {
+entry: &#39;src/main.js&#39;,
+output: &#39;dist&#39;,
+publicPath: &#39;/common/&#39;,
+port: 8888,
+dll: {
+venders: [&#39;vue&#39;, &#39;react&#39;]
+    },
+pages: {
+index: {
+entry: &#39;src/main.js&#39;,
+template: &#39;public/index.html&#39;,
+filename: &#39;index.html&#39;,
+      },
+index2: {
+entry: &#39;src/main.js&#39;,
+template: &#39;public/index2.html&#39;,
+filename: &#39;index2.html&#39;,
+      }
+    },
+    chainWebpack(config) {
+    }
+  }
+}
+</code></pre>
+<hr>
+<h2 id="课题-1-初探-webpack？探究-webpack-打包原理"><a href="#课题-1-初探-webpack？探究-webpack-打包原理" class="headerlink" title="课题 1:初探 webpack？探究 webpack 打包原理"></a>课题 1:初探 webpack？探究 webpack 打包原理</h2><p>想要学好 <code>webpack</code>，我们首先要了解 <code>webpack</code> 的机制，我们先从js加载css开始学习。</p>
+<p>我们从下面这个小练习开始走进 <code>webpack</code> 吧</p>
+<p>在 <code>index.js</code> 中引入 <code>index.css</code></p>
+<pre><code>const css = require(&#39;./index.css&#39;)
+console.log(css)
+</code></pre>
+<p>css 文件并不能被 js 识别，webpack 也不例外，上述的写法不出意外会报错</p>
+<p>我们如何让 webpack 识别 css 呢，答案就在 webpack 给我们提供了 loader 机制，可以让我们通过loader 将任意的文件转成<br>webpack 可以识别的文件</p>
+<p>本章主要讲解</p>
+<ol>
+<li>webpack 基础配置</li>
+<li>解析 bundle 如何加载模块</li>
+<li>动态 import 加载原理</li>
+<li>使用 webpack-chain 重写配置</li>
+<li>课时 1 小结</li>
+</ol>
+<h3 id="webpack-基础配置"><a href="#webpack-基础配置" class="headerlink" title="webpack 基础配置"></a>webpack 基础配置</h3><h4 id="需要的依赖包"><a href="#需要的依赖包" class="headerlink" title="需要的依赖包"></a>需要的依赖包</h4><p>package.json</p>
+<pre><code>{
+&quot;scripts&quot;: {
+&quot;dev&quot;: &quot;cross-env NODE_ENV=development webpack&quot;, // 开发环境
+&quot;build&quot;: &quot;cross-env NODE_ENV=production webpack&quot; // 生产环境
+  },
+&quot;dependencies&quot;: {
+&quot;cross-env&quot;: &quot;^6.0.3&quot;, // 兼容各种环境
+&quot;css-loader&quot;: &quot;^3.2.0&quot;,
+&quot;rimraf&quot;: &quot;^3.0.0&quot;, // 删除文件
+&quot;webpack&quot;: &quot;^4.41.2&quot;
+  },
+&quot;devDependencies&quot;: {
+&quot;webpack-cli&quot;: &quot;^3.3.10&quot;
+  }
+}
+</code></pre>
+<h4 id="webpack-基础配置-1"><a href="#webpack-基础配置-1" class="headerlink" title="webpack 基础配置"></a>webpack 基础配置</h4><p>webpack.config.js</p>
+<pre><code>const path = require(&#39;path&#39;);
+const rimraf = require(&#39;rimraf&#39;);
+
+// 删除 dist 目录
+rimraf.sync(&#39;dist&#39;);
+
+// webpack 配置
+module.exports = {
+entry: &#39;./src/index&#39;,
+mode: process.env.NODE_ENV,
+output: {
+filename: &#39;bundle.js&#39;,
+path: path.resolve(__dirname, &#39;dist&#39;)
+  }
+};
+</code></pre>
+<h4 id="css-引入到-js"><a href="#css-引入到-js" class="headerlink" title="css 引入到 js"></a>css 引入到 js</h4><p>src&#x2F;index.js</p>
+<pre><code>const css = require(&#39;css-loader!./index.css&#39;);
+const a = 100;
+console.log(a, css);
+</code></pre>
+<h4 id="测试-css"><a href="#测试-css" class="headerlink" title="测试 css"></a>测试 css</h4><p>src&#x2F;index.css</p>
+<pre><code>body {
+width: 100%;
+height: 100vh;
+background-color: orange;
+}
+</code></pre>
+<h3 id="解析-bundle-如何加载模块"><a href="#解析-bundle-如何加载模块" class="headerlink" title="解析 bundle 如何加载模块"></a>解析 bundle 如何加载模块</h3><p>我删掉了一些注释跟一些干扰内容，这样看起来会更清晰一点</p>
+<ul>
+<li><code>bundle</code> 是一个立即执行函数，可以认为它是把所有模块捆绑在一起的一个巨型模块。</li>
+<li><code>webpack</code> 将所有模块打包成了 <code>bundle</code> 的依赖，通过一个对象注入</li>
+<li><code>0 模块</code> 就是入口</li>
+<li><code>webpack</code> 通过 <code>__webpack_require__</code> 引入模块</li>
+<li><code>__webpack_require__</code> 就是我们使用的 <code>require</code>，被 <code>webpack</code> 封装了一层</li>
+</ul>
+<p>dist&#x2F;bundle.js</p>
+<pre><code>(function(modules) {
+function__webpack_require__(moduleId) {
+if (installedModules[moduleId]) {
+return installedModules[moduleId].exports;
+    }
+varmodule = (installedModules[moduleId] = {
+i: moduleId,
+l: false,
+exports: {}
+    });
+
+    modules[moduleId].call(
+module.exports,
+module,
+module.exports,
+      __webpack_require__
+    );
+
+module.l = true;
+
+returnmodule.exports;
+  }
+return __webpack_require__((__webpack_require__.s = 0));
+})({
+&#39;./src/index.js&#39;: function(module, exports, __webpack_require__) {
+eval(`
+      const css = __webpack_require__(&quot;./src/style/index.css&quot;)
+      const a = 100;
+      console.log(a, css)
+    `);
+  },
+
+&#39;./src/style/index.css&#39;: function(module, exports, __webpack_require__) {
+eval(`
+      exports = module.exports = __webpack_require__(&quot;./node_modules/css-loader/dist/runtime/api.js&quot;)(false);
+      exports.push([module.i, &quot;body {
+        width: 100%;
+        height: 100vh;
+        background-color: orange;
+      }&quot;, &quot;&quot;]);
+    `);
+  },
+
+0: function(module, exports, __webpack_require__) {
+module.exports = __webpack_require__(&#39;./src/index.js&#39;);
+  }
+});
+</code></pre>
+<h3 id="动态-import-加载原理"><a href="#动态-import-加载原理" class="headerlink" title="动态 import 加载原理"></a>动态 import 加载原理</h3><p>如果我们把 index.js 的 require 改成 import 会发生什么？</p>
+<p>我们知道 <code>import</code> 跟 <code>require</code> 的区别是，<code>import</code> 是动态加载只有在用到的时候才会去加载，而 <code>require</code><br>只要声明了就会加载，<code>webpack</code> 遇到了 <code>require</code> 就会把它当成一个模块加载到 <code>bundle</code> 的依赖里</p>
+<p>那么问题来了，如果我们使用了 import 去引用一个模块，它是如何加载的呢？</p>
+<h4 id="require-改成-import"><a href="#require-改成-import" class="headerlink" title="require 改成 import()"></a>require 改成 import()</h4><p>src&#x2F;index.js</p>
+<pre><code>// const css = require(&#39;css-loader!./index.css&#39;);
+const css = import(&#39;css-loader!./index.css&#39;);
+const a = 100;
+console.log(a, css);
+</code></pre>
+<h4 id="动态加载打包结果"><a href="#动态加载打包结果" class="headerlink" title="动态加载打包结果"></a>动态加载打包结果</h4><p>除了正常的 <code>bundle</code> 之外，我们还可以看见一个 <code>0.boundle.js</code></p>
+<p><code>0.boundle.js</code> 就是我们的动态加载的 <code>index.css</code> 模块</p>
+<pre><code>|-- bundle.js
+|-- 0.boundle.js
+</code></pre>
+<h4 id="动态模块"><a href="#动态模块" class="headerlink" title="动态模块"></a>动态模块</h4><p>0.boundle.js</p>
+<p>这个文件就是把我们 <code>import</code> 的模块放进了一个单独的 <code>js</code> 文件中</p>
+<pre><code>(window[&#39;webpackJsonp&#39;] = window[&#39;webpackJsonp&#39;] || []).push([
+  [0],
+  {
+&#39;./node_modules/css-loader/dist/runtime/api.js&#39;: function(
+      module,
+      exports,
+      __webpack_require__
+) {
+      &#39;use strict&#39;;
+eval(`
+        ...
+      `);
+    },
+
+&#39;./src/style/index.css&#39;: function(module, exports, __webpack_require__) {
+eval(`
+        exports = module.exports = __webpack_require__(&quot;./node_modules/css-loader/dist/runtime/api.js&quot;)(false));
+        exports.push([module.i, \`body {
+          width: 100%;
+          height: 100vh;
+          background-color: orange;
+        },&quot;\`]
+      `);
+    }
+  }
+]);
+</code></pre>
+<h4 id="动态模块加载逻辑"><a href="#动态模块加载逻辑" class="headerlink" title="动态模块加载逻辑"></a>动态模块加载逻辑</h4><p>我们再看下 dist&#x2F;bundle.js</p>
+<p>方便理解，我把大部分代码和注释都删掉了</p>
+<p>原理很简单，就是利用的 jsonp 的实现原理加载模块，只是在这里并不是从 server 拿数据而是从其他模块中</p>
+<ol>
+<li><p>调用模块时会在 <code>window</code> 上注册一个 <code>webpackJsonp</code> 数组，window[‘webpackJsonp’] &#x3D;<br>window[‘webpackJsonp’] || []</p>
+</li>
+<li><p>当我们 <code>import</code>时，<code>webpack</code> 会调用 <code>__webpack_require__.e(0)</code> 方法，也就是 <code>requireEnsure</code></p>
+</li>
+<li><p><code>webpack</code> 会动态创建一个 <code>script</code> 标签去加载这个模块，加载成功后会将该模块注入到 <code>webpackJsonp</code> 中</p>
+</li>
+<li><p><code>webpackJsonp.push</code> 会调用 <code>webpackJsonpCallback</code> 拿到模块</p>
+</li>
+<li><p>模块加载完（then）再使用 <code>__webpack_require__</code> 获取模块</p>
+<p> (function(modules) {<br> functionwebpackJsonpCallback(data) {<br> var chunkIds &#x3D; data[0];<br> var moreModules &#x3D; data[1];<br> var moduleId,<br>   chunkId,<br>   i &#x3D; 0,<br>   resolves &#x3D; [];<br> for (; i &lt; chunkIds.length; i++) {<br>   chunkId &#x3D; chunkIds[i];<br> if (<br> Object.prototype.hasOwnProperty.call(installedChunks, chunkId) &amp;&amp;<br>     installedChunks[chunkId]<br>   ) {<br>     resolves.push(installedChunks[chunkId][0]);<br>   }<br> &#x2F;&#x2F; 模块安装完<br>   installedChunks[chunkId] &#x3D; 0;<br> }<br> for (moduleId in moreModules) {<br> if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {<br>     modules[moduleId] &#x3D; moreModules[moduleId];<br>   }<br> }<br> if (parentJsonpFunction) parentJsonpFunction(data);<br> while (resolves.length) {<br> &#x2F;&#x2F; 执行所有 promise 的 resolve 函数<br>   resolves.shift()();<br> }<br>   }</p>
+<p> functionjsonpScriptSrc(chunkId) {<br> return <strong>webpack_require</strong>.p + ‘’ + ({}[chunkId] || chunkId) + ‘.bundle.js’;<br>   }</p>
+<p> function__webpack_require__(moduleId) {<br> &#x2F;&#x2F; …<br>   }</p>
+<p>   <strong>webpack_require</strong>.e &#x3D; functionrequireEnsure(chunkId) {<br> var promises &#x3D; [];<br> &#x2F;&#x2F; …<br> var script &#x3D; document.createElement(‘script’);<br> var onScriptComplete;<br> script.charset &#x3D; ‘utf-8’;<br> script.timeout &#x3D; 120;<br> script.src &#x3D; jsonpScriptSrc(chunkId);<br><br> onScriptComplete &#x3D; function(event) {<br> &#x2F;&#x2F; 处理异常，消除副作用<br> &#x2F;&#x2F; …<br> };<br> var timeout &#x3D; setTimeout(function() {<br>   onScriptComplete({ type: ‘timeout’, target: script });<br> }, 120000);<br> script.onerror &#x3D; script.onload &#x3D; onScriptComplete;<br> document.head.appendChild(script);<br> &#x2F;&#x2F; …<br> &#x2F;&#x2F; 动态加载模块<br> returnPromise.all(promises);<br>   };</p>
+<p> var jsonpArray &#x3D; (window[‘webpackJsonp’] &#x3D; window[‘webpackJsonp’] || []);<br> &#x2F;&#x2F; 重写数组 push 方法<br>   jsonpArray.push &#x3D; webpackJsonpCallback;<br>   jsonpArray &#x3D; jsonpArray.slice();<br> for (var i &#x3D; 0; i &lt; jsonpArray.length; i++)<br> webpackJsonpCallback(jsonpArray[i]);<br> return <strong>webpack_require</strong>((<strong>webpack_require</strong>.s &#x3D; 0));<br> })({<br> ‘.&#x2F;src&#x2F;index.js’: function(module, exports, <strong>webpack_require</strong>) {<br> eval(<code>     const css = __webpack_require__.e(0).then(__webpack_require__.t.bind(null, &quot;./src/style/index.css&quot;, 7))      const a = 100;      console.log(a, css)   </code>);<br>   },<br> 0: function(module, exports, <strong>webpack_require</strong>) {<br> eval(<code>module.exports = __webpack_require__(&quot;./src/index.js&quot;);</code>);<br>   }<br> });</p>
+</li>
+</ol>
+<h3 id="使用-webpack-chain-重写配置"><a href="#使用-webpack-chain-重写配置" class="headerlink" title="使用 webpack-chain 重写配置"></a>使用 webpack-chain 重写配置</h3><p>我们用 webpack-chain 来写 webpack 的配置，原因是 webpack-chain 的方式更加灵活</p>
+<p>官方解释</p>
+<blockquote>
+<p><code>webpack-chain</code> 尝试通过提供可链式或顺流式的 <code>API</code> 创建和修改 <code>webpack</code> 配置。<code>API</code> 的 <code>Key</code></p>
+</blockquote>
+<p>部分可以由用户指定的名称引用，这有助于跨项目修改配置方式的标准化。</p>
+<pre><code>const path = require(&#39;path&#39;);
+const rimraf = require(&#39;rimraf&#39;);
+const Config = require(&#39;webpack-chain&#39;);
+const config = new Config();
+const resolve = src =&gt; {
+return path.join(process.cwd(), src);
+};
+
+// 删除 dist 目录
+rimraf.sync(&#39;dist&#39;);
+
+config
+// 入口
+  .entry(&#39;src/index&#39;)
+  .add(resolve(&#39;src/index.js&#39;))
+  .end()
+// 模式
+// .mode(process.env.NODE_ENV) 等价下面
+  .set(&#39;mode&#39;, process.env.NODE_ENV)
+// 出口
+  .output.path(resolve(&#39;dist&#39;))
+  .filename(&#39;[name].bundle.js&#39;);
+
+config.module
+  .rule(&#39;css&#39;)
+  .test(/\.css$/)
+  .use(&#39;css&#39;)
+  .loader(&#39;css-loader&#39;);
+
+module.exports = config.toConfig();
+</code></pre>
+<h3 id="课时-1-小结"><a href="#课时-1-小结" class="headerlink" title="课时 1 小结"></a>课时 1 小结</h3><p>至此课时 1 已经结束了，我们主要做了以下事情</p>
+<ol>
+<li>webpack 基础配置</li>
+<li>将 css 通过 css-loader 打包进 js 中</li>
+<li>解析 bundle 如何加载模块的</li>
+<li>webpack 如何实现的动态加载模块</li>
+</ol>
+<p>学习一个工具我们不仅要看懂它的配置，还要对它的原理一起了解，只有学到框架的精髓，我们才能应对如今大前端如此迅猛的发展。</p>
+<hr>
+<h2 id="课题-2：搭建开发环境跟生产环境"><a href="#课题-2：搭建开发环境跟生产环境" class="headerlink" title="课题 2：搭建开发环境跟生产环境"></a>课题 2：搭建开发环境跟生产环境</h2><p>本章提要：</p>
+<ul>
+<li>目录</li>
+<li>实现可插拔配置</li>
+<li>构建生产环境</li>
+<li>构建开发环境（devServer）</li>
+<li>提取 css</li>
+<li>自动生成 html</li>
+<li>项目测试</li>
+</ul>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><pre><code>│── build
+│   │── base.js                 // 公共部分
+│   │── build.js
+│   └── dev.js
+│── config
+│   │── base.js                 // 基础配置
+│   │── css.js                  // css 配置
+│   │── HtmlWebpackPlugin.js    // html 配置
+│   └── MiniCssExtractPlugin.js // 提取css
+│── public                      // 公共资源
+│   └── index.html              // html 模版
+└── src                         // 开发目录
+    │── style
+    │ └── index.css
+    └── main.js                // 主入口
+</code></pre>
+<h3 id="实现可插拔配置"><a href="#实现可插拔配置" class="headerlink" title="实现可插拔配置"></a>实现可插拔配置</h3><p>package.json</p>
+<pre><code>{
+&quot;scripts&quot;: {
+&quot;dev&quot;: &quot;cross-env NODE_ENV=development node build/dev.js&quot;,
+&quot;build&quot;: &quot;cross-env NODE_ENV=production node build/build.js&quot;
+  },
+&quot;dependencies&quot;: {
+&quot;cross-env&quot;: &quot;^6.0.3&quot;,
+&quot;css-loader&quot;: &quot;^3.2.0&quot;,
+&quot;cssnano&quot;: &quot;^4.1.10&quot;,
+&quot;ora&quot;: &quot;^4.0.3&quot;,
+&quot;rimraf&quot;: &quot;^3.0.0&quot;,
+&quot;webpack&quot;: &quot;^4.41.2&quot;
+  },
+&quot;devDependencies&quot;: {
+&quot;extract-text-webpack-plugin&quot;: &quot;^3.0.2&quot;,
+&quot;html-webpack-plugin&quot;: &quot;^3.2.0&quot;,
+&quot;mini-css-extract-plugin&quot;: &quot;^0.8.0&quot;,
+&quot;vue-cli-plugin-commitlint&quot;: &quot;^1.0.4&quot;,
+&quot;webpack-chain&quot;: &quot;^6.0.0&quot;,
+&quot;webpack-cli&quot;: &quot;^3.3.10&quot;,
+&quot;webpack-dev-server&quot;: &quot;^3.9.0&quot;
+  }
+}
+</code></pre>
+<p>build&#x2F;base.js</p>
+<pre><code>const { findSync } = require(&#39;../lib&#39;);
+const Config = require(&#39;webpack-chain&#39;);
+const config = new Config();
+const files = findSync(&#39;config&#39;);
+const path = require(&#39;path&#39;);
+const resolve = p =&gt; {
+return path.join(process.cwd(), p);
+};
+
+module.exports = () =&gt; {
+const map = newMap();
+
+  files.map(_ =&gt; {
+const name = _.split(&#39;/&#39;)
+      .pop()
+      .replace(&#39;.js&#39;, &#39;&#39;);
+return map.set(name, require(_)(config, resolve));
+  });
+
+  map.forEach(v =&gt; v());
+
+return config;
+};
+</code></pre>
+<h3 id="构建生产环境"><a href="#构建生产环境" class="headerlink" title="构建生产环境"></a>构建生产环境</h3><p>build&#x2F;build.js</p>
+<pre><code>const rimraf = require(&#39;rimraf&#39;);
+const ora = require(&#39;ora&#39;);
+const chalk = require(&#39;chalk&#39;);
+const path = require(&#39;path&#39;);
+// 删除 dist 目录
+rimraf.sync(path.join(process.cwd(), &#39;dist&#39;));
+
+const config = require(&#39;./base&#39;)();
+const webpack = require(&#39;webpack&#39;);
+const spinner = ora(&#39;开始构建项目...&#39;);
+spinner.start();
+
+webpack(config.toConfig(), function(err, stats) {
+  spinner.stop();
+if (err) throw err;
+  process.stdout.write(
+    stats.toString({
+colors: true,
+modules: false,
+children: false,
+chunks: false,
+chunkModules: false
+    }) + &#39;\n\n&#39;
+  );
+
+if (stats.hasErrors()) {
+console.log(chalk.red(&#39;构建失败\n&#39;));
+    process.exit(1);
+  }
+
+console.log(chalk.cyan(&#39;build完成\n&#39;));
+});
+</code></pre>
+<h3 id="构建开发环境（devServer）"><a href="#构建开发环境（devServer）" class="headerlink" title="构建开发环境（devServer）"></a>构建开发环境（devServer）</h3><p>build&#x2F;dev.js</p>
+<pre><code>const config = require(&#39;./base&#39;)();
+const webpack = require(&#39;webpack&#39;);
+const chalk = require(&#39;chalk&#39;);
+const WebpackDevServer = require(&#39;webpack-dev-server&#39;);
+const port = 8080;
+const publicPath = &#39;/common/&#39;;
+
+config.devServer
+  .quiet(true)
+  .hot(true)
+  .https(false)
+  .disableHostCheck(true)
+  .publicPath(publicPath)
+  .clientLogLevel(&#39;none&#39;);
+
+const compiler = webpack(config.toConfig());
+// 拿到 devServer 参数
+const chainDevServer = compiler.options.devServer;
+const server = new WebpackDevServer(
+  compiler,
+Object.assign(chainDevServer, {})
+);
+
+[&#39;SIGINT&#39;, &#39;SIGTERM&#39;].forEach(signal =&gt; {
+  process.on(signal, () =&gt; {
+    server.close(() =&gt; {
+      process.exit(0);
+    });
+  });
+});
+// 监听端口
+server.listen(port);
+
+newPromise(() =&gt; {
+  compiler.hooks.done.tap(&#39;dev&#39;, stats =&gt; {
+const empty = &#39;    &#39;;
+const common = `App running at:
+    - Local: http://127.0.0.1:${port}${publicPath}\n`;
+console.log(chalk.cyan(&#39;\n&#39; + empty + common));
+  });
+});
+</code></pre>
+<h3 id="提取-css"><a href="#提取-css" class="headerlink" title="提取 css"></a>提取 css</h3><p>config&#x2F;css.js</p>
+<h4 id="css-提取-loader-配置"><a href="#css-提取-loader-配置" class="headerlink" title="css 提取 loader 配置"></a>css 提取 loader 配置</h4><pre><code>module.exports = (config, resolve) =&gt; {
+return(lang, test) =&gt; {
+const baseRule = config.module.rule(lang).test(test);
+const normalRule = baseRule.oneOf(&#39;normal&#39;);
+    applyLoaders(normalRule);
+functionapplyLoaders(rule) {
+      rule
+        .use(&#39;extract-css-loader&#39;)
+        .loader(require(&#39;mini-css-extract-plugin&#39;).loader)
+        .options({
+publicPath: &#39;./&#39;
+        });
+      rule
+        .use(&#39;css-loader&#39;)
+        .loader(&#39;css-loader&#39;)
+        .options({});
+    }
+  };
+};
+</code></pre>
+<h4 id="css-提取插件-MiniCssExtractPlugin"><a href="#css-提取插件-MiniCssExtractPlugin" class="headerlink" title="css 提取插件 MiniCssExtractPlugin"></a>css 提取插件 MiniCssExtractPlugin</h4><p>config&#x2F;MiniCssExtractPlugin.js</p>
+<pre><code>const MiniCssExtractPlugin = require(&#39;mini-css-extract-plugin&#39;);
+
+module.exports = (config, resolve) =&gt; {
+return() =&gt; {
+    config
+      .oneOf(&#39;normal&#39;)
+      .plugin(&#39;mini-css-extract&#39;)
+      .use(MiniCssExtractPlugin);
+  };
+};
+</code></pre>
+<h3 id="自动生成-html"><a href="#自动生成-html" class="headerlink" title="自动生成 html"></a>自动生成 html</h3><p>config&#x2F;HtmlWebpackPlugin.js</p>
+<pre><code>const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);
+
+module.exports = (config, resolve) =&gt; {
+return() =&gt; {
+    config.plugin(&#39;html&#39;).use(HtmlWebpackPlugin, [
+      {
+template: &#39;public/index.html&#39;
+      }
+    ]);
+  };
+};
+</code></pre>
+<h3 id="项目测试"><a href="#项目测试" class="headerlink" title="项目测试"></a>项目测试</h3><h4 id="测试-html-模板"><a href="#测试-html-模板" class="headerlink" title="测试 html 模板"></a>测试 html 模板</h4><p>public&#x2F;index.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;metacharset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;learn_webpack&lt;/title&gt;
+&lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="测试-css-模板"><a href="#测试-css-模板" class="headerlink" title="测试 css 模板"></a>测试 css 模板</h4><p>src&#x2F;style&#x2F;index.css</p>
+<pre><code>.test {
+width: 200px;
+height: 200px;
+color: red;
+background-color: orange;
+}
+</code></pre>
+<h4 id="程序入口"><a href="#程序入口" class="headerlink" title="程序入口"></a>程序入口</h4><p>src&#x2F;main.js</p>
+<pre><code>require(&#39;./style/index.css&#39;);
+
+const h2 = document.createElement(&#39;h2&#39;);
+h2.className = &#39;test&#39;;
+h2.innerText = &#39;test&#39;;
+document.body.append(h2);
+</code></pre>
+<hr>
+<h2 id="课题-3：基础配置之loader"><a href="#课题-3：基础配置之loader" class="headerlink" title="课题 3：基础配置之loader"></a>课题 3：基础配置之loader</h2><p>本章提要：</p>
+<ul>
+<li>配置 babel</li>
+<li>使用 babel 配置 ts</li>
+<li>ts 静态类型检查</li>
+<li>友好错误提示插件</li>
+<li>配置样式，style，css、less、sass、postcss 等</li>
+<li>postcss 配置</li>
+<li>编译前后 css 对比</li>
+<li>配置 autoprefixer</li>
+<li>开启 source map</li>
+</ul>
+<h3 id="目录-1"><a href="#目录-1" class="headerlink" title="目录"></a>目录</h3><p>增加以下文件</p>
+<pre><code>│──── config                // 配置目录
+│   │── babelLoader.js      // babel-loader 配置
+│   │── ForkTsChecker.js    // ts 静态检查
+│   │── FriendlyErrorsWebpackPlugin.js // 友好错误提示
+│   └── style
+│──── src                   // 开发目录
+│   │── style
+│   │  │── app.css
+│   │  │── index.less       // 测试 less
+│   │  │── index.scss       // 测试 sass
+│   │  └── index.postcss    // 测试 postcss
+│   └── ts
+│     └── index.ts          // 测试 ts
+│── babel.js
+│── postcss.config.js       // postcss 配置
+│── tsconfig.json           // ts 配置
+└──── dist                  // 打包后的目录
+    │── app.bundle.js
+    │── app.css
+    └── index.html
+</code></pre>
+<h3 id="配置-babel"><a href="#配置-babel" class="headerlink" title="配置 babel"></a>配置 babel</h3><p>config&#x2F;babelLoader.js</p>
+<pre><code>module.exports = (config, resolve) =&gt; {
+const baseRule = config.module.rule(&#39;js&#39;).test(/.js│.tsx?$/);
+const babelPath = resolve(&#39;babel.js&#39;);
+const babelConf = require(babelPath);
+const version = require(resolve(&#39;node_modules/@babel/core/package.json&#39;))
+    .version;
+return() =&gt; {
+    baseRule
+      .use(&#39;babel&#39;)
+      .loader(require.resolve(&#39;babel-loader&#39;))
+      .options(babelConf({ version }));
+  };
+};
+</code></pre>
+<h3 id="使用-babel-配置-ts"><a href="#使用-babel-配置-ts" class="headerlink" title="使用 babel 配置 ts"></a>使用 babel 配置 ts</h3><p>这里我们使用 <code>babel</code> 插件 <code>@babel/preset-typescript</code> 将 <code>ts</code> 转成 <code>js，并使用</code><br><code>ForkTsCheckerWebpackPlugin</code>、<code>ForkTsCheckerNotifierWebpackPlugin</code> 插件进行错误提示。</p>
+<p>babel.js</p>
+<pre><code>module.exports = function(api) {
+return {
+presets: [
+      [
+&#39;@babel/preset-env&#39;,
+        {
+targets: {
+chrome: 59,
+edge: 13,
+firefox: 50,
+safari: 8
+          }
+        }
+      ],
+      [
+&#39;@babel/preset-typescript&#39;,
+        {
+allExtensions: true
+        }
+      ]
+    ],
+plugins: [
+&#39;@babel/plugin-transform-typescript&#39;,
+&#39;transform-class-properties&#39;,
+&#39;@babel/proposal-object-rest-spread&#39;
+    ]
+  };
+};
+</code></pre>
+<h3 id="ts-静态类型检查"><a href="#ts-静态类型检查" class="headerlink" title="ts 静态类型检查"></a>ts 静态类型检查</h3><pre><code>const ForkTsCheckerWebpackPlugin = require(&#39;fork-ts-checker-webpack-plugin&#39;);
+const ForkTsCheckerNotifierWebpackPlugin = require(&#39;fork-ts-checker-notifier-webpack-plugin&#39;);
+
+module.exports = (config, resolve) =&gt; {
+return() =&gt; {
+    config.plugin(&#39;ts-fork&#39;).use(ForkTsCheckerWebpackPlugin, [
+      {
+// 将async设为false，可以阻止Webpack的emit以等待类型检查器/linter，并向Webpack的编译添加错误。
+async: false
+      }
+    ]);
+// 将TypeScript类型检查错误以弹框提示
+// 如果fork-ts-checker-webpack-plugin的async为false时可以不用
+// 否则建议使用，以方便发现错误
+    config.plugin(&#39;ts-notifier&#39;).use(ForkTsCheckerNotifierWebpackPlugin, [
+      {
+title: &#39;TypeScript&#39;,
+excludeWarnings: true,
+skipSuccessful: true
+      }
+    ]);
+  };
+};
+</code></pre>
+<h3 id="友好错误提示插件"><a href="#友好错误提示插件" class="headerlink" title="友好错误提示插件"></a>友好错误提示插件</h3><p>config&#x2F;FriendlyErrorsWebpackPlugin.js</p>
+<pre><code>const FriendlyErrorsWebpackPlugin = require(&#39;friendly-errors-webpack-plugin&#39;);
+
+module.exports = (config, resolve) =&gt; {
+return() =&gt; {
+    config.plugin(&#39;error&#39;).use(FriendlyErrorsWebpackPlugin);
+  };
+};
+</code></pre>
+<h3 id="配置样式，style，css、less、sass、postcss-等"><a href="#配置样式，style，css、less、sass、postcss-等" class="headerlink" title="配置样式，style，css、less、sass、postcss 等"></a>配置样式，style，css、less、sass、postcss 等</h3><pre><code>module.exports = (config, resolve) =&gt; {
+const createCSSRule = (lang, test, loader, options = {}) =&gt; {
+const baseRule = config.module.rule(lang).test(test);
+const normalRule = baseRule.oneOf(&#39;normal&#39;);
+    normalRule
+      .use(&#39;extract-css-loader&#39;)
+      .loader(require(&#39;mini-css-extract-plugin&#39;).loader)
+      .options({
+hmr: process.env.NODE_ENV === &#39;development&#39;,
+publicPath: &#39;/&#39;
+      });
+    normalRule
+      .use(&#39;css-loader&#39;)
+      .loader(require.resolve(&#39;css-loader&#39;))
+      .options({});
+    normalRule.use(&#39;postcss-loader&#39;).loader(require.resolve(&#39;postcss-loader&#39;));
+if (loader) {
+const rs = require.resolve(loader);
+      normalRule
+        .use(loader)
+        .loader(rs)
+        .options(options);
+    }
+  };
+
+return() =&gt; {
+    createCSSRule(&#39;css&#39;, /\.css$/, &#39;css-loader&#39;, {});
+    createCSSRule(&#39;less&#39;, /\.less$/, &#39;less-loader&#39;, {});
+    createCSSRule(&#39;scss&#39;, /\.scss$/, &#39;sass-loader&#39;, {});
+    createCSSRule(&#39;postcss&#39;, /\.p(ost)?css$/);
+  };
+};
+</code></pre>
+<h3 id="postcss-配置"><a href="#postcss-配置" class="headerlink" title="postcss 配置"></a>postcss 配置</h3><pre><code>module.exports = {
+plugins: {
+&#39;postcss-px-to-viewport&#39;: {
+unitToConvert: &#39;px&#39;,
+viewportWidth: 750,
+unitPrecision: 5,
+propList: [&#39;*&#39;],
+viewportUnit: &#39;vw&#39;,
+fontViewportUnit: &#39;vw&#39;,
+selectorBlackList: [],
+minPixelValue: 1,
+mediaQuery: false,
+replace: true,
+exclude: [],
+landscape: false,
+landscapeUnit: &#39;vw&#39;,
+landscapeWidth: 568
+    }
+  }
+};
+</code></pre>
+<h3 id="编译前后-css-对比"><a href="#编译前后-css-对比" class="headerlink" title="编译前后 css 对比"></a>编译前后 css 对比</h3><p>src&#x2F;style&#x2F;index.less</p>
+<pre><code>/* index.less */
+.test {
+  width: 300px;
+}
+</code></pre>
+<p>dist&#x2F;app.css</p>
+<pre><code>/* index.css */
+.test {
+width: 36.66667vw;
+height: 26.66667vw;
+color: red;
+background-color: orange;
+}
+/* app.css */
+.test {
+font-size: 8vw;
+}
+/* index.less */
+.test {
+width: 40vw;
+}
+
+/* index.scss */
+.test {
+height: 40vw;
+}
+/* index.postcss */
+.test {
+background: green;
+height: 26.66667vw;
+}
+</code></pre>
+<h3 id="配置-autoprefixer"><a href="#配置-autoprefixer" class="headerlink" title="配置 autoprefixer"></a>配置 autoprefixer</h3><p>自动添加 css 前缀</p>
+<p>postcss.config.js</p>
+<pre><code>module.exports = {
+plugins: {
+autoprefixer: {
+overrideBrowserslist: [
+&#39;&gt; 1%&#39;,
+&#39;last 3 versions&#39;,
+&#39;iOS &gt;= 8&#39;,
+&#39;Android &gt;= 4&#39;,
+&#39;Chrome &gt;= 40&#39;
+      ]
+    }
+  }
+};
+</code></pre>
+<h4 id="转换前"><a href="#转换前" class="headerlink" title="转换前"></a>转换前</h4><pre><code>/* index.css */
+.test {
+width: 200px;
+height: 200px;
+color: red;
+display: flex;
+background-color: orange;
+}
+</code></pre>
+<h4 id="转换后"><a href="#转换后" class="headerlink" title="转换后"></a>转换后</h4><pre><code>/* index.css */
+.test {
+width: 26.66667vw;
+height: 26.66667vw;
+color: red;
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+background-color: orange;
+}
+</code></pre>
+<h3 id="开启-source-map"><a href="#开启-source-map" class="headerlink" title="开启 source map"></a>开启 source map</h3><pre><code>config.devtool(&#39;cheap-source-map&#39;);
+
+└── dist
+  │── app.bundle.js
+  │── app.bundle.js.map
+  │── app.css
+  │── app.css.map
+  └── index.html
+</code></pre>
+<p>在源文件下会有一行注释，证明开启了 sourcemap</p>
+<pre><code>/*# sourceMappingURL=app.css.map*/
+</code></pre>
+<hr>
+<h2 id="课时-4：webpack性能优化"><a href="#课时-4：webpack性能优化" class="headerlink" title="课时 4：webpack性能优化"></a>课时 4：webpack性能优化</h2><p>本章讲解</p>
+<ol>
+<li>分离 Manifest</li>
+<li>Code Splitting（代码分割）</li>
+<li>Bundle Splitting（打包分割）</li>
+<li>Tree Shaking（删除死代码）</li>
+<li>开启 gzip</li>
+</ol>
+<h3 id="分离-Manifest"><a href="#分离-Manifest" class="headerlink" title="分离 Manifest"></a>分离 Manifest</h3><pre><code>module.exports = (config, resolve) =&gt; {
+return() =&gt; {
+    config
+      .optimization
+      .runtimeChunk({
+name: &quot;manifest&quot;
+      })
+  }
+}
+</code></pre>
+<h3 id="Code-Splitting"><a href="#Code-Splitting" class="headerlink" title="Code Splitting"></a>Code Splitting</h3><ol>
+<li>使用动态 import 或者 require.ensure 语法，在第一节已经讲解</li>
+<li>使用 <code>babel-plugin-import</code> 插件按需引入一些组件库</li>
+</ol>
+<h3 id="Bundle-Splitting"><a href="#Bundle-Splitting" class="headerlink" title="Bundle Splitting"></a>Bundle Splitting</h3><p>将公共的包提取到 <code>chunk-vendors</code> 里面，比如你require(‘vue’)，webpack 会将 vue 打包进<br>chunk-vendors.bundle.js</p>
+<pre><code>module.exports = (config, resolve) =&gt; {
+return() =&gt; {
+    config
+      .optimization.splitChunks({
+chunks: &#39;async&#39;,
+minSize: 30000,
+minChunks: 1,
+maxAsyncRequests: 3,
+maxInitialRequests: 3,
+cacheGroups: {
+vendors: {
+name: `chunk-vendors`,
+test: /[\\/]node_modules[\\/]/,
+priority: -10,
+chunks: &#39;initial&#39;
+          },
+common: {
+name: `chunk-common`,
+minChunks: 2,
+priority: -20,
+chunks: &#39;initial&#39;,
+reuseExistingChunk: true
+          }
+        }
+      })
+    config.optimization.usedExports(true)
+  }
+}
+</code></pre>
+<h3 id="Tree-Shaking"><a href="#Tree-Shaking" class="headerlink" title="Tree Shaking"></a>Tree Shaking</h3><p>config&#x2F;optimization.js</p>
+<pre><code>config.optimization.usedExports(true);
+</code></pre>
+<p>src&#x2F;treeShaking.js</p>
+<pre><code>exportfunctionsquare(x) {
+return x * x;
+}
+
+exportfunctioncube(x) {
+return x * x * x;
+}
+</code></pre>
+<p>在 main.js 中只引用了 cube</p>
+<pre><code>import { cube } from&#39;./treeShaking&#39;;
+
+console.log(cube(2));
+</code></pre>
+<h4 id="未使用-Tree-Shaking"><a href="#未使用-Tree-Shaking" class="headerlink" title="未使用 Tree Shaking"></a>未使用 Tree Shaking</h4><pre><code>{
+&quot;./src/treeShaking.js&quot;: function(
+    module,
+    __webpack_exports__,
+    __webpack_require__
+) {
+    &quot;use strict&quot;;
+    __webpack_require__.r(__webpack_exports__);
+    __webpack_require__.d(__webpack_exports__, &quot;square&quot;, function() {
+return square;
+    });
+    __webpack_require__.d(__webpack_exports__, &quot;cube&quot;, function() {
+return cube;
+    });
+functionsquare(x) {
+return x * x;
+    }
+functioncube(x) {
+return x * x * x;
+    }
+  }
+}
+</code></pre>
+<h4 id="使用了-Tree-Shaking"><a href="#使用了-Tree-Shaking" class="headerlink" title="使用了 Tree Shaking"></a>使用了 Tree Shaking</h4><p>这里只导出了 cube 函数，并没有将 square 导出去</p>
+<p>当然你可以看见 square 函数还是在 bundle 里面，但是在压缩的时候就会被干掉了，因为它并没有被引用</p>
+<pre><code>{
+&quot;./src/treeShaking.js&quot;: function(
+    module,
+    __webpack_exports__,
+    __webpack_require__
+) {
+    &quot;use strict&quot;;
+    __webpack_require__.d(__webpack_exports__, &quot;a&quot;, function() {
+return cube;
+    });
+functionsquare(x) {
+return x * x;
+    }
+functioncube(x) {
+return x * x * x;
+    }
+  }
+}
+</code></pre>
+<p>只有当函数给定输入后，产生相应的输出，且不修改任何外部的东西，才可以安全做shaking的操作</p>
+<p>如何使用tree-shaking？</p>
+<ol>
+<li>确保代码是es6格式,即 export，import</li>
+<li>package.json中，设置 sideEffects</li>
+<li>确保 tree-shaking 的函数没有副作用</li>
+<li>babelrc中设置presets [[“@babel&#x2F;preset-env”, { “modules”: false }]]<br>禁止转换模块，交由webpack进行模块化处理</li>
+<li>结合uglifyjs-webpack-plugin</li>
+</ol>
+<p>其实在 <code>webpack4</code> 我们根本不需要做这些操作了，因为 <code>webpack</code> 在生产环境已经帮我们默认添加好了，开箱即用！</p>
+<h3 id="开启-gzip"><a href="#开启-gzip" class="headerlink" title="开启 gzip"></a>开启 gzip</h3><p>CompressionWebpackPlugin.js</p>
+<pre><code>const CompressionWebpackPlugin = require(&#39;compression-webpack-plugin&#39;);
+
+module.exports = (config, resolve) =&gt; {
+return() =&gt; {
+    config.plugin(&#39;CompressionWebpackPlugin&#39;).use(CompressionWebpackPlugin, [
+      {
+algorithm: &#39;gzip&#39;,
+test: /\.js(\?.*)?$/i,
+threshold: 10240,
+minRatio: 0.8
+      }
+    ]);
+  };
+};
+</code></pre>
+<hr>
+<h2 id="课时-5：手写loader实现可选链"><a href="#课时-5：手写loader实现可选链" class="headerlink" title="课时 5：手写loader实现可选链"></a>课时 5：手写loader实现可选链</h2><p>本章内容</p>
+<ol>
+<li>什么是 webpack loader</li>
+<li>可选链介绍</li>
+<li>loader 实现可选链</li>
+</ol>
+<h3 id="什么是-webpack-loader"><a href="#什么是-webpack-loader" class="headerlink" title="什么是 webpack loader"></a>什么是 webpack loader</h3><p><code>webpack loader</code> 是 <code>webpack</code> 为了处理各种类型文件的一个中间层，<code>webpack</code> 本质上就是一个 <code>node</code> 模块，它不能处理<br><code>js</code> 以外的文件，那么 <code>loader</code> 就帮助 <code>webpack</code> 做了一层转换，将所有文件都转成字符串，你可以对字符串进行任意操作&#x2F;修改，然后返回给<br><code>webpack</code> 一个包含这个字符串的对象，让 <code>webpack</code> 进行后面的处理。如果把 <code>webpack</code> 当成一个垃圾工厂的话，那么 <code>loader</code><br>就是这个工厂的垃圾分类！</p>
+<h3 id="可选链介绍"><a href="#可选链介绍" class="headerlink" title="可选链介绍"></a>可选链介绍</h3><p>这里并不是纯粹意义上的可选链，因为 <code>babel</code> 跟 <code>ts</code> 都已经支持了，我们也没有必要去写一个完整的可选链，只是来加深一下对 <code>loader</code> 的理解，<br><code>loader</code> 在工作当中能帮助我们做什么？</p>
+<p><strong><code>用途</code></strong> 当我们访问一个对象属性时不必担心这个对象是 <code>undefined</code> 而报错，导致程序不能继续向下执行</p>
+<p><strong><code>解释</code></strong> 在 <code>?</code> 之前的所有访问链路都是合法的，不会产生报错</p>
+<pre><code>const obj = {
+foo: {
+bar: {
+baz: 2
+    }
+  }
+}
+
+console.log(obj.foo.bar?.baz) // 2
+// 被转成 obj &amp;&amp; obj.foo &amp;&amp; obj.foo.bar &amp;&amp; obj.foo.bar.baz
+console.log(obj.foo.err?.baz) // undefined
+// 被转成 obj &amp;&amp; obj.foo &amp;&amp; obj.foo.err &amp;&amp; obj.foo.err.baz
+</code></pre>
+<h3 id="loader-实现可选链"><a href="#loader-实现可选链" class="headerlink" title="loader 实现可选链"></a>loader 实现可选链</h3><p>配置loader，options-chain-loader</p>
+<p>config&#x2F;OptionsChainLoader.js</p>
+<pre><code>module.exports = (config, resolve) =&gt; {
+const baseRule = config.module.rule(&#39;js&#39;).test(/.js|.tsx?$/);
+const normalRule = baseRule.oneOf(&#39;normal&#39;);
+return() =&gt; {
+    normalRule
+      .use(&#39;options-chain&#39;)
+      .loader(resolve(&#39;options-chain-loader&#39;))
+  }
+}
+</code></pre>
+<p>其实就是正则替换，<code>loader</code> 将整个文件全部转换成字符串，<code>content</code> 就是整个文件的内容，对 <code>content</code><br>进行修改，修改完成后再返回一个新的 <code>content</code> 就完成了一个 <code>loader</code> 转换。是不是很简单？</p>
+<p>下面的操作意思就是，我们匹配 <code>obj.foo.bar?.</code> 并把它转成 <code>obj &amp;&amp; obj.foo &amp;&amp; obj.foo.bar &amp;&amp; obj.foo.bar.</code></p>
+<p>options-chain-loader.js</p>
+<pre><code>module.exports = function(content) {
+return content.replace(newRegExp(/([\$_\w\.]+\?\.)/,&#39;g&#39;),function(res) {
+let str  = res.replace(/\?\./,&#39;&#39;);
+let arrs = str.split(&#39;.&#39;);
+let strArr = [];
+for(let i = 1; i &lt;= arrs.length; i++) {
+      strArr.push(arrs.slice(0,i).join(&#39;.&#39;));
+    }
+let compile = strArr.join(&#39;&amp;&amp;&#39;);
+const done = compile + &#39;&amp;&amp;&#39; + str + &#39;.&#39;
+return  done;
+  });
+};
+</code></pre>
+<hr>
+<h2 id="课时-6：webpack编译优化"><a href="#课时-6：webpack编译优化" class="headerlink" title="课时 6：webpack编译优化"></a>课时 6：webpack编译优化</h2><p>本章内容</p>
+<ol>
+<li>cache-loader</li>
+<li>DllPlugin</li>
+<li>threadLoader</li>
+</ol>
+<h3 id="cache-loader"><a href="#cache-loader" class="headerlink" title="cache-loader"></a>cache-loader</h3><p><code>cache-loader</code> 主要是将打包好的文件缓存在硬盘的一个目录里，一般存在 <code>node_modules/.cache</code> 下，当你再次 <code>build</code><br>的时候如果此文件没有修改就会从缓存中读取已经编译过的文件，只有有改动的才会被编译，这样就大大降低了编译的时间。尤其是项目越大时越明显。</p>
+<p>此项目使用前后数据对比 3342ms –&gt; 2432ms 效果还是比较明显</p>
+<p>这里只对 babel 加入了 cache-loader，因为我们的 ts&#x2F;js 都是由 babel 进行编译的，不需要对 ts-loader<br>缓存（我们也没有用到）</p>
+<p>config&#x2F;cacheLoader.js</p>
+<pre><code>module.exports = (config, resolve) =&gt; {
+const baseRule = config.module.rule(&#39;js&#39;).test(/.js|.tsx?$/);
+const babelPath = resolve(&#39;babel.js&#39;)
+const babelConf = require(babelPath);
+const version = require(resolve(&#39;node_modules/@babel/core/package.json&#39;)).version
+return() =&gt; {
+    baseRule
+      .exclude
+      .add(filepath =&gt; {
+// 不缓存 node_modules 下的文件
+return/node_modules/.test(filepath)
+      })
+      .end()
+      .use(&#39;cache-loader&#39;)
+      .loader(&#39;cache-loader&#39;)
+      .options({
+// 缓存位置
+        cacheDirectory: resolve(&#39;node_modules/.cache/babel&#39;)
+      })
+  }
+}
+</code></pre>
+<h3 id="DllPlugin"><a href="#DllPlugin" class="headerlink" title="DllPlugin"></a>DllPlugin</h3><p>DllPlugin 是将第三方长期不变的包与实际项目隔离开来并分别打包，当我们 build 时再将已经打包好的 dll 包引进来就 ok 了</p>
+<p>我提取了两个包 vue、react，速度差不多提升了 200ms，从 2698ms 到 2377ms</p>
+<h4 id="打包-dll"><a href="#打包-dll" class="headerlink" title="打包 dll"></a>打包 dll</h4><p>build&#x2F;dll.js</p>
+<pre><code>const path = require(&quot;path&quot;);
+const dllPath = path.join(process.cwd(), &#39;dll&#39;);
+const Config = require(&#39;webpack-chain&#39;);
+const config = new Config();
+const webpack = require(&#39;webpack&#39;)
+const rimraf = require(&#39;rimraf&#39;);
+const ora = require(&#39;ora&#39;)
+const chalk = require(&#39;chalk&#39;)
+const BundleAnalyzerPlugin = require(&#39;../config/BundleAnalyzerPlugin&#39;)(config)
+
+BundleAnalyzerPlugin()
+config
+  .entry(&#39;dll&#39;)
+  .add(&#39;vue&#39;)
+  .add(&#39;react&#39;)
+  .end()
+  .set(&#39;mode&#39;, &quot;production&quot;)
+  .output
+  .path(dllPath)
+  .filename(&#39;[name].js&#39;)
+  .library(&quot;[name]&quot;)
+  .end()
+  .plugin(&#39;DllPlugin&#39;)
+  .use(webpack.DllPlugin, [{
+name: &quot;[name]&quot;,
+path: path.join(process.cwd(), &#39;dll&#39;, &#39;manifest.json&#39;),
+  }])
+  .end()
+
+rimraf.sync(path.join(process.cwd(), &#39;dll&#39;))
+const spinner = ora(&#39;开始构建项目...&#39;)
+spinner.start()
+
+webpack(config.toConfig(), function (err, stats) {
+  spinner.stop()
+if (err) throw err
+  process.stdout.write(stats.toString({
+colors: true,
+modules: false,
+children: false,
+chunks: false,
+chunkModules: false
+  }) + &#39;\n\n&#39;)
+
+if (stats.hasErrors()) {
+console.log(chalk.red(&#39;构建失败\n&#39;))
+    process.exit(1)
+  }
+console.log(chalk.cyan(&#39;build完成\n&#39;))
+})
+</code></pre>
+<h3 id="将-dll-包合并"><a href="#将-dll-包合并" class="headerlink" title="将 dll 包合并"></a>将 dll 包合并</h3><pre><code>const webpack = require(&#39;webpack&#39;)
+
+module.exports = (config, resolve) =&gt; {
+return() =&gt; {
+    config.plugin(&#39;DllPlugin&#39;)
+      .use(webpack.DllReferencePlugin, [{
+context: process.cwd(),
+manifest: require(resolve(&#39;dll/manifest.json&#39;))
+      }])
+  }
+}
+</code></pre>
+<h3 id="threadLoader"><a href="#threadLoader" class="headerlink" title="threadLoader"></a>threadLoader</h3><p>测试效果变差了 😅，线程数越小编译速度越快</p>
+<p>config&#x2F;threadLoader.js</p>
+<pre><code>module.exports = (config, resolve) =&gt; {
+const baseRule = config.module.rule(&#39;js&#39;).test(/.js|.tsx?$/);
+return() =&gt; {
+const useThreads = true;
+if (useThreads) {
+const threadLoaderConfig = baseRule
+        .use(&#39;thread-loader&#39;)
+        .loader(&#39;thread-loader&#39;);
+      threadLoaderConfig.options({ workers: 3 })
+    }
+  }
+}
+</code></pre>
+<hr>
+<h2 id="课时-7：多页面配置"><a href="#课时-7：多页面配置" class="headerlink" title="课时 7：多页面配置"></a>课时 7：多页面配置</h2><p><strong>注意</strong></p>
+<ul>
+<li><code>弃用</code> npm run build &amp; npm run dev &amp; npm run dll</li>
+<li><code>改成</code> box build &amp; box dev &amp; box dll</li>
+<li><code>link</code> npm link 将 box 命令链接到全局</li>
+</ul>
+<p>本章内容</p>
+<ol>
+<li>使用</li>
+<li>改造为脚手架</li>
+<li>多页面配置</li>
+</ol>
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><pre><code>box build # 不加参数则会编译所有页面，并清空 dist
+box dev   # 默认编译 index 页面
+</code></pre>
+<p><code>参数</code></p>
+<pre><code># index2 是指定编译的页面。不会清空 dist
+# report 开启打包分析
+box build index2 --report
+box dev index2 --report
+</code></pre>
+<h3 id="改造为脚手架"><a href="#改造为脚手架" class="headerlink" title="改造为脚手架"></a>改造为脚手架</h3><p>分成三个命令，进行不同操作</p>
+<ul>
+<li>build</li>
+<li>dev</li>
+<li>dll</li>
+</ul>
+<p>bin&#x2F;box.js</p>
+<pre><code>#!/usr/bin/env node
+
+const chalk = require(&#39;chalk&#39;)
+const program = require(&#39;commander&#39;)
+const packageConfig = require(&#39;../package.json&#39;);
+const { cleanArgs } = require(&#39;../lib&#39;)
+const path = require(&#39;path&#39;)
+const __name__ = `build,dev,dll`
+
+let boxConf = {}
+let lock = false
+
+try {
+  boxConf = require(path.join(process.cwd(), &#39;box.config.js&#39;))()
+} catch (error) { }
+
+program
+  .usage(&#39;&lt;command&gt; [options]&#39;)
+  .version(packageConfig.version)
+  .command(&#39;build [app-page]&#39;)
+  .description(`构建开发环境`)
+  .option(&#39;-r, --report&#39;, &#39;打包分析报告&#39;)
+  .option(&#39;-d, --dll&#39;, &#39;合并差分包&#39;)
+  .action(async (name, cmd) =&gt; {
+const options = cleanArgs(cmd)
+const args = Object.assign(options, { name }, boxConf)
+if (lock) return
+    lock = true;
+if (boxConf.pages) {
+Object.keys(boxConf.pages).forEach(page =&gt; {
+        args.name = page;
+require(&#39;../build/build&#39;)(args)
+      })
+    } else {
+require(&#39;../build/build&#39;)(args)
+    }
+  })
+
+program
+  .usage(&#39;&lt;command&gt; [options]&#39;)
+  .version(packageConfig.version)
+  .command(&#39;dev [app-page]&#39;)
+  .description(`构建生产环境`)
+  .option(&#39;-d, --dll&#39;, &#39;合并差分包&#39;)
+  .action(async (name, cmd) =&gt; {
+const options = cleanArgs(cmd)
+const args = Object.assign(options, { name }, boxConf)
+if (lock) return
+    lock = true;
+require(&#39;../build/dev&#39;)(args)
+  })
+
+program
+  .usage(&#39;&lt;command&gt; [options]&#39;)
+  .version(packageConfig.version)
+  .command(&#39;dll [app-page]&#39;)
+  .description(`编译差分包`)
+  .action(async (name, cmd) =&gt; {
+const options = cleanArgs(cmd)
+const args = Object.assign(options, { name }, boxConf)
+if (lock) return
+    lock = true;
+require(&#39;../build/dll&#39;)(args)
+  })
+
+program.parse(process.argv).args &amp;&amp; program.parse(process.argv).args[0];
+program.commands.forEach(c =&gt; c.on(&#39;--help&#39;, () =&gt; console.log()))
+
+if (process.argv[2] &amp;&amp; !__name__.includes(process.argv[2])) {
+console.log()
+console.log(chalk.red(`没有找到 ${process.argv[2]} 命令`))
+console.log()
+  program.help()
+}
+
+if (!process.argv[2]) {
+  program.help()
+}
+</code></pre>
+<h3 id="多页面配置"><a href="#多页面配置" class="headerlink" title="多页面配置"></a>多页面配置</h3><p>box.config.js</p>
+<pre><code>module.exports = function (config) {
+return {
+entry: &#39;src/main.js&#39;, // 默认入口
+    dist: &#39;dist&#39;, // 默认打包目录
+    publicPath: &#39;/&#39;,
+port: 8888,
+pages: {
+index: {
+entry: &#39;src/main.js&#39;,
+template: &#39;public/index.html&#39;,
+filename: &#39;index.html&#39;,
+      },
+index2: {
+entry: &#39;src/main.js&#39;,
+template: &#39;public/index2.html&#39;,
+filename: &#39;index2.html&#39;,
+      }
+    },
+    chainWebpack(config) {
+    }
+  }
+}
+</code></pre>
+<hr>
+<h2 id="课时-8：手写一个webpack插件"><a href="#课时-8：手写一个webpack插件" class="headerlink" title="课时 8：手写一个webpack插件"></a>课时 8：手写一个webpack插件</h2><p>如果把 webpack 当成一个垃圾工厂，loader 就是垃圾分类，将所有垃圾整理好交给 webpack。plugin 就是如何去处理这些垃圾。</p>
+<p>webpack 插件写起来很简单，就是你要知道各种各样的钩子在什么时候触发，然后你的逻辑写在钩子里面就ok了</p>
+<ul>
+<li><code>apply</code> 函数是 webpack 在调用 plugin 的时候执行的，你可以认为它是入口</li>
+<li><code>compiler</code> 暴露了和 webpack 整个生命周期相关的钩子</li>
+<li><code>Compilation</code> 暴露了与模块和依赖有关的粒度更小的事件钩子</li>
+</ul>
+<p><strong>本节概要</strong></p>
+<ul>
+<li>实现一个 CopyPlugin</li>
+<li>使用</li>
+</ul>
+<h3 id="实现一个-CopyPlugin"><a href="#实现一个-CopyPlugin" class="headerlink" title="实现一个 CopyPlugin"></a>实现一个 CopyPlugin</h3><p>我们今天写一个 copy 的插件，在webpack构建完成之后，将目标目录下的文件 copy 到另一个目录下</p>
+<pre><code>const fs = require(&#39;fs-extra&#39;)
+const globby = require(&#39;globby&#39;)
+
+classCopyDirWebpackPlugin{
+constructor(options) {
+this.options = options;
+  }
+  apply(compiler) {
+const opt = this.options
+    compiler.plugin(&#39;done&#39;, (stats) =&gt; {
+if (process.env.NODE_ENV === &#39;production&#39;) {
+        (async ()=&gt;{
+const toFilesPath = await globby([`${opt.to}/**`, &#39;!.git/**&#39;])
+          toFilesPath.forEach(filePath =&gt; fs.removeSync(filePath))
+const fromFilesPath = await globby([`${opt.from}/**`])
+          fromFilesPath.forEach(fromPath =&gt; {
+const cachePath = fromPath
+            fromPath = fromPath.replace(&#39;dist&#39;, opt.to)
+const dirpaths = fromPath.substring(0, fromPath.lastIndexOf(&#39;/&#39;))
+            fs.mkdirpSync(dirpaths)
+            fs.copySync(cachePath, fromPath)
+          })
+console.log(`完成copy ${opt.from} to ${opt.to}`)
+        })()
+      }
+    });
+  }
+}
+
+module.exports = CopyDirWebpackPlugin
+</code></pre>
+<h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><p>将打包出来的 dist 目录下的内容 copy 到 dist2 目录下</p>
+<pre><code>const CopyPlugin = require(&#39;../webapck-plugin-copy&#39;);
+
+module.exports = ({ config }) =&gt; {
+return() =&gt; {
+    config.plugin(&#39;copy-dist&#39;)
+      .use(CopyPlugin, [{
+from: &#39;dist&#39;,
+to: &#39;dist2&#39;
+      }])
+  }
+}
+</code></pre>
+<hr>
+<h2 id="课时-9：构建-ssr"><a href="#课时-9：构建-ssr" class="headerlink" title="课时 9：构建 ssr"></a>课时 9：构建 ssr</h2><p>ssr 就是服务端渲染，做 ssr 的好处就是为了处理 spa 的不足，比如 seo 优化，服务端缓存等问题。</p>
+<p>今天主要用 react 的 ssr 来做一个简单的实例，让大家更清晰的入门</p>
+<p>本章概要</p>
+<ul>
+<li>创建 box build:ssr</li>
+<li>编译 ssr</li>
+<li>编译 jsx 语法</li>
+<li>入口区分服务端&#x2F;客户端</li>
+<li>服务端渲染</li>
+<li>小结</li>
+</ul>
+<h3 id="创建-box-build-ssr"><a href="#创建-box-build-ssr" class="headerlink" title="创建 box build:ssr"></a>创建 box build:ssr</h3><p>老规矩，先来一个 <code>box build:ssr</code> 命令让程序可以执行</p>
+<p>执行 <code>box build:ssr</code> 会调用 <code>build/ssr</code> 执行编译</p>
+<pre><code>program
+  .usage(&#39;&lt;command&gt; [options]&#39;)
+  .version(packageConfig.version)
+  .command(&#39;build:ssr [app-page]&#39;)
+  .description(`服务端渲染`)
+  .action(async (name, cmd) =&gt; {
+const options = cleanArgs(cmd);
+const args = Object.assign(options, { name }, boxConf);
+if (lock) return;
+    lock = true;
+require(&#39;../build/ssr&#39;)(args);
+  });
+</code></pre>
+<h3 id="编译-ssr"><a href="#编译-ssr" class="headerlink" title="编译 ssr"></a>编译 ssr</h3><p>与其他的编译没有什么区别，值得住的是</p>
+<ul>
+<li><p>target 指定为 umd 模式</p>
+</li>
+<li><p>globalObject 为 this</p>
+</li>
+<li><p>入口改为 ssr.jsx</p>
+<p>  .libraryTarget(‘umd’)<br>  .globalObject(‘this’)</p>
+</li>
+</ul>
+<p>build&#x2F;ssr.js</p>
+<pre><code>module.exports = function(options) {
+const path = require(&#39;path&#39;);
+const Config = require(&#39;webpack-chain&#39;);
+const config = new Config();
+const webpack = require(&#39;webpack&#39;);
+const rimraf = require(&#39;rimraf&#39;);
+const ora = require(&#39;ora&#39;);
+const chalk = require(&#39;chalk&#39;);
+const PATHS = {
+build: path.join(process.cwd(), &#39;static&#39;),
+ssrDemo: path.join(process.cwd(), &#39;src&#39;, &#39;ssr.jsx&#39;)
+  };
+
+require(&#39;../config/babelLoader&#39;)({ config, tsx: true })();
+require(&#39;../config/HtmlWebpackPlugin&#39;)({
+    config,
+options: {
+publicPath: &#39;/&#39;,
+filename: &#39;client.ssr.html&#39;
+    }
+  })();
+
+  config
+    .entry(&#39;ssr&#39;)
+    .add(PATHS.ssrDemo)
+    .end()
+    .set(&#39;mode&#39;, &#39;development&#39;) //  production
+    .output.path(PATHS.build)
+    .filename(&#39;[name].js&#39;)
+    .libraryTarget(&#39;umd&#39;)
+    .globalObject(&#39;this&#39;)
+    .library(&#39;[name]&#39;)
+    .end();
+
+  rimraf.sync(path.join(process.cwd(), PATHS.build));
+const spinner = ora(&#39;开始构建项目...&#39;);
+  spinner.start();
+
+  webpack(config.toConfig(), function(err, stats) {
+    spinner.stop();
+if (err) throw err;
+    process.stdout.write(
+      stats.toString({
+colors: true,
+modules: false,
+children: false,
+chunks: false,
+chunkModules: false
+      }) + &#39;\n\n&#39;
+    );
+
+if (stats.hasErrors()) {
+console.log(chalk.red(&#39;构建失败\n&#39;));
+      process.exit(1);
+    }
+console.log(chalk.cyan(&#39;build完成\n&#39;));
+  });
+};
+</code></pre>
+<h3 id="编译-jsx-语法"><a href="#编译-jsx-语法" class="headerlink" title="编译 jsx 语法"></a>编译 jsx 语法</h3><p>因为我们是用 react 写的，避免不了会用到 jsx 语法，所以我们需要在 <code>babel-loader</code> 中使用 <code>@babel/preset-react</code></p>
+<pre><code>npm i @babel/preset-react -D
+</code></pre>
+<p>config&#x2F;babelLoader.js</p>
+<pre><code>if (tsx) {
+  babelConf.presets.push(&#39;@babel/preset-react&#39;);
+}
+</code></pre>
+<h3 id="入口区分服务端-客户端"><a href="#入口区分服务端-客户端" class="headerlink" title="入口区分服务端&#x2F;客户端"></a>入口区分服务端&#x2F;客户端</h3><p>区分服务端跟客户端分别渲染</p>
+<pre><code>const React = require(&quot;react&quot;);
+const ReactDOM = require(&quot;react-dom&quot;);
+
+const SSR = &lt;divonClick={() =&gt; alert(&quot;hello&quot;)}&gt;Hello world&lt;/div&gt;;
+
+if (typeofdocument === &quot;undefined&quot;) {
+console.log(&#39;在服务端渲染&#39;)
+module.exports = SSR;
+} else {
+console.log(&#39;在客户端渲染&#39;)
+const renderMethod = !module.hot ? ReactDOM.render : ReactDOM.hydrate;
+  renderMethod(SSR, document.getElementById(&quot;app&quot;));
+}
+</code></pre>
+<h3 id="服务端渲染"><a href="#服务端渲染" class="headerlink" title="服务端渲染"></a>服务端渲染</h3><ul>
+<li><p>将打包出来的 static 文件夹作为一个服务</p>
+</li>
+<li><p>访问 <code>http://127.0.0.1:8080</code>，进入服务端渲染的页面</p>
+</li>
+<li><p>再执行一遍 ssr.js 进行事件绑定</p>
+<p>  module.exports &#x3D; function (options) {<br>  const express &#x3D; require(“express”);<br>  const { renderToString } &#x3D; require(“react-dom&#x2F;server”);<br>  const chalk &#x3D; require(‘chalk’)</p>
+<p>  const SSR &#x3D; require(“..&#x2F;static&#x2F;ssr”);<br>  const port &#x3D; process.env.PORT || 8080;</p>
+<pre><code>server(port);
+</code></pre>
+<p>  functionserver(port) {<br>  const app &#x3D; express();<br>  app.use(express.static(“static”));<br>  app.get(“&#x2F;“, (req, res) &#x3D;&gt;<br>    res.status(200).send(renderMarkup(renderToString(SSR)))<br>  );<br>  const empty &#x3D; ‘    ‘<br>  const common &#x3D; <code>App running at:     - Local: http://127.0.0.1:${port}\n</code><br>  console.log(chalk.cyan(‘\n’ + empty + common))</p>
+<pre><code>  app.listen(port, () =&gt; process.send &amp;&amp; process.send(&quot;online&quot;));
+}
+</code></pre>
+<p>  functionrenderMarkup(html) {<br>  return<code>&lt;!DOCTYPE html&gt; &lt;html&gt;   &lt;head&gt;     &lt;title&gt;Webpack SSR Demo&lt;/title&gt;     &lt;meta charset=&quot;utf-8&quot; /&gt;   &lt;/head&gt;   &lt;body&gt;     &lt;div id=&quot;app&quot;&gt;${html}&lt;/div&gt;     &lt;script src=&quot;./ssr.js&quot;&gt;&lt;/script&gt;   &lt;/body&gt; &lt;/html&gt;</code>;<br>}<br>  }</p>
+</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>至此 ssr 已经结束了，其实所有看起来很高大上的技术都是从一点一滴积累起来的，只要我们明白原理，你也能做出更优秀的框架</p>
+<p><strong>推荐阅读</strong></p>
+<p>（点击标题可跳转阅读）</p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651557158&amp;idx=1&amp;sn=37b5709e442840d03391049fccebedbb&amp;chksm=80255ae7b752d3f1a37ca753aeeacdde8502d525e86f5ae1b0fbb2a780c3c4e627a16fbc05b0&amp;scene=21#wechat_redirect">一看就懂之 webpack<br>高级配置与优化</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651557068&amp;idx=1&amp;sn=570f0ab7f1cf096f22d4446058f86279&amp;chksm=80255b0db752d21bfbf5930e997341da18c3c36c6387711806b4d0404b54ecfcfccade114bc3&amp;scene=21#wechat_redirect">一文搞懂 Webpack<br>多入口配置</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651557043&amp;idx=2&amp;sn=531feefa5133f279ccae6242ea16e0c0&amp;chksm=80255b72b752d264692bfee6d71ed582cef914c526fc18b5ddcc841cc4f64c07e447dff06a42&amp;scene=21#wechat_redirect">愿未来没有<br>Webpack</a></p>
+<p>觉得本文对你有帮助？请分享给更多人</p>
+<p>关注「前端大全」加星标，提升前端技能</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/zPh0erYjkib3jzxuxibgz8GJ7k0UVp4kHMMDsL32ialKjpkgA9q7BFkbJ8VRYh0Liad1x6rD7w6oU7icR9DVPgsIxzQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<p>好文章，我在看❤️</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/c6e9bfd3.html"><div class="related-post-title">如何在url中传一个对象？</div><div class="related-post-meta"><time>2020-01-09</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/b53ad9a1.html"><div class="related-post-title">免费全栈工程师视频教程</div><div class="related-post-meta"><time>2019-10-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/53803e6.html"><div class="related-post-title">git提交注释规范</div><div class="related-post-meta"><time>2022-06-17</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/c1f2b7c5.html"><div class="related-post-title">高频面试题深入解析 / 周刊 01</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/5fdacb38.html"><div class="related-post-title">React16免费视频教程（共28集）</div><div class="related-post-meta"><time>2019-10-01</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/7092568c.html">https://xuehuayu.cn/article/7092568c.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/6a610663.html">浏览器与前端性能灵魂之问，请问你能接得住几个？</a><a class="next" href="/article/b84b6699.html">OSCHINA 公布 2019 年度最受欢迎中国开源软件</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

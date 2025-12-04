@@ -1,0 +1,558 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>从零开始配置webpack(基于babel 7版本) | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">从零开始配置webpack(基于babel 7版本)</h1><div class="post-meta"><span class="date">2019-10-02</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 11</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/9fe3d429.html#waline-comment"><span class="waline-comment-count" data-path="/article/9fe3d429.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/1</code></p>
+<span id="more"></span>
+
+<blockquote>
+<h3 id="webpack-核心概念"><a href="#webpack-核心概念" class="headerlink" title="webpack 核心概念:"></a>webpack 核心概念:</h3></blockquote>
+<ul>
+<li>Entry: 入口</li>
+<li>Module:模块，webpack中一切皆是模块</li>
+<li>Chunk:代码库，一个chunk由十多个模块组合而成，用于代码合并与分割</li>
+<li>Loader:模块转换器，用于把模块原内容按照需求转换成新内容</li>
+<li>Plugin:扩展插件，在webpack构建流程中的特定时机注入扩展逻辑来改变构建结果或做你想要做的事情</li>
+<li>Output: 输出结果</li>
+</ul>
+<blockquote>
+<h3 id="webpack流程"><a href="#webpack流程" class="headerlink" title="webpack流程:"></a>webpack流程:</h3></blockquote>
+<p>webpack启动后会从 Entry 里配置的 Module 开始递归解析 Entry<br>依赖的所有Module.每找到一个Module,就会根据配置的Loader去找出对应的转换规则，对Module进行转换后，再解析出当前的Module依赖的Module.这些模块会以Entry为单位进行分组，一个Entry和其所有依赖的Module被分到一个组也就是一个Chunk。最好Webpack会把所有Chunk转换成文件输出。在整个流程中Webpack会在恰当的时机执行Plugin里定义的逻辑。</p>
+<p>下面我们开始从零开始配置一个支持打包图片,CSS,LESS,SASS,支持ES6&#x2F;ES7和JSX语法，并对代码进行压缩的webpack配置.</p>
+<blockquote>
+<h3 id="1-最简webpack配置"><a href="#1-最简webpack配置" class="headerlink" title="1. 最简webpack配置"></a>1. 最简webpack配置</h3></blockquote>
+<p>首先初始化npm和安装webpack的依赖:</p>
+<pre><code>npm init -y
+npm install --save-dev webpack webpack-cli
+</code></pre>
+<p>配置 webpack.config.js 文件如下:</p>
+<pre><code>constpath=require(&#39;path&#39;);
+
+module.exports= {
+    entry:path.resolve(__dirname, &#39;src/index.js&#39;),
+    output: {
+        path:path.resolve(__dirname, &#39;dist&#39;),
+        filename:&#39;bundle.js&#39;,
+        publicPath:&#39;/&#39;
+    }
+}
+</code></pre>
+<p>说明: publicPath 上线时配置的是cdn的地址。</p>
+<p>使用命令进行打包:</p>
+<pre><code>webpack --mode production
+</code></pre>
+<p>也可以将其配置到 package.json 中的 scripts 字段.</p>
+<p>入口文件为 src&#x2F;index.js, 打包输出到 dist&#x2F;bundle.js.</p>
+<blockquote>
+<h3 id="2-使用模板-html"><a href="#2-使用模板-html" class="headerlink" title="2. 使用模板 html"></a>2. 使用模板 html</h3></blockquote>
+<p>html-webpack-plugin 可以指定template模板文件，将会在output目录下，生成html文件，并引入打包后的js.</p>
+<p>安装依赖:</p>
+<pre><code>npm install --save-dev html-webpack-plugin
+</code></pre>
+<p>在 webpack.config.js 增加 plugins 配置:</p>
+<pre><code>constHtmlWebpackPlugin=require(&#39;html-webpack-plugin&#39;);
+module.exports= {
+    //...other code
+    plugins: [
+        newHtmlWebpackPlugin({
+            template:path.resolve(__dirname, &#39;src/index.html&#39;)
+        })
+    ]
+}
+</code></pre>
+<p>HtmlWebpackPlugin<br>还有一些其它的参数,如title(html的title),minify(是否要压缩),filename(dist中生成的html的文件名)等</p>
+<blockquote>
+<h3 id="3-配置-webpack-dev-server"><a href="#3-配置-webpack-dev-server" class="headerlink" title="3. 配置 webpack-dev-server"></a>3. 配置 webpack-dev-server</h3></blockquote>
+<p>webpack-dev-server提供了一个简单的Web服务器和实时热更新的能力</p>
+<p>安装依赖:</p>
+<pre><code>npm install --save-dev webpack-dev-server
+</code></pre>
+<p>在 webpack.config.js 增加 devServer 配置:</p>
+<pre><code>constpath=require(&#39;path&#39;);
+constHtmlWebpackPlugin=require(&#39;html-webpack-plugin&#39;);
+module.exports= {
+    //...other code
+    devServer: {
+        contentBase:&#39;./dist&#39;,
+        port:&#39;8080&#39;,
+        host:&#39;localhost&#39;
+    }
+}
+</code></pre>
+<p>在 package.json 的 scripts 字段中增加:</p>
+<pre><code>webpack-dev-server --mode development
+</code></pre>
+<p>之后，我们就可以通过 npm run dev , 来启动服务。</p>
+<p>更多 webpack-dev-server 的知识，请访问:<br><a target="_blank" rel="noopener" href="https://webpack.js.org/configuration/dev-server/">https://webpack.js.org/configuration/dev-server/</a></p>
+<blockquote>
+<h3 id="4-支持加载css文件"><a href="#4-支持加载css文件" class="headerlink" title="4. 支持加载css文件"></a>4. 支持加载css文件</h3></blockquote>
+<p>通过使用不同的 style-loader 和 css-loader, 可以将 css 文件转换成JS文件类型。</p>
+<p>安装依赖:</p>
+<pre><code>npm install --save-dev style-loader css-loader
+</code></pre>
+<p>在 webpack.config.js 中增加 loader 的配置。</p>
+<pre><code>module.exports= {
+    //other code
+    module: {
+        rules: [
+            {
+                test:/\.css/,
+                use: [&#39;style-loader&#39;, &#39;css-loader&#39;],
+                exclude:/node_modules/,
+                include:path.resolve(__dirname, &#39;src&#39;)
+            }
+        ]
+    }
+}
+</code></pre>
+<p>loader 可以配置以下参数:</p>
+<ul>
+<li>test: 匹配处理文件的扩展名的正则表达式</li>
+<li>use: loader名称</li>
+<li>include&#x2F;exclude: 手动指定必须处理的文件夹或屏蔽不需要处理的文件夹</li>
+<li>query: 为loader提供额外的设置选项</li>
+</ul>
+<p>如果需要给loader传参，那么可以使用use+loader的方式,如:</p>
+<pre><code>module.exports= {
+    //other code
+    module: {
+        rules: [
+            {
+            use: [{
+                        loader:&#39;style-loader&#39;,
+                        options: {
+                            insertAt:&#39;top&#39;
+                        }
+                    },
+                    &#39;css-loader&#39;
+                ],
+                //....
+            }
+        ]
+    }
+}
+</code></pre>
+<blockquote>
+<h3 id="5-支持加载图片"><a href="#5-支持加载图片" class="headerlink" title="5. 支持加载图片"></a>5. 支持加载图片</h3></blockquote>
+<ul>
+<li>file-loader: 解决CSS等文件中的引入图片路径问题</li>
+<li>url-loader: 当图片小于limit的时候会把图片Base64编码，大于limit参数的时候还是使用file-loader进行拷贝</li>
+</ul>
+<p><strong>如果希望图片存放在单独的目录下，那么需要指定outputPath</strong></p>
+<p>安装依赖:</p>
+<pre><code>npm install --save-dev url-loader file-loader
+</code></pre>
+<p>在 webpack.config.js 中增加 loader 的配置(增加在 module.rules 的数组中)。</p>
+<pre><code>module.exports= {
+    //other code
+    module: {
+        rules: [
+            {
+                test:/\.(gif|jpg|png|bmp|eot|woff|woff2|ttf|svg)/,
+                use: [
+                    {
+                        loader:&#39;url-loader&#39;,
+                        options: {
+                            limit:8192,
+                            outputPath:&#39;images&#39;
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
+</code></pre>
+<blockquote>
+<h3 id="6-支持编译less和sass"><a href="#6-支持编译less和sass" class="headerlink" title="6.支持编译less和sass"></a>6.支持编译less和sass</h3></blockquote>
+<p>有些前端同事可能习惯于使用less或者是sass编写css，那么也需要在 webpack 中进行配置。</p>
+<p>安装对应的依赖:</p>
+<pre><code>npm install --save-dev less less-loader
+npm install --save-dev node-sass sass-loader
+</code></pre>
+<p>在 webpack.config.js 中增加 loader 的配置(module.rules 数组中)。</p>
+<pre><code>module.exports= {
+    //other code
+    module: {
+        rules: [
+            {
+                test:/\.less/,
+                use: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;less-loader&#39;],
+                exclude:/node_modules/,
+                include:path.resolve(__dirname, &#39;src&#39;)
+            },
+            {
+                test:/\.scss/,
+                use: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;sass-loader&#39;],
+                exclude:/node_modules/,
+                include:path.resolve(__dirname, &#39;src&#39;)
+            }
+        ]
+    }
+}
+</code></pre>
+<blockquote>
+<h3 id="7-支持转义-ES6-ES7-JSX"><a href="#7-支持转义-ES6-ES7-JSX" class="headerlink" title="7.支持转义 ES6&#x2F;ES7&#x2F;JSX"></a>7.支持转义 ES6&#x2F;ES7&#x2F;JSX</h3></blockquote>
+<p>ES6&#x2F;ES7&#x2F;JSX 转义需要 Babel 的依赖，支持装饰器。</p>
+<pre><code>npm install --save-dev @babel/core babel-loader @babel/preset-env @babel/preset-react @babel/plugin-proposal-decorators @babel/plugin-proposal-object-rest-spread
+</code></pre>
+<p>在 webpack.config.js 中增加 loader 的配置(module.rules 数组中)。</p>
+<pre><code>module.exports= {
+    //other code
+    module: {
+        rules: [
+            {
+                test:/\.jsx?$/,
+                use: [
+                    {
+                        loader:&#39;babel-loader&#39;,
+                        options: {
+                            presets: [&#39;@babel/preset-env&#39;, &#39;@babel/react&#39;],
+                            plugins: [
+                                [require(&quot;@babel/plugin-proposal-decorators&quot;), { &quot;legacy&quot;:true }]
+                            ]
+                        }
+                    }
+                ],
+                include:path.resolve(__dirname, &#39;src&#39;),
+                exclude:/node_modules/
+            },
+        ]
+    }
+}
+</code></pre>
+<blockquote>
+<h3 id="8-压缩JS文件"><a href="#8-压缩JS文件" class="headerlink" title="8.压缩JS文件"></a>8.压缩JS文件</h3></blockquote>
+<p>安装依赖:</p>
+<pre><code>npm install --save-dev uglifyjs-webpack-plugin
+npm install --save-dev optimize-css-assets-webpack-plugin
+</code></pre>
+<p>在 webpack.config.js 中增加 optimization 的配置</p>
+<pre><code>constUglifyWebpackPlugin=require(&#39;uglifyjs-webpack-plugin&#39;);
+
+module.exports= {
+    //other code
+    optimization: {
+        minimizer: [
+            newUglifyWebpackPlugin({
+                parallel:4
+            })
+        ]
+    }
+}
+</code></pre>
+<blockquote>
+<h3 id="9-分离CSS-如果CSS文件较大的话"><a href="#9-分离CSS-如果CSS文件较大的话" class="headerlink" title="9.分离CSS(如果CSS文件较大的话)"></a>9.分离CSS(如果CSS文件较大的话)</h3></blockquote>
+<p>因为CSS的下载和JS可以并行，当一个HTML文件很大的时候，可以把CSS单独提取出来加载</p>
+<pre><code>npm install --save-dev mini-css-extract-plugin
+</code></pre>
+<p>在 webpack.config.js 中增加 plugins 的配置,并且将 ‘style-loader’ 修改为 { loader:<br>MiniCssExtractPlugin.loader}。</p>
+<p>CSS打包在单独目录，那么配置filename。</p>
+<pre><code>constMiniCssExtractPlugin=require(&#39;mini-css-extract-plugin&#39;);
+
+module.exports= {
+    //other code
+    module: {
+        rules: [
+            {
+                test:/\.css/,
+                use: [{ loader:MiniCssExtractPlugin.loader}, &#39;css-loader&#39;],
+                exclude:/node_modules/,
+                include:path.resolve(__dirname, &#39;src&#39;)
+            },
+            {
+                test:/\.less/,
+                use: [{ loader:MiniCssExtractPlugin.loader }, &#39;css-loader&#39;, &#39;less-loader&#39;],
+                exclude:/node_modules/,
+                include:path.resolve(__dirname, &#39;src&#39;)
+            },
+            {
+                test:/\.scss/,
+                use: [{ loader:MiniCssExtractPlugin.loader }, &#39;css-loader&#39;, &#39;sass-loader&#39;],
+                exclude:/node_modules/,
+                include:path.resolve(__dirname, &#39;src&#39;)
+            },
+        ]
+    },
+    plugins: [
+        newMiniCssExtractPlugin({
+            filename:&#39;css/[name].css&#39;
+        })
+    ]
+}
+</code></pre>
+<blockquote>
+<h3 id="10-压缩CSS文件"><a href="#10-压缩CSS文件" class="headerlink" title="10.压缩CSS文件"></a>10.压缩CSS文件</h3></blockquote>
+<p>安装依赖:</p>
+<pre><code>npm install --save-dev optimize-css-assets-webpack-plugin
+</code></pre>
+<p>在 webpack.config.js 中的 optimization 中增加配置</p>
+<pre><code>constOptimizeCssAssetsWebpackPlugin=require(&#39;optimize-css-assets-webpack-plugin&#39;);
+
+module.exports= {
+    //other code
+    optimization: {
+        minimizer: [
+            newOptimizeCssAssetsWebpackPlugin()
+        ]
+    }
+}
+</code></pre>
+<blockquote>
+<h3 id="11-打包前先清空输出目录"><a href="#11-打包前先清空输出目录" class="headerlink" title="11.打包前先清空输出目录"></a>11.打包前先清空输出目录</h3></blockquote>
+<pre><code>npm install --save-dev clean-webpack-plugin
+</code></pre>
+<p>在 webpack.config.js 中增加 plugins 的配置</p>
+<pre><code>constCleanWebpackPlugin=require(&#39;clean-webpack-plugin&#39;);
+
+module.exports= {
+    //other code
+    plugins: [
+        newCleanWebpackPlugin()
+    ]
+}
+</code></pre>
+<p>至此，webpack配置已经基本能满足需求。</p>
+<blockquote>
+<h3 id="完整webpack-config-js和package-json文件"><a href="#完整webpack-config-js和package-json文件" class="headerlink" title="完整webpack.config.js和package.json文件"></a>完整webpack.config.js和package.json文件</h3></blockquote>
+<p>webpack.config.js文件:</p>
+<pre><code>constpath=require(&#39;path&#39;);
+consthtmlWebpackPlugin=require(&#39;html-webpack-plugin&#39;);
+constUglifyWebpackPlugin=require(&#39;uglifyjs-webpack-plugin&#39;);
+constMiniCssExtractPlugin=require(&#39;mini-css-extract-plugin&#39;);
+constCleanWebpackPlugin=require(&#39;clean-webpack-plugin&#39;);
+constOptimizeCssAssetsWebpackPlugin=require(&#39;optimize-css-assets-webpack-plugin&#39;);
+module.exports= {
+    entry:path.resolve(__dirname, &#39;src/index.js&#39;),
+    output: {
+        path:path.resolve(__dirname, &#39;dist&#39;),
+        filename:&#39;bundle.js&#39;,
+        publicPath:&#39;/&#39;
+    },
+    devServer: {
+        contentBase:&#39;./dist&#39;,
+        port:&#39;8080&#39;,
+        host:&#39;localhost&#39;
+    },
+    module: {
+        rules: [
+            {
+                test:/\.jsx?$/,
+                use: [
+                    {
+                        loader:&#39;babel-loader&#39;,
+                        options: {
+                            presets: [&#39;@babel/preset-env&#39;, &#39;@babel/react&#39;],
+                            plugins: [
+                                [require(&quot;@babel/plugin-proposal-decorators&quot;), { &quot;legacy&quot;:true }]
+                            ]
+                        }
+                    }
+                ],
+                include:path.resolve(__dirname, &#39;src&#39;),
+                exclude:/node_modules/
+            },
+            {
+                test:/\.css/,
+                use: [{ loader:MiniCssExtractPlugin.loader}, &#39;css-loader&#39;],
+                exclude:/node_modules/,
+                include:path.resolve(__dirname, &#39;src&#39;)
+            },
+            {
+                test:/\.less/,
+                use: [{ loader:MiniCssExtractPlugin.loader }, &#39;css-loader&#39;, &#39;less-loader&#39;],
+                exclude:/node_modules/,
+                include:path.resolve(__dirname, &#39;src&#39;)
+            },
+            {
+                test:/\.scss/,
+                use: [{ loader:MiniCssExtractPlugin.loader }, &#39;css-loader&#39;, &#39;sass-loader&#39;],
+                exclude:/node_modules/,
+                include:path.resolve(__dirname, &#39;src&#39;)
+            },
+            {
+                test:/\.(gif|jpg|png|bmp|eot|woff|woff2|ttf|svg)/,
+                use: [
+                    {
+                        loader:&#39;url-loader&#39;,
+                        options: {
+                            limit:1024,
+                            outputPath:&#39;images&#39;
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    optimization: {
+        minimizer: [
+            newUglifyWebpackPlugin({
+                parallel:4
+            }),
+            newOptimizeCssAssetsWebpackPlugin()
+        ]
+    },
+    plugins: [
+        newhtmlWebpackPlugin({
+            template:path.resolve(__dirname, &#39;src/index.html&#39;),
+        }),
+        newMiniCssExtractPlugin({
+            filename:&#39;css/[name].css&#39;
+        }),
+        newCleanWebpackPlugin()
+    ]
+}
+</code></pre>
+<p>package.json文件:</p>
+<pre><code>{
+  &quot;name&quot;: &quot;webpk&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;webpack.config.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+    &quot;build&quot;: &quot;webpack --mode production&quot;,
+    &quot;dev&quot;: &quot;webpack-dev-server --mode development&quot;
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;devDependencies&quot;: {
+    &quot;@babel/core&quot;: &quot;^7.4.0&quot;,
+    &quot;@babel/plugin-proposal-decorators&quot;: &quot;^7.4.0&quot;,
+    &quot;@babel/plugin-proposal-object-rest-spread&quot;: &quot;^7.4.0&quot;,
+    &quot;@babel/preset-env&quot;: &quot;^7.4.1&quot;,
+    &quot;@babel/preset-react&quot;: &quot;^7.0.0&quot;,
+    &quot;babel-loader&quot;: &quot;^8.0.5&quot;,
+    &quot;clean-webpack-plugin&quot;: &quot;^2.0.1&quot;,
+    &quot;css-loader&quot;: &quot;^2.1.1&quot;,
+    &quot;file-loader&quot;: &quot;^3.0.1&quot;,
+    &quot;html-webpack-plugin&quot;: &quot;^3.2.0&quot;,
+    &quot;less&quot;: &quot;^3.9.0&quot;,
+    &quot;less-loader&quot;: &quot;^4.1.0&quot;,
+    &quot;mini-css-extract-plugin&quot;: &quot;^0.5.0&quot;,
+    &quot;node-sass&quot;: &quot;^4.11.0&quot;,
+    &quot;optimize-css-assets-webpack-plugin&quot;: &quot;^5.0.1&quot;,
+    &quot;sass-loader&quot;: &quot;^7.1.0&quot;,
+    &quot;style-loader&quot;: &quot;^0.23.1&quot;,
+    &quot;uglifyjs-webpack-plugin&quot;: &quot;^2.1.2&quot;,
+    &quot;url-loader&quot;: &quot;^1.1.2&quot;,
+    &quot;webpack&quot;: &quot;^4.29.6&quot;,
+    &quot;webpack-cli&quot;: &quot;^3.3.0&quot;,
+    &quot;webpack-dev-server&quot;: &quot;^3.2.1&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;react&quot;: &quot;^16.8.4&quot;,
+    &quot;react-dom&quot;: &quot;^16.8.4&quot;,
+    &quot;react-redux&quot;: &quot;^6.0.1&quot;,
+    &quot;redux&quot;: &quot;^4.0.1&quot;
+  }
+}
+</code></pre>
+<p>更多loader和plugin的参数可以参考:<br><a target="_blank" rel="noopener" href="https://www.webpackjs.com/loaders/">https://www.webpackjs.com/loaders/</a><br><a target="_blank" rel="noopener" href="https://www.webpackjs.com/plugins/">https://www.webpackjs.com/plugins/</a></p>
+<p>如果你有其它的webpack配置需求，欢迎留言~</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/6a90feea.html"><div class="related-post-title">异常监控：教你如何优雅的处理前端异常</div><div class="related-post-meta"><time>2019-12-17</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/11cc4180.html"><div class="related-post-title">高频面试题深入解析/ 周刊 02</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/5fb35a73.html"><div class="related-post-title">react+electron检测网络断开和重新连接</div><div class="related-post-meta"><time>2020-04-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/bf95eb5d.html"><div class="related-post-title">要面试了，数据结构和算法太弱怎么办</div><div class="related-post-meta"><time>2020-03-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/b791217d.html"><div class="related-post-title">阿里面试：说一下从 url 输入到返回请求的过程</div><div class="related-post-meta"><time>2021-05-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/9fe3d429.html">https://xuehuayu.cn/article/9fe3d429.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/b3d63d9d.html">Webpack 5 升级实验</a><a class="next" href="/article/59b456eb.html">React服务端渲染框架Next.js入门(共12集)</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

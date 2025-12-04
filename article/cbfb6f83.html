@@ -1,0 +1,806 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>寒冬求职季之你必须要懂的原生JS(上) | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">寒冬求职季之你必须要懂的原生JS(上)</h1><div class="post-meta"><span class="date">2019-10-03</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 7.7k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 30</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/cbfb6f83.html#waline-comment"><span class="waline-comment-count" data-path="/article/cbfb6f83.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/7</code><br>互联网寒冬之际，各大公司都缩减了HC，甚至是采取了“裁员”措施，在这样的大环境之下，想要获得一份更好的工作，必然需要付出更多的努力。</p>
+<p>一年前，也许你搞清楚闭包，this，原型链，就能获得认可。但是现在，很显然是不行了。本文梳理出了一些面试中有一定难度的高频原生JS问题，部分知识点可能你之前从未关注过，或者看到了，却没有仔细研究，但是它们却非常重要。本文将以真实的面试题的形式来呈现知识点，大家在阅读时，建议不要先看我的答案，而是自己先思考一番。尽管，本文所有的答案，都是我在翻阅各种资料，思考并验证之后，才给出的(<strong>绝非复制粘贴而来</strong>)。但因水平有限，本人的答案未必是最优的，如果您有更好的答案，欢迎给我留言。</p>
+<span id="more"></span>
+
+<p>本文篇幅较长，但是满满的都是干货！并且还埋伏了可爱的表情包，希望小伙伴们能够坚持读完。</p>
+<p>衷心的祝愿大家都能找到心仪的工作。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/49db68dc8dea52399fc43253766fa43af7a54662/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535343534323535393534392664693d376130623265323538323866613836346264386331313338616637613166383426696d67747970653d30267372633d68747470253341253246253246356230393838653539353232352e63646e2e736f687563732e636f6d253246696d61676573253246323031383038303325324665366664383561343137633534323837393133363361306433373563633161342e6a706567"><img src="https://camo.githubusercontent.com/49db68dc8dea52399fc43253766fa43af7a54662/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535343534323535393534392664693d376130623265323538323866613836346264386331313338616637613166383426696d67747970653d30267372633d68747470253341253246253246356230393838653539353232352e63646e2e736f687563732e636f6d253246696d61676573253246323031383038303325324665366664383561343137633534323837393133363361306433373563633161342e6a706567" alt="xuehuayu.cn"></a></p>
+<blockquote>
+<h3 id="1-原始类型有哪几种？null-是对象吗？原始数据类型和复杂数据类型存储有什么区别？"><a href="#1-原始类型有哪几种？null-是对象吗？原始数据类型和复杂数据类型存储有什么区别？" class="headerlink" title="1. 原始类型有哪几种？null 是对象吗？原始数据类型和复杂数据类型存储有什么区别？"></a>1. 原始类型有哪几种？null 是对象吗？原始数据类型和复杂数据类型存储有什么区别？</h3></blockquote>
+<ul>
+<li>原始类型有6种，分别是undefined,null,bool,string,number,symbol(ES6新增)。</li>
+<li>虽然 typeof null 返回的值是 object,但是null不是对象，而是基本数据类型的一种。</li>
+<li>原始数据类型存储在栈内存，存储的是值。</li>
+<li>复杂数据类型存储在堆内存，存储的是地址。当我们把对象赋值给另外一个变量的时候，复制的是地址，指向同一块内存空间，当其中一个对象改变时，另一个对象也会变化。</li>
+</ul>
+<hr>
+<blockquote>
+<h3 id="2-typeof-是否正确判断类型-instanceof呢？-instanceof-的实现原理是什么？"><a href="#2-typeof-是否正确判断类型-instanceof呢？-instanceof-的实现原理是什么？" class="headerlink" title="2. typeof 是否正确判断类型? instanceof呢？ instanceof 的实现原理是什么？"></a>2. typeof 是否正确判断类型? instanceof呢？ instanceof 的实现原理是什么？</h3></blockquote>
+<p>首先 typeof 能够正确的判断基本数据类型，但是除了 null, typeof null输出的是对象。</p>
+<p>但是对象来说，typeof 不能正确的判断其类型， typeof 一个函数可以输出 ‘function’,而除此之外，输出的全是<br>object,这种情况下，我们无法准确的知道对象的类型。</p>
+<p>instanceof可以准确的判断复杂数据类型，但是不能正确判断基本数据类型。(正确判断数据类型请戳：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/blob/master/JS/data-type.js">https://github.com/YvetteLau/Blog/blob/master/JS/data-type.js</a>)</p>
+<p>instanceof 是通过原型链判断的，A instanceof B,<br>在A的原型链中层层查找，是否有原型等于B.prototype，如果一直找到A的原型链的顶端(null;即<code>Object.prototype.__proto__</code>),仍然不等于B.prototype，那么返回false，否则返回true.</p>
+<p>instanceof的实现代码:</p>
+<pre><code>// L instanceof Rfunctioninstance_of(L, R) {//L 表示左表达式，R 表示右表达式varO=R.prototype;// 取 R 的显式原型L=L.__proto__;    // 取 L 的隐式原型while (true) {
+        if (L===null) //已经找到顶层returnfalse;
+        if (O===L)   //当 O 严格等于 L 时，返回 truereturn true;
+        L=L.__proto__;  //继续向上一层原型链查找
+    }
+}
+</code></pre>
+<hr>
+<blockquote>
+<h3 id="3-for-of-for-in-和-forEach-map-的区别。"><a href="#3-for-of-for-in-和-forEach-map-的区别。" class="headerlink" title="3. for of , for in 和 forEach,map 的区别。"></a>3. for of , for in 和 forEach,map 的区别。</h3></blockquote>
+<ul>
+<li>for…of循环：具有 iterator 接口，就可以用for…of循环遍历它的成员(属性值)。for…of循环可以使用的范围包括数组、Set</li>
+</ul>
+<p>和 Map 结构、某些类似数组的对象、Generator<br>对象，以及字符串。for…of循环调用遍历器接口，数组的遍历器接口只返回具有数字索引的属性。对于普通的对象，for…of结构不能直接使用，会报错，必须部署了<br>Iterator 接口后才能使用。可以中断循环。</p>
+<ul>
+<li>for…in循环：遍历对象自身的和继承的可枚举的属性, 不能直接获取属性值。可以中断循环。</li>
+<li>forEach: 只能遍历数组，不能中断，没有返回值(或认为返回值是undefined)。</li>
+<li>map: 只能遍历数组，不能中断，返回值是修改后的数组。</li>
+</ul>
+<p>PS: Object.keys()：返回给定对象所有可枚举属性的字符串数组。</p>
+<p>关于forEach是否会改变原数组的问题，有些小伙伴提出了异议，为此我写了代码测试了下(注意数组项是复杂数据类型的情况)。</p>
+<p>除了forEach之外，map等API，也有同样的问题。</p>
+<pre><code>let arry = [1, 2, 3, 4];
+
+arry.forEach((item) =&gt; {
+    item *=10;
+});
+console.log(arry); //[1, 2, 3, 4]arry.forEach((item) =&gt; {
+    arry[1] =10; //直接操作数组
+});
+console.log(arry); //[ 1, 10, 3, 4 ]let arry2 = [
+    { name:&quot;Yve&quot; },
+    { age:20 }
+];
+arry2.forEach((item) =&gt; {
+    item.name=10;
+});
+console.log(arry2);//[ { name: 10 }, { age: 20, name: 10 } ]
+</code></pre>
+<p>如还不了解 iterator 接口或 for…of, 请先阅读ES6文档: <a target="_blank" rel="noopener" href="http://es6.ruanyifeng.com/#docs/iterator">Iterator 和 for…of<br>循环</a></p>
+<p>更多细节请戳:<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/blob/master/JS/for.js">https://github.com/YvetteLau/Blog/blob/master/JS/for.js</a></p>
+<hr>
+<blockquote>
+<h3 id="4-如何判断一个变量是不是数组？"><a href="#4-如何判断一个变量是不是数组？" class="headerlink" title="4. 如何判断一个变量是不是数组？"></a>4. 如何判断一个变量是不是数组？</h3></blockquote>
+<ul>
+<li>使用 Array.isArray 判断，如果返回 true, 说明是数组</li>
+<li>使用 instanceof Array 判断，如果返回true, 说明是数组</li>
+<li>使用 Object.prototype.toString.call 判断，如果值是 [object Array], 说明是数组</li>
+<li>通过 constructor 来判断，如果是数组，那么 <code>arr.constructor === Array</code>. (不准确，因为我们可以指定</li>
+</ul>
+<p><code>obj.constructor = Array</code>)</p>
+<pre><code>functionfn() {
+    console.log(Array.isArray(arguments));   //false; 因为arguments是类数组，但不是数组console.log(Array.isArray([1,2,3,4]));   //trueconsole.log(argumentsinstanceofArray); //fasleconsole.log([1,2,3,4] instanceofArray); //trueconsole.log(Object.prototype.toString.call(arguments)); //[object Arguments]console.log(Object.prototype.toString.call([1,2,3,4])); //[object Array]console.log(arguments.constructor===Array); //falsearguments.constructor=Array;
+    console.log(arguments.constructor===Array); //trueconsole.log(Array.isArray(arguments));        //false
+}
+fn(1,2,3,4);
+</code></pre>
+<hr>
+<blockquote>
+<h3 id="5-类数组和数组的区别是什么？"><a href="#5-类数组和数组的区别是什么？" class="headerlink" title="5. 类数组和数组的区别是什么？"></a>5. 类数组和数组的区别是什么？</h3></blockquote>
+<blockquote>
+<p>类数组:</p>
+</blockquote>
+<p>1）拥有length属性，其它属性（索引）为非负整数（对象中的索引会被当做字符串来处理）;</p>
+<p>2）不具有数组所具有的方法；</p>
+<p>类数组是一个普通对象，而真实的数组是Array类型。</p>
+<p>常见的类数组有: 函数的参数 arugments, DOM 对象列表(比如通过 document.querySelectorAll 得到的列表), jQuery<br>对象 (比如 $(“div”)).</p>
+<p>类数组可以转换为数组:</p>
+<pre><code>//第一种方法Array.prototype.slice.call(arrayLike, start);
+//第二种方法
+[...arrayLike];
+//第三种方法:Array.from(arrayLike);
+</code></pre>
+<p><strong>PS:</strong> 任何定义了遍历器（Iterator）接口的对象，都可以用扩展运算符转为真正的数组。</p>
+<p>Array.from方法用于将两类对象转为真正的数组：类似数组的对象（array-like object）和可遍历（iterable）的对象。</p>
+<hr>
+<blockquote>
+<h3 id="6-和-有什么区别？"><a href="#6-和-有什么区别？" class="headerlink" title="6. &#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D; 有什么区别？"></a>6. &#x3D;&#x3D; 和 &#x3D;&#x3D;&#x3D; 有什么区别？</h3></blockquote>
+<p>&#x3D;&#x3D;&#x3D; 不需要进行类型转换，只有类型相同并且值相等时，才返回 true.</p>
+<p>&#x3D;&#x3D; 如果两者类型不同，首先需要进行类型转换。具体流程如下:</p>
+<ol>
+<li><p>首先判断两者类型是否相同，如果相等，判断值是否相等.</p>
+</li>
+<li><p>如果类型不同，进行类型转换</p>
+</li>
+<li><p>判断比较的是否是 null 或者是 undefined, 如果是, 返回 true .</p>
+</li>
+<li><p>判断两者类型是否为 string 和 number, 如果是, 将字符串转换成 number</p>
+</li>
+<li><p>判断其中一方是否为 boolean, 如果是, 将 boolean 转为 number 再进行判断</p>
+</li>
+<li><p>判断其中一方是否为 object 且另一方为 string、number 或者 symbol , 如果是, 将 object 转为原始类型再进行判断</p>
+<p> let person1 &#x3D; {<br> age: 25<br> }<br> let person2 &#x3D; person1;<br> person2.gae&#x3D;20;<br> console.log(person1 &#x3D;&#x3D;&#x3D; person2); &#x2F;&#x2F;true,注意复杂数据类型，比较的是引用地址</p>
+</li>
+</ol>
+<blockquote>
+<p>思考: <code>[] == ![xuehuayu.cn]</code></p>
+</blockquote>
+<p>我们来分析一下: <code>[] == ![xuehuayu.cn]</code> 是true还是false？</p>
+<ol>
+<li>首先，我们需要知道 ! 优先级是高于 &#x3D;&#x3D; (更多运算符优先级可查看:<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence">运算符优先级</a>)</li>
+<li><code>![xuehuayu.cn]</code> 引用类型转换成布尔值都是true,因此<code>![xuehuayu.cn]</code>的是false</li>
+<li>根据上面的比较步骤中的第五条，其中一方是 boolean，将 boolean 转为 number 再进行判断，false转换成 number，对应的值是</li>
+<li></li>
+<li>根据上面比较步骤中的第六条，有一方是<br>number，那么将object也转换成Number,空数组转换成数字，对应的值是0.(空数组转换成数字，对应的值是0，如果数组中只有一个数字，那么转成number就是这个数字，其它情况，均为NaN)</li>
+<li>0 &#x3D;&#x3D; 0; 为true</li>
+</ol>
+<hr>
+<blockquote>
+<h3 id="7-ES6中的class和ES5的类有什么区别？"><a href="#7-ES6中的class和ES5的类有什么区别？" class="headerlink" title="7. ES6中的class和ES5的类有什么区别？"></a>7. ES6中的class和ES5的类有什么区别？</h3></blockquote>
+<ol>
+<li>ES6 class 内部所有定义的方法都是不可枚举的;</li>
+<li>ES6 class 必须使用 new 调用;</li>
+<li>ES6 class 不存在变量提升;</li>
+<li>ES6 class 默认即是严格模式;</li>
+<li>ES6 class<br>子类必须在父类的构造函数中调用super()，这样才有this对象;ES5中类继承的关系是相反的，先有子类的this，然后用父类的方法应用在this上。</li>
+</ol>
+<hr>
+<blockquote>
+<h3 id="8-数组的哪些API会改变原数组？"><a href="#8-数组的哪些API会改变原数组？" class="headerlink" title="8. 数组的哪些API会改变原数组？"></a>8. 数组的哪些API会改变原数组？</h3></blockquote>
+<blockquote>
+<p>修改原数组的API有:</p>
+</blockquote>
+<p>splice&#x2F;reverse&#x2F;fill&#x2F;copyWithin&#x2F;sort&#x2F;push&#x2F;pop&#x2F;unshift&#x2F;shift</p>
+<blockquote>
+<p>不修改原数组的API有:</p>
+</blockquote>
+<p>slice&#x2F;map&#x2F;forEach&#x2F;every&#x2F;filter&#x2F;reduce&#x2F;entries&#x2F;find</p>
+<p>注: 数组的每一项是简单数据类型，且未直接操作数组的情况下。</p>
+<hr>
+<blockquote>
+<h3 id="9-let、const-以及-var-的区别是什么？"><a href="#9-let、const-以及-var-的区别是什么？" class="headerlink" title="9. let、const 以及 var 的区别是什么？"></a>9. let、const 以及 var 的区别是什么？</h3></blockquote>
+<ul>
+<li>let 和 const 定义的变量不会出现变量提升，而 var 定义的变量会提升。</li>
+<li>let 和 const 是JS中的块级作用域</li>
+<li>let 和 const 不允许重复声明(会抛出错误)</li>
+<li>let 和 const 定义的变量在定义语句之前，如果使用会抛出错误(形成了暂时性死区)，而 var 不会。</li>
+<li>const 声明一个只读的常量。一旦声明，常量的值就不能改变(如果声明是一个对象，那么不能改变的是对象的引用地址)</li>
+</ul>
+<hr>
+<blockquote>
+<h3 id="10-在JS中什么是变量提升？什么是暂时性死区？"><a href="#10-在JS中什么是变量提升？什么是暂时性死区？" class="headerlink" title="10. 在JS中什么是变量提升？什么是暂时性死区？"></a>10. 在JS中什么是变量提升？什么是暂时性死区？</h3></blockquote>
+<p>变量提升就是变量在声明之前就可以使用，值为undefined。</p>
+<p>在代码块内，使用 let&#x2F;const 命令声明变量之前，该变量都是不可用的(会抛出错误)。这在语法上，称为“暂时性死区”。暂时性死区也意味着 typeof<br>不再是一个百分百安全的操作。</p>
+<pre><code>typeof x; // ReferenceError(暂时性死区，抛错)let x;
+
+typeof y; // 值是undefined,不会报错
+</code></pre>
+<p>暂时性死区的本质就是，只要一进入当前作用域，所要使用的变量就已经存在了，但是不可获取，只有等到声明变量的那一行代码出现，才可以获取和使用该变量。</p>
+<hr>
+<blockquote>
+<h3 id="11-如何正确的判断this-箭头函数的this是什么？"><a href="#11-如何正确的判断this-箭头函数的this是什么？" class="headerlink" title="11. 如何正确的判断this? 箭头函数的this是什么？"></a>11. 如何正确的判断this? 箭头函数的this是什么？</h3></blockquote>
+<p>this的绑定规则有四种：默认绑定，隐式绑定，显式绑定，new绑定.</p>
+<ol>
+<li>函数是否在 new 中调用(new绑定)，如果是，那么 this 绑定的是新创建的对象。</li>
+<li>函数是否通过 call,apply 调用，或者使用了 bind (即硬绑定)，如果是，那么this绑定的就是指定的对象。</li>
+<li>函数是否在某个上下文对象中调用(隐式绑定)，如果是的话，this 绑定的是那个上下文对象。一般是 obj.foo()</li>
+<li>如果以上都不是，那么使用默认绑定。如果在严格模式下，则绑定到 undefined，否则绑定到全局对象。</li>
+<li>如果把 null 或者 undefined 作为 this 的绑定对象传入 call、apply 或者 bind,<br>这些值在调用时会被忽略，实际应用的是默认绑定规则。</li>
+<li>箭头函数没有自己的 this, 它的this继承于上一层代码块的this。</li>
+</ol>
+<p>测试下是否已经成功Get了此知识点(浏览器执行环境):</p>
+<pre><code>var number =5;
+var obj = {
+    number:3,
+    fn1: (function () {
+        var number;
+        this.number*=2;
+        number = number *2;
+        number =3;
+        returnfunction () {
+            var num =this.number;
+            this.number*=2;
+            console.log(num);
+            number *=3;
+            console.log(number);
+        }
+    })()
+}
+var fn1 =obj.fn1;
+fn1.call(null);
+obj.fn1();
+console.log(window.number);
+</code></pre>
+<p>如果this的知识点，您还不太懂，请戳: <a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/issues/6">嗨，你真的懂this吗？</a></p>
+<hr>
+<blockquote>
+<h3 id="12-词法作用域和this的区别。"><a href="#12-词法作用域和this的区别。" class="headerlink" title="12. 词法作用域和this的区别。"></a>12. 词法作用域和this的区别。</h3></blockquote>
+<ul>
+<li>词法作用域是由你在写代码时将变量和块作用域写在哪里来决定的</li>
+<li>this 是在调用时被绑定的，this 指向什么，完全取决于函数的调用位置(关于this的指向问题，本文已经有说明)</li>
+</ul>
+<hr>
+<blockquote>
+<h3 id="13-谈谈你对JS执行上下文栈和作用域链的理解。"><a href="#13-谈谈你对JS执行上下文栈和作用域链的理解。" class="headerlink" title="13. 谈谈你对JS执行上下文栈和作用域链的理解。"></a>13. 谈谈你对JS执行上下文栈和作用域链的理解。</h3></blockquote>
+<p>执行上下文就是当前 JavaScript 代码被解析和执行时所在环境, JS执行上下文栈可以认为是一个存储函数调用的栈结构，遵循先进后出的原则。</p>
+<ul>
+<li>JavaScript执行在单线程上，所有的代码都是排队执行。</li>
+<li>一开始浏览器执行全局的代码时，首先创建全局的执行上下文，压入执行栈的顶部。</li>
+<li>每当进入一个函数的执行就会创建函数的执行上下文，并且把它压入执行栈的顶部。当前函数执行-完成后，当前函数的执行上下文出栈，并等待垃圾回收。</li>
+<li>浏览器的JS执行引擎总是访问栈顶的执行上下文。</li>
+<li>全局上下文只有唯一的一个，它在浏览器关闭时出栈。</li>
+</ul>
+<p>作用域链: 无论是 LHS 还是 RHS<br>查询，都会在当前的作用域开始查找，如果没有找到，就会向上级作用域继续查找目标标识符，每次上升一个作用域，一直到全局作用域为止。</p>
+<hr>
+<p><strong>题难不难？不难！继续挑战一下难！知道难，就更要继续了！</strong><br><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/d5eb9dcb8ae7e7b208f000da434318495175b5bb/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535343534323839343730392664693d663931623361356563343334643864343639643435396433306566393563386626696d67747970653d30267372633d687474702533412532462532466d6d62697a2e717069632e636e2532466d6d62697a5f676966253246355147423169624844497451776651417950586e3769614f7152436f4145566a4d4f4d636e7371346962723632755a504761707a4d4b4759417a3569615956516d70654a5a6d696351446f5a6c4178636d684853507569626962454f7725324636343025334677785f666d74253344676966"><img src="https://camo.githubusercontent.com/d5eb9dcb8ae7e7b208f000da434318495175b5bb/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535343534323839343730392664693d663931623361356563343334643864343639643435396433306566393563386626696d67747970653d30267372633d687474702533412532462532466d6d62697a2e717069632e636e2532466d6d62697a5f676966253246355147423169624844497451776651417950586e3769614f7152436f4145566a4d4f4d636e7371346962723632755a504761707a4d4b4759417a3569615956516d70654a5a6d696351446f5a6c4178636d684853507569626962454f7725324636343025334677785f666d74253344676966" alt="xuehuayu.cn"></a></p>
+<h3 id="14-什么是闭包？闭包的作用是什么？闭包有哪些使用场景？"><a href="#14-什么是闭包？闭包的作用是什么？闭包有哪些使用场景？" class="headerlink" title="14. 什么是闭包？闭包的作用是什么？闭包有哪些使用场景？"></a>14. 什么是闭包？闭包的作用是什么？闭包有哪些使用场景？</h3><p>闭包是指有权访问另一个函数作用域中的变量的函数，创建闭包最常用的方式就是在一个函数内部创建另一个函数。</p>
+<p>闭包的作用有:</p>
+<ol>
+<li>封装私有变量</li>
+<li>模仿块级作用域(ES5中没有块级作用域)</li>
+<li>实现JS的模块</li>
+</ol>
+<hr>
+<blockquote>
+<h3 id="15-call、apply有什么区别？call-aplly和bind的内部是如何实现的？"><a href="#15-call、apply有什么区别？call-aplly和bind的内部是如何实现的？" class="headerlink" title="15. call、apply有什么区别？call,aplly和bind的内部是如何实现的？"></a>15. call、apply有什么区别？call,aplly和bind的内部是如何实现的？</h3></blockquote>
+<p>call 和 apply 的功能相同，区别在于传参的方式不一样:</p>
+<ul>
+<li><p>fn.call(obj, arg1, arg2, …),调用一个函数, 具有一个指定的this值和分别地提供的参数(参数的列表)。</p>
+</li>
+<li><p>fn.apply(obj, [argsArray]),调用一个函数，具有一个指定的this值，以及作为一个数组（或类数组对象）提供的参数。</p>
+</li>
+</ul>
+<blockquote>
+<p>call核心:</p>
+</blockquote>
+<ul>
+<li><p>将函数设为传入参数的属性</p>
+</li>
+<li><p>指定this到函数并传入给定参数执行函数</p>
+</li>
+<li><p>如果不传入参数或者参数为null，默认指向为 window &#x2F; global</p>
+</li>
+<li><p>删除参数上的函数</p>
+<p>  Function.prototype.call&#x3D;function (context) {<br>  &#x2F;** 如果第一个参数传入的是 null 或者是 undefined, 那么指向this指向 window&#x2F;global <em>&#x2F;&#x2F;</em>* 如果第一个参数传入的不是null或者是undefined, 那么必须是一个对象 *&#x2F;if (!context) {<br>      &#x2F;&#x2F;context为null或者是undefined<br>      context &#x3D;typeofwindow&#x3D;&#x3D;&#x3D;’undefined’?global:window;<br>  }<br>  context.fn&#x3D;this; &#x2F;&#x2F;this指向的是当前的函数(Function的实例)let args &#x3D; […arguments].slice(1);&#x2F;&#x2F;获取除了this指向对象以外的参数, 空数组slice后返回的仍然是空数组let result &#x3D;context.fn(…args); &#x2F;&#x2F;隐式绑定,当前函数的this指向了context.deletecontext.fn;<br>  return result;<br>  }</p>
+<p>  &#x2F;&#x2F;测试代码var foo &#x3D; {<br>  name:’Selina’<br>  }<br>  var name &#x3D;’Chirs’;<br>  functionbar(job, age) {<br>  console.log(this.name);<br>  console.log(job, age);<br>  }<br>  bar.call(foo, ‘programmer’, 20);<br>  &#x2F;&#x2F; Selina programmer 20bar.call(null, ‘teacher’, 25);<br>  &#x2F;&#x2F; 浏览器环境: Chirs teacher 25; node 环境: undefined teacher 25</p>
+</li>
+</ul>
+<blockquote>
+<p>apply:</p>
+</blockquote>
+<p>apply的实现和call很类似，但是需要注意他们的参数是不一样的，apply的第二个参数是数组或类数组.</p>
+<pre><code>Function.prototype.apply=function (context, rest) {
+    if (!context) {
+        //context为null或者是undefined时,设置默认值
+        context =typeofwindow===&#39;undefined&#39;?global:window;
+    }
+    context.fn=this;
+    let result;
+    if(rest ===undefined|| rest ===null) {
+        //undefined 或者 是 null 不是 Iterator 对象，不能被 ...
+        result =context.fn(rest);
+    }elseif(typeof rest ===&#39;object&#39;) {
+        result =context.fn(...rest);
+    }
+    deletecontext.fn;
+    return result;
+}
+var foo = {
+    name:&#39;Selina&#39;
+}
+var name =&#39;Chirs&#39;;
+functionbar(job, age) {
+    console.log(this.name);
+    console.log(job, age);
+}
+bar.apply(foo, [&#39;programmer&#39;, 20]);
+// Selina programmer 20bar.apply(null, [&#39;teacher&#39;, 25]);
+// 浏览器环境: Chirs programmer 20; node 环境: undefined teacher 25
+</code></pre>
+<blockquote>
+<p>bind</p>
+</blockquote>
+<p>bind 和 call&#x2F;apply 有一个很重要的区别，一个函数被 call&#x2F;apply 的时候，会直接调用，但是 bind<br>会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。</p>
+<pre><code>Function.prototype.my_bind=function(context) {
+    if(typeofthis!==&quot;function&quot;){
+		thrownewTypeError(&quot;not a function&quot;);
+  }
+    let self =this;
+    let args = [...arguments].slice(1);
+    functionFn() {};
+    Fn.prototype=this.prototype;
+    letbound=function() {
+        let res = [...args, ...arguments]; //bind传递的参数和函数调用时传递的参数拼接
+        context =thisinstanceof Fn ?this: context ||this;
+        returnself.apply(context, res);
+    }
+    //原型链bound.prototype=newFn();
+    return bound;
+}
+
+var name =&#39;Jack&#39;;
+functionperson(age, job, gender){
+    console.log(this.name , age, job, gender);
+}
+var Yve = {name :&#39;Yvette&#39;};
+let result =person.my_bind(Yve, 22, &#39;enginner&#39;)(&#39;female&#39;);
+</code></pre>
+<hr>
+<blockquote>
+<h3 id="16-new的原理是什么？通过new的方式创建对象和通过字面量创建有什么区别？"><a href="#16-new的原理是什么？通过new的方式创建对象和通过字面量创建有什么区别？" class="headerlink" title="16. new的原理是什么？通过new的方式创建对象和通过字面量创建有什么区别？"></a>16. new的原理是什么？通过new的方式创建对象和通过字面量创建有什么区别？</h3></blockquote>
+<blockquote>
+<p>new:</p>
+</blockquote>
+<ol>
+<li><p>创建一个新对象。</p>
+</li>
+<li><p>这个新对象会被执行[[原型]]连接。</p>
+</li>
+<li><p>将构造函数的作用域赋值给新对象，即this指向这个新对象.</p>
+</li>
+<li><p>如果函数没有返回其他对象，那么new表达式中的函数调用会自动返回这个新对象。</p>
+<p> functionnew(func) {<br>   lat target &#x3D; {};<br>   target.<strong>proto</strong>&#x3D;func.prototype;<br>   let res &#x3D;func.call(target);<br>   if (typeof(res) &#x3D;&#x3D;”object”||typeof(res) &#x3D;&#x3D;”function”) {<br>     return res;<br>   }<br>   return target;<br> }</p>
+</li>
+</ol>
+<p>字面量创建对象，不会调用 Object构造函数, 简洁且性能更好;</p>
+<p>new Object() 方式创建对象本质上是方法调用，涉及到在proto链中遍历该方法，当找到该方法后，又会生产方法调用必须的<br>堆栈信息，方法调用结束后，还要释放该堆栈，性能不如字面量的方式。</p>
+<p>通过对象字面量定义对象时，不会调用Object构造函数。</p>
+<hr>
+<blockquote>
+<h3 id="17-谈谈你对原型的理解？"><a href="#17-谈谈你对原型的理解？" class="headerlink" title="17. 谈谈你对原型的理解？"></a>17. 谈谈你对原型的理解？</h3></blockquote>
+<p>在 JavaScript 中，每当定义一个对象（函数也是对象）时候，对象中都会包含一些预定义的属性。其中每个函数对象都有一个prototype<br>属性，这个属性指向函数的原型对象。使用原型对象的好处是所有对象实例共享它所包含的属性和方法。</p>
+<hr>
+<blockquote>
+<h3 id="18-什么是原型链？【原型链解决的是什么问题？】"><a href="#18-什么是原型链？【原型链解决的是什么问题？】" class="headerlink" title="18. 什么是原型链？【原型链解决的是什么问题？】"></a>18. 什么是原型链？【原型链解决的是什么问题？】</h3></blockquote>
+<p>原型链解决的主要是继承问题。</p>
+<p>每个对象拥有一个原型对象，通过 <strong>proto</strong> (读音: dunder proto)<br>指针指向其原型对象，并从中继承方法和属性，同时原型对象也可能拥有原型，这样一层一层，最终指向<br>null(<code>Object.proptotype.__proto__</code> 指向的是null)。这种关系被称为原型链 (prototype<br>chain)，通过原型链一个对象可以拥有定义在其他对象中的属性和方法。</p>
+<p>构造函数 Parent、Parent.prototype 和 实例 p 的关系如下:<code>(p.__proto__ === Parent.prototype)</code></p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/5ac31a08b22bdf9b076cb417c099025711966cf6/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434534626433653631313566366265636266373133343532363238666430396230352f3239343936"><img src="https://camo.githubusercontent.com/5ac31a08b22bdf9b076cb417c099025711966cf6/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434534626433653631313566366265636266373133343532363238666430396230352f3239343936" alt="xuehuayu.cn"></a></p>
+<hr>
+<blockquote>
+<h3 id="19-prototype-和-proto-区别是什么？"><a href="#19-prototype-和-proto-区别是什么？" class="headerlink" title="19. prototype 和 __proto__ 区别是什么？"></a>19. prototype 和 <code>__proto__</code> 区别是什么？</h3></blockquote>
+<p>prototype是构造函数的属性。</p>
+<p><code>__proto__</code> 是每个实例都有的属性，可以访问 [[prototype]] 属性。</p>
+<p>实例的<code>__proto__</code> 与其构造函数的prototype指向的是同一个对象。</p>
+<pre><code>functionStudent(name) {
+    this.name= name;
+}
+Student.prototype.setAge=function(){
+    this.age=20;
+}
+let Jack =newStudent(&#39;jack&#39;);
+console.log(Jack.__proto__);
+//console.log(Object.getPrototypeOf(Jack));;console.log(Student.prototype);
+console.log(Jack.__proto__===Student.prototype);//true
+</code></pre>
+<hr>
+<blockquote>
+<h3 id="20-使用ES5实现一个继承？"><a href="#20-使用ES5实现一个继承？" class="headerlink" title="20. 使用ES5实现一个继承？"></a>20. 使用ES5实现一个继承？</h3></blockquote>
+<blockquote>
+<p>组合继承(最常用的继承方式)</p>
+</blockquote>
+<pre><code>functionSuperType() {
+    this.name= name;
+    this.colors= [&#39;red&#39;, &#39;blue&#39;, &#39;green&#39;];
+}
+SuperType.prototype.sayName=function() {
+    console.log(this.name);
+}
+
+functionSubType(name, age) {
+    SuperType.call(this, name);
+    this.age= age;
+}
+SubType.prototype=newSuperType();
+SubType.prototype.constructor= SubType;
+
+SubType.prototype.sayAge=function() {
+    console.log(this.age);
+}
+</code></pre>
+<p>其它继承方式实现，可以参考《JavaScript高级程序设计》</p>
+<hr>
+<blockquote>
+<h3 id="21-什么是深拷贝？深拷贝和浅拷贝有什么区别？"><a href="#21-什么是深拷贝？深拷贝和浅拷贝有什么区别？" class="headerlink" title="21. 什么是深拷贝？深拷贝和浅拷贝有什么区别？"></a>21. 什么是深拷贝？深拷贝和浅拷贝有什么区别？</h3></blockquote>
+<p>浅拷贝是指只复制第一层对象，但是当对象的属性是引用类型时，实质复制的是其引用，当引用指向的值改变时也会跟着变化。</p>
+<p>深拷贝复制变量值，对于非基本类型的变量，则递归至基本类型变量后，再复制。深拷贝后的对象与原来的对象是完全隔离的，互不影响，对一个对象的修改并不会影响另一个对象。</p>
+<p>实现一个深拷贝:</p>
+<pre><code>functiondeepClone(obj) { //递归拷贝if(obj ===null) returnnull; //null 的情况if(obj instanceofRegExp) returnnewRegExp(obj);
+    if(obj instanceofDate) returnnewDate(obj);
+    if(typeof obj !==&#39;object&#39;) {
+        //如果不是复杂数据类型，直接返回return obj;
+    }
+    /**     * 如果obj是数组，那么 obj.constructor 是 [Function: Array]     * 如果obj是对象，那么 obj.constructor 是 [Function: Object]*/let t =newobj.constructor();
+    for(let key in obj) {
+        //如果 obj[key] 是复杂数据类型，递归
+        t[key] =deepClone(obj[key]);
+    }
+    return t;
+}
+</code></pre>
+<hr>
+<p><strong>看不下去了？别人的送分题会成为你的送命题</strong><br><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/1365ecb42b3f043669f37d44b15324a6579132db/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535343534323838343234362664693d646136333863636231323662653361626439353336623039656434613036373926696d67747970653d30267372633d68747470253341253246253246696d672e6d702e6974632e636e25324675706c6f6164253246323031373036313725324637343537303562653965376434366236383833643031646339303166333661365f74682e6a7067"><img src="https://camo.githubusercontent.com/1365ecb42b3f043669f37d44b15324a6579132db/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535343534323838343234362664693d646136333863636231323662653361626439353336623039656434613036373926696d67747970653d30267372633d68747470253341253246253246696d672e6d702e6974632e636e25324675706c6f6164253246323031373036313725324637343537303562653965376434366236383833643031646339303166333661365f74682e6a7067" alt="xuehuayu.cn"></a></p>
+<h3 id="22-防抖和节流的区别是什么？防抖和节流的实现。"><a href="#22-防抖和节流的区别是什么？防抖和节流的实现。" class="headerlink" title="22. 防抖和节流的区别是什么？防抖和节流的实现。"></a>22. 防抖和节流的区别是什么？防抖和节流的实现。</h3><p>防抖和节流的作用都是防止函数多次调用。区别在于，假设一个用户一直触发这个函数，且每次触发函数的间隔小于设置的时间，防抖的情况下只会调用一次，而节流的情况会每隔一定时间调用一次函数。</p>
+<blockquote>
+<p>防抖(debounce): n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间</p>
+</blockquote>
+<pre><code>functiondebounce(func, wait, immediate=true) {
+    let timeout, context, args;
+        // 延迟执行函数constlater= () =&gt;setTimeout(() =&gt; {
+            // 延迟函数执行完毕，清空定时器
+            timeout =null// 延迟执行的情况下，函数会在延迟函数中执行// 使用到之前缓存的参数和上下文if (!immediate) {
+                func.apply(context, args);
+                context = args =null;
+            }
+        }, wait);
+        letdebounced=function (...params) {
+            if (!timeout) {
+                timeout =later();
+                if (immediate) {
+                    //立即执行func.apply(this, params);
+                } else {
+                    //闭包
+                    context =this;
+                    args = params;
+                }
+            } else {
+                clearTimeout(timeout);
+                timeout =later();
+            }
+        }
+    debounced.cancel=function () {
+        clearTimeout(timeout);
+        timeout =null;
+    };
+    return debounced;
+};
+</code></pre>
+<p>防抖的应用场景:</p>
+<ul>
+<li>每次 resize&#x2F;scroll 触发统计事件</li>
+<li>文本输入的验证（连续输入文字后发送 AJAX 请求进行验证，验证一次就好）</li>
+</ul>
+<blockquote>
+<p>节流(throttle): 高频事件在规定时间内只会执行一次，执行一次后，只有大于设定的执行周期后才会执行第二次。</p>
+</blockquote>
+<pre><code>//underscore.jsfunctionthrottle(func, wait, options) {
+    var timeout, context, args, result;
+    var previous =0;
+    if (!options) options = {};
+
+    varlater=function () {
+        previous =options.leading===false?0:Date.now() ||newDate().getTime();
+        timeout =null;
+        result =func.apply(context, args);
+        if (!timeout) context = args =null;
+    };
+
+    varthrottled=function () {
+        var now =Date.now() ||newDate().getTime();
+        if (!previous &amp;&amp;options.leading===false) previous = now;
+        var remaining = wait - (now - previous);
+        context =this;
+        args =arguments;
+        if (remaining &lt;=0|| remaining &gt; wait) {
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout =null;
+            }
+            previous = now;
+            result =func.apply(context, args);
+            if (!timeout) context = args =null;
+        } elseif (!timeout &amp;&amp;options.trailing!==false) {
+            // 判断是否设置了定时器和 trailing
+            timeout =setTimeout(later, remaining);
+        }
+        return result;
+    };
+
+    throttled.cancel=function () {
+        clearTimeout(timeout);
+        previous =0;
+        timeout = context = args =null;
+    };
+
+    return throttled;
+};
+</code></pre>
+<p>函数节流的应用场景有:</p>
+<ul>
+<li>DOM 元素的拖拽功能实现（mousemove）</li>
+<li>射击游戏的 mousedown&#x2F;keydown 事件（单位时间只能发射一颗子弹）</li>
+<li>计算鼠标移动的距离（mousemove）</li>
+<li>Canvas 模拟画板功能（mousemove）</li>
+<li>搜索联想（keyup）</li>
+<li>监听滚动事件判断是否到页面底部自动加载更多：给 scroll 加了 debounce 后，只有用户停止滚动后，才会判断是否到了页面底部；如果是</li>
+</ul>
+<p>throttle 的话，只要页面滚动就会间隔一段时间判断一次</p>
+<hr>
+<blockquote>
+<h3 id="23-取数组的最大值（ES5、ES6）"><a href="#23-取数组的最大值（ES5、ES6）" class="headerlink" title="23. 取数组的最大值（ES5、ES6）"></a>23. 取数组的最大值（ES5、ES6）</h3></blockquote>
+<pre><code>// ES5 的写法Math.max.apply(null, [14, 3, 77, 30]);
+
+// ES6 的写法Math.max(...[14, 3, 77, 30]);
+
+// reduce
+[14,3,77,30].reduce((accumulator, currentValue)=&gt;{
+    return accumulator = accumulator &gt; currentValue ? accumulator : currentValue
+});
+</code></pre>
+<hr>
+<blockquote>
+<h3 id="24-ES6新的特性有哪些？"><a href="#24-ES6新的特性有哪些？" class="headerlink" title="24. ES6新的特性有哪些？"></a>24. ES6新的特性有哪些？</h3></blockquote>
+<ol>
+<li>新增了块级作用域(let,const)</li>
+<li>提供了定义类的语法糖(class)</li>
+<li>新增了一种基本数据类型(Symbol)</li>
+<li>新增了变量的解构赋值</li>
+<li>函数参数允许设置默认值，引入了rest参数，新增了箭头函数</li>
+<li>数组新增了一些API，如 isArray &#x2F; from &#x2F; of 方法;数组实例新增了 entries()，keys() 和 values() 等方法</li>
+<li>对象和数组新增了扩展运算符</li>
+<li>ES6 新增了模块化(import&#x2F;export)</li>
+<li>ES6 新增了 Set 和 Map 数据结构</li>
+<li>ES6 原生提供 Proxy 构造函数，用来生成 Proxy 实例</li>
+<li>ES6 新增了生成器(Generator)和遍历器(Iterator)</li>
+</ol>
+<hr>
+<blockquote>
+<h3 id="25-setTimeout倒计时为什么会出现误差？"><a href="#25-setTimeout倒计时为什么会出现误差？" class="headerlink" title="25. setTimeout倒计时为什么会出现误差？"></a>25. setTimeout倒计时为什么会出现误差？</h3></blockquote>
+<p>setTimeout()<br>只是将事件插入了“任务队列”，必须等当前代码（执行栈）执行完，主线程才会去执行它指定的回调函数。要是当前代码消耗时间很长，也有可能要等很久，所以并没办法保证回调函数一定会在<br>setTimeout() 指定的时间执行。所以， setTimeout() 的第二个参数表示的是最少时间，并非是确切时间。</p>
+<p>HTML5标准规定了 setTimeout()<br>的第二个参数的最小值不得小于4毫秒，如果低于这个值，则默认是4毫秒。在此之前。老版本的浏览器都将最短时间设为10毫秒。另外，对于那些DOM的变动（尤其是涉及页面重新渲染的部分），通常是间隔16毫秒执行。这时使用<br>requestAnimationFrame() 的效果要好于 setTimeout();</p>
+<hr>
+<blockquote>
+<h3 id="26-为什么-0-1-0-2-0-3"><a href="#26-为什么-0-1-0-2-0-3" class="headerlink" title="26. 为什么 0.1 + 0.2 !&#x3D; 0.3 ?"></a>26. 为什么 0.1 + 0.2 !&#x3D; 0.3 ?</h3></blockquote>
+<p>0.1 + 0.2 !&#x3D; 0.3 是因为在进制转换和进阶运算的过程中出现精度损失。</p>
+<p>下面是详细解释:</p>
+<p>JavaScript使用 Number 类型表示数字(整数和浮点数)，使用64位表示一个数字。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/f1313e3e42dbc4804a37483fdf7b4ddf6f8d264c/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434566316132626430346538646561383732656264373832383966646438623138622f3239343938"><img src="https://camo.githubusercontent.com/f1313e3e42dbc4804a37483fdf7b4ddf6f8d264c/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434566316132626430346538646561383732656264373832383966646438623138622f3239343938" alt="xuehuayu.cn"></a></h2><p>图片说明:</p>
+<ul>
+<li>第0位：符号位，0表示正数，1表示负数(s)</li>
+<li>第1位到第11位：储存指数部分（e）</li>
+<li>第12位到第63位：储存小数部分（即有效数字）f</li>
+</ul>
+<p>计算机无法直接对十进制的数字进行运算, 需要先对照 IEEE 754 规范转换成二进制，然后对阶运算。</p>
+<p>1.进制转换</p>
+<p>0.1和0.2转换成二进制后会无限循环</p>
+<pre><code>0.1 -&gt; 0.0001100110011001...(无限循环)
+0.2 -&gt; 0.0011001100110011...(无限循环)
+</code></pre>
+<p>但是由于IEEE 754尾数位数限制，需要将后面多余的位截掉，这样在进制之间的转换中精度已经损失。</p>
+<p>2.对阶运算</p>
+<p>由于指数位数不相同，运算时需要对阶运算 这部分也可能产生精度损失。</p>
+<p>按照上面两步运算（包括两步的精度损失），最后的结果是</p>
+<p>0.0100110011001100110011001100110011001100110011001100</p>
+<p>结果转换成十进制之后就是 0.30000000000000004。</p>
+<blockquote>
+<h3 id="27-promise-有几种状态-Promise-有什么优缺点"><a href="#27-promise-有几种状态-Promise-有什么优缺点" class="headerlink" title="27. promise 有几种状态, Promise 有什么优缺点 ?"></a>27. promise 有几种状态, Promise 有什么优缺点 ?</h3></blockquote>
+<p>promise有三种状态: fulfilled, rejected, pending.</p>
+<blockquote>
+<p>Promise 的优点:</p>
+</blockquote>
+<ol>
+<li>一旦状态改变，就不会再变，任何时候都可以得到这个结果</li>
+<li>可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数</li>
+</ol>
+<blockquote>
+<p>Promise 的缺点:</p>
+</blockquote>
+<ol>
+<li>无法取消 Promise</li>
+<li>当处于pending状态时，无法得知目前进展到哪一个阶段</li>
+</ol>
+<hr>
+<blockquote>
+<h3 id="28-Promise构造函数是同步还是异步执行，then中的方法呢-promise如何实现then处理"><a href="#28-Promise构造函数是同步还是异步执行，then中的方法呢-promise如何实现then处理" class="headerlink" title="28. Promise构造函数是同步还是异步执行，then中的方法呢 ?promise如何实现then处理 ?"></a>28. Promise构造函数是同步还是异步执行，then中的方法呢 ?promise如何实现then处理 ?</h3></blockquote>
+<p>Promise的构造函数是同步执行的。then中的方法是异步执行的。</p>
+<p>promise的then实现，详见:<br><a target="_blank" rel="noopener" href="https://juejin.im/post/5c88e427f265da2d8d6a1c84">Promise源码实现</a></p>
+<hr>
+<blockquote>
+<h3 id="29-Promise和setTimeout的区别"><a href="#29-Promise和setTimeout的区别" class="headerlink" title="29. Promise和setTimeout的区别 ?"></a>29. Promise和setTimeout的区别 ?</h3></blockquote>
+<p>Promise 是微任务，setTimeout 是宏任务，同一个事件循环中，promise总是先于 setTimeout 执行。</p>
+<hr>
+<blockquote>
+<h3 id="30-如何实现-Promise-all"><a href="#30-如何实现-Promise-all" class="headerlink" title="30. 如何实现 Promise.all ?"></a>30. 如何实现 Promise.all ?</h3></blockquote>
+<p>要实现 Promise.all,首先我们需要知道 Promise.all 的功能：</p>
+<ol>
+<li>如果传入的参数是一个空的可迭代对象，那么此promise对象回调完成(resolve),只有此情况，是同步执行的，其它都是异步返回的。</li>
+<li>如果传入的参数不包含任何 promise，则返回一个异步完成.</li>
+</ol>
+<p>promises 中所有的promise都“完成”时或参数中不包含 promise 时回调完成。<br>3. 如果参数中有一个promise失败，那么Promise.all返回的promise对象失败<br>4. 在任何情况下，Promise.all 返回的 promise 的完成状态的结果都是一个数组</p>
+<pre><code>Promise.all=function (promises) {
+    returnnewPromise((resolve, reject) =&gt; {
+        let index =0;
+        let result = [];
+        if (promises.length===0) {
+            resolve(result);
+        } else {
+            setTimeout(() =&gt; {
+                functionprocessValue(i, data) {
+                    result[i] = data;
+                    if (++index ===promises.length) {
+                        resolve(result);
+                    }
+                }
+                for (let i =0; i &lt;promises.length; i++) {
+                    //promises[i] 可能是普通值Promise.resolve(promises[i]).then((data) =&gt; {
+                        processValue(i, data);
+                    }, (err) =&gt; {
+                        reject(err);
+                        return;
+                    });
+                }
+            })
+        }
+    });
+}
+</code></pre>
+<p>如果想了解更多Promise的源码实现，可以参考我的另一篇文章：<a target="_blank" rel="noopener" href="https://juejin.im/post/5c88e427f265da2d8d6a1c84#heading-24">Promise的源码实现（完美符合Promise&#x2F;A+规范）</a></p>
+<hr>
+<blockquote>
+<h3 id="31-如何实现-Promise-finally"><a href="#31-如何实现-Promise-finally" class="headerlink" title="31.如何实现 Promise.finally ?"></a>31.如何实现 Promise.finally ?</h3></blockquote>
+<p>不管成功还是失败，都会走到finally中,并且finally之后，还可以继续then。并且会将值原封不动的传递给后面的then.</p>
+<pre><code>Promise.prototype.finally=function (callback) {
+    returnthis.then((value) =&gt; {
+        returnPromise.resolve(callback()).then(() =&gt; {
+            return value;
+        });
+    }, (err) =&gt; {
+        returnPromise.resolve(callback()).then(() =&gt; {
+            throw err;
+        });
+    });
+}
+</code></pre>
+<hr>
+<blockquote>
+<h3 id="32-什么是函数柯里化？实现-sum-1-2-3-返回结果是1-2-3之和"><a href="#32-什么是函数柯里化？实现-sum-1-2-3-返回结果是1-2-3之和" class="headerlink" title="32. 什么是函数柯里化？实现 sum(1)(2)(3) 返回结果是1,2,3之和"></a>32. 什么是函数柯里化？实现 sum(1)(2)(3) 返回结果是1,2,3之和</h3></blockquote>
+<p>函数柯里化是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。</p>
+<pre><code>functionsum(a) {
+    returnfunction(b) {
+        returnfunction(c) {
+            return a+b+c;
+        }
+    }
+}
+console.log(sum(1)(2)(3)); // 6
+</code></pre>
+<p>引申：实现一个curry函数，将普通函数进行柯里化:</p>
+<pre><code>functioncurry(fn, args= []) {
+    returnfunction(){
+        let rest = [...args, ...arguments];
+        if (rest.length&lt;fn.length) {
+            returncurry.call(this,fn,rest);
+        }else{
+            returnfn.apply(this,rest);
+        }
+    }
+}
+//testfunctionsum(a,b,c) {
+    return a+b+c;
+}
+let sumFn =curry(sum);
+console.log(sumFn(1)(2)(3)); //6console.log(sumFn(1)(2, 3)); //6
+</code></pre>
+<hr>
+<p>如果您在面试中遇到了更多的原生JS问题，或者有一些本文未涉及到且有一定难度的JS知识，请给我留言。您的问题将会出现在后续文章中~</p>
+<p>本文的写成耗费了非常多的时间，在这个过程中，我也学习到了很多知识，谢谢各位小伙伴愿意花费宝贵的时间阅读本文，如果本文给了您一点帮助或者是启发，请不要吝啬你的赞和Star，您的肯定是我前进的最大动力。<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog">https://github.com/YvetteLau/Blog</a></p>
+<blockquote>
+<h3 id="后续写作计划"><a href="#后续写作计划" class="headerlink" title="后续写作计划"></a>后续写作计划</h3></blockquote>
+<p>1.《寒冬求职季之你必须要懂的原生JS》(中)(下)</p>
+<p>2.《寒冬求职季之你必须要知道的CSS》</p>
+<p>3.《寒冬求职季之你必须要懂的前端安全》</p>
+<p>4.《寒冬求职季之你必须要懂的一些浏览器知识》</p>
+<p>5.《寒冬求职季之你必须要知道的性能优化》</p>
+<p><strong>针对React技术栈:</strong></p>
+<p>1.《寒冬求职季之你必须要懂的React》系列</p>
+<p>2.《寒冬求职季之你必须要懂的ReactNative》系列</p>
+<blockquote>
+<p>参考文章:</p>
+</blockquote>
+<ol>
+<li></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/index.html">https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof&#x2F;index.html</a><br>2.<br><a target="_blank" rel="noopener" href="https://juejin.im/post/5c77365c6fb9a049b2228e4a#heading-0">https://juejin.im/post/5c77365c6fb9a049b2228e4a#heading-0</a><br>3. 选用了面试之道上的部分面试题<br>4. 选用了木易杨说文中提及的部分面试题:<br><a target="_blank" rel="noopener" href="https://juejin.im/post/5bc92e9ce51d450e8e777136">https://juejin.im/post/5bc92e9ce51d450e8e777136</a><br>5. <strong>特别说明</strong>: <code>0.1 + 0.2 !== 0.3</code> 此题答案大量使用了此篇文章的图文:<br><a target="_blank" rel="noopener" href="https://juejin.im/post/5b90e00e6fb9a05cf9080dff">https://juejin.im/post/5b90e00e6fb9a05cf9080dff</a><br>6. 选用了朋友面试大厂时遇到的一些面试题<br>7. 《你不知道的JavaSctipt》<br>8. 《JavaScript高级程序设计》<br>9.<br><a target="_blank" rel="noopener" href="https://github.com/lessfish/underscore-analysis/issues/20">lessfish&#x2F;underscore-analysis#20</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/82ae7b5f.html"><div class="related-post-title">js判断一个对象是否为空</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/6ff625e1.html"><div class="related-post-title">TypeScript 断言详解及示例</div><div class="related-post-meta"><time>2025-10-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">TypeScript</span></div></div></a><a class="related-post-item" href="/article/aeda5d77.html"><div class="related-post-title">前端面试之手写Promise</div><div class="related-post-meta"><time>2020-06-12</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/d59498f9.html"><div class="related-post-title">uniapp纯前端renderjs实现WebDAV</div><div class="related-post-meta"><time>2024-03-18</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/2cb0b801.html"><div class="related-post-title">OPTIONS请求时设置了Header请求和token可是后台接收不到，为什么？</div><div class="related-post-meta"><time>2019-12-07</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/cbfb6f83.html">https://xuehuayu.cn/article/cbfb6f83.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/113edde6.html">寒冬求职季之你必须要懂的原生JS(中)</a><a class="next" href="/article/61a6b50f.html">高频面试题深入解析/ 周刊 07</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

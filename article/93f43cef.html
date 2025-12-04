@@ -1,0 +1,627 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>35道值得收藏的React面试题 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">35道值得收藏的React面试题</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 5.5k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 21</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/93f43cef.html#waline-comment"><span class="waline-comment-count" data-path="/article/93f43cef.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.html.cn/interview/14282.html</code></p>
+<p>如果你在为有经验的人或新生寻找ReactJS面试问题和答案，那么你来对地方了。本篇可以帮助前端开发人员准备和清除React面试。有一定的参考价值，有需要的朋友可以参考一下，希望对大家有所帮助。</p>
+<span id="more"></span>
+
+<p><img src="https://img.php.cn/upload/article/000/000/006/5dde184a0bf83255.jpg" alt="xuehuayu.cn"></p>
+<h3 id="问题1：什么是虚拟DOM？"><a href="#问题1：什么是虚拟DOM？" class="headerlink" title="问题1：什么是虚拟DOM？"></a>问题1：什么是虚拟DOM？</h3><blockquote>
+<p>主题: React<br>难度: ⭐</p>
+</blockquote>
+<p><strong>虚拟 DOM (VDOM)<strong>是真实 DOM 在内存中的表示。UI 的表示形式保存在内存中，并与实际的 DOM<br>同步。这是一个发生在渲染函数被调用和元素在屏幕上显示之间的步骤，整个过程被称为</strong>调和</strong>。</p>
+<h3 id="问题2：类组件和函数组件之间的区别是啥？"><a href="#问题2：类组件和函数组件之间的区别是啥？" class="headerlink" title="问题2：类组件和函数组件之间的区别是啥？"></a>问题2：类组件和函数组件之间的区别是啥？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐</p>
+</blockquote>
+<ul>
+<li><strong>类组件</strong>可以使用其他特性，如状态 <code>state</code> 和生命周期钩子。</li>
+<li>当组件只是接收 <code>props</code> 渲染到页面时，就是无状态组件，就属于函数组件，也被称为哑组件或展示组件。</li>
+</ul>
+<p>函数组件和类组件当然是有区别的，而且函数组件的性能比类组件的性能要高，因为类组件使用的时候要实例化，而函数组件直接执行函数取返回结果即可。为了提高性能，尽量使用函数组件。<br>区别函数组件类组件是否有 <code>this</code>没有有是否有生命周期没有有是否有状态 <code>state</code>没有有</p>
+<h3 id="问题-3：React-中-refs-干嘛用的？"><a href="#问题-3：React-中-refs-干嘛用的？" class="headerlink" title="问题 3：React 中 refs 干嘛用的？"></a>问题 3：React 中 refs 干嘛用的？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐</p>
+</blockquote>
+<p><code>Refs</code> 提供了一种访问在<code>render</code>方法中创建的 DOM 节点或者 React 元素的方法。在典型的数据流中，<code>props</code><br>是父子组件交互的唯一方式，想要修改子组件，需要使用新的<code>pros</code>重新渲染它。凡事有例外，某些情况下咱们需要在典型数据流外，强制修改子代，这个时候可以使用<br><code>Refs</code>。</p>
+<p>咱们可以在组件添加一个 <code>ref</code> 属性来使用，该属性的值是一个回调函数，接收作为其第一个参数的底层 DOM 元素或组件的挂载实例。</p>
+<pre><code>class UnControlledForm extends Component {
+  handleSubmit = () =&gt; {
+    console.log(&quot;Input Value: &quot;, this.input.value)
+  }
+  render () {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;input
+          type=&#39;text&#39;
+          ref={(input) =&gt; this.input = input} /&gt;
+        &lt;button type=&#39;submit&#39;&gt;Submit&lt;/button&gt;
+      &lt;/form&gt;
+    )
+  }
+}
+</code></pre>
+<p>请注意，<code>input</code> 元素有一个<code>ref</code>属性，它的值是一个函数。该函数接收输入的实际 DOM 元素，然后将其放在实例上，这样就可以在<br><code>handleSubmit</code> 函数内部访问它。</p>
+<p>经常被误解的只有在类组件中才能使用 <code>refs</code>，但是<code>refs</code>也可以通过利用 JS 中的闭包与函数组件一起使用。</p>
+<pre><code>function CustomForm ({handleSubmit}) {
+  let inputElement
+  return (
+    &lt;form onSubmit={() =&gt; handleSubmit(inputElement.value)}&gt;
+      &lt;input
+        type=&#39;text&#39;
+        ref={(input) =&gt; inputElement = input} /&gt;
+      &lt;button type=&#39;submit&#39;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  )
+}
+</code></pre>
+<h3 id="问题-4：在-React-中如何处理事件"><a href="#问题-4：在-React-中如何处理事件" class="headerlink" title="问题 4：在 React 中如何处理事件"></a>问题 4：在 React 中如何处理事件</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐</p>
+</blockquote>
+<p>为了解决跨浏览器的兼容性问题，<code>SyntheticEvent</code> 实例将被传递给你的事件处理函数，<code>SyntheticEvent</code>是 React<br>跨浏览器的浏览器原生事件包装器，它还拥有和浏览器原生事件相同的接口，包括 <code>stopPropagation()</code> 和 <code>preventDefault()</code>。</p>
+<p>比较有趣的是，React 实际上并不将事件附加到子节点本身。React 使用单个事件侦听器侦听顶层的所有事件。这对性能有好处，也意味着 React 在更新<br>DOM 时不需要跟踪事件监听器。</p>
+<h3 id="问题-5：state-和-props-区别是啥？"><a href="#问题-5：state-和-props-区别是啥？" class="headerlink" title="问题 5：state 和 props 区别是啥？"></a>问题 5：state 和 props 区别是啥？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐</p>
+</blockquote>
+<p><code>props</code>和<code>state</code>是普通的 JS 对象。虽然它们都包含影响渲染输出的信息，但是它们在组件方面的功能是不同的。即</p>
+<ul>
+<li><code>state</code> 是组件自己管理数据，控制自己的状态，可变；</li>
+<li><code>props</code> 是外部传入的数据参数，不可变；</li>
+<li>没有<code>state</code>的叫做无状态组件，有<code>state</code>的叫做有状态组件；</li>
+<li>多用 <code>props</code>，少用 <code>state</code>，也就是多写无状态组件。</li>
+</ul>
+<h3 id="问题-6：如何创建-refs"><a href="#问题-6：如何创建-refs" class="headerlink" title="问题 6：如何创建 refs"></a>问题 6：如何创建 refs</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐</p>
+</blockquote>
+<p>Refs 是使用 <code>React.createRef()</code> 创建的，并通过 <code>ref</code> 属性附加到 React 元素。在构造组件时，通常将 <code>Refs</code><br>分配给实例属性，以便可以在整个组件中引用它们。</p>
+<pre><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+  render() {
+    return &lt;p ref={this.myRef} /&gt;;
+  }
+}
+</code></pre>
+<p>或者这样用：</p>
+<pre><code>class UserForm extends Component {
+  handleSubmit = () =&gt; {
+    console.log(&quot;Input Value is: &quot;, this.input.value)
+  }
+  render () {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;input
+          type=&#39;text&#39;
+          ref={(input) =&gt; this.input = input} /&gt; // Access DOM input in handle submit
+        &lt;button type=&#39;submit&#39;&gt;Submit&lt;/button&gt;
+      &lt;/form&gt;
+    )
+  }
+}
+</code></pre>
+<h3 id="问题-7：什么是高阶组件？"><a href="#问题-7：什么是高阶组件？" class="headerlink" title="问题 7：什么是高阶组件？"></a>问题 7：什么是高阶组件？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐</p>
+</blockquote>
+<p><strong>高阶组件(HOC)<strong>是接受一个组件并返回一个新组件的函数。基本上，这是一个模式，是从 React<br>的组合特性中衍生出来的，称其为</strong>纯组件</strong>，因为它们可以接受任何动态提供的子组件，但不会修改或复制输入组件中的任何行为。</p>
+<pre><code>const EnhancedComponent = higherOrderComponent(WrappedComponent);
+</code></pre>
+<p>HOC 可以用于以下许多用例</p>
+<ul>
+<li>代码重用、逻辑和引导抽象</li>
+<li>渲染劫持</li>
+<li>state 抽象和操作</li>
+<li>props 处理</li>
+</ul>
+<h3 id="问题-8：在构造函数调用-super-并将-props-作为参数传入的作用是啥？"><a href="#问题-8：在构造函数调用-super-并将-props-作为参数传入的作用是啥？" class="headerlink" title="问题 8：在构造函数调用 super 并将 props 作为参数传入的作用是啥？"></a>问题 8：在构造函数调用 <code>super</code> 并将 <code>props</code> 作为参数传入的作用是啥？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐</p>
+</blockquote>
+<p>在调用 <code>super()</code> 方法之前，子类构造函数无法使用<code>this</code>引用，ES6 子类也是如此。将 <code>props</code> 参数传递给 <code>super()</code><br>调用的主要原因是在子构造函数中能够通过<code>this.props</code>来获取传入的 <code>props</code>。</p>
+<p><strong>传递 props</strong></p>
+<pre><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props);  // { name: &#39;sudheer&#39;,age: 30 }
+  }
+}
+</code></pre>
+<p><strong>没传递 props</strong></p>
+<pre><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super();
+    console.log(this.props); // undefined
+    // 但是 Props 参数仍然可用
+    console.log(props); // Prints { name: &#39;sudheer&#39;,age: 30 }
+  }
+
+  render() {
+    // 构造函数外部不受影响
+    console.log(this.props) // { name: &#39;sudheer&#39;,age: 30 }
+  }
+}
+</code></pre>
+<p>上面示例揭示了一点。<code>props</code> 的行为只有在构造函数中是不同的，在构造函数之外也是一样的。</p>
+<h3 id="问题-9：什么是控制组件？"><a href="#问题-9：什么是控制组件？" class="headerlink" title="问题 9：什么是控制组件？"></a>问题 9：什么是控制组件？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>在 HTML 中，表单元素如<br><code>&lt;input&gt;</code>、<code>&lt;textarea&gt;</code>和<code>&lt;select&gt;</code>通常维护自己的状态，并根据用户输入进行更新。当用户提交表单时，来自上述元素的值将随表单一起发送。</p>
+<p>而 React<br>的工作方式则不同。包含表单的组件将跟踪其状态中的输入值，并在每次回调函数(例如<code>onChange</code>)触发时重新渲染组件，因为状态被更新。以这种方式由 React<br>控制其值的输入表单元素称为<strong>受控组件</strong>。</p>
+<h3 id="问题-10：如何-React-createElement-？"><a href="#问题-10：如何-React-createElement-？" class="headerlink" title="问题 10：如何 React.createElement ？"></a>问题 10：如何 React.createElement ？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p><strong>问题：</strong></p>
+<pre><code>const element = (
+  &lt;h1 className=&quot;greeting&quot;&gt;
+    Hello, world!
+  &lt;/h1&gt;
+)
+</code></pre>
+<p>上述代码如何使用 <code>React.createElement</code> 来实现:</p>
+<pre><code>const element = React.createElement(
+  &#39;h1&#39;,
+  {className: &#39;greeting&#39;},
+  &#39;Hello, world!&#39;
+);
+</code></pre>
+<h3 id="问题-11：讲讲什么是-JSX-？"><a href="#问题-11：讲讲什么是-JSX-？" class="headerlink" title="问题 11：讲讲什么是 JSX ？"></a>问题 11：讲讲什么是 JSX ？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>当 <strong>Facebook</strong> 第一次发布 React 时，他们还引入了一种新的 JS 方言 <code>JSX</code>，将原始 HTML 模板嵌入到 JS 代码中。JSX<br>代码本身不能被浏览器读取，必须使用<code>Babel</code>和<code>webpack</code>等工具将其转换为传统的JS。很多开发人员就能无意识使用 JSX，因为它已经与 React<br>结合在一直了。</p>
+<pre><code>class MyComponent extends React.Component {
+  render() {
+    let props = this.props;
+    return (
+      &lt;p className=&quot;my-component&quot;&gt;
+      &lt;a href={props.url}&gt;{props.name}&lt;/a&gt;
+      &lt;/p&gt;
+    );
+  }
+}
+</code></pre>
+<h3 id="问题-12：根据下面定义的代码，可以找出存在的两个问题吗-？"><a href="#问题-12：根据下面定义的代码，可以找出存在的两个问题吗-？" class="headerlink" title="问题 12：根据下面定义的代码，可以找出存在的两个问题吗 ？"></a>问题 12：根据下面定义的代码，可以找出存在的两个问题吗 ？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>请看下面的代码：</p>
+<p><img src="https://img.php.cn/upload/image/142/335/636/1574835619281427.png" alt="1574835619281427.png"></p>
+<p>答案：</p>
+<p>1.在构造函数没有将 <code>props</code> 传递给 <code>super</code>，它应该包括以下行</p>
+<pre><code>constructor(props) {
+  super(props);
+  // ...
+}
+</code></pre>
+<p>2.事件监听器(通过<code>addEventListener()</code>分配时)的作用域不正确，因为 ES6<br>不提供自动绑定。因此，开发人员可以在构造函数中重新分配<code>clickHandler</code>来包含正确的绑定:</p>
+<pre><code>constructor(props) {
+  super(props);
+  this.clickHandler = this.clickHandler.bind(this);
+  // ...
+}
+</code></pre>
+<h3 id="问题-13：为什么不直接更新-state-呢"><a href="#问题-13：为什么不直接更新-state-呢" class="headerlink" title="问题 13：为什么不直接更新 state 呢 ?"></a>问题 13：为什么不直接更新 <code>state</code> 呢 ?</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>如果试图直接更新 <code>state</code> ，则不会重新渲染组件。</p>
+<pre><code>  // 错误
+  This.state.message = &#39;Hello world&#39;;
+</code></pre>
+<p>需要使用<code>setState()</code>方法来更新 <code>state</code>。它调度对组件<code>state</code>对象的更新。当<code>state</code>改变时，组件通过重新渲染来响应：</p>
+<pre><code>// 正确做法
+This.setState({message: ‘Hello World’});
+</code></pre>
+<h3 id="问题-14：React-组件生命周期有哪些不同阶段？"><a href="#问题-14：React-组件生命周期有哪些不同阶段？" class="headerlink" title="问题 14：React 组件生命周期有哪些不同阶段？"></a>问题 14：React 组件生命周期有哪些不同阶段？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>在组件生命周期中有四个不同的阶段：</p>
+<ol>
+<li><strong>Initialization</strong>：在这个阶段，组件准备设置初始化状态和默认属性。</li>
+<li><strong>Mounting</strong>：react 组件已经准备好挂载到浏览器 DOM<br>中。这个阶段包括<code>componentWillMount</code>和<code>componentDidMount</code>生命周期方法。</li>
+<li><strong>Updating</strong>：在这个阶段，组件以两种方式更新，发送新的 props 和 state<br>状态。此阶段包括<code>shouldComponentUpdate</code>、<code>componentWillUpdate</code>和<code>componentDidUpdate</code>生命周期方法。</li>
+<li><strong>Unmounting</strong>：在这个阶段，组件已经不再被需要了，它从浏览器 DOM 中卸载下来。这个阶段包含 <code>componentWillUnmount</code><br>生命周期方法。</li>
+</ol>
+<p>除以上四个常用生命周期外，还有一个错误处理的阶段：</p>
+<p><strong>Error Handling</strong>：在这个阶段，不论在渲染的过程中，还是在生命周期方法中或是在任何子组件的构造函数中发生错误，该组件都会被调用。这个阶段包含了<br><code>componentDidCatch</code> 生命周期方法。</p>
+<p><img src="https://img.php.cn/upload/image/924/906/470/1574835665593845.png" alt="1574835665593845.png"></p>
+<h3 id="问题-15：React-的生命周期方法有哪些？"><a href="#问题-15：React-的生命周期方法有哪些？" class="headerlink" title="问题 15：React 的生命周期方法有哪些？"></a>问题 15：React 的生命周期方法有哪些？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<ul>
+<li><p><code>componentWillMount</code>:在渲染之前执行，用于根组件中的 App 级配置。</p>
+</li>
+<li><p><code>componentDidMount</code>：在第一次渲染之后执行，可以在这里做AJAX请求，DOM 的操作或状态更新以及设置事件监听器。</p>
+</li>
+<li></li>
+</ul>
+<p><code>componentWillReceiveProps</code>：在初始化<code>render</code>的时候不会执行，它会在组件接受到新的状态(Props)时被触发，一般用于父组件状态更新时子组件的重新渲染</p>
+<ul>
+<li><code>shouldComponentUpdate</code>：确定是否更新组件。默认情况下，它返回<code>true</code>。如果确定在 <code>state</code> 或 <code>props</code></li>
+</ul>
+<p>更新后组件不需要在重新渲染，则可以返回<code>false</code>，这是一个提高性能的方法。</p>
+<ul>
+<li><code>componentWillUpdate</code>：在<code>shouldComponentUpdate</code>返回 <code>true</code> 确定要更新组件之前件之前执行。</li>
+<li><code>componentDidUpdate</code>：它主要用于更新DOM以响应<code>props</code>或<code>state</code>更改。</li>
+<li><code>componentWillUnmount</code>：它用于取消任何的网络请求，或删除与组件关联的所有事件监听器。</li>
+</ul>
+<h3 id="问题-16：这三个点-…-在-React-干嘛用的？"><a href="#问题-16：这三个点-…-在-React-干嘛用的？" class="headerlink" title="问题 16：这三个点(…)在 React 干嘛用的？"></a>问题 16：这三个点(…)在 React 干嘛用的？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p><code>...</code> 在React（使用JSX）代码中做什么？它叫什么？</p>
+<pre><code>&lt;Modal {...this.props} title=&#39;Modal heading&#39;  animation={false}/&gt;
+</code></pre>
+<p>这个叫扩展操作符号或者展开操作符，例如，如果<code>this.props</code>包含<code>a：1</code>和<code>b：2</code>，则</p>
+<pre><code>&lt;Modal {...this.props} title=&#39;Modal heading&#39; animation={false}&gt;
+</code></pre>
+<p>等价于下面内容：</p>
+<pre><code>&lt;Modal a={this.props.a} b={this.props.b} title=&#39;Modal heading&#39; animation={false}&gt;
+</code></pre>
+<p>扩展符号不仅适用于该用例，而且对于创建具有现有对象的大多数（或全部）属性的新对象非常方便，在更新<code>state</code> 咱们就经常这么做：</p>
+<pre><code>this.setState(prevState =&gt; {
+    return {foo: {...prevState.foo, a: &quot;updated&quot;} };
+});
+</code></pre>
+<h3 id="问题-17：使用-React-Hooks-好处是啥？"><a href="#问题-17：使用-React-Hooks-好处是啥？" class="headerlink" title="问题 17：使用 React Hooks 好处是啥？"></a>问题 17：使用 React Hooks 好处是啥？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>首先，Hooks 通常支持提取和重用跨多个组件通用的有状态逻辑，而无需承担高阶组件或渲染 <code>props</code> 的负担。<code>Hooks</code><br>可以轻松地操作函数组件的状态，而不需要将它们转换为类组件。</p>
+<p>Hooks 在类中不起作用，通过使用它们，咱们可以完全避免使用生命周期方法，例如<br><code>componentDidMount</code>、<code>componentDidUpdate</code>、<code>componentWillUnmount</code>。相反，使用像<code>useEffect</code>这样的内置钩子。</p>
+<h3 id="问题-18：什么是-React-Hooks？"><a href="#问题-18：什么是-React-Hooks？" class="headerlink" title="问题 18：什么是 React Hooks？"></a>问题 18：什么是 React Hooks？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p><strong>Hooks</strong>是 React 16.8 中的新添加内容。它们允许在不编写类的情况下使用<code>state</code>和其他 React 特性。使用<br>Hooks，可以从组件中提取有状态逻辑，这样就可以独立地测试和重用它。Hooks<br>允许咱们在不改变组件层次结构的情况下重用有状态逻辑，这样在许多组件之间或与社区共享 Hooks 变得很容易。</p>
+<h3 id="问题-19：React-中的-useState-是什么？"><a href="#问题-19：React-中的-useState-是什么？" class="headerlink" title="问题 19：React 中的 useState() 是什么？"></a>问题 19：React 中的 <code>useState()</code> 是什么？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>下面说明<code>useState(0)</code>的用途：</p>
+<pre><code>...
+const [count, setCounter] = useState(0);
+const [moreStuff, setMoreStuff] = useState(...);
+...
+
+const setCount = () =&gt; {
+    setCounter(count + 1);
+    setMoreStuff(...);
+    ...
+};
+</code></pre>
+<p><code>useState</code> 是一个内置的 React Hook。<code>useState(0)</code><br>返回一个元组，其中第一个参数<code>count</code>是计数器的当前状态，<code>setCounter</code> 提供更新计数器状态的方法。</p>
+<p>咱们可以在任何地方使用<code>setCounter</code>方法更新计数状态-在这种情况下，咱们在<code>setCount</code>函数内部使用它可以做更多的事情，使用<br>Hooks，能够使咱们的代码保持更多功能，还可以避免过多使用基于类的组件。</p>
+<h3 id="问题-20：React-中的StrictMode-严格模式-是什么？？"><a href="#问题-20：React-中的StrictMode-严格模式-是什么？？" class="headerlink" title="问题 20：React 中的StrictMode(严格模式)是什么？？"></a>问题 20：React 中的StrictMode(严格模式)是什么？？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>React 的<code>StrictMode</code>是一种辅助组件，可以帮助咱们编写更好的 react 组件，可以使用<code>&lt;StrictMode /&gt;</code>包装一组组件，并且可以帮咱们以下检查：</p>
+<ul>
+<li>验证内部组件是否遵循某些推荐做法，如果没有，会在控制台给出警告。</li>
+<li>验证是否使用的已经废弃的方法，如果有，会在控制台给出警告。</li>
+<li>通过识别潜在的风险预防一些副作用。</li>
+</ul>
+<h3 id="问题-21：为什么类方法需要绑定到类实例？"><a href="#问题-21：为什么类方法需要绑定到类实例？" class="headerlink" title="问题 21：为什么类方法需要绑定到类实例？"></a>问题 21：为什么类方法需要绑定到类实例？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>在 JS 中，<code>this</code> 值会根据当前上下文变化。在 React 类组件方法中，开发人员通常希望 <code>this</code><br>引用组件的当前实例，因此有必要将这些方法绑定到实例。通常这是在构造函数中完成的:</p>
+<pre><code>class SubmitButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFormSubmitted: false
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit() {
+    this.setState({
+      isFormSubmitted: true
+    });
+  }
+
+  render() {
+    return (
+      &lt;button onClick={this.handleSubmit}&gt;Submit&lt;/button&gt;
+    )
+  }
+}
+</code></pre>
+<h3 id="问题-22：什么是-prop-drilling，如何避免？"><a href="#问题-22：什么是-prop-drilling，如何避免？" class="headerlink" title="问题 22：什么是 prop drilling，如何避免？"></a>问题 22：什么是 prop drilling，如何避免？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>在构建 React 应用程序时，在多层嵌套组件来使用另一个嵌套组件提供的数据。最简单的方法是将一个 <code>prop</code><br>从每个组件一层层的传递下去，从源组件传递到深层嵌套组件，这叫做<strong>prop drilling</strong>。</p>
+<p><code>prop drilling</code>的主要缺点是原本不需要数据的组件变得不必要地复杂，并且难以维护。</p>
+<p>为了避免<code>prop drilling</code>，一种常用的方法是使用<strong>React<br>Context</strong>。通过定义提供数据的<code>Provider</code>组件，并允许嵌套的组件通过<code>Consumer</code>组件或<code>useContext</code> Hook<br>使用上下文数据。</p>
+<h3 id="问题-23：描述-Flux-与-MVC？"><a href="#问题-23：描述-Flux-与-MVC？" class="headerlink" title="问题 23：描述 Flux 与 MVC？"></a>问题 23：描述 Flux 与 MVC？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<p>传统的 MVC 模式在分离数据(Model)、UI(View和逻辑(Controller)方面工作得很好，但是 MVC 架构经常遇到两个主要问题:</p>
+<p><strong>数据流不够清晰</strong>:跨视图发生的级联更新常常会导致混乱的事件网络，难于调试。</p>
+<p><strong>缺乏数据完整性</strong>:模型数据可以在任何地方发生突变，从而在整个UI中产生不可预测的结果。</p>
+<p>使用 Flux 模式的复杂用户界面不再遭受级联更新，任何给定的React 组件都能够根据 <code>store</code> 提供的数据重建其状态。Flux<br>模式还通过限制对共享数据的直接访问来加强数据完整性。</p>
+<h3 id="问题-24：受控组件和非受控组件区别是啥？"><a href="#问题-24：受控组件和非受控组件区别是啥？" class="headerlink" title="问题 24：受控组件和非受控组件区别是啥？"></a>问题 24：受控组件和非受控组件区别是啥？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐</p>
+</blockquote>
+<ul>
+<li><strong>受控组件</strong>是 React 控制中的组件，并且是表单数据真实的唯一来源。</li>
+<li>非受控组件是由 DOM 处理表单数据的地方，而不是在 React 组件中。</li>
+</ul>
+<p>尽管非受控组件通常更易于实现，因为只需使用<code>refs</code>即可从 DOM 中获取值，但通常建议优先选择受控制的组件，而不是非受控制的组件。</p>
+<p>这样做的主要原因是受控组件支持即时字段验证，允许有条件地禁用&#x2F;启用按钮，强制输入格式。</p>
+<h3 id="问题-25：这段代码有什么问题吗？"><a href="#问题-25：这段代码有什么问题吗？" class="headerlink" title="问题 25：这段代码有什么问题吗？"></a>问题 25：这段代码有什么问题吗？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>这段代码有什么问题:</p>
+<pre><code>this.setState((prevState, props) =&gt; {
+  return {
+    streak: prevState.streak + props.count
+  }
+})
+</code></pre>
+<p><strong>答案：</strong></p>
+<p>没有什么问题。这种方式很少被使用，咱们可以将一个函数传递给<code>setState</code>，该函数接收上一个 <code>state</code><br>的值和当前的<code>props</code>，并返回一个新的状态，如果咱们需要根据以前的状态重新设置状态，推荐使用这种方式。</p>
+<h3 id="问题-26：什么是-React-Context"><a href="#问题-26：什么是-React-Context" class="headerlink" title="问题 26：什么是 React Context?"></a>问题 26：什么是 React Context?</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p><code>Context</code> 通过组件树提供了一个传递数据的方法，从而避免了在每一个层级手动的传递 <code>props</code> 属性。</p>
+<h3 id="问题-27：什么是-React-Fiber"><a href="#问题-27：什么是-React-Fiber" class="headerlink" title="问题 27：什么是 React Fiber?"></a>问题 27：什么是 React Fiber?</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p><strong>Fiber</strong> 是 React 16 中新的协调引擎或重新实现核心算法。它的主要目标是支持虚拟DOM的增量渲染。<strong>React Fiber</strong><br>的目标是提高其在动画、布局、手势、暂停、中止或重用等方面的适用性，并为不同类型的更新分配优先级，以及新的并发原语。</p>
+<p>React Fiber 的目标是增强其在动画、布局和手势等领域的适用性。它的主要特性是增量渲染:能够将渲染工作分割成块，并将其分散到多个帧中。</p>
+<h3 id="问题-28：如何在-ReactJS-的-Props上应用验证？"><a href="#问题-28：如何在-ReactJS-的-Props上应用验证？" class="headerlink" title="问题 28：如何在 ReactJS 的 Props上应用验证？"></a>问题 28：如何在 ReactJS 的 Props上应用验证？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>当应用程序在开发模式下运行时，React 将自动检查咱们在组件上设置的所有<br><code>props</code>，以确保它们具有正确的数据类型。对于不正确的类型，开发模式下会在控制台中生成警告消息，而在生产模式中由于性能影响而禁用它。强制的 <code>props</code><br>用 <code>isRequired</code>定义的。</p>
+<p>下面是一组预定义的 prop 类型:</p>
+<ul>
+<li>React.PropTypes.string</li>
+<li>React.PropTypes.number</li>
+<li>React.PropTypes.func</li>
+<li>React.PropTypes.node</li>
+<li>React.PropTypes.bool</li>
+</ul>
+<p>例如，咱们为用户组件定义了如下的<code>propTypes</code></p>
+<pre><code>import PropTypes from &#39;prop-types&#39;;
+
+class User extends React.Component {
+  render() {
+    return (
+      &lt;h1&gt;Welcome, {this.props.name}&lt;/h1&gt;
+      &lt;h2&gt;Age, {this.props.age}
+    );
+  }
+}
+
+User.propTypes = {
+  name: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired
+};
+</code></pre>
+<h3 id="问题-29：在-React-中使用构造函数和-getInitialState-有什么区别？"><a href="#问题-29：在-React-中使用构造函数和-getInitialState-有什么区别？" class="headerlink" title="问题 29：在 React 中使用构造函数和 getInitialState 有什么区别？"></a>问题 29：在 React 中使用构造函数和 getInitialState 有什么区别？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>构造函数和<code>getInitialState</code>之间的区别就是<code>ES6</code>和<code>ES5</code>本身的区别。在使用<code>ES6</code>类时，应该在构造函数中初始化<code>state</code>，并在使用<code>React.createClass</code>时定义<code>getInitialState</code>方法。</p>
+<pre><code>class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { /* initial state */ };
+  }
+}
+</code></pre>
+<p>等价于：</p>
+<pre><code>var MyComponent = React.createClass({
+  getInitialState() {
+    return { /* initial state */ };
+  },
+});
+</code></pre>
+<h3 id="问题-30：如何有条件地向-React-组件添加属性？"><a href="#问题-30：如何有条件地向-React-组件添加属性？" class="headerlink" title="问题 30：如何有条件地向 React 组件添加属性？"></a>问题 30：如何有条件地向 React 组件添加属性？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>对于某些属性，React 非常聪明，如果传递给它的值是虚值，可以省略该属性。例如：</p>
+<pre><code>var InputComponent = React.createClass({
+    render: function() {
+      var required = true;
+      var disabled = false;
+
+      return (
+        &lt;input type=&quot;text&quot; disabled={disabled} required={required} /&gt;
+      );
+    }
+});
+</code></pre>
+<p>渲染结果：</p>
+<pre><code>&lt;input type=&quot;text&quot; required&gt;
+</code></pre>
+<p>另一种可能的方法是：</p>
+<pre><code>var condition = true;
+
+var component = (
+  &lt;p
+    value=&quot;foo&quot;
+    { ...( condition &amp;&amp; { disabled: true } ) } /&gt;
+);
+</code></pre>
+<h3 id="问题-31：Hooks会取代-render-props-和高阶组件吗？"><a href="#问题-31：Hooks会取代-render-props-和高阶组件吗？" class="headerlink" title="问题 31：Hooks会取代 render props 和高阶组件吗？"></a>问题 31：Hooks会取代 <code>render props</code> 和高阶组件吗？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>通常，<code>render props</code>和高阶组件仅渲染一个子组件。React团队认为，Hooks 是服务此用例的更简单方法。</p>
+<p>这两种模式仍然有一席之地(例如，一个虚拟的 <code>scroller</code> 组件可能有一个 <code>renderItem prop</code>，或者一个可视化的容器组件可能有它自己的<br>DOM 结构)。但在大多数情况下，Hooks 就足够了，可以帮助减少树中的嵌套。</p>
+<h3 id="问题-32：如何避免组件的重新渲染？"><a href="#问题-32：如何避免组件的重新渲染？" class="headerlink" title="问题 32：如何避免组件的重新渲染？"></a>问题 32：如何避免组件的重新渲染？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐</p>
+</blockquote>
+<p>React 中最常见的问题之一是组件不必要地重新渲染。React 提供了两个方法，在这些情况下非常有用：</p>
+<ul>
+<li><code>React.memo()</code>:这可以防止不必要地重新渲染函数组件</li>
+<li><code>PureComponent</code>:这可以防止不必要地重新渲染类组件</li>
+</ul>
+<p>这两种方法都依赖于对传递给组件的<code>props</code>的浅比较，如果 <code>props</code><br>没有改变，那么组件将不会重新渲染。虽然这两种工具都非常有用，但是浅比较会带来额外的性能损失，因此如果使用不当，这两种方法都会对性能产生负面影响。</p>
+<p>通过使用 <strong>React Profiler</strong>，可以在使用这些方法前后对性能进行测量，从而确保通过进行给定的更改来实际改进性能。</p>
+<h3 id="问题-33：什么是纯函数？"><a href="#问题-33：什么是纯函数？" class="headerlink" title="问题 33：什么是纯函数？"></a>问题 33：什么是纯函数？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐⭐</p>
+</blockquote>
+<p>纯函数是不依赖并且不会在其作用域之外修改变量状态的函数。本质上，纯函数始终在给定相同参数的情况下返回相同结果。</p>
+<h3 id="问题-34：当调用setState时，React-render-是如何工作的？"><a href="#问题-34：当调用setState时，React-render-是如何工作的？" class="headerlink" title="问题 34：当调用setState时，React render 是如何工作的？"></a>问题 34：当调用<code>setState</code>时，React <code>render</code> 是如何工作的？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐⭐</p>
+</blockquote>
+<p>咱们可以将”<code>render</code>“分为两个步骤：</p>
+<ol>
+<li>虚拟 DOM 渲染:当<code>render</code>方法被调用时，它返回一个新的组件的虚拟 DOM<br>结构。当调用<code>setState()</code>时，<code>render</code>会被再次调用，因为默认情况下<code>shouldComponentUpdate</code>总是返回<code>true</code>，所以默认情况下<br>React 是没有优化的。</li>
+<li>原生 DOM 渲染:React<br>只会在虚拟DOM中修改真实DOM节点，而且修改的次数非常少——这是很棒的React特性，它优化了真实DOM的变化，使React变得更快。</li>
+</ol>
+<h3 id="问题-35：如何避免在React重新绑定实例？"><a href="#问题-35：如何避免在React重新绑定实例？" class="headerlink" title="问题 35：如何避免在React重新绑定实例？"></a>问题 35：如何避免在React重新绑定实例？</h3><blockquote>
+<p>主题: React<br>难度: ⭐⭐⭐⭐⭐</p>
+</blockquote>
+<p>有几种常用方法可以避免在 React 中绑定方法：</p>
+<p>1.将事件处理程序定义为内联箭头函数</p>
+<pre><code>class SubmitButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFormSubmitted: false
+    };
+  }
+
+  render() {
+    return (
+      &lt;button onClick={() =&gt; {
+        this.setState({ isFormSubmitted: true });
+      } }&gt;Submit&lt;/button&gt;
+    )
+  }
+}
+</code></pre>
+<p>2.使用箭头函数来定义方法：</p>
+<pre><code>class SubmitButton extends React.Component {
+  state = {
+    isFormSubmitted: false
+  }
+
+  handleSubmit = () =&gt; {
+    this.setState({
+      isFormSubmitted: true
+    });
+  }
+
+  render() {
+    return (
+      &lt;button onClick={this.handleSubmit}&gt;Submit&lt;/button&gt;
+    )
+  }
+}
+</code></pre>
+<p>3.使用带有 Hooks 的函数组件</p>
+<pre><code>const SubmitButton = () =&gt; {
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+  return (
+    &lt;button onClick={() =&gt; {
+        setIsFormSubmitted(true);
+    } }&gt;Submit&lt;/button&gt;
+  )
+};
+</code></pre>
+<blockquote>
+<p>作者：Alex<br>来源：dev.to</p>
+</blockquote>
+<p>本文来自HTML中文网 <a target="_blank" rel="noopener" href="https://www.html.cn/interview/">前端面试题</a> 栏目！！</p>
+<p>以上就是35道值得收藏的React面试题的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/99abea60.html"><div class="related-post-title">修复Web应用程序中的内存泄漏</div><div class="related-post-meta"><time>2020-03-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/1215277f.html"><div class="related-post-title">css容易使人蒙圈的几个经典问题</div><div class="related-post-meta"><time>2020-01-13</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/362fd171.html"><div class="related-post-title">Chrome浏览器垃圾回收机制与内存泄漏分析</div><div class="related-post-meta"><time>2019-10-31</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/1f1295e4.html"><div class="related-post-title">腾讯开源内部跨端框架 Hippy</div><div class="related-post-meta"><time>2019-12-25</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/586ec14f.html"><div class="related-post-title">Web性能领域常见的专业术语</div><div class="related-post-meta"><time>2019-12-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/93f43cef.html">https://xuehuayu.cn/article/93f43cef.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/14539579.html">50个最简单的JavaScript面试题</a><a class="next" href="/article/efe984b2.html">React 开发人员应该掌握的 22 种神奇工具</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

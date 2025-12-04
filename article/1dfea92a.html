@@ -1,0 +1,619 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>React SSR 详解 + 2个项目实战 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">React SSR 详解 + 2个项目实战</h1><div class="post-meta"><span class="date">2019-12-13</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 5.6k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 23</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/1dfea92a.html#waline-comment"><span class="waline-comment-count" data-path="/article/1dfea92a.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5def0816f265da33aa6aa7fe</code></p>
+<span id="more"></span>
+
+<h2 id="CSR-SSR"><a href="#CSR-SSR" class="headerlink" title="CSR &amp; SSR"></a>CSR &amp; SSR</h2><h3 id="客户端渲染（Client-Side-Rendering）"><a href="#客户端渲染（Client-Side-Rendering）" class="headerlink" title="客户端渲染（Client Side Rendering）"></a>客户端渲染（Client Side Rendering）</h3><ul>
+<li><strong>CSR 渲染流程：</strong>![React</li>
+</ul>
+<p>CSR.png](<a target="_blank" rel="noopener" href="https://user-gold-cdn.xitu.io/2019/12/9/16eeb56642155f21?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">https://user-gold-cdn.xitu.io/2019/12/9/16eeb56642155f21?imageView2/0/w/1280/h/960/format/webp/ignore-error/1</a>)</p>
+<h3 id="服务端渲染（Server-Side-Rendering）"><a href="#服务端渲染（Server-Side-Rendering）" class="headerlink" title="服务端渲染（Server Side Rendering）"></a>服务端渲染（Server Side Rendering）</h3><ul>
+<li>是指将单页应用（SPA）在<strong>服务器端</strong>渲染成 HTML</li>
+</ul>
+<p>片段，发送到浏览器，然后交由浏览器为其绑定状态与事件，成为完全可交互页面的过程。（<strong>PS：本文中的 SSR 内容都是围绕同构应用来讲的</strong>）</p>
+<ul>
+<li><strong>SSR 渲染流程：</strong></li>
+</ul>
+<p>![React</p>
+<p>SSR.jpg](<a target="_blank" rel="noopener" href="https://user-gold-cdn.xitu.io/2019/12/9/16eeb5663f9bdfe7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">https://user-gold-cdn.xitu.io/2019/12/9/16eeb5663f9bdfe7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1</a>)</p>
+<ul>
+<li>服务端只负责首次“渲染”（真正意义上，只有浏览器才能渲染页面，服务端其实是生成 HTML</li>
+</ul>
+<p>内容），然后返回给客户端，客户端<strong>接管</strong>页面交互（事件绑定等逻辑），之后客户端路由切换时，直接通过 JS<br>代码来显示对应的内容，不再需要服务端渲染（只有页面刷新时会需要）</p>
+<h2 id="为什么要用-SSR"><a href="#为什么要用-SSR" class="headerlink" title="为什么要用 SSR"></a>为什么要用 SSR</h2><p><strong>优点：</strong></p>
+<ul>
+<li><p><strong>更快的首屏加载速度</strong>：无需等待 JavaScript 完成下载且执行才显示内容，更快速地看到完整渲染的页面，有更好的用户体验。</p>
+</li>
+<li><p><strong>更友好的 SEO</strong>：</p>
+</li>
+<li><p>爬虫可以直接抓取渲染之后的页面，CSR 首次返回的 HTML</p>
+</li>
+</ul>
+<p>文档中，是空节点（root），不包含内容，爬虫就无法分析你的网站有什么内容，所以就无法给你好的排名。而 SSR 返回渲染之后的 HTML<br>片段，内容完整，所以能更好地被爬虫分析与索引。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/9/16eeb566424a13e1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<ul>
+<li>基于旧版本的搜索引擎：我们会给 html 加 title 和 description 来做简单的 seo</li>
+</ul>
+<p>优化，这两个本质上并不会提高搜索的排名，而是提高网站转化率。给网站提供更多的描述，让用户有点击的欲望，从而提高排名。</p>
+<pre><code>&lt;title&gt;首页标题&lt;/title&gt;&lt;metaname=&quot;description&quot;content=&quot;首页描述&quot;&gt;&lt;/meta&gt;复制代码
+</code></pre>
+<ul>
+<li>基于新版本的搜索引擎（全文搜索）：想要光靠上面两个来给网站有个好的排名是不行的，所以需要 SSR 来提供更多的网站内容。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>对服务器性能消耗较高</li>
+<li>项目复杂度变高，出问题需要在前端、node、后端三者之间找</li>
+<li>需要考虑 SSR 机器的运维、申请、扩容，增加了运维成本（可以通过 Serverless 解决）</li>
+</ul>
+<h2 id="什么是同构应用"><a href="#什么是同构应用" class="headerlink" title="什么是同构应用"></a>什么是同构应用</h2><ul>
+<li><strong>一套代码既可以在服务端运行又可以在客户端运行，这就是同构应用。</strong></li>
+<li>在服务器上生成渲染内容，让用户尽早看到有信息的页面。一个完整的应用除包括纯粹的静态内容以外，还包括各种事件响应、用户交互等。这就意味着在浏览器端一定还要执行</li>
+</ul>
+<h2 id="JavaScript-脚本，以完成绑定事件、处理异步交互等工作。"><a href="#JavaScript-脚本，以完成绑定事件、处理异步交互等工作。" class="headerlink" title="JavaScript 脚本，以完成绑定事件、处理异步交互等工作。"></a>JavaScript 脚本，以完成绑定事件、处理异步交互等工作。</h2><h2 id="从性能及用户体验上来看，服务端渲染应该表达出页面最主要、最核心、最基本的信息；而浏览器端则需要针对交互完成进一步的页面渲染、事件绑定等增强功能。所谓同构，就是指前后端共用一套代码或逻辑，而在这套代码或逻辑中，理想的状况是在浏览器端进一步渲染的过程中，判断已有的DOM-结构和即将渲染出的结构是否相同，若相同，则不重新渲染-DOM-结构，只需要进行事件绑定即可。"><a href="#从性能及用户体验上来看，服务端渲染应该表达出页面最主要、最核心、最基本的信息；而浏览器端则需要针对交互完成进一步的页面渲染、事件绑定等增强功能。所谓同构，就是指前后端共用一套代码或逻辑，而在这套代码或逻辑中，理想的状况是在浏览器端进一步渲染的过程中，判断已有的DOM-结构和即将渲染出的结构是否相同，若相同，则不重新渲染-DOM-结构，只需要进行事件绑定即可。" class="headerlink" title="从性能及用户体验上来看，服务端渲染应该表达出页面最主要、最核心、最基本的信息；而浏览器端则需要针对交互完成进一步的页面渲染、事件绑定等增强功能。所谓同构，就是指前后端共用一套代码或逻辑，而在这套代码或逻辑中，理想的状况是在浏览器端进一步渲染的过程中，判断已有的DOM 结构和即将渲染出的结构是否相同，若相同，则不重新渲染 DOM 结构，只需要进行事件绑定即可。"></a>从性能及用户体验上来看，服务端渲染应该表达出页面最主要、最核心、最基本的信息；而浏览器端则需要针对交互完成进一步的页面渲染、事件绑定等增强功能。所谓同构，就是指前后端共用一套代码或逻辑，而在这套代码或逻辑中，理想的状况是在浏览器端进一步渲染的过程中，判断已有的<br>DOM 结构和即将渲染出的结构是否相同，若相同，则不重新渲染 DOM 结构，只需要进行事件绑定即可。</h2><p>从这个维度上讲，同构和服务端渲染又有所区别，同构更像是服务端渲染和浏览器端渲染的交集，它弥补了服务端和浏览器端的差异，从而使得同一套代码或逻辑得以统一运行。同构的核心是“同一套代码”，这是脱离于两端角度的另一个维度。</p>
+<h2 id="手动搭建一个-SSR-框架"><a href="#手动搭建一个-SSR-框架" class="headerlink" title="手动搭建一个 SSR 框架"></a>手动搭建一个 SSR 框架</h2><ul>
+<li></li>
+</ul>
+<p><strong>项目地址：</strong><a target="_blank" rel="noopener" href="https://github.com/yjdjiayou/react-ssr-demo"><strong>https://github.com/yjdjiayou/react-ssr-demo</strong></a></p>
+<ul>
+<li>项目源码中已经有大量的注释，所以这里不做过多的介绍</li>
+</ul>
+<h2 id="使用-Next-js（成熟的-SSR-框架）"><a href="#使用-Next-js（成熟的-SSR-框架）" class="headerlink" title="使用 Next.js（成熟的 SSR 框架）"></a>使用 <a target="_blank" rel="noopener" href="https://nextjs.frontendx.cn/docs/#%E5%AE%89%E8%A3%85">Next.js</a>（成熟的 SSR 框架）</h2><ul>
+<li>这里只是展示了一些值得注意的知识点以及自己的心得，更多细节请看</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://nextjs.org/docs#importing-css--sass--less--stylus-files">官方文档</a>****<a target="_blank" rel="noopener" href="https://nextjs.frontendx.cn/docs/#%E5%AE%89%E8%A3%85">中文文档</a></strong></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code>npx create-next-app project-name
+复制代码
+</code></pre>
+<p>查看 package.json</p>
+<pre><code>{
+  &quot;name&quot;: &quot;next-demo-one&quot;,
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;private&quot;: true,
+  &quot;scripts&quot;: {
+    // 默认端口 3000，想要修改端口用 -p
+    &quot;dev&quot;: &quot;next dev -p 4000&quot;,
+    &quot;build&quot;: &quot;next build&quot;,
+    &quot;start&quot;: &quot;next start&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;next&quot;: &quot;9.1.4&quot;,
+    &quot;react&quot;: &quot;16.12.0&quot;,
+    &quot;react-dom&quot;: &quot;16.12.0&quot;
+  }
+}
+复制代码
+</code></pre>
+<h3 id="Head"><a href="#Head" class="headerlink" title="Head"></a>Head</h3><ul>
+<li><p>next&#x2F;head 的作用就是给每个页面设置 <code>&lt;head&gt;</code> 标签的内容，相当于 react-helmet</p>
+<p>  import Head from’next&#x2F;head’exportdefault () &#x3D;&gt;<br><div><Head><title>My page title</title>&lt;metaname&#x3D;”viewport”content&#x3D;”initial-scale&#x3D;1.0, width&#x3D;device-width” &#x2F;&gt;</Head><p>Hello world!</p></div>复制代码</p>
+</li>
+</ul>
+<h3 id="getInitialProps"><a href="#getInitialProps" class="headerlink" title="getInitialProps"></a>getInitialProps</h3><ul>
+<li>**Next.js 有一套自己的获取数据的规范，数据请求需要放在 <code>getInitialProps</code></li>
+</ul>
+<p>内部，而不是放在组件的生命周期里，需要遵循它的规范。**</p>
+<ul>
+<li><p><code>getInitialProps</code> 入参对象的属性如下：</p>
+</li>
+<li><p><code>pathname</code> - URL 的 path 部分</p>
+</li>
+<li><p><code>query</code> - URL 的 query 部分，并被解析成对象</p>
+</li>
+<li><p><code>asPath</code> - 显示在浏览器中的实际路径（包含查询部分），为 <code>String</code> 类型</p>
+</li>
+<li><p><code>req</code> - HTTP 请求对象 (只有服务器端有)</p>
+</li>
+<li><p><code>res</code> - HTTP 返回对象 (只有服务器端有)</p>
+</li>
+<li><p><code>jsonPageRes</code> -</p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/with-aphrodite">获取数据响应对象</a><br>(只有客户端有)</p>
+<ul>
+<li><p><code>err</code> - 渲染过程中的任何错误</p>
+</li>
+<li><p>当页面初始化加载时，<code>getInitialProps</code> 只会在服务端被调用。只有当路由跳转（<code>Link</code> 组件跳转或 API 方法跳转）时，客户端才会执行</p>
+</li>
+</ul>
+<p><code>getInitialProps</code>。<strong><a target="_blank" rel="noopener" href="https://codesandbox.io/s/nextjs-getinitialprops-8yn40">在线demo</a></strong></p>
+<ul>
+<li>**只有放在 pages</li>
+</ul>
+<p>目录下的组件，它的**<code>getInitialProps</code><strong>才会被调用，子组件使用</strong><code>getInitialProps</code><strong>是无效的</strong></p>
+<ul>
+<li>因为 pages 目录下的组件都默认是一个路由组件，只有路由组件才会被处理。Next.js 会先调用路由组件上的 <code>getInitialProps</code></li>
+</ul>
+<p>方法，获取返回的数据作为 <code>props</code><br>传入到该路由组件中，最后渲染该路由组件。<a target="_blank" rel="noopener" href="https://codesandbox.io/s/nextjs-getinitialprops-2-8lg9z"><strong>在线demo</strong></a></p>
+<ul>
+<li><p>子组件想要获取数据，最直接的方法如下：</p>
+<p>  functionPageA(props){<br>  const {childOneData,childTwoData} &#x3D; props;<br>  return<div><ChildOnechildOneData/><ChildTwochildTwoData/></div>;<br>  }<br>  PageA.getInitialProps &#x3D; async ()&#x3D;&gt;{<br>  &#x2F;&#x2F; 在父组件中的 getInitialProps 方法里，调用接口获取子组件所需要的数据const childOneData &#x3D; await getPageAChildOneData();<br>  const childTwoData &#x3D; await getPageAChildTwoData();<br>  return {childOneData, childTwoData}<br>  };<br>  复制代码</p>
+</li>
+<li><p>当一个页面结构复杂，多个子组件需要同时请求数据或者子组件需要动态加载时，以上的方案可能就不太适合了。千万不要想着在子组件的生命周期中去请求数据，要遵守</p>
+</li>
+</ul>
+<p>Next.js 的规范。比较好的方法是：将这些子组件拆分一个个子路由，作为路由组件就能调用 <code>getInitialProps</code> 方法获取数据</p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><ul>
+<li><strong>约定式路由</strong></li>
+<li>默认在 <code>pages</code> 目录下的 <code>.js</code> 文件都是一级路由</li>
+<li>如果要使用二级路由，就在 <code>pages</code> 目录新建一个文件夹</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/9/16eeb56646d432f5?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="image.png"></p>
+<ul>
+<li>**Next.js 中的 <code>Link</code></li>
+</ul>
+<p>组件，默认不会渲染出任何内容（如**<code>a</code><strong>标签），需要指定渲染内容，并且内部必须有一个顶层元素，不能同时出现两个兄弟元素。它只是监听了我们指定内容的</strong><code>click</code><strong>事件，然后跳转到指定的路径</strong></p>
+<pre><code>import Link from&#39;next/link&#39;const Index = () =&gt; {
+  return (
+    &lt;&gt;&lt;Linkhref=&quot;/a?id=1&quot;&gt;&lt;div&gt;&lt;Button&gt;AAA&lt;/Button&gt;&lt;Button&gt;BBB&lt;/Button&gt;&lt;/div&gt;&lt;/Link&gt;&lt;/&gt;
+  )
+};
+复制代码
+</code></pre>
+<ul>
+<li><p>Next.js 中的路由是通过约定文件目录结构来生成的，所以无法定义 <code>params</code> ，<strong>动态路由只能通过 <code>query</code> 实现</strong></p>
+<p>  import Router from’next&#x2F;router’import Link from’next&#x2F;link’const Index &#x3D; () &#x3D;&gt; {<br>&#x2F;&#x2F; 通过 API 跳转functiongotoTestB() {<br>  Router.push(<br>    {<br>      pathname: ‘&#x2F;test&#x2F;b’,<br>      query: {<br>        id: 2,<br>      },<br>    }<br>  )<br>}<br>return (<br>  &lt;&gt;&lt;Linkhref&#x3D;”&#x2F;test&#x2F;b?id&#x3D;1” &gt;<Button>BBB</Button></Link>&lt;&#x2F;&gt;<br>)<br>  };<br>  复制代码</p>
+</li>
+<li><p>如果想要浏览器中的路由更好看些（如：<code>/test/id</code>，而不是 <code>/test?id=123456</code>），可以用<strong>路由映射</strong></p>
+<p>  import Router from’next&#x2F;router’import Link from’next&#x2F;link’const Index &#x3D; () &#x3D;&gt; {<br>&#x2F;&#x2F; 通过 API 跳转functiongotoTestB() {<br>  Router.push(<br>    {<br>      pathname: ‘&#x2F;test&#x2F;b’,<br>      query: {<br>        id: 2,<br>      },<br>    },<br>    ‘&#x2F;test&#x2F;b&#x2F;2’,<br>  )<br>}<br>return (<br>  &lt;&gt;&lt;Linkhref&#x3D;”&#x2F;test&#x2F;b?id&#x3D;1”as&#x3D;”&#x2F;test&#x2F;b&#x2F;1” &gt;<div><Button>BBB</Button></div></Link>&lt;&#x2F;&gt;<br>)<br>  };<br>  复制代码</p>
+</li>
+<li><p>但是以上页面刷新的时候，页面会 404 ，因为是 SPA</p>
+</li>
+</ul>
+<p>应用，前端改变浏览器路由可以不刷新页面，但是在刷新页面，重新请求该路由对应的文件时，服务端找不到该路径对应的文件。所以需要借助 Node 框架（如：Koa2<br>）来替代 Next.js 默认自带的 server</p>
+<pre><code>const Koa = require(&#39;koa&#39;);
+const Router = require(&#39;koa-router&#39;);
+const next = require(&#39;next&#39;);
+const app = next({ dev });
+const handle = app.getRequestHandler();
+
+app.prepare().then(() =&gt; {
+  const server = new Koa();
+  const router = new Router();
+
+  router.get(&#39;/a/:id&#39;, async ctx =&gt; {
+    const id = ctx.params.id;
+    await handle(ctx.req, ctx.res, {
+      pathname: &#39;/a&#39;,
+      query: { id },
+    });
+  });
+
+  server.listen(3000, () =&gt; {
+    console.log(&#39;koa server listening on 3000&#39;)
+  });
+}
+
+复制代码
+</code></pre>
+<ul>
+<li><p><strong>路由拦截器</strong></p>
+<p>  import Router from’next&#x2F;router’</p>
+<p>  Router.beforePopState(({ url, as, options }) &#x3D;&gt; {<br>&#x2F;&#x2F; I only want to allow these two routes!if (as !&#x3D;&#x3D; “&#x2F;“ || as !&#x3D;&#x3D; “&#x2F;other”) {<br>  &#x2F;&#x2F; Have SSR render bad routes as a 404.window.location.href &#x3D; as&#x2F;&#x2F; 返回 false，Router 将不会执行 popstate 事件returnfalse<br>}<br><br>return true<br>  });</p>
+<p>  复制代码</p>
+</li>
+<li><p><strong>路由事件</strong></p>
+</li>
+<li><p><code>routeChangeStart(url)</code> - 路由开始切换时触发</p>
+</li>
+<li><p><code>routeChangeComplete(url)</code> - 完成路由切换时触发</p>
+</li>
+<li><p><code>routeChangeError(err, url)</code> - 路由切换报错时触发</p>
+</li>
+<li><p><code>beforeHistoryChange(url)</code> - 浏览器 <code>history</code> 模式开始切换时触发</p>
+</li>
+<li><p><code>hashChangeStart(url)</code> - 开始切换 <code>hash</code> 值但是没有切换页面路由时触发</p>
+</li>
+<li><p><code>hashChangeComplete(url)</code> - 完成切换 <code>hash</code> 值但是没有切换页面路由时触发</p>
+</li>
+<li><p>这里的 <code>url</code> 是指显示在浏览器中的 <code>url</code>。如果你使用了<strong>路由映射</strong>，那浏览器中的 <code>url</code> 将会显示 <code>as</code> 的值</p>
+<p>  import React from’react’;<br>  import Router from’next&#x2F;router’classUserextendsReact.Component{</p>
+<pre><code>  handleRouteChange = url =&gt; {
+      console.log(&#39;url=&gt; &#39;, url);
+  };
+
+  componentDidMount() {
+      Router.events.on(&#39;routeChangeStart&#39;, (res) =&gt; {
+          console.log(res);
+      });
+      Router.events.on(&#39;routeChangeComplete&#39;, (res) =&gt; {
+          console.log(res);
+      });
+      Router.events.on(&#39;routeChangeError&#39;, (res) =&gt; {
+          console.log(res);
+      });
+  }
+
+  componentWillUnmount() {
+      Router.events.off(&#39;routeChangeStart&#39;, (res) =&gt; {
+          console.log(res);
+      });
+      Router.events.off(&#39;routeChangeComplete&#39;, (res) =&gt; {
+          console.log(res);
+      });
+      Router.events.off(&#39;routeChangeError&#39;, (res) =&gt; {
+          console.log(res);
+      });
+  }
+
+  render() {
+      return&lt;div&gt;User &lt;/div&gt;;
+  }
+</code></pre>
+<p>  }</p>
+<p>  复制代码</p>
+</li>
+</ul>
+<h3 id="style-jsx"><a href="#style-jsx" class="headerlink" title="style jsx"></a>style jsx</h3><ul>
+<li>Next.js 中有各种 CSS 解决方案，默认集成了</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/styled-jsx"><strong>styled-jsx</strong></a></p>
+<pre><code>const A = ({ router, name}) =&gt; {
+  return (
+    &lt;&gt;&lt;Linkhref=&quot;#aaa&quot;&gt;&lt;aclassName=&quot;link&quot;&gt;
+          A {router.query.id} {name}
+        &lt;/a&gt;&lt;/Link&gt;&lt;stylejsx&gt;{`
+        a {
+          color: blue;
+        }
+        .link {
+          color: ${color};
+        }
+      `}&lt;/style&gt;&lt;/&gt;
+  )
+};
+
+复制代码
+</code></pre>
+<h3 id="动态加载资源-组件"><a href="#动态加载资源-组件" class="headerlink" title="动态加载资源 &amp; 组件"></a>动态加载资源 &amp; 组件</h3><pre><code>import { withRouter } from&#39;next/router&#39;import dynamic from&#39;next/dynamic&#39;import Link from&#39;next/link&#39;const LazyComp = dynamic(import(&#39;../components/lazy-comp&#39;));
+
+const A = ({time }) =&gt; {
+
+  return (
+    &lt;&gt;&lt;div&gt;Time:{time}&lt;/div&gt;&lt;LazyComp /&gt;&lt;/&gt;
+  )
+};
+
+A.getInitialProps = async ctx =&gt; {
+  // 动态加载 moment，只有到了当前页面的时候才去加载它，而不是在页面初始化的时候去加载
+  const moment = await import(&#39;moment&#39;);
+
+  const promise = new Promise(resolve =&gt; {
+    setTimeout(() =&gt; {
+      resolve({
+        name: &#39;jokcy&#39;,
+        // 默认加载的是 ES6 模块
+        time: moment.default(Date.now() - 60 * 1000).fromNow(),
+      })
+    }, 1000)
+  });
+
+  return await promise
+};
+
+export default A;
+
+复制代码
+</code></pre>
+<h3 id="app-js"><a href="#app-js" class="headerlink" title="_app.js"></a>_app.js</h3><ul>
+<li><p>新建 <code>./pages/_app.js</code> 文件，自定义 App 模块</p>
+</li>
+<li><p>自定义 Next.js 中的 ，可以有如下好处：</p>
+</li>
+<li><p>实现各个页面通用的布局 —— Layout</p>
+</li>
+<li><p>当路由变化时，保持一些公用的状态（使用 redux）</p>
+</li>
+<li><p>给页面传入一些自定义的数据</p>
+</li>
+<li><p>使用 <code>componentDidCatch</code> 自定义处理错误</p>
+<p>  &#x2F;&#x2F; lib&#x2F;my-contextimport React from’react’exportdefault React.createContext(‘’)</p>
+<p>  &#x2F;&#x2F; components&#x2F;Layout&#x2F;&#x2F; 固定布局<br>  xxx<br>  xxx<br>  xxx<br>  &#x2F;&#x2F; _app.jsimport’antd&#x2F;dist&#x2F;antd.css’;<br>  import App, { Container } from’next&#x2F;app’;<br>  import Layout from’..&#x2F;components&#x2F;Layout’import MyContext from’..&#x2F;lib&#x2F;my-context’import {Provider} from’react-redux’classMyAppextendsApp{<br>state &#x3D; {<br>  context: ‘value’,<br>};<br><br>&#x2F;**<br>  - 重写 getInitialProps 方法<br>  *&#x2F;staticasync getInitialProps(ctx) {<br>  const {Component} &#x3D; ctx;<br>  &#x2F;&#x2F; 每次页面切换的时候，这个方法都会被执行！！！console.log(‘app init’);<br>  let pageProps &#x3D; {};<br>  &#x2F;&#x2F; 因为如果不加 _app.js，默认情况下，Next.js 会执行 App.getInitialProps&#x2F;&#x2F; 所以重写 getInitialProps 方法时，路由组件的 getInitialProps 必须要执行if (Component.getInitialProps) {<br>    pageProps &#x3D; await Component.getInitialProps(ctx)<br>  }<br>  return {<br>    pageProps<br>  }<br>}<br><br>render() {<br>  const { Component, pageProps, reduxStore } &#x3D; this.props;<br><br>  return (<br>    &#x2F;&#x2F; 在最新的 Next.js 版本中，Container 被移除了，不再需要 Container 包裹组件&#x2F;&#x2F; <a target="_blank" rel="noopener" href="https://github.com/zeit/next.js/blob/master/errors/app-container-deprecated.md">https://github.com/zeit/next.js/blob/master/errors/app-container-deprecated.md</a><br>    <Container><br>      <Layout>&lt;MyContext.Providervalue&#x3D;{this.state.context}&gt;&lt;Component {…pageProps} &#x2F;&gt;&lt;&#x2F;MyContext.Provider&gt;</Layout></Container><br>  )<br>}<br>  }<br>  export default MyApp;</p>
+<p>  复制代码</p>
+</li>
+</ul>
+<h3 id="document-js"><a href="#document-js" class="headerlink" title="_document.js"></a>_document.js</h3><ul>
+<li><strong>只有在服务端渲染的时候才会被调用，客户端是不会执行的</strong></li>
+<li>用来修改服务端渲染的文档内容</li>
+<li>一般配合第三方 css-in-js 方案使用，如</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/with-styled-components">styled-components</a></strong></p>
+<pre><code>import Document, { Html, Head, Main, NextScript } from&#39;next/document&#39;classMyDocumentextendsDocument{
+    // 重写 getInitialProps 方法staticasync getInitialProps(ctx) {
+        // 因为如果不加 _document.js，默认情况下，Next.js 会执行 Document.getInitialProps// 所以自定义的时候，必须执行 Document.getInitialPropsconst props = await Document.getInitialProps(ctx);
+        return {
+            ...props
+        }
+    }
+
+    // render 要么不重写，重写的话，以下的内容都必须加上// render() {//   return (//     &lt;Html&gt;//       &lt;Head&gt;//           &lt;style&gt;{`body { background:red;} /* custom! */`}&lt;/style&gt;//       &lt;/Head&gt;//       &lt;body className=&quot;custom_class&quot;&gt;//         &lt;Main /&gt;//         &lt;NextScript /&gt;//       &lt;/body&gt;//     &lt;/Html&gt;//   )// }
+}
+
+exportdefault MyDocument
+
+复制代码
+</code></pre>
+<h3 id="内部集成-Webpack"><a href="#内部集成-Webpack" class="headerlink" title="内部集成 Webpack"></a>内部集成 Webpack</h3><ul>
+<li>Next.js 内部集成了 Webpack，开箱即用</li>
+<li>生成环境下默认会分割代码和 tree-shaking</li>
+</ul>
+<h3 id="集成-Redux"><a href="#集成-Redux" class="headerlink" title="集成 Redux"></a>集成 Redux</h3><p><a target="_blank" rel="noopener" href="https://codesandbox.io/s/nextjs-getinitialprops-redux-op1tm"><strong>在线demo</strong></a></p>
+<h3 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h3><p>![Next.js 渲染流程</p>
+<p>(1).jpg](<a target="_blank" rel="noopener" href="https://user-gold-cdn.xitu.io/2019/12/10/16eeb677254a5232?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">https://user-gold-cdn.xitu.io/2019/12/10/16eeb677254a5232?imageView2/0/w/1280/h/960/format/webp/ignore-error/1</a>)</p>
+<h4 id="服务端执行顺序"><a href="#服务端执行顺序" class="headerlink" title="服务端执行顺序"></a>服务端执行顺序</h4><p><a target="_blank" rel="noopener" href="https://codesandbox.io/s/nextjs-getinitialprops-zhixingshunxu-ss6mp"><strong>在线demo</strong></a></p>
+<ol>
+<li>_app getInitialProps()</li>
+<li>page getInitialProps()</li>
+<li>_document getInitialProps()</li>
+<li>_app constructor()</li>
+<li>_app render()</li>
+<li>page constructor()</li>
+<li>page render()</li>
+<li>_document constructor()</li>
+<li>_document render()</li>
+</ol>
+<p>page 表示路由组件</p>
+<h4 id="客户端执行顺序（首次打开页面）"><a href="#客户端执行顺序（首次打开页面）" class="headerlink" title="客户端执行顺序（首次打开页面）"></a>客户端执行顺序（首次打开页面）</h4><ol>
+<li>_app constructor()</li>
+<li>_app render()</li>
+<li>page constructor()</li>
+<li>page render()</li>
+</ol>
+<p><strong>注意：</strong> 当页面初始化加载时，<code>getInitialProps</code> 只会在服务端被调用。只有当路由跳转（ <code>Link</code> 组件跳转或 API<br>方法跳转）时，客户端才会执行 <code>getInitialProps</code>。</p>
+<h4 id="路由跳转执行顺序"><a href="#路由跳转执行顺序" class="headerlink" title="路由跳转执行顺序"></a>路由跳转执行顺序</h4><ol>
+<li>_app getInitialProps()</li>
+<li>page getInitialProps()</li>
+<li>_app render()</li>
+<li>page constructor()</li>
+<li>page render()</li>
+</ol>
+<h3 id="使用-Next-js-的优缺点"><a href="#使用-Next-js-的优缺点" class="headerlink" title="使用 Next.js 的优缺点"></a>使用 Next.js 的优缺点</h3><p><strong>优点：</strong></p>
+<ul>
+<li>轻量易用，学习成本低，开箱即用（如：内部集成 Webpack、约定式路由等），不需要自己去折腾搭建项目。个人看法：是一个用自由度来换取易用性的框架。</li>
+<li>自带数据同步策略，解决服务端渲染最大难点。把服务端渲染好的数据，拿到客户端重用，这个在没有框架的时候，是非常麻烦的。</li>
+<li>拥有丰富的插件，让我们可以在使用的时候按需使用。</li>
+<li>配置灵活：可以根据项目要求的不同快速灵活的进行配置。</li>
+</ul>
+<p><strong>缺点：</strong> 必须遵循它的规范（如：必须在 <code>getInitialProps</code> 中获取数据），写法固定，不利于拓展。</p>
+<h2 id="展望-Serverless"><a href="#展望-Serverless" class="headerlink" title="展望 Serverless"></a>展望 Serverless</h2><ul>
+<li>Serverless —— 无服务架构</li>
+<li>Serverless 不代表再也不需要服务器了，而是说：开发者再也不用过多考虑服务器的问题，计算资源作为服务而不是服务器的概念出现</li>
+<li>Serverless 肯定会火，前端可以不考虑部署、运维、环境等场景，直接编写函数来实现后端逻辑，对生产力上有着显著的提升</li>
+<li>有了 Serverless ，之后的 SSR 可以称为 Serverless Side Rendering</li>
+<li>因为对 Serverless 不是很了解，只知道它的概念以及带来的影响是什么，所以不敢过多妄言，有兴趣的同学可以自行了解</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/cc18868876837/article/details/90672971"><strong>看懂<br>Serverless，这一篇就够了</strong></a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tugenhua0707/p/10991363.html"><strong>理解serverless无服务架构原理(一)</strong></a><br><a target="_blank" rel="noopener" href="https://www.jdon.com/soa/serverless.html"><strong>什么是Serverless无服务器架构？</strong></a></p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="客户端需要使用-ReactDOM-hydrate-代替-ReactDOM-render-，完成-SSR-未完成的事情（如：事件绑定）"><a href="#客户端需要使用-ReactDOM-hydrate-代替-ReactDOM-render-，完成-SSR-未完成的事情（如：事件绑定）" class="headerlink" title="客户端需要使用 ReactDOM.hydrate 代替 ReactDOM.render ，完成 SSR 未完成的事情（如：事件绑定）"></a>客户端需要使用 ReactDOM.hydrate 代替 ReactDOM.render ，完成 SSR 未完成的事情（如：事件绑定）</h3><ul>
+<li>在 React v15 版本里，<code>ReactDOM.render</code> 方法会根据 <code>data-react-checksum</code> 的标记，复用</li>
+</ul>
+<p><code>ReactDOMServer</code> 的渲染结果，不重复渲染。根据 <code>data-reactid</code> 属性，找到需要绑定的事件元素，进行事件绑定的处理。</p>
+<ul>
+<li>在 React v16 版本里，<code>ReactDOMServer</code> 渲染的内容不再带有 <code>data-react</code> 属性，<code>ReactDOM.render</code></li>
+</ul>
+<p>可以使用但是会报警告。</p>
+<ul>
+<li>在 React v17 版本里，<code>ReactDOM.render</code> 将不再具有复用 SSR 内容的功能，统一用 <code>hydrate()</code> 来进行服务端渲染。</li>
+<li>因为服务端返回的 HTML 是字符串，虽然有内容，但是各个组件没有事件，客户端的仓库中也没有数据，可以看做是<strong>干瘪的字符串</strong>。客户端会根据这些字符串完成</li>
+</ul>
+<p>React 的初始化工作，比如创建组件实例、绑定事件、初始化仓库数据等。hydrate<br>在这个过程中起到了非常重要的作用，俗称“注水”，可以理解为给干瘪的种子注入水分，使其更具生机。</p>
+<ul>
+<li><strong>在使用 Next.js 时，</strong> 打开浏览器控制台 &#x3D;&gt; 找到 network &#x3D;&gt; 找到当前路由的请求并查看 response &#x3D;&gt;</li>
+</ul>
+<p>可以看到服务端返回的 html 里包含着当前页面需要的数据，这样客户端就不会重新发起请求了，靠的就是 <code>ReactDOM.hydrate</code> 。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/10/16eeb6772793457d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="image.png"></p>
+<h3 id="SSR-需要使用-StaticRouter（静态路由容器），而非-BrowserRouter-和-HashRouter"><a href="#SSR-需要使用-StaticRouter（静态路由容器），而非-BrowserRouter-和-HashRouter" class="headerlink" title="SSR 需要使用 StaticRouter（静态路由容器），而非 BrowserRouter 和 HashRouter"></a>SSR 需要使用 <code>StaticRouter</code>（静态路由容器），而非 <code>BrowserRouter</code> 和 <code>HashRouter</code></h3><h3 id="客户端和服务端都需要配置-store-仓库，但是两个仓库会不大一样"><a href="#客户端和服务端都需要配置-store-仓库，但是两个仓库会不大一样" class="headerlink" title="客户端和服务端都需要配置 store 仓库，但是两个仓库会不大一样"></a>客户端和服务端都需要配置 store 仓库，但是两个仓库会不大一样</h3><h3 id="componentDidMount-在服务器端是不执行的，而-componentWillMount-在客户端和服务端都会执行，所以这就是为什么不建议在-componentWillMount-发送请求的原因"><a href="#componentDidMount-在服务器端是不执行的，而-componentWillMount-在客户端和服务端都会执行，所以这就是为什么不建议在-componentWillMount-发送请求的原因" class="headerlink" title="componentDidMount 在服务器端是不执行的，而 componentWillMount 在客户端和服务端都会执行，所以这就是为什么不建议在 componentWillMount 发送请求的原因"></a><code>componentDidMount</code> 在服务器端是不执行的，而 <code>componentWillMount</code> 在客户端和服务端都会执行，所以这就是为什么不建议在 <code>componentWillMount</code> 发送请求的原因</h3><h3 id="注册事件必须要放在-componentDidMount-中，不能放在-componentWillMount-中，因为-服务端是不会执行-componentWillUnmount-的，如果放在-componentWillMount-中，会导致事件重复注册，发生内存泄漏"><a href="#注册事件必须要放在-componentDidMount-中，不能放在-componentWillMount-中，因为-服务端是不会执行-componentWillUnmount-的，如果放在-componentWillMount-中，会导致事件重复注册，发生内存泄漏" class="headerlink" title="注册事件必须要放在 componentDidMount 中，不能放在 componentWillMount 中，因为 服务端是不会执行 componentWillUnmount 的，如果放在 componentWillMount 中，会导致事件重复注册，发生内存泄漏"></a>注册事件必须要放在 <code>componentDidMount</code> 中，不能放在 <code>componentWillMount</code> 中，因为 服务端是不会执行 <code>componentWillUnmount</code> 的，如果放在 <code>componentWillMount</code> 中，会导致事件重复注册，发生内存泄漏</h3><h3 id="如果不想使用-SSR，但是又想要优化-SEO-，可以使用-prerender-或者-prerender-spa-plugin-来替代-SSR"><a href="#如果不想使用-SSR，但是又想要优化-SEO-，可以使用-prerender-或者-prerender-spa-plugin-来替代-SSR" class="headerlink" title="如果不想使用 SSR，但是又想要优化 SEO ，可以使用 prerender  或者 prerender-spa-plugin 来替代 SSR"></a>如果不想使用 SSR，但是又想要优化 SEO ，可以使用 <a target="_blank" rel="noopener" href="https://github.com/prerender/prerender">prerender </a> 或者 <a target="_blank" rel="noopener" href="https://github.com/chrisvfritz/prerender-spa-plugin">prerender-spa-plugin</a> 来替代 SSR</h3><h3 id="在手动搭建-SSR-框架时：使用-npm-run-all-nodemon-来提高开发-Node-项目的效率"><a href="#在手动搭建-SSR-框架时：使用-npm-run-all-nodemon-来提高开发-Node-项目的效率" class="headerlink" title="在手动搭建 SSR 框架时：使用 npm-run-all &amp; nodemon 来提高开发 Node 项目的效率"></a>在手动搭建 SSR 框架时：使用 <code>npm-run-al</code>l &amp; <code>nodemon</code> 来提高开发 Node 项目的效率</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/nodemon"><strong>nodemon</strong></a> 监听代码文件的变动，当代码改变之后，自动重启</li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/npm-run-all"><strong>npm-run-all</strong></a> 用于并行或者顺序运行多个 npm</li>
+</ul>
+<p>脚本的 cli 工具</p>
+<pre><code>npm install npm-run-all nodemon --save-dev
+复制代码
+
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;npm-run-all --parallel dev:**&quot;,
+    &quot;dev:start&quot;: &quot;nodemon build/server.js&quot;,
+    &quot;dev:build:client&quot;: &quot;webpack --config webpack.client.js --watch&quot;,
+    &quot;dev:build:server&quot;: &quot;webpack --config webpack.server.js --watch&quot;
+  }
+
+复制代码
+</code></pre>
+<h3 id="在-Next-js-中：默认会引入-import-React-from-react-，但是如果不引入，在写组件时，编辑器会发出警告，所以还是引入下较好"><a href="#在-Next-js-中：默认会引入-import-React-from-react-，但是如果不引入，在写组件时，编辑器会发出警告，所以还是引入下较好" class="headerlink" title="在 Next.js 中：默认会引入 import React from &quot;react&quot;，但是如果不引入，在写组件时，编辑器会发出警告，所以还是引入下较好"></a>在 Next.js 中：默认会引入 <code>import React from &quot;react&quot;</code>，但是如果不引入，在写组件时，编辑器会发出警告，所以还是引入下较好</h3><h3 id="在-Next-js-中：会对-pages-目录下的每个路由组件分开打包，所以当点击按钮进行路由跳转时，并不会马上跳转到对应的路由页面，而是要先加载好目标路由的资源文件，然后再跳转过去。这个可以用预加载优化。"><a href="#在-Next-js-中：会对-pages-目录下的每个路由组件分开打包，所以当点击按钮进行路由跳转时，并不会马上跳转到对应的路由页面，而是要先加载好目标路由的资源文件，然后再跳转过去。这个可以用预加载优化。" class="headerlink" title="在 Next.js 中：会对 pages 目录下的每个路由组件分开打包，所以当点击按钮进行路由跳转时，并不会马上跳转到对应的路由页面，而是要先加载好目标路由的资源文件，然后再跳转过去。这个可以用预加载优化。"></a>在 Next.js 中：会对 pages 目录下的每个路由组件分开打包，所以当点击按钮进行路由跳转时，并不会马上跳转到对应的路由页面，而是要先加载好目标路由的资源文件，然后再跳转过去。这个可以用预加载优化。</h3><h3 id="在-Next-js-中：内部集成了-Webpack，生成环境下默认会分割代码和-tree-shaking"><a href="#在-Next-js-中：内部集成了-Webpack，生成环境下默认会分割代码和-tree-shaking" class="headerlink" title="在 Next.js 中：内部集成了 Webpack，生成环境下默认会分割代码和 tree-shaking"></a>在 Next.js 中：内部集成了 Webpack，生成环境下默认会分割代码和 tree-shaking</h3><h3 id="Next-js-适用于任何-node-框架，但是这些框架的对于-request、response-的封装方式肯定有不同之处，它是如何保证-Next-js-导出的-handle-方法能兼容这些框架尼？"><a href="#Next-js-适用于任何-node-框架，但是这些框架的对于-request、response-的封装方式肯定有不同之处，它是如何保证-Next-js-导出的-handle-方法能兼容这些框架尼？" class="headerlink" title="Next.js 适用于任何 node 框架，但是这些框架的对于 request、response 的封装方式肯定有不同之处，它是如何保证 Next.js 导出的 handle 方法能兼容这些框架尼？"></a>Next.js 适用于任何 node 框架，但是这些框架的对于 <code>request</code>、<code>response</code> 的封装方式肯定有不同之处，它是如何保证 Next.js 导出的 <code>handle</code> 方法能兼容这些框架尼？</h3><ul>
+<li>保证 <code>handle</code> 方法接收到的是 NodeJS 原生的<code>requset</code> 对象以及 <code>response</code> 对象，不是框架基于原生封装的</li>
+</ul>
+<p><code>request</code>、<code>response</code> 对象。所以这就是为什么在使用 koa 时，<code>handle</code> 接收的是 <code>ctx.req</code> 、<code>ctx.res</code><br>，而不是 <code>ctx.request</code>、<code>ctx.response</code> 的原因。</p>
+<h3 id="在-Next-js-中：如何集成-styled-components"><a href="#在-Next-js-中：如何集成-styled-components" class="headerlink" title="在 Next.js 中：如何集成 styled-components"></a>在 Next.js 中：如何集成 styled-components</h3><ul>
+<li><p>需要在 _document.js 中集成</p>
+</li>
+<li><p>利用 AOP 面向切面编程思想</p>
+<p>  cnpm i styled-components babel-plugin-styled-components -D</p>
+<p>  复制代码</p>
+<p>  &#x2F;&#x2F; .babelrc<br>  {<br>“presets”: [“next&#x2F;babel”],<br>“plugins”: [<br>  [<br>    “import”,<br>    {<br>      “libraryName”: “antd”<br>    }<br>  ],<br>  [“styled-components”, { “ssr”: true }]<br>]<br>  }</p>
+<p>  复制代码</p>
+<p>  &#x2F;&#x2F; _document.jsimport Docuemnt, { Html, Head, Main, NextScript } from’next&#x2F;document’import { ServerStyleSheet } from’styled-components’functionwithLog(Comp) {<br>returnprops &#x3D;&gt; {<br>  console.log(props);<br>  return &lt;Comp {…props} &#x2F;&gt;<br>}<br>  }</p>
+<p>  class MyDocument extends Docuemnt {</p>
+<pre><code>static async getInitialProps(ctx) {
+  const sheet = new ServerStyleSheet();
+  const originalRenderPage = ctx.renderPage;
+
+  try {
+    ctx.renderPage = () =&gt;
+      originalRenderPage({
+        // 增强 APP 功能
+        enhanceApp: App =&gt; props =&gt; sheet.collectStyles(&lt;App {...props} /&gt;),
+        // 增强组件功能
+        // enhanceComponent: Component =&gt; withLog(Component)
+      });
+
+    const props = await Docuemnt.getInitialProps(ctx);
+
+    return {
+      ...props,
+      styles: (
+        &lt;&gt;
+          {props.styles}
+          {sheet.getStyleElement()}
+        &lt;/&gt;
+      ),
+    }
+  } finally {
+    sheet.seal()
+  }
+}
+
+render() {
+  return (
+    &lt;Html&gt;
+      &lt;Head /&gt;
+      &lt;body&gt;
+        &lt;Main /&gt;
+        &lt;NextScript /&gt;
+      &lt;/body&gt;
+    &lt;/Html&gt;
+  )
+}
+</code></pre>
+<p>  }</p>
+<p>  export default MyDocument</p>
+<p>  复制代码</p>
+<p>  &#x2F;&#x2F; pages&#x2F;a.jsimport { withRouter } from’next&#x2F;router’import Link from’next&#x2F;link’import styled from’styled-components’const Title &#x3D; styled.h1<code>color: yellow; font-size: 40px;  </code>;</p>
+<p>  const color &#x3D; ‘#113366’;</p>
+<p>  const A &#x3D; ({ router, name}) &#x3D;&gt; {<br>return (<br>  &lt;&gt;<Title>This is Title</Title><Comp />&lt;Linkhref&#x3D;”#aaa”&gt;&lt;aclassName&#x3D;”link”&gt;<br>        A {router.query.id} {name}<br>      </a></Link><stylejsx>{<code>      a {         color: blue;       }       .link {         color: ${color};       }    </code>}</style>&lt;&#x2F;&gt;<br>)<br>  };<br>  export default withRouter(A)</p>
+<p>  复制代码</p>
+</li>
+</ul>
+<h3 id="在-Next-js-中：如何集成-CSS-Sass-Less-Stylus"><a href="#在-Next-js-中：如何集成-CSS-Sass-Less-Stylus" class="headerlink" title="在 Next.js 中：如何集成 CSS &#x2F; Sass &#x2F; Less &#x2F; Stylus"></a>在 Next.js 中：如何集成 CSS &#x2F; Sass &#x2F; Less &#x2F; Stylus</h3><p>支持用 <code>.css</code>、 <code>.scss</code>、 <code>.less</code>、 <code>.styl</code>，需要配置默认文件 next.config.js，具体可查看下面链接</p>
+<ul>
+<li></li>
+</ul>
+<h2 id="zeit-next-css"><a href="#zeit-next-css" class="headerlink" title="@zeit&#x2F;next-css"></a><a target="_blank" rel="noopener" href="https://github.com/zeit/next.js/tree/canary/examples/basic-css">@zeit&#x2F;next-css</a></h2><h2 id="zeit-next-sass"><a href="#zeit-next-sass" class="headerlink" title="@zeit&#x2F;next-sass"></a><a target="_blank" rel="noopener" href="https://github.com/zeit/next-plugins/tree/master/packages/next-sass">@zeit&#x2F;next-sass</a></h2><h2 id="zeit-next-less"><a href="#zeit-next-less" class="headerlink" title="@zeit&#x2F;next-less"></a><a target="_blank" rel="noopener" href="https://github.com/zeit/next-plugins/tree/master/packages/next-less">@zeit&#x2F;next-less</a></h2><p><a target="_blank" rel="noopener" href="https://github.com/zeit/next-plugins/tree/master/packages/next-stylus">@zeit&#x2F;next-stylus</a></p>
+<h3 id="在-Next-js-中：打包的时候无法按需加载-Antd-样式"><a href="#在-Next-js-中：打包的时候无法按需加载-Antd-样式" class="headerlink" title="在 Next.js 中：打包的时候无法按需加载 Antd 样式"></a>在 Next.js 中：打包的时候无法按需加载 Antd 样式</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/1wen/p/10793868.html">www.cnblogs.com/1wen/p/1079…</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2f9f3e41c67c">www.jianshu.com/p/2f9f3e41c…</a></p>
+<h3 id="在-Next-js-中：不要自定义静态文件夹的名字"><a href="#在-Next-js-中：不要自定义静态文件夹的名字" class="headerlink" title="在 Next.js 中：不要自定义静态文件夹的名字"></a>在 Next.js 中：不要自定义静态文件夹的名字</h3><p>在根目录下新建文件夹叫 <code>static</code>，代码可以通过 <code>/static/</code> 来引入相关的静态资源。但只能叫<code>static</code> ，因为只有这个名字 Next.js<br>才会把它当作静态资源。</p>
+<h3 id="在-Next-js-中：为什么打开应用的速度会很慢"><a href="#在-Next-js-中：为什么打开应用的速度会很慢" class="headerlink" title="在 Next.js 中：为什么打开应用的速度会很慢"></a>在 Next.js 中：为什么打开应用的速度会很慢</h3><ul>
+<li>可能将只有服务端用到的模块放到了 getInitialProps 中，然后 Webpack 把该模块也打包了。可参考 [import them</li>
+</ul>
+<p>properly](<a target="_blank" rel="noopener" href="https://arunoda.me/blog/ssr-and-server-only-modules">https://arunoda.me/blog/ssr-and-server-only-modules</a>)</p>
+<h3 id="Next-js-常见错误列表"><a href="#Next-js-常见错误列表" class="headerlink" title="Next.js 常见错误列表"></a><a target="_blank" rel="noopener" href="https://github.com/zeit/next.js/tree/master/errors">Next.js 常见错误列表</a></h3><h2 id="后语"><a href="#后语" class="headerlink" title="后语"></a>后语</h2><ul>
+<li>本文只是基于我的理解写的，如有错误的理解还请指正或者更好的方案还请提出</li>
+<li>为了写的尽量详细点，前前后后花了两个月的时间才整理出了这篇文章，看到这里，如果觉得这篇文章还不错，还请点个赞~~</li>
+</ul>
+<h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><p><a target="_blank" rel="noopener" href="https://github.com/yjdjiayou/react-ssr-demo"><strong>手动搭建简易版 SSR 框架</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/yjdjiayou/react-ssr-with-nextjs-demo"><strong>React16.8 + Next.js + Koa2 开发 Github<br>全栈项目</strong></a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://2014.jsconfchina.com/slides/herman-taobaoweb/index.html#/"><strong>淘宝前后端分离实践</strong></a><strong>！！！！！！</strong></p>
+<p><a target="_blank" rel="noopener" href="https://umijs.org/zh/guide/ssr.html#%E4%BB%8B%E7%BB%8D"><strong>UmiJS SSR</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4b126c7ba1fd"><strong>为什么将 react 项目做成 ssr 同构应用</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/122da0c7d509"><strong>揭秘 React 同构应用</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/HL14pC9AiQLNOkDQio7hug"><strong>打造高可靠与高性能的 React<br>同构解决方案</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://coding.imooc.com/class/334.html"><strong>慕课网 Next.js 教程</strong></a></p>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p><a target="_blank" rel="noopener" href="https://juejin.im/post/5df648836fb9a016526eba01"><strong>你真的了解 React 生命周期吗</strong></a></p>
+<p><strong><a target="_blank" rel="noopener" href="https://juejin.im/post/5dbbdbd5f265da4d4b5fe57d">React Hooks 详解 【近 1W 字】+<br>项目实战</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://juejin.im/post/5dfa36f9f265da33c90b47ef">Webpack 设置环境变量的误区</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://juejin.im/post/5da56e34f265da5b932e73fa">从 0 到 1 实现一款简易版 Webpack</a></strong></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/6a610663.html"><div class="related-post-title">浏览器与前端性能灵魂之问，请问你能接得住几个？</div><div class="related-post-meta"><time>2019-12-24</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/a91910b6.html"><div class="related-post-title">create-react-app，webpack配置超强解析</div><div class="related-post-meta"><time>2025-01-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">React</span><span class="category-badge">Webpack</span></div></div></a><a class="related-post-item" href="/article/e1804bda.html"><div class="related-post-title">2019年Web前端入门的自学路线</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/642afbeb.html"><div class="related-post-title">var a=1; var b=2和a=1和var a=b=1和var a=1,b=2的区别</div><div class="related-post-meta"><time>2020-09-22</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/ca35918e.html"><div class="related-post-title">jQuery 模块终于从 AMD 迁移到了 ES 模块</div><div class="related-post-meta"><time>2019-12-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/1dfea92a.html">https://xuehuayu.cn/article/1dfea92a.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/fbe74506.html">React useEffect的陷阱</a><a class="next" href="/article/eb94f47d.html">你不知道的 JSON.stringify() 的威力</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

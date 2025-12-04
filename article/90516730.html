@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,广告过滤,ADBlock,ADBlock Plus,过滤规则,浏览器插件,ADGuard"><title>撰写 Adblock Plus 过滤规则 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">撰写 Adblock Plus 过滤规则</h1><div class="post-meta"><span class="date">2019-09-26</span><span> | </span><span class="edit">整理 </span><span> | </span><span class="category"><a href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤 </a><a href="/categories/ADBlock/">ADBlock </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.8k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 17</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/90516730.html#waline-comment"><span class="waline-comment-count" data-path="/article/90516730.html">0</span><span> 条评论</span></a><div class="post-content"><p>当前的 Adblock Plus 版本允许您通过多种不同的方法来优化过滤规则。本文档将向您介绍具体操作方法。<br>本章节描述的过滤规则属性，对于偶尔编写过滤规则的用户来说已经足够。</p>
+<span id="more"></span>
+
+<h3 id="一款全网视频聚合APP，无广告，无隐私：点击下载"><a href="#一款全网视频聚合APP，无广告，无隐私：点击下载" class="headerlink" title="一款全网视频聚合APP，无广告，无隐私：点击下载"></a>一款全网视频聚合APP，无广告，无隐私：<a target="_blank" rel="noopener" href="https://laonongmin.online/">点击下载</a></h3><p><a href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/"><strong>查看广告过滤汇总 | 点这里</strong></a></p>
+<blockquote>
+<p>声明：这里给出的过滤规则只是示例，不一定能直接使用。</p>
+</blockquote>
+<h3 id="基本过滤规则"><a href="#基本过滤规则" class="headerlink" title="基本过滤规则"></a>基本过滤规则</h3><p>最简单的过滤规则就是您想要屏蔽的横幅广告地址，但这些地址通常会在您每次打开页面时发生变化。例如：<br><code>http://example.com/ads/banner123.gif</code>，其中 123 是一个随机数字。<br>在这种情况下，屏蔽整个图片地址是无效的，您需要创建一条更通用的过滤规则 —— 例如：<br><code>http://example.com/ads/banner*.gif</code><br>或者更通用的规则：<code>http://example.com/ads/*</code></p>
+<blockquote>
+<p>注意：不要使用通配符来代替过多的字符。过滤规则 <code>http://example.com/*</code> 虽然可以屏蔽所有横幅广告，但也会屏蔽</p>
+</blockquote>
+<p><code>example.com</code> 下其他您想看的内容。</p>
+<h3 id="定义例外规则"><a href="#定义例外规则" class="headerlink" title="定义例外规则"></a>定义例外规则</h3><p>有时您可能会发现某个过滤规则平时屏蔽广告效果很好，但在某些情况下会屏蔽不该屏蔽的内容。您不想移除这条过滤规则，但也不希望它屏蔽不该屏蔽的内容。</p>
+<p>这就是例外规则的好处——它们允许您定义过滤规则不被使用的情况。例如，如果您不满意过滤规则 <code>adv</code> 屏蔽了<br><code>http://example.com/advice.html</code>，您可以定义一条例外规则 <code>@@advice</code>。<br>例外规则和普通过滤规则类似，您可以使用通配符或正则表达式。只需在规则前添加 <code>@@</code> 来声明这是一个例外规则。</p>
+<p><strong>例外规则的功能可以更强大。</strong> 如果您指定了 <code>$document</code> 选项，您将为整个页面获得一个例外。例如，如果您的例外规则是<br><code>@@||example.com^$document</code>，并且您打开了来自 <code>example.com</code> 的某个页面 —— Adblock Plus<br>将在此页面上完全禁用，不会屏蔽任何内容。</p>
+<h3 id="匹配网址开头-结尾"><a href="#匹配网址开头-结尾" class="headerlink" title="匹配网址开头&#x2F;结尾"></a>匹配网址开头&#x2F;结尾</h3><p>通常 Adblock Plus 在处理过滤规则时，会默认在过滤规则的开头和结尾都有一个通配符。例如，过滤规则 <code>ad</code> 和 <code>*ad*</code> 是相同的。<br>正常情况下这没有问题，但有时您可能需要定义可以匹配网址开头或结尾的过滤规则。例如，您想要屏蔽所有的 Flash，但如果您添加过滤规则 <code>swf</code>，地址<br><code>http://example.com/swf/index.html</code> 同样也会被屏蔽。</p>
+<p><strong>解决方法：</strong> 使用管道符号 (|) 来表示地址的最前端或最末端。</p>
+<ul>
+<li>例如，过滤规则 <code>swf|</code> 会屏蔽 <code>http://example.com/annoyingflash.swf</code>，但不会屏蔽 <code>http://example.com/swf/index.html</code>。</li>
+<li>过滤规则 <code>|http://baddomain.example/</code> 会屏蔽 <code>http://baddomain.example/banner.gif</code>，但不会屏蔽 <code>http://gooddomain.example/analyze?http://baddomain.example</code>。</li>
+</ul>
+<p>有时您想屏蔽 <code>http://example.com/banner.gif</code>、<code>https://example.com/banner.gif</code> 和<br><code>http://www.example.com/banner.gif</code>。这时只需在过滤规则的域名前加上两个管道符号<br>(||)：<code>||example.com/banner.gif</code> 将会屏蔽上述地址，而不会屏蔽<br><code>http://badexample.com/banner.gif</code> 或<br><code>http://gooddomain.example/analyze?http://example.com/banner.gif</code>（需要 Adblock<br>Plus 1.1 或更高版本）。</p>
+<h3 id="标记分隔符"><a href="#标记分隔符" class="headerlink" title="标记分隔符"></a>标记分隔符</h3><p>通常您需要允许过滤规则匹配任何分隔符。例如，您可能编写一条规则来屏蔽 <code>http://example.com/</code> 和<br><code>http://example.com:8000/</code>，但不能屏蔽 <code>http://example.com.ar/</code>。在这里，符号 (^) 用作分隔符。<br><code>http://example.com^</code>（需要 Adblock Plus 1.1 或更高版本）。</p>
+<p>分隔符可以是除了字母、数字或者 <code>_ - . %</code> 之外的任何字符。网址的结尾也被视为一个分隔符。在下面的例子中，所有分隔符用红色标出：<br><code>http://example.com:8000/foo.bar?a=12&amp;b=%D1%82%D0%B5%D1%81%D1%82</code><br>因此，这个地址可以通过以下过滤规则进行过滤：<br><code>^example.com^</code> 或 <code>^%D1%82%D0%B5%D1%81%D1%82^</code> 或 <code>^foo.bar^</code></p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>任何以感叹号 (!) 开头的规则都被视为注释。在过滤规则列表中，这些规则仍然会显示，但会以灰色而非黑色显示。Adblock Plus<br>在判断规则时会忽略这些注释，因此我们可以写下任何想写的内容。您可以在一条规则上方说明该规则的用途，也可以在过滤列表顶部写上作者信息（大多数过滤列表的作者已经这样做了）。</p>
+<h3 id="特殊注释"><a href="#特殊注释" class="headerlink" title="特殊注释"></a>特殊注释</h3><p>特殊注释仅在下载的过滤规则列表中生效，在自定义列表中无效。它们可以为该过滤规则列表设置许多参数：</p>
+<h4 id="Homepage-http-example-com"><a href="#Homepage-http-example-com" class="headerlink" title="! Homepage: http://example.com/"></a>! Homepage: <code>http://example.com/</code></h4><p>此注释表明哪个网页是该过滤规则列表的首页。</p>
+<h4 id="Title-FooList"><a href="#Title-FooList" class="headerlink" title="! Title: FooList"></a>! Title: FooList</h4><p>此注释为该过滤规则列表设置一个固定的标题。如果此注释存在，用户不能再更改该标题。</p>
+<h4 id="Expires-5-days"><a href="#Expires-5-days" class="headerlink" title="! Expires: 5 days"></a>! Expires: 5 days</h4><p>此注释设置该过滤规则列表的更新间隔，指定的值可以是天数（例如 5 days）或小时数（例如 8 hours）。可以提供 1 小时至 14 天之间的值。<br><strong>注意：</strong> 更新并不一定会在指定的间隔到达时立即发生。实际的更新时间会稍微随机化，并取决于一些额外因素，以减少服务器负载。</p>
+<h4 id="Checksum-OaopkIiiAl77sSHk-VAWDA"><a href="#Checksum-OaopkIiiAl77sSHk-VAWDA" class="headerlink" title="! Checksum: OaopkIiiAl77sSHk&#x2F;VAWDA"></a>! Checksum: OaopkIiiAl77sSHk&#x2F;VAWDA</h4><p>此注释确保数据的意外损坏不会导致过滤规则出现意外损坏。例如，一些防火墙软件可能会在下载时修改像 <code>*/adnetwork/*</code><br>这样的过滤规则，试图保护用户免受广告侵扰。但这会导致过滤规则的部分内容被移除，Adblock Plus 将只会看到过滤规则像是 <code>**</code>。<br>过滤规则列表中的校验和注释就是为了防止这种情况，任何修改都将导致校验和与内容不匹配，然后 Adblock Plus 将忽略该数据。</p>
+<p><strong>计算该校验和需要执行以下步骤：</strong></p>
+<ol>
+<li>移除现存的校验和及注释（如果有）。</li>
+<li>使用 UTF-8 编码对过滤规则列表的文本进行编码。</li>
+<li>转换所有换行符为 Unix 样式（如有 <code>\r</code> 则替换为 <code>\n</code>）。</li>
+<li>移除空行（用单个 <code>\n</code> 字符替换连续的 <code>\n</code> 字符）。</li>
+<li>计算该文本的 MD5 校验和的 Base64 编码，并去除结尾的 <code>=</code> 字符（如果有）。</li>
+</ol>
+<p>您也可以参考基于 Python 实现的 <strong>验证校验和</strong> 和 <strong>添加校验和到文件</strong> 作为参考。</p>
+<h4 id="Redirect-http-example-com-list-txt"><a href="#Redirect-http-example-com-list-txt" class="headerlink" title="! Redirect: http://example.com/list.txt"></a>! Redirect: <code>http://example.com/list.txt</code></h4><p>此注释表明该过滤规则列表已被转移到新的下载地址。Adblock Plus 将忽略此注释后的任何文件内容，并立即尝试从新地址下载。<br>如果成功，过滤规则列表的地址将按此设置更新。如果新地址与当前地址相同，此注释将被忽略，意味着它可以作为该过滤规则列表的“权威”地址使用。</p>
+<h4 id="Version-1234"><a href="#Version-1234" class="headerlink" title="! Version: 1234"></a>! Version: 1234</h4><p>此注释定义过滤规则列表的数字版本。此版本号将显示在问题报告中，并可用于验证报告指向的是否是过滤规则列表的当前版本。</p>
+<h3 id="进阶功能"><a href="#进阶功能" class="headerlink" title="进阶功能"></a>进阶功能</h3><p>本章节描述的特性通常只有高级用户和维护过滤列表的作者才会用到。普通用户可以跳过。</p>
+<h4 id="指定过滤规则选项"><a href="#指定过滤规则选项" class="headerlink" title="指定过滤规则选项"></a>指定过滤规则选项</h4><p>Adblock Plus 允许您指定某些选项来改变某条规则的行为。您可以在过滤规则的最后面，将这些选项放在美元符号 ($) 后面，并用逗号 (,) 分隔。<br>例如：<br><code>*/ads/*$script,match-case</code><br>这里的 <code>*/ads/*</code> 是实际的过滤规则，<code>script</code> 和 <code>match-case</code> 是指定的选项。以下是目前支持的选项：</p>
+<ul>
+<li><p><strong>类型选项：</strong> 判定过滤规则（或例外规则）过滤元素的类型。过滤规则可以指定多个类型选项来过滤指定的元素类型。可指定的类型包括：</p>
+<ul>
+<li><code>script</code> —— 外部脚本，由 HTML <code>&lt;script&gt;</code> 标签加载</li>
+<li><code>image</code> —— 正常图片，通常由 HTML 的 <code>&lt;img&gt;</code> 标签载入</li>
+<li><code>stylesheet</code> —— 外部 CSS 样式文件</li>
+<li><code>object</code> —— 由浏览器插件处理的内容，例如 Flash 或 Java</li>
+<li><code>xmlhttprequest</code> —— 使用 XMLHttpRequest 对象或 fetch() API 发起的请求</li>
+<li><code>object-subrequest</code> —— 插件的请求，比如 Flash</li>
+<li><code>subdocument</code> —— 内嵌的页面，通常通过 HTML 的框架方式内嵌</li>
+<li><code>ping</code> —— 由 <code>&lt;a ping&gt;</code> 或 <code>navigator.sendBeacon()</code> 发起的请求（需要 Adblock Plus 2.7.1 或更高版本）</li>
+<li><code>websocket</code> —— 通过 WebSocket 对象发起的请求（需要 Adblock Plus 2.8 或更高版本）</li>
+<li><code>webrtc</code> —— 通过 RTCPeerConnection 实例连接到 ICE 服务器的连接（Adblock Plus for Chrome 和 Opera 需要 1.13.3 或更高版本，Adblock Plus for Firefox 和 Safari 尚不支持）</li>
+<li><code>document</code> —— 网页本身（仅适用于例外规则）</li>
+<li><code>elemhide</code> —— 仅适用于例外规则，类似于 <code>document</code>，但只禁用页面上的元素隐藏规则，而不是所有规则（需要 Adblock Plus 1.2 或更高版本）</li>
+<li><code>generichide</code> —— 仅适用于例外规则，类似于 <code>elemhide</code>，但只禁用页面上的通用元素隐藏规则（需要 Adblock Plus 2.6.12 或更高版本）</li>
+<li><code>genericblock</code> —— 仅适用于例外规则，类似于 <code>generichide</code>，但禁用的是通用屏蔽规则（需要 Adblock Plus 2.6.12 或更高版本）</li>
+<li><code>other</code> —— 不属于上述类型的其他请求</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>类型选项 <code>background</code>、<code>xbl</code> 和 <code>dtd</code> 已过时，不应再使用。</p>
+</blockquote>
+<ul>
+<li><p><strong>反转类型选项：</strong> 指定过滤规则<strong>不</strong>应用的元素类型。可指定的类型选项：<code>~script</code>, <code>~image</code>, <code>~stylesheet</code>, <code>~object</code>, <code>~xmlhttprequest</code>, <code>~object-subrequest</code>, <code>~subdocument</code>, <code>~document</code>, <code>~elemhide</code>, <code>~other</code></p>
+</li>
+<li><p><strong>第三方&#x2F;第一方请求限制：</strong> 如果指定了 <code>third-party</code> 选项，则过滤规则仅适用于来源与当前正在浏览页面不同的请求。类似地，<code>~third-party</code> 适用于来源与当前浏览页面相同的请求。</p>
+</li>
+<li><p><strong>域名限定：</strong> 选项 <code>domain=example.com</code> 表示过滤规则仅适用于 “<code>example.com</code>“ 下的页面。多个域名可以用 “|” 分隔：</p>
+<p>  过滤规则 <code>domain=example.com|example.net</code> 将仅适用于 “<code>example.com</code>“ 或 “<code>example.net</code>“ 的页面。<br>  如果域名前有 “<code>~</code>“，则该过滤规则不适用于此域名的页面。例如：</p>
+<ul>
+<li><code>domain=~example.com</code> 表示过滤规则适用于除 <code>example.com</code> 之外的任何域名的页面。</li>
+<li><code>domain=example.com|~foo.example.com</code> 表示过滤规则适用于 “<code>example.com</code>“ 但不包括其子域名 “<code>foo.example.com</code>“。</li>
+</ul>
+</li>
+<li><p><strong>Sitekey 限制：</strong> 选项 <code>sitekey=abcdsitekeydcba</code> 意味着该过滤规则应该只在页面上提供了一个与过滤规则内包含的公钥（没有 <code>=</code> 后缀）非常相似且可被验证的签名时才应用。可以使用 “|” 作为分隔符指定多个 sitekey：</p>
+<p>  使用 <code>sitekey=abcdsitekeydcba|bcdesitekeyedcb</code> 作为过滤规则的选项时，将仅在页面提供了 “abcdsitekeydcba” 或 “bcdesitekeyedcb” 的 sitekey 时应用。这类似于域名限制，但这允许单条过滤规则应用到相当多的域。</p>
+<blockquote>
+<p>注意：sitekey 限制需要服务器端的修改。</p>
+</blockquote>
+</li>
+<li><p><strong><code>match-case</code></strong> —— 使过滤规则仅匹配大小写完全一致的地址。例如：过滤规则 <code>*/BannerAd.gif$match-case</code> 会屏蔽 <code>http://example.com/BannerAd.gif</code>，但不会屏蔽 <code>http://example.com/bannerad.gif</code>。</p>
+</li>
+<li><p><strong><code>collapse</code></strong> —— 此选项将覆盖全局的“隐藏已屏蔽元素的占位符”选项，并确保过滤规则总是隐藏这些元素。类似地，<code>~collapse</code> 选项将确保过滤规则不隐藏这些元素。</p>
+</li>
+<li><p><strong><code>donottrack</code></strong> —— 对于匹配了带有此选项的屏蔽规则，且未匹配到带有此选项的例外规则的地址，会发送一个 Do-Not-Track 头（需要 Adblock Plus 1.3.5 或更高版本）。为了向后兼容，使用此选项时建议使用矛盾的组合类型选项，以防止此规则在早期版本的 Adblock Plus 中屏蔽任何内容：<code>*$donottrack,image,~image</code></p>
+</li>
+</ul>
+<h3 id="使用正则表达式"><a href="#使用正则表达式" class="headerlink" title="使用正则表达式"></a>使用正则表达式</h3><p>如果您想更好地控制您的过滤规则，决定什么匹配、什么不匹配，您可以使用正则表达式。例如，过滤规则 <code>/banner\d+/</code> 会匹配 <code>banner123</code> 和<br><code>banner321</code>，但不会匹配 <code>banners</code>。您可以查看正则表达式的文档来学习如何编写正则表达式。</p>
+<blockquote>
+<p>注意：出于性能原因，建议尽可能避免使用正则表达式。</p>
+</blockquote>
+<h3 id="元素隐藏"><a href="#元素隐藏" class="headerlink" title="元素隐藏"></a>元素隐藏</h3><h4 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h4><p>有时您可能会发现无法屏蔽某些内嵌在网页中的文字广告。如果查看网页源代码，可能会发现类似这样的代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;textad&quot;</span>&gt;</span></span><br><span class="line">  最便宜的豆腐，仅限此时此地！</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;sponsorad&quot;</span>&gt;</span></span><br><span class="line">  真正便宜的豆腐，点击这里！</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">textad</span>&gt;</span></span><br><span class="line">  只有在这里您才能买到最好的豆腐！</span><br><span class="line"><span class="tag">&lt;/<span class="name">textad</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>因为您必须下载页面的内容，所以您也必须下载这些广告。对于这种情况，您能做的就是把这些广告隐藏起来，这样您就看不到它们了。这就是元素隐藏的意义所在。</p>
+<p>上面代码中的第一则广告是在一个 <code>class</code> 属性为 “textad” 的 <code>div</code> 容器内。过滤规则 <code>##div.textad</code> 可以隐藏它。这里的<br><code>##</code> 表明这是一条元素隐藏规则，其余部分是定义需要隐藏元素的选择器。<br>同样，您可以通过 <code>id</code> 属性来隐藏：<code>##div#sponsorad</code> 会隐藏第二个广告。<br>您不需要指定元素的名称，过滤规则 <code>##*#sponsorad</code> 同样有效。<br>您也可以仅指定要屏蔽的元素名称来隐藏，例如：<code>##textad</code> 可以隐藏第三则广告。</p>
+<p>在不查看页面源码的情况下，<strong>Element Hiding Helper</strong> 扩展可以帮助选择正确的元素并编写相应的规则。具备基础的 HTML<br>知识还是很有用的。</p>
+<blockquote>
+<p>注意：元素隐藏规则与普通屏蔽规则的工作方式有很大不同。元素隐藏规则<strong>不支持通配符</strong>。</p>
+</blockquote>
+<h4 id="限定在特定域名的规则"><a href="#限定在特定域名的规则" class="headerlink" title="限定在特定域名的规则"></a>限定在特定域名的规则</h4><p>通常您只想隐藏特定网站的特定广告，而不希望规则影响其他网站。例如，过滤规则 <code>##*.sponsor</code> 可能会隐藏某些网站的有效代码。<br>但如果您将其写为 <code>example.com##*.sponsor</code>，它就只会在 <code>http://example.com/</code> 和<br><code>http://something.example.com/</code> 上生效，而不会在 <code>http://example.org/</code> 上生效。<br>您也可以指定多个域名——只需用逗号 (,)<br>分隔即可：<code>domain1.example,domain2.example,domain3.example##*.sponsor</code></p>
+<p>如果在域名前有 “<code>~</code>“，则该过滤规则不适用于此域名的页面（需要 AdBlock Plus 1.1 或更高版本）。例如：</p>
+<ul>
+<li><code>~example.com##*.sponsor</code> 将适用于除 “<code>example.com</code>“ 之外的任何域名。</li>
+<li><code>example.com,~foo.example.com##*.sponsor</code> 适用于 “<code>example.com</code>“ 但不适用于其子域名 “<code>foo.example.com</code>“。</li>
+</ul>
+<blockquote>
+<p>注意：由于元素隐藏的实现方式，您只能将隐藏规则限定在完整的域名上。您不能使用网址的其他部分，也不能用 <code>domain</code> 代替</p>
+</blockquote>
+<p><code>domain.example,domain.test</code>。</p>
+<blockquote>
+<p>注意：限定域名的元素隐藏规则也可用来隐藏浏览器的用户界面。例如，过滤规则 <code>browser##menuitem#javascriptConsole</code> 会隐藏</p>
+</blockquote>
+<p>Firefox 工具菜单中的 JavaScript 控制台。</p>
+<h4 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h4><p>一些广告隐藏起来并不容易——它们可能既没有 <code>id</code> 也没有 <code>class</code> 属性。您可以使用其他属性来隐藏它们。</p>
+<ul>
+<li>例如 <code>##table[width=&quot;80%&quot;]</code> 可以隐藏 <code>width</code> 属性值为 80% 的表格元素。</li>
+<li>如果您不想指定属性的完整值，<code>##div[title*=&quot;adv&quot;]</code> 会隐藏所有 <code>title</code> 属性包含 “adv” 字符串的 <code>div</code> 元素。</li>
+<li>您还可以检查属性的开始和结束字符，例如 <code>##div[title^=&quot;adv&quot;][title$=&quot;ert&quot;]</code> 会隐藏 <code>title</code> 属性以 “adv” 开头并以 “ert” 结尾的 <code>div</code> 元素。</li>
+</ul>
+<p>正如您所见，您可以使用多个条件 —— <code>table[width=&quot;80%&quot;][bgcolor=&quot;white&quot;]</code> 会匹配 <code>width</code> 属性为 80% 且<br><code>bgcolor</code> 属性为 white 的表格元素。</p>
+<h4 id="高级选择器"><a href="#高级选择器" class="headerlink" title="高级选择器"></a>高级选择器</h4><p>通常情况下，Firefox 支持的 CSS 选择器都可用于元素隐藏。例如：下面的过滤规则会隐藏 <code>class</code> 属性为 <code>adheader</code> 的 <code>div</code><br>元素<strong>后面相邻</strong>的任何元素：<code>##div.adheader + *</code>。完整的 CSS 选择器列表请查看 W3C CSS 规范（Firefox<br>目前并未支持所有选择器）。</p>
+<blockquote>
+<p>注意：这个功能仅供高级用户使用，您需要能熟练使用 CSS 选择器。Adblock Plus 无法检查您添加的选择器语法是否正确，如果您使用了无效的 CSS</p>
+</blockquote>
+<p>语法，可能会破坏其他已有的有效过滤规则。建议使用 JavaScript 控制台检查是否有 CSS 错误。</p>
+<h4 id="例外规则"><a href="#例外规则" class="headerlink" title="例外规则"></a>例外规则</h4><p>例外规则的作用是在特定域名中禁用已有的元素隐藏规则。这对于那些与其他订阅列表配合使用，且无法修改该订阅列表的用户或作者来说非常有用。<br>例如，要禁用 <code>example.com</code> 上的 <code>##div.textad</code> 规则，可以使用<br><code>example.com#@#div.textad</code>。这条组合规则等同于 <code>~example.com##div.textad</code>。<br><strong>建议您仅在无法调整全局隐藏规则时才使用例外规则，否则应优先使用限定在特定域名的规则。</strong></p>
+<h4 id="简单元素隐藏语法"><a href="#简单元素隐藏语法" class="headerlink" title="简单元素隐藏语法"></a>简单元素隐藏语法</h4><p>Adblock Plus 支持简单元素隐藏语法（例如：<code>#div(id=foo)</code>）只是为了向后兼容。使用这种语法并不好，<strong>CSS<br>选择器才是首选</strong>。对此语法的支持可能在未来的某个版本中移除。</p>
+<h4 id="通用-特定过滤器"><a href="#通用-特定过滤器" class="headerlink" title="通用&#x2F;特定过滤器"></a>通用&#x2F;特定过滤器</h4><p>随着 <code>$generichide</code> 和 <code>$genericblock</code> 过滤选项的出现，区分通用过滤器和特定过滤器变得重要起来。</p>
+<p>我们将匹配一个或多个域名或匹配一个 sitekey 的过滤器归类为<strong>特定过滤器</strong>。如果过滤器没有指定域名（或仅有域名例外）且没有<br>sitekey，则它被视为<strong>通用过滤器</strong>。<br>例如，<code>example.com##div.textad</code> 是一个特定过滤器，而 <code>##div.textad</code> 和<br><code>~example.com##div.textad</code> 都是通用过滤器。</p>
+<p>请注意，对于屏蔽规则，域名必须在 <code>$domain</code> 选项下指定才能被视为特定规则。例如，<code>||example.com^</code> 被认为是通用的，而<br><code>*/ads/*$domain=example.com</code> 是站点特定的。</p>
+<h3 id="在服务器上实施-Sitekey"><a href="#在服务器上实施-Sitekey" class="headerlink" title="在服务器上实施 Sitekey"></a>在服务器上实施 Sitekey</h3><p>若要实现一个采用 sitekey 限制的过滤规则，网页需要返回 Base64 编码的公钥版本以及 Adblock Plus<br>可以验证的签名。目前，这需要通过以下两种方式提供：</p>
+<ol>
+<li>在 HTTP 响应头中包含：<code>X-Adblock-Key: abcdpublickeydcba_abcdsignaturedcba</code></li>
+<li>在 document 的根标签（<code>&lt;html&gt;</code>）中包含：<code>&lt;html data-adblockkey=&quot;abcdpublickeydcba_abcdsignaturedcba&quot;&gt;</code></li>
+</ol>
+<p><strong>实施步骤：</strong></p>
+<ol>
+<li>首先，您需要创建一个专用的 RSA 密钥（最好是 512 位以降低传输开销）以及公钥的 DER 表示。</li>
+<li>用于创建签名的数据是一个由请求变量（即 URI、Host 和 User-Agent）组成的连续列表，分隔符是 NUL 字符（即 <code>\0</code>）。<br> 例如：<br> <code>/index.html?q=foo\0www.example.com\0Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:30.0) Gecko/20100101 Firefox/30.0</code></li>
+<li>最后，使用 <code>SEC_OID_ISO_SHA_WITH_RSA_SIGNATURE</code> 签名算法（这是使用 OpenSSL 时的默认算法）生成此字符串的签名。</li>
+</ol>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/c94280cc.html"><div class="related-post-title">“看看”视频解析chrome扩展</div><div class="related-post-meta"><time>2021-01-10</time><div class="related-post-categories"><span class="category-badge">广告过滤</span><span class="category-badge">ADBlock</span><span class="category-badge">影视</span><span class="category-badge">Movies</span></div></div></a><a class="related-post-item" href="/article/c36d683.html"><div class="related-post-title">AdGuard最新广告规则，去网页广告，去视频广告，去启动广告，去app广告</div><div class="related-post-meta"><time>2019-09-26</time><div class="related-post-categories"><span class="category-badge">广告过滤</span><span class="category-badge">ADBlock</span></div></div></a><a class="related-post-item" href="/article/e293ac22.html"><div class="related-post-title">AdGuard更多规则推荐</div><div class="related-post-meta"><time>2019-09-26</time><div class="related-post-categories"><span class="category-badge">广告过滤</span><span class="category-badge">ADBlock</span></div></div></a><a class="related-post-item" href="/article/d049ba2c.html"><div class="related-post-title">AdGuard推荐设置</div><div class="related-post-meta"><time>2019-09-26</time><div class="related-post-categories"><span class="category-badge">广告过滤</span><span class="category-badge">ADBlock</span></div></div></a><a class="related-post-item" href="/article/6f1f19a3.html"><div class="related-post-title">AdGuard添加规则方法</div><div class="related-post-meta"><time>2019-09-26</time><div class="related-post-categories"><span class="category-badge">广告过滤</span><span class="category-badge">ADBlock</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/90516730.html">https://xuehuayu.cn/article/90516730.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><a href="/tags/ADBlock/">ADBlock</a><a href="/tags/ADBlock-Plus/">ADBlock Plus</a><a href="/tags/%E8%BF%87%E6%BB%A4%E8%A7%84%E5%88%99/">过滤规则</a><a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/">浏览器插件</a><a href="/tags/ADGuard/">ADGuard</a></div><div class="post-nav"><a class="pre" href="/article/3c15629d.html">AdGuard，给你更全面的网络隐私保护</a><a class="next" href="/article/6f1f19a3.html">AdGuard添加规则方法</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

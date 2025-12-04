@@ -1,0 +1,477 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>20道JS原理题助你面试一臂之力！ | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">20道JS原理题助你面试一臂之力！</h1><div class="post-meta"><span class="date">2019-12-02</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 11</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/1398f35d.html#waline-comment"><span class="waline-comment-count" data-path="/article/1398f35d.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5d2ee123e51d4577614761f8</code></p>
+<p>本文针对目前常见的面试题，仅提供了相应的核心原理及思路，部分边界细节未处理。后续会持续更新，希望对你有所帮助。</p>
+<span id="more"></span>
+
+<h2 id="1-实现一个call函数"><a href="#1-实现一个call函数" class="headerlink" title="1. 实现一个call函数"></a>1. 实现一个call函数</h2><pre><code>// 思路：将要改变this指向的方法挂到目标this上执行并返回Function.prototype.mycall = function (context) {
+  if (typeofthis !== &#39;function&#39;) {
+    thrownewTypeError(&#39;not funciton&#39;)
+  }
+  context = context || window
+  context.fn = thislet arg = [...arguments].slice(1)
+  let result = context.fn(...arg)
+  delete context.fn
+  return result
+}
+复制代码
+</code></pre>
+<h2 id="2-实现一个apply函数"><a href="#2-实现一个apply函数" class="headerlink" title="2. 实现一个apply函数"></a>2. 实现一个apply函数</h2><pre><code>// 思路：将要改变this指向的方法挂到目标this上执行并返回Function.prototype.myapply = function (context) {
+  if (typeofthis !== &#39;function&#39;) {
+    thrownewTypeError(&#39;not funciton&#39;)
+  }
+  context = context || window
+  context.fn = thislet result
+  if (arguments[1]) {
+    result = context.fn(...arguments[1])
+  } else {
+    result = context.fn()
+  }
+  delete context.fn
+  return result
+}
+复制代码
+</code></pre>
+<h2 id="3-实现一个bind函数"><a href="#3-实现一个bind函数" class="headerlink" title="3. 实现一个bind函数"></a>3. 实现一个bind函数</h2><pre><code>// 思路：类似call，但返回的是函数Function.prototype.mybind = function (context) {
+  if (typeofthis !== &#39;function&#39;) {
+    thrownewTypeError(&#39;Error&#39;)
+  }
+  let _this = thislet arg = [...arguments].slice(1)
+  returnfunctionF() {
+    // 处理函数使用new的情况if (thisinstanceof F) {
+      returnnew _this(...arg, ...arguments)
+    } else {
+      return _this.apply(context, arg.concat(...arguments))
+    }
+  }
+}
+复制代码
+</code></pre>
+<h2 id="4-instanceof的原理"><a href="#4-instanceof的原理" class="headerlink" title="4. instanceof的原理"></a>4. instanceof的原理</h2><pre><code>// 思路：右边变量的原型存在于左边变量的原型链上functioninstanceOf(left, right) {
+  let leftValue = left.__proto__
+  let rightValue = right.prototype
+  while (true) {
+    if (leftValue === null) {
+      returnfalse
+    }
+    if (leftValue === rightValue) {
+      return true
+    }
+    leftValue = leftValue.__proto__
+  }
+}
+复制代码
+</code></pre>
+<h2 id="5-Object-create的基本实现原理"><a href="#5-Object-create的基本实现原理" class="headerlink" title="5. Object.create的基本实现原理"></a>5. Object.create的基本实现原理</h2><pre><code>// 思路：将传入的对象作为原型functioncreate(obj) {
+  functionF() {}
+  F.prototype = obj
+  returnnew F()
+}
+复制代码
+</code></pre>
+<h2 id="6-new本质"><a href="#6-new本质" class="headerlink" title="6. new本质"></a>6. new本质</h2><pre><code>functionmyNew (fun) {
+  returnfunction () {
+    // 创建一个新对象且将其隐式原型指向构造函数原型let obj = {
+      __proto__ : fun.prototype
+    }
+    // 执行构造函数
+    fun.call(obj, ...arguments)
+    // 返回该对象return obj
+  }
+}
+
+functionperson(name, age) {
+  this.name = name
+  this.age = age
+}
+let obj = myNew(person)(&#39;chen&#39;, 18) // {name: &quot;chen&quot;, age: 18}复制代码
+</code></pre>
+<h2 id="7-实现一个基本的Promise"><a href="#7-实现一个基本的Promise" class="headerlink" title="7. 实现一个基本的Promise"></a>7. 实现一个基本的Promise</h2><pre><code>// 未添加异步处理等其他边界情况// ①自动执行函数，②三个状态，③thenclassPromise{
+  constructor (fn) {
+    // 三个状态this.state = &#39;pending&#39;this.value = undefinedthis.reason = undefinedlet resolve = value =&gt; {
+      if (this.state === &#39;pending&#39;) {
+        this.state = &#39;fulfilled&#39;this.value = value
+      }
+    }
+    let reject = value =&gt; {
+      if (this.state === &#39;pending&#39;) {
+        this.state = &#39;rejected&#39;this.reason = value
+      }
+    }
+    // 自动执行函数try {
+      fn(resolve, reject)
+    } catch (e) {
+      reject(e)
+    }
+  }
+  // then
+  then(onFulfilled, onRejected) {
+    switch (this.state) {
+      case&#39;fulfilled&#39;:
+        onFulfilled()
+        breakcase&#39;rejected&#39;:
+        onRejected()
+        breakdefault:
+    }
+  }
+}
+复制代码
+</code></pre>
+<h2 id="8-实现浅拷贝"><a href="#8-实现浅拷贝" class="headerlink" title="8. 实现浅拷贝"></a>8. 实现浅拷贝</h2><pre><code>// 1. ...实现let copy1 = {...{x:1} }
+
+// 2. Object.assign实现let copy2 = Object.assign({}, {x:1})
+复制代码
+</code></pre>
+<h2 id="9-实现一个基本的深拷贝"><a href="#9-实现一个基本的深拷贝" class="headerlink" title="9. 实现一个基本的深拷贝"></a>9. 实现一个基本的深拷贝</h2><pre><code>// 1. JOSN.stringify()/JSON.parse()let obj = {a: 1, b: {x: 3} }
+JSON.parse(JSON.stringify(obj))
+
+// 2. 递归拷贝functiondeepClone(obj) {
+  let copy = obj instanceofArray ? [] : {}
+  for (let i in obj) {
+    if (obj.hasOwnProperty(i)) {
+      copy[i] = typeof obj[i] === &#39;object&#39; ? deepClone(obj[i]) : obj[i]
+    }
+  }
+  return copy
+}
+复制代码
+</code></pre>
+<h2 id="10-使用setTimeout模拟setInterval"><a href="#10-使用setTimeout模拟setInterval" class="headerlink" title="10. 使用setTimeout模拟setInterval"></a>10. 使用setTimeout模拟setInterval</h2><pre><code>// 可避免setInterval因执行时间导致的间隔执行时间不一致
+setTimeout (function () {
+  // do something
+  setTimeout (arguments.callee, 500)
+}, 500)
+复制代码
+</code></pre>
+<h2 id="11-js实现一个继承方法"><a href="#11-js实现一个继承方法" class="headerlink" title="11. js实现一个继承方法"></a>11. js实现一个继承方法</h2><pre><code>// 借用构造函数继承实例属性functionChild () {
+  Parent.call(this)
+}
+// 寄生继承原型属性
+(function () {
+  let Super = function () {}
+  Super.prototype = Parent.prototype
+  Child.prototype = new Super()
+})()
+复制代码
+</code></pre>
+<h2 id="12-实现一个基本的Event-Bus"><a href="#12-实现一个基本的Event-Bus" class="headerlink" title="12. 实现一个基本的Event Bus"></a>12. 实现一个基本的Event Bus</h2><pre><code>// 组件通信，一个触发与监听的过程classEventEmitter{
+  constructor () {
+    // 存储事件this.events = this.events || newMap()
+  }
+  // 监听事件
+  addListener (type, fn) {
+    if (!this.events.get(type)) {
+      this.events.set(type, fn)
+    }
+  }
+  // 触发事件
+  emit (type) {
+    let handle = this.events.get(type)
+    handle.apply(this, [...arguments].slice(1))
+  }
+}
+
+// 测试let emitter = new EventEmitter()
+// 监听事件
+emitter.addListener(&#39;ages&#39;, age =&gt; {
+  console.log(age)
+})
+// 触发事件
+emitter.emit(&#39;ages&#39;, 18)  // 18复制代码
+</code></pre>
+<h2 id="13-实现一个双向数据绑定"><a href="#13-实现一个双向数据绑定" class="headerlink" title="13. 实现一个双向数据绑定"></a>13. 实现一个双向数据绑定</h2><pre><code>let obj = {}
+let input = document.getElementById(&#39;input&#39;)
+let span = document.getElementById(&#39;span&#39;)
+// 数据劫持Object.defineProperty(obj, &#39;text&#39;, {
+  configurable: true,
+  enumerable: true,
+  get() {
+    console.log(&#39;获取数据了&#39;)
+  },
+  set(newVal) {
+    console.log(&#39;数据更新了&#39;)
+    input.value = newVal
+    span.innerHTML = newVal
+  }
+})
+// 输入监听
+input.addEventListener(&#39;keyup&#39;, function(e) {
+  obj.text = e.target.value
+})
+复制代码
+</code></pre>
+<p>完整实现可前往之前写的：<a target="_blank" rel="noopener" href="https://juejin.im/post/5d26e368e51d4577407b1dd7">这应该是最详细的响应式系统讲解了</a></p>
+<h2 id="14-实现一个简单路由"><a href="#14-实现一个简单路由" class="headerlink" title="14. 实现一个简单路由"></a>14. 实现一个简单路由</h2><pre><code>// hash路由classRoute{
+  constructor(){
+    // 路由存储对象this.routes = {}
+    // 当前hashthis.currentHash = &#39;&#39;// 绑定this，避免监听时this指向改变this.freshRoute = this.freshRoute.bind(this)
+    // 监听window.addEventListener(&#39;load&#39;, this.freshRoute, false)
+    window.addEventListener(&#39;hashchange&#39;, this.freshRoute, false)
+  }
+  // 存储
+  storeRoute (path, cb) {
+    this.routes[path] = cb || function () {}
+  }
+  // 更新
+  freshRoute () {
+    this.currentHash = location.hash.slice(1) || &#39;/&#39;this.routes[this.currentHash]()
+  }
+}
+复制代码
+</code></pre>
+<h2 id="15-实现懒加载"><a href="#15-实现懒加载" class="headerlink" title="15. 实现懒加载"></a>15. 实现懒加载</h2><pre><code>&lt;ul&gt;&lt;li&gt;&lt;imgsrc=&quot;./imgs/default.png&quot;data=&quot;./imgs/1.png&quot;alt=&quot;&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;imgsrc=&quot;./imgs/default.png&quot;data=&quot;./imgs/2.png&quot;alt=&quot;&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;imgsrc=&quot;./imgs/default.png&quot;data=&quot;./imgs/3.png&quot;alt=&quot;&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;imgsrc=&quot;./imgs/default.png&quot;data=&quot;./imgs/4.png&quot;alt=&quot;&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;imgsrc=&quot;./imgs/default.png&quot;data=&quot;./imgs/5.png&quot;alt=&quot;&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;imgsrc=&quot;./imgs/default.png&quot;data=&quot;./imgs/6.png&quot;alt=&quot;&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;imgsrc=&quot;./imgs/default.png&quot;data=&quot;./imgs/7.png&quot;alt=&quot;&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;imgsrc=&quot;./imgs/default.png&quot;data=&quot;./imgs/8.png&quot;alt=&quot;&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;imgsrc=&quot;./imgs/default.png&quot;data=&quot;./imgs/9.png&quot;alt=&quot;&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;imgsrc=&quot;./imgs/default.png&quot;data=&quot;./imgs/10.png&quot;alt=&quot;&quot;&gt;&lt;/li&gt;&lt;/ul&gt;复制代码
+
+let imgs =  document.querySelectorAll(&#39;img&#39;)
+// 可视区高度let clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+functionlazyLoad () {
+  // 滚动卷去的高度let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+  for (let i = 0; i &lt; imgs.length; i ++) {
+    // 图片在可视区冒出的高度let x = clientHeight + scrollTop - imgs[i].offsetTop
+    // 图片在可视区内if (x &gt; 0 &amp;&amp; x &lt; clientHeight+imgs[i].height) {
+      imgs[i].src = imgs[i].getAttribute(&#39;data&#39;)
+    }
+  }
+}
+// addEventListener(&#39;scroll&#39;, lazyLoad) or setInterval(lazyLoad, 1000)复制代码
+</code></pre>
+<h2 id="16-rem基本设置"><a href="#16-rem基本设置" class="headerlink" title="16. rem基本设置"></a>16. rem基本设置</h2><pre><code>// 原始配置functionsetRem () {
+  let doc = document.documentElement
+  let width = doc.getBoundingClientRect().width
+  let rem = width / 75
+  doc.style.fontSize = rem + &#39;px&#39;
+}
+// 监听窗口变化
+addEventListener(&quot;resize&quot;, setRem)
+复制代码
+</code></pre>
+<h2 id="17-手写实现AJAX"><a href="#17-手写实现AJAX" class="headerlink" title="17. 手写实现AJAX"></a>17. 手写实现AJAX</h2><pre><code>// 1. 简单流程// 实例化let xhr = new XMLHttpRequest()
+// 初始化
+xhr.open(method, url, async)
+// 发送请求
+xhr.send(data)
+// 设置状态变化回调处理请求结果
+xhr.onreadystatechange = () =&gt; {
+  if (xhr.readyStatus === 4 &amp;&amp; xhr.status === 200) {
+    console.log(xhr.responseText)
+  }
+}
+
+// 2. 基于promise实现 functionajax (options) {
+  // 请求地址const url = options.url
+  // 请求方法const method = options.method.toLocaleLowerCase() || &#39;get&#39;// 默认为异步trueconstasync = options.async
+  // 请求参数const data = options.data
+  // 实例化const xhr = new XMLHttpRequest()
+  // 请求超时if (options.timeout &amp;&amp; options.timeout &gt; 0) {
+    xhr.timeout = options.timeout
+  }
+  // 返回一个Promise实例returnnewPromise ((resolve, reject) =&gt; {
+    xhr.ontimeout = () =&gt; reject &amp;&amp; reject(&#39;请求超时&#39;)
+    // 监听状态变化回调
+    xhr.onreadystatechange = () =&gt; {
+      if (xhr.readyState == 4) {
+        // 200-300 之间表示请求成功，304资源未变，取缓存if (xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300 || xhr.status == 304) {
+          resolve &amp;&amp; resolve(xhr.responseText)
+        } else {
+          reject &amp;&amp; reject()
+        }
+      }
+    }
+    // 错误回调
+    xhr.onerror = err =&gt; reject &amp;&amp; reject(err)
+    let paramArr = []
+    let encodeData
+    // 处理请求参数if (data instanceofObject) {
+      for (let key in data) {
+        // 参数拼接需要通过 encodeURIComponent 进行编码
+        paramArr.push(encodeURIComponent(key) + &#39;=&#39; + encodeURIComponent(data[key]))
+      }
+      encodeData = paramArr.join(&#39;&amp;&#39;)
+    }
+    // get请求拼接参数if (method === &#39;get&#39;) {
+      // 检测url中是否已存在 ? 及其位置const index = url.indexOf(&#39;?&#39;)
+      if (index === -1) url += &#39;?&#39;elseif (index !== url.length -1) url += &#39;&amp;&#39;// 拼接url
+      url += encodeData
+    }
+    // 初始化
+    xhr.open(method, url, async)
+    // 发送请求if (method === &#39;get&#39;) xhr.send(null)
+    else {
+      // post 方式需要设置请求头
+      xhr.setRequestHeader(&#39;Content-Type&#39;,&#39;application/x-www-form-urlencoded;charset=UTF-8&#39;)
+      xhr.send(encodeData)
+    }
+  })
+}
+复制代码
+</code></pre>
+<h2 id="18-实现拖拽"><a href="#18-实现拖拽" class="headerlink" title="18. 实现拖拽"></a>18. 实现拖拽</h2><pre><code>window.onload = function () {
+  // drag处于绝对定位状态let drag = document.getElementById(&#39;box&#39;)
+  drag.onmousedown = function(e) {
+    var e = e || window.event
+    // 鼠标与拖拽元素边界的距离 = 鼠标与可视区边界的距离 - 拖拽元素与边界的距离let diffX = e.clientX - drag.offsetLeft
+    let diffY = e.clientY - drag.offsetTop
+    drag.onmousemove = function (e) {
+      // 拖拽元素移动的距离 = 鼠标与可视区边界的距离 - 鼠标与拖拽元素边界的距离let left = e.clientX - diffX
+      let top = e.clientY - diffY
+      // 避免拖拽出可视区if (left &lt; 0) {
+        left = 0
+      } elseif (left &gt; window.innerWidth - drag.offsetWidth) {
+        left = window.innerWidth - drag.offsetWidth
+      }
+      if (top &lt; 0) {
+        top = 0
+      } elseif (top &gt; window.innerHeight - drag.offsetHeight) {
+        top = window.innerHeight - drag.offsetHeight
+      }
+      drag.style.left = left + &#39;px&#39;
+      drag.style.top = top + &#39;px&#39;
+    }
+    drag.onmouseup = function (e) {
+      this.onmousemove = nullthis.onmouseup = null
+    }
+  }
+}
+复制代码
+</code></pre>
+<h2 id="19-实现一个节流函数"><a href="#19-实现一个节流函数" class="headerlink" title="19. 实现一个节流函数"></a>19. 实现一个节流函数</h2><pre><code>// 思路：在规定时间内只触发一次functionthrottle (fn, delay) {
+  // 利用闭包保存时间let prev = Date.now()
+  returnfunction () {
+    let context = thislet arg = argumentslet now = Date.now()
+    if (now - prev &gt;= delay) {
+      fn.apply(context, arg)
+      prev = Date.now()
+    }
+  }
+}
+
+functionfn () {
+  console.log(&#39;节流&#39;)
+}
+addEventListener(&#39;scroll&#39;, throttle(fn, 1000))
+复制代码
+</code></pre>
+<h2 id="20-实现一个防抖函数"><a href="#20-实现一个防抖函数" class="headerlink" title="20. 实现一个防抖函数"></a>20. 实现一个防抖函数</h2><pre><code>// 思路:在规定时间内未触发第二次，则执行functiondebounce (fn, delay) {
+  // 利用闭包保存定时器let timer = nullreturnfunction () {
+    let context = thislet arg = arguments// 在规定时间内再次触发会先清除定时器后再重设定时器
+    clearTimeout(timer)
+    timer = setTimeout(function () {
+      fn.apply(context, arg)
+    }, delay)
+  }
+}
+
+functionfn () {
+  console.log(&#39;防抖&#39;)
+}
+addEventListener(&#39;scroll&#39;, debounce(fn, 1000))
+复制代码
+</code></pre>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>后续会持续更新，欢迎关注点个赞！</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/12/21/167d05bdfff953ad?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/f11ce35e.html"><div class="related-post-title">寒冬求职之你必须要懂的Web安全</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/2f775138.html"><div class="related-post-title">vue3 组件 has no default export</div><div class="related-post-meta"><time>2025-10-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">Vue3</span></div></div></a><a class="related-post-item" href="/article/6103b430.html"><div class="related-post-title">antd的select选择框设置下拉框的宽度</div><div class="related-post-meta"><time>2020-04-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/a188a3ec.html"><div class="related-post-title">利用&quot;交叉观察者&quot;(IntersectionObserver接口)，轻松实现懒加载、吸顶、触底</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/ecd8e3f0.html"><div class="related-post-title">webpack常用的plugin</div><div class="related-post-meta"><time>2019-11-05</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/1398f35d.html">https://xuehuayu.cn/article/1398f35d.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/44ff8f55.html">面试:在浏览器输入URL回车之后发生了什么？（超详细版）</a><a class="next" href="/article/7ad54585.html">MVVM 双向绑定全量版整理</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

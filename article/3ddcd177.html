@@ -1,0 +1,1319 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>21 个 React 性能优化技巧 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">21 个 React 性能优化技巧</h1><div class="post-meta"><span class="date">2019-11-21</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 8.7k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 34</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/3ddcd177.html#waline-comment"><span class="waline-comment-count" data-path="/article/3ddcd177.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.infoq.cn/article/KVE8xtRs-uPphptq5LUz</code></p>
+<p>React 为高性能应用设计提供了许多优化方案，本文列举了其中的一些最佳实践。</p>
+<span id="more"></span>
+
+<p>在以下场景中，父组件和子组件通常会重新渲染：</p>
+<ol>
+<li><p>在同一组件或父组件中调用 setState 时。</p>
+</li>
+<li><p>从父级收到的“props”的值发生变化。</p>
+</li>
+<li><p>调用组件中的 forceUpdate。</p>
+</li>
+</ol>
+<p>下面是提升 React 应用性能的 21 个技巧。</p>
+<h3 id="1-使用纯组件"><a href="#1-使用纯组件" class="headerlink" title="1. 使用纯组件"></a>1. 使用纯组件</h3><p><img src="https://static001.infoq.cn/resource/image/7e/73/7e98f4de99e7689203e6c6551a6fec73.jpg" alt="21个React性能优化技巧"></p>
+<p>如果 React 组件为相同的状态和 props 渲染相同的输出，则可以将其视为纯组件。</p>
+<p>对于像 this 的类组件来说，React 提供了 PureComponent 基类。扩展 React.PureComponent 类的类组件被视为纯组件。</p>
+<p>它与普通组件是一样的，只是 PureComponents 负责 shouldComponentUpdate——它对状态和 props<br>数据进行浅层比较（shallow comparison）。</p>
+<p>如果先前的状态和 props 数据与下一个 props 或状态相同，则组件不会重新渲染。</p>
+<h4 id="什么是浅层渲染？"><a href="#什么是浅层渲染？" class="headerlink" title="什么是浅层渲染？"></a>什么是浅层渲染？</h4><p>在对比先前的 props 和状态与下一个 props 和状态时，浅层比较将检查它们的基元是否有相同的值（例如：1 等于 1 或真等于真），还会检查更复杂的<br>JavaScript 值（如对象和数组）之间的引用是否相同。</p>
+<p>比较基元和对象引用的开销比更新组件视图要低。</p>
+<p>因此，查找状态和 props 值的变化会比不必要的更新更快。</p>
+<p>复制代码</p>
+<pre><code>importReact from &#39;react&#39;;
+
+export defaultclassApplicationComponentextendsReact.Component{
+
+    constructor() {
+
+super();
+
+this.state = {
+
+            name: &quot;Mayank&quot;
+
+        }
+
+    }
+
+    updateState = () =&gt; {
+
+        setInterval(() =&gt; {
+
+this.setState({
+
+                name: &quot;Mayank&quot;
+
+            })
+
+        }, 1000)
+
+    }
+
+    componentDidMount() {
+
+this.updateState();
+
+    }
+
+    render() {
+
+        console.log(&quot;Render Called Again&quot;)
+
+return (
+
+            &lt;div&gt;
+
+                &lt;RegularChildComponent name={this.state.name} /&gt;
+
+                &lt;PureChildComponent name={this.state.name} /&gt;
+
+            &lt;/div&gt;
+
+        )
+
+    }
+
+}
+
+classRegularChildComponentextendsReact.Component{
+
+    render() {
+
+        console.log(&quot;Regular Component Rendered..&quot;);
+
+return &lt;div&gt;{this.props.name}&lt;/div&gt;;
+
+    }
+
+}
+
+classPureChildComponentextendsReact.PureComponent{
+
+// Pure Components are the components that do not re-render if the State data or props data is still the same
+
+    render() {
+
+        console.log(&quot;Pure Component Rendered..&quot;)
+
+return &lt;div&gt;{this.props.name}&lt;/div&gt;;
+
+    }
+
+}
+</code></pre>
+<p>在上面的示例中，状态被传播到子组件 RegularChildComponent 和 PureChildComponent。PureChildComponent<br>是一个纯组件。</p>
+<p>setstate 在一秒的间隔之后被调用，这将重新触发组件的视图渲染。由于初始 props 和新 props<br>的值相同，因此组件（PureChildComponent）不会被重新渲染。</p>
+<p>状态的浅层比较表明 props 或状态的数据没有变化，因此不需要渲染组件，从而提升了性能。</p>
+<h3 id="2-使用-React-memo-进行组件记忆"><a href="#2-使用-React-memo-进行组件记忆" class="headerlink" title="2. 使用 React.memo 进行组件记忆"></a>2. 使用 React.memo 进行组件记忆</h3><p>React.memo 是一个高阶组件。</p>
+<p>它很像 PureComponent，但 PureComponent 属于 Component 的类实现，而“memo”则用于创建函数组件。</p>
+<p>这里与纯组件类似，如果输入 props 相同则跳过组件渲染，从而提升组件性能。</p>
+<p>它会记忆上次某个输入 prop 的执行输出并提升应用性能。即使在这些组件中比较也是浅层的。</p>
+<p>你还可以为这个组件传递自定义比较逻辑。</p>
+<p>用户可以用自定义逻辑深度对比（deep comparison）对象。如果比较函数返回 false 则重新渲染组件，否则就不会重新渲染。</p>
+<p>复制代码</p>
+<pre><code>functionCustomisedComponen(props) {
+
+return (
+
+&lt;div&gt;
+
+&lt;b&gt;User name: {props.name}&lt;/b&gt;
+
+&lt;b&gt;User age: {props.age}&lt;/b&gt;
+
+&lt;b&gt;User designation: {props.designation}&lt;/b&gt;
+
+&lt;/div&gt;
+
+    )
+
+}
+
+// The component below is the optimised version for the Default Componenent
+
+// The Component will not re-render if same props value for &quot;name&quot; property
+
+var memoComponent = React.memo(CustomisedComponent);
+</code></pre>
+<p>上面的组件将对前后两个 props 的值进行浅层比较。</p>
+<p>如果我们将对象引用作为 props 传递给 memo 组件，则需要一些自定义登录以进行比较。在这种情况下，我们可以将比较函数作为第二个参数传递给<br>React.memo 函数。</p>
+<p>假设 props 值（user）是一个对象引用，包含特定用户的 name、age 和 designation。</p>
+<p>这种情况下需要进行深入比较。我们可以创建一个自定义函数，查找前后两个 props 值的 name、age 和 designation 的值，如果它们不相同则返回<br>false。</p>
+<p>这样，即使我们将参考数据作为 memo 组件的输入，组件也不会重新渲染。</p>
+<p>复制代码</p>
+<pre><code>// The followingfunction takes &quot;user&quot; Objectasinput parameter in props
+
+function CustomisedComponen(props) {
+
+return (
+
+        &lt;div&gt;
+
+            &lt;b&gt;Username: {props.user.name}&lt;/b&gt;
+
+            &lt;b&gt;User age: {props.user.age}&lt;/b&gt;
+
+            &lt;b&gt;User designation: {props.user.designation}&lt;/b&gt;
+
+        &lt;/div&gt;
+
+    )
+
+}
+
+function userComparator(previosProps, nextProps) {
+
+if(previosProps.user.name == nextProps.user.name ||
+
+        previosProps.user.age == nextProps.user.age ||
+
+        previosProps.user.designation == nextProps.user.designation) {
+
+returnfalse
+
+    } else {
+
+return true;
+
+    }
+
+}
+
+var memoComponent = React.memo(CustomisedComponent, userComparator);
+</code></pre>
+<p>上面的代码提供了用于比较的自定义逻辑</p>
+<h3 id="3-使用-shouldComponentUpdate-生命周期事件"><a href="#3-使用-shouldComponentUpdate-生命周期事件" class="headerlink" title="3. 使用 shouldComponentUpdate 生命周期事件"></a>3. 使用 shouldComponentUpdate 生命周期事件</h3><p>这是在重新渲染组件之前触发的其中一个生命周期事件。</p>
+<p>可以利用此事件来决定何时需要重新渲染组件。如果组件 props 更改或调用 setState，则此函数返回一个 Boolean 值。</p>
+<p>在这两种情况下组件都会重新渲染。我们可以在这个生命周期事件中放置一个自定义逻辑，以决定是否调用组件的 render 函数。</p>
+<p>这个函数将 nextState 和 nextProps 作为输入，并可将其与当前 props 和状态做对比，以决定是否需要重新渲染。</p>
+<p>比如说我想在网页上显示员工的详细资料。每位员工都包含多个属性，如姓名、年龄、牌号、薪水、当前经理、前任经理、奖金等。</p>
+<p>我想只在网页上渲染所选员工的姓名和年龄。员工的牌号会在某时刻更新。</p>
+<p>由于员工牌号不在视图内，理想情况下视图是无需更新的。我们可以在组件中添加自定义逻辑，判断是否需要组件更新视图。</p>
+<p>代码如下：</p>
+<p>复制代码</p>
+<pre><code>import React from&quot;react&quot;;
+
+export default class ShouldComponentUpdateUsage extends React.Component {
+
+  constructor(props) {
+
+    super(props);
+
+    this.state = {
+
+      name: &quot;Mayank&quot;;
+
+      age: 30,
+
+      designation: &quot;Architect&quot;;
+
+    }
+
+  }
+
+  componentDidMount() {
+
+setTimeout(() =&gt; {
+
+      this.setState({
+
+        designation: &quot;Senior Architect&quot;
+
+      });
+
+    }
+
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+
+      if(nextState.age != this.state.age || netState.name = this.state.name) {
+
+        return true;
+
+      }
+
+      return false;
+
+  }
+
+  render() {
+
+    return (
+
+&lt;div&gt;
+
+&lt;b&gt;User Name:&lt;/b&gt; {this.state.name}
+
+&lt;b&gt;User Age:&lt;/b&gt; {this.state.age}
+
+      &lt;/div&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<p>这里即使组件中 designation 发生变化也不会影响应用的视图。</p>
+<p>调用 setState 时组件会重新渲染，但因为 designation 更改不会改变 &#x2F; 影响组件的视图，因此在更改 designation<br>时重新渲染组件会带来额外开销。</p>
+<p>为了避免这种开销，我们可以使用自定义逻辑来检查 name 或 age 是否更新，因为视图仅受它们的影响。</p>
+<p>shouldComponentUpdate 将输入参数作为状态和 props 的新值。</p>
+<p>我们可以比较 name 和 age 的当前值和新值。有任何一个发生变化就可以触发重新渲染。</p>
+<p>从 shouldComponentUpdate 传递 true 就意味着可以重新渲染组件，反之亦然。所以正确使用 shouldComponentUpdate<br>就可以优化应用组件的性能。</p>
+<p>对比过初始状态和 props 后我们就可以决定是否需要重新渲染组件。这样可以减少重新渲染的需求来提升性能。</p>
+<h3 id="4-懒加载组件"><a href="#4-懒加载组件" class="headerlink" title="4. 懒加载组件"></a>4. 懒加载组件</h3><p>导入多个文件合并到一个文件中的过程叫打包，使应用不必导入大量外部文件。</p>
+<p>所有主要组件和外部依赖项都合并为一个文件，通过网络传送出去以启动并运行 Web 应用。</p>
+<p>这样可以节省大量网络调用，但这个文件会变得很大，消耗大量网络带宽。</p>
+<p>应用需要等待这个文件的加载和执行，所以传输延迟会带来严重的影响。</p>
+<p>为了解决这个问题，我们引入代码拆分的概念。</p>
+<p>像 webpack 这样的打包器支持就支持代码拆分，它可以为应用创建多个包，并在运行时动态加载，减少初始包的大小。</p>
+<p>为此我们使用 Suspense 和 lazy。</p>
+<p>复制代码</p>
+<pre><code>import React, { lazy, Suspense } from&quot;react&quot;;
+
+exportdefaultclassCallingLazyComponentsextendsReact.Component{
+
+  render() {
+
+var ComponentToLazyLoad = null;
+
+if(this.props.name == &quot;Mayank&quot;) {
+
+      ComponentToLazyLoad = lazy(() =&gt;import(&quot;./mayankComponent&quot;));
+
+    } elseif(this.props.name == &quot;Anshul&quot;) {
+
+      ComponentToLazyLoad = lazy(() =&gt;import(&quot;./anshulComponent&quot;));
+
+    }
+
+return (
+
+&lt;div&gt;
+
+&lt;h1&gt;This is the Base User: {this.state.name}&lt;/h1&gt;
+
+&lt;Suspensefallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+
+&lt;ComponentToLazyLoad /&gt;
+
+&lt;/Suspense&gt;
+
+&lt;/div&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<p>上面的代码中有一个条件语句，它查找 props 值，并根据指定的条件加载主组件中的两个组件。</p>
+<p>我们可以按需懒惰加载这些拆分出来的组件，增强应用的整体性能。</p>
+<p>假设有两个组件 WelcomeComponent 或 GuestComponents，我们根据用户是否登录而渲染其中一个。</p>
+<p>我们可以根据具体的条件延迟组件加载，无需一开始就加载两个组件。</p>
+<p>复制代码</p>
+<pre><code>import React, { lazy, Suspense } from&quot;react&quot;;
+
+exportdefaultclassUserSalutationextendsReact.Component{
+
+    render() {
+
+if(this.props.username !== &quot;&quot;) {
+
+const WelcomeComponent = lazy(() =&gt;import(&quot;./welcomeComponent&quot;));
+
+return (
+
+&lt;div&gt;
+
+&lt;Suspensefallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+
+&lt;WelcomeComponent /&gt;
+
+&lt;/Suspense&gt;
+
+&lt;/div&gt;
+
+          )
+
+        } else {
+
+const GuestComponent = lazy(() =&gt;import(&quot;./guestComponent&quot;));
+
+return (
+
+&lt;div&gt;
+
+&lt;Suspensefallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+
+&lt;GuestComponent /&gt;
+
+&lt;/Suspense&gt;
+
+&lt;/div&gt;
+
+            )
+
+        }
+
+    }
+
+}
+</code></pre>
+<p>在上面的代码中我们没有预加载 WelcomeCompoment 和 GuestComponents 这两个组件，而是进行一个条件检查。</p>
+<p>如果用户名存在（或相反），我们就根据指定的条件决定将某个组件作为单独的包加载。</p>
+<h4 id="这个方法的好处"><a href="#这个方法的好处" class="headerlink" title="这个方法的好处"></a>这个方法的好处</h4><ol>
+<li><p>主包体积变小，消耗的网络传输时间更少。</p>
+</li>
+<li><p>动态单独加载的包比较小，可以迅速加载完成。</p>
+</li>
+</ol>
+<p>我们可以分析应用来决定懒加载哪些组件，从而减少应用的初始加载时间。</p>
+<h3 id="5-使用-React-Fragments-避免额外标记"><a href="#5-使用-React-Fragments-避免额外标记" class="headerlink" title="5. 使用 React Fragments 避免额外标记"></a>5. 使用 React Fragments 避免额外标记</h3><p>使用 Fragments 减少了包含的额外标记数量，这些标记只是为了满足在 React 组件中具有公共父级的要求。</p>
+<p>用户创建新组件时，每个组件应具有单个父标签。父级不能有两个标签，所以顶部要有一个公共标签。所以我们经常在组件顶部添加额外标签，例如：</p>
+<p><img src="https://static001.infoq.cn/resource/image/64/2e/64aa86291b5a89a110308aeb47e5592e.jpg" alt="21个React性能优化技巧"></p>
+<p>在上面指定的组件中，我们需要一个额外的标签为要渲染的组件提供公共父级。</p>
+<p>除了充当组件的父标签之外，这个额外的 div 没有其他用途。</p>
+<p>在顶层有多个标签会导致以下错误：</p>
+<p><img src="https://static001.infoq.cn/resource/image/45/40/45e0e65676c65624fb3580f3cd60cb40.jpg" alt="21个React性能优化技巧"></p>
+<p>要解决此问题，我们可以将元素包含在片段（fragement）中。</p>
+<p>片段不会向组件引入任何额外标记，但它仍然为两个相邻标记提供父级，因此满足在组件顶级具有单个父级的条件。</p>
+<p>复制代码</p>
+<pre><code>export defaultclassNestedRoutingComponentextendsReact.Component{
+
+    render() {
+
+return (
+
+            &lt;&gt;
+
+                &lt;h1&gt;This is the HeaderComponent&lt;/h1&gt;
+
+                &lt;h2&gt;WelcomeToDemoPage&lt;/h2&gt;
+
+            &lt;/&gt;
+
+        )
+
+    }
+
+}
+</code></pre>
+<p>上面的代码没有额外的标记，因此节省了渲染器渲染额外元素的工作量。</p>
+<p>更多信息参考：<a target="_blank" rel="noopener" href="https://github.com/facebook/react/issues/2127?source=post_page-----d15fa52c2349"><br>https://github.com/facebook/react/issues/2127?source=post_page—–d15fa52c2349
+</a></p>
+<h3 id="6-不要使用内联函数定义"><a href="#6-不要使用内联函数定义" class="headerlink" title="6. 不要使用内联函数定义"></a>6. 不要使用内联函数定义</h3><p>如果我们使用内联函数，则每次调用“render”函数时都会创建一个新的函数实例。</p>
+<p>当 React 进行虚拟 DOM diffing 时，它每次都会找到一个新的函数实例；因此在渲染阶段它会会绑定新函数并将旧实例扔给垃圾回收。</p>
+<p>因此直接绑定内联函数就需要额外做垃圾回收和绑定到 DOM 的新函数的工作。</p>
+<p>复制代码</p>
+<pre><code>importReact from &quot;react&quot;;
+
+export defaultclassInlineFunctionComponentextendsReact.Component{
+
+  render() {
+
+return (
+
+      &lt;div&gt;
+
+        &lt;h1&gt;WelcomeGuest&lt;/h1&gt;
+
+        &lt;input type=&quot;button&quot; onClick={(e) =&gt; { this.setState({inputValue: e.target.value}) } } value=&quot;Click For Inline Function&quot; /&gt;
+
+      &lt;/div&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<p>上面的函数创建了内联函数。每次调用 render 函数时都会创建一个函数的新实例，render 函数会将该函数的新实例绑定到该按钮。</p>
+<p>此外最后一个函数实例会被垃圾回收，大大增加了 React 应用的工作量。</p>
+<p>所以不要用内联函数，而是在组件内部创建一个函数，并将事件绑定到该函数本身。这样每次调用 render 时就不会创建单独的函数实例了，参考组件如下。</p>
+<p>复制代码</p>
+<pre><code>importReact from &quot;react&quot;;
+
+export defaultclassInlineFunctionComponentextendsReact.Component{
+
+  setNewStateData = (event) =&gt; {
+
+this.setState({
+
+      inputValue: e.target.value
+
+    })
+
+  }
+
+  render() {
+
+return (
+
+      &lt;div&gt;
+
+        &lt;h1&gt;WelcomeGuest&lt;/h1&gt;
+
+        &lt;input type=&quot;button&quot; onClick={this.setNewStateData} value=&quot;Click For Inline Function&quot; /&gt;
+
+      &lt;/div&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<h3 id="7-避免-componentWillMount-中的异步请求"><a href="#7-避免-componentWillMount-中的异步请求" class="headerlink" title="7. 避免 componentWillMount() 中的异步请求"></a>7. 避免 componentWillMount() 中的异步请求</h3><p>componentWillMount 是在渲染组件之前调用的。</p>
+<p>这个函数用的不多，可用来配置组件的初始配置，但使用 constructor 方法自己也能做到。</p>
+<p>该方法无法访问 DOM 元素，因为组件还没挂载上来。</p>
+<p>一些开发人员认为这个函数可以用来做异步数据 API 调用，但其实这没什么好处。</p>
+<p>由于 API 调用是异步的，因此组件在调用 render 函数之前不会等待 API 返回数据。于是在初始渲染中渲染组件时没有任何数据。</p>
+<p>复制代码</p>
+<pre><code>import React from&quot;react&quot;;
+
+import axios from&quot;axios&quot;;
+
+exportdefaultclassUsingAsyncInComponentWillMountextendsReact.Component{
+
+constructor() {
+
+this.state = {
+
+userData: null
+
+    }
+
+  }
+
+  componentWillMount() {
+
+    axios.get(&quot;someResourceUrl&quot;).then((data) =&gt; {
+
+this.setState({
+
+userData: data
+
+      });
+
+    });
+
+  }
+
+  render() {
+
+return (
+
+&lt;&gt;
+
+&lt;b&gt;UserName: {this.state.name}&lt;/b&gt;
+
+&lt;b&gt;UserAge: {this.state.age}&lt;/b&gt;
+
+&lt;/&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<p>在上面的代码中，我们正在进行异步调用以获取数据。由于数据调用是异步的，需要一段时间才能获取到。</p>
+<p>在检索数据时 React 会触发组件的 render 函数。因此第一个调用的渲染仍然不包含它所需的数据。</p>
+<p>这样一开始渲染组件没有数据，然后检索数据，调用 setState，还得重新渲染组件。在 componentWillMount 阶段进行 AJAX<br>调用没有好处可言。</p>
+<p>我们应避免在此函数中发出 Async 请求。这些函数和调用可以延迟到 componentDidMount 生命周期事件里。</p>
+<p><strong>注意</strong>：React 16.3 不推荐使用 componentWillMount。如果你使用的是最新版本的 React，请避免使用这个生命周期事件。</p>
+<h3 id="8-在-Constructor-的早期绑定函数"><a href="#8-在-Constructor-的早期绑定函数" class="headerlink" title="8. 在 Constructor 的早期绑定函数"></a>8. 在 Constructor 的早期绑定函数</h3><p>当我们在 React 中创建函数时，我们需要使用 bind 关键字将函数绑定到当前上下文。</p>
+<p>绑定可以在构造函数中完成，也可以在我们将函数绑定到 DOM 元素的位置上完成。</p>
+<p>两者之间似乎没有太大差异，但性能表现是不一样的。</p>
+<p>复制代码</p>
+<pre><code>importReact from &quot;react&quot;;
+
+export defaultclassDelayedBindingextendsReact.Component{
+
+  constructor() {
+
+this.state = {
+
+      name: &quot;Mayank&quot;
+
+    }
+
+  }
+
+  handleButtonClick() {
+
+    alert(&quot;Button Clicked: &quot; + this.state.name)
+
+  }
+
+  render() {
+
+return (
+
+      &lt;&gt;
+
+        &lt;input type=&quot;button&quot; value=&quot;Click&quot; onClick={this.handleButtonClick.bind(this)} /&gt;
+
+      &lt;/&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<p>在上面的代码中，我们在 render 函数的绑定期间将函数绑定到按钮上。</p>
+<p>上面代码的问题在于，每次调用 render 函数时都会创建并使用绑定到当前上下文的新函数，但在每次渲染时使用已存在的函数效率更高。优化方案如下：</p>
+<p>复制代码</p>
+<pre><code>importReact from &quot;react&quot;;
+
+export defaultclassDelayedBindingextendsReact.Component{
+
+  constructor() {
+
+this.state = {
+
+      name: &quot;Mayank&quot;
+
+    }
+
+this.handleButtonClick = this.handleButtonClick.bind(this)
+
+  }
+
+  handleButtonClick() {
+
+    alert(&quot;Button Clicked: &quot; + this.state.name)
+
+  }
+
+  render() {
+
+return (
+
+      &lt;&gt;
+
+        &lt;input type=&quot;button&quot; value=&quot;Click&quot; onClick={this.handleButtonClick} /&gt;
+
+      &lt;/&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<p>最好在构造函数调用期间使用绑定到当前上下文的函数覆盖 handleButtonClick 函数。</p>
+<p>这将减少将函数绑定到当前上下文的开销，无需在每次渲染时重新创建函数，从而提高应用的性能。</p>
+<h3 id="9-箭头函数与构造函数中的绑定"><a href="#9-箭头函数与构造函数中的绑定" class="headerlink" title="9. 箭头函数与构造函数中的绑定"></a>9. 箭头函数与构造函数中的绑定</h3><p>处理类时的标准做法就是使用箭头函数。使用箭头函数时会保留执行的上下文。</p>
+<p>我们调用它时不需要将函数绑定到上下文。</p>
+<p>复制代码</p>
+<pre><code>importReact from &quot;react&quot;;
+
+export defaultclassDelayedBindingextendsReact.Component{
+
+  constructor() {
+
+this.state = {
+
+      name: &quot;Mayank&quot;
+
+    }
+
+  }
+
+  handleButtonClick = () =&gt; {
+
+    alert(&quot;Button Clicked: &quot; + this.state.name)
+
+  }
+
+  render() {
+
+return (
+
+      &lt;&gt;
+
+        &lt;input type=&quot;button&quot; value=&quot;Click&quot; onClick={this.handleButtonClick} /&gt;
+
+      &lt;/&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<p>箭头函数好处多多，但也有缺点。</p>
+<p>当我们添加箭头函数时，该函数被添加为对象实例，而不是类的原型属性。这意味着如果我们多次复用组件，那么在组件外创建的每个对象中都会有这些函数的多个实例。</p>
+<p>每个组件都会有这些函数的一份实例，影响了可复用性。此外因为它是对象属性而不是原型属性，所以这些函数在继承链中不可用。</p>
+<p>因此箭头函数确实有其缺点。实现这些函数的最佳方法是在构造函数中绑定函数，如上所述。</p>
+<h3 id="10-避免使用内联样式属性"><a href="#10-避免使用内联样式属性" class="headerlink" title="10. 避免使用内联样式属性"></a>10. 避免使用内联样式属性</h3><p>使用内联样式时浏览器需要花费更多时间来处理脚本和渲染，因为它必须映射传递给实际 CSS 属性的所有样式规则。</p>
+<p>复制代码</p>
+<pre><code>importReact from &quot;react&quot;;
+
+export defaultclassInlineStyledComponentsextendsReact.Component{
+
+  render() {
+
+return (
+
+      &lt;&gt;
+
+        &lt;b style={ {&quot;backgroundColor&quot;: &quot;blue&quot;} }&gt;Welcome to SamplePage&lt;/b&gt;
+
+      &lt;/&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<p>在上面创建的组件中，我们将内联样式附加到组件。添加的内联样式是 JavaScript 对象而不是样式标记。</p>
+<p>样式 backgroundColor 需要转换为等效的 CSS 样式属性，然后才应用样式。这样就需要额外的脚本处理和 JS 执行工作。</p>
+<p>更好的办法是将 CSS 文件导入组件。</p>
+<h3 id="11-优化-React-中的条件渲染"><a href="#11-优化-React-中的条件渲染" class="headerlink" title="11. 优化 React 中的条件渲染"></a>11. 优化 React 中的条件渲染</h3><p>安装和卸载 React 组件是昂贵的操作。为了提升性能，我们需要减少安装和卸载的操作。</p>
+<p>很多情况下在我们可能会渲染或不渲染特定元素，这时可以用条件渲染。</p>
+<p>复制代码</p>
+<pre><code>import React from&quot;react&quot;;
+
+import AdminHeaderComponent from&quot;./AdminHeaderComponent&quot;;
+
+import HeaderComponent from&quot;./HeaderComponent&quot;;
+
+import ContentComponent from&quot;./ContentComponent&quot;
+
+exportdefaultclassConditionalRenderingextendsReact.Component{
+
+constructor() {
+
+this.state = {
+
+name: &quot;Mayank&quot;
+
+    }
+
+  }
+
+  render() {
+
+if(this.state.name == &quot;Mayank&quot;) {
+
+return (
+
+&lt;&gt;
+
+&lt;AdminHeaderComponent&gt;&lt;/AdminHeaderComponent&gt;
+
+&lt;HeaderComponent&gt;&lt;/HeaderComponent&gt;
+
+&lt;ContentComponent&gt;&lt;/ContentComponent&gt;
+
+&lt;/&gt;
+
+      )
+
+    } else {
+
+      return (
+
+&lt;&gt;
+
+&lt;HeaderComponent&gt;&lt;/HeaderComponent&gt;
+
+&lt;ContentComponent&gt;&lt;/ContentComponent&gt;
+
+&lt;/&gt;
+
+      )
+
+    }
+
+  }
+
+}
+</code></pre>
+<p>在上面的代码中有一个条件语句，让组件根据指定的条件渲染。如果状态包含名称值 Mayank，则不会渲染 AdminHeaderComponent。</p>
+<p>条件运算符和 if else 条件似乎没问题，但后面的代码有性能问题，需要分析一下。</p>
+<p>每次调用 render 函数，并且值在 Mayank 和另一个值之间切换时，都会执行不同的 if else 语句。</p>
+<p>diffing 算法会运行一个检查，比较每个位置的元素类型。在 diffing 期间，它看到 AdminHeaderComponent<br>不可用，并且需要渲染的第一个组件是 HeaderComponent。</p>
+<p>React 将观察元素的位置。它看到位置 1 和位置 2 的组件已更改并将卸载组件。</p>
+<p>组件 HeaderComponent 和 ContentComponent 将在位置 1 和位置 2<br>卸载并重新安装。其实这是用不着的，因为这些组件没有更改，这是一项昂贵的操作。优化方案如下：</p>
+<p>复制代码</p>
+<pre><code>import React from&quot;react&quot;;
+
+import AdminHeaderComponent from&quot;./AdminHeaderComponent&quot;;
+
+import HeaderComponent from&quot;./HeaderComponent&quot;;
+
+import ContentComponent from&quot;./ContentComponent&quot;
+
+exportdefaultclassConditionalRenderingextendsReact.Component{
+
+constructor() {
+
+this.state = {
+
+name: &quot;Mayank&quot;
+
+    }
+
+  }
+
+  render() {
+
+return (
+
+&lt;&gt;
+
+        { this.state.name == &quot;Mayank&quot; &amp;&amp; &lt;AdminHeaderComponent&gt;&lt;/AdminHeaderComponent&gt; }
+
+&lt;HeaderComponent&gt;&lt;/HeaderComponent&gt;
+
+&lt;ContentComponent&gt;&lt;/ContentComponent&gt;
+
+&lt;/&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<p>在上面的代码中，当 name 不是 Mayank 时，React 在位置 1 处放置 null。</p>
+<p>开始 DOM diffing 时，位置 1 的元素从 AdminHeaderComponent 变为 null，但位置 2 和位置 3 的组件保持不变。</p>
+<p>由于元素没变，因此组件不会卸载，减少了不必要的操作。</p>
+<p>详情参阅：<a target="_blank" rel="noopener" href="https://medium.com/@cowi4030/optimizing-conditional-rendering-in-react-3fee6b197a20"><br>https:&#x2F;&#x2F;medium.com&#x2F;@cowi4030&#x2F;optimizing-conditional-rendering-in-react-3fee6b197a20
+</a></p>
+<h3 id="12-不要在-render-方法中导出数据"><a href="#12-不要在-render-方法中导出数据" class="headerlink" title="12. 不要在 render 方法中导出数据"></a>12. 不要在 render 方法中导出数据</h3><p>Render 方法是 React 开发人员最熟悉的生命周期事件。</p>
+<p>和其他生命周期事件不一样的是，我们的核心原则是将 render() 函数作为纯函数。</p>
+<h4 id="纯函数对-render-方法意味着什么？"><a href="#纯函数对-render-方法意味着什么？" class="headerlink" title="纯函数对 render 方法意味着什么？"></a>纯函数对 render 方法意味着什么？</h4><p>纯函数意味着我们应该确保 setState 和查询原生 DOM 元素等任何可以修改应用状态的东西不会被调用。</p>
+<p>该函数永远不该更新应用的状态。</p>
+<p>更新组件状态的问题在于，当状态更新时会触发另一个 render 循环，后者在内部会再触发一个 render 循环，以此类推。</p>
+<p>复制代码</p>
+<pre><code>import React from&quot;react&quot;;
+
+export default class RenderFunctionOptimization extends React.Component {
+
+  constructor() {
+
+    this.state = {
+
+      name: &quot;Mayank&quot;
+
+    }
+
+  }
+
+  render() {
+
+    this.setState({
+
+      name: this.state.name + &quot;_&quot;
+
+    });
+
+    return (
+
+&lt;div&gt;
+
+&lt;b&gt;User Name: {this.state.name}&lt;/b&gt;
+
+      &lt;/div&gt;
+
+    );
+
+  }
+
+}
+</code></pre>
+<p>在上面的代码中，每次调用 render 函数时都会更新状态。状态更新后组件将立即重新渲染。因此更新状态会导致 render 函数的递归调用。</p>
+<p>render 函数应保持纯净，以确保组件以一致的方式运行和渲染。</p>
+<h3 id="13-为组件创建错误边界"><a href="#13-为组件创建错误边界" class="headerlink" title="13. 为组件创建错误边界"></a>13. 为组件创建错误边界</h3><p>组件渲染错误是很常见的情况。</p>
+<p>在这种情况下，组件错误不应该破坏整个应用。创建错误边界可避免应用在特定组件发生错误时中断。</p>
+<p>错误边界是一个 React 组件，可以捕获子组件中的 JavaScript 错误。我们可以包含错误、记录错误消息，并为 UI 组件故障提供回退机制。</p>
+<p>错误边界是基于高阶组件的概念。</p>
+<p>详细信息参阅：<a target="_blank" rel="noopener" href="https://levelup.gitconnected.com/introduction-to-reacts-higher-order-components-hocs-c42182fb634"><br>https://levelup.gitconnected.com/introduction-to-reacts-higher-order-components-hocs-c42182fb634
+</a></p>
+<p>错误边界涉及一个高阶组件，包含以下方法：static getDerivedStateFromError() 和 componentDidCatch()。</p>
+<p>static 函数用于指定回退机制，并从收到的错误中获取组件的新状态。</p>
+<p>componentDidCatch 函数用来将错误信息记录到应用中。</p>
+<p>下面是代码示例：</p>
+<p>复制代码</p>
+<pre><code>importReact from &#39;react&#39;;
+
+export classErrorBoundariesextendsReact.Component{
+
+    constructor(props) {
+
+super(props);
+
+this.state = {
+
+            hasErrors: false
+
+        }
+
+    }
+
+    componentDidCatch(error, info) {
+
+        console.dir(&quot;Component Did Catch Error&quot;);
+
+    }
+
+    static getDerivedStateFromError(error) {
+
+        console.dir(&quot;Get Derived State From Error&quot;);
+
+return {
+
+            hasErrors: true
+
+        }
+
+    }
+
+    render() {
+
+if(this.state.hasErrors === true) {
+
+return &lt;div&gt;This is a Error&lt;/div&gt;
+
+        }
+
+return &lt;div&gt;&lt;ShowData name=&quot;Mayank&quot; /&gt;&lt;/div&gt;
+
+    }
+
+}
+
+export classShowDataextendsReact.Component{
+
+    constructor() {
+
+super();
+
+this.state = {
+
+            name: &quot;Mayank&quot;
+
+        }
+
+    }
+
+    changeData = () =&gt; {
+
+this.setState({
+
+            name: &quot;Anshul&quot;
+
+        })
+
+    }
+
+    render() {
+
+if(this.state.name === &quot;Anshul&quot;) {
+
+thrownewError(&quot;Sample Error&quot;)
+
+        }
+
+return (
+
+            &lt;div&gt;
+
+                &lt;b&gt;This is the ChildComponent {this.state.name}&lt;/b&gt;
+
+                &lt;input type=&quot;button&quot; onClick={this.changeData} value=&quot;Click To Throw Error&quot; /&gt;
+
+            &lt;/div&gt;
+
+        )
+
+    }
+
+}
+</code></pre>
+<p>当 name 更新为 Anshul 时，上面的代码会抛出错误。</p>
+<p>组件 ShowData 是 ErrorBoundaries 组件内的嵌入。</p>
+<p>因此，如果错误是从 ShowData 函数内抛出的，则它会被父组件捕获，我们使用 static getDerivedStateFromError 函数和<br>componentDidCatch 生命周期事件中的日志数据部署回退 UI。</p>
+<h3 id="14-组件的不可变数据结构"><a href="#14-组件的不可变数据结构" class="headerlink" title="14. 组件的不可变数据结构"></a>14. 组件的不可变数据结构</h3><p>React 的灵魂是函数式编程。如果我们希望组件能一致工作，则 React 组件中的状态和 props 数据应该是不可变的。</p>
+<p>对象的突变可能导致输出不一致。</p>
+<p>复制代码</p>
+<pre><code>import React from&quot;react&quot;
+
+expoort default class ImmutableComponentData extends React.Component {
+
+  constructor() {
+
+    this.state = {
+
+userInfo: {
+
+        name: &quot;Mayank&quot;,
+
+        age: 30,
+
+        designation: &quot;Software Architect&quot;
+
+      }
+
+    }
+
+  }
+
+  updateUser() {
+
+    this.setState({
+
+userInfo: {
+
+        name: &quot;OtherUser&quot;
+
+      }
+
+    })
+
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+
+    if(nextState.userInfo != this.state.userInfo) {
+
+      return true;
+
+    }
+
+  }
+
+  render() {
+
+    return (
+
+&lt;&gt;
+
+&lt;b&gt;User Name: {this.state.userName}
+
+      &lt;/&gt;
+
+    )
+
+  }
+
+}
+</code></pre>
+<p>如上所示。在 shouldComponentUpdate 函数中我们指定，如果 userInfo 的初始值与 userInfo<br>的新值不同，则应该重新渲染该组件；反之不应重新渲染组件。</p>
+<p>详细信息参阅：<a target="_blank" rel="noopener" href="https://blog.logrocket.com/immutability-in-react-ebe55253a1cc"> https://blog.logrocket.com/immutability-in-react-ebe55253a1cc
+</a></p>
+<h3 id="15-使用唯一键迭代"><a href="#15-使用唯一键迭代" class="headerlink" title="15. 使用唯一键迭代"></a>15. 使用唯一键迭代</h3><p>当我们需要渲染项目列表时应该为项目添加一个键。</p>
+<p>键可以用来识别已更改、添加或删除的项目。键为元素提供了稳定的标识。一个键应该对应列表中的唯一一个元素。</p>
+<p>如果开发人员没有为元素提供键，则它将 index 作为默认键。在下面的代码中我们默认不添加任何键，因此 index 将用作列表的默认键。</p>
+<p>使用 index 作为键就不会出现标识不唯一的问题了，因为 index 只会标识所渲染的组件。</p>
+<p>我们可以在以下场景中使用 index 作为键：</p>
+<ol>
+<li><p>列表项是静态的，项目不随时间变化。</p>
+</li>
+<li><p>Items 没有唯一 ID。</p>
+</li>
+<li><p>List 永远不会重新排序或过滤。</p>
+</li>
+<li><p>不会从顶部或中间添加或删除项目。</p>
+</li>
+</ol>
+<p>复制代码</p>
+<pre><code>export defaultclassComponentRecreationextendsReact.Component{
+
+constructor() {
+
+super();
+
+this.state = {
+
+            inputName: &quot;&quot;,
+
+            arrayData: [&quot;Mayank&quot;, &quot;Meha&quot;, &quot;Anshul&quot;, &quot;Arjun&quot;]
+
+        }
+
+    }
+
+    updateUserName(event) {
+
+this.setState({
+
+            inputName: event.target.value
+
+        })
+
+    }
+
+    addUserData() {
+
+this.setState({
+
+            arrayData: [this.state.inputName, ...this.state.arrayData]
+
+        })
+
+    }
+
+    render() {
+
+var dataList = this.state.arrayData.map((data, index) =&gt; {
+
+return &lt;div&gt;{data}&lt;/div&gt;;
+
+        })
+
+return (
+
+            &lt;div&gt;
+
+                &lt;input type=&quot;text&quot; value={this.state.inputName} placeholder=&quot;Enter Unique Name&quot; onChange={this.updateUserName.bind(this)} /&gt;
+
+                &lt;input type=&quot;button&quot; onClick={this.addUserData.bind(this)} value=&quot;Click To Add&quot; /&gt;&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+
+                &lt;b&gt;List of Users: &lt;/b&gt;&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+
+                {dataList}&lt;br&gt;&lt;/br&gt;
+
+            &lt;/div&gt;
+
+        )
+
+    }
+
+}
+</code></pre>
+<h4 id="在列表中添加项目"><a href="#在列表中添加项目" class="headerlink" title="在列表中添加项目"></a>在列表中添加项目</h4><p>使用 index 作为键会加大错误率并降低应用的性能。</p>
+<p>每当新元素添加到列表时，默认情况下 React 会同时遍历新创建的列表和旧列表，并在需要时进行突变。</p>
+<p>在列表顶部添加一个新元素（包含 index 作为键）时，全部已有组件的索引都会更新。</p>
+<p>索引更新后，之前键值为 1 的元素现在的键值变成了 2。更新所有组件会拖累性能。</p>
+<p>上面的代码允许用户在列表顶部添加新项目。但在顶部插入元素后果最严重。因为顶部元素一变，后面所有的元素都得跟着改键值，从而导致性能下降。</p>
+<p>因此，我们应该确保键值和元素一一对应不会变化。</p>
+<p>总结一下：</p>
+<ul>
+<li><p>Key 不仅影响性能，更重要的作用是标识。随机分配和更改的值不算是标识。</p>
+</li>
+<li><p>我们得知道数据的建模方式才能提供合适的键值。如果你没有 ID，我建议使用某种哈希函数生成 ID。</p>
+</li>
+<li><p>我们在使用数组时已经有了内部键，但它们是数组中的索引。插入新元素时这些键是错误的。</p>
+</li>
+</ul>
+<p>详细信息请参阅：</p>
+<p><a target="_blank" rel="noopener" href="https://reactjs.org/docs/reconciliation.html#recursing-on-children"> https://reactjs.org/docs/reconciliation.html?#recursing-on-children
+</a></p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318"><br>https:&#x2F;&#x2F;medium.com&#x2F;@robinpokorny&#x2F;index-as-a-key-is-an-anti-pattern-e0349aece318
+</a></p>
+<h3 id="16-事件节流和防抖"><a href="#16-事件节流和防抖" class="headerlink" title="16. 事件节流和防抖"></a>16. 事件节流和防抖</h3><p>节流（throttling）和防抖（debouncing）可用来限制在指定时间内调用的事件处理程序的数量。</p>
+<p>事件处理程序是响应不同事件（如鼠标单击和页面滚动）而调用的函数。事件触发事件处理程序的速率是不一样的。</p>
+<h4 id="节流的概念"><a href="#节流的概念" class="headerlink" title="节流的概念"></a>节流的概念</h4><p>节流意味着延迟函数执行。</p>
+<p>这些函数不会立即执行，在触发事件之前会加上几毫秒延迟。</p>
+<p>比如在页面滚动时，我们不会过于频繁地触发滚动事件，而是将事件延迟一段时间以便将多个事件堆叠在一起。</p>
+<p>它确保函数在特定时间段内至少调用一次。如果函数最近运行过了，它将阻止函数运行，确保函数以固定间隔定期运行。</p>
+<p>当我们处理无限滚动并且当用户接近页面底部必须获取数据时，我们可以使用节流。</p>
+<p>否则滚动到页面底部将触发多个事件，并且触发对网络的多次调用，从而导致性能问题。</p>
+<h4 id="防抖的概念"><a href="#防抖的概念" class="headerlink" title="防抖的概念"></a>防抖的概念</h4><p>防抖是指在调用停止一段时间之前忽略事件处理程序调用。</p>
+<p>假设我们有一个事件，有一秒钟的 debounce 时间。一旦用户停止触发事件，该事件的事件处理程序将在一秒钟后触发。</p>
+<p><img src="https://static001.infoq.cn/resource/image/21/93/21f3cfea7f1589041889ad203a659293.jpg" alt="21个React性能优化技巧"></p>
+<p>典型的例子是用户在自动填充搜索框中键入数据。</p>
+<p>一旦用户停止键入，就会进行 AJAX 查询以从 API 获取数据。每次键入都进行 AJAX 调用就需要多次查询数据库。</p>
+<p>因此，我们对该事件做 debounce，直到用户不再输入数据为止，从而减少网络调用并提升性能。</p>
+<p>我们可以使用第三方库来实现和使用节流和防抖功能，例<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/throttle-debounce">如throttle-debounce
+</a>。具体用法参阅:<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/throttle-debounce%E3%80%82"><br>https://www.npmjs.com/package/throttle-debounce。</a></p>
+<h3 id="17-使用-CDN"><a href="#17-使用-CDN" class="headerlink" title="17. 使用 CDN"></a>17. 使用 CDN</h3><p>谷歌、亚马逊和微软等公司提供了许多内容分发网络。</p>
+<p>这些 CDN 是可在你的应用中使用的外部资源。我们甚至可以创建私有 CDN 并托管我们的文件和资源。</p>
+<p>使用 CDN 有以下好处：</p>
+<ul>
+<li><strong>不同的域名</strong>。浏览器限制了单个域名的并发连接数量，具体取决于浏览器设置。假设允许的并发连接数为 10。如果要从单个域名中检索 11</li>
+</ul>
+<p>个资源，那么同时完成的只有 10 个，还有 1 个需要再等一会儿。CDN 托管在不同的域名 &#x2F; 服务器上。因此资源文件可以分布在不同的域名中，提升了并发能力。</p>
+<ul>
+<li><strong>文件可能已被缓存</strong>。有很多网站使用这些</li>
+</ul>
+<p>CDN，因此你尝试访问的资源很可能已在浏览器中缓存好了。这时应用将访问文件的已缓存版本，从而减少脚本和文件执行的网络调用和延迟，提升应用性能。</p>
+<ul>
+<li>** 高容量基础设施**。这些 CDN 由大公司托管，因此可用的基础设施非常庞大。他们的数据中心遍布全球。向 CDN</li>
+</ul>
+<p>发出请求时，它们将通过最近的数据中心提供服务，从而减少延迟。这些公司会对服务器做负载平衡，以确保请求到达最近的服务器并减少网络延迟，提升应用性能。</p>
+<p>如果担心安全性，可以使用私有 CDN。</p>
+<h3 id="18-用-CSS-动画代替-JavaScript-动画"><a href="#18-用-CSS-动画代替-JavaScript-动画" class="headerlink" title="18. 用 CSS 动画代替 JavaScript 动画"></a>18. 用 CSS 动画代替 JavaScript 动画</h3><p>在 HTML 5 和 CSS 3 出现之前，动画曾经是 JavaScript 的专属，但随着 HTML 5 和 CSS 3<br>的引入情况开始变化。现在动画甚至可以由 CSS 3 来处理了。</p>
+<p>我们可以制定一些规则：</p>
+<ul>
+<li><p>如果 CSS 可以实现某些 JS 功能，那就用 CSS。</p>
+</li>
+<li><p>如果 HTML 可以实现某些 JS 功能，那就用 HTML。</p>
+</li>
+</ul>
+<p>理由如下：</p>
+<ol>
+<li><p>破损的 CSS 规则和样式不会导致网页损坏，而 JavaScript 则不然。</p>
+</li>
+<li><p>解析 CSS 是非常便宜的，因为它是声明性的。我们可以为样式并行创建内存中的表达，可以推迟样式属性的计算，直到元素绘制完成。</p>
+</li>
+<li><p>为动画加载 JavaScript 库的成本相对较高，消耗更多网络带宽和计算时间。</p>
+</li>
+<li><p>虽然 JavaScript 可以提供比 CSS 更多的优化，但优化过的 JavaScript 代码也可能卡住 UI 并导致 Web 浏览器崩溃。</p>
+</li>
+</ol>
+<p>详细信息参阅：<a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/design-and-ux/animations/css-vs-javascript"><br>https://developers.google.com/web/fundamentals/design-and-ux/animations/css-vs-javascript
+</a></p>
+<h3 id="19-在-Web-服务器上启用-gzip-压缩"><a href="#19-在-Web-服务器上启用-gzip-压缩" class="headerlink" title="19. 在 Web 服务器上启用 gzip 压缩"></a>19. 在 Web 服务器上启用 gzip 压缩</h3><p>压缩是节省网络带宽和加速应用的最简单方法。</p>
+<p>我们可以把网络资源压缩到更小的尺寸。Gzip 是一种能够快速压缩和解压缩文件的数据压缩算法。</p>
+<p>它可以压缩几乎所有类型的文件，例如图像、文本、JavaScript 文件、样式文件等。Gzip 减少了网页需要传输到客户端的数据量。</p>
+<p>当 Web 服务器收到请求时，它会提取文件数据并查找 Accept-Encoding 标头以确定如何压缩应用。</p>
+<p>如果服务器支持 gzip 压缩，资源会被压缩后通过网络发送。每份资源的压缩副本（添加了 Content-Encoding 标头）指定使用 gzip 解压。</p>
+<p>然后，浏览器将内容解压缩原始版本在渲染给用户。</p>
+<p>只是 gzip 压缩需要付出成本，因为压缩和解压缩文件属于 CPU 密集型任务。但我们还是建议对网页使用 gzip 压缩。</p>
+<p>详细信息参阅：<a target="_blank" rel="noopener" href="https://royal.pingdom.com/can-gzip-compression-really-improve-web-performance"><br>https://royal.pingdom.com/can-gzip-compression-really-improve-web-performance
+</a></p>
+<h3 id="20-使用-Web-Workers-处理-CPU-密集任务"><a href="#20-使用-Web-Workers-处理-CPU-密集任务" class="headerlink" title="20. 使用 Web Workers 处理 CPU 密集任务"></a>20. 使用 Web Workers 处理 CPU 密集任务</h3><p>JavaScript 是一个单线程应用，但在渲染网页时需要执行多个任务：</p>
+<p>处理 UI 交互、处理响应数据、操纵 DOM 元素、启用动画等。所有这些任务都由单个线程处理。</p>
+<p>可以使用 worker 来分担主线程的负载。</p>
+<p>Worker 线程在后台运行，可以在不中断主线程的情况下执行多个脚本和 JavaScript 任务。</p>
+<p>每当需要执行长时间的 CPU 密集任务时，可以使用 worker 在单独的线程上执行这些逻辑块。</p>
+<p>它们在隔离环境中执行，并且使用进程间线程通信与主线程交互。主线程就可以腾出手来处理渲染和 DOM 操作任务。</p>
+<p>详细信息参阅：<a target="_blank" rel="noopener" href="https://medium.com/prolanceer/optimizing-react-app-performance-using-web-workers-79266afd4a7"><br>https://medium.com/prolanceer/optimizing-react-app-performance-using-web-workers-79266afd4a7
+</a></p>
+<h3 id="21-React-组件的服务端渲染"><a href="#21-React-组件的服务端渲染" class="headerlink" title="21. React 组件的服务端渲染"></a>21. React 组件的服务端渲染</h3><p>服务端渲染可以减少初始页面加载延迟。</p>
+<p>我们可以让网页从服务端加载初始页面，而不是在客户端上渲染。这样对 SEO 非常有利。</p>
+<p>服务端渲染是指第一个组件显示的内容是从服务器本身发送的，而不是在浏览器级别操作。之后的页面直接从客户端加载。</p>
+<p>这样我们就能把初始内容放在服务端渲染，客户端只按需加载部分页面。</p>
+<p>其好处包括：</p>
+<ol>
+<li><p>性能：初始页面内容和数据是从服务器本身加载的，因此我们不需要添加加载器和下拉列表，而是等待初始页面加载完毕后再加载初始组件。</p>
+</li>
+<li><p>SEO 优化：爬虫在应用初始加载时查找页面内容。在客户端渲染时初始 Web 页面不包含所需的组件，这些组件需要等 React<br>脚本等文件加载完毕后才渲染出来。</p>
+</li>
+</ol>
+<p>服务端渲染还可以使用第三方库，如 Next.js。详细信息参阅：<a target="_blank" rel="noopener" href="https://nextjs.org/"> https://nextjs.org/ </a></p>
+<p>这里有服务端渲染的示例项目：<a target="_blank" rel="noopener" href="https://github.com/Mayankgupta688/reactServerRendering%E3%80%82%E5%8F%AA%E9%9C%80%E4%BB%8E%E9%A1%B9%E7%9B%AE%E5%AD%98%E5%82%A8%E5%BA%93%E6%89%A7%E8%A1%8C%E4%BB%A5%E4%B8%8B%E6%AD%A5%E9%AA%A4%E5%8D%B3%E5%8F%AF%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8%EF%BC%9A"><br>https://github.com/Mayankgupta688/reactServerRendering。只需从项目存储库执行以下步骤即可运行应用：</a></p>
+<ol>
+<li><p>npm install</p>
+</li>
+<li><p>npm start</p>
+</li>
+</ol>
+<p>这个应用中“pages”文件夹里的文件是可以用服务端渲染加载的初始 URL。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li>示例代码 GitHub 仓库：[ <a target="_blank" rel="noopener" href="https://github.com/Mayankgupta688/react-demos">https://github.com/Mayankgupta688/react-demos</a></li>
+</ul>
+<p>](<a target="_blank" rel="noopener" href="https://github.com/Mayankgupta688/react-demos">https://github.com/Mayankgupta688/react-demos</a>)</p>
+<p>英文原文：<a target="_blank" rel="noopener" href="https://medium.com/better-programming/https-medium-com-mayank-gupta-6-88-21-performance-optimizations-techniques-for-react-d15fa52c2349"><br>https://medium.com/better-programming/https-medium-com-mayank-gupta-6-88-21-performance-optimizations-techniques-for-react-d15fa52c2349
+</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/55e10b84.html"><div class="related-post-title">字符串的ES5和ES6方法</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/201610a0.html"><div class="related-post-title">如何对 React 函数式组件进行优化</div><div class="related-post-meta"><time>2019-11-21</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/b10cbe97.html"><div class="related-post-title">一个前端失业者的面试之旅</div><div class="related-post-meta"><time>2020-03-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/b5946fcc.html"><div class="related-post-title">Array.from() 五个超好用的用途</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/6ff625e1.html"><div class="related-post-title">TypeScript 断言详解及示例</div><div class="related-post-meta"><time>2025-10-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">TypeScript</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/3ddcd177.html">https://xuehuayu.cn/article/3ddcd177.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/8b6aa213.html">浅谈React性能优化的方向</a><a class="next" href="/article/f33d5442.html">经常被面试官考的 JavaScript 数据类型知识你真的懂吗？</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

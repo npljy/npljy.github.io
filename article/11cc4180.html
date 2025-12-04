@@ -1,0 +1,608 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>高频面试题深入解析/ 周刊 02 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">高频面试题深入解析/ 周刊 02</h1><div class="post-meta"><span class="date">2019-10-03</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.7k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 20</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/11cc4180.html#waline-comment"><span class="waline-comment-count" data-path="/article/11cc4180.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/32</code></p>
+<span id="more"></span>
+
+<h3 id="关于【Step-By-Step】"><a href="#关于【Step-By-Step】" class="headerlink" title="关于【Step-By-Step】"></a>关于【Step-By-Step】</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step">Step-By-Step</a> (点击进入项目) 是我于</p>
+</blockquote>
+<p><code>2019-05-20</code> 开始的一个项目，每个工作日发布一道面试题。</p>
+<blockquote>
+<p>每个周末我会仔细阅读大家的答案，整理最一份较优答案出来，因本人水平有限，有误的地方，大家及时指正。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>本周面试题一览:</p>
+</blockquote>
+<ul>
+<li>节流(throttle)函数的作用是什么？有哪些应用场景，请实现一个节流函数</li>
+<li>说一说你对JS执行上下文栈和作用域链的理解？</li>
+<li>什么是BFC？BFC的布局规则是什么？如何创建BFC？</li>
+<li>let、const、var 的区别有哪些？</li>
+<li>深拷贝和浅拷贝的区别是什么？如何实现一个深拷贝？</li>
+</ul>
+<h3 id="6-节流-throttle-函数的作用是什么？有哪些应用场景，请实现一个节流函数。-2019-05-27"><a href="#6-节流-throttle-函数的作用是什么？有哪些应用场景，请实现一个节流函数。-2019-05-27" class="headerlink" title="6. 节流(throttle)函数的作用是什么？有哪些应用场景，请实现一个节流函数。(2019-05-27)"></a>6. 节流(throttle)函数的作用是什么？有哪些应用场景，请实现一个节流函数。(2019-05-27)</h3><h4 id="节流函数的作用"><a href="#节流函数的作用" class="headerlink" title="节流函数的作用"></a>节流函数的作用</h4><p>节流函数的作用是规定一个单位时间，在这个单位时间内最多只能触发一次函数执行，如果这个单位时间内多次触发函数，只能有一次生效。</p>
+<p>举例说明：小明的妈妈和小明约定好，如果小明在周考中取得满分，那么当月可以带他去游乐场玩，但是一个月最多只能去一次。</p>
+<p>这其实就是一个节流的例子，在一个月的时间内，去游乐场最多只能触发一次。即使这个时间周期内，小明取得多次满分。</p>
+<h4 id="节流应用场景"><a href="#节流应用场景" class="headerlink" title="节流应用场景"></a>节流应用场景</h4><p>1.按钮点击事件</p>
+<p>2.拖拽事件</p>
+<p>3.onScoll</p>
+<p>4.计算鼠标移动的距离(mousemove)</p>
+<h4 id="节流函数实现"><a href="#节流函数实现" class="headerlink" title="节流函数实现"></a>节流函数实现</h4><blockquote>
+<p>利用时间戳实现</p>
+</blockquote>
+<pre><code>functionthrottle (func, delay) {
+    var lastTime =0;
+    functionthrottled() {
+        var context =this;
+        var args =arguments;
+        var nowTime =Date.now();
+        if(nowTime &gt; lastTime + delay) {
+            func.apply(context, args);
+            lastTime = nowTime;
+        }
+    }
+    //防抖函数最终返回的是一个函数return throttled;
+}
+</code></pre>
+<blockquote>
+<p>利用定时器实现</p>
+</blockquote>
+<pre><code>functionthrottle(func, delay) {
+    var timeout =null;
+    functionthrottled() {
+        var context =this;
+        var args =arguments;
+        if(!timeout) {
+            timeout =setTimeout(()=&gt;{
+                func.apply(context, args);
+                clearTimeout(timeout);
+                timeout=null
+            }, delay);
+        }
+    }
+    return throttled;
+}
+</code></pre>
+<p>时间戳和定时器的方式都没有考虑最后一次执行的问题，比如有个按钮点击事件，设置的间隔时间是1S，在第0.5S，1.8S，2.2S点击，那么只有0.5S和1.8S的两次点击能够触发函数执行，而最后一次的2.2S会被忽略。</p>
+<blockquote>
+<p>组合实现，允许设置第一次或者最后一次是否触发函数执行</p>
+</blockquote>
+<pre><code>functionthrottle (func, wait, options) {
+    var timeout, context, args, result;
+    var previous =0;
+    if (!options) options = {};
+
+    varlater=function () {
+        previous =options.leading===false?0:Date.now() ||newDate().getTime();
+        timeout =null;
+        result =func.apply(context, args);
+        if (!timeout) context = args =null;
+    };
+
+    varthrottled=function () {
+        var now =Date.now() ||newDate().getTime();
+        if (!previous &amp;&amp;options.leading===false) previous = now;
+        var remaining = wait - (now - previous);
+        context =this;
+        args =arguments;
+        if (remaining &lt;=0|| remaining &gt; wait) {
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout =null;
+            }
+            previous = now;
+            result =func.apply(context, args);
+            if (!timeout) context = args =null;
+        } elseif (!timeout &amp;&amp;options.trailing!==false) {
+            // 判断是否设置了定时器和 trailing
+            timeout =setTimeout(later, remaining);
+        }
+        return result;
+    };
+
+    throttled.cancel=function () {
+        clearTimeout(timeout);
+        previous =0;
+        timeout = context = args =null;
+    };
+
+    return throttled;
+}
+</code></pre>
+<p>使用很简单:</p>
+<pre><code>btn.onclick=throttle(handle, 1000, {leading:true, trailing:true});
+</code></pre>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Step-By-Step/issues/12">点击查看更多</a></p>
+</blockquote>
+<h3 id="7-说一说你对JS执行上下文栈和作用域链的理解？-2019-05-28"><a href="#7-说一说你对JS执行上下文栈和作用域链的理解？-2019-05-28" class="headerlink" title="7. 说一说你对JS执行上下文栈和作用域链的理解？(2019-05-28)"></a>7. 说一说你对JS执行上下文栈和作用域链的理解？(2019-05-28)</h3><p>在开始说明JS上下文栈和作用域之前，我们先说明下JS上下文以及作用域的概念。</p>
+<h4 id="JS执行上下文"><a href="#JS执行上下文" class="headerlink" title="JS执行上下文"></a><a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/?nsukey=rQHqMrFpKq6JJN//OeubPCslaSTSRyuc/XCznnIDze1SGzwva5SZtzixJ13p2gAlxua95Xa7fraZXwj5tyLRDK33+pNhyfKR/xyzhWNyB/qaIlsDGyQBckNoHQGPveOB24M+cK/gF8Tg1ehUGLWiCvumxdgcQwZOWj2BGfD3n/Y=#sec-execution-contexts">JS执行上下文</a></h4><p>执行上下文就是当前 JavaScript 代码被解析和执行时所在环境的抽象概念， JavaScript 中运行任何的代码都是在执行上下文中运行。</p>
+<blockquote>
+<p>执行上下文类型分为：</p>
+</blockquote>
+<ul>
+<li>全局执行上下文</li>
+<li>函数执行上下文</li>
+<li>eval函数执行上下文(不被推荐)</li>
+</ul>
+<p>执行上下文创建过程中，需要做以下几件事:</p>
+<ol>
+<li>创建变量对象：首先初始化函数的参数arguments，提升函数声明和变量声明。</li>
+<li>创建作用域链（Scope Chain）：在执行期上下文的创建阶段，作用域链是在变量对象之后创建的。</li>
+<li>确定this的值，即 ResolveThisBinding</li>
+</ol>
+<h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p><strong>作用域</strong>负责收集和维护由所有声明的标识符（变量）组成的一系列查询，并实施一套非常严格的规则，确定当前执行的代码对这些标识符的访问权限。——<br>摘录自《你不知道的JavaScript》(上卷)</p>
+<p>作用域有两种工作模型：词法作用域和动态作用域，JS采用的是<strong>词法作用域</strong>工作模型，词法作用域意味着作用域是由书写代码时变量和函数声明的位置决定的。(<code>with</code><br>和 <code>eval</code> 能够修改词法作用域，但是不推荐使用，对此不做特别说明)</p>
+<blockquote>
+<p>作用域分为：</p>
+</blockquote>
+<ul>
+<li>全局作用域</li>
+<li>函数作用域</li>
+<li>块级作用域</li>
+</ul>
+<h4 id="JS执行上下文栈-后面简称执行栈"><a href="#JS执行上下文栈-后面简称执行栈" class="headerlink" title="JS执行上下文栈(后面简称执行栈)"></a>JS执行上下文栈(后面简称执行栈)</h4><p>执行栈，也叫做调用栈，具有 <strong>LIFO</strong> (后进先出) 结构，用于存储在代码执行期间创建的所有执行上下文。</p>
+<blockquote>
+<p>规则如下：</p>
+</blockquote>
+<ul>
+<li></li>
+</ul>
+<p>首次运行JavaScript代码的时候,会创建一个全局执行的上下文并Push到当前的执行栈中，每当发生函数调用，引擎都会为该函数创建一个新的函数执行上下文并Push当前执行栈的栈顶。</p>
+<ul>
+<li>当栈顶的函数运行完成后，其对应的函数执行上下文将会从执行栈中Pop出，上下文的控制权将移动到当前执行栈的下一个执行上下文。</li>
+</ul>
+<p>以一段代码具体说明：</p>
+<pre><code>functionfun3() {
+    console.log(&#39;fun3&#39;)
+}
+
+functionfun2() {
+    fun3();
+}
+
+functionfun1() {
+    fun2();
+}
+
+fun1();
+</code></pre>
+<p><code>Global Execution Context</code> (即全局执行上下文)首先入栈，过程如下：</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/91e9dd3b5bb10580e674c7a6dc6a0e23bd6a4412/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434536396264626461313461663038663333363831666563613032313665336239622f3239343435"><img src="https://camo.githubusercontent.com/91e9dd3b5bb10580e674c7a6dc6a0e23bd6a4412/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434536396264626461313461663038663333363831666563613032313665336239622f3239343435" alt="xuehuayu.cn"></a></p>
+<p>伪代码:</p>
+<pre><code>//全局执行上下文首先入栈ECStack.push(globalContext);
+
+//执行fun1();ECStack.push(&lt;fun1&gt; functionContext);
+
+//fun1中又调用了fun2;ECStack.push(&lt;fun2&gt; functionContext);
+
+//fun2中又调用了fun3;ECStack.push(&lt;fun3&gt; functionContext);
+
+//fun3执行完毕ECStack.pop();
+
+//fun2执行完毕ECStack.pop();
+
+//fun1执行完毕ECStack.pop();
+
+//javascript继续顺序执行下面的代码，但ECStack底部始终有一个 全局上下文（globalContext）;
+</code></pre>
+<h4 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h4><p>作用域链就是从当前作用域开始一层一层向上寻找某个变量，直到找到全局作用域还是没找到，就宣布放弃。这种一层一层的关系，就是作用域链。</p>
+<p>如：</p>
+<pre><code>var a =10;
+functionfn1() {
+    var b =20;
+    console.log(fn2)
+    functionfn2() {
+        a =20
+    }
+    return fn2;
+}
+fn1()();
+</code></pre>
+<p>fn2作用域链 &#x3D; [fn2作用域, fn1作用域，全局作用域]</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/67d8d95ca5726d90408b24ed9cf01ccbef32e769/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434531363630373963303963636534376633636164363632386539326137373434362f3239343339"><img src="https://camo.githubusercontent.com/67d8d95ca5726d90408b24ed9cf01ccbef32e769/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434531363630373963303963636534376633636164363632386539326137373434362f3239343339" alt="xuehuayu.cn"></a></p>
+<h3 id="8-什么是BFC？BFC的布局规则是什么？如何创建BFC？-2019-05-29"><a href="#8-什么是BFC？BFC的布局规则是什么？如何创建BFC？-2019-05-29" class="headerlink" title="8. 什么是BFC？BFC的布局规则是什么？如何创建BFC？(2019-05-29)"></a>8. 什么是BFC？BFC的布局规则是什么？如何创建BFC？(2019-05-29)</h3><h4 id="什么是BFC"><a href="#什么是BFC" class="headerlink" title="什么是BFC"></a>什么是BFC</h4><p>BFC 是 Block Formatting Context 的缩写，即块格式化上下文。我们来看一下CSS2.1规范中对 BFC 的说明。</p>
+<blockquote>
+<p>Floats, absolutely positioned elements, block containers (such as</p>
+</blockquote>
+<p>inline-blocks, table-cells, and table-captions) that are not block boxes, and<br>block boxes with ‘overflow’ other than ‘visible’ (except when that value has<br>been propagated to the viewport) establish new block formatting contexts for<br>their contents.</p>
+<blockquote>
+<p>浮动、绝对定位的元素、非块级盒子的块容器（如inline-blocks、table-cells 和</p>
+</blockquote>
+<p>table-captions），以及<code>overflow</code>的值不为<code>visible</code>（该值已传播到视区时除外）为其内容建立新的块格式上下文。</p>
+<p>因此，如果想要深入的理解BFC，我们需要了解以下两个概念：</p>
+<blockquote>
+<p>1.Box</p>
+</blockquote>
+<blockquote>
+<p>2.Formatting Context</p>
+</blockquote>
+<h4 id="Box"><a href="#Box" class="headerlink" title="Box"></a>Box</h4><p>Box 是 CSS 布局的对象和基本单位，页面是由若干个Box组成的。</p>
+<p>元素的类型 和 <code>display</code> 属性，决定了这个 Box 的类型。不同类型的 Box 会参与不同的 Formatting Context。</p>
+<h4 id="Formatting-Context"><a href="#Formatting-Context" class="headerlink" title="Formatting Context"></a>Formatting Context</h4><p>Formatting Context 是页面的一块渲染区域，并且有一套渲染规则，决定了其子元素将如何定位，以及和其它元素的关系和相互作用。</p>
+<p>Formatting Context 有 BFC (Block formatting context)，IFC (Inline formatting<br>context)，FFC (Flex formatting context) 和 GFC (Grid formatting context)。FFC 和 GFC<br>为 CC3 中新增。</p>
+<h4 id="BFC布局规则"><a href="#BFC布局规则" class="headerlink" title="BFC布局规则"></a><a target="_blank" rel="noopener" href="https://www.w3.org/TR/2011/REC-CSS2-20110607/visuren.html#block-formatting">BFC布局规则</a></h4><ul>
+<li>BFC内，盒子依次垂直排列。</li>
+<li>BFC内，两个盒子的垂直距离由 <code>margin</code></li>
+</ul>
+<p>属性决定。属于同一个BFC的两个相邻Box的margin会发生重叠【符合合并原则的margin合并后是使用大的margin】</p>
+<ul>
+<li>BFC内，每个盒子的左外边缘接触内部盒子的左边缘（对于从右到左的格式，右边缘接触）。即使在存在浮动的情况下也是如此。除非创建新的BFC。</li>
+<li>BFC的区域不会与float box重叠。</li>
+<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
+<li>计算BFC的高度时，浮动元素也参与计算。</li>
+</ul>
+<h4 id="如何创建BFC"><a href="#如何创建BFC" class="headerlink" title="如何创建BFC"></a>如何创建BFC</h4><ul>
+<li>根元素</li>
+<li>浮动元素（float 属性不为 none）</li>
+<li>position 为 absolute 或 relative</li>
+<li>overflow 不为 visible 的块元素</li>
+<li>display 为 inline-block, table-cell, table-caption</li>
+</ul>
+<h4 id="BFC的应用"><a href="#BFC的应用" class="headerlink" title="BFC的应用"></a>BFC的应用</h4><p>1.防止 margin 重叠</p>
+<pre><code>&lt;style&gt;.a{height: 100px;width: 100px;margin: 50px;background: pink;    }&lt;/style&gt;
+&lt;body&gt;
+    &lt;divclass=&quot;a&quot;&gt;&lt;/div&gt;
+    &lt;divclass=&quot;a&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+<p>两个div直接的 <code>margin</code> 是50px，发生了 <code>margin</code> 的重叠。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/f7c8440c52f9b81cc651960ec4a4879cf896231f/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434539376131336132386564656662326662623032373435333964303231643035642f3239343539"><img src="https://camo.githubusercontent.com/f7c8440c52f9b81cc651960ec4a4879cf896231f/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434539376131336132386564656662326662623032373435333964303231643035642f3239343539" alt="xuehuayu.cn"></a></p>
+<blockquote>
+<p>根据BFC规则，同一个BFC内的两个两个相邻Box的 <code>margin</code> 会发生重叠，因此我们可以在div外面再嵌套一层容器，并且触发该容器生成一个</p>
+</blockquote>
+<p>BFC，这样 <code>&lt;div class=&quot;a&quot;&gt;&lt;/div&gt;</code> 就会属于两个 BFC，自然也就不会再发生 <code>margin</code> 重叠</p>
+<pre><code>&lt;style&gt;.a{height: 100px;width: 100px;margin: 50px;background: pink;    }.container{overflow: auto; /*触发生成BFC*/    }&lt;/style&gt;
+&lt;body&gt;
+    &lt;divclass=&quot;container&quot;&gt;
+        &lt;divclass=&quot;a&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;divclass=&quot;a&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/222948a37af1b842631d513d69793f0de10f1c62/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434562323562356537376662316631313361323466383539663063396230383638662f3239343537"><img src="https://camo.githubusercontent.com/222948a37af1b842631d513d69793f0de10f1c62/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434562323562356537376662316631313361323466383539663063396230383638662f3239343537" alt="xuehuayu.cn"></a></p>
+<p>2.清除内部浮动</p>
+<pre><code>&lt;style&gt;.a{height: 100px;width: 100px;margin: 10px;background: pink;float: left;    }.container{width: 120px;border: 2pxsolidblack;    }&lt;/style&gt;
+&lt;body&gt;
+    &lt;divclass=&quot;container&quot;&gt;
+        &lt;divclass=&quot;a&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/22a6e0d15e914da2533ef651e396be8a34e84509/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434534626537326662343265623865626132386337343930613130363062643039352f3239343634"><img src="https://camo.githubusercontent.com/22a6e0d15e914da2533ef651e396be8a34e84509/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434534626537326662343265623865626132386337343930613130363062643039352f3239343634" alt="xuehuayu.cn"></a></p>
+<blockquote>
+<p>container 的高度没有被撑开，如果我们希望 container 的高度能够包含浮动元素，那么可以创建一个新的 BFC，因为根据 BFC 的规则，计算</p>
+</blockquote>
+<p>BFC 的高度时，浮动元素也参与计算。</p>
+<pre><code>&lt;style&gt;.a{height: 100px;width: 100px;margin: 10px;background: pink;float: left;    }.container{width: 120px;display: inline-block;/*触发生成BFC*/border: 2pxsolidblack;     }&lt;/style&gt;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/066f7101f9b7661c62d0b2337cd9be5b4589c6aa/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434538333836303135393137333537343364343964386637666436383663613331362f3239343635"><img src="https://camo.githubusercontent.com/066f7101f9b7661c62d0b2337cd9be5b4589c6aa/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434538333836303135393137333537343364343964386637666436383663613331362f3239343635" alt="xuehuayu.cn"></a></p>
+<p>3.自适应多栏布局</p>
+<pre><code>&lt;style&gt;body{width: 500px;    }.a{height: 150px;width: 100px;background: pink;float: left;    }.b{height: 200px;background: blue;    }&lt;/style&gt;
+&lt;body&gt;
+    &lt;divclass=&quot;a&quot;&gt;&lt;/div&gt;
+    &lt;divclass=&quot;b&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/695942e3b6432886f4de1861de4de224b7e203ba/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434536663265383231653237353236376230316433653161616130616130613562642f3239343638"><img src="https://camo.githubusercontent.com/695942e3b6432886f4de1861de4de224b7e203ba/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434536663265383231653237353236376230316433653161616130616130613562642f3239343638" alt="xuehuayu.cn"></a></p>
+<blockquote>
+<p>根据规则，BFC的区域不会与float box重叠。因此，可以触发生成一个新的BFC，如下：</p>
+</blockquote>
+<pre><code>&lt;style&gt;.b{height: 200px;overflow: hidden; /*触发生成BFC*/background: blue;}&lt;/style&gt;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/1a93f5f9cb3ae405c61952c3ad86653ea211197c/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434530333837653239316662643830333334336163356137376138383738343164392f3239343639"><img src="https://camo.githubusercontent.com/1a93f5f9cb3ae405c61952c3ad86653ea211197c/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434530333837653239316662643830333334336163356137376138383738343164392f3239343639" alt="xuehuayu.cn"></a></p>
+<h3 id="9-let、const、var-的区别有哪些？-2019-05-30"><a href="#9-let、const、var-的区别有哪些？-2019-05-30" class="headerlink" title="9. let、const、var 的区别有哪些？(2019-05-30)"></a>9. let、const、var 的区别有哪些？(2019-05-30)</h3><p>声明方式变量提升暂时性死区重复声明块作用域有效初始值重新赋值var会不存在允许不是非必须允许let不会存在不允许是非必须允许const不会存在不允许是必须不允许</p>
+<h4 id="1-let-const-定义的变量不会出现变量提升，而-var-定义的变量会提升。"><a href="#1-let-const-定义的变量不会出现变量提升，而-var-定义的变量会提升。" class="headerlink" title="1.let&#x2F;const 定义的变量不会出现变量提升，而 var 定义的变量会提升。"></a>1.let&#x2F;const 定义的变量不会出现变量提升，而 var 定义的变量会提升。</h4><pre><code>a =10;
+var a; //正常
+
+a =10;
+let a; //ReferenceError
+</code></pre>
+<h4 id="2-相同作用域中，let-和-const-不允许重复声明，var-允许重复声明。"><a href="#2-相同作用域中，let-和-const-不允许重复声明，var-允许重复声明。" class="headerlink" title="2.相同作用域中，let 和 const 不允许重复声明，var 允许重复声明。"></a>2.相同作用域中，let 和 const 不允许重复声明，var 允许重复声明。</h4><pre><code>let a =10;
+var a =20;
+//抛出异常：SyntaxError: Identifier &#39;a&#39; has already been declared
+</code></pre>
+<h4 id="3-cosnt-声明变量时必须设置初始值"><a href="#3-cosnt-声明变量时必须设置初始值" class="headerlink" title="3.cosnt 声明变量时必须设置初始值"></a>3.cosnt 声明变量时必须设置初始值</h4><pre><code>consta;//SyntaxError: Missing initializer in const declaration
+</code></pre>
+<h4 id="4-const-声明一个只读的常量，这个常量不可改变。"><a href="#4-const-声明一个只读的常量，这个常量不可改变。" class="headerlink" title="4.const 声明一个只读的常量，这个常量不可改变。"></a>4.const 声明一个只读的常量，这个常量不可改变。</h4><p>这里有一个非常重要的点即是：复杂数据类型，存储在栈中的是堆内存的地址，存在栈中的这个地址是不变的，但是存在堆中的值是可以变得。有没有相当常量指针&#x2F;指针常量~</p>
+<pre><code>consta=20;
+constb= {
+    age: 18,
+    star: 500
+}
+</code></pre>
+<p>一图胜万言，如下图所示，不变的是栈内存中 a 存储的 20，和 b 中存储的 0x0012ff21（瞎编的一个数字）。而 {age: 18, star:<br>200} 是可变的。思考下如果想希望一个对象是不可变的，应该用什么方法？</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/ed02c1af72d4c8780f57b43c364caedfadba0516/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434530383735656138663831633231306165393363653631396335663964386232642f3239343733"><img src="https://camo.githubusercontent.com/ed02c1af72d4c8780f57b43c364caedfadba0516/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434530383735656138663831633231306165393363653631396335663964386232642f3239343733" alt="xuehuayu.cn"></a></p>
+<h4 id="5-let-const-声明的变量仅在块级作用域中有效。而-var-声明的变量在块级作用域外仍能访问到。"><a href="#5-let-const-声明的变量仅在块级作用域中有效。而-var-声明的变量在块级作用域外仍能访问到。" class="headerlink" title="5.let&#x2F;const 声明的变量仅在块级作用域中有效。而 var 声明的变量在块级作用域外仍能访问到。"></a>5.let&#x2F;const 声明的变量仅在块级作用域中有效。而 var 声明的变量在块级作用域外仍能访问到。</h4><pre><code>{
+    let a =10;
+    constb=20;
+    var c =30;
+}
+console.log(a); //ReferenceErrorconsole.log(b); //ReferenceErrorconsole.log(c); //30
+</code></pre>
+<p>在 let&#x2F;const 之前，最早学习JS的时候，也曾被下面这个问题困扰：</p>
+<p>期望： <code>a[0]() 输出 0 , a[1]() 输出 1 , a[2]() 输出 2 , ...</code></p>
+<pre><code>var a = [];
+for (var i =0; i &lt;10; i++) {
+    a[i] =function () {
+        console.log(i);
+    };
+}
+a[6](); // 10
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/81e73ac06639b2ee4e2b1b62d5721e00973d765b/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434536363865313739303339343630643539663437666561303932383661303939652f3239343735"><img src="https://camo.githubusercontent.com/81e73ac06639b2ee4e2b1b62d5721e00973d765b/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434536363865313739303339343630643539663437666561303932383661303939652f3239343735" alt="xuehuayu.cn"></a></p>
+<p>虽然后来知道了为什么，但是想要得到自己需要的结果，还得整个闭包，我…我做错了什么，要这么对我…</p>
+<pre><code>var a = [];
+for (var i =0; i &lt;10; i++) {
+    a[i] = (function(j){
+        returnfunction () {
+            console.log(j);
+        }
+    })(i)
+}
+a[6](); // 6
+</code></pre>
+<p>有了 let 之后，终于不要这么麻烦了。</p>
+<pre><code>var a = [];
+for (let i =0; i &lt;10; i++) {
+    a[i] =function () {
+        console.log(i);
+    };
+}
+a[6](); // 6
+</code></pre>
+<p>美滋滋，有没有~</p>
+<p>美是美了，但是总得问自己为什么吧~</p>
+<p><code>var i</code> 为什么输出的是 10，这是因为 i 在全局范围内都是有效的，相当于只有一个变量 i，等执行到 <code>a[6]()</code> 的时候，这个 i<br>的值是什么？请大声说出来。</p>
+<p>再看 let , 我们说 let 声明的变量仅在块级作用域内有效，变量i是let声明的，当前的 i 只在本轮循环有效，所以每一次循环的 i<br>其实都是一个新的变量。有兴趣的小伙伴可以查看 babel 编译后的代码。</p>
+<h4 id="6-顶层作用域中-var-声明的变量挂在window上-浏览器环境"><a href="#6-顶层作用域中-var-声明的变量挂在window上-浏览器环境" class="headerlink" title="6.顶层作用域中 var 声明的变量挂在window上(浏览器环境)"></a>6.顶层作用域中 var 声明的变量挂在window上(浏览器环境)</h4><pre><code>var a =10;
+console.log(window.a);//10
+</code></pre>
+<h4 id="7-let-const有暂时性死区的问题，即let-const-声明的变量，在定义之前都是不可用的。如果使用会抛出错误。"><a href="#7-let-const有暂时性死区的问题，即let-const-声明的变量，在定义之前都是不可用的。如果使用会抛出错误。" class="headerlink" title="7.let&#x2F;const有暂时性死区的问题，即let&#x2F;const 声明的变量，在定义之前都是不可用的。如果使用会抛出错误。"></a>7.let&#x2F;const有暂时性死区的问题，即let&#x2F;const 声明的变量，在定义之前都是不可用的。如果使用会抛出错误。</h4><p>只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。</p>
+<pre><code>var a =10;
+if (true) {
+  a =20; // ReferenceErrorlet a;
+}
+</code></pre>
+<p>在代码块内，使用 let&#x2F;const 命令声明变量之前，该变量都是不可用的，也就意味着 typeof 不再是一个百分百安全的操作。</p>
+<pre><code>console.log(typeof b);//undefinedconsole.log(a); //ReferenceErrorlet a =10;
+</code></pre>
+<h3 id="10-深拷贝和浅拷贝的区别是什么？如何实现一个深拷贝？-2019-05-31"><a href="#10-深拷贝和浅拷贝的区别是什么？如何实现一个深拷贝？-2019-05-31" class="headerlink" title="10. 深拷贝和浅拷贝的区别是什么？如何实现一个深拷贝？(2019-05-31)"></a>10. 深拷贝和浅拷贝的区别是什么？如何实现一个深拷贝？(2019-05-31)</h3><p>深拷贝和浅拷贝是针对复杂数据类型来说的。</p>
+<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><blockquote>
+<p>深拷贝复制变量值，对于非基本类型的变量，则递归至基本类型变量后，再复制。</p>
+</blockquote>
+<p>深拷贝后的对象与原来的对象是完全隔离的，互不影响，对一个对象的修改并不会影响另一个对象。</p>
+<h4 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h4><blockquote>
+<p>浅拷贝是会将对象的每个属性进行依次复制，但是当对象的属性值是引用类型时，实质复制的是其引用，当引用指向的值改变时也会跟着变化。</p>
+</blockquote>
+<p>可以使用 <code>for in</code>、 <code>Object.assign</code>、 扩展运算符 <code>...</code><br>、<code>Array.prototype.slice()</code>、<code>Array.prototype.concat()</code> 等，例如:</p>
+<pre><code>let obj = {
+    name: &#39;Yvette&#39;,
+    age: 18,
+    hobbies: [&#39;reading&#39;, &#39;photography&#39;]
+}
+let obj2 =Object.assign({}, obj);
+let obj3 = {...obj};
+
+obj.name=&#39;Jack&#39;;
+obj.hobbies.push(&#39;coding&#39;);
+console.log(obj);//{ name: &#39;Jack&#39;, age: 18,hobbies: [ &#39;reading&#39;, &#39;photography&#39;, &#39;coding&#39; ] }console.log(obj2);//{ name: &#39;Yvette&#39;, age: 18,hobbies: [ &#39;reading&#39;, &#39;photography&#39;, &#39;coding&#39; ] }console.log(obj3);//{ name: &#39;Yvette&#39;, age: 18,hobbies: [ &#39;reading&#39;, &#39;photography&#39;, &#39;coding&#39; ] }
+</code></pre>
+<p>可以看出浅拷贝只最第一层属性进行了拷贝，当第一层的属性值是基本数据类型时，新的对象和原对象互不影响，但是如果第一层的属性值是复杂数据类型，那么新对象和原对象的属性值其指向的是同一块内存地址。来看一下使用<br><code>for in</code> 实现浅拷贝。</p>
+<pre><code>let obj = {
+    name: &#39;Yvette&#39;,
+    age: 18,
+    hobbies: [&#39;reading&#39;, &#39;photography&#39;]
+}
+let newObj = {};
+for(let key in obj){
+    newObj[key] = obj[key];
+    //这一步不需要多说吧，复杂数据类型栈中存的是对应的地址，因此赋值操作，相当于两个属性值指向同一个内存空间
+}
+console.log(newObj);
+//{ name: &#39;Yvette&#39;, age: 18, hobbies: [ &#39;reading&#39;, &#39;photography&#39; ] }obj.age=20;
+obj.hobbies.pop();
+console.log(newObj);
+//{ name: &#39;Yvette&#39;, age: 18, hobbies: [ &#39;reading&#39; ] }
+</code></pre>
+<h4 id="深拷贝实现"><a href="#深拷贝实现" class="headerlink" title="深拷贝实现"></a>深拷贝实现</h4><blockquote>
+<p>1.深拷贝最简单的实现是: <code>JSON.parse(JSON.stringify(obj))</code></p>
+</blockquote>
+<pre><code>let obj = {
+    name: &#39;Yvette&#39;,
+    age: 18,
+    hobbies: [&#39;reading&#39;, &#39;photography&#39;]
+}
+let newObj =JSON.parse(JSON.stringify(obj));//newObj和obj互不影响obj.hobbies.push(&#39;coding&#39;);
+console.log(newObj);//{ name: &#39;Yvette&#39;, age: 18, hobbies: [ &#39;reading&#39;, &#39;photography&#39; ] }
+</code></pre>
+<p><code>JSON.parse(JSON.stringify(obj))</code> 是最简单的实现方式，但是有一点缺陷：</p>
+<p>1.对象的属性值是函数时，无法拷贝。</p>
+<pre><code>let obj = {
+    name: &#39;Yvette&#39;,
+    age: 18,
+    hobbies: [&#39;reading&#39;, &#39;photography&#39;],
+    sayHi: function() {
+        console.log(sayHi);
+    }
+}
+let newObj =JSON.parse(JSON.stringify(obj));
+console.log(newObj);//{ name: &#39;Yvette&#39;, age: 18, hobbies: [ &#39;reading&#39;, &#39;photography&#39; ] }
+</code></pre>
+<p>2.原型链上的属性无法获取</p>
+<pre><code>functionSuper() {
+
+}
+Super.prototype.location=&#39;NanJing&#39;;
+functionChild(name, age, hobbies) {
+    this.name= name;
+    this.age= age;
+}
+Child.prototype=newSuper();
+
+let obj =newChild(&#39;Yvette&#39;, 18);
+console.log(obj.location); //NanJinglet newObj =JSON.parse(JSON.stringify(obj));
+console.log(newObj);//{ name: &#39;Yvette&#39;, age: 18}console.log(newObj.location);//undefined;原型链上的属性无法获取
+</code></pre>
+<p>3.不能正确的处理 Date 类型的数据</p>
+<p>4.不能处理 RegExp</p>
+<p>5.会忽略 symbol</p>
+<p>6.会忽略 undefined</p>
+<pre><code>let obj = {
+    time: newDate(),
+    reg: /\d{3}/,
+    sym: Symbol(10),
+    name: undefined
+}
+
+let obj2 =JSON.parse(JSON.stringify(obj));
+console.log(obj2); //{ time: &#39;2019-06-02T08:16:44.625Z&#39;, reg: {} }
+</code></pre>
+<blockquote>
+<p>2.实现一个 deepClone 函数</p>
+</blockquote>
+<ol>
+<li><p>如果是基本数据类型，直接返回</p>
+</li>
+<li><p>如果是 <code>RegExp</code> 或者 <code>Date</code> 类型，返回对应类型</p>
+</li>
+<li><p>如果是复杂数据类型，递归。</p>
+<p> functiondeepClone(obj) { &#x2F;&#x2F;递归拷贝if(obj instanceofRegExp) returnnewRegExp(obj);<br> if(obj instanceofDate) returnnewDate(obj);<br> if(obj &#x3D;&#x3D;&#x3D;null||typeof obj !&#x3D;&#x3D;’object’) {<br>     &#x2F;&#x2F;如果不是复杂数据类型，直接返回return obj;<br> }<br> &#x2F;**     * 如果obj是数组，那么 obj.constructor 是 [Function: Array]     * 如果obj是对象，那么 obj.constructor 是 [Function: Object]*&#x2F;let t &#x3D;newobj.constructor();<br> for(let key in obj) {<br>     &#x2F;&#x2F;如果 obj[key] 是复杂数据类型，递归if(obj.hasOwnProperty(key)){&#x2F;&#x2F;是否是自身的属性<br>         t[key] &#x3D;deepClone(obj[key]);<br>     }<br> }<br> return t;<br> }</p>
+</li>
+</ol>
+<p>测试:</p>
+<pre><code>functionSuper() {
+
+}
+Super.prototype.location=&#39;NanJing&#39;;
+functionChild(name, age, hobbies) {
+    this.name= name;
+    this.age= age;
+    this.hobbies= hobbies;
+}
+Child.prototype=newSuper();
+
+let obj =newChild(&#39;Yvette&#39;, 18, [&#39;reading&#39;, &#39;photography&#39;]);
+obj.sayHi=function () {
+    console.log(&#39;hi&#39;);
+}
+console.log(obj.location); //NanJinglet newObj =deepClone(obj);
+console.log(newObj);//console.log(newObj.location);//NanJing 可以获取到原型链上的属性newObj.sayHi();//hi 函数属性拷贝正常
+</code></pre>
+<h3 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h3><p>[1]<br><a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/6.0/#sec-completion-record-specification-type">https://www.ecma-international.org/ecma-262/6.0/#sec-completion-record-specification-type</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://juejin.im/post/5bdfd3e151882516c6432c32">【译】理解 Javascript<br>执行上下文和执行栈</a></p>
+<p>[3]<br><a target="_blank" rel="noopener" href="https://css-tricks.com/debouncing-throttling-explained-examples/">https://css-tricks.com/debouncing-throttling-explained-examples/</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/4">mqyqingfeng&#x2F;Blog#4</a></p>
+<p>[5]<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/coco1s/p/4017544.html">https://www.cnblogs.com/coco1s/p/4017544.html</a></p>
+<p>[6]<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangfupeng1988/p/4000798.html">https://www.cnblogs.com/wangfupeng1988/p/4000798.html</a></p>
+<p>[7]<br><a target="_blank" rel="noopener" href="https://www.w3.org/TR/2011/REC-CSS2-20110607/visuren.html#block-boxes">https://www.w3.org/TR/2011/REC-CSS2-20110607/visuren.html#block-boxes</a></p>
+<p>[8] <a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/4">mqyqingfeng&#x2F;Blog#4</a></p>
+<p>谢谢各位小伙伴愿意花费宝贵的时间阅读本文，如果本文给了您一点帮助或者是启发，请不要吝啬你的赞和Star，您的肯定是我前进的最大动力。<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog">https://github.com/YvetteLau/Blog</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/809a1fd.html"><div class="related-post-title">uni-app无网络提示ajax拦截无网络提示</div><div class="related-post-meta"><time>2021-11-14</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/6a28989.html"><div class="related-post-title">连续拿到4个大厂offer的面试总结</div><div class="related-post-meta"><time>2019-10-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/c0e893fd.html"><div class="related-post-title">一文洞察Chrome DevTools近半年新增了哪些功能</div><div class="related-post-meta"><time>2019-10-24</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/968a0bf3.html"><div class="related-post-title">What Is VPN MUX?</div><div class="related-post-meta"><time>2025-10-07</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/b3d63d9d.html"><div class="related-post-title">Webpack 5 升级实验</div><div class="related-post-meta"><time>2019-10-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/11cc4180.html">https://xuehuayu.cn/article/11cc4180.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/66cb7116.html">高频面试题深入解析/ 周刊 03</a><a class="next" href="/article/356e7afa.html">精读《最佳前端面试题》及面试官技巧</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

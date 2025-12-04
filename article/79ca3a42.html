@@ -1,0 +1,353 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>CSS伪元素指南 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">CSS伪元素指南</h1><div class="post-meta"><span class="date">2019-10-31</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.1k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 8</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/79ca3a42.html#waline-comment"><span class="waline-comment-count" data-path="/article/79ca3a42.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/3zLfon7iREGcehRq4f4wHQ</code></p>
+<p>层叠样式表（css）是一种独立的语言，用于描述web应用程序的表示。这涉及到诸如颜色、字体和HTML元素布局的完全控制等概念。</p>
+<span id="more"></span>
+
+<p><img src="https://img.php.cn/upload/article/000/000/013/5dba9fa680bf8405.jpg" alt="xuehuayu.cn"></p>
+<p>在本文中，将为您介绍级联样式表中的伪元素，以及如何将它们与兼容性一起使用的实际示例。</p>
+<p><strong>css中的伪元素是什么？</strong></p>
+<p>CSS伪元素是添加到CSS选择器的关键字，可用于设置所选HTML元素的特定部分的样式。<br>在CSS3中，通常用两个冒号（例如<code>::first-line</code>）表示，以将它们与伪类区分开。 相反，CSS2语法使用一个冒号（例如<code>:first-line</code>）。</p>
+<p><strong>伪元素语法</strong></p>
+<p>CSS伪元素的一般语法如下所示：</p>
+<pre><code>selector::pseudo-element {
+  property: value;
+}
+</code></pre>
+<p>它看起来就像普通的样式设置语句，但是使用冒号来指示要设置样式的选择器中包含的元素的特定部分。</p>
+<p><strong>CSS中的伪元素</strong></p>
+<p>目前css中有七个伪元素。他们是：</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">::after</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">::before</a></p>
+</li>
+<li></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">::first-letter</a></p>
+<ol start="4">
+<li></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">::first-line</a></p>
+<ol start="5">
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">::marker</a></p>
+</li>
+<li></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">::placeholder</a></p>
+<ol start="7">
+<li></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">::selection</a></p>
+<p>还有其他一些，但它们仍被认为是实验技术。 因此，在本文中，重点将放在主要的七个伪元素上。</p>
+<p><strong>工作演示</strong></p>
+<p>在本文中，将在一个简单的演示文件夹中向您介绍这些伪元素中的每一个。 要遵循，您将需要：</p>
+<ul>
+<li><p>代码编辑器-推荐<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a></p>
+</li>
+<li><p>用于提供HTML代码的实时服务器。 您可以在VS Code中下载一个。 首先，转到扩展标签。 您会在收藏夹扩展列表旁边看到搜索栏。</p>
+</li>
+</ul>
+<p>搜索“实时服务器”（下载量将近500万）</p>
+<p>现在，创建一个文件夹，将其命名为伪，然后使用VS Code打开它。 创建两个文件：</p>
+<ol>
+<li><p><code>index.html</code>：这是我们用于内容的HTML代码的去向</p>
+</li>
+<li><p><code>main.css</code>：这是进行样式设置的地方</p>
+</li>
+</ol>
+<p>将下面的启动代码复制到您的<code>index.html</code>文件中：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=”en”&gt;
+  &lt;head&gt;
+  &lt;meta charset=”UTF-8&quot;&gt;
+  &lt;meta name=”viewport” content=”width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;meta http-equiv=”X-UA-Compatible” content=”ie=edge”&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+  &lt;link rel=”stylesheet” type=”text/css” href=”main.css”&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;p&gt;hello world!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>粗体代码显示我们已将内容链接到样式表-在您的示例中是<code>main.css</code>。接下来，将此测试样式复制到<code>main.css</code>文件中进行测试：</p>
+<pre><code>p{
+color: aqua;
+}
+</code></pre>
+<p>如果单击VS Code应用程序页脚中的“上线”按钮，您将被重定向到默认浏览器，在该浏览器中已为您启动了托管该网页的实时远程服务器。</p>
+<p><img src="https://img.php.cn/upload/image/337/118/418/1572484728777750.jpg" alt="1572484728777750.jpg"></p>
+<p><strong>:: after (:after)</strong></p>
+<p><code>:: after</code>创建一个伪元素，该元素代表所选HTML元素的最后一个子元素。 它用于与<code>CSS content</code>属性协作将样式添加到此特定元素。<br>语法如下所示：</p>
+<pre><code>selector::after {
+  content: &quot;value&quot;;
+}
+</code></pre>
+<p>将下面的代码复制到<code>index.html</code>文件：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=”en”&gt;
+  &lt;head&gt;
+  &lt;meta charset=”UTF-8&quot;&gt;
+  &lt;meta name=”viewport” content=”width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;meta http-equiv=”X-UA-Compatible” content=”ie=edge”&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+  &lt;link rel=”stylesheet” type=”text/css” href=”main.css”&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;p class=”one”&gt;This is my very first paragraph.
+    This is my very first paragraph.
+    This is my very first paragraph.
+    This is my very first paragraph.&lt;/p&gt;
+  &lt;p class=”three”&gt;This is my second paragraph.&lt;/p&gt;
+  &lt;p class=”two”&gt;This is my last but not the least paragraph&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>现在，在您的<code>main.css</code>文件中，复制以下代码：</p>
+<pre><code>.one::after {
+  content: “ — 1”;
+  color: blue;
+}
+.two::after {
+  content: “ — 2”;
+  color: red;
+}
+</code></pre>
+<p>这只是将字符串添加到所选元素之前（在本例中为指向各个段落的类），并更新其颜色。</p>
+<p><strong>::before (:before)</strong></p>
+<p><code>:: before</code>创建一个伪元素，该元素代表所选HTML元素的第一个子元素。 默认情况下，它是内联的，用于与<code>CSS content</code>属性协作将样式添加到此特定元素。 语法如下所示：</p>
+<pre><code>selector::before {
+  content: &quot;value&quot;;
+}
+</code></pre>
+<p>您的<code>index.html</code>文件将保持不变，但是在<code>main.css</code>文件中，复制以下代码：</p>
+<pre><code>.one::before {
+content: “1--”;
+color: blue;
+}
+.two::before {
+content: “2--”;
+color: red;
+}
+</code></pre>
+<p>这只是将字符串添加到所选元素之前（在本例中为指向各个段落的类），并更新其颜色。</p>
+<p><strong>::first-letter (:first-letter)</strong></p>
+<p><code>::first-letter</code>创建一个伪元素，表示一个块元素第一行的第一个字母，只要它不在图像或表格之后。</p>
+<pre><code>selector::first-letter {
+  property: value;
+}
+</code></pre>
+<p>然而，重要的是要认识到元素的第一个字母很难识别。像标点符号这样的东西在逻辑上可以算作第一个字母。有些语言的有向图总是大写在一起，比如荷兰语中的ij。在这些情况下，有向图的两个字母都应该与<code>::first-letter</code>伪元素匹配。</p>
+<p><code>::before</code>伪元素与<code>content</code>属性一起也可以创建第一个元素，因此在调试CSS时请牢记这些。</p>
+<p>将以下样式代码复制到<code>main.css</code>文件中，以查看<code>::first-letter</code>的作用：</p>
+<pre><code>p::first-letter {
+  color: red;
+  font-size: 130%;
+}
+</code></pre>
+<p><strong>::first-line (:first-line)</strong></p>
+<p><code>::first-line</code>创建一个伪元素，该伪元素代表<code>block</code>元素的第一行。<br>就像第一个字母一样，第一行也取决于一些因素，例如元素的宽度，文档的宽度以及元素的字体大小。 <code>::first-line</code>伪元素的语法如下：</p>
+<pre><code>selector::first-line {
+  property: value;
+}
+</code></pre>
+<p>将以下样式复制到您的<code>main.css</code>文件中：</p>
+<pre><code>p {
+font-size: 130%;
+}
+p::first-line {
+color: red;
+font-size: 130%;
+}
+</code></pre>
+<p>第一个段落样式将放大段落的字体，以便从给定的字符串中获得一行。</p>
+<p><img src="https://img.php.cn/upload/image/866/684/574/1572485350624491.jpg" alt="1572485350624491.jpg"></p>
+<p><strong>::marker</strong></p>
+<p><code>::marker</code>伪元素选择列表项的标记框，该列表框通常包含项目符号或数字。 它用于列表项和摘要元素。 语法如下所示：</p>
+<pre><code>selector ::marker {
+  property: value;
+}
+</code></pre>
+<p>将下面的列表项代码添加到您的<code>index.html</code>文件中：</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;One&lt;/li&gt;
+  &lt;li&gt;Two&lt;/li&gt;
+  &lt;li&gt;Three&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<p>将以下<code>::marker</code>样式复制到<code>main.css</code>文件中，以查看其作用：</p>
+<pre><code>ul li::marker {
+  color: blue;
+  font-size: 130%;
+}
+</code></pre>
+<p><strong>::placeholder</strong></p>
+<p><code>::placeholder</code>伪元素指向演示文稿中输入元素的占位符，通常在表单中找到。 默认情况下，大多数浏览器会将浅灰色应用于占位符。 语法如下所示：</p>
+<pre><code>selector ::placeholder {
+  property: value;
+}
+</code></pre>
+<p>将此输入行复制到您的<code>index.html</code>文件中：</p>
+<pre><code>&lt;input placeholder=&quot;Type something here!&quot;&gt;
+</code></pre>
+<p>将以下样式复制到<code>main.css</code>文件中以查看更改：</p>
+<pre><code>input::placeholder {
+  color: red;
+  font-size: 1.2em;
+  font-style: italic;
+}
+</code></pre>
+<p><strong>::selection</strong></p>
+<p><code>::selection</code>伪元素适用于DOM上突出显示的元素。语法如下所示：</p>
+<pre><code>selector ::selection {
+  property: value;
+}
+</code></pre>
+<p><code>::selection</code>伪元素上可以使用一些属性：<code>color</code>, <code>background-color</code>, <code>cursor</code>, <code>caret-color</code>,<br><code>outline</code>, <code>text-decoration</code>, <code>text-emphasis-color</code>, 和<code>text-shadow</code>.</p>
+<p>将以下样式复制到您的<code>main.css</code>文件中：</p>
+<pre><code>p::selection {
+  background-color: red;
+}
+</code></pre>
+<p>如果您在浏览器中显示，它将看起来像这样：</p>
+<p><img src="https://img.php.cn/upload/image/452/224/762/1572485813541921.gif" alt="1572485813541921.gif"></p>
+<p><strong>浏览器兼容性</strong></p>
+<p>您可能想了解一些有关浏览器支持的伪元素的有用信息：</p>
+<ul>
+<li>除Safari和Opera外，所有流行的浏览器都完全支持[::</li>
+</ul>
+<p>after伪元素](<a target="_blank" rel="noopener" href="https://caniuse.com/#search=%3A%3Aafter">https://caniuse.com/#search=%3A%3Aafter</a>)</p>
+<ul>
+<li>除Safari，Internet Explorer 9和Opera外，所有流行的浏览器都完全支持[::</li>
+</ul>
+<p>before伪元素。](<a target="_blank" rel="noopener" href="https://caniuse.com/#search=%3A%3Abefore">https://caniuse.com/#search=%3A%3Abefore</a>)</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://caniuse.com/#search=%3A%3Amarker">:: marker伪元素</a>仅受Firefox支持</p>
+</li>
+<li><p>除了iOS设备上的Safari以外，所有浏览器均支持[::</p>
+</li>
+</ul>
+<p>first-letter伪元素](<a target="_blank" rel="noopener" href="https://caniuse.com/#search=%3A%3Afirst-letter">https://caniuse.com/#search=%3A%3Afirst-letter</a>)</p>
+<ul>
+<li>每个屏幕尺寸的每个浏览器都完全支持[::</li>
+</ul>
+<p>first-line伪元素](<a target="_blank" rel="noopener" href="https://caniuse.com/#search=%3A%3Afirst-line">https://caniuse.com/#search=%3A%3Afirst-line</a>)</p>
+<ul>
+<li>除了Internet Explorer，所有浏览器均支持[::</li>
+</ul>
+<p>placeholder伪元素](<a target="_blank" rel="noopener" href="https://caniuse.com/#search=%3A%3Aplaceholder)%E3%80%82">https://caniuse.com/#search=%3A%3Aplaceholder)。</a></p>
+<ul>
+<li>所有网络浏览器均支持<a target="_blank" rel="noopener" href="https://caniuse.com/#search=%3A%3Aselection">:: selection伪元素</a></li>
+</ul>
+<p><strong>结论</strong></p>
+<p>CSS仍然是现代Web开发过程中不可或缺的一部分。 Web开发人员花一些时间来学习CSS基础非常重要。<br>CSS中的伪元素将帮助您扩展知识，并为您提供更多激动人心的样式选择。</p>
+<p><code>原文地址：https://blog.logrocket.com/a-guide-to-css-pseudo-elements/</code></p>
+<p>以上就是css伪元素指南的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/dc8dc705.html"><div class="related-post-title">ES6，ES7，ES8，ES9，ES10新特性一览</div><div class="related-post-meta"><time>2019-12-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/12c5754.html"><div class="related-post-title">JS实现99乘法表</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/af2cbd9d.html"><div class="related-post-title">【http的演化过程】当我谈 HTTP 时，我谈些什么?</div><div class="related-post-meta"><time>2020-10-12</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/c83ae69b.html"><div class="related-post-title">ES2019中JavaScript的新功能</div><div class="related-post-meta"><time>2019-10-31</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/7366770b.html"><div class="related-post-title">实现双向绑定Proxy比defineproperty优劣如何</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/79ca3a42.html">https://xuehuayu.cn/article/79ca3a42.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/583f82b4.html">CSS 开发必知必会的 16 个DevTools技巧</a><a class="next" href="/article/244d8be8.html">javascript常用正则表达式备忘录</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

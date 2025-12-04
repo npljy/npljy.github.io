@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>VS Code 成主宰、Vue 备受热捧！2019 前端开发趋势必读 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">VS Code 成主宰、Vue 备受热捧！2019 前端开发趋势必读</h1><div class="post-meta"><span class="date">2019-12-18</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 6.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 23</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/16554c83.html#waline-comment"><span class="waline-comment-count" data-path="/article/16554c83.html">0</span><span> 条评论</span></a><div class="post-content"><blockquote>
+<p>&#96;原文：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/yMa9PAUDbHc00Qp21us7YQ%C2%B7">https://mp.weixin.qq.com/s/yMa9PAUDbHc00Qp21us7YQ·</a></p>
+</blockquote>
+<hr>
+<span id="more"></span>
+<p>前端在生产和开发中占据着越来越重要的地位，PC 端、手机端、桌面端、智能手表端等等设备都离不开前端的身影。本文将围绕框架、编程语言、工具、React、Vue<br>等方面，全面回顾 2019 年前端与 Web 开发的大事。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Pn4Sm0RsAuhzGbHK1kg8LtrlfLZaLaRRTqK4bMT3g054pib0tiaGQDtANVH8tsNJicLTvhVrjh0fdejoUVaTog3KA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<p>作者 | Trey Huffine<br>译者 | 弯月，责编 | 郭芮<br>出品 | CSDN（ID：CSDNnews）<strong>以下为译文：</strong><br>在过去的一年中，前端开发再次加快了发展的速度，本文总结了2019年以来的所有大事、新闻和趋势。</p>
+<p><strong><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAugo5SicrbBWhBdrvsmIrWNwHklazcTAqHwNiakxwcrlNUFmx9RjNGxR0ghGKMoO9ubibCib9CHYkkT2HA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></strong></p>
+<p><strong>2019年流行前端框架和库的NPM下载</strong></p>
+<p>React 再次荣登前端流行库的榜首，且用户的数量仍在增长，而 jQuery 出乎意料地保住了第二名的位置。紧随其后的是 Angular 和<br>Vue，一大批饱含热情的开发人员为二者奠定了强大的用户基础。去年，Svelte 收到了很多关注，但还在为获得更多采用而努力。</p>
+<p><strong><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAughtzsqSX5AjrYuuJCebR40kU5YMKEoeJFFVH3bg2ZWBj6pP7H9lz5xJIjVtGTicickLU5yQOE1Dl1w/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAugo5SicrbBWhBdrvsmIrWNwH79IdgwBuCldKPGDicPyLfzel3DBo8Odgd8VbbYiaUZG3qBz5DRhEbmgg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<p><strong>WebAssembly 成为了继 HTML、CSS 和 JavaScript 之后的第四大Web语言</strong></p>
+<p>**<br>**</p>
+<p>经过一年的平静之后，12月初 WebAssembly 出现了一些重大新闻：W3C联盟正式推荐其为Web语言。（万维网联盟（W3C）是互联网主要的国际标准组织。）</p>
+<p>自2017年发布以来，WebAssembly 引起了广泛的关注，而且采用也迅速增长。在过去的几年中，我们看到了WebAssembly<br>建立了1.0规范，而且所有主流浏览器都开始支持WebAssembly。</p>
+<p>2019年，还有一则 WebAssembly 的新闻：字节码联盟（Bytecode Alliance）成立，该联盟旨在通过协作实施标准和提出新标准，以完善<br>WebAssembly 在浏览器之外的生态。</p>
+<p>我们仍在等待 WebAssembly 真正站稳脚跟，并大面积普及。随着 WebAssembly<br>每次的更新，我们离这个目标越来越近。毫无疑问，W3C的声明是让各个公司合法使用 WebAssembly 的重要一步，我们需要继续降低使用 WebAssembly<br>的入门门槛，让其更方便构建产品。</p>
+<p><strong><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAugo5SicrbBWhBdrvsmIrWNwHgvU6jQlC6U6g2F1sBAUicFbcmNibDa0d3vHpawVWfn5654o7uLI7icozw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></strong></p>
+<p><strong>TypeScript 的使用激增：许多开发人员为之倾倒</strong></p>
+<p>2019年是 TypeScript 之年。TypeScript<br>不仅成为了在JS代码中添加类型时的最佳选择，而且许多开发人员在个人项目和工作中对它的喜爱超过了普通的 JavaScript。</p>
+<p>在2019年初发布的StackOverflow调查中，TypeScript 与 Python 并列第二，成为了最受欢迎的语言，仅次于<br>Rust。如果在2020年初发布的最新的调查中看到 TypeScript 更上一层楼也不足为奇。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAughtzsqSX5AjrYuuJCebR40qspbibY1gkxsK3GibtedJqR9n40I9A6loNbCPV9ZQ779f5z3YXuY0HnQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<p>TypeScript 已经开始蚕食Web开发世界——前端和后端皆如此。有些开发人员曾经认为TypeScript 的兴起只不过是暂时的，而且他们还认为它会重蹈<br>Coffeescript的覆辙，但事实证明 TypeScript 可以解决JS开发人员的核心问题，而且其使用率似乎越来越高。</p>
+<p>TypeScript 与所有主流文本编辑器的集成为Web开发人员提供了更好的开发体验。JavaScript 开发人员将 TypeScript<br>视为一种工具：它可以减少错误，同时由于其提供的文档说明类型和对象接口，代码阅读起来更为轻松。</p>
+<p>值得注意的是，2019年 TypeScript 的NPM下载流行度超过了 React。此外，它的下载量也远远超过了 Flow 和 Reason 等竞争对手。</p>
+<blockquote>
+<p>TypeScript 和 React 解决的是完全不同的问题，因此不应该直接将二者进行比较。下图只是为了展示 TypeScript 的受欢迎程度。</p>
+</blockquote>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAughtzsqSX5AjrYuuJCebR404hr7umLbfHe6vlvBtOYHGKnEUl3aaBAqyqfFuwkSyeWD0dNu7bVhzQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<p>TypeScript v3.0 于 2018年末发布，2019年发布到了3.7版，其中包括 ECMAScript 功能的更新，例如Optional<br>Chaining、nullish operator以及对类型检查功能的改进。</p>
+<p><strong><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAugo5SicrbBWhBdrvsmIrWNwHw0gbr2nQhORCNib5Wlbuo2ane4qziancmoHuyPK5NsUThZXXnFbiaLdlA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></strong></p>
+<p><strong>React 继续保持领先，开发人员为钩子倾倒</strong></p>
+<p>虽然 Vue 和 Angular 拥有大一批饱含热情的用户，Vue 在 GitHub 上的给星数甚至超过了 React，但在个人和专业项目中，React<br>继续保持领先地位。</p>
+<p>2018年末，React团队引入了钩子。2019年，钩子吞噬了 React<br>世界，绝大多数开发人员都将其作为管理状态和组件生命周期的首选方式。2019年中有关钩子的文章层出不穷，这方面的模式开始走向稳固，重要的 React<br>包都开始利用自定义钩子来导出其函数库的功能。</p>
+<p>钩子提供了一种通过简洁的语法管理功能组件的状态和生命周期的方法。另外，React<br>提供了构建自定义钩子的功能，我们可以利用这个功能创建可重用的代码和共享的逻辑，而无需创建高阶组件或使用render props。</p>
+<p><strong><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAugo5SicrbBWhBdrvsmIrWNwH3Njic1JR7J9liafR0Y2TeXIwWZaJPOumK6TLrVGt0Vue5ibQU14iaghCBA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></strong></p>
+<p><strong>React核心团队重点关注开发人员的经验和工具，提高生产力</strong></p>
+<p>在React v16.8 添加了大量钩子之后，其后的大多数更改都相对较小，2019年发布的最新版本为16.14版。</p>
+<p>在发布了大量钩子之后，React 团队随后将工作重点转移到通过提供更多工具来改善开发人员的工作。实际上，开发人员的经验是2019年 React<br>大会的主要主题。React 大会的主要发言人及 React 团队经理 Tom Occhino<br>表示，开发人员的经验主要依赖于三个方面：降低入门的门槛、提高生产率和改善扩展能力。下面让我们来看一看为了支持这三方面，React 团队发布了哪些功能和计划：</p>
+<ul>
+<li><p>全新版本的 React DevTools</p>
+</li>
+<li><p>全新的 React 性能分析工具</p>
+</li>
+<li><p>创建了 React App v3</p>
+</li>
+<li><p>测试工具的更新</p>
+</li>
+<li><p>Suspense</p>
+</li>
+<li><p>并发模式（即将推出）</p>
+</li>
+<li><p>Facebook 使用的 CSS-in-JS（即将推出）</p>
+</li>
+<li><p>渐进&#x2F;选择性页面hydration（即将进行）</p>
+</li>
+<li><p>React 核心层面支持可访问性（即将发布）</p>
+</li>
+</ul>
+<p>我们相信，良好的开发人员体验能带来良好的用户体验，因此这对每个人都有益。有关即将发布的 React<br>功能，请点击如下链接（<a target="_blank" rel="noopener" href="https://youtu.be/uXEEL9mrkAQ%EF%BC%89%E8%A7%82%E7%9C%8B2019%E5%B9%B4">https://youtu.be/uXEEL9mrkAQ）观看2019年</a> React 大会上Yuzhi Zheng的发言。</p>
+<p><strong><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAugo5SicrbBWhBdrvsmIrWNwHyV2C0tibEjhEial4SrXA0YZXaZia8UFjhXbCGgUcn3Yja2kl8ByTmM38w/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></strong></p>
+<p><strong>Vue为版本3发行做准备，使用量继续增长</strong></p>
+<p>Vue 的采用率可能尚未达到最高，但其拥有一大批热情高涨的用户。Vue 借鉴了 React 和Angular<br>的精华，同时还进行了简化。它的另一个巨大的卖点是：更开放，不像React（Facebook）或 Angular（Google）一样受大公司的控制。</p>
+<p>Vue 最大的新闻是即将发布的3.0版本，alpha 版有望在第四季度末发布。2019年，Vue<br>2.x仅在年初收到了一些更新，因为大多数的工作都投入到了v3版本中。</p>
+<p>虽然今年发布的版本不多，但这并不意味着Vue 没有太多大事发生。当 Evan You 向大众征集有关 v3 的建议时，这个版本的变动在社区引发了广泛的争论，请见<br>Reddit 和 Hacker News等网站。</p>
+<p>激怒 Vue 开发人员的关键问题是对框架API的全面改革。但是，在强烈反对之后，有人指出此次API的变更与 Vue 2<br>完全兼容。虽然许多开发人员仍在关注该版本的发行，但他们声称这些改动可能会让他们考虑 Svelte，因为他们担心 Vue 与 React<br>太相像。尽管社区中仍有许多人对此表示关注，但在他们等待发布的过程中，喧杂声似乎已平息。</p>
+<p>除了上述有争论的变更外，Vue 3 还包含其他重大变化：</p>
+<ul>
+<li><p>组合API</p>
+</li>
+<li><p>全局mount&#x2F;配置API的改动</p>
+</li>
+<li><p>Fragments</p>
+</li>
+<li><p>时间切片支持（实验性）</p>
+</li>
+<li><p>多个v模型</p>
+</li>
+<li><p>Portal</p>
+</li>
+<li><p>新的自定义指令API</p>
+</li>
+<li><p>反应性的</p>
+</li>
+<li><p>虚拟DOM重写</p>
+</li>
+<li><p>静态props hoising</p>
+</li>
+<li><p>钩子 API（实验性）</p>
+</li>
+<li><p>slot生成优化（父和子组件的单独渲染）</p>
+</li>
+<li><p>更好地支持 TypeScript</p>
+</li>
+</ul>
+<p>有关Vue的发布（<a target="_blank" rel="noopener" href="https://youtu.be/ANtSWq-zI0s%EF%BC%89%EF%BC%8C%E4%BB%8A%E5%B9%B4%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%80%BC%E5%BE%97%E6%B3%A8%E6%84%8F%E7%9A%84%E6%98%AFCLI%E7%9A%84%E7%AC%AC4%E7%89%88%EF%BC%8C%E4%B8%BB%E8%A6%81%E9%9B%86%E4%B8%AD%E5%9C%A8%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7%E7%9A%84%E6%9B%B4%E6%96%B0%E4%B8%8A%E3%80%82">https://youtu.be/ANtSWq-zI0s），今年另一个值得注意的是CLI的第4版，主要集中在基础工具的更新上。</a></p>
+<p><strong><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAugo5SicrbBWhBdrvsmIrWNwHCibcNLkqr1tK72ibibS0kvbO9NbItSYoENiam42pAPz5eAebt3AU8ricdfQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></strong></p>
+<p><strong>Angular发布版本8和9，以及新的Ivy编译&#x2F;渲染管道</strong></p>
+<p>Angular 刚愎自用的哲学为它赢得了庞大的用户群。由于 Angular 是一个“霸道总裁”式的框架，因此它要求开发人员以 Angular<br>的方式行事，同时也为开发人员提供了所有必要的工具。</p>
+<p>这可以避免许多有关引入哪些库和依赖项的争论，而这些争议是 React 应用构建团队中可能需要面对的问题。它还要求开发人员使用 TypeScript<br>编写应用程序。由于大多数抉择已被确立，因此各个公司将其视为一个不错的选择，因为开发人员可以专注于构建产品，而不必花费时间考虑软件包。</p>
+<p>2019年，Angular 发布了版本8，并且还发布了一个新的渲染器&#x2F;编译流水线——名叫 Ivy。Ivy<br>最大的好处在于构建的包更小，但它提供了许多其他巨大的改进。目前，Ivy 是 Angular 9 之前的可选功能。版本8中值得注意的更新包括：</p>
+<ul>
+<li><p>现代JavaScript的差分加载</p>
+</li>
+<li><p>默认支持的 Ivy 预览</p>
+</li>
+<li><p>Angular Router 的向后兼容性</p>
+</li>
+<li><p>改进后的Web Worker包</p>
+</li>
+<li><p>默认支持的使用情况分享</p>
+</li>
+<li><p>依赖关系更新</p>
+</li>
+</ul>
+<p>2019年12月期间，Angular 团队为版本9的发布做好了准备，该版本将于2019年底或2020年初正式发布。Angular 9的最大变化是 Ivy<br>成为了标准渲染器。有关Angular 9的更多详细信息，请参照如下视频（<a target="_blank" rel="noopener" href="https://youtu.be/5wmWtgr7LQ0%EF%BC%89%E3%80%82">https://youtu.be/5wmWtgr7LQ0）。</a></p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>可访问性和国际化变得越来越重要</strong></p>
+<p>Web应该对所有人开放，且人人可访问，前端世界一直非常重视这一点。自2015年开始 JavaScript 和 Web<br>得到了快速发展之后，模式和框架终于得到了巩固。如今的形式更为稳定，因此开发人员可以将更多的精力放在能够将应用本地化以及方便更多人访问的工具上，努力打造更好的Web环境。我们应该为我们所取得的进展感到自豪，但是我们还有很长的路要走。</p>
+<p>可访问性（Accessibility，简称A11y）：让尽可能多的人使用你的网站，传统上我们认为这是关于残疾人的，但实际上它也涵盖了其他群体，比如使用移动设备的人群，那些网络连接缓慢的人群。——<br>MDN</p>
+<p>国际化（Internationalization，简称i18n）是对应用程序、规范文档的设计和开发，以确保这些应用和规范等可以更好更容易地适应不同文化、地区、语言的用户。——<br>W3C</p>
+<blockquote>
+<p>注：Accessibility被简称为A11y是因为首字母“A”和最后一个字母“y”之间有11个字母。</p>
+</blockquote>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>ES2019新功能</strong></p>
+<p>今年，ECMAScript（JavaScript 的规范）也发表了年度更新，且 ES2019 版本中添加了如下新功能：</p>
+<ul>
+<li><p>Object.fromEntries()</p>
+</li>
+<li><p>String.trimStart()和 String.trimEnd()</p>
+</li>
+<li><p>JSON.stringify中 unicode的处理改善</p>
+</li>
+<li><p>Array.flat()</p>
+</li>
+<li><p>Array.flatMap()</p>
+</li>
+<li><p>try&#x2F;catch绑定</p>
+</li>
+<li><p>Symbol.description</p>
+</li>
+</ul>
+<p>尽管ES2019进行了一些重大更新，但即将到来的 ES2020 拥有 ES6 &#x2F; ES2015 以来最令人期待的功能：</p>
+<ul>
+<li><p>私有类属性</p>
+</li>
+<li><p>Optional Chaining：obj.field?.maybe?.exists</p>
+</li>
+<li><p>nullish coalescing：item ?? ‘use this only if item is null&#x2F;undefined’</p>
+</li>
+<li><p>BigInts</p>
+</li>
+</ul>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>Flutter 突飞猛进地发展，作为构建跨平台移动应用的另一个绝佳选择向 React Native 发起了挑战</strong></p>
+<p>React Native 推出两年后，Flutter才发布，但 Flutter 的发展非常迅速。Flutter 在GitHub上斩获了<br>80,500颗星，几乎赶上了 React Native 的83,000颗星，照此情形 Flutter 很快就过超越 React Native。</p>
+<p>鉴于 Flutter 没有开发社区的推波助澜（React Web开发人员推动了React<br>Native的发展），所以如此迅速的发展实在令人刮目相看。Flutter 正在努力打造最优秀的的跨平台移动框架。</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>Node.js 基金会与 JS 基金会合并成立 OpenJS 基金会：Node版本12遵循了年度长期支持发布策略</strong></p>
+<p>为了支持 JavaScript 生态系统并加速语言的发展，Node.js 基金会与 JS 基金会合并成立了 OpenJS<br>基金会。该基金会表示，希望通过中立的组织推进协作和发展，如今他们托管了31个开源项目，包括 Node、jQuery 和<br>Webpack。这一举动为整个JS社区带来了积极的影响，并得到了Google、IBM和微软等大公司的支持。</p>
+<p>今年，Node发布了版本12，该版本遵循长期支持（LTS）策略，可以一直到2023年4月。Node12提供了许多新功能、安全更新和性能改进。一些值得注意的更新包括<br>import&#x2F;export 语句的原生支持、私有类属性、兼容V8 Engine 7.4、对TLS 1.3的支持以及其他诊断工具。</p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>随着版本3的发布Svelte 获得了关注，但在采用方面依然落后</strong></p>
+<p>Svelte 在竞争异常激励的前端框架世界中，找到了自己的跻身之道。但是，正如我们在本文开头的介绍，Svelte<br>还没有得到大量的实际应用。总的来说，Svelte“简单而强大”。Svelte 网站表明了其三大优点：</p>
+<ul>
+<li><p>需要编写的代码量更少</p>
+</li>
+<li><p>没有虚拟DOM</p>
+</li>
+<li><p>真正的响应式编程</p>
+</li>
+</ul>
+<p>Svelte 尝试将大部分工作转移到编译过程中，减少运行时在浏览器中进行的工作。Svelte 具有基于组件的体系结构，可编译为纯 HTML 和原始<br>JavaScript，同时也承诺减少样板代码。它使用响应式编程来直接更新DOM，而不是利用虚拟的DOM。</p>
+<p>Svelte 为前端领域带来了耳目一新的感觉——即提供更少的功能。2020年，Svelte<br>的成长和发展很让人欣慰，希望我们能够获得一些实际的例子，证明它确实能够与 React、Vue 和Angular 等强大的竞争对手一较高低。</p>
+<blockquote>
+<p>相关视频：<a target="_blank" rel="noopener" href="https://youtu.be/AdNJ3fydeao">https://youtu.be/AdNJ3fydeao</a></p>
+</blockquote>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>静态网站的使用仍在持续，开发人员开始采用 JAMStack</strong></p>
+<p>随着 Gatsby 等框架利用率的提高，Netlify 等负责托管静态网站的公司也得到了快速增长，于是无数headless<br>CMS公司相继出现，静态网站证明了自己是Web不可或缺的一部分。</p>
+<p>静态网站将旧网站与新兴的工具、库和更新结合在一起，提供了无与伦比的体验。我们能够使用 React 等现代库来构建我们的网站，然后在构建时将它们编译成静态<br>HTML<br>页面。由于所有页面都是预先构建的，因此服务器不需要花费时间利用请求中的数据渲染页面，这些页面可以立即提供，并利用CDN中全局缓存的优势，尽可能迅速地将页面提供给用户。</p>
+<p>静态网站使用的一种流行的编程模式是 JAMStack。这是一种结合了静态&#x2F;<br>SPA的方式，这些页面都是静态提供的，但是一旦进入客户端，就会被当成SPA——通过API和用户交互来推进UI的状态。</p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>PWA的增长和采用有所增加</strong></p>
+<p>虽然静态网站的速度无人能及，但也并非适合所有应用，另一个绝佳的选择是 PWA（渐进式Web应用程序）。我们可以利用 PWA<br>在浏览器中缓存资源，以确保页面的立即响应与离线支持。此外，在 PWA 方式中，后台工作人员还可以提供推送通知等原生功能。</p>
+<p>甚至有人声称 PWA 可以取代原生移动应用。无论最终结果将如何，毫无疑问，在很长一段时间内 PWA 将影响各大公司构建产品的主要方式。</p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>前端的工具越来越优秀</strong></p>
+<p>近几年来，前端开发人员总是抱怨厌倦了 JavaScript， 但是我们也慢慢看到，开源项目维护人员的不懈努力减轻了人们对 JavaScript 的厌倦。</p>
+<p>以前，如果我们想构建SPA，则必须利用 Bower 或 NPM 引入依赖关系，还要掌握如何利用 Browserify 或 Webpack 进行编译，从零开始编写<br>Express 服务器，并在库发生更新时维护我们的应用。</p>
+<p>多年来，我们经历了很多痛苦，但如今我们造就了最活跃、最发达的软件包生态系统。我们有很多工具可以帮助我们抽象化构建应用程序中最痛苦的部分：创建 React<br>应用、Vue CLI、Angular CLI、用于静态网站的Gatsby、用于 React Native 移动应用的Expo、用于SSR应用程序的Next &#x2F;<br>Nuxt、用于创建服务器的生成器、免却为GraphQL编写服务器的Hasura、使用 GraphQL 代码生成器自动生成 TypeScript<br>类型、Webpack不断得到简化等等，我们总能找到工具帮我们减轻繁重的工作。</p>
+<p>也许现在我们开始厌倦了工具了？</p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>GraphQL深受开发人员的喜爱，并在科技公司中得到进一步的采用</strong></p>
+<p>GraphQL 有望解决传统的基于 REST 的应用程序面临的许多问题。GraphQL<br>很快就获得了开发人员的喜爱，而各大科技公司也纷纷开始采用它。几年前，GitHub 用 GraphQL 编写了它的最新API，许多其他组织也在做出了同样的变革。</p>
+<p>GraphQL 应用程序是数据驱动的（不是端点驱动），因此客户端可以声明所需的确切数据，从服务器接收相应的JSON响应。GraphQL<br>API提供的文档记录了所有的数据及其类型，帮助开发人员更全面地了解API。</p>
+<p>由于GraphQL API 提供了完全类型化的架构，因此它也可以与 TypeScript 应用程序很好地集成。GraphQL 可以通过 GraphQL Code<br>Generator 等工具读取客户端代码中的查询，并将其与架构进行匹配，以提供在整个应用程序中流动的 TypeScript 类型。</p>
+<p>在过去的一年中，GraphQL 的下载量增加了一倍，而 Apollo 也开始朝着使用最广泛的框架迈进。</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>CSS-in-JS的发展势不可挡</strong></p>
+<p>Web开发的发展大有让 JavaScript 一统天下的趋势，CSS-in-JS 的采用充分体现了这一点，因为这些CSS样式都是使用 JavaScript<br>字符串创建的。</p>
+<p>在这种方式下，我们可以通过 import&#x2F;export ，利用常规的 JavaScript 语法共享样式和依赖项。由于CSS-in-JS组件可以将 props<br>插入到样式字符串中，因此简化了动态样式。如前所述，Facebook 甚至认为 CSS-in -JS 可能会成为前端的未来，并即将发布自己的库。</p>
+<p>下面是一个经典的 CSS 与 CSS-in-JS 的示例。如果用普通CSS处理动态样式，那么你必须管理组件中的类名称，并根据 state&#x2F;props<br>进行更新。而且你还需要为每种变化建立一个CSS类：</p>
+<pre><code>// Component JS file
+const MyComp = ({ isActive }) =&gt; {
+  const className = isActive ? &#39;active&#39; : &#39;inactive&#39;;
+  return &lt;div className={className}&gt;HI&lt;/div&gt;
+}
+// CSS file
+.active { color: green; }
+.inactive { color: red; }
+</code></pre>
+<p>在 CSS-in -JS 中，你不再需要管理CSS类。你只需要将 props<br>传递给样式化的组件，而它会利用声明式的语法处理动态样式。这些代码更为简洁，而且由CSS管理基于 props 的动态样式后，我们就可以将样式与 React<br>相分离。实际的代码读起来与正常的 React 和 JavaScript 代码并无二样：<br>    const Header &#x3D; styled.div<code>      color: ${({ isActive }) =&gt; isActive ? &#39;green&#39; : &#39;red&#39;};    </code>;<br>    const MyComp &#x3D; ({ isActive } } &#x3D;&gt; (<br>      <Header isActive={isActive}>HI</Header><br>    )</p>
+<p>styled-components 和 emotion 是 CSS-in-JS 的两个主要库，而且2019年 emotion 的下载超过了<br>styled-components。从增长幅度来看，这两个库遥遥领先于其他 CSS-in-JS 库，而且它们还将持续快速增长。</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>VS Code是文本编辑器市场上的主宰</strong></p>
+<p>开发人员对于IDE &#x2F;文本编辑器充满了热情，他们会没完没了地争论为什么自己的编辑器才是最佳选择。然而，前端开发人员不约而同地选择了 VS Code。VS<br>Code 是一款开源编辑器，它提供的插件为开发人员提供了无与伦比的体验。</p>
+<p>根据“2018年JS的状况调查”（地址：<a target="_blank" rel="noopener" href="https://2018.stateofjs.com/other-tools/%EF%BC%89%EF%BC%8C%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%E5%A6%82%E4%B8%8B%EF%BC%882019%E5%B9%B4%E7%9A%84%E8%B0%83%E6%9F%A5%E5%8F%91%E5%B8%83%E6%97%B6%EF%BC%8C%E4%B8%8B%E5%9B%BE%E5%B0%86%E8%A2%AB%E6%9B%B4%E6%96%B0%EF%BC%89%EF%BC%9A">https://2018.stateofjs.com/other-tools/），文本编辑器的使用情况如下（2019年的调查发布时，下图将被更新）：</a></p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>Webpack 5 已进入测试阶段且即将发布</strong></p>
+<p>Webpack 已成为所有现代 JavaScript 工具链的核心组件，而且也是最常用的构建工具。Webpack<br>一直在提高性能和可用性，努力为开发人员提供更好的工具。Webpack 5 主要侧重于以下几个方面：</p>
+<ul>
+<li><p>通过持久缓存提高构建性能；</p>
+</li>
+<li><p>通过更好的算法和默认值来改善长期缓存；</p>
+</li>
+<li><p>清理内部模式，同时不会引发任何重大变动。</p>
+</li>
+</ul>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>Jest 放弃 Flow，转投 TypeScript 的怀抱</strong></p>
+<p>Facebook 维护着流行的测试库 Jest 和 Flow，后者是 TypeScript 的竞争对手。2019年初，Facebook 大胆声明 Jest<br>将放弃Flow，转投 TypeScript 的怀抱。这进一步表明 TypeScript 已成为输入 JavaScript 代码的标准选择，2020年及以后<br>TypeScript 的使用会进一步增加。</p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>2019年Chrome 发布了稳定版本 72–78</strong></p>
+<p>Chrome 快速迭代的步伐从未停歇，他们正在迅速为Web和开发工具添加新功能。2019年，Chrome<br>发布了7个稳定版本，其中包括Beta版79、dev版80和canary版81。</p>
+<p>过去一年中有关 Chrome<br>的重大新增功能，请参照如下链接：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Google_Chrome_version_history?source=post_page-----1e7d07966d6c----------------------">https://en.wikipedia.org/wiki/Google_Chrome_version_history?source=post_page-----1e7d07966d6c----------------------</a></p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>微软 Edge 浏览器移至 Chromium，并创建了新的标志</strong></p>
+<p>对 Web开发人员来说，IE及其后续的 Edge<br>就是个笑话，它们令开发人员苦不堪言。这款浏览器在Web功能实现方面一直落后于他人，并且众所周知，为其编写跨浏览器兼容的代码简直就是灾难。为了赢得开发人员，微软决定选择使用Google的开源<br>Chromium 引擎。2019年中期，这项变更已进入beta阶段。</p>
+<p><strong><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></strong></p>
+<p><strong>Facebook 发布了 Hermes，这是面向 Android 的 JavaScript 解析器，用于改进 React Native</strong></p>
+<p>Facebook 认为 Android JavaScript 引擎的速度不够快，所以他们建立了自己的引擎。Facebook全力支持 React<br>Native，此举表明为了确保其在所有平台上都能尽可能有效地工作，他们愿意做出必要的调整。</p>
+<p><strong><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAugo5SicrbBWhBdrvsmIrWNwHwlha8RdzQh9D5pLbOSrOKtkc2Jd6QIhXrlrPoLIuHF6UJ9m7dKjq6g/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></strong></p>
+<p><strong>2020年的预测</strong></p>
+<ul>
+<li><p>随着代码拆分和 PWA 的进一步使用，性能仍然是Web最关键的方面。</p>
+</li>
+<li><p>WebAssembly 会越来越普及，并得到实际采用和应用于产品中。</p>
+</li>
+<li><p>新兴创业公司和新项目都会采用 GraphQL，而其他公司也会纷纷从 REST 向 GraphQL 迁移。</p>
+</li>
+<li><p>TypeScript 将成为新兴创业公司和项目的默认选择。</p>
+</li>
+<li><p>我们有望看到没有服务器且构建在区块链之上的真实应用，这会让Web更加开放。</p>
+</li>
+<li><p>CSS-in-JS可能取代普通的CSS，会成为默认的样式设置方式。</p>
+</li>
+<li><p>“无代码”应用越来越流行。随着AI的改进和应用抽象层的增加，构建应用程序会越来越容易。2020年，我们有望看到无需编写代码即可创建应用的重大转变。</p>
+</li>
+<li><p>Flutter 可能会取代 React Native，成为构建跨平台移动应用的最佳方式。</p>
+</li>
+<li><p>Svelte 将会用于更多实际项目。</p>
+</li>
+<li><p>Deno（Node 创建者构建的 TypeScript 运行时）将投入实际使用。</p>
+</li>
+<li><p>AR &#x2F; VR 将取得巨大进步，其中包括使用A-Frame、React VR 和 Google VR 等库，并改进浏览器中原生的 AR &#x2F; VR 工具。</p>
+</li>
+<li><p>容器化（例如Docker、Kubernetes）的影响在前端开发中越来越普遍。</p>
+</li>
+</ul>
+<p>原文：<a target="_blank" rel="noopener" href="https://levelup.gitconnected.com/a-recap-of-frontend-development-in-2019-1e7d07966d6c">https://levelup.gitconnected.com/a-recap-of-frontend-development-in-2019-1e7d07966d6c</a></p>
+<p>本文为 CSDN 翻译，转载请注明来源出处。</p>
+<p>【End】</p>
+<p><strong>刷爆技术人朋友圈的DevOps是什么？《敏捷无敌之DevOps时代》读书会系列课程来了！第一课由微服务与云计算技术专家、书籍作者亲自授课，扫码免费学习：<a target="_blank" rel="noopener" href="https://edu.csdn.net/huiyiCourse/detail/1127">https://edu.csdn.net/huiyiCourse/detail/1127</a></strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAughtzsqSX5AjrYuuJCebR40hmlKsicJoRbwG2JdlDvlOBEBxQynyz9uVDnzTphPPZoP5MQtJ5sUfRw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+<p>**<strong>热 文</strong> 推 荐 **<br>☞<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650735081&amp;idx=1&amp;sn=6cae666332de6540b2aa467f343a80d3&amp;chksm=bea7703a89d0f92c083e90b47c164a5afc31d5bb4534f1dc0b06be2cd4e571a11d123699a421&amp;scene=21#wechat_redirect">小米卢伟冰回应“低价误国”；国产统一操作系统 UOS 正全面适配；Vue 2.6.11 发布 |<br>极客头条</a><br><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650735081&amp;idx=2&amp;sn=be8e2d8922bc3e7874119d1e2caf03d4&amp;chksm=bea7703a89d0f92c137d888d891ab95712c4e9339e27368f6be665a8f9b905bd364561103843&amp;scene=21#wechat_redirect">☞Nginx 之父被捕，程序员如何避免面向起诉编程？| CSDN<br>博文精选</a><br><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650735081&amp;idx=3&amp;sn=c21ac8a885cd06521da84b0ff915d0c4&amp;chksm=bea7703a89d0f92cf6812a8c770eec8fa71e3480f25b5d674f9f8cc28300f59aac1ed8ccdabb&amp;scene=21#wechat_redirect">☞让 API 端点的响应速度提高 50<br>倍！</a><br><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650735063&amp;idx=1&amp;sn=00607e3ed67469ac2c447f879ad1f99f&amp;chksm=bea7700489d0f9127cdde2b4ed31919dba8f7d8a4667c0da68e36e3587f2c81c83c59df9f08e&amp;scene=21#wechat_redirect">☞微信地位，牢不可破？</a><br>☞<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650735060&amp;idx=2&amp;sn=b0bc076f1ca79a15ecb1e1a3253f209c&amp;chksm=bea7700789d0f9118744275b1a9a53b6bdc43cbafe3b26ebf87daa8f6b1cb5d29c848c207153&amp;scene=21#wechat_redirect">HTML + CSS<br>为何得不到编程界的认可？</a><br><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650731727&amp;idx=1&amp;sn=68b9db43893cc63e9b2e4ac9ffb42d4b&amp;chksm=bea6851c89d10c0a8206cae79f4ac9a0f3fa1a7b17db060c469b6515bdde8be2e1c30f8bba8c&amp;scene=21#wechat_redirect">☞</a><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzI0ODcxODk5OA==&amp;mid=2247511422&amp;idx=2&amp;sn=48b57c96f84707e9f42921bd8c8a95a5&amp;chksm=e99e9e87dee9179156e88681b7e12516305f5294f442bae8a9ba8b5582c626dda77c593aa44a&amp;scene=21#wechat_redirect">讯飞轮值总裁胡郁：大数据是人工智能产业落地的必要保障|<br>BDTC<br>2019</a><br><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzA3MjY1MTQwNQ==&amp;mid=2649832024&amp;idx=1&amp;sn=7af868d79a4a3840488589e0f7350ee0&amp;chksm=871e9dbab06914acf7ab5de1ba59ff3f4ad05599a5d0b21971686e3fac33923f634479f2ea86&amp;scene=21#wechat_redirect">http://mp.weixin.qq.com/s?__biz&#x3D;MzA3MjY1MTQwNQ&#x3D;&#x3D;&amp;mid&#x3D;2649832024&amp;idx&#x3D;1&amp;sn&#x3D;7af868d79a4a3840488589e0f7350ee0&amp;chksm&#x3D;871e9dbab06914acf7ab5de1ba59ff3f4ad05599a5d0b21971686e3fac33923f634479f2ea86&amp;scene&#x3D;21#wechat_redirect</a><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650731727&amp;idx=1&amp;sn=68b9db43893cc63e9b2e4ac9ffb42d4b&amp;chksm=bea6851c89d10c0a8206cae79f4ac9a0f3fa1a7b17db060c469b6515bdde8be2e1c30f8bba8c&amp;scene=21#wechat_redirect">☞</a><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzA5MzY4NTQwMA==&amp;mid=2651015310&amp;idx=1&amp;sn=68c225b4538b5abf3f6a7c58ec3eff53&amp;chksm=8badfb79bcda726f1a175e81607c55192660ff77143a81086099126a46c315b062bdbf6518b8&amp;scene=21#wechat_redirect">公司倒闭，39<br>岁重新找工作，薪资不到<br>8000，太残酷！</a><br>☞<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzA3MjY1MTQwNQ==&amp;mid=2649832563&amp;idx=3&amp;sn=8f89463842a7b60e10dc292b08983efb&amp;chksm=871e9b91b0691287f3b628a433da82b08f46882398c692445bcc0e387922b4d184d5570374e1&amp;scene=21#wechat_redirect">阿里云上万个 Kubernetes<br>集群大规模管理实践</a></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/Pn4Sm0RsAujr9dOtwUGfl03zJzLBRXbZs8g1RcNcLr7qm5qEy419tofZ8dq1sIW75xZwq2K4zIzcTtaDOy4OTg/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="xuehuayu.cn"><strong><strong>点击阅读原文，参与有奖调查！</strong></strong><br><img src="https://mmbiz.qpic.cn/mmbiz_png/Pn4Sm0RsAuhpplm16ibb8iaib7RoGQ5iaHEdvAd0o9e1LlUGA2k0Yib222agOxzweXhahA9GuzJcGBg0dA4DzlibxRqw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn">你点的每个“在看”，我都认真当成了喜欢</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/433d7e2b.html"><div class="related-post-title">electron-vite+react+react-router-dom+antd中useRoutes踩坑</div><div class="related-post-meta"><time>2024-11-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/a26e9e54.html"><div class="related-post-title">项目中用的20个轮子 开发效率提升200% 建议收藏</div><div class="related-post-meta"><time>2023-12-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/b791217d.html"><div class="related-post-title">阿里面试：说一下从 url 输入到返回请求的过程</div><div class="related-post-meta"><time>2021-05-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/68c9c2c2.html"><div class="related-post-title">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</div><div class="related-post-meta"><time>2025-11-21</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">Frontend</span><span class="category-badge">Redis</span><span class="category-badge">Vercel</span></div></div></a><a class="related-post-item" href="/article/e318761e.html"><div class="related-post-title">嗨，你真的懂this吗？</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/16554c83.html">https://xuehuayu.cn/article/16554c83.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/6cb984a0.html">Webpack 深入浅出之公司级分享总结(内附完整ppt)</a><a class="next" href="/article/d6b8f593.html">前端工程化 - 剖析npm的包管理机制</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

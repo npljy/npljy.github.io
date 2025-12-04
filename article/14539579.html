@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>50个最简单的JavaScript面试题 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">50个最简单的JavaScript面试题</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.8k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 17</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/14539579.html#waline-comment"><span class="waline-comment-count" data-path="/article/14539579.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.html.cn/interview/14261.html</code></p>
+<span id="more"></span>
+
+<p><img src="https://img.php.cn/upload/article/000/000/006/5ddcdbcc37e26942.jpg" alt="xuehuayu.cn"></p>
+<h4 id="问题1：Java和JavaScript有什么不同"><a href="#问题1：Java和JavaScript有什么不同" class="headerlink" title="问题1：Java和JavaScript有什么不同"></a>问题1：Java和JavaScript有什么不同</h4><p>JavaJavaScriptJava是一种OOP编程语言。JavaScript是一种OOP脚本语言。它创建在虚拟机或浏览器中运行的应用程序。代码在浏览器或node环境上运行。需要编译Java代码。JS代码都是文本的形式。</p>
+<h4 id="问题2：什么-Javascript"><a href="#问题2：什么-Javascript" class="headerlink" title="问题2：什么 Javascript"></a>问题2：什么 Javascript</h4><p>JavaScript 是一种轻量级的解释型编程语言，具有面向对象的特性，允许各位在其他静态HTML页面中构建交互性。<br>该语言的通用核心已嵌入Netscape，Internet Explorer和其他Web浏览器中。</p>
+<h4 id="问题3：-JS-支持哪些数据类型"><a href="#问题3：-JS-支持哪些数据类型" class="headerlink" title="问题3： JS 支持哪些数据类型"></a>问题3： JS 支持哪些数据类型</h4><p><img src="https://img.php.cn/upload/image/441/684/127/1574754885723821.png" alt="1574754885723821.png"></p>
+<p>JS 支持的数据类型:</p>
+<ul>
+<li>Undefined</li>
+<li>Null</li>
+<li>Boolean</li>
+<li>String</li>
+<li>Symbol</li>
+<li>Number</li>
+<li>Object</li>
+</ul>
+<h4 id="问题4：JavaScript的特性是什么"><a href="#问题4：JavaScript的特性是什么" class="headerlink" title="问题4：JavaScript的特性是什么"></a>问题4：JavaScript的特性是什么</h4><p><img src="https://img.php.cn/upload/image/280/997/463/1574754892156273.png" alt="1574754892156273.png"></p>
+<p>以下是JS的特性:</p>
+<ul>
+<li>JS 是一种轻量级，解释性编程语言。</li>
+<li>为了创建以网络为中心的应用程序而设计。</li>
+<li>补充和集成了 Java</li>
+<li>补充和集成了 HTML</li>
+<li>开放和跨平台</li>
+</ul>
+<h4 id="问题5：JavaScript是区分大小写"><a href="#问题5：JavaScript是区分大小写" class="headerlink" title="问题5：JavaScript是区分大小写"></a>问题5：JavaScript是区分大小写</h4><p>是的，JS是一种区分大小写的语言。关键字、变量、函数名和任何其他标识符必须始终使用一致的大写字母进行使用。</p>
+<h4 id="问题6：JS-的优势是什么"><a href="#问题6：JS-的优势是什么" class="headerlink" title="问题6：JS 的优势是什么"></a>问题6：JS 的优势是什么</h4><p>以下使用JS的优点:</p>
+<ul>
+<li><strong>更少的服务器交互</strong> - 在将页面发送到服务器之前，可以验证用户输入,节省了服务器流量，意味着服务器的负载更少</li>
+<li>立即反馈 - 用户不需要等待页面重新加载来查看是否忘记输入某些内容。</li>
+<li>增强交互 - 在界面中，当用户使用鼠标悬停或通过键盘激活它们时会做出响应。</li>
+<li>丰富的接口 - 可以使用JS包含拖放组件和滑块等项，为网站提供丰富的界面。</li>
+</ul>
+<h4 id="问题7：如何用JS创建对象"><a href="#问题7：如何用JS创建对象" class="headerlink" title="问题7：如何用JS创建对象"></a>问题7：如何用JS创建对象</h4><p>JS贼支持对象概念，用如下方式创建即可：</p>
+<pre><code>var emp = {
+name: &quot;Daniel&quot;,
+age: 23
+};
+</code></pre>
+<h4 id="问题8：如何用JS创建数组"><a href="#问题8：如何用JS创建数组" class="headerlink" title="问题8：如何用JS创建数组"></a>问题8：如何用JS创建数组</h4><p>JS 创建数组也很简单：</p>
+<pre><code>var x = [];
+var y = [1, 2, 3, 4, 5];
+</code></pre>
+<h4 id="问题9：JS-中的命名函数是什么以及如何定义："><a href="#问题9：JS-中的命名函数是什么以及如何定义：" class="headerlink" title="问题9：JS 中的命名函数是什么以及如何定义："></a>问题9：JS 中的命名函数是什么以及如何定义：</h4><p>命名函数在定义后立即声明名称，可以使用<code>function</code>关键字定义：</p>
+<pre><code>function named(){
+// write code here
+}
+</code></pre>
+<h4 id="问题10：是否可以将匿名函数分配给变量并将其作为参数传递给另一个函数"><a href="#问题10：是否可以将匿名函数分配给变量并将其作为参数传递给另一个函数" class="headerlink" title="问题10：是否可以将匿名函数分配给变量并将其作为参数传递给另一个函数"></a>问题10：是否可以将匿名函数分配给变量并将其作为参数传递给另一个函数</h4><p>可以。一个匿名函数可以分配给一个变量，它也可以作为参数传递给另一个函数。</p>
+<h4 id="问题11：JS中的参数对象是什么-如何获得传递给函数的参数类型"><a href="#问题11：JS中的参数对象是什么-如何获得传递给函数的参数类型" class="headerlink" title="问题11：JS中的参数对象是什么&amp;如何获得传递给函数的参数类型"></a>问题11：JS中的参数对象是什么&amp;如何获得传递给函数的参数类型</h4><p>JS 变量<code>arguments</code>表示传递给函数的参数。 使用<code>typeof</code>运算符，可以获得传递给函数的参数类型。如下：</p>
+<pre><code>function func(x){
+console.log(typeof x, arguments.length);
+}
+func(); //==&gt; &quot;undefined&quot;, 0
+func(7); //==&gt; &quot;number&quot;, 1
+func(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;); //==&gt; &quot;string&quot;, 3
+</code></pre>
+<h4 id="问题12：JS中变量的作用域是什么"><a href="#问题12：JS中变量的作用域是什么" class="headerlink" title="问题12：JS中变量的作用域是什么"></a>问题12：JS中变量的作用域是什么</h4><p>变量的作用域是程序中定义它的区域，JS变量只有两个作用域：</p>
+<ul>
+<li><strong>全局变量</strong> - 全局变量具有全局作用域，这意味着它在JS代码中的任何位置都可见。</li>
+<li>局部变量 - 局部变量仅在定义它的函数中可见，函数参数始终是该函数的本地参数。</li>
+</ul>
+<h4 id="问题13：JS-中“this”运算符的用途是什么？"><a href="#问题13：JS-中“this”运算符的用途是什么？" class="headerlink" title="问题13：JS 中“this”运算符的用途是什么？"></a>问题13：JS 中“<code>this</code>”运算符的用途是什么？</h4><p><code>this</code>关键字引用它所属的对象。 根据使用位置，它具有不同的值。 在方法中，这指的是所有者对象，而在函数中，这指的是全局对象。</p>
+<h4 id="问题14：什么是回调"><a href="#问题14：什么是回调" class="headerlink" title="问题14：什么是回调"></a>问题14：什么是回调</h4><p>回调函数是作为参数或选项传递给某个方法的普通JS函数。它是一个函数，在另一个函数完成执行后执行，因此称为回调。在JS中，函数是对象，因此，函数可以接受函数作为参数，并且可以由其他函数返回。</p>
+<h4 id="问题15：什么是闭包？举个例子"><a href="#问题15：什么是闭包？举个例子" class="headerlink" title="问题15：什么是闭包？举个例子"></a>问题15：什么是闭包？举个例子</h4><p>只要在某个内部作用域内访问在当前作用域之外定义的变量，就会创建<strong>闭包</strong>。 它允许你从内部函数访问外部函数的作用域。 在JS中，每次创建函数时都会创建闭包。<br>要使用闭包，只需在另一个函数内定义一个函数并暴露它。</p>
+<h4 id="问题16：列出一些内置方法及其返回的值。"><a href="#问题16：列出一些内置方法及其返回的值。" class="headerlink" title="问题16：列出一些内置方法及其返回的值。"></a>问题16：列出一些内置方法及其返回的值。</h4><p>内置方法返回值CharAt()它返回指定索引处的字符。Concat()它连接两个或多个字符串。forEach()它为数组中的每个元素调用一个函数。indexOf()它返回指定值第一次出现时调用字符串对象中的索引。pop()它从数组中删除最后一个元素并返回该元素。push()它将一个或多个元素添加到数组的末尾，并返回数组的新长度。reverse()反转数组元素的顺序。</p>
+<h4 id="问题17：-JS中的变量命名约定是什么？"><a href="#问题17：-JS中的变量命名约定是什么？" class="headerlink" title="问题17： JS中的变量命名约定是什么？"></a>问题17： JS中的变量命名约定是什么？</h4><p>在JS中命名变量时要遵循以下规则:</p>
+<ol>
+<li>咱们不应该使用任何JS保留关键字作为变量名。例如，<code>break</code>或<code>boolean</code>变量名无效。</li>
+<li>JS<br>变量名不应该以数字<code>(0-9)</code>开头。它们必须以字母或下划线开头。例如，<code>123name</code>是一个无效的变量名，但<code>123name</code>或<code>name123</code>是一个有效的变量名。</li>
+<li>JS 变量名区分大小写。例如，<code>Test</code>和<code>test</code>是两个不同的变量。</li>
+</ol>
+<h4 id="问题18：TypeOf-运算符是如何工作的"><a href="#问题18：TypeOf-运算符是如何工作的" class="headerlink" title="问题18：TypeOf 运算符是如何工作的"></a>问题18：TypeOf 运算符是如何工作的</h4><p><code>typeof</code>运算符用于获取其操作数的数据类型。 操作数可以是文字或数据结构，例如变量，函数或对象。<br>它是一个一元运算符，放在它的单个操作数之前，可以是任何类型。 它的值是一个字符串，表示操作数的数据类型。</p>
+<h4 id="问题19：如何使用-JS-创建-cookie"><a href="#问题19：如何使用-JS-创建-cookie" class="headerlink" title="问题19：如何使用 JS 创建 cookie"></a>问题19：如何使用 JS 创建 cookie</h4><p>创建<code>cookie</code>的最简单方法是为<code>document.cookie</code>对象分配一个字符串值，如下所示:</p>
+<pre><code>document.cookie = &quot;key1 = value1; key2 = value2; expires = date&quot;;
+</code></pre>
+<h4 id="问题20：如何使用JS读取cookie"><a href="#问题20：如何使用JS读取cookie" class="headerlink" title="问题20：如何使用JS读取cookie"></a>问题20：如何使用JS读取cookie</h4><p>读取<code>cookie</code>就像写入<code>cookie</code>一样简单，因为<code>document.cookie</code>对象的值是<code>cookie</code>。</p>
+<ul>
+<li><code>document.cookie</code>的值是由分号分隔的<code>name=value</code>对的列表，其中<code>name</code>是cookie的名称，<code>value</code>是其字符串值。</li>
+<li>可以使用<code>split()</code>方法将字符串分解为键和值。</li>
+</ul>
+<h4 id="问题21：如何使用-JS-删除-cookie"><a href="#问题21：如何使用-JS-删除-cookie" class="headerlink" title="问题21：如何使用 JS 删除 cookie"></a>问题21：如何使用 JS 删除 cookie</h4><p>如果要删除<code>cookie</code>以便后续尝试读取<code>cookie</code>，则只需将过期日期设置为过去的时间。<br>咱们应该定义<code>cookie</code>路径以确保删除正确的<code>cookie</code>。 如果未指定路径，某些浏览器将不允许咱们删除<code>cookie</code>。</p>
+<h4 id="问题22：Attribute-和Property之间有什么区别"><a href="#问题22：Attribute-和Property之间有什么区别" class="headerlink" title="问题22：Attribute 和Property之间有什么区别"></a>问题22：Attribute 和Property之间有什么区别</h4><ul>
+<li><strong>Attribute</strong>——提供关于元素的更多细节，如id、类型、值等。</li>
+<li><strong>Property</strong> —— 分配给属性的值，如<code>type =“text”</code>，<code>value =&#39;Name&#39;</code>等。</li>
+</ul>
+<h4 id="问题23：列出在JS代码中访问HTML元素的不同方式"><a href="#问题23：列出在JS代码中访问HTML元素的不同方式" class="headerlink" title="问题23：列出在JS代码中访问HTML元素的不同方式"></a>问题23：列出在JS代码中访问HTML元素的不同方式</h4><p>下面是在JS代码中访问 html 元素的方法列表:</p>
+<ul>
+<li><strong>getElementById(‘idname’)</strong>: 按<code>id</code>名称获取元素</li>
+<li><strong>getElementsByClass(‘classname’)</strong>: 获取具有给定类名的所有元素</li>
+<li><strong>getElementsByTagName(‘tagname’)</strong>: 获取具有给定标记名称的所有元素</li>
+<li><strong>querySelector()</strong>: 此函数采用css样式选择器并返回第一个选定元素</li>
+</ul>
+<h4 id="问题24：JS代码在HTML文件中可以以多少种方式使用"><a href="#问题24：JS代码在HTML文件中可以以多少种方式使用" class="headerlink" title="问题24：JS代码在HTML文件中可以以多少种方式使用"></a>问题24：JS代码在HTML文件中可以以多少种方式使用</h4><p>主要有三种：</p>
+<ul>
+<li>行内</li>
+<li>内部</li>
+<li>外部</li>
+</ul>
+<p>行内方式：</p>
+<pre><code>...
+&lt;input type=&quot;button&quot; value=&quot;点击有惊喜&quot; onclick=&quot;javascript:alert(&#39;哈哈哈哈&#39;)&quot;&gt;
+...
+</code></pre>
+<p>内部方式：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+//声明一个函数(整个文档都可以使用)
+function surprise() {
+alert(&#39;恭喜你中了一百万&#39;)/*弹出框*/
+}
+&lt;/script&gt;
+&lt;/head&gt;
+。。。
+&lt;/html&gt;
+</code></pre>
+<p>外部方式：</p>
+<pre><code>...
+&lt;!--很多html页面都可以调用js4.js页面--&gt;
+&lt;script src=&quot;../../js/js4.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;
+...
+</code></pre>
+<h4 id="问题25：在JS中定义变量的方法有哪些"><a href="#问题25：在JS中定义变量的方法有哪些" class="headerlink" title="问题25：在JS中定义变量的方法有哪些"></a>问题25：在JS中定义变量的方法有哪些</h4><p>在 JS 中声明变量有三种方式：</p>
+<ul>
+<li><strong>var</strong> – <code>var</code> 语句用于声明一个变量，咱们可以选择初始化该变量的值。例子:<code>var a =10;</code>变量声明在代码执行之前处理。</li>
+<li><strong>const</strong> - 常量的值不能通过重新赋值来改变，并且不能重新声明。</li>
+<li><strong>let</strong> - 语句声明一个块级作用域的本地变量，并且可选的将其初始化为一个值。</li>
+</ul>
+<h4 id="问题26：什么是类型化语言"><a href="#问题26：什么是类型化语言" class="headerlink" title="问题26：什么是类型化语言"></a>问题26：什么是类型化语言</h4><p>类型化语言中，值与值关联，而不是与变量关联，它有两种类型：</p>
+<ul>
+<li><strong>动态</strong>:在这种情况下，变量可以包含多种类型，如在JS中，变量可以取<code>number</code>, <code>string</code> 类型。</li>
+<li>静态:在这种情况下，变量只能包含一种类型，就像在Java中声明为<code>string</code>的变量只能包含一组字符，不能包含其他类型。</li>
+</ul>
+<h4 id="问题27：Cookie-与-Local-storage-与-Session-storage-区别"><a href="#问题27：Cookie-与-Local-storage-与-Session-storage-区别" class="headerlink" title="问题27：Cookie 与 Local storage 与 Session storage 区别"></a>问题27：Cookie 与 Local storage 与 Session storage 区别</h4><p>特性CookielocalStoragesessionStorage数据的生命期一般由服务器生成，可设置失效时间。如果在浏览器端生成Cookie，默认是关闭浏览器后失效除非被清除，否则永久保存仅在当前会话下有效，关闭页面或浏览器后被清除存放数据大小4K左右一般为<br>5MB与服务器端通信每次都会携带在HTTP头中，如果使用cookie保存过多数据会带来性能问题仅在客户端（即浏览器）中保存，不参与和服务器的通信易用性需要程序员自己封装，源生的Cookie接口不友好需要程序员自己封装，源生的Cookie接口不友好<br>源生接口可以接受，亦可再次封装来对Object和Array有更好的支持</p>
+<h4 id="问题28-‘-‘-和-‘-‘-区别"><a href="#问题28-‘-‘-和-‘-‘-区别" class="headerlink" title="问题28: ‘&#x3D;&#x3D;‘ 和 ‘&#x3D;&#x3D;&#x3D;‘ 区别"></a>问题28: ‘&#x3D;&#x3D;‘ 和 ‘&#x3D;&#x3D;&#x3D;‘ 区别</h4><p><strong><code>==</code></strong>： 两边值类型不同的时候，要先进行类型转换，再比较。<br><strong><code>===</code></strong>：不做类型转换，类型不同的一定不等。</p>
+<p>一言以蔽之：<code>==</code>先转换类型再比较，<code>===</code>先判断类型，如果不是同一类型直接为<code>false</code>。</p>
+<h4 id="问题29：null-和-undefined-区别"><a href="#问题29：null-和-undefined-区别" class="headerlink" title="问题29：null 和 undefined 区别"></a>问题29：null 和 undefined 区别</h4><p><code>undefined</code>是基本数据类型 表示未定义 缺少的意思。</p>
+<p><code>null</code>是引用数据类型，是对象，表示空对象</p>
+<p><code>undefined</code>是从<code>null</code>派生出来的 所以<code>undefined==null</code> 为 <code>true</code></p>
+<h4 id="问题-30：undeclared-和-undefined-区别？"><a href="#问题-30：undeclared-和-undefined-区别？" class="headerlink" title="问题 30：undeclared 和 undefined 区别？"></a>问题 30：undeclared 和 undefined 区别？</h4><p><code>undeclared</code>的变量是程序中不存在且未声明的变量。<br>如果程序尝试读取未声明变量的值，则会遇到运行时错误。<strong>undefined</strong>的变量是在程序中声明但未赋予任何值的变量，如果程序试图读取未定义变量的值，则返回<code>undefined</code>的值。</p>
+<h4 id="问题-31：-列出一些JS框架"><a href="#问题-31：-列出一些JS框架" class="headerlink" title="问题 31： 列出一些JS框架"></a>问题 31： 列出一些JS框架</h4><p><img src="https://img.php.cn/upload/image/181/755/627/1574754920183198.png" alt="1574754920183198.png"></p>
+<p>JS框架是用JavaScript编写的应用程序框架，它与控制流中的JS库不同，一些最常用的框架是：</p>
+<ul>
+<li>Vue</li>
+<li>Angular</li>
+<li>React</li>
+</ul>
+<h4 id="问题-32：-window-与-document-的区别："><a href="#问题-32：-window-与-document-的区别：" class="headerlink" title="问题 32： window 与 document 的区别："></a>问题 32： window 与 document 的区别：</h4><p><strong>window</strong>:JS 的 window 是一个全局对象，它包含变量、函数、<code>history</code>、<code>location</code>。</p>
+<p><strong>document</strong>:<code>document</code>也位于<code>window</code>之下，可以视为<code>window</code>的属性。</p>
+<h4 id="问题-33：-innerHTML-和-innerText-的区别"><a href="#问题-33：-innerHTML-和-innerText-的区别" class="headerlink" title="问题 33： innerHTML 和 innerText 的区别"></a>问题 33： innerHTML 和 innerText 的区别</h4><p><strong>innerHTML</strong>:也就是从对象的起始位置到终止位置的全部内容,包括Html标签。</p>
+<p><strong>innerText</strong>:从起始位置到终止位置的内容, 但它去除Html标签</p>
+<h4 id="问题-34：JS中的事件冒泡是什么"><a href="#问题-34：JS中的事件冒泡是什么" class="headerlink" title="问题 34：JS中的事件冒泡是什么"></a>问题 34：JS中的事件冒泡是什么</h4><p>事件冒泡是HTML DOM<br>API中事件传播的一种方式，当一个事件发生在另一个元素中的一个元素中，并且两个元素都注册了该事件的句柄时。通过冒泡，事件首先由最内部的元素捕获和处理，然后传播到外部元素。执行从该事件开始，并转到其父元素。然后执行传递给父元素，以此类推，直到body元素。</p>
+<h4 id="问题-35：NaN-是什么"><a href="#问题-35：NaN-是什么" class="headerlink" title="问题 35：NaN 是什么"></a>问题 35：NaN 是什么</h4><p><code>NaN</code> 即非数值（Not a Number），<code>NaN</code> 属性用于引用特殊的非数字值，该属性指定的并不是不合法的数字。</p>
+<p><code>NaN</code> 属性 与 <code>Number.Nan</code> 属性相同。</p>
+<p><strong>提示：</strong> 请使用 <code>isNaN()</code> 来判断一个值是否是数字。原因是 <code>NaN</code> 与所有值都不相等，包括它自己。</p>
+<h4 id="问题-36：JS的原始-对象类型如何在函数中传递？"><a href="#问题-36：JS的原始-对象类型如何在函数中传递？" class="headerlink" title="问题 36：JS的原始&#x2F;对象类型如何在函数中传递？"></a>问题 36：JS的原始&#x2F;对象类型如何在函数中传递？</h4><p>两者之间的一个区别是，原始数据类型是通过值传递的，对象是通过引用传递的。</p>
+<ul>
+<li><strong>值传递</strong>：意味着创建原始文件的副本。把它想象成一对双胞胎:他们出生的时候一模一样，但是双胞胎中的老大在战争中失去了一条腿，而老二却没有。</li>
+<li><strong>引用传递</strong>:</li>
+</ul>
+<p>意味着创建原始文件的别名。当我妈妈叫沙雕的时候，虽然我的名字叫小智，但这并不是说我就突然就克隆了一个自己:我仍然是我，只是可以用不同名字来称呼我而已。</p>
+<h4 id="问题-37：如何在JS中将任意基的字符串转换为整数"><a href="#问题-37：如何在JS中将任意基的字符串转换为整数" class="headerlink" title="问题 37：如何在JS中将任意基的字符串转换为整数"></a>问题 37：如何在JS中将任意基的字符串转换为整数</h4><p><code>parseInt(string, radix)</code> 将一个字符串 <code>string</code> 转换为 <code>radix</code> 进制的整数， radix<br>为介于<code>2-36</code>之间的数,如下：</p>
+<pre><code>parseInt(&quot;4F&quot;, 16)
+</code></pre>
+<h4 id="问题-38：2-5-‘3’的结果是什么"><a href="#问题-38：2-5-‘3’的结果是什么" class="headerlink" title="问题 38：2+5+ ‘3’的结果是什么"></a>问题 38：2+5+ ‘3’的结果是什么</h4><p>由于<code>2</code>和<code>5</code>是整数，它们将以数字形式相加。因为<code>3</code>是一个字符串，它将与 <code>7</code> 拼接，结果是73。</p>
+<h4 id="问题-39：export-和-import-是什么"><a href="#问题-39：export-和-import-是什么" class="headerlink" title="问题 39：export 和 import 是什么"></a>问题 39：export 和 import 是什么</h4><p><code>import</code>和<code>export</code>有助于咱们编写模块化JS代码。 使用<code>import</code>和<code>export</code>，咱们可以将代码拆分为多个文件，如下：</p>
+<pre><code>//------ lib.js ------&lt;/span&gt;
+export const sqrt = Math.sqrt;&lt;/span&gt;
+export function square(x) {&lt;/span&gt;
+return x * x;&lt;/span&gt;
+}
+export function diag(x, y) {
+return sqrt(square(x) + square(y));
+}
+
+//------ main.js ------&lt;/span&gt;
+  { square, diag } from &#39;lib&#39;;
+console.log(square(5)); // 25
+console.log(diag(4, 3)); // 5
+</code></pre>
+<h4 id="问题40：JS中的“严格”模式是什么以及如何启用？"><a href="#问题40：JS中的“严格”模式是什么以及如何启用？" class="headerlink" title="问题40：JS中的“严格”模式是什么以及如何启用？"></a>问题40：JS中的“严格”模式是什么以及如何启用？</h4><p>严格模式是在代码中引入更好的错误检查的一种方法。</p>
+<ul>
+<li>当使用严格模式时，不能使用隐式声明的变量，或为只读属性赋值，或向不可扩展的对象添加属性。</li>
+<li>可以通过在文件，程序或函数的开头添加<code>“use strict”</code>来启用严格模式</li>
+</ul>
+<h4 id="问题41：JS-中的-prompt-框是什么"><a href="#问题41：JS-中的-prompt-框是什么" class="headerlink" title="问题41：JS 中的 prompt 框是什么"></a>问题41：JS 中的 prompt 框是什么</h4><p>提示框是允许用户通过提供文本框输入输入的框。 <code>prompt()</code> 方法显示一个对话框，提示访问者输入。<br>如果您希望用户在输入页面之前输入值，则通常会使用提示框。 弹出提示框时，用户必须在输入输入值后单击“确定”或“取消”才能继续。</p>
+<h4 id="问题42：下面代码的输出是什么？"><a href="#问题42：下面代码的输出是什么？" class="headerlink" title="问题42：下面代码的输出是什么？"></a>问题42：下面代码的输出是什么？</h4><pre><code>var Y = 1;
+if (eval(function f(){}))
+{
+  y += typeof F;
+}
+console.log(y);
+</code></pre>
+<p>打印<code>1undefined</code>。<code>if</code>条件语句使用<code>eval</code>求值，因此<code>eval(function f(){})</code>返回函数<code>f(){}</code>(为真)。因此，在<code>if</code>语句中，执行<code>typeof f</code>返回undefined，因为<code>if</code>语句代码在运行时执行，而<code>if</code>条件中的语句在运行时计算。</p>
+<h4 id="问题43：call-和-apply有什么区别"><a href="#问题43：call-和-apply有什么区别" class="headerlink" title="问题43：call 和 apply有什么区别"></a>问题43：call 和 apply有什么区别</h4><p><code>call</code>和<code>apply</code>可以用来重新定义函数的执行环境，也就是<code>this</code>的指向；<code>call</code>和<code>apply</code>都是为了改变某个函数运行时的<code>context</code>，即上下文而存在的，换句话说，就是为了改变函数体内部<code>this</code>的指向。</p>
+<p><code>call()</code>调用一个对象的方法，用另一个对象替换当前对象，可以继承另外一个对象的属性，它的语法是：</p>
+<pre><code>Function.call(obj[, param1[, param2[, [,...paramN]]]]);
+</code></pre>
+<p><strong>说明：</strong><code>call</code>方法可以用来代替另一个对象调用一个方法，<code>call</code>方法可以将一个函数的对象上下文从初始的上下文改变为<code>obj</code>指定的新对象，如果没有提供<code>obj</code>参数，那么<code>Global</code>对象被用于<code>obj</code></p>
+<p><code>apply()</code> 和<code>call()</code>方法一样，只是参数列表不同，语法：</p>
+<pre><code>Function.apply(obj[, argArray]);
+</code></pre>
+<p><strong>说明</strong>：如果<code>argArray</code>不是一个有效数组或不是<code>arguments</code>对象，那么将导致一个<code>TypeError</code>，如果没有提供<code>argArray</code>和<code>obj</code>任何一个参数，那么<code>Global</code>对象将用作obj。</p>
+<h4 id="问题44：如何在JS中清空数组"><a href="#问题44：如何在JS中清空数组" class="headerlink" title="问题44：如何在JS中清空数组"></a>问题44：如何在JS中清空数组</h4><p>有许多方法可以用来清空数组:</p>
+<p>方法一：</p>
+<pre><code>arrayList = []
+</code></pre>
+<p>上面的代码将把变量<code>arrayList</code>设置为一个新的空数组。如果在其他任何地方都没有对原始数组<code>arrayList</code>的引用，则建议这样做，因为它实际上会创建一个新的空数组。咱们应该小心使用这种清空数组的方法，因为如果你从另一个变量引用了这个数组，那么原始的引用数组将保持不变。</p>
+<p>方法二：</p>
+<pre><code>arrayList.length = 0;
+</code></pre>
+<p>上面的代码将通过将其<code>length</code>设置为<code>0</code>来清除现有数组。这种清空数组的方式还会更新指向原始数组的所有引用变量。<br>因此，当你想要更新指向<code>arrayList</code>的所有引用变量时，此方法很有用。</p>
+<p>方法三：</p>
+<pre><code>arrayList.splice(0, arrayList.length);
+</code></pre>
+<p>这处方法也行，当然这种清空数组的方法也将更新对原始数组的所有引用。</p>
+<p>方法四：</p>
+<pre><code>while(arrayList.length)
+{
+  arrayList.pop();
+}
+</code></pre>
+<p>上面的实现也可以空数组，但通常不建议经常使用这种方式。</p>
+<h4 id="问题45：以下代码的输出什么"><a href="#问题45：以下代码的输出什么" class="headerlink" title="问题45：以下代码的输出什么"></a>问题45：以下代码的输出什么</h4><pre><code>var output = (function(x)
+{
+  delete x;
+  return x;
+}
+)(0);
+console.log(output);
+</code></pre>
+<p>打印 <code>0</code>。<code>delete</code>操作符用于从对象中删除属性。这里<code>x</code>不是一个对象，而是一个局部变量，删除操作符不影响局部变量。</p>
+<h4 id="问题46：以下代码的输出什么"><a href="#问题46：以下代码的输出什么" class="headerlink" title="问题46：以下代码的输出什么"></a>问题46：以下代码的输出什么</h4><pre><code>var X = { foo : 1};
+var output = (function()
+{
+  delete X.foo;
+  return X.foo;
+}
+)();
+console.log(output);
+</code></pre>
+<p>输出<br><code>undefined</code>。<code>delete</code>操作符用于删除对象的属性。<code>X</code>是一个具有<code>foo</code>属性的对象，由于它是一个自调用函数，所以咱们将从对象<code>X</code>中删除<code>foo</code>属性。这样做之后，当咱们试图引用一个被删除的<code>foo</code>属性时，结果是<code>undefined</code>。</p>
+<h4 id="问题47：以下代码的输出什么"><a href="#问题47：以下代码的输出什么" class="headerlink" title="问题47：以下代码的输出什么"></a>问题47：以下代码的输出什么</h4><pre><code>var foo = function Bar()
+{
+  return 7;
+};
+typeof Bar();
+</code></pre>
+<p>输出将是<code>引用错误</code>。函数定义只能有一个引用变量作为其函数名。</p>
+<h4 id="问题49：为什么要将JS源文件的全部内容包装在一个函数中"><a href="#问题49：为什么要将JS源文件的全部内容包装在一个函数中" class="headerlink" title="问题49：为什么要将JS源文件的全部内容包装在一个函数中"></a>问题49：为什么要将JS源文件的全部内容包装在一个函数中</h4><p>这是一种越来越普遍的做法，被许多流行的JS库所采用。<br>这种技术围绕文件的整个内容创建一个闭包，最重要的是，它可以创建一个私有命名空间，从而有助于避免不同JS模块和库之间潜在的名称冲突。</p>
+<p>该技术的另一个特性是允许为全局变量提供一个简单的别名，这在jQuery插件中经常使用。</p>
+<h4 id="问题50：JS中的转义字符是什么"><a href="#问题50：JS中的转义字符是什么" class="headerlink" title="问题50：JS中的转义字符是什么"></a>问题50：JS中的转义字符是什么</h4><p>JS转义字符使咱们能够在不破坏应用程序的情况下编写特殊字符。转义字符(<code>\</code>)用于处理特殊字符，如单引号、双引号、撇号和<code>&amp;</code>号，在字符前放置反斜杠使其显示。</p>
+<p>如：<code>document.write(&quot;I am a \&quot;good\&quot; boy&quot;)</code></p>
+<p><code>原文地址：https://hackr.io/blog/javascript-interview-questions</code></p>
+<p>为了保证的可读性，本文采用意译而非直译。</p>
+<p>本文来自HTML中文网 <a target="_blank" rel="noopener" href="https://www.html.cn/interview/">前端面试题</a> 栏目！！</p>
+<p>以上就是50个最简单的JavaScript面试题的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/fd15746b.html"><div class="related-post-title">前端面试之JS手写new方法</div><div class="related-post-meta"><time>2019-09-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/479a031b.html"><div class="related-post-title">ES6语法知识点补充</div><div class="related-post-meta"><time>2020-03-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/964be38c.html"><div class="related-post-title">How to retrieve committed code after switching back to the development branch when you committed code on a historical version using git checkout</div><div class="related-post-meta"><time>2025-08-18</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">Git</span></div></div></a><a class="related-post-item" href="/article/a4145266.html"><div class="related-post-title">前端数组拍平flat一行代码</div><div class="related-post-meta"><time>2022-05-30</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/87cf05af.html"><div class="related-post-title">11 种在大多数教程中找不到的JavaScript技巧</div><div class="related-post-meta"><time>2019-12-09</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/14539579.html">https://xuehuayu.cn/article/14539579.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/52b578ac.html">20个棘手的ES6面试问题来提高JavaScript技能</a><a class="next" href="/article/93f43cef.html">35道值得收藏的React面试题</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

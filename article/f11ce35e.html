@@ -1,0 +1,394 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>寒冬求职之你必须要懂的Web安全 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">寒冬求职之你必须要懂的Web安全</h1><div class="post-meta"><span class="date">2019-10-03</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 5.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 19</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/f11ce35e.html#waline-comment"><span class="waline-comment-count" data-path="/article/f11ce35e.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://github.com/YvetteLau/Blog/issues/29</code></p>
+<p>随着互联网的发展，各种Web应用变得越来越复杂，满足了用户的各种需求的同时，各种网络安全问题也接踵而至。作为前端工程师的我们也逃不开这个问题，今天一起看一看Web前端有哪些安全问题以及我们如何去检测和防范这些问题。非前端的攻击本文不会讨论(如SQL注入，DDOS攻击等)，毕竟后端也非本人擅长的领域。</p>
+<span id="more"></span>
+
+<p>QQ邮箱、新浪微博、YouTube、WordPress 和 百度<br>等知名网站都曾遭遇攻击，如果你从未有过安全方面的问题，不是因为你所开发的网站很安全，更大的可能是你的网站的流量非常低或者没有攻击的价值。</p>
+<p>本文主要讨论以下几种攻击方式: XSS攻击、CSRF攻击、点击劫持以及URL跳转漏洞。</p>
+<blockquote>
+<p><strong>希望大家在阅读完本文之后，能够很好的回答以下几个面试题。</strong></p>
+</blockquote>
+<p>1.前端有哪些攻击方式？</p>
+<p>2.什么是XSS攻击？XSS攻击有几种类型？如果防范XSS攻击？</p>
+<p>3.什么是CSRF攻击？如何防范CSRF攻击</p>
+<p>4.如何检测网站是否安全？</p>
+<p>在开始之前，建议大家先clone代码，我为大家准备好了示例代码，并且写了详细的注释，大家可以对照代码来理解每一种攻击以及如何去防范攻击，毕竟看再多的文字，都不如实操。(Readme中详细得写了操作步骤)：<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/tree/master/Security">https://github.com/YvetteLau/Blog/tree/master/Security</a></p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/3f35d69fcaf65dbb37d6e58cd98ab9c353897e1c/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434533623862396562323035376266343935353936666532663334383334666630302f3239353034"><img src="https://camo.githubusercontent.com/3f35d69fcaf65dbb37d6e58cd98ab9c353897e1c/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434533623862396562323035376266343935353936666532663334383334666630302f3239353034" alt="xuehuayu.cn"></a></p>
+<h2 id="1-XSS攻击"><a href="#1-XSS攻击" class="headerlink" title="1. XSS攻击"></a>1. XSS攻击</h2><p>XSS(Cross-Site<br>Scripting，跨站脚本攻击)是一种代码注入攻击。攻击者在目标网站上注入恶意代码，当被攻击者登陆网站时就会执行这些恶意代码，这些脚本可以读取<br>cookie，session tokens，或者其它敏感的网站信息，对用户进行钓鱼欺诈，甚至发起蠕虫攻击等。</p>
+<p>XSS<br>的本质是：恶意代码未经过滤，与网站正常的代码混在一起；浏览器无法分辨哪些脚本是可信的，导致恶意脚本被执行。由于直接在用户的终端执行，恶意代码能够直接获取用户的信息，利用这些信息冒充用户向网站发起攻击者定义的请求。</p>
+<blockquote>
+<p>XSS分类</p>
+</blockquote>
+<p>根据攻击的来源，XSS攻击可以分为存储型(持久性)、反射型(非持久型)和DOM型三种。下面我们来详细了解一下这三种XSS攻击：</p>
+<blockquote>
+<h3 id="1-1-反射型XSS"><a href="#1-1-反射型XSS" class="headerlink" title="1.1 反射型XSS"></a>1.1 反射型XSS</h3></blockquote>
+<p>当用户点击一个恶意链接，或者提交一个表单，或者进入一个恶意网站时，注入脚本进入被攻击者的网站。Web服务器将注入脚本，比如一个错误信息，搜索结果等，未进行过滤直接返回到用户的浏览器上。</p>
+<blockquote>
+<p>反射型 XSS 的攻击步骤：</p>
+</blockquote>
+<ol>
+<li>攻击者构造出特殊的 <code>URL</code>，其中包含恶意代码。</li>
+<li>用户打开带有恶意代码的 <code>URL</code> 时，网站服务端将恶意代码从 <code>URL</code> 中取出，拼接在 HTML 中返回给浏览器。</li>
+<li>用户浏览器接收到响应后解析执行，混在其中的恶意代码也被执行。</li>
+<li>恶意代码窃取用户数据并发送到攻击者的网站，或者冒充用户的行为，调用目标网站接口执行攻击者指定的操作。</li>
+</ol>
+<p>反射型 XSS 漏洞常见于通过 <code>URL</code> 传递参数的功能，如网站搜索、跳转等。由于需要用户主动打开恶意的 <code>URL</code><br>才能生效，攻击者往往会结合多种手段诱导用户点击。</p>
+<p>POST 的内容也可以触发反射型 XSS，只不过其触发条件比较苛刻（需要构造表单提交页面，并引导用户点击），所以非常少见。</p>
+<blockquote>
+<p>查看反射型攻击示例</p>
+</blockquote>
+<p>请戳：<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/tree/master/Security">https://github.com/YvetteLau/Blog/tree/master/Security</a></p>
+<p>根据 <code>README.md</code> 的提示进行操作(真实情况下是需要诱导用户点击的，上述代码仅是用作演示)。</p>
+<p>注意<code>Chrome</code> 和 <code>Safari</code> 能够检测到 <code>url</code> 上的xss攻击，将网页拦截掉，但是其它浏览器不行，如<code>Firefox</code></p>
+<p>如果不希望被前端拿到cookie，后端可以设置 <code>httpOnly</code> (不过这不是 <code>XSS攻击</code> 的解决方案，只能降低受损范围)</p>
+<blockquote>
+<p>如何防范反射型XSS攻击</p>
+</blockquote>
+<p><strong>对字符串进行编码。</strong></p>
+<p>对url的查询参数进行转义后再输出到页面。</p>
+<pre><code>app.get(&#39;/welcome&#39;, function(req, res) {
+    //对查询参数进行编码，避免反射型 XSS攻击res.send(`${encodeURIComponent(req.query.type)}`);
+});
+</code></pre>
+<blockquote>
+<h3 id="1-2-DOM-型-XSS"><a href="#1-2-DOM-型-XSS" class="headerlink" title="1.2 DOM 型 XSS"></a>1.2 DOM 型 XSS</h3></blockquote>
+<p>DOM 型 XSS 攻击，实际上就是前端 <code>JavaScript</code> 代码不够严谨，把不可信的内容插入到了页面。在使用<br><code>.innerHTML</code>、<code>.outerHTML</code>、<code>.appendChild</code>、<code>document.write()</code>等API时要特别小心，不要把不可信的数据作为<br>HTML 插到页面上，尽量使用 <code>.innerText</code>、<code>.textContent</code>、<code>.setAttribute()</code> 等。</p>
+<blockquote>
+<p>DOM 型 XSS 的攻击步骤：</p>
+</blockquote>
+<ol>
+<li>攻击者构造出特殊数据，其中包含恶意代码。</li>
+<li>用户浏览器执行了恶意代码。</li>
+<li>恶意代码窃取用户数据并发送到攻击者的网站，或者冒充用户的行为，调用目标网站接口执行攻击者指定的操作。</li>
+</ol>
+<blockquote>
+<p>如何防范 DOM 型 XSS 攻击</p>
+</blockquote>
+<p>防范 DOM 型 XSS 攻击的核心就是对输入内容进行转义(DOM 中的内联事件监听器和链接跳转都能把字符串作为代码运行，需要对其内容进行检查)。</p>
+<p>1.对于<code>url</code>链接(例如图片的<code>src</code>属性)，那么直接使用 <code>encodeURIComponent</code> 来转义。</p>
+<p>2.非<code>url</code>，我们可以这样进行编码：</p>
+<pre><code>functionencodeHtml(str) {
+    returnstr.replace(/&quot;/g, &#39;&amp;quot;&#39;)
+            .replace(/&#39;/g, &#39;&amp;apos;&#39;)
+            .replace(/&lt;/g, &#39;&amp;lt;&#39;)
+            .replace(/&gt;/g, &#39;&amp;gt;&#39;);
+}
+</code></pre>
+<p>DOM 型 XSS 攻击中，取出和执行恶意代码由浏览器端完成，属于前端 JavaScript 自身的安全漏洞。</p>
+<blockquote>
+<p>查看DOM型XSS攻击示例(根据readme提示查看)</p>
+</blockquote>
+<p>请戳：<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/tree/master/Security">https://github.com/YvetteLau/Blog/tree/master/Security</a></p>
+<blockquote>
+<h3 id="1-3-存储型XSS"><a href="#1-3-存储型XSS" class="headerlink" title="1.3 存储型XSS"></a>1.3 存储型XSS</h3></blockquote>
+<p>恶意脚本永久存储在目标服务器上。当浏览器请求数据时，脚本从服务器传回并执行，影响范围比反射型和DOM型XSS更大。存储型XSS攻击的原因仍然是没有做好数据过滤：前端提交数据至服务端时，没有做好过滤；服务端在接受到数据时，在存储之前，没有做过滤；前端从服务端请求到数据，没有过滤输出。</p>
+<blockquote>
+<p>存储型 XSS 的攻击步骤：</p>
+</blockquote>
+<ol>
+<li>攻击者将恶意代码提交到目标网站的数据库中。</li>
+<li>用户打开目标网站时，网站服务端将恶意代码从数据库取出，拼接在 HTML 中返回给浏览器。</li>
+<li>用户浏览器接收到响应后解析执行，混在其中的恶意代码也被执行。</li>
+<li>恶意代码窃取用户数据并发送到攻击者的网站，或者冒充用户的行为，调用目标网站接口执行攻击者指定的操作。</li>
+</ol>
+<p>这种攻击常见于带有用户保存数据的网站功能，如论坛发帖、商品评论、用户私信等。</p>
+<blockquote>
+<p>如何防范存储型XSS攻击：</p>
+</blockquote>
+<ol>
+<li>前端数据传递给服务器之前，先转义&#x2F;过滤(防范不了抓包修改数据的情况)</li>
+<li>服务器接收到数据，在存储到数据库之前，进行转义&#x2F;过滤</li>
+<li>前端接收到服务器传递过来的数据，在展示到页面前，先进行转义&#x2F;过滤</li>
+</ol>
+<blockquote>
+<p>查看存储型XSS攻击示例(根据Readme提示查看)</p>
+</blockquote>
+<p>请戳：<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/tree/master/Security">https://github.com/YvetteLau/Blog/tree/master/Security</a></p>
+<p><strong>除了谨慎的转义，我们还需要其他一些手段来防范XSS攻击:</strong></p>
+<p><strong>1.Content Security Policy</strong></p>
+<p>在服务端使用 HTTP的 <code>Content-Security-Policy</code> 头部来指定策略，或者在前端设置 <code>meta</code> 标签。</p>
+<p>例如下面的配置只允许加载同域下的资源：</p>
+<pre><code>Content-Security-Policy: default-src &#39;self&#39;
+
+&lt;metahttp-equiv=&quot;Content-Security-Policy&quot;content=&quot;form-action &#39;self&#39;;&quot;&gt;
+</code></pre>
+<p>前端和服务端设置 CSP 的效果相同，但是<code>meta</code>无法使用<code>report</code></p>
+<blockquote>
+<p>更多的设置可以查看 [Content-Security-Policy</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>](<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy__by_cnvoid">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy__by_cnvoid</a>)</p>
+<p>严格的 CSP 在 XSS 的防范中可以起到以下的作用：</p>
+<ol>
+<li>禁止加载外域代码，防止复杂的攻击逻辑。</li>
+<li>禁止外域提交，网站被攻击后，用户的数据不会泄露到外域。</li>
+<li>禁止内联脚本执行（规则较严格，目前发现 GitHub 使用）。</li>
+<li>禁止未授权的脚本执行（新特性，Google Map 移动版在使用）。</li>
+<li>合理使用上报可以及时发现 XSS，利于尽快修复问题。</li>
+</ol>
+<p><strong>2.输入内容长度控制</strong></p>
+<p>对于不受信任的输入，都应该限定一个合理的长度。虽然无法完全防止 XSS 发生，但可以增加 XSS 攻击的难度。</p>
+<p><strong>3.输入内容限制</strong></p>
+<p>对于部分输入，可以限定不能包含特殊字符或者仅能输入数字等。</p>
+<p><strong>4.其他安全措施</strong></p>
+<ul>
+<li>HTTP-only Cookie: 禁止 JavaScript 读取某些敏感 Cookie，攻击者完成 XSS 注入后也无法窃取此 Cookie。</li>
+<li>验证码：防止脚本冒充用户提交危险操作。</li>
+</ul>
+<blockquote>
+<h3 id="1-5-XSS-检测"><a href="#1-5-XSS-检测" class="headerlink" title="1.5 XSS 检测"></a>1.5 XSS 检测</h3></blockquote>
+<p>读到这儿，相信大家已经知道了什么是XSS攻击，XSS攻击的类型，以及如何去防范XSS攻击。但是有一个非常重要的问题是：我们如何去检测XSS攻击，怎么知道自己的页面是否存在XSS漏洞？</p>
+<p>很多大公司，都有专门的安全部门负责这个工作，但是如果没有安全部门，作为开发者本身，该如何去检测呢？</p>
+<p>1.使用通用 XSS 攻击字串手动检测 XSS 漏洞</p>
+<p>如: <code>jaVasCript:/*-/*</code>&#x2F;*`&#x2F;*’&#x2F;*”&#x2F;**&#x2F;(&#x2F;* *&#x2F;oNcliCk&#x3D;alert()<br>)&#x2F;&#x2F;%0D%0A%0d%0a&#x2F;&#x2F;&lt;&#x2F;stYle&#x2F;&lt;&#x2F;titLe&#x2F;&lt;&#x2F;teXtarEa&#x2F;&lt;&#x2F;scRipt&#x2F;–!&gt;\x3csVg&#x2F;&lt;sVg&#x2F;oNloAd&#x3D;alert()&#x2F;&#x2F;&gt;\x3e&#96;</p>
+<p>能够检测到存在于 HTML 属性、HTML 文字内容、HTML 注释、跳转链接、内联 JavaScript 字符串、内联 CSS 样式表等多种上下文中的 XSS<br>漏洞，也能检测 eval()、setTimeout()、setInterval()、Function()、innerHTML、document.write()<br>等 DOM 型 XSS 漏洞，并且能绕过一些 XSS 过滤器。</p>
+<p><code>&lt;img src=1 onerror=alert(1)&gt;</code></p>
+<p>2.使用第三方工具进行扫描（详见最后一个章节）</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/6a4fc7c9cc9446874d905768380b02c4cc4a5f1a/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434566643233356365653161333064303437636666356361376531636636356533382f3239343831"><img src="https://camo.githubusercontent.com/6a4fc7c9cc9446874d905768380b02c4cc4a5f1a/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434566643233356365653161333064303437636666356361376531636636356533382f3239343831" alt="xuehuayu.cn"></a></p>
+<hr>
+<h2 id="2-CSRF"><a href="#2-CSRF" class="headerlink" title="2. CSRF"></a>2. CSRF</h2><p>CSRF（Cross-site request<br>forgery）跨站请求伪造：攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。</p>
+<blockquote>
+<p>典型的CSRF攻击流程：</p>
+</blockquote>
+<ol>
+<li>受害者登录A站点，并保留了登录凭证（Cookie）。</li>
+<li>攻击者诱导受害者访问了站点B。</li>
+<li>站点B向站点A发送了一个请求，浏览器会默认携带站点A的Cookie信息。</li>
+<li>站点A接收到请求后，对请求进行验证，并确认是受害者的凭证，误以为是无辜的受害者发送的请求。</li>
+<li>站点A以受害者的名义执行了站点B的请求。</li>
+<li>攻击完成，攻击者在受害者不知情的情况下，冒充受害者完成了攻击。</li>
+</ol>
+<p><strong>一图胜千言：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/1a3fca040f52115fa9c6c1ca7d55953fa5418040/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434537623931326162323266333766643133343831383631316237373737343437622f3239343836"><img src="https://camo.githubusercontent.com/1a3fca040f52115fa9c6c1ca7d55953fa5418040/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434537623931326162323266333766643133343831383631316237373737343437622f3239343836" alt="xuehuayu.cn"></a></p>
+<blockquote>
+<p>CSRF的特点</p>
+</blockquote>
+<p>1.攻击通常在第三方网站发起，如图上的站点B，站点A无法防止攻击发生。</p>
+<p>2.攻击利用受害者在被攻击网站的登录凭证，冒充受害者提交操作；并不会去获取cookie信息(cookie有同源策略)</p>
+<p>3.跨站请求可以用各种方式：图片URL、超链接、CORS、Form提交等等(来源不明的链接，不要点击)</p>
+<blockquote>
+<p>运行代码，更直观了解一下</p>
+</blockquote>
+<p>用户 loki 银行存款 10W。</p>
+<p>用户 yvette 银行存款 1000。</p>
+<p>我们来看看 yvette 如何通过 <code>CSRF</code> 攻击，将 loki 的钱偷偷转到自己的账户中，并根据提示，查看如何去防御CSRF攻击。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/9c235309e0db35e62a17ed7f3247a87ca0413cb9/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434566363431356238633937363930613731396532353735656666653937376233392f3239353036"><img src="https://camo.githubusercontent.com/9c235309e0db35e62a17ed7f3247a87ca0413cb9/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f66343537303163633431303530346537316462626362643838363165386430632f786d6c6e6f74652f5745425245534f5552434566363431356238633937363930613731396532353735656666653937376233392f3239353036" alt="xuehuayu.cn"></a></p>
+<p>请戳：<br><a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog/tree/master/Security">https://github.com/YvetteLau/Blog/tree/master/Security</a><br>[根据readme中的CSRF部分进行操作]</p>
+<h4 id="CSRF-攻击防御"><a href="#CSRF-攻击防御" class="headerlink" title="CSRF 攻击防御"></a>CSRF 攻击防御</h4><p><strong>1. 添加验证码(体验不好)</strong></p>
+<p>验证码能够防御CSRF攻击，但是我们不可能每一次交互都需要验证码，否则用户的体验会非常差，但是我们可以在转账，交易等操作时，增加验证码，确保我们的账户安全。</p>
+<p><strong>2. 判断请求的来源：检测Referer(并不安全，Referer可以被更改)</strong></p>
+<pre><code>`Referer` 可以作为一种辅助手段，来判断请求的来源是否是安全的，但是鉴于 `Referer` 本身是可以被修改的，因为不能仅依赖于  `Referer`
+</code></pre>
+<p><strong>3. 使用Token(主流)</strong></p>
+<pre><code>CSRF攻击之所以能够成功，是因为服务器误把攻击者发送的请求当成了用户自己的请求。那么我们可以要求所有的用户请求都携带一个CSRF攻击者无法获取到的Token。服务器通过校验请求是否携带正确的Token，来把正常的请求和攻击的请求区分开。跟验证码类似，只是用户无感知。
+
+- 服务端给用户生成一个token，加密后传递给用户
+- 用户在提交请求时，需要携带这个token
+- 服务端验证token是否正确
+</code></pre>
+<p><strong>4. Samesite Cookie属性</strong></p>
+<p>为了从源头上解决这个问题，Google起草了一份草案来改进HTTP协议，为Set-Cookie响应头新增Samesite属性，它用来标明这个<br>Cookie是个“同站 Cookie”，同站Cookie只能作为第一方Cookie，不能作为第三方Cookie，Samesite 有两个属性值，分别是<br>Strict 和 Lax。</p>
+<p>部署简单，并能有效防御CSRF攻击，但是存在兼容性问题。</p>
+<p><strong>Samesite&#x3D;Strict</strong></p>
+<p><code>Samesite=Strict</code> 被称为是严格模式,表明这个 Cookie 在任何情况都不可能作为第三方的<br>Cookie，有能力阻止所有CSRF攻击。此时，我们在B站点下发起对A站点的任何请求，A站点的 Cookie 都不会包含在cookie请求头中。</p>
+<pre><code>**Samesite=Lax**
+
+`Samesite=Lax` 被称为是宽松模式，与 Strict 相比，放宽了限制，允许发送安全 HTTP 方法带上 Cookie，如 `Get` / `OPTIONS` 、`HEAD` 请求.
+
+但是不安全 HTTP 方法，如： `POST`, `PUT`, `DELETE` 请求时，不能作为第三方链接的 Cookie
+</code></pre>
+<p>为了更好的防御CSRF攻击，我们可以组合使用以上防御手段。</p>
+<h2 id="3-点击劫持"><a href="#3-点击劫持" class="headerlink" title="3. 点击劫持"></a>3. 点击劫持</h2><p>点击劫持是指在一个Web页面中隐藏了一个透明的iframe，用外层假页面诱导用户点击，实际上是在隐藏的frame上触发了点击事件进行一些用户不知情的操作。</p>
+<h4 id="典型点击劫持攻击流程"><a href="#典型点击劫持攻击流程" class="headerlink" title="典型点击劫持攻击流程"></a>典型点击劫持攻击流程</h4><ol>
+<li>攻击者构建了一个非常有吸引力的网页【不知道哪些内容对你们来说有吸引力，我就不写页面了，偷个懒】</li>
+<li>将被攻击的页面放置在当前页面的 <code>iframe</code> 中</li>
+<li>使用样式将 iframe 叠加到非常有吸引力内容的上方</li>
+<li>将iframe设置为100%透明</li>
+<li>你被诱导点击了网页内容，你以为你点击的是***，而实际上，你成功被攻击了。</li>
+</ol>
+<h4 id="点击劫持防御"><a href="#点击劫持防御" class="headerlink" title="点击劫持防御"></a>点击劫持防御</h4><p><strong>1. frame busting</strong></p>
+<p>Frame busting</p>
+<pre><code>if ( top.location != window.location ){
+    top.location = window.location
+}
+</code></pre>
+<p>需要注意的是: HTML5中iframe的 <code>sandbox</code> 属性、IE中iframe的<code>security</code><br>属性等，都可以限制iframe页面中的JavaScript脚本执行，从而可以使得 frame busting 失效。</p>
+<p><strong>2. X-Frame-Options</strong></p>
+<p>X-FRAME-OPTIONS是微软提出的一个http头，专门用来防御利用iframe嵌套的点击劫持攻击。并且在IE8、Firefox3.6、Chrome4以上的版本均能很好的支持。</p>
+<p>可以设置为以下值:</p>
+<ul>
+<li><p>DENY: 拒绝任何域加载</p>
+</li>
+<li><p>SAMEORIGIN: 允许同源域下加载</p>
+</li>
+<li><p>ALLOW-FROM: 可以定义允许frame加载的页面地址</p>
+</li>
+</ul>
+<h2 id="4-URL跳转漏洞"><a href="#4-URL跳转漏洞" class="headerlink" title="4. URL跳转漏洞"></a>4. URL跳转漏洞</h2><p>URL 跳转漏洞是指后台服务器在告知浏览器跳转时，未对客户端传入的重定向地址进行合法性校验，导致用户浏览器跳转到钓鱼页面的一种漏洞。</p>
+<p>URL跳转一般有以下几种实现方式</p>
+<ol>
+<li><p>Header头跳转</p>
+</li>
+<li><p>Javascript跳转</p>
+</li>
+<li><p>META标签跳转</p>
+</li>
+</ol>
+<blockquote>
+<h4 id="URL跳转漏洞防御"><a href="#URL跳转漏洞防御" class="headerlink" title="URL跳转漏洞防御"></a>URL跳转漏洞防御</h4></blockquote>
+<p>之所以会出现跳转 URL 漏洞，就是因为服务端没有对客户端传递的跳转地址进行合法性校验，所以，预防这种攻击的方式，就是对客户端传递过来的跳转 URL 进行校验。</p>
+<p><strong>1.referer的限制</strong></p>
+<p>如果确定传递URL参数进入的来源，我们可以通过该方式实现安全限制，保证该URL的有效性，避免恶意用户自己生成跳转链接</p>
+<p><strong>2.加入有效性验证Token</strong></p>
+<p>保证所有生成的链接都是来自于可信域，通过在生成的链接里加入用户不可控的token对生成的链接进行校验，可以避免用户生成自己的恶意链接从而被利用。</p>
+<h3 id="安全扫描工具"><a href="#安全扫描工具" class="headerlink" title="安全扫描工具"></a>安全扫描工具</h3><p>上面我们介绍了几种常见的前端安全漏洞，也了解一些防范措施，那么我们如何发现自己网站的安全问题呢？没有安全部门的公司可以考虑下面几款开源扫码工具：</p>
+<h4 id="1-Arachni"><a href="#1-Arachni" class="headerlink" title="1. Arachni"></a>1. <a target="_blank" rel="noopener" href="https://github.com/Arachni/arachni">Arachni</a></h4><p>Arachni是基于Ruby的开源，功能全面，高性能的漏洞扫描框架，Arachni提供简单快捷的扫描方式，只需要输入目标网站的网址即可开始扫描。它可以通过分析在扫描过程中获得的信息，来评估漏洞识别的准确性和避免误判。</p>
+<p>Arachni默认集成大量的检测工具，可以实施 代码注入、CSRF、文件包含检测、SQL注入、命令行注入、路径遍历等各种攻击。</p>
+<p>同时，它还提供了各种插件，可以实现表单爆破、HTTP爆破、防火墙探测等功能。</p>
+<p>针对大型网站，该工具支持会话保持、浏览器集群、快照等功能，帮助用户更好实施渗透测试。</p>
+<h4 id="2-Mozilla-HTTP-Observatory"><a href="#2-Mozilla-HTTP-Observatory" class="headerlink" title="2. Mozilla HTTP Observatory"></a>2. <a target="_blank" rel="noopener" href="https://github.com/mozilla/http-observatory/">Mozilla HTTP Observatory</a></h4><p>Mozilla HTTP<br>Observatory，是Mozilla最近发布的一款名为Observatory的网站安全分析工具，意在鼓励开发者和系统管理员增强自己网站的安全配置。用法非常简单：输入网站URL，即可访问并分析网站HTTP标头，随后可针对网站安全性提供数字形式的分数和字母代表的安全级别。</p>
+<blockquote>
+<p>检查的主要范围包括：</p>
+</blockquote>
+<ul>
+<li>Cookie</li>
+<li>跨源资源共享（CORS）</li>
+<li>内容安全策略（CSP）</li>
+<li>HTTP公钥固定（Public Key Pinning）</li>
+<li>HTTP严格安全传输（HSTS）状态</li>
+<li>是否存在HTTP到HTTPs的自动重定向</li>
+<li>子资源完整性（Subresource Integrity）</li>
+<li>X-Frame-Options</li>
+<li>X-XSS-Protection</li>
+</ul>
+<h4 id="3-w3af"><a href="#3-w3af" class="headerlink" title="3. w3af"></a>3. <a target="_blank" rel="noopener" href="https://github.com/andresriancho/w3af">w3af</a></h4><p>W3af是一个基于Python的Web应用安全扫描器。可帮助开发人员，有助于开发人员和测试人员识别Web应用程序中的漏洞。</p>
+<p>扫描器能够识别200多个漏洞，包括跨站点脚本、SQL注入和操作系统命令。</p>
+<p>参考文章:</p>
+<p>[1]<br><a target="_blank" rel="noopener" href="https://github.com/0xsobky/HackVault/wiki/Unleashing-an-Ultimate-XSS-Polyglot">https://github.com/0xsobky/HackVault/wiki/Unleashing-an-Ultimate-XSS-Polyglot</a></p>
+<p>[2]<br><a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/10/11/fe-security-csrf.html">https://tech.meituan.com/2018/10/11/fe-security-csrf.html</a></p>
+<p>[3]<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25486768?group_id=820705780520079360">https://zhuanlan.zhihu.com/p/25486768?group_id&#x3D;820705780520079360</a></p>
+<p>[4]<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/up35Zd8EmEfDVnvxOX9EmA">https://mp.weixin.qq.com/s/up35Zd8EmEfDVnvxOX9EmA</a></p>
+<p>[5]<br><a target="_blank" rel="noopener" href="https://juejin.im/post/5b4e0c936fb9a04fcf59cb79">https://juejin.im/post/5b4e0c936fb9a04fcf59cb79</a></p>
+<p>[6]<br><a target="_blank" rel="noopener" href="https://juejin.im/post/5c8a33dcf265da2dc538fc7d">https://juejin.im/post/5c8a33dcf265da2dc538fc7d</a></p>
+<p>[7]<br><a target="_blank" rel="noopener" href="https://github.com/OWASP/CheatSheetSeries">https://github.com/OWASP/CheatSheetSeries</a></p>
+<blockquote>
+<h3 id="后续写作计划-写作顺序不定"><a href="#后续写作计划-写作顺序不定" class="headerlink" title="后续写作计划(写作顺序不定)"></a>后续写作计划(写作顺序不定)</h3></blockquote>
+<p>1.《寒冬求职季之你必须要懂的原生JS》(下)</p>
+<p>2.《寒冬求职季之你必须要知道的CSS》</p>
+<p>3.《寒冬求职季之你必须要懂的一些浏览器知识》</p>
+<p>4.《寒冬求职季之你必须要知道的性能优化》</p>
+<p>5.《寒冬求职季之你必须要懂的webpack原理》</p>
+<p><strong>针对React技术栈:</strong></p>
+<p>1.《寒冬求职季之你必须要懂的React》系列</p>
+<p>2.《寒冬求职季之你必须要懂的ReactNative》系列</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/97caf4bcf03761926ba45cf5660af9b9e48fa4c1/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535353836393832393734352664693d393664353038333338343739653236366638316434636230616161313533316526696d67747970653d30267372633d68747470253341253246253246696d672e74756b6578772e636f6d253246696d67253246373233666634623731306439646436312e6a7067"><img src="https://camo.githubusercontent.com/97caf4bcf03761926ba45cf5660af9b9e48fa4c1/68747470733a2f2f74696d6773612e62616964752e636f6d2f74696d673f696d616765267175616c6974793d38302673697a653d62393939395f3130303030267365633d313535353836393832393734352664693d393664353038333338343739653236366638316434636230616161313533316526696d67747970653d30267372633d68747470253341253246253246696d672e74756b6578772e636f6d253246696d67253246373233666634623731306439646436312e6a7067" alt="xuehuayu.cn"></a></p>
+<p>编写本文，虽然花费了很多时间，但是在这个过程中，我也学习到了很多知识，谢谢各位小伙伴愿意花费宝贵的时间阅读本文，如果本文给了您一点帮助或者是启发，请不要吝啬你的赞和Star，您的肯定是我前进的最大动力。<a target="_blank" rel="noopener" href="https://github.com/YvetteLau/Blog">https://github.com/YvetteLau/Blog</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/d59498f9.html"><div class="related-post-title">uniapp纯前端renderjs实现WebDAV</div><div class="related-post-meta"><time>2024-03-18</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/4c014dd6.html"><div class="related-post-title">缓存的主要方式</div><div class="related-post-meta"><time>2019-10-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/3406f3b5.html"><div class="related-post-title">如何使div自适应内容的宽度和高度</div><div class="related-post-meta"><time>2020-02-06</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/d2c6416d.html"><div class="related-post-title">如何固定table表格的列</div><div class="related-post-meta"><time>2020-03-21</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/b53ad9a1.html"><div class="related-post-title">免费全栈工程师视频教程</div><div class="related-post-meta"><time>2019-10-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/f11ce35e.html">https://xuehuayu.cn/article/f11ce35e.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/e38a5ee8.html">微软推出Python免费在线教程视频</a><a class="next" href="/article/113edde6.html">寒冬求职季之你必须要懂的原生JS(中)</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

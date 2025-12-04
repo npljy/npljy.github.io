@@ -1,0 +1,378 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>webpack 5 之持久化缓存指南 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">webpack 5 之持久化缓存指南</h1><div class="post-meta"><span class="date">2019-10-23</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 11</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/f004ee59.html#waline-comment"><span class="waline-comment-count" data-path="/article/f004ee59.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/oB5eYax_NndcM5IinPgzNQ</code></p>
+<p>在TLC大前端信息流会上，@TheLarkInn分享了<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651233472&amp;idx=1&amp;sn=01eb557fc0ed307782f98cc5df2a63a6&amp;chksm=bd4945448a3ecc523982c6ec6eedcadaeb6d847754362b5bba257b7c0a972d38cd4520d7963f&amp;scene=21#wechat_redirect">【PPT】the road to webpack<br>5</a>。今日早读文章由苏宁@QC-L翻译授权分享。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>@QC-L，目前就职于苏宁。印记中文成员之一，React 中文官网负责人</p>
+</blockquote>
+<p>正文从这开始～～</p>
+<p>继 webpack v5-beta0 发布后，官方又发布了持久化缓存指南。</p>
+<h4 id="Opt-in"><a href="#Opt-in" class="headerlink" title="Opt-in"></a>Opt-in</h4><p>首先，要注意的是默认情况下不会启用持久化<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651231803&amp;idx=1&amp;sn=6fd4c3f8511ca2e0ddd521d27fab67d6&amp;chksm=bd494fbf8a3ec6a9ff1eb157f490627f1745e69c90f45756c3ec615a716564798b9b914066cb&amp;scene=21#wechat_redirect">缓存</a>。你可以自行选择启用。</p>
+<p>为何如此？webpack 旨在注重构建安全而非性能。我们没有打算默认启用这一功能，主要原因在于此功能虽然有 95% 几率提升性能，但仍有 5%<br>的几率中断你的应用程序&#x2F;工作流&#x2F;构建。</p>
+<p>这可能听起来很糟，但相信我它并非如此。只不过需要开发人员进行额外的操作来配置它。</p>
+<p>序列化与反序列化功能具有无需配置的开箱即用体验，但开箱即用的部分可能致使<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651230934&amp;idx=2&amp;sn=137706ea7af4762a7c6e649617259f82&amp;chksm=bd494b528a3ec2441eac9bd0500770fb2b762fdfa2fd4cb16306640b224cfea4d3c9d18803b3&amp;scene=21#wechat_redirect">缓存</a>失效。</p>
+<p>什么是缓存失效？webpack 需要确认 entry 的缓存何时会失效，并在失效时不再将其用于构建。因此，当你应用程序修改文件时，就会发生此情况。</p>
+<p>示例：修改<br>magic.js。<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651228535&amp;idx=1&amp;sn=06d7aba782e719c2db719f749d13962a&amp;chksm=bd4950f38a3ed9e5366fbf1944ffa4e70d68ef3e1654ae85537fd123f4c6a6f38f22097dbcac&amp;scene=21#wechat_redirect">前端</a><br>必须让 entry 为 magic.js 的缓存失效。构建将重新处理该文件，即运行 babel，typescript<br>诸如此类工具，重新解析文件并运行代码生成。webpack 可能还会致使 entry 为 bundle.js 的缓存失效。然后根据原模块重新构建此文件。</p>
+<p>为此，webpack 追踪了每个模块的 fileDependencies contextDependencies 以及<br>missingDependencies，并创建了文件系统快照。此快照会与真实文件系统进行比较，当检测到差异时，将触发对应模块的重新构建。</p>
+<p>webpack 给 bundle.js 的缓存 entry 设置了一个 etag，它为所有贡献者的 hash 值。比较这个 etag，只有当它与缓存 entry<br>匹配时才能使用。</p>
+<p>webpack 4 中的内存缓存也依赖上述这些。从开发人员角度来说，这些都能够开箱即用，无需额外配置。但对于 webpack 5<br>的<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651229831&amp;idx=2&amp;sn=99984badcd42382a5f0ac8e7a036b1d1&amp;chksm=bd4957038a3ede15f11e522bb8e5ea8883a22c7206e925ebed946c6188d25f8c30db59372225&amp;scene=21#wechat_redirect">持久化</a>缓存来说，却充满着挑战。</p>
+<p>以下操作均会让 webpack 使 entry 缓存失效：</p>
+<ul>
+<li><p>当 npm 升级 loader 或 plugin 时</p>
+</li>
+<li><p>当更改配置时</p>
+</li>
+<li><p>当更改在配置中读取的文件时</p>
+</li>
+<li><p>当 npm 升级配置中使用的 dependencies 时</p>
+</li>
+<li><p>当不同命令行参数传递给 build 脚本时</p>
+</li>
+<li><p>当有自定义构建脚本并进行更改时</p>
+</li>
+</ul>
+<p>这变得非常棘手。开箱即用的情况下，webpack<br>无法处理所有这些情况。这就是我们为什么选择安全的方式，并将持久化缓存变为可选特性的原因。我们希望读者可以学习如何启用持久化缓存，以为你提供正确的提示。我们希望你知道需要使用哪种配置来处理你自定义的构建脚本。</p>
+<h4 id="构建依赖（dependencies），缓存版本（version）和缓存名（name）"><a href="#构建依赖（dependencies），缓存版本（version）和缓存名（name）" class="headerlink" title="构建依赖（dependencies），缓存版本（version）和缓存名（name）"></a>构建依赖（dependencies），缓存版本（version）和缓存名（name）</h4><p>为了处理构建过程中的依赖关系，webpack 提供了三个新工具：</p>
+<h4 id="构建依赖（Build-dependencies）"><a href="#构建依赖（Build-dependencies）" class="headerlink" title="构建依赖（Build dependencies）"></a>构建依赖（Build dependencies）</h4><p>此为全新的配置项 cache.buildDependencies，它可以指定构建过程中的代码依赖。为了使它更简易，webpack 负责解析并遵循配置值的依赖。</p>
+<p>值类型有两种：文件和目录。目录类型必须以斜杠（&#x2F;）结尾。其他所有内容都解析为文件类型。</p>
+<p>对于目录类型来说，会解析其最近的 package.json 中的 dependencies。对于文件类型来说，我们将查看 node.js 模块缓存以寻找其依赖。</p>
+<p>示例：构建通常取决于 webpack 本身的 lib 文件夹：你可以这样配置：</p>
+<pre><code>cache.buildDependencies:{
+
+    defaultWebpack:[&quot;webpack/lib/&quot;]
+
+}
+</code></pre>
+<p>当 webpack&#x2F;lib 或 webpack 依赖的库（如，watchpack，enhanced-resolved<br>等）发生任何变化时，其缓存将失效。webpack&#x2F;lib 已是默认值，默认情况下无需配置。</p>
+<p>另一个示例：构建依旧取决于你的配置文件。具体配置如下：</p>
+<pre><code>cache.buildDependencies:{
+
+    config:[__filename]
+
+}
+</code></pre>
+<p><code>__filename</code> 变量指向 node.js 中的当前文件。</p>
+<p>当配置文件或配置文件中通过 require 依赖的任何内容发生更改时，也会使得持久化缓存失效。当配置文件通过 require()<br>引用了所有使用过的插件时，它们也会成为构建依赖项。</p>
+<p>如果配置文件通过 fs.readFile 读取文件，则将不会成为构建依赖项，因为 webpack 仅遵循 require()。你需要手动将此类文件添加到<br>buildDependencies 中。</p>
+<h4 id="缓存版本（Version）"><a href="#缓存版本（Version）" class="headerlink" title="缓存版本（Version）"></a>缓存版本（Version）</h4><p>构建的某些依赖项不能单纯的依靠对文件的引用，如，从数据库读取的值，环境变量或命令行上传递的值。对于这些值，我们给出了新的配置项 cache.version。</p>
+<p>cache.version 类型为 string。传递不同的字符串将使持久化缓存失效。</p>
+<p>示例：你的配置中可能会读取环境变量中的 GITREV 并将其与 DefinePlugin 一起使用以将其嵌入到 bundle 中。这使得 GITREV<br>成为你构建的依赖项。具体配置如下：</p>
+<pre><code>cache:{
+
+    version:`${process.env.GIT_REV}`
+
+}
+</code></pre>
+<h4 id="缓存名（Name）"><a href="#缓存名（Name）" class="headerlink" title="缓存名（Name）"></a>缓存名（Name）</h4><p>在某些情况下，依赖关系会在多个不同的值间切换，并且对于每个值更改都会使得持久化缓存失效，这显然是浪费资源的。对于这类值，我们给出了新的配置项<br>cache.name。</p>
+<p>cache.name 类型为 string。传递值将创建一个隔离且独立的持久化缓存。</p>
+<p>cache.name 被用于对文件名进行持久化缓存。确保仅传递短小且 fs-safe 的名称。</p>
+<p>示例：你的配置可以使用 –env.target mobile|desktop 参数为移动端或 PC 用户创建不同的构建。具体配置如下：</p>
+<pre><code>cache:{
+
+    name:`${env.target}`
+
+}
+</code></pre>
+<h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><p>对大部分 nodemodules 进行哈希处理并加盖时间戳以生存构建和常规依赖项，其代价非常昂贵，并且还会大大降低 webpack<br>的执行速度。为避免这种情况出现，webpack 引入了相关的性能优化，默认情况下会跳过 nodemodules，并使用 package.json 中的<br>version 和 name 作为数据源。</p>
+<p>此优化将用于配置项 cache.managedPaths 中的所有 path。它默认为 webpack 安装了 node_modules 目录。</p>
+<p>启用此优化后，请勿手动编辑 node_modules。你可以使用 cache.managedPaths: [] 禁用它。</p>
+<p>当使用 Yarn PnP 时，将启用另一个优化。由于缓存内容不可变，yarn 缓存中的所有文件都将完全跳过哈希和时间戳的操作（甚至不会追踪 version 和<br>name）。</p>
+<p>此操作由配置项 cache.immutablePaths 控制。启用 Yarn PnP 时，默认为安装了 webpack 的 yarn 缓存。</p>
+<p>不要手动编辑 yarn 缓存，因为这根本不可行。</p>
+<h4 id="使用持久化缓存"><a href="#使用持久化缓存" class="headerlink" title="使用持久化缓存"></a>使用持久化缓存</h4><p>确保你已阅读并理解以上信息！</p>
+<p>此为启用持久化缓存的典型配置：</p>
+<pre><code>cache:{
+
+    type:&quot;filesystem&quot;,
+
+    buildDependencies:{
+
+        config:[ __filename ]// 当你 CLI 自动添加它时，你可以忽略它
+
+    }
+
+}
+</code></pre>
+<h4 id="Watching"><a href="#Watching" class="headerlink" title="Watching"></a>Watching</h4><p>持久化缓存可用于单独构建和连续构建（watch）。</p>
+<p>当设置 cache.type: “filesystem” 时，webpack<br>会在内部以分层方式启用文件系统缓存和内存缓存。从缓存读取时，会先查看内存缓存，如果内存缓存未找到，则降级到文件系统缓存。写入缓存将同时写入内存缓存和文件系统缓存。</p>
+<p>文件系统缓存不会直接将对磁盘写入的请求进行序列化。它将等到编译过程完成且编译器处于空闲状态才会执行。如此处理的原因是序列化和磁盘写入会占用资源，并且我们不想额外延迟编译过程。</p>
+<p>针对单一构建，其工作流为：</p>
+<ul>
+<li><p>Loading cache</p>
+</li>
+<li><p>Building</p>
+</li>
+<li><p>Emitting</p>
+</li>
+<li><p>Display results (stats)</p>
+</li>
+<li><p>Persisting cache (if changed)</p>
+</li>
+<li><p>Process exits</p>
+</li>
+</ul>
+<p>针对连续构建（watch），其工作流为：</p>
+<ul>
+<li><p>Loading cache</p>
+</li>
+<li><p>Building</p>
+</li>
+<li><p>Emitting</p>
+</li>
+<li><p>Display results (stats)</p>
+</li>
+<li><p>Attach filesystem watchers</p>
+</li>
+<li><p>Wait cache.idleTimeoutForInitialStore</p>
+</li>
+<li><p>Persisting cache (if changed)</p>
+</li>
+</ul>
+<p>On change:</p>
+<ul>
+<li><p>Building</p>
+</li>
+<li><p>Emitting</p>
+</li>
+<li><p>Display results (stats)</p>
+</li>
+<li><p>Wait cache.idleTimeout</p>
+</li>
+<li><p>Persisting cache (if changed)</p>
+</li>
+</ul>
+<p>你会发现两个新的配置项 cache.idleTimeout 和<br>cache.idleTimeoutForInitialStore，它们控制着持久化缓存之前编译器必须空闲的时长。cache.idleTimeout 默认为<br>60s，cache.idleTimeoutForInitialStore 默认为<br>0s。由于序列化阻止了事件循环，因此在序列化缓存时不进行缓存检测。此延迟尝试避免由于快速编辑文件，而在 watch<br>模式下导致重新编译造成的延迟，同时尝试为下一次冷启动保持持久化缓存的最新状态。这是一个折中的解决方案，可以设置适合你工作流的值。较小的值会缩短冷启动时间，但会增加延迟重新构建的风险。</p>
+<h4 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h4><p>发生错误要恢复持久化缓存的方式，可以通过删除整个缓存并进行全新的构建，或者通过删除有问题的缓存 entry 并使得该项目保持未缓存状态来进行。</p>
+<p>在这种情况下，webpack 的 logger 会发出警告。欲了解更多，请参阅 infrastructureLogging 的配置项。</p>
+<h4 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h4><p>正常使用不需要以下信息。</p>
+<h4 id="使用-webpack-的高级工具指南"><a href="#使用-webpack-的高级工具指南" class="headerlink" title="使用 webpack 的高级工具指南"></a>使用 webpack 的高级工具指南</h4><p>封装 webpack 的工具可以选择其他默认值。当不允许使用自定义扩展的 webpack 时，由于可以完全控制所有构建的依赖项，因此可以默认打开持久化存储。</p>
+<h4 id="CLI-指南"><a href="#CLI-指南" class="headerlink" title="CLI 指南"></a>CLI 指南</h4><p>默认情况下，使用 webpack 的 CLI 可能会添加一些构建依赖关系，而 webpack 本身不会。</p>
+<ul>
+<li><p>默认情况下，CLI 会将 cache.buildDependencies.defaultConfig 设置为所用的配置文件</p>
+</li>
+<li><p>CLI 会将命令行参数附加到 cache.version</p>
+</li>
+<li><p>使用命令行参数时，CLI 可能会在 cache.name 中添加注释。</p>
+</li>
+</ul>
+<h4 id="调试信息"><a href="#调试信息" class="headerlink" title="调试信息"></a>调试信息</h4><p>使用如下配置，将输出额外的调试信息：</p>
+<pre><code>infrastructureLogging:{
+
+    debug:/webpack\.cache/
+
+}
+</code></pre>
+<h4 id="内部工作流"><a href="#内部工作流" class="headerlink" title="内部工作流"></a>内部工作流</h4><p>webpack 读取缓存文件。</p>
+<ul>
+<li><p>没有缓存文件 -&gt; 未构建缓存</p>
+</li>
+<li><p>缓存文件中的 version 与 cache.version 不匹配 -&gt; 没有构建缓存</p>
+</li>
+</ul>
+<p>webpack 将解析快照（resolve snapshot）与文件系统进行对比</p>
+<ul>
+<li><p>匹配到 -&gt; 继续后续流程</p>
+</li>
+<li><p>没有匹配到：</p>
+</li>
+<li><p>再次解析所有解析结果（resolve results）</p>
+</li>
+<li><p>没有匹配到 -&gt; 未构建缓存</p>
+</li>
+<li><p>匹配到 -&gt; 继续后续流程</p>
+</li>
+</ul>
+<p>webpack 将构建依赖快照（build dependencies snapshot）与文件系统进行对比</p>
+<ul>
+<li><p>没有匹配到 -&gt; 未构建缓存</p>
+</li>
+<li><p>匹配到 -&gt; 继续后续流程</p>
+</li>
+</ul>
+<p>对缓存 entry 进行反序列化（在构建过程中对较大的缓存 entry 进行延迟反序列化）</p>
+<p>构建运行（有缓存或没有缓存）</p>
+<ul>
+<li><p>追踪构建依赖关系</p>
+</li>
+<li><p>追踪 cache.buildDependencies</p>
+</li>
+<li><p>追踪已使用的 loader</p>
+</li>
+</ul>
+<p>新的构建依赖关系已解析完成</p>
+<ul>
+<li><p>解析依赖关系已追踪</p>
+</li>
+<li><p>解析结果已追踪</p>
+</li>
+</ul>
+<p>创建来自所有新解析依赖项的快照</p>
+<p>创建来自所有新构建依赖项的快照</p>
+<p>持久化缓存文件序列化到磁盘</p>
+<h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><p>所有支持序列化的 class 都需要注册一个序列化器：</p>
+<pre><code>1. webpack.util.serialization.register(Constructor, request, name, serializer);
+</code></pre>
+<p>Constructor 应为一个 class 或构造器函数。对于任何需要序列化的对象的 object.constructor<br>将被用于查找序列化器（serializer）。</p>
+<p>request 将被用于加载调用 register 模块。它应指向当前模块。它将以这种方式使用：require(request)。</p>
+<p>name 被用于区分具有相同 request 的多个 register 调用。</p>
+<p>serializer 是至少拥有 serialize 和 deserialize 两个方法的对象。</p>
+<p>当需序列化对象时，请调用 serializer.serialize(object, context)。context 是至少拥有一个<br>write(anything) 方法的对象 此方法将内容写入输出流。传递的值也会被序列化。</p>
+<p>当需要反序列化对象时，请调用 serializer.deserialize(context)。context 是至少拥有一个 read(): anything<br>方法的对象。此方法会反序列化输入流中的某些内容。deserialize 必须返回反序列化后的对象。</p>
+<p>serialize 和 deserialize 应以相同的顺序读取和写入相同的对象。</p>
+<p>示例：</p>
+<pre><code>// some-module/lib/MyClass.js
+
+classMyClass{
+
+    constructor(a, b){
+
+    this.a = a;
+
+    this.b = b;
+
+    this.c =undefined;
+
+  }
+
+}
+
+register(MyClass,&quot;some-module/lib/MyClass&quot;,null,{
+
+    seralize(obj,{ write }){
+
+        write(obj.a);
+
+        write(obj.b);
+
+        write(obj.c);
+
+}
+
+    deserialize({ read }){
+
+        const obj =newMyClass(read(), read());
+
+        obj.c = read();
+
+        return obj;
+
+    }
+
+});
+</code></pre>
+<p>基本数据类型和引用数据类型的序列化器都已被注册，即 string，number，Array，Set，Map，RegExp，plain<br>objects，Error。</p>
+<p>关于本文<br>译者：@QC-L<br>译文：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/sPb20xx-I64mifKa2N3YFQ">https://mp.weixin.qq.com/s/sPb20xx-I64mifKa2N3YFQ</a><br>原文：<a target="_blank" rel="noopener" href="https://github.com/QC-L/changelog-v5-cn/commit/2a060edd261183adbc1da49344a353c21b04c9b2">https://github.com/QC-L/changelog-v5-cn/commit/2a060edd261183adbc1da49344a353c21b04c9b2</a></p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p>为你推荐</p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651233472&amp;idx=1&amp;sn=01eb557fc0ed307782f98cc5df2a63a6&amp;chksm=bd4945448a3ecc523982c6ec6eedcadaeb6d847754362b5bba257b7c0a972d38cd4520d7963f&amp;scene=21#wechat_redirect">【PPT】the road to webpack<br>5</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651230908&amp;idx=1&amp;sn=3af117fc01f14e173aa97c41d739c65b&amp;chksm=bd494b388a3ec22eea4601215af2fc393c3497c9b4af5f5a23327b25df7231ff5ae38144c1b0&amp;scene=21#wechat_redirect">【第1498期】webpack<br>loader机制源码解析</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651233358&amp;idx=1&amp;sn=f7153ed423caa21fb0b5fa513212403f&amp;chksm=bd4945ca8a3eccdc9c688f4f2b88b1027c9bbab65ba52202a92eeb8f119dd467c10775e3b42c&amp;scene=21#wechat_redirect">【第1702期】针对web开发者的浏览器缓存指南</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/b791217d.html"><div class="related-post-title">阿里面试：说一下从 url 输入到返回请求的过程</div><div class="related-post-meta"><time>2021-05-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/c767da51.html"><div class="related-post-title">轻松理解webpack热更新原理</div><div class="related-post-meta"><time>2019-12-05</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/ed850983.html"><div class="related-post-title">Next.js启动打包部署（out、standalone）</div><div class="related-post-meta"><time>2024-11-22</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/a5ee9b3f.html"><div class="related-post-title">TypeScript 泛型（Generics）详解及示例</div><div class="related-post-meta"><time>2025-10-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">TypeScript</span></div></div></a><a class="related-post-item" href="/article/a27d1eb.html"><div class="related-post-title">2020年1月Github上最热门的JavaScript开源项目</div><div class="related-post-meta"><time>2020-02-28</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/f004ee59.html">https://xuehuayu.cn/article/f004ee59.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/9928d550.html">CSS第四级选择器</a><a class="next" href="/article/cec80388.html">前端框架用vue还是react？清晰对比两者差异</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

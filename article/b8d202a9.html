@@ -1,0 +1,498 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>函数式编程入门教程 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">函数式编程入门教程</h1><div class="post-meta"><span class="date">2020-01-08</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 15</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/b8d202a9.html#waline-comment"><span class="waline-comment-count" data-path="/article/b8d202a9.html">0</span><span> 条评论</span></a><div class="post-content"><blockquote>
+<p>作者： 阮一峰</p>
+</blockquote>
+<blockquote>
+<p><code>原文链接：http://www.ruanyifeng.com/blog/2017/02/fp-tutorial.html</code></p>
+</blockquote>
+<hr>
+<p>你可能听说过函数式编程（Functional programming），甚至已经使用了一段时间。</p>
+<p>但是，你能说清楚，它到底是什么吗？</p>
+<span id="more"></span>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022201.jpg" alt="img"></p>
+<p>网上搜索一下，你会轻松找到好多答案。</p>
+<blockquote>
+<ul>
+<li>与面向对象编程（Object-oriented programming）和过程式编程（Procedural programming）并列的编程范式。</li>
+<li></li>
+</ul>
+</blockquote>
+<p>最主要的特征是，函数是<a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch2.html">第一等公民</a>。</p>
+<blockquote>
+<ul>
+<li>强调将计算过程分解成可复用的函数，典型例子就是<code>map</code>方法和<code>reduce</code>方法组合而成 [MapReduce</li>
+</ul>
+</blockquote>
+<p>算法](<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/MapReduce)%E3%80%82">https://zh.wikipedia.org/wiki/MapReduce)。</a></p>
+<blockquote>
+<ul>
+<li></li>
+</ul>
+</blockquote>
+<p>只有<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%AF%E5%87%BD%E6%95%B0">纯的</a>、没有<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B0%E5%89%AF%E4%BD%9C%E7%94%A8">副作用</a>的函数，才是合格的函数。</p>
+<p>上面这些说法都对，但还不够，都没有回答下面这个更深层的问题。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022202.jpg" alt="xuehuayu.cn"></p>
+<blockquote>
+<p><strong>为什么要这样做？</strong></p>
+</blockquote>
+<p>这就是，本文要解答的问题。我会通过最简单的语言，帮你理解函数式编程，并且学会它那些基本写法。</p>
+<p>需要声明的是，我不是专家，而是一个初学者，最近两年才真正开始学习函数式编程。一直苦于看不懂各种资料，立志要写一篇清晰易懂的教程。下面的内容肯定不够严密，甚至可能包含错误，但是我发现，像下面这样解释，初学者最容易懂。</p>
+<p>另外，本文比较长，阅读时请保持耐心。</p>
+<h2 id="一、范畴论"><a href="#一、范畴论" class="headerlink" title="一、范畴论"></a>一、范畴论</h2><p>函数式编程的起源，是一门叫做范畴论（Category Theory）的数学分支。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022205.jpg" alt="img"></p>
+<p>理解函数式编程的关键，就是理解范畴论。它是一门很复杂的数学，认为世界上所有的概念体系，都可以抽象成一个个的”范畴”（category）。</p>
+<h3 id="1-1-范畴的概念"><a href="#1-1-范畴的概念" class="headerlink" title="1.1 范畴的概念"></a>1.1 范畴的概念</h3><p>什么是范畴呢？</p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Category_(mathematics)">维基百科</a>的一句话定义如下。</p>
+<blockquote>
+<p>“范畴就是使用箭头连接的物体。”（In mathematics, a category is an algebraic structure that</p>
+</blockquote>
+<p>comprises “objects” that are linked by “arrows”. ）</p>
+<p>也就是说，彼此之间存在某种关系的概念、事物、对象等等，都构成”范畴”。随便什么东西，只要能找出它们之间的关系，就能定义一个”范畴”。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022210.jpg" alt="xuehuayu.cn"></p>
+<p>上图中，各个点与它们之间的箭头，就构成一个范畴。</p>
+<p>箭头表示范畴成员之间的关系，正式的名称叫做”态射”（morphism）。范畴论认为，同一个范畴的所有成员，就是不同状态的”变形”（transformation）。通过”态射”，一个成员可以变形成另一个成员。</p>
+<h3 id="1-2-数学模型"><a href="#1-2-数学模型" class="headerlink" title="1.2 数学模型"></a>1.2 数学模型</h3><p>既然”范畴”是满足某种变形关系的所有对象，就可以总结出它的数学模型。</p>
+<blockquote>
+<ul>
+<li>所有成员是一个集合</li>
+<li>变形关系是函数</li>
+</ul>
+</blockquote>
+<p>也就是说，范畴论是集合论更上层的抽象，简单的理解就是”集合 + 函数”。</p>
+<p>理论上通过函数，就可以从范畴的一个成员，算出其他所有成员。</p>
+<h3 id="1-3-范畴与容器"><a href="#1-3-范畴与容器" class="headerlink" title="1.3 范畴与容器"></a>1.3 范畴与容器</h3><p>我们可以把”范畴”想象成是一个容器，里面包含两样东西。</p>
+<blockquote>
+<ul>
+<li>值（value）</li>
+<li>值的变形关系，也就是函数。</li>
+</ul>
+</blockquote>
+<p>下面我们使用代码，定义一个简单的范畴。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>class Category {<br>constructor(val) {<br>this.val &#x3D; val;<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>addOne(x) {<br>return x + 1;<br>}<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面代码中，<code>Category</code>是一个类，也是一个容器，里面包含一个值（<code>this.val</code>）和一种变形关系（<code>addOne</code>）。你可能已经看出来了，这里的范畴，就是所有彼此之间相差<code>1</code>的数字。</p>
+<p>注意，本文后面的部分，凡是提到”容器”的地方，全部都是指”范畴”。</p>
+<h3 id="1-4-范畴论与函数式编程的关系"><a href="#1-4-范畴论与函数式编程的关系" class="headerlink" title="1.4 范畴论与函数式编程的关系"></a>1.4 范畴论与函数式编程的关系</h3><p>范畴论使用函数，表达范畴之间的关系。</p>
+<p>伴随着范畴论的发展，就发展出一整套函数的运算方法。这套方法起初只用于数学运算，后来有人将它在计算机上实现了，就变成了今天的”函数式编程”。</p>
+<p><strong>本质上，函数式编程只是范畴论的运算方法，跟数理逻辑、微积分、行列式是同一类东西，都是数学方法，只是碰巧它能用来写程序。</strong></p>
+<p>所以，你明白了吗，为什么函数式编程要求函数必须是纯的，不能有副作用？因为它是一种数学运算，原始目的就是求值，不做其他事情，否则就无法满足函数运算法则了。</p>
+<p>总之，在函数式编程中，函数就是一个管道（pipe）。这头进去一个值，那头就会出来一个新的值，没有其他作用。</p>
+<h2 id="二、函数的合成与柯里化"><a href="#二、函数的合成与柯里化" class="headerlink" title="二、函数的合成与柯里化"></a>二、函数的合成与柯里化</h2><p>函数式编程有两个最基本的运算：合成和柯里化。</p>
+<h3 id="2-1-函数的合成"><a href="#2-1-函数的合成" class="headerlink" title="2.1 函数的合成"></a>2.1 函数的合成</h3><p>如果一个值要经过多个函数，才能变成另外一个值，就可以把所有中间步骤合并成一个函数，这叫做”函数的合成”（compose）。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022204.png" alt="xuehuayu.cn"></p>
+<p>上图中，<code>X</code>和<code>Y</code>之间的变形关系是函数<code>f</code>，<code>Y</code>和<code>Z</code>之间的变形关系是函数<code>g</code>，那么<code>X</code>和<code>Z</code>之间的关系，就是<code>g</code>和<code>f</code>的合成函数<code>g·f</code>。</p>
+<p>下面就是代码实现了，我使用的是 JavaScript 语言。注意，本文所有示例代码都是简化过的，完整的 Demo 请看《参考链接》部分。</p>
+<p>合成两个函数的简单代码如下。</p>
+<blockquote>
+<p>const compose &#x3D; function (f, g) {<br>return function (x) {<br>return f(g(x));<br>};<br>}</p>
+</blockquote>
+<p>函数的合成还必须满足结合律。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022209.png" alt="img"></p>
+<blockquote>
+<p>compose(f, compose(g, h))<br>&#x2F;&#x2F; 等同于<br>compose(compose(f, g), h)<br>&#x2F;&#x2F; 等同于<br>compose(f, g, h)</p>
+</blockquote>
+<p>合成也是函数必须是纯的一个原因。因为一个不纯的函数，怎么跟其他函数合成？怎么保证各种合成以后，它会达到预期的行为？</p>
+<p>前面说过，函数就像数据的管道（pipe）。那么，函数合成就是将这些管道连了起来，让数据一口气从多个管道中穿过。</p>
+<h3 id="2-2-柯里化"><a href="#2-2-柯里化" class="headerlink" title="2.2 柯里化"></a>2.2 柯里化</h3><p><code>f(x)</code>和<code>g(x)</code>合成为<code>f(g(x))</code>，有一个隐藏的前提，就是<code>f</code>和<code>g</code>都只能接受一个参数。如果可以接受多个参数，比如<code>f(x, y)</code>和<code>g(a, b, c)</code>，函数合成就非常麻烦。</p>
+<p>这时就需要函数柯里化了。所谓”柯里化”，就是把一个多参数的函数，转化为单参数函数。</p>
+<blockquote>
+<p>&#x2F;&#x2F; 柯里化之前<br>function add(x, y) {<br>return x + y;<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>add(1, 2) &#x2F;&#x2F; 3</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>&#x2F;&#x2F; 柯里化之后<br>function addX(y) {<br>return function (x) {<br>return x + y;<br>};<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>addX(2)(1) &#x2F;&#x2F; 3</p>
+</blockquote>
+<p>有了柯里化以后，我们就能做到，所有函数只接受一个参数。后文的内容除非另有说明，都默认函数只有一个参数，就是所要处理的那个值。</p>
+<h2 id="三、函子"><a href="#三、函子" class="headerlink" title="三、函子"></a>三、函子</h2><p>函数不仅可以用于同一个范畴之中值的转换，还可以用于将一个范畴转成另一个范畴。这就涉及到了函子（Functor）。</p>
+<h3 id="3-1-函子的概念"><a href="#3-1-函子的概念" class="headerlink" title="3.1 函子的概念"></a>3.1 函子的概念</h3><p>函子是函数式编程里面最重要的数据类型，也是基本的运算单位和功能单位。</p>
+<p>它首先是一种范畴，也就是说，是一个容器，包含了值和变形关系。<strong>比较特殊的是，它的变形关系可以依次作用于每一个值，将当前容器变形成另一个容器。</strong></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022203.png" alt="xuehuayu.cn"></p>
+<p>上图中，左侧的圆圈就是一个函子，表示人名的范畴。外部传入函数<code>f</code>，会转成右边表示早餐的范畴。</p>
+<p>下面是一张更一般的图。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2017/bg2017022211.jpg" alt="xuehuayu.cn"></p>
+<p>上图中，函数<code>f</code>完成值的转换（<code>a</code>到<code>b</code>），将它传入函子，就可以实现范畴的转换（<code>Fa</code>到<code>Fb</code>）。</p>
+<h3 id="3-2-函子的代码实现"><a href="#3-2-函子的代码实现" class="headerlink" title="3.2 函子的代码实现"></a>3.2 函子的代码实现</h3><p>任何具有<code>map</code>方法的数据结构，都可以当作函子的实现。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>class Functor {<br>constructor(val) {<br>this.val &#x3D; val;<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>map(f) {<br>return new Functor(f(this.val));<br>}<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面代码中，<code>Functor</code>是一个函子，它的<code>map</code>方法接受函数<code>f</code>作为参数，然后返回一个新的函子，里面包含的值是被<code>f</code>处理过的（<code>f(this.val)</code>）。</p>
+<p><strong>一般约定，函子的标志就是容器具有<code>map</code>方法。该方法将容器里面的每一个值，映射到另一个容器。</strong></p>
+<p>下面是一些用法的示例。</p>
+<blockquote>
+<p>(new Functor(2)).map(function (two) {<br>return two + 2;<br>});<br>&#x2F;&#x2F; Functor(4)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>(new Functor(‘flamethrowers’)).map(function(s) {<br>return s.toUpperCase();<br>});<br>&#x2F;&#x2F; Functor(‘FLAMETHROWERS’)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>(new Functor(‘bombs’)).map(<em>.concat(‘ away’)).map(</em>.prop(‘length’));<br>&#x2F;&#x2F; Functor(10)</p>
+</blockquote>
+<p>上面的例子说明，函数式编程里面的运算，都是通过函子完成，即运算不直接针对值，而是针对这个值的容器—-函子。函子本身具有对外接口（<code>map</code>方法），各种函数就是运算符，通过接口接入容器，引发容器里面的值的变形。</p>
+<p>因此，**学习函数式编程，实际上就是学习函子的各种运算。**由于可以把运算方法封装在函子里面，所以又衍生出各种不同类型的函子，有多少种运算，就有多少种函子。函数式编程就变成了运用不同的函子，解决实际问题。</p>
+<h2 id="四、of-方法"><a href="#四、of-方法" class="headerlink" title="四、of 方法"></a>四、of 方法</h2><p>你可能注意到了，上面生成新的函子的时候，用了<code>new</code>命令。这实在太不像函数式编程了，因为<code>new</code>命令是面向对象编程的标志。</p>
+<p><strong>函数式编程一般约定，函子有一个<code>of</code>方法，用来生成新的容器。</strong></p>
+<p>下面就用<code>of</code>方法替换掉<code>new</code>。</p>
+<blockquote>
+<p>Functor.of &#x3D; function(val) {<br>return new Functor(val);<br>};</p>
+</blockquote>
+<p>然后，前面的例子就可以改成下面这样。</p>
+<blockquote>
+<p>Functor.of(2).map(function (two) {<br>return two + 2;<br>});<br>&#x2F;&#x2F; Functor(4)</p>
+</blockquote>
+<p>这就更像函数式编程了。</p>
+<h2 id="五、Maybe-函子"><a href="#五、Maybe-函子" class="headerlink" title="五、Maybe 函子"></a>五、Maybe 函子</h2><p>函子接受各种函数，处理容器内部的值。这里就有一个问题，容器内部的值可能是一个空值（比如<code>null</code>），而外部函数未必有处理空值的机制，如果传入空值，很可能就会出错。</p>
+<blockquote>
+<p>Functor.of(null).map(function (s) {<br>return s.toUpperCase();<br>});<br>&#x2F;&#x2F; TypeError</p>
+</blockquote>
+<p>上面代码中，函子里面的值是<code>null</code>，结果小写变成大写的时候就出错了。</p>
+<p>Maybe 函子就是为了解决这一类问题而设计的。简单说，它的<code>map</code>方法里面设置了空值检查。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>class Maybe extends Functor {<br>map(f) {<br>return this.val ? Maybe.of(f(this.val)) : Maybe.of(null);<br>}<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>有了 Maybe 函子，处理空值就不会出错了。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>Maybe.of(null).map(function (s) {<br>return s.toUpperCase();<br>});<br>&#x2F;&#x2F; Maybe(null)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<h2 id="六、Either-函子"><a href="#六、Either-函子" class="headerlink" title="六、Either 函子"></a>六、Either 函子</h2><p>条件运算<code>if...else</code>是最常见的运算之一，函数式编程里面，使用 Either 函子表达。</p>
+<p>Either 函子内部有两个值：左值（<code>Left</code>）和右值（<code>Right</code>）。右值是正常情况下使用的值，左值是右值不存在时使用的默认值。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>class Either extends Functor {<br>constructor(left, right) {<br>this.left &#x3D; left;<br>this.right &#x3D; right;<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>map(f) {<br>return this.right ?<br>Either.of(this.left, f(this.right)) :<br>Either.of(f(this.left), this.right);<br>}<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>Either.of &#x3D; function (left, right) {<br>return new Either(left, right);<br>};</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>下面是用法。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>var addOne &#x3D; function (x) {<br>return x + 1;<br>};</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>Either.of(5, 6).map(addOne);<br>&#x2F;&#x2F; Either(5, 7);</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>Either.of(1, null).map(addOne);<br>&#x2F;&#x2F; Either(2, null);</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面代码中，如果右值有值，就使用右值，否则使用左值。通过这种方式，Either 函子表达了条件运算。</p>
+<p>Either 函子的常见用途是提供默认值。下面是一个例子。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>Either<br>.of({address: ‘xxx’}, currentUser.address)<br>.map(updateField);</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面代码中，如果用户没有提供地址，Either 函子就会使用左值的默认地址。</p>
+<p>Either 函子的另一个用途是代替<code>try...catch</code>，使用左值表示错误。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>function parseJSON(json) {<br>try {<br>return Either.of(null, JSON.parse(json));<br>} catch (e: Error) {<br>return Either.of(e, null);<br>}<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面代码中，左值为空，就表示没有出错，否则左值会包含一个错误对象<code>e</code>。一般来说，所有可能出错的运算，都可以返回一个 Either 函子。</p>
+<h2 id="七、ap-函子"><a href="#七、ap-函子" class="headerlink" title="七、ap 函子"></a>七、ap 函子</h2><p>函子里面包含的值，完全可能是函数。我们可以想象这样一种情况，一个函子的值是数值，另一个函子的值是函数。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>function addTwo(x) {<br>return x + 2;<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>const A &#x3D; Functor.of(2);<br>const B &#x3D; Functor.of(addTwo)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面代码中，函子<code>A</code>内部的值是<code>2</code>，函子<code>B</code>内部的值是函数<code>addTwo</code>。</p>
+<p>有时，我们想让函子<code>B</code>内部的函数，可以使用函子<code>A</code>内部的值进行运算。这时就需要用到 ap 函子。</p>
+<p>ap 是 applicative（应用）的缩写。凡是部署了<code>ap</code>方法的函子，就是 ap 函子。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>class Ap extends Functor {<br>ap(F) {<br>return Ap.of(this.val(F.val));<br>}<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>注意，<code>ap</code>方法的参数不是函数，而是另一个函子。</p>
+<p>因此，前面例子可以写成下面的形式。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>Ap.of(addTwo).ap(Functor.of(2))<br>&#x2F;&#x2F; Ap(4)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>ap 函子的意义在于，对于那些多参数的函数，就可以从多个容器之中取值，实现函子的链式操作。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>function add(x) {<br>return function (y) {<br>return x + y;<br>};<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>Ap.of(add).ap(Maybe.of(2)).ap(Maybe.of(3));<br>&#x2F;&#x2F; Ap(5)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面代码中，函数<code>add</code>是柯里化以后的形式，一共需要两个参数。通过 ap 函子，我们就可以实现从两个容器之中取值。它还有另外一种写法。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>Ap.of(add(2)).ap(Maybe.of(3));</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<h2 id="八、Monad-函子"><a href="#八、Monad-函子" class="headerlink" title="八、Monad 函子"></a>八、Monad 函子</h2><p>函子是一个容器，可以包含任何值。函子之中再包含一个函子，也是完全合法的。但是，这样就会出现多层嵌套的函子。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>Maybe.of(<br>Maybe.of(<br>Maybe.of({name: ‘Mulburry’, number: 8402})<br>)<br>)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面这个函子，一共有三个<code>Maybe</code>嵌套。如果要取出内部的值，就要连续取三次<code>this.val</code>。这当然很不方便，因此就出现了 Monad 函子。</p>
+<p>**Monad<br>函子的作用是，总是返回一个单层的函子。**它有一个<code>flatMap</code>方法，与<code>map</code>方法作用相同，唯一的区别是如果生成了一个嵌套函子，它会取出后者内部的值，保证返回的永远是一个单层的容器，不会出现嵌套的情况。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>class Monad extends Functor {<br>join() {<br>return this.val;<br>}<br>flatMap(f) {<br>return this.map(f).join();<br>}<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面代码中，如果函数<code>f</code>返回的是一个函子，那么<code>this.map(f)</code>就会生成一个嵌套的函子。所以，<code>join</code>方法保证了<code>flatMap</code>方法总是返回一个单层的函子。这意味着嵌套的函子会被铺平（flatten）。</p>
+<h2 id="九、IO-操作"><a href="#九、IO-操作" class="headerlink" title="九、IO 操作"></a>九、IO 操作</h2><p>Monad 函子的重要应用，就是实现 I&#x2F;O （输入输出）操作。</p>
+<p>I&#x2F;O 是不纯的操作，普通的函数式编程没法做，这时就需要把 IO 操作写成<code>Monad</code>函子，通过它来完成。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>var fs &#x3D; require(‘fs’);</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>var readFile &#x3D; function(filename) {<br>return new IO(function() {<br>return fs.readFileSync(filename, ‘utf-8’);<br>});<br>};</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>var print &#x3D; function(x) {<br>return new IO(function() {<br>console.log(x);<br>return x;<br>});<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面代码中，读取文件和打印本身都是不纯的操作，但是<code>readFile</code>和<code>print</code>却是纯函数，因为它们总是返回 IO 函子。</p>
+<p>如果 IO 函子是一个<code>Monad</code>，具有<code>flatMap</code>方法，那么我们就可以像下面这样调用这两个函数。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>readFile(‘.&#x2F;user.txt’)<br>.flatMap(print)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>这就是神奇的地方，上面的代码完成了不纯的操作，但是因为<code>flatMap</code>返回的还是一个 IO<br>函子，所以这个表达式是纯的。我们通过一个纯的表达式，完成带有副作用的操作，这就是 Monad 的作用。</p>
+<p>由于返回还是 IO 函子，所以可以实现链式操作。因此，在大多数库里面，<code>flatMap</code>方法被改名成<code>chain</code>。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>var tail &#x3D; function(x) {<br>return new IO(function() {<br>return x[x.length - 1];<br>});<br>}</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>readFile(‘.&#x2F;user.txt’)<br>.flatMap(tail)<br>.flatMap(print)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>&#x2F;&#x2F; 等同于<br>readFile(‘.&#x2F;user.txt’)<br>.chain(tail)<br>.chain(print)</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>上面代码读取了文件<code>user.txt</code>，然后选取最后一行输出。</p>
+<h2 id="十、参考链接"><a href="#十、参考链接" class="headerlink" title="十、参考链接"></a>十、参考链接</h2><ul>
+<li>[JS</li>
+</ul>
+<p>函数式编程指南](<a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/">https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/</a>)</p>
+<ul>
+<li>[Taking Things Out of Context: Functors in</li>
+</ul>
+<p>JavaScript](<a target="_blank" rel="noopener" href="http://mattfield.github.io/javascript/2013/07/28/taking-things-out-of-context-functors-in-javascript/">http://mattfield.github.io/javascript/2013/07/28/taking-things-out-of-context-functors-in-javascript/</a>)</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/buzzdecafe/5721205">Functor.js</a></li>
+<li>[Maybe, Either &amp; Try Functors in</li>
+</ul>
+<p>ES6](<a target="_blank" rel="noopener" href="https://gist.github.com/rjchatfield/54393388f80f55fcc81a">https://gist.github.com/rjchatfield/54393388f80f55fcc81a</a>)</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://rs.io/why-category-theory-matters/">Why Category Theory Matters</a></li>
+</ul>
+<p>（正文完）</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/30e2cc00.html"><div class="related-post-title">react预览pdf和图片遇到的一些坑</div><div class="related-post-meta"><time>2020-04-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/2846d64b.html"><div class="related-post-title">vue的input输入框中截取字符串改变时不刷新问题</div><div class="related-post-meta"><time>2021-11-05</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/1f1295e4.html"><div class="related-post-title">腾讯开源内部跨端框架 Hippy</div><div class="related-post-meta"><time>2019-12-25</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/53803e6.html"><div class="related-post-title">git提交注释规范</div><div class="related-post-meta"><time>2022-06-17</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/ca90758a.html"><div class="related-post-title">7 个令人兴奋的 JavaScript 新特性</div><div class="related-post-meta"><time>2019-12-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/b8d202a9.html">https://xuehuayu.cn/article/b8d202a9.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/c6e9bfd3.html">如何在url中传一个对象？</a><a class="next" href="/article/c76adf7e.html">😇原生JS灵魂之问, 冲刺🚀进阶最后一公里</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

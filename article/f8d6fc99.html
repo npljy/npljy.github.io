@@ -1,0 +1,936 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>React Hooks 详解+项目实战 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">React Hooks 详解+项目实战</h1><div class="post-meta"><span class="date">2019-11-06</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 9.1k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 38</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/f8d6fc99.html#waline-comment"><span class="waline-comment-count" data-path="/article/f8d6fc99.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5dbbdbd5f265da4d4b5fe57d</code></p>
+<span id="more"></span>
+
+<h2 id="一、什么是-Hooks"><a href="#一、什么是-Hooks" class="headerlink" title="一、什么是 Hooks"></a>一、什么是 Hooks</h2><ul>
+<li>React 一直都提倡使用<strong><strong>函数组件</strong></strong>，但是有时候需要使用 state</li>
+</ul>
+<p>或者其他一些功能时，只能使用<strong><strong>类组件</strong></strong>，因为函数组件没有实例，没有生命周期函数，只有类组件才有</p>
+<ul>
+<li>Hooks 是 React 16.8 新增的特性，它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性</li>
+<li>如果你在编写函数组件并意识到需要向其添加一些 state，以前的做法是必须将其它转化为 class。现在你可以直接在现有的函数组件中使用 Hooks</li>
+<li>凡是 use 开头的 React API 都是 Hooks</li>
+</ul>
+<h2 id="二、Hooks-解决的问题"><a href="#二、Hooks-解决的问题" class="headerlink" title="二、Hooks 解决的问题"></a>二、Hooks 解决的问题</h2><h3 id="1-类组件的不足"><a href="#1-类组件的不足" class="headerlink" title="1. 类组件的不足"></a>1. 类组件的不足</h3><ul>
+<li><strong>状态逻辑难复用：</strong> 在组件之间复用状态逻辑很难，可能要用到 <strong>render props</strong> （<strong>渲染属性</strong>）或者</li>
+</ul>
+<p><strong>HOC</strong>（<strong>高阶组件</strong>），但无论是渲染属性，还是高阶组件，都会在原先的组件外包裹一层父容器（一般都是 div 元素），<strong>导致层级冗余</strong></p>
+<ul>
+<li><strong>趋向复杂难以维护：</strong></li>
+<li>在生命周期函数中混杂不相干的逻辑（如：在 <code>componentDidMount</code> 中注册事件以及其他的逻辑，在 <code>componentWillUnmount</code></li>
+</ul>
+<p>中卸载事件，这样分散不集中的写法，很容易写出 bug ）</p>
+<ul>
+<li><p>类组件中到处都是对状态的访问和处理，导致组件难以拆分成更小的组件</p>
+</li>
+<li><p><strong>this 指向问题</strong>：父组件给子组件传递函数时，必须绑定 this</p>
+</li>
+<li><p>react 中的组件四种绑定 this 方法的区别</p>
+<p>  class App extends React.Component&lt;any, any&gt; {<br>  handleClick2;<br><br>  constructor(props) {<br>      super(props);<br>      this.state &#x3D; {<br>          num: 1,<br>          title: ‘ react study’<br>      };<br>      this.handleClick2 &#x3D; this.handleClick1.bind(this);<br>  }<br><br>  handleClick1() {<br>      this.setState({<br>          num: this.state.num + 1,<br>      })<br>  }<br><br>  handleClick3 &#x3D; () &#x3D;&gt; {<br>      this.setState({<br>          num: this.state.num + 1,<br>      })<br>  };<br><br>  render() {<br>      return (<div><br>          <h2>Ann, {this.state.num}</h2><br>          <button onClick={this.handleClick2}>btn1</button><br>          <button onClick={this.handleClick1.bind(this)}>btn2</button><br>          &lt;button onClick&#x3D;{() &#x3D;&gt; this.handleClick1()}&gt;btn3</button><br>          <button onClick={this.handleClick3}>btn4</button><br>      </div>)<br>  }<br>  }<br>  复制代码</p>
+</li>
+</ul>
+<p>前提：子组件内部做了性能优化，如（<strong>React.PureComponent</strong>）</p>
+<ul>
+<li>第一种是<strong>在构造函数中绑定 this</strong>：那么每次父组件刷新的时候，如果传递给子组件其他的 props 值不变，那么子组件就不会刷新；</li>
+<li>第二种是<strong>在 render() 函数里面绑定 this</strong>：因为 **bind</li>
+</ul>
+<p>函数会返回一个新的函数**，所以每次父组件刷新时，都会重新生成一个函数，即使父组件传递给子组件其他的 props 值不变，子组件每次都会刷新；</p>
+<ul>
+<li>第三种是<strong>使用箭头函数</strong>：父组件刷新的时候，即使两个箭头函数的函数体是一样的，都会生成一个新的箭头函数，所以子组件每次都会刷新；</li>
+<li>第四种是<strong>使用类的静态属性：原理和第一种方法差不多，比第一种更简洁</strong></li>
+</ul>
+<p>综上所述，如果不注意的话，很容易写成第三种写法，导致性能上有所损耗。</p>
+<h3 id="2-Hooks-优势"><a href="#2-Hooks-优势" class="headerlink" title="2. Hooks 优势"></a>2. Hooks 优势</h3><ul>
+<li>能优化类组件的三大问题</li>
+<li>能在无需修改组件结构的情况下复用状态逻辑（自定义 Hooks ）</li>
+<li>能将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据）</li>
+<li><strong>副作用的关注点分离</strong>：**副作用指那些没有发生在数据向视图转换过程中的逻辑，如 <code>ajax</code> 请求、访问原生<code>dom</code></li>
+</ul>
+<p>元素、本地持久化缓存、绑定&#x2F;解绑事件、添加订阅、设置定时器、记录日志等**。以往这些副作用都是写在类组件生命周期函数中的。而 <code>useEffect</code><br>在全部渲染完毕后才会执行，<code>useLayoutEffect</code> 会在浏览器 <code>layout</code> 之后，<code>painting</code> 之前执行。</p>
+<h2 id="三、注意事项"><a href="#三、注意事项" class="headerlink" title="三、注意事项"></a>三、注意事项</h2><ul>
+<li><p><strong>只能在<strong><strong>函数内部的最外层</strong></strong>调用 Hook，不要在循环、条件判断或者子函数中调用</strong></p>
+</li>
+<li><p><strong>只能在 React 的<strong><strong>函数组件</strong></strong>中调用 Hook，不要在其他 JavaScript 函数中调用</strong></p>
+</li>
+<li></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://reactjs.org/warnings/invalid-hook-call-warning.html"><strong>https://reactjs.org/warnings/invalid-hook-call-warning.html</strong></a></p>
+<h2 id="四、useState-useMemo-useCallback"><a href="#四、useState-useMemo-useCallback" class="headerlink" title="四、useState &amp; useMemo &amp; useCallback"></a>四、useState &amp; useMemo &amp; useCallback</h2><ul>
+<li><strong>React 假设当你多次调用 useState 的时候，你能保证每次渲染时它们的<strong><strong>调用顺序</strong></strong>是不变的。</strong></li>
+<li>通过在函数组件里调用它来给组件添加一些内部 state，React会 <strong>在重复渲染时保留这个 state</strong></li>
+<li>useState 唯一的参数就是初始 state</li>
+<li><strong>useState 会返回一个数组</strong>：<strong>一个 state，一个更新 state 的函数</strong></li>
+<li>在初始化渲染期间，返回的状态 (state) 与传入的第一个参数 (initialState) 值相同</li>
+<li>你可以在事件处理函数中或其他一些地方调用这个函数。它类似 class 组件的 this.setState，但是它**不会把新的 state 和旧的</li>
+</ul>
+<p>state 进行合并，而是直接替换**</p>
+<pre><code>// 这里可以任意命名，因为返回的是数组，数组解构const [state, setState] = useState(initialState);
+复制代码
+</code></pre>
+<h3 id="4-1-使用例子"><a href="#4-1-使用例子" class="headerlink" title="4.1 使用例子"></a>4.1 使用例子</h3><pre><code>import React, { useState } from&quot;react&quot;;
+import ReactDOM from&quot;react-dom&quot;;
+
+functionChild1(porps) {
+  console.log(porps);
+  const { num, handleClick } = porps;
+  return (
+    &lt;divonClick={() =&gt; {
+        handleClick(num + 1);
+      } }
+    &gt;
+      child
+    &lt;/div&gt;
+  );
+}
+
+functionChild2(porps) {
+  // console.log(porps);const { text, handleClick } = porps;
+  return (
+    &lt;div&gt;
+      child2
+      &lt;Grandson text={text} handleClick={handleClick} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Grandson(porps) {
+  console.log(porps);
+  const { text, handleClick } = porps;
+  return (
+    &lt;div
+      onClick={() =&gt; {
+        handleClick(text + 1);
+      } }
+    &gt;
+      grandson
+    &lt;/div&gt;
+  );
+}
+
+function Parent() {
+  let [num, setNum] = useState(0);
+  let [text, setText] = useState(1);
+
+  return (
+    &lt;div&gt;
+      &lt;Child1 num={num} handleClick={setNum} /&gt;
+      &lt;Child2 text={text} handleClick={setText} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+const rootElement = document.getElementById(&quot;root&quot;);
+ReactDOM.render(&lt;Parent /&gt;, rootElement);
+复制代码
+</code></pre>
+<h3 id="4-2-每次渲染都是独立的闭包"><a href="#4-2-每次渲染都是独立的闭包" class="headerlink" title="4.2 每次渲染都是独立的闭包"></a>4.2 每次渲染都是独立的闭包</h3><ul>
+<li><p>每一次渲染都有它自己的 Props 和 State</p>
+</li>
+<li><p>每一次渲染都有它自己的事件处理函数</p>
+</li>
+<li><p>当点击更新状态的时候，函数组件都会重新被调用，那么每次渲染都是独立的，取到的值不会受后面操作的影响</p>
+<p>  functionCounter2(){<br>let [number,setNumber] &#x3D; useState(0);<br>functionalertNumber(){<br>  setTimeout(()&#x3D;&gt;{<br>    &#x2F;&#x2F; alert 只能获取到点击按钮时的那个状态<br>    alert(number);<br>  },3000);<br>}<br>return (<br>    &lt;&gt;<p>{number}</p>&lt;buttononClick&#x3D;{()&#x3D;&gt;setNumber(number+1)}&gt;+</button>&lt;buttononClick&#x3D;{alertNumber}&gt;alertNumber</button>&lt;&#x2F;&gt;<br>)<br>  }<br>  复制代码</p>
+</li>
+</ul>
+<h3 id="4-3-函数式更新"><a href="#4-3-函数式更新" class="headerlink" title="4.3 函数式更新"></a>4.3 函数式更新</h3><ul>
+<li>**如果新的 state 需要通过使用先前的 state 计算得出，那么可以将回调函数当做参数传递给 setState。该回调函数将接收先前的</li>
+</ul>
+<p>state，并返回一个更新后的值。**</p>
+<pre><code>functionCounter(){
+    let [number,setNumber] = useState(0);
+    functionlazy(){
+        setTimeout(() =&gt; {
+            // setNumber(number+1);// 这样每次执行时都会去获取一遍 state，而不是使用点击触发时的那个 state
+            setNumber(number=&gt;number+1);
+        }, 3000);
+    }
+    return (
+        &lt;&gt;&lt;p&gt;{number}&lt;/p&gt;&lt;buttononClick={()=&gt;setNumber(number+1)}&gt;+&lt;/button&gt;&lt;buttononClick={lazy}&gt;lazy&lt;/button&gt;&lt;/&gt;
+    )
+}
+复制代码
+</code></pre>
+<h3 id="4-4-惰性初始化-state"><a href="#4-4-惰性初始化-state" class="headerlink" title="4.4 惰性初始化 state"></a>4.4 惰性初始化 state</h3><ul>
+<li><p><strong>initialState 参数只会在组件的初始化渲染中起作用，后续渲染时会被忽略</strong></p>
+</li>
+<li><p><strong>如果初始 state 需要通过复杂计算获得，则可以传入一个函数，在函数中计算并返回初始的 state，此函数只在初始渲染时被调用</strong></p>
+<p>  functionCounter5(props){<br>  console.log(‘Counter5 render’);<br>  &#x2F;&#x2F; 这个函数只在初始渲染时执行一次，后续更新状态重新渲染组件时，该函数就不会再被调用functiongetInitState(){<br>      return {number:props.number};<br>  }<br>  let [counter,setCounter] &#x3D; useState(getInitState);<br>  return (<br>      &lt;&gt;<p>{counter.number}</p>&lt;buttononClick&#x3D;{()&#x3D;&gt;setCounter({number:counter.number+1})}&gt;+</button>&lt;buttononClick&#x3D;{()&#x3D;&gt;setCounter(counter)}&gt;setCounter</button>&lt;&#x2F;&gt;<br>  )<br>  }<br>  复制代码</p>
+</li>
+</ul>
+<h3 id="4-5-性能优化"><a href="#4-5-性能优化" class="headerlink" title="4.5 性能优化"></a>4.5 性能优化</h3><h4 id="4-5-1-Object-is-（浅比较）"><a href="#4-5-1-Object-is-（浅比较）" class="headerlink" title="4.5.1 Object.is （浅比较）"></a>4.5.1 Object.is （浅比较）</h4><ul>
+<li>Hook 内部使用 Object.is 来比较新&#x2F;旧 state 是否相等</li>
+<li><strong>与 class 组件中的 setState 方法不同，如果你修改状态的时候，传的状态值没有变化，则不重新渲染</strong></li>
+<li>**与 class 组件中的 setState 方法不同，useState 不会自动合并更新对象。你可以用函数式的 setState</li>
+</ul>
+<p>结合展开运算符来达到合并更新对象的效果**</p>
+<pre><code>functionCounter(){
+    const [counter,setCounter] = useState({name:&#39;计数器&#39;,number:0});
+    console.log(&#39;render Counter&#39;)
+    // 如果你修改状态的时候，传的状态值没有变化，则不重新渲染return (
+        &lt;&gt;&lt;p&gt;{counter.name}:{counter.number}&lt;/p&gt;&lt;buttononClick={()=&gt;setCounter({...counter,number:counter.number+1})}&gt;+&lt;/button&gt;&lt;buttononClick={()=&gt;setCounter(counter)}&gt;++&lt;/button&gt;&lt;/&gt;
+    )
+}
+复制代码
+</code></pre>
+<h4 id="4-5-2-减少渲染次数"><a href="#4-5-2-减少渲染次数" class="headerlink" title="4.5.2 减少渲染次数"></a>4.5.2 减少渲染次数</h4><ul>
+<li><strong>默认情况，只要父组件状态变了（不管子组件依不依赖该状态），子组件也会重新渲染</strong></li>
+<li><strong>一般的优化：</strong></li>
+</ul>
+<ol>
+<li><strong>类组件</strong>：可以使用 <code>pureComponent</code> ；</li>
+<li><strong>函数组件</strong>：使用 <code>React.memo</code> ，将函数组件传递给 <code>memo</code><br>之后，就会返回一个新的组件，新组件的功能：<strong>如果接受到的属性不变，则不重新渲染函数</strong>；</li>
+</ol>
+<ul>
+<li><strong>但是怎么保证属性不会变尼？这里使用 useState ，每次更新都是独立的</strong>，&#96;const [number,setNumber] &#x3D;</li>
+</ul>
+<p>useState(0)<code>**也就是说每次都会生成一个新的值（哪怕这个值没有变化），即使使用了</code>React.memo&#96; ，也还是会重新渲染**</p>
+<pre><code>import React,{useState,memo,useMemo,useCallback} from&#39;react&#39;;
+
+functionSubCounter({onClick,data}){
+    console.log(&#39;SubCounter render&#39;);
+    return (
+        &lt;buttononClick={onClick}&gt;{data.number}&lt;/button&gt;
+    )
+}
+SubCounter = memo(SubCounter);
+exportdefaultfunctionCounter6(){
+    console.log(&#39;Counter render&#39;);
+    const [name,setName]= useState(&#39;计数器&#39;);
+    const [number,setNumber] = useState(0);
+    const data ={number};
+    const addClick = ()=&gt;{
+        setNumber(number+1);
+    };
+    return (
+        &lt;&gt;
+            &lt;input type=&quot;text&quot; value={name} onChange={(e)=&gt;setName(e.target.value)}/&gt;
+            &lt;SubCounter data={data} onClick={addClick}/&gt;
+        &lt;/&gt;
+    )
+}
+复制代码
+</code></pre>
+<ul>
+<li><strong>更深入的优化：</strong></li>
+</ul>
+<ol>
+<li><p><strong>useCallback</strong>：接收一个内联回调函数参数和一个依赖项数组（子组件依赖父组件的状态，即子组件会使用到父组件的值） ，useCallback<br>会返回该回调函数的 memoized 版本，该回调函数仅在某个依赖项改变时才会更新</p>
+</li>
+<li><p><strong>useMemo</strong>：把创建函数和依赖项数组作为参数传入 <code>useMemo</code>，它仅会在某个依赖项改变时才重新计算 memoized<br>值。这种优化有助于避免在每次渲染时都进行高开销的计算</p>
+<p> import React,{useState,memo,useMemo,useCallback} from’react’;</p>
+<p> functionSubCounter({onClick,data}){<br> console.log(‘SubCounter render’);<br> return (<br>     &lt;buttononClick&#x3D;{onClick}&gt;{data.number}</button><br> )<br> }<br> SubCounter &#x3D; memo(SubCounter);</p>
+<p> let oldData,oldAddClick;<br> exportdefaultfunctionCounter2(){<br> console.log(‘Counter render’);<br> const [name,setName]&#x3D; useState(‘计数器’);<br> const [number,setNumber] &#x3D; useState(0);<br> &#x2F;&#x2F; 父组件更新时，这里的变量和函数每次都会重新创建，那么子组件接受到的属性每次都会认为是新的&#x2F;&#x2F; 所以子组件也会随之更新，这时候可以用到 useMemo&#x2F;&#x2F; 有没有后面的依赖项数组很重要，否则还是会重新渲染&#x2F;&#x2F; 如果后面的依赖项数组没有值的话，即使父组件的 number 值改变了，子组件也不会去更新&#x2F;&#x2F;const data &#x3D; useMemo(()&#x3D;&gt;({number}),[]);const data &#x3D; useMemo(()&#x3D;&gt;({number}),[number]);<br> console.log(‘data&#x3D;&#x3D;&#x3D;oldData ‘,data&#x3D;&#x3D;&#x3D;oldData);<br> oldData &#x3D; data;<br><br> &#x2F;&#x2F; 有没有后面的依赖项数组很重要，否则还是会重新渲染const addClick &#x3D; useCallback(()&#x3D;&gt;{<br>     setNumber(number+1);<br> },[number]);<br> console.log(‘addClick&#x3D;&#x3D;&#x3D;oldAddClick ‘,addClick&#x3D;&#x3D;&#x3D;oldAddClick);<br> oldAddClick&#x3D;addClick;<br> return (<br>     &lt;&gt;<br>         &lt;input type&#x3D;”text” value&#x3D;{name} onChange&#x3D;{(e)&#x3D;&gt;setName(e.target.value)}&#x2F;&gt;<br>         <SubCounter data={data} onClick={addClick}/><br>     &lt;&#x2F;&gt;<br> )<br> }<br> 复制代码</p>
+</li>
+</ol>
+<h3 id="4-6-useState-源码中的链表实现"><a href="#4-6-useState-源码中的链表实现" class="headerlink" title="4.6 useState 源码中的链表实现"></a>4.6 useState 源码中的链表实现</h3><pre><code>import React from&#39;react&#39;;
+import ReactDOM from&#39;react-dom&#39;;
+
+let firstWorkInProgressHook = {memoizedState: null, next: null};
+let workInProgressHook;
+
+functionuseState(initState) {
+    let currentHook = workInProgressHook.next ? workInProgressHook.next : {memoizedState: initState, next: null};
+
+    functionsetState(newState) {
+        currentHook.memoizedState = newState;
+        render();
+    }
+    // 这就是为什么 useState 书写顺序很重要的原因// 假如某个 useState 没有执行，会导致指针移动出错，数据存取出错if (workInProgressHook.next) {
+        // 这里只有组件刷新的时候，才会进入// 根据书写顺序来取对应的值// console.log(workInProgressHook);
+        workInProgressHook = workInProgressHook.next;
+    } else {
+        // 只有在组件初始化加载时，才会进入// 根据书写顺序，存储对应的数据// 将 firstWorkInProgressHook 变成一个链表结构
+        workInProgressHook.next = currentHook;
+        // 将 workInProgressHook 指向 {memoizedState: initState, next: null}
+        workInProgressHook = currentHook;
+        // console.log(firstWorkInProgressHook);
+    }
+    return [currentHook.memoizedState, setState];
+}
+
+functionCounter() {
+    // 每次组件重新渲染的时候，这里的 useState 都会重新执行const [name, setName] = useState(&#39;计数器&#39;);
+    const [number, setNumber] = useState(0);
+    return (
+        &lt;&gt;&lt;p&gt;{name}:{number}&lt;/p&gt;&lt;buttononClick={() =&gt; setName(&#39;新计数器&#39; + Date.now())}&gt;新计数器&lt;/button&gt;&lt;buttononClick={() =&gt; setNumber(number + 1)}&gt;+&lt;/button&gt;&lt;/&gt;
+    )
+}
+
+function render() {
+    // 每次重新渲染的时候，都将 workInProgressHook 指向 firstWorkInProgressHook
+    workInProgressHook = firstWorkInProgressHook;
+    ReactDOM.render(&lt;Counter/&gt;, document.getElementById(&#39;root&#39;));
+}
+
+render();
+复制代码
+</code></pre>
+<h2 id="五、useReducer"><a href="#五、useReducer" class="headerlink" title="五、useReducer"></a>五、useReducer</h2><ul>
+<li>useReducer 和 redux 中 reducer 很像</li>
+<li>useState 内部就是靠 useReducer 来实现的</li>
+<li>useState 的替代方案，它接收一个形如 (state, action) &#x3D;&gt; newState 的 reducer，并返回当前的 state</li>
+</ul>
+<p>以及与其配套的 dispatch 方法</p>
+<ul>
+<li>在某些场景下，useReducer 会比 useState 更适用，例如 state 逻辑较复杂且包含多个子值，或者下一个 state 依赖于之前的</li>
+</ul>
+<p>state 等</p>
+<pre><code>let initialState = 0;
+// 如果你希望初始状态是一个{number:0}// 可以在第三个参数中传递一个这样的函数 ()=&gt;({number:initialState})// 这个函数是一个惰性初始化函数，可以用来进行复杂的计算，然后返回最终的 initialStateconst [state, dispatch] = useReducer(reducer, initialState, init);
+复制代码
+
+const initialState = 0;
+functionreducer(state, action) {
+  switch (action.type) {
+    case&#39;increment&#39;:
+      return {number: state.number + 1};
+    case&#39;decrement&#39;:
+      return {number: state.number - 1};
+    default:
+      thrownewError();
+  }
+}
+functioninit(initialState){
+    return {number:initialState};
+}
+functionCounter(){
+    const [state, dispatch] = useReducer(reducer, initialState,init);
+    return (
+        &lt;&gt;
+          Count: {state.number}
+          &lt;buttononClick={() =&gt; dispatch({type: &#39;increment&#39;})}&gt;+&lt;/button&gt;&lt;buttononClick={() =&gt; dispatch({type: &#39;decrement&#39;})}&gt;-&lt;/button&gt;&lt;/&gt;
+    )
+}
+复制代码
+</code></pre>
+<h2 id="六、useContext"><a href="#六、useContext" class="headerlink" title="六、useContext"></a>六、useContext</h2><ul>
+<li>接收一个 context 对象（React.createContext 的返回值）并返回该 context 的当前值</li>
+<li>当前的 context 值由上层组件中距离当前组件最近的 &lt;MyContext.Provider&gt; 的 value prop 决定</li>
+<li>当组件上层最近的 &lt;MyContext.Provider&gt; 更新时，该 Hook 会触发重渲染，并使用最新传递给 MyContext provider 的</li>
+</ul>
+<p>context value 值</p>
+<ul>
+<li><strong>useContext(MyContext) 相当于 class 组件中的</strong><code>static contextType = MyContext</code> 或者</li>
+</ul>
+<p><code>&lt;MyContext.Consumer&gt;</code></p>
+<ul>
+<li>**useContext(MyContext) 只是让你能够读取 context 的值以及订阅 context 的变化。你仍然需要在上层组件树中使用</li>
+</ul>
+<p>&lt;MyContext.Provider&gt; 来为下层组件提供 context**</p>
+<pre><code>import React,{useState,memo,useMemo,useCallback,useReducer,createContext,useContext} from&#39;react&#39;;
+import ReactDOM from&#39;react-dom&#39;;
+
+const initialState = 0;
+functionreducer(state=initialState,action){
+    switch(action.type){
+        case&#39;ADD&#39;:
+            return {number:state.number+1};
+        default:
+            break;
+    }
+}
+
+const CounterContext = createContext();
+// 第一种获取 CounterContext 方法：不使用 hookfunctionSubCounter_one(){
+    return (
+        &lt;CounterContext.Consumer&gt;
+            {
+                value=&gt;(
+                    &lt;&gt;
+                    &lt;p&gt;{value.state.number}&lt;/p&gt;
+                    &lt;button onClick={()=&gt;value.dispatch({type:&#39;ADD&#39;})}&gt;+&lt;/button&gt;
+                    &lt;/&gt;
+                )
+            }
+
+        &lt;/CounterContext.Consumer&gt;
+    )
+}
+// 第二种获取 CounterContext 方法：使用 hook ，更简洁
+function SubCounter(){
+    const {state, dispatch} = useContext(CounterContext);
+    return (
+        &lt;&gt;
+            &lt;p&gt;{state.number}&lt;/p&gt;
+            &lt;button onClick={()=&gt;dispatch({type:&#39;ADD&#39;})}&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+/* class SubCounter extends React.Component{
+    static contextTypes = CounterContext
+    this.context =  {state, dispatch}
+} */
+
+function Counter(){
+    const [state, dispatch] = useReducer((reducer), initialState, ()=&gt;({number:initialState}));
+    return (
+        &lt;CounterContext.Provider value={ {state, dispatch} }&gt;
+            &lt;SubCounter/&gt;
+        &lt;/CounterContext.Provider&gt;
+    )
+}
+ReactDOM.render(&lt;Counter  /&gt;, document.getElementById(&#39;root&#39;));
+
+复制代码
+</code></pre>
+<h2 id="七、useEffect"><a href="#七、useEffect" class="headerlink" title="七、useEffect"></a>七、useEffect</h2><ul>
+<li>**effect（副作用）：指那些没有发生在数据向视图转换过程中的逻辑，如 <code>ajax</code> 请求、访问原生<code>dom</code></li>
+</ul>
+<p>元素、本地持久化缓存、绑定&#x2F;解绑事件、添加订阅、设置定时器、记录日志等。**</p>
+<ul>
+<li><strong>副作用操作<strong><strong>可以分两</strong></strong>类：<strong><strong>需要清除的和不需要清除的</strong></strong>。</strong></li>
+<li>原先在函数组件内（这里指在 React 渲染阶段）改变 dom 、发送 ajax 请求以及执行其他包含副作用的操作都是不被允许的，因为这可能会产生莫名其妙的</li>
+</ul>
+<p>bug 并破坏 UI 的一致性</p>
+<ul>
+<li>useEffect 就是一个 Effect Hook，给函数组件增加了操作副作用的能力。它跟 class 组件中的</li>
+</ul>
+<p><code>componentDidMount</code>、<code>componentDidUpdate</code> 和 <code>componentWillUnmount</code><br>具有相同的用途，只不过被合并成了一个 API</p>
+<ul>
+<li><strong>useEffect 接收一个函数，该函数会在组件渲染到屏幕之后才执行，该函数有要求：要么返回一个能清除副作用的函数，要么就不返回任何内容</strong></li>
+<li>与 <code>componentDidMount</code> 或 <code>componentDidUpdate</code> 不同，使用 useEffect 调度的 effect</li>
+</ul>
+<p>不会阻塞浏览器更新屏幕，这让你的应用看起来响应更快。大多数情况下，effect 不需要同步地执行。在个别情况下（例如测量布局），有单独的<br>useLayoutEffect Hook 供你使用，其 API 与 useEffect 相同。</p>
+<h3 id="7-1-使用-class-组件实现修改标题"><a href="#7-1-使用-class-组件实现修改标题" class="headerlink" title="7.1 使用 class 组件实现修改标题"></a>7.1 使用 class 组件实现修改标题</h3><ul>
+<li>在这个 class</li>
+</ul>
+<p>中，我们需要在两个生命周期函数中编写重复的代码，这是因为很多情况下，我们希望在组件加载和更新时执行同样的操作。我们希望它在每次渲染之后执行，但 React 的<br>class 组件没有提供这样的方法。即使我们提取出一个方法，我们还是要在两个地方调用它。而 <strong>useEffect 会在第一次渲染之后和每次更新之后都会执行</strong></p>
+<pre><code>classCounterextendsReact.Component{
+    state = {number:0};
+    add = ()=&gt;{
+        this.setState({number:this.state.number+1});
+    };
+    componentDidMount(){
+        this.changeTitle();
+    }
+    componentDidUpdate(){
+        this.changeTitle();
+    }
+    changeTitle = ()=&gt;{
+        document.title = `你已经点击了${this.state.number}次`;
+    };
+    render(){
+        return (
+            &lt;&gt;&lt;p&gt;{this.state.number}&lt;/p&gt;&lt;buttononClick={this.add}&gt;+&lt;/button&gt;&lt;/&gt;
+        )
+    }
+}
+复制代码
+</code></pre>
+<h3 id="7-2-使用-useEffect-来实现修改标题"><a href="#7-2-使用-useEffect-来实现修改标题" class="headerlink" title="7.2 使用 useEffect 来实现修改标题"></a>7.2 使用 useEffect 来实现修改标题</h3><ul>
+<li>每次我们重新渲染，都会生成新的 effect，替换掉之前的。某种意义上讲，effect 更像是渲染结果的一部分 —— 每个 effect</li>
+</ul>
+<p>属于一次特定的渲染。</p>
+<pre><code>import React,{Component,useState,useEffect} from&#39;react&#39;;
+import ReactDOM from&#39;react-dom&#39;;
+functionCounter(){
+    const [number,setNumber] = useState(0);
+    // useEffect里面的这个函数会在第一次渲染之后和更新完成后执行// 相当于 componentDidMount 和 componentDidUpdate:
+    useEffect(() =&gt; {
+        document.title = `你点击了${number}次`;
+    });
+    return (
+        &lt;&gt;&lt;p&gt;{number}&lt;/p&gt;&lt;buttononClick={()=&gt;setNumber(number+1)}&gt;+&lt;/button&gt;&lt;/&gt;
+    )
+}
+ReactDOM.render(&lt;Counter /&gt;, document.getElementById(&#39;root&#39;));
+复制代码
+</code></pre>
+<h3 id="7-3-清除副作用"><a href="#7-3-清除副作用" class="headerlink" title="7.3 清除副作用"></a>7.3 清除副作用</h3><ul>
+<li>*<em>副作用函数还可以通过返回一个函数来指定如何清除副作用，为防止内存泄漏，清除函数会在</em><em><strong>组件卸载前</strong></em>*执行。如果组件多次渲染，则在执行下一个</li>
+</ul>
+<p>effect 之前，上一个 effect 就已被清除。**</p>
+<pre><code>functionCounter(){
+    let [number,setNumber] = useState(0);
+    let [text,setText] = useState(&#39;&#39;);
+    // 相当于componentDidMount 和 componentDidUpdate
+    useEffect(()=&gt;{
+        console.log(&#39;开启一个新的定时器&#39;)
+        let $timer = setInterval(()=&gt;{
+            setNumber(number=&gt;number+1);
+        },1000);
+        // useEffect 如果返回一个函数的话，该函数会在组件卸载和更新时调用// useEffect 在执行副作用函数之前，会先调用上一次返回的函数// 如果要清除副作用，要么返回一个清除副作用的函数/*  return ()=&gt;{
+            console.log(&#39;destroy effect&#39;);
+            clearInterval($timer);
+        } */
+    });
+    // },[]);//要么在这里传入一个空的依赖项数组，这样就不会去重复执行return (
+        &lt;&gt;
+          &lt;input value={text} onChange={(event)=&gt;setText(event.target.value)}/&gt;
+          &lt;p&gt;{number}&lt;/p&gt;
+          &lt;button&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+复制代码
+</code></pre>
+<h3 id="7-4-跳过-effect-进行性能优化"><a href="#7-4-跳过-effect-进行性能优化" class="headerlink" title="7.4 跳过 effect 进行性能优化"></a>7.4 跳过 effect 进行性能优化</h3><ul>
+<li>依赖项数组控制着 useEffect 的执行</li>
+<li>如果某些特定值在两次重渲染之间没有发生变化，你可以通知 React 跳过对 effect 的调用，只要传递数组作为 useEffect 的第二个可选参数即可</li>
+<li>如果想执行只运行一次的 effect（仅在组件挂载和卸载时执行），可以传递一个空数组（[]）作为第二个参数。这就告诉 React 你的 effect</li>
+</ul>
+<p>不依赖于 props 或 state 中的任何值，所以它永远都不需要重复执行</p>
+<ul>
+<li>推荐启用</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-react-hooks#installation">eslint-plugin-react-hooks</a><br>中的 <a target="_blank" rel="noopener" href="https://github.com/facebook/react/issues/14920">exhaustive-deps</a><br>规则。此规则会在添加错误依赖时发出警告并给出修复建议。</p>
+<pre><code>functionCounter(){
+    let [number,setNumber] = useState(0);
+    let [text,setText] = useState(&#39;&#39;);
+    // 相当于componentDidMount 和 componentDidUpdate
+    useEffect(()=&gt;{
+        console.log(&#39;useEffect&#39;);
+        let $timer = setInterval(()=&gt;{
+            setNumber(number=&gt;number+1);
+        },1000);
+    },[text]);// 数组表示 effect 依赖的变量，只有当这个变量发生改变之后才会重新执行 efffect 函数return (
+        &lt;&gt;
+          &lt;input value={text} onChange={(event)=&gt;setText(event.target.value)}/&gt;
+          &lt;p&gt;{number}&lt;/p&gt;
+          &lt;button&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+复制代码
+</code></pre>
+<h3 id="7-5-使用多个-Effect-实现关注点分离"><a href="#7-5-使用多个-Effect-实现关注点分离" class="headerlink" title="7.5 使用多个 Effect 实现关注点分离"></a>7.5 使用多个 Effect 实现关注点分离</h3><ul>
+<li><p>使用 Hook 其中一个目的就是要解决 class 中生命周期函数经常包含不相关的逻辑，但又把相关逻辑分离到了几个不同方法中的问题。</p>
+<p>  &#x2F;&#x2F; 类组件版classFriendStatusWithCounterextendsReact.Component{<br>constructor(props) {<br>  super(props);<br>  this.state &#x3D; { count: 0, isOnline: null };<br>  this.handleStatusChange &#x3D; this.handleStatusChange.bind(this);<br>}<br><br>componentDidMount() {<br>  document.title &#x3D; <code>You clicked ${this.state.count} times</code>;<br>  ChatAPI.subscribeToFriendStatus(<br>    this.props.friend.id,<br>    this.handleStatusChange<br>  );<br>}<br><br>componentDidUpdate() {<br>  document.title &#x3D; <code>You clicked ${this.state.count} times</code>;<br>}<br><br>componentWillUnmount() {<br>  ChatAPI.unsubscribeFromFriendStatus(<br>    this.props.friend.id,<br>    this.handleStatusChange<br>  );<br>}<br><br>handleStatusChange(status) {<br>  this.setState({<br>    isOnline: status.isOnline<br>  });<br>}<br>&#x2F;&#x2F; …复制代码</p>
+</li>
+<li><p>可以发现设置 <code>document.title</code> 的逻辑是如何被分割到 <code>componentDidMount</code> 和 <code>componentDidUpdate</code></p>
+</li>
+</ul>
+<p>中的，订阅逻辑又是如何被分割到 <code>componentDidMount</code> 和 <code>componentWillUnmount</code> 中的。而且<br><code>componentDidMount</code> 中同时包含了两个不同功能的代码。这样会使得生命周期函数很混乱。</p>
+<ul>
+<li><strong>Hook 允许我们按照代码的用途分离他们，</strong> 而不是像生命周期函数那样。React 将按照 effect 声明的顺序依次调用组件中的 每一个</li>
+</ul>
+<p>effect。</p>
+<pre><code>// Hooks 版functionFriendStatusWithCounter(props) {
+  const [count, setCount] = useState(0);
+  useEffect(() =&gt; {
+    document.title = `You clicked ${count} times`;
+  });
+
+  const [isOnline, setIsOnline] = useState(null);
+  useEffect(() =&gt; {
+    functionhandleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    return() =&gt; {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+  // ...
+}
+复制代码
+</code></pre>
+<h2 id="八、useLayoutEffect"><a href="#八、useLayoutEffect" class="headerlink" title="八、useLayoutEffect"></a>八、useLayoutEffect</h2><p>![xuehuayu.cn](data:image&#x2F;svg+xml;utf8,<?xml version=&quot;1.0&quot;?>&lt;svg</p>
+<p>xmlns&#x3D;&quot;<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>&quot; version&#x3D;&quot;1.1&quot;<br>width&#x3D;&quot;624&quot; height&#x3D;&quot;289&quot;&gt;</svg>)</p>
+<ul>
+<li><p><strong>useEffect 在全部渲染完毕后才会执行</strong></p>
+</li>
+<li><p><strong>useLayoutEffect 会在 浏览器 layout 之后，painting 之前执行</strong></p>
+</li>
+<li><p>其函数签名与 useEffect 相同，但它会在所有的 DOM 变更之后<strong>同步</strong>调用 effect</p>
+</li>
+<li><p><strong>可以使用它来读取 DOM 布局并同步触发重渲染</strong></p>
+</li>
+<li><p>在浏览器执行绘制之前 useLayoutEffect 内部的更新计划将被<strong>同步</strong>刷新</p>
+</li>
+<li><p><strong>尽可能使用标准的 useEffect 以避免阻塞视图更新</strong></p>
+<p>  functionLayoutEffect() {<br>  const [color, setColor] &#x3D; useState(‘red’);<br>  useLayoutEffect(() &#x3D;&gt; {<br>      alert(color);<br>  });<br>  useEffect(() &#x3D;&gt; {<br>      console.log(‘color’, color);<br>  });<br>  return (<br>      &lt;&gt;&lt;divid&#x3D;”myDiv”style&#x3D;{ {background:color } }&gt;颜色</div>&lt;buttononClick&#x3D;{() &#x3D;&gt; setColor(‘red’)}&gt;红</button>&lt;buttononClick&#x3D;{() &#x3D;&gt; setColor(‘yellow’)}&gt;黄</button>&lt;buttononClick&#x3D;{() &#x3D;&gt; setColor(‘blue’)}&gt;蓝</button>&lt;&#x2F;&gt;<br>  );<br>  }<br>  复制代码</p>
+</li>
+</ul>
+<h2 id="九、useRef-useImperativeHandle"><a href="#九、useRef-useImperativeHandle" class="headerlink" title="九、useRef &amp; useImperativeHandle"></a>九、useRef &amp; useImperativeHandle</h2><h3 id="8-1-useRef"><a href="#8-1-useRef" class="headerlink" title="8.1 useRef"></a>8.1 useRef</h3><ul>
+<li><p>类组件、React 元素用 React.createRef，函数组件使用 useRef</p>
+</li>
+<li><p>useRef 返回一个可变的 ref 对象，其 <code>current</code> 属性被初始化为传入的参数（initialValue）</p>
+<p>  const refContainer &#x3D; useRef(initialValue);<br>  复制代码</p>
+</li>
+<li><p>**useRef 返回的 ref 对象在组件的整个生命周期内保持不变，也就是说每次重新渲染函数组件时，返回的ref 对象都是同一个（使用</p>
+</li>
+</ul>
+<p>React.createRef ，每次重新渲染组件都会重新创建 ref）**</p>
+<pre><code>import React, { useState, useEffect, useRef } from&#39;react&#39;;
+import ReactDOM from&#39;react-dom&#39;;
+functionParent() {
+    let [number, setNumber] = useState(0);
+    return (
+        &lt;&gt;
+            &lt;Child /&gt;
+            &lt;button onClick={() =&gt; setNumber({ number: number + 1 })}&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+let input;
+function Child() {
+    const inputRef = useRef();
+    console.log(&#39;input===inputRef&#39;, input === inputRef);
+    input = inputRef;
+    function getFocus() {
+        inputRef.current.focus();
+    }
+    return (
+        &lt;&gt;
+            &lt;input type=&quot;text&quot; ref={inputRef} /&gt;
+            &lt;button onClick={getFocus}&gt;获得焦点&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+ReactDOM.render(&lt;Parent /&gt;, document.getElementById(&#39;root&#39;));
+复制代码
+</code></pre>
+<h3 id="8-2-forwardRef"><a href="#8-2-forwardRef" class="headerlink" title="8.2 forwardRef"></a>8.2 forwardRef</h3><ul>
+<li><p><strong>因为函数组件没有实例，所以函数组件无法像类组件一样可以接收 ref 属性</strong></p>
+<p>  functionParent() {<br>  return (<br>      &lt;&gt;<br>        &#x2F;&#x2F; <Child ref={xxx} /> 这样是不行的<br>          <Child /><br>          <button>+</button><br>      &lt;&#x2F;&gt;<br>  )<br>  }<br>  复制代码</p>
+</li>
+<li><p><strong>forwardRef 可以在父组件中操作子组件的 ref 对象</strong></p>
+</li>
+<li><p><strong>forwardRef 可以将父组件中的 ref 对象转发到子组件中的 dom 元素上</strong></p>
+</li>
+<li><p><strong>子组件接受 props 和 ref 作为参数</strong></p>
+<p>  functionChild(props,ref){<br>return (<br>  <input type="text" ref={ref}/><br>)<br>  }<br>  Child &#x3D; React.forwardRef(Child);<br>  function Parent(){<br>let [number,setNumber] &#x3D; useState(0);<br>&#x2F;&#x2F; 在使用类组件的时候，创建 ref 返回一个对象，该对象的 current 属性值为空<br>&#x2F;&#x2F; 只有当它被赋给某个元素的 ref 属性时，才会有值<br>&#x2F;&#x2F; 所以父组件（类组件）创建一个 ref 对象，然后传递给子组件（类组件），子组件内部有元素使用了<br>&#x2F;&#x2F; 那么父组件就可以操作子组件中的某个元素<br>&#x2F;&#x2F; 但是函数组件无法接收 ref 属性 <Child ref={xxx} /> 这样是不行的<br>&#x2F;&#x2F; 所以就需要用到 forwardRef 进行转发<br>const inputRef &#x3D; useRef();&#x2F;&#x2F;{current:’’}<br>function getFocus(){<br>  inputRef.current.value &#x3D; ‘focus’;<br>  inputRef.current.focus();<br>}<br>return (<br>    &lt;&gt;<br>      <Child ref={inputRef}/><br>      &lt;button onClick&#x3D;{()&#x3D;&gt;setNumber({number:number+1})}&gt;+</button><br>      <button onClick={getFocus}>获得焦点</button><br>    &lt;&#x2F;&gt;<br>)<br>  }<br>  复制代码</p>
+</li>
+</ul>
+<h3 id="8-3-useImperativeHandle"><a href="#8-3-useImperativeHandle" class="headerlink" title="8.3 useImperativeHandle"></a>8.3 useImperativeHandle</h3><ul>
+<li><p><code>useImperativeHandle</code>可以让你在使用 ref 时，自定义暴露给父组件的实例值，不能让父组件想干嘛就干嘛</p>
+</li>
+<li><p><strong>在大多数情况下，应当避免使用 ref 这样的命令式代码。useImperativeHandle 应当与 forwardRef 一起使用</strong></p>
+</li>
+<li><p><strong>父组件可以使用操作子组件中的多个 ref</strong></p>
+<p>  import React,{useState,useEffect,createRef,useRef,forwardRef,useImperativeHandle} from’react’;</p>
+<p>  functionChild(props,parentRef){<br>  &#x2F;&#x2F; 子组件内部自己创建 ref let focusRef &#x3D; useRef();<br>  let inputRef &#x3D; useRef();<br>  useImperativeHandle(parentRef,()&#x3D;&gt;(<br>    &#x2F;&#x2F; 这个函数会返回一个对象&#x2F;&#x2F; 该对象会作为父组件 current 属性的值&#x2F;&#x2F; 通过这种方式，父组件可以使用操作子组件中的多个 refreturn {<br>          focusRef,<br>          inputRef,<br>          name:’计数器’,<br>          focus(){<br>              focusRef.current.focus();<br>          },<br>          changeText(text){<br>              inputRef.current.value &#x3D; text;<br>          }<br>      }<br>  });<br>  return (<br>      &lt;&gt;<br>          <input ref={focusRef}/><br>          <input ref={inputRef}/><br>      &lt;&#x2F;&gt;<br>  )<br>  }<br>  Child &#x3D; forwardRef(Child);<br>  function Parent(){<br>const parentRef &#x3D; useRef();&#x2F;&#x2F;{current:’’}<br>function getFocus(){<br>  parentRef.current.focus();<br>  &#x2F;&#x2F; 因为子组件中没有定义这个属性，实现了保护，所以这里的代码无效<br>  parentRef.current.addNumber(666);<br>  parentRef.current.changeText(‘<script>alert(1)</script>‘);<br>  console.log(parentRef.current.name);<br>}<br>return (<br>    &lt;&gt;<br>      <ForwardChild ref={parentRef}/><br>      <button onClick={getFocus}>获得焦点</button><br>    &lt;&#x2F;&gt;<br>)<br>  }<br>  复制代码</p>
+</li>
+</ul>
+<h2 id="十、自定义-Hook"><a href="#十、自定义-Hook" class="headerlink" title="十、自定义 Hook"></a>十、自定义 Hook</h2><ul>
+<li><p>自定义 Hook 更像是一种约定，而不是一种功能。如果函数的名字以 use 开头，并且调用了其他的 Hook，则就称其为一个自定义 Hook</p>
+</li>
+<li><p>有时候我们会想要在组件之间重用一些状态逻辑，之前要么用 render props ，要么用高阶组件，要么使用 redux</p>
+</li>
+<li><p>自定义 Hook 可以让你在不增加组件的情况下达到同样的目的</p>
+</li>
+<li><p><strong>Hook 是一种复用状态逻辑的方式，它不复用 state 本身</strong></p>
+</li>
+<li><p><strong>事实上 Hook 的每次调用都有一个完全独立的 state</strong></p>
+<p>  import React, { useLayoutEffect, useEffect, useState } from’react’;<br>  import ReactDOM from’react-dom’;</p>
+<p>  functionuseNumber(){<br>let [number,setNumber] &#x3D; useState(0);<br>useEffect(()&#x3D;&gt;{<br>  setInterval(()&#x3D;&gt;{<br>      setNumber(number&#x3D;&gt;number+1);<br>  },1000);<br>},[]);<br>return [number,setNumber];<br>  }<br>  &#x2F;&#x2F; 每个组件调用同一个 hook，只是复用 hook 的状态逻辑，并不会共用一个状态functionCounter1(){<br>  let [number,setNumber] &#x3D; useNumber();<br>  return (<br>      <div>&lt;buttononClick&#x3D;{()&#x3D;&gt;{<br>          setNumber(number+1)<br>      } }&gt;{number}</button></div><br>  )<br>  }<br>  functionCounter2(){<br>  let [number,setNumber] &#x3D; useNumber();<br>  return (<br>      <div>&lt;buttononClick&#x3D;{()&#x3D;&gt;{<br>          setNumber(number+1)<br>      } }&gt;{number}</button></div><br>  )<br>  }<br>  ReactDOM.render(&lt;&gt;<Counter1 /><Counter2 />&lt;&#x2F;&gt;, document.getElementById(‘root’));<br>  复制代码</p>
+</li>
+</ul>
+<h2 id="十一、常见问题"><a href="#十一、常见问题" class="headerlink" title="十一、常见问题"></a>十一、常见问题</h2><h3 id="1-使用-eslint-plugin-react-hooks-来检查代码错误，给出提示"><a href="#1-使用-eslint-plugin-react-hooks-来检查代码错误，给出提示" class="headerlink" title="1. 使用 eslint-plugin-react-hooks 来检查代码错误，给出提示"></a>1. 使用 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-react-hooks">eslint-plugin-react-hooks</a> 来检查代码错误，给出提示</h3><pre><code>{
+  &quot;plugins&quot;: [&quot;react-hooks&quot;],
+  // ...
+  &quot;rules&quot;: {
+    &quot;react-hooks/rules-of-hooks&quot;: &#39;error&#39;,// 检查 Hook 的规则
+    &quot;react-hooks/exhaustive-deps&quot;: &#39;warn&#39; // 检查 effect 的依赖
+  }
+}
+复制代码
+</code></pre>
+<h3 id="2-为什么每次更新的时候都要运行-Effect"><a href="#2-为什么每次更新的时候都要运行-Effect" class="headerlink" title="2.为什么每次更新的时候都要运行 Effect"></a>2.为什么每次更新的时候都要运行 Effect</h3><p><a target="_blank" rel="noopener" href="https://react.docschina.org/docs/hooks-effect.html#explanation-why-effects-run-on-each-update">react.docschina.org&#x2F;docs&#x2F;hooks-…</a></p>
+<h3 id="3-为什么必须在组件的顶层使用-Hook-在单个组件中使用多个-State-Hook-或-Effect-Hook，那么-React-怎么知道哪个-state-对应哪个-useState？"><a href="#3-为什么必须在组件的顶层使用-Hook-在单个组件中使用多个-State-Hook-或-Effect-Hook，那么-React-怎么知道哪个-state-对应哪个-useState？" class="headerlink" title="3.为什么必须在组件的顶层使用 Hook &amp; 在单个组件中使用多个 State Hook 或 Effect Hook，那么 React 怎么知道哪个 state 对应哪个 useState？"></a>3.为什么必须在组件的顶层使用 Hook &amp; 在单个组件中使用多个 State Hook 或 Effect Hook，那么 React 怎么知道哪个 state 对应哪个 useState？</h3><ul>
+<li><strong>React 依赖于 Hook 的调用顺序</strong>，如果能确保 Hook 在每一次渲染中都按照同样的顺序被调用。那么React 能够在多次的</li>
+</ul>
+<p><code>useState</code> 和 <code>useEffect</code> 调用之间保持 hook 状态的正确性</p>
+<pre><code>functionForm() {
+  // 1. Use the name state variableconst [name, setName] = useState(&#39;Mary&#39;);
+
+  // 2. Use an effect for persisting the form
+  useEffect(functionpersistForm() {
+    localStorage.setItem(&#39;formData&#39;, name);
+  });
+
+  // 3. Use the surname state variableconst [surname, setSurname] = useState(&#39;Poppins&#39;);
+
+  // 4. Use an effect for updating the title
+  useEffect(functionupdateTitle() {
+    document.title = name + &#39; &#39; + surname;
+  });
+
+  // ...
+}
+复制代码
+
+// ------------// 首次渲染// ------------
+useState(&#39;Mary&#39;)           // 1. 使用 &#39;Mary&#39; 初始化变量名为 name 的 state
+useEffect(persistForm)     // 2. 添加 effect 以保存 form 操作
+useState(&#39;Poppins&#39;)        // 3. 使用 &#39;Poppins&#39; 初始化变量名为 surname 的 state
+useEffect(updateTitle)     // 4. 添加 effect 以更新标题// -------------// 二次渲染// -------------
+useState(&#39;Mary&#39;)           // 1. 读取变量名为 name 的 state（参数被忽略）
+useEffect(persistForm)     // 2. 替换保存 form 的 effect
+useState(&#39;Poppins&#39;)        // 3. 读取变量名为 surname 的 state（参数被忽略）
+useEffect(updateTitle)     // 4. 替换更新标题的 effect// ...复制代码
+</code></pre>
+<p><strong>只要 Hook 的调用顺序在多次渲染之间保持一致，React 就能正确地将内部 state 和对应的 Hook 进行关联</strong>。但如果我们将一个 Hook<br>(例如 <code>persistForm</code> effect) 调用放到一个条件语句中会发生什么呢？</p>
+<pre><code>// 🔴 在条件语句中使用 Hook 违反第一条规则if (name !== &#39;&#39;) {
+    useEffect(functionpersistForm() {
+      localStorage.setItem(&#39;formData&#39;, name);
+    });
+  }
+复制代码
+</code></pre>
+<p>在第一次渲染中 <code>name !== &#39;&#39;</code> 这个条件值为 <code>true</code>，所以我们会执行这个 Hook。但是下一次渲染时我们可能清空了表单，表达式值变为<br><code>false</code>。此时的渲染会跳过该 Hook，Hook 的调用顺序发生了改变：</p>
+<pre><code>useState(&#39;Mary&#39;)           // 1. 读取变量名为 name 的 state（参数被忽略）// useEffect(persistForm)  // 🔴 此 Hook 被忽略！
+useState(&#39;Poppins&#39;)        // 🔴 2 （之前为 3）。读取变量名为 surname 的 state 失败
+useEffect(updateTitle)     // 🔴 3 （之前为 4）。替换更新标题的 effect 失败复制代码
+</code></pre>
+<p>React 不知道第二个 <code>useState</code> 的 Hook 应该返回什么。React 会以为在该组件中第二个 Hook 的调用像上次的渲染一样，对应得是<br><code>persistForm</code> 的 effect，但并非如此。从这里开始，后面的 Hook 调用都被提前执行，导致 bug 的产生。</p>
+<p>如果我们想要有条件地执行一个 effect，可以将判断放到 Hook 的<em>内部</em>：</p>
+<pre><code>useEffect(functionpersistForm() {
+    // 👍 将条件判断放置在 effect 中if (name !== &#39;&#39;) {
+      localStorage.setItem(&#39;formData&#39;, name);
+    }
+  });
+复制代码
+</code></pre>
+<h3 id="4-自定义-Hook-必须以-use-开头吗？"><a href="#4-自定义-Hook-必须以-use-开头吗？" class="headerlink" title="4. 自定义 Hook 必须以 use 开头吗？"></a>4. <strong>自定义 Hook 必须以 <code>use</code> 开头吗？</strong></h3><p>必须如此。这个约定非常重要。不遵循的话，由于无法判断某个函数是否包含对其内部 Hook 的调用，React 将无法自动检查你的 Hook 是否违反了 <a target="_blank" rel="noopener" href="https://react.docschina.org/docs/hooks-rules.html">Hook<br>的规则</a>。</p>
+<h3 id="5-在两个组件中使用相同的-Hook-会共享-state-吗？"><a href="#5-在两个组件中使用相同的-Hook-会共享-state-吗？" class="headerlink" title="5. 在两个组件中使用相同的 Hook 会共享 state 吗？"></a>5. <strong>在两个组件中使用相同的 Hook 会共享 state 吗？</strong></h3><p>不会。自定义 Hook 是一种重用<em>状态逻辑</em>的机制(例如设置为订阅并存储当前值)，所以每次使用自定义 Hook 时，其中的所有 state<br>和副作用都是完全隔离的。</p>
+<h3 id="6-在一个组件中多次调用-useState-或者-useEffect，每次调用-Hook，它都会获取独立的-state，是完全独立的。"><a href="#6-在一个组件中多次调用-useState-或者-useEffect，每次调用-Hook，它都会获取独立的-state，是完全独立的。" class="headerlink" title="6. 在一个组件中多次调用 useState 或者 useEffect，每次调用 Hook，它都会获取独立的 state，是完全独立的。"></a>6. 在一个组件中多次调用 <code>useState</code> 或者 <code>useEffect</code>，每次调用 Hook，它都会获取独立的 state，是完全独立的。</h3><h3 id="7-当组件拥有多个-state-时，应该把多个-state-合并成一个-state-，还是把-state-切分成多个-state-变量？"><a href="#7-当组件拥有多个-state-时，应该把多个-state-合并成一个-state-，还是把-state-切分成多个-state-变量？" class="headerlink" title="7. 当组件拥有多个 state 时，应该把多个 state 合并成一个 state ，还是把 state 切分成多个 state 变量？"></a>7. 当组件拥有多个 state 时，应该把多个 state 合并成一个 state ，还是把 state 切分成多个 state 变量？</h3><p><a target="_blank" rel="noopener" href="https://react.docschina.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables">react.docschina.org&#x2F;docs&#x2F;hooks-…</a></p>
+<ul>
+<li>要么把所有 state 都放在同一个 <code>useState</code> 调用中，要么每一个字段都对应一个 <code>useState</code> 调用，这两方式都能跑通。</li>
+<li>当你在这<strong>两个极端</strong>之间找到平衡，然后把<strong>相关 state****组合到几个独立的 state 变量</strong>时，组件就会更加的可读。如果 state</li>
+</ul>
+<p>的逻辑开始变得复杂，我们推荐用 <code>useReducer</code> 来管理它，或使用自定义 Hook。</p>
+<h3 id="8-可以只在更新时运行-effect-吗？"><a href="#8-可以只在更新时运行-effect-吗？" class="headerlink" title="8. 可以只在更新时运行 effect 吗？"></a>8. 可以只在更新时运行 effect 吗？</h3><p>这是个比较罕见的使用场景。如果你需要的话，你可以 <a target="_blank" rel="noopener" href="https://react.docschina.org/docs/hooks-faq.html#is-there-something-like-instance-variables">使用一个可变的<br>ref</a><br>手动存储一个布尔值来表示是首次渲染还是后续渲染，然后在你的 effect 中检查这个标识。（如果你发现自己经常在这么做，你可以为之创建一个自定义 Hook。）</p>
+<h3 id="9-在-useEffect-中调用用函数时，要把该函数在-useEffect-中申明，不能放到外部申明，然后再在-useEffect-中调用"><a href="#9-在-useEffect-中调用用函数时，要把该函数在-useEffect-中申明，不能放到外部申明，然后再在-useEffect-中调用" class="headerlink" title="9. 在 useEffect 中调用用函数时，要把该函数在 useEffect 中申明，不能放到外部申明，然后再在 useEffect 中调用"></a>9. 在 useEffect 中调用用函数时，要把该函数在 useEffect 中申明，不能放到外部申明，然后再在 useEffect 中调用</h3><p><a target="_blank" rel="noopener" href="https://react.docschina.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies">react.docschina.org&#x2F;docs&#x2F;hooks-…</a></p>
+<pre><code>functionExample({ someProp }) {
+  functiondoSomething() {
+    console.log(someProp);
+  }
+
+  useEffect(() =&gt; {
+    doSomething();
+  }, []); // 🔴 这样不安全（它调用的 `doSomething` 函数使用了 `someProp`）
+}
+复制代码
+</code></pre>
+<p>要记住 effect 外部的函数使用了哪些 props 和 state 很难。这也是为什么 <strong>通常你会想要在 effect 内部 去声明它所需要的函数。</strong><br>这样就能容易的看出那个 effect 依赖了组件作用域中的哪些值：</p>
+<pre><code>functionExample({ someProp }) {
+  useEffect(() =&gt; {
+    functiondoSomething() {
+      console.log(someProp);
+    }
+
+    doSomething();
+  }, [someProp]); // ✅ 安全（我们的 effect 仅用到了 `someProp`）
+}
+复制代码
+</code></pre>
+<p><strong>只有</strong> 当函数（以及它所调用的函数）不引用 props、state 以及由它们衍生而来的值时，你才能放心地把它们从依赖列表中省略。下面这个案例有一个<br>Bug：</p>
+<pre><code>functionProductPage({ productId }) {
+  const [product, setProduct] = useState(null);
+  asyncfunctionfetchProduct() {
+    const response = await fetch(&#39;http://myapi/product&#39; + productId); // 使用了 productId propconst json = await response.json();
+    setProduct(json);
+  }
+  useEffect(() =&gt; {
+    fetchProduct();
+  }, []); // 🔴 这样是无效的，因为 `fetchProduct` 使用了 `productId`// ...
+}
+复制代码
+</code></pre>
+<p><strong>推荐的修复方案是把那个函数移动到你的 effect 内部</strong>。这样就能很容易的看出来你的 effect 使用了哪些 props 和<br>state，并确保它们都被声明了：</p>
+<pre><code>functionProductPage({ productId }) {
+  const [product, setProduct] = useState(null);
+  useEffect(() =&gt; {
+    // 把这个函数移动到 effect 内部后，我们可以清楚地看到它用到的值。asyncfunctionfetchProduct() {
+      const response = await fetch(&#39;http://myapi/product&#39; + productId);
+      const json = await response.json();
+      setProduct(json);
+    }
+    fetchProduct();
+  }, [productId]); // ✅ 有效，因为我们的 effect 只用到了 productId// ...
+}
+复制代码
+</code></pre>
+<h3 id="10-如何在-Hooks-中优雅的-Fetch-Data"><a href="#10-如何在-Hooks-中优雅的-Fetch-Data" class="headerlink" title="10. 如何在 Hooks 中优雅的 Fetch Data"></a>10. 如何在 Hooks 中优雅的 Fetch Data</h3><p><a target="_blank" rel="noopener" href="https://www.robinwieruch.de/react-hooks-fetch-data/">www.robinwieruch.de/react-hooks…</a></p>
+<p><a target="_blank" rel="noopener" href="https://codesandbox.io/s/jvvkoo8pq3">codesandbox.io&#x2F;s&#x2F;jvvkoo8pq…</a></p>
+<pre><code>import React, { useState, useEffect } from&#39;react&#39;;
+import axios from&#39;axios&#39;;
+functionApp() {
+  const [data, setData] = useState({ hits: [] });
+  // 注意 async 的位置// 这种写法，虽然可以运行，但是会发出警告// 每个带有 async 修饰的函数都返回一个隐含的 promise// 但是 useEffect 函数有要求：要么返回清除副作用函数，要么就不返回任何内容
+  useEffect(async () =&gt; {
+    const result = await axios(
+      &#39;https://hn.algolia.com/api/v1/search?query=redux&#39;,
+    );
+    setData(result.data);
+  }, []);
+  return (
+    &lt;ul&gt;
+      {data.hits.map(item =&gt; (
+        &lt;likey={item.objectID}&gt;&lt;ahref={item.url}&gt;{item.title}&lt;/a&gt;&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}
+exportdefault App;
+复制代码
+
+import React, { useState, useEffect } from&#39;react&#39;;
+import axios from&#39;axios&#39;;
+functionApp() {
+  const [data, setData] = useState({ hits: [] });
+  useEffect(() =&gt; {
+    // 更优雅的方式const fetchData = async () =&gt; {
+      const result = await axios(
+        &#39;https://hn.algolia.com/api/v1/search?query=redux&#39;,
+      );
+      setData(result.data);
+    };
+    fetchData();
+  }, []);
+  return (
+    &lt;ul&gt;
+      {data.hits.map(item =&gt; (
+        &lt;likey={item.objectID}&gt;&lt;ahref={item.url}&gt;{item.title}&lt;/a&gt;&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}
+exportdefault App;
+复制代码
+</code></pre>
+<h3 id="11-不要过度依赖-useMemo"><a href="#11-不要过度依赖-useMemo" class="headerlink" title="11. 不要过度依赖 useMemo"></a>11. 不要过度依赖 useMemo</h3><ul>
+<li><code>useMemo</code> 本身也有开销。<code>useMemo</code> 会「记住」一些值，同时在后续 render</li>
+</ul>
+<p>时，将依赖数组中的值取出来和上一次记录的值进行比较，如果不相等才会重新执行回调函数，否则直接返回「记住」的值。这个过程本身就会消耗一定的内存和计算资源。因此，过度使用<br><code>useMemo</code> 可能会影响程序的性能。</p>
+<ul>
+<li><p>在使用 <code>useMemo</code> 前，应该先思考三个问题：</p>
+</li>
+<li><p><strong>传递给 <code>useMemo</code> 的函数开销大不大？</strong> 有些计算开销很大，我们就需要「记住」它的返回值，避免每次 render</p>
+</li>
+</ul>
+<p>都去重新计算。如果你执行的操作开销不大，那么就不需要记住返回值。否则，使用 <code>useMemo</code> 本身的开销就可能超过重新计算这个值的开销。因此，对于一些简单的<br>JS 运算来说，我们不需要使用 <code>useMemo</code> 来「记住」它的返回值。</p>
+<ul>
+<li><strong>返回的值是原始值吗？</strong> 如果计算出来的是<strong>基本类型</strong>的值（<code>string</code>、 <code>boolean</code> 、<code>null</code>、<code>undefined</code></li>
+</ul>
+<p>、<code>number</code>、<code>symbol</code>），那么每次比较都是相等的，下游组件就不会重新渲染；如果计算出来的是<strong>复杂类型</strong>的值（<code>object</code>、<code>array</code>），哪怕值不变，但是地址会发生变化，导致下游组件重新渲染。所以我们也需要「记住」这个值。</p>
+<ul>
+<li><strong>在编写自定义 Hook 时，返回值一定要保持引用的一致性。</strong> 因为你无法确定外部要如何使用它的返回值。如果返回值被用做其他 Hook 的依赖，并且每次</li>
+</ul>
+<p>re-render 时引用不一致（当值相等的情况），就可能会产生 bug。所以如果自定义 Hook 中暴露出来的值是<br>object、array、函数等，都应该使用 <code>useMemo</code> 。以确保当值相同时，引用不发生变化。</p>
+<h3 id="12-useEffect-不能接收-async-作为回调函数"><a href="#12-useEffect-不能接收-async-作为回调函数" class="headerlink" title="12. useEffect 不能接收 async 作为回调函数"></a>12. useEffect 不能接收 async 作为回调函数</h3><p>useEffect 接收的函数，要么返回一个能清除副作用的函数，要么就不返回任何内容。而 async 返回的是 promise。</p>
+<p><a target="_blank" rel="noopener" href="https://www.robinwieruch.de/react-hooks-fetch-data">www.robinwieruch.de/react-hooks…</a></p>
+<p>![image.png](data:image&#x2F;svg+xml;utf8,<?xml version=&quot;1.0&quot;?>&lt;svg</p>
+<p>xmlns&#x3D;&quot;<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>&quot; version&#x3D;&quot;1.1&quot;<br>width&#x3D;&quot;1088&quot; height&#x3D;&quot;729&quot;&gt;</svg>)</p>
+<h2 id="十二、项目实战"><a href="#十二、项目实战" class="headerlink" title="十二、项目实战"></a>十二、项目实战</h2><p><a target="_blank" rel="noopener" href="https://github.com/yjdjiayou/react-hooks-qunar-demo"><strong>React Hooks 项目</strong></a></p>
+<h2 id="十三、参考"><a href="#十三、参考" class="headerlink" title="十三、参考"></a>十三、参考</h2><p><strong><a target="_blank" rel="noopener" href="https://react.docschina.org/docs/hooks-faq.html">官方提供的问题列表</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://reactjs.org/docs/hooks-rules.html#explanation">React 使用规则</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://juejin.im/post/5d9c5f935188251e3a06bbbb">React Hooks 你真的用对了吗？</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://github.com/streamich/react-use">大量自定义 hooks<br>的</a><a target="_blank" rel="noopener" href="https://github.com/streamich/react-use">仓库</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://juejin.im/post/5cfa29e151882539c33e4f5e">从 Preact 中了解 React 组件和 hooks<br>基本原理表</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://juejin.im/post/5d594ea5518825041301bbcb">2019年了，整理了N个实用案例帮你快速迁移到React<br>Hooks</a></strong></p>
+<h2 id="十四、推荐阅读"><a href="#十四、推荐阅读" class="headerlink" title="十四、推荐阅读"></a>十四、推荐阅读</h2><p><a target="_blank" rel="noopener" href="https://juejin.im/post/5df648836fb9a016526eba01"><strong>你真的了解 React 生命周期吗</strong></a></p>
+<p><strong><a target="_blank" rel="noopener" href="https://juejin.im/post/5def0816f265da33aa6aa7fe">React SSR 详解【近 1W 字】+<br>2个项目实战</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://juejin.im/post/5da56e34f265da5b932e73fa">从 0 到 1 实现一款简易版 Webpack</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://juejin.im/post/5dfa36f9f265da33c90b47ef">Webpack 设置环境变量的误区</a></strong></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/fa01fe52.html"><div class="related-post-title">前端面试中常见的手写代码题合集</div><div class="related-post-meta"><time>2020-02-26</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/201610a0.html"><div class="related-post-title">如何对 React 函数式组件进行优化</div><div class="related-post-meta"><time>2019-11-21</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/aeda5d77.html"><div class="related-post-title">前端面试之手写Promise</div><div class="related-post-meta"><time>2020-06-12</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/ecd8e3f0.html"><div class="related-post-title">webpack常用的plugin</div><div class="related-post-meta"><time>2019-11-05</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/c1f2b7c5.html"><div class="related-post-title">高频面试题深入解析 / 周刊 01</div><div class="related-post-meta"><time>2019-10-03</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/f8d6fc99.html">https://xuehuayu.cn/article/f8d6fc99.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/8ed011c9.html">TypeScript 3.7 来了，支持 Optional Chaining！</a><a class="next" href="/article/9c320836.html">重磅！微软发布 Visual Studio Online：Web 版 VS Code + 云开发环境</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

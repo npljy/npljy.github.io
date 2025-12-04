@@ -1,0 +1,38 @@
+User-agent: *
+
+Allow: /
+Allow: /archives/
+
+# 禁止分类和标签页（非page页面）
+# Disallow: /categories/
+# Disallow: /categories/page/
+# Disallow: /tags/
+# Disallow: /tags/page/
+
+# 禁止抓取 Hexo 生成的一些无关文件
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+Disallow: /img/
+Disallow: /lib/
+Disallow: /cdn/
+Disallow: /appConfigs/
+Disallow: /donate/
+Disallow: /blocks/
+
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.png$
+Disallow: /*.bmp$
+Disallow: /v.html
+
+# 指定 Sitemap 位置，帮助爬虫发现链接
+Sitemap: https://xuehuayu.cn/sitemap.xml
+Sitemap: https://cainiaoblog.cn/sitemap.xml
+Sitemap: https://xuehuayu.cn/baidusitemap.xml
+Sitemap: https://cainiaoblog.cn/baidusitemap.xml

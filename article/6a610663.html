@@ -1,0 +1,810 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>浏览器与前端性能灵魂之问，请问你能接得住几个？ | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">浏览器与前端性能灵魂之问，请问你能接得住几个？</h1><div class="post-meta"><span class="date">2019-12-24</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 16.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 59</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/6a610663.html#waline-comment"><span class="waline-comment-count" data-path="/article/6a610663.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5df5bcea6fb9a016091def69</code></p>
+<p>作为一个合格的前端工程师，浏览器相关的工作原理是我们进行性能优化的基石，我之前也强调过知识体系的重要性，这部分原理性的内容就是知识体系中的重要部分，必须牢牢掌握才能面对瞬息万变的实际场景，针对性地给出实际方案，而不是背诵各种开发军规和性能优化的条例，这样很难发现真正的问题所在,<br>更无法真正地解决问题。</p>
+<span id="more"></span>
+
+<p>内容会涵盖<code>浏览器工作原理</code>、<code>浏览器安全</code>和<code>性能监控和分析</code>。文章会分上下两次来发，今天这一篇是整个系列的上篇。</p>
+<h2 id="第1篇-能不能说一说浏览器缓存"><a href="#第1篇-能不能说一说浏览器缓存" class="headerlink" title="第1篇: 能不能说一说浏览器缓存?"></a>第1篇: 能不能说一说浏览器缓存?</h2><p>缓存是性能优化中非常重要的一环，浏览器的缓存机制对开发也是非常重要的知识点。接下来以三个部分来把浏览器的缓存机制说清楚：</p>
+<ul>
+<li>强缓存</li>
+<li>协商缓存</li>
+<li>缓存位置</li>
+</ul>
+<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><p>浏览器中的缓存作用分为两种情况，一种是需要发送<code>HTTP</code>请求，一种是不需要发送。</p>
+<p>首先是检查强缓存，这个阶段<code>不需要</code>发送HTTP请求。</p>
+<p>如何来检查呢？通过相应的字段来进行，但是说起这个字段就有点门道了。</p>
+<p>在<code>HTTP/1.0</code>和<code>HTTP/1.1</code>当中，这个字段是不一样的。在早期，也就是<code>HTTP/1.0</code>时期，使用的是<strong>Expires</strong>，而<code>HTTP/1.1</code>使用的是<strong>Cache-Control</strong>。让我们首先来看看Expires。</p>
+<h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p><code>Expires</code>即过期时间，存在于服务端返回的响应头中，告诉浏览器在这个过期时间之前可以直接从缓存里面获取数据，无需再次请求。比如下面这样:</p>
+<pre><code>Expires: Wed, 22 Nov 201908:41:00 GMT
+复制代码
+</code></pre>
+<p>表示资源在<code>2019年11月22号8点41分</code>过期，过期了就得向服务端发请求。</p>
+<p>这个方式看上去没什么问题，合情合理，但其实潜藏了一个坑，那就是<strong>服务器的时间和浏览器的时间可能并不一致</strong>，那服务器返回的这个过期时间可能就是不准确的。因此这种方式很快在后来的HTTP1.1版本中被抛弃了。</p>
+<h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>在HTTP1.1中，采用了一个非常关键的字段：<code>Cache-Control</code>。这个字段也是存在于</p>
+<p>它和<code>Expires</code>本质的不同在于它并没有采用<code>具体的过期时间点</code>这个方式，而是采用过期时长来控制缓存，对应的字段是<strong>max-age</strong>。比如这个例子:</p>
+<pre><code>Cache-Control:max-age=3600复制代码
+</code></pre>
+<p>代表这个响应返回后在 3600 秒，也就是一个小时之内可以直接使用缓存。</p>
+<p>如果你觉得它只有<code>max-age</code>一个属性的话，那就大错特错了。</p>
+<p>它其实可以组合非常多的指令，完成更多场景的缓存判断, 将一些关键的属性列举如下:<br><strong>public</strong>:<br>客户端和代理服务器都可以缓存。因为一个请求可能要经过不同的<code>代理服务器</code>最后才到达目标服务器，那么结果就是不仅仅浏览器可以缓存数据，中间的任何代理节点都可以进行缓存。</p>
+<p><strong>private</strong>： 这种情况就是只有浏览器能缓存了，中间的代理服务器不能缓存。</p>
+<p><strong>no-cache</strong>: 跳过当前的强缓存，发送HTTP请求，即直接进入<code>协商缓存阶段</code>。</p>
+<p><strong>no-store</strong>：非常粗暴，不进行任何形式的缓存。</p>
+<p><strong>s-maxage</strong>：这和<code>max-age</code>长得比较像，但是区别在于s-maxage是针对代理服务器的缓存时间。</p>
+<p>值得注意的是，当<strong>Expires</strong>和<strong>Cache-Control</strong>同时存在的时候，<strong>Cache-Control</strong>会优先考虑。</p>
+<p>当然，还存在一种情况，当资源缓存时间超时了，也就是<code>强缓存</code>失效了，接下来怎么办？没错，这样就进入到第二级屏障——<strong>协商缓存</strong>了。</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>强缓存失效之后，浏览器在请求头中携带相应的<code>缓存tag</code>来向服务器发请求，由服务器根据这个tag，来决定是否使用缓存，这就是<strong>协商缓存</strong>。</p>
+<p>具体来说，这样的缓存tag分为两种: <strong>Last-Modified</strong> 和<br><strong>ETag</strong>。这两者各有优劣，并不存在谁对谁有<code>绝对的优势</code>，跟上面强缓存的两个 tag 不一样。</p>
+<h4 id="Last-Modified"><a href="#Last-Modified" class="headerlink" title="Last-Modified"></a>Last-Modified</h4><p>即最后修改时间。在浏览器第一次给服务器发送请求后，服务器会在响应头中加上这个字段。</p>
+<p>浏览器接收到后，如果再次请求，会在请求头中携带<code>If-Modified-Since</code>字段，这个字段的值也就是服务器传来的最后修改时间。</p>
+<p>服务器拿到请求头中的<code>If-Modified-Since</code>的字段后，其实会和这个服务器中<code>该资源的最后修改时间</code>对比:</p>
+<ul>
+<li>如果请求头中的这个值小于最后修改时间，说明是时候更新了。返回新的资源，跟常规的HTTP请求响应的流程一样。</li>
+<li>否则返回304，告诉浏览器直接用缓存。</li>
+</ul>
+<h4 id="ETag"><a href="#ETag" class="headerlink" title="ETag"></a>ETag</h4><p><code>ETag</code> 是服务器根据当前文件的内容，给文件生成的唯一标识，只要里面的内容有改动，这个值就会变。服务器通过<code>响应头</code>把这个值给浏览器。</p>
+<p>浏览器接收到<code>ETag</code>的值，会在下次请求时，将这个值作为<strong>If-None-Match</strong>这个字段的内容，并放到请求头中，然后发给服务器。</p>
+<p>服务器接收到<strong>If-None-Match</strong>后，会跟服务器上该资源的<strong>ETag</strong>进行比对:</p>
+<ul>
+<li>如果两者不一样，说明要更新了。返回新的资源，跟常规的HTTP请求响应的流程一样。</li>
+<li>否则返回304，告诉浏览器直接用缓存。</li>
+</ul>
+<h4 id="两者对比"><a href="#两者对比" class="headerlink" title="两者对比"></a>两者对比</h4><ol>
+<li>在<code>精准度</code>上，<code>ETag</code>优于<code>Last-Modified</code>。优于 ETag 是按照内容给资源上标识，因此能准确感知资源的变化。而<br>Last-Modified 就不一样了，它在一些特殊的情况并不能准确感知资源变化，主要有两种情况:</li>
+</ol>
+<ul>
+<li>编辑了资源文件，但是文件内容并没有更改，这样也会造成缓存失效。</li>
+<li>Last-Modified 能够感知的单位时间是秒，如果文件在 1 秒内改变了多次，那么这时候的 Last-Modified 并没有体现出修改了。</li>
+</ul>
+<ol>
+<li>在性能上，<code>Last-Modified</code>优于<code>ETag</code>，也很简单理解，<code>Last-Modified</code>仅仅只是记录一个时间点，而<br><code>Etag</code>需要根据文件的具体内容生成哈希值。</li>
+</ol>
+<p>另外，如果两种方式都支持的话，服务器会优先考虑<code>ETag</code>。</p>
+<h3 id="缓存位置"><a href="#缓存位置" class="headerlink" title="缓存位置"></a>缓存位置</h3><p>前面我们已经提到，当<code>强缓存</code>命中或者协商缓存中服务器返回304的时候，我们直接从缓存中获取资源。那这些资源究竟缓存在什么位置呢？</p>
+<p>浏览器中的缓存位置一共有四种，按优先级从高到低排列分别是：</p>
+<ul>
+<li>Service Worker</li>
+<li>Memory Cache</li>
+<li>Disk Cache</li>
+<li>Push Cache</li>
+</ul>
+<h3 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a>Service Worker</h3><p>Service Worker 借鉴了 Web Worker的 思路，即让 JS<br>运行在主线程之外，由于它脱离了浏览器的窗体，因此无法直接访问<code>DOM</code>。虽然如此，但它仍然能帮助我们完成很多有用的功能，比如<code>离线缓存</code>、<code>消息推送</code>和<code>网络代理</code>等功能。其中的<code>离线缓存</code>就是<br><strong>Service Worker Cache</strong>。</p>
+<p>Service Worker 同时也是 PWA 的重要实现机制，关于它的细节和特性，我们将会在后面的 PWA 的分享中详细介绍。</p>
+<h3 id="Memory-Cache-和-Disk-Cache"><a href="#Memory-Cache-和-Disk-Cache" class="headerlink" title="Memory Cache 和 Disk Cache"></a>Memory Cache 和 Disk Cache</h3><p><strong>Memory Cache</strong>指的是内存缓存，从效率上讲它是最快的。但是从存活时间来讲又是最短的，当渲染进程结束后，内存缓存也就不存在了。</p>
+<p><strong>Disk<br>Cache</strong>就是存储在磁盘中的缓存，从存取效率上讲是比内存缓存慢的，但是他的优势在于存储容量和存储时长。稍微有些计算机基础的应该很好理解，就不展开了。</p>
+<p>好，现在问题来了，既然两者各有优劣，那浏览器如何决定将资源放进内存还是硬盘呢？主要策略如下：</p>
+<ul>
+<li>比较大的JS、CSS文件会直接被丢进磁盘，反之丢进内存</li>
+<li>内存使用率比较高的时候，文件优先进入磁盘</li>
+</ul>
+<h3 id="Push-Cache"><a href="#Push-Cache" class="headerlink" title="Push Cache"></a>Push Cache</h3><p>即推送缓存，这是浏览器缓存的最后一道防线。它是 <code>HTTP/2</code> 中的内容，虽然现在应用的并不广泛，但随着 HTTP&#x2F;2 的推广，它的应用越来越广泛。关于<br>Push<br>Cache，有非常多的内容可以挖掘，不过这已经不是本文的重点，大家可以参考这篇<a target="_blank" rel="noopener" href="https://jakearchibald.com/2017/h2-push-tougher-than-i-thought/">扩展文章</a>。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>对浏览器的缓存机制来做个简要的总结:</p>
+<p>首先通过 <code>Cache-Control</code> 验证强缓存是否可用</p>
+<ul>
+<li><p>如果强缓存可用，直接使用</p>
+</li>
+<li><p>否则进入协商缓存，即发送 HTTP 请求，服务器通过请求头中的<code>Last-Modified</code>或者<code>ETag</code>字段检查资源是否更新</p>
+</li>
+<li><p>若资源更新，返回资源和200状态码</p>
+</li>
+<li><p>否则，返回304，告诉浏览器直接从缓存获取资源</p>
+</li>
+</ul>
+<h2 id="第2篇-能不能说一说浏览器的本地存储？各自优劣如何？"><a href="#第2篇-能不能说一说浏览器的本地存储？各自优劣如何？" class="headerlink" title="第2篇: 能不能说一说浏览器的本地存储？各自优劣如何？"></a>第2篇: 能不能说一说浏览器的本地存储？各自优劣如何？</h2><p>浏览器的本地存储主要分为<code>Cookie</code>、<code>WebStorage</code>和<code>IndexedDB</code>,<br>其中<code>WebStorage</code>又可以分为<code>localStorage</code>和<code>sessionStorage</code>。接下来我们就来一一分析这些本地存储方案。</p>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p><code>Cookie</code> 最开始被设计出来其实并不是来做本地存储的，而是为了弥补<code>HTTP</code>在<strong>状态管理上的不足</strong>。</p>
+<p><code>HTTP</code> 协议是一个无状态协议，客户端向服务器发请求，服务器返回响应，故事就这样结束了，但是下次发请求如何让服务端知道客户端是谁呢？</p>
+<p>这种背景下，就产生了 <code>Cookie</code>.</p>
+<p>Cookie<br>本质上就是浏览器里面存储的一个很小的文本文件，内部以键值对的方式来存储(在chrome开发者面板的<code>Application</code>这一栏可以看到)。向同一个域名下发送请求，都会携带相同的<br>Cookie，服务器拿到 Cookie 进行解析，便能拿到客户端的状态。</p>
+<p>Cookie 的作用很好理解，就是用来做<strong>状态存储</strong>的，但它也是有诸多致命的缺陷的：</p>
+<ol>
+<li><p>容量缺陷。Cookie 的体积上限只有<code>4KB</code>，只能用来存储少量的信息。</p>
+</li>
+<li><p>性能缺陷。Cookie 紧跟域名，不管域名下面的某一个地址需不需要这个 Cookie ，请求都会携带上完整的<br>Cookie，这样随着请求数的增多，其实会造成巨大的性能浪费的，因为请求携带了很多不必要的内容。</p>
+</li>
+<li><p>安全缺陷。由于 Cookie 以纯文本的形式在浏览器和服务器中传递，很容易被非法用户截获，然后进行一系列的篡改，在 Cookie<br>的有效期内重新发送给服务器，这是相当危险的。另外，在<code>HttpOnly</code>为 false 的情况下，Cookie 信息能直接通过 JS 脚本来读取。</p>
+</li>
+</ol>
+<h3 id="localStorage"><a href="#localStorage" class="headerlink" title="localStorage"></a>localStorage</h3><h4 id="和Cookie异同"><a href="#和Cookie异同" class="headerlink" title="和Cookie异同"></a>和Cookie异同</h4><p><code>localStorage</code>有一点跟<code>Cookie</code>一样，就是针对一个域名，即在同一个域名下，会存储相同的一段<strong>localStorage</strong>。</p>
+<p>不过它相对<code>Cookie</code>还是有相当多的区别的:</p>
+<ol>
+<li><p>容量。localStorage 的容量上限为<strong>5M</strong>，相比于<code>Cookie</code>的 4K 大大增加。当然这个 5M<br>是针对一个域名的，因此对于一个域名是持久存储的。</p>
+</li>
+<li><p>只存在客户端，默认不参与与服务端的通信。这样就很好地避免了 Cookie 带来的<strong>性能问题</strong>和<strong>安全问题</strong>。</p>
+</li>
+<li><p>接口封装。通过<code>localStorage</code>暴露在全局，并通过它的 <code>setItem</code> 和 <code>getItem</code>等方法进行操作，非常方便。</p>
+</li>
+</ol>
+<h4 id="操作方式"><a href="#操作方式" class="headerlink" title="操作方式"></a>操作方式</h4><p>接下来我们来具体看看如何来操作<code>localStorage</code>。</p>
+<pre><code>let obj = { name: &quot;sanyuan&quot;, age: 18 };
+localStorage.setItem(&quot;name&quot;, &quot;sanyuan&quot;);
+localStorage.setItem(&quot;info&quot;, JSON.stringify(obj));
+复制代码
+</code></pre>
+<p>接着进入相同的域名时就能拿到相应的值:</p>
+<pre><code>let name = localStorage.getItem(&quot;name&quot;);
+let info = JSON.parse(localStorage.getItem(&quot;info&quot;));
+复制代码
+</code></pre>
+<p>从这里可以看出，<code>localStorage</code>其实存储的都是字符串，如果是存储对象需要调用<code>JSON</code>的<code>stringify</code>方法，并且用<code>JSON.parse</code>来解析成对象。</p>
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><p>利用<code>localStorage</code>的较大容量和持久特性，可以利用<code>localStorage</code>存储一些内容稳定的资源，比如官网的<code>logo</code>，存储<code>Base64</code>格式的图片资源，因此利用<code>localStorage</code></p>
+<h3 id="sessionStorage"><a href="#sessionStorage" class="headerlink" title="sessionStorage"></a>sessionStorage</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p><code>sessionStorage</code>以下方面和<code>localStorage</code>一致:</p>
+<ul>
+<li>容量。容量上限也为 5M。</li>
+<li>只存在客户端，默认不参与与服务端的通信。</li>
+<li>接口封装。除了<code>sessionStorage</code>名字有所变化，存储方式、操作方式均和<code>localStorage</code>一样。</li>
+</ul>
+<p>但<code>sessionStorage</code>和<code>localStorage</code>有一个本质的区别，那就是前者只是会话级别的存储，并不是持久化存储。会话结束，也就是页面关闭，这部分<code>sessionStorage</code>就不复存在了。</p>
+<h4 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h4><ol>
+<li>可以用它对表单信息进行维护，将表单信息存储在里面，可以保证页面即使刷新也不会让之前的表单信息丢失。</li>
+<li>可以用它存储本次浏览记录。如果关闭页面后不需要这些记录，用<code>sessionStorage</code>就再合适不过了。事实上微博就采取了这样的存储方式。</li>
+</ol>
+<h3 id="IndexedDB"><a href="#IndexedDB" class="headerlink" title="IndexedDB"></a>IndexedDB</h3><p><code>IndexedDB</code>是运行在浏览器中的<code>非关系型数据库</code>, 本质上是数据库，绝不是和刚才WebStorage的 5M 一个量级，理论上这个容量是没有上限的。</p>
+<p>关于它的使用，本文侧重原理，而且 MDN<br>上的教程文档已经非常详尽，这里就不做赘述了，感兴趣可以看一下<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB">使用文档</a>。</p>
+<p>接着我们来分析一下<code>IndexedDB</code>的一些重要特性，除了拥有数据库本身的特性，比如<code>支持事务</code>，<code>存储二进制数据</code>，还有这样一些特性需要格外注意：</p>
+<ol>
+<li>键值对存储。内部采用<code>对象仓库</code>存放数据，在这个对象仓库中数据采用<strong>键值对</strong>的方式来存储。</li>
+<li>异步操作。数据库的读写属于 I&#x2F;O 操作, 浏览器中对异步 I&#x2F;O 提供了支持。</li>
+<li>受同源策略限制，即无法访问跨域的数据库。</li>
+</ol>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>浏览器中各种本地存储和缓存技术的发展，给前端应用带来了大量的机会，PWA 也正是依托了这些优秀的存储方案才得以发展起来。重新梳理一下这些本地存储方案:</p>
+<ol>
+<li><code>cookie</code>并不适合存储，而且存在非常多的缺陷。</li>
+<li><code>Web Storage</code>包括<code>localStorage</code>和<code>sessionStorage</code>, 默认不会参与和服务器的通信。</li>
+<li><code>IndexedDB</code>为运行在浏览器上的非关系型数据库，为大型数据的存储提供了接口。</li>
+</ol>
+<h2 id="第3篇-说一说从输入URL到页面呈现发生了什么？——网络篇"><a href="#第3篇-说一说从输入URL到页面呈现发生了什么？——网络篇" class="headerlink" title="第3篇: 说一说从输入URL到页面呈现发生了什么？——网络篇"></a>第3篇: 说一说从输入URL到页面呈现发生了什么？——网络篇</h2><p>这是一个可以无限难的问题。出这个题目的目的就是为了考察你的 web<br>基础深入到什么程度。由于水平和篇幅有限，在这里我将把其中一些重要的过程给大家梳理一遍，相信能在绝大部分的情况下给出一个比较惊艳的答案。</p>
+<p>这里我提前声明，由于是一个综合性非常强的问题，可能会在某一个点上深挖出非常多的细节，我个人觉得学习是一个循序渐进的过程，在明白了整体过程后再去自己研究这些细节，会对整个知识体系有更深的理解。同时，关于延申出来的细节点我都有参考资料，看完这篇之后不妨再去深入学习一下，扩展知识面。</p>
+<p>好，正题开始。</p>
+<p>此时此刻，你在浏览器地址栏输入了百度的网址:</p>
+<pre><code>https://www.baidu.com/复制代码
+</code></pre>
+<h3 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a>网络请求</h3><h4 id="1-构建请求"><a href="#1-构建请求" class="headerlink" title="1. 构建请求"></a>1. 构建请求</h4><p>浏览器会构建请求行:</p>
+<pre><code>// 请求方法是GET，路径为根路径，HTTP协议版本为1.1
+GET / HTTP/1.1复制代码
+</code></pre>
+<h4 id="2-查找强缓存"><a href="#2-查找强缓存" class="headerlink" title="2. 查找强缓存"></a>2. 查找强缓存</h4><p>先检查强缓存，如果命中直接使用，否则进入下一步。关于强缓存，如果不清楚可以参考上一篇文章。</p>
+<h4 id="3-DNS解析"><a href="#3-DNS解析" class="headerlink" title="3. DNS解析"></a>3. DNS解析</h4><p>由于我们输入的是域名，而数据包是通过<code>IP地址</code>传给对方的。因此我们需要得到域名对应的<code>IP地址</code>。这个过程需要依赖一个服务系统，这个系统将域名和 IP<br>一一映射，我们将这个系统就叫做<strong>DNS</strong>（域名系统）。得到具体 IP 的过程就是<code>DNS</code>解析。</p>
+<p>当然，值得注意的是，浏览器提供了<strong>DNS数据缓存功能</strong>。即如果一个域名已经解析过，那会把解析的结果缓存下来，下次处理直接走缓存，不需要经过 <code>DNS解析</code>。</p>
+<p>另外，如果不指定端口的话，默认采用对应的 IP 的 80 端口。</p>
+<h4 id="4-建立-TCP-连接"><a href="#4-建立-TCP-连接" class="headerlink" title="4. 建立 TCP 连接"></a>4. 建立 TCP 连接</h4><p>这里要提醒一点，Chrome 在同一个域名下要求同时最多只能有 6 个 TCP 连接，超过 6 个的话剩下的请求就得等待。</p>
+<p>假设现在不需要等待，我们进入了 TCP 连接的建立阶段。首先解释一下什么是 TCP:</p>
+<blockquote>
+<p>TCP（Transmission Control Protocol，传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。</p>
+</blockquote>
+<p>建立 <code>TCP连接</code>经历了下面三个阶段:</p>
+<ol>
+<li>通过<strong>三次握手</strong>(即总共发送3个数据包确认已经建立连接)建立客户端和服务器之间的连接。</li>
+<li>进行数据传输。这里有一个重要的机制，就是接收方接收到数据包后必须要向发送方<code>确认</code>,<br>如果发送方没有接到这个<code>确认</code>的消息，就判定为数据包丢失，并重新发送该数据包。当然，发送的过程中还有一个优化策略，就是把<code>大的数据包拆成一个个小包</code>，依次传输到接收方，接收方按照这个小包的顺序把它们<code>组装</code>成完整数据包。</li>
+<li>断开连接的阶段。数据传输完成，现在要断开连接了，通过<strong>四次挥手</strong>来断开连接。</li>
+</ol>
+<p>读到这里，你应该明白 TCP<br>连接通过什么手段来保证数据传输的可靠性，一是<code>三次握手</code>确认连接，二是<code>数据包校验</code>保证数据到达接收方，三是通过<code>四次挥手</code>断开连接。</p>
+<p>当然，如果再深入地问，比如<strong>为什么要三次握手，两次不行吗？第三次握手失败了怎么办？为什么要四次挥手</strong>等等这一系列的问题，涉及计算机网络的基础知识，比较底层，但是也是非常重要的细节，希望你能好好研究一下，另外这里有一篇不错的文章，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/86426969">点击进入相应的推荐文章</a>，相信这篇文章能给你启发。</p>
+<h4 id="5-发送-HTTP-请求"><a href="#5-发送-HTTP-请求" class="headerlink" title="5.发送 HTTP 请求"></a>5.发送 HTTP 请求</h4><p>现在<code>TCP连接</code>建立完毕，浏览器可以和服务器开始通信，即开始发送 HTTP 请求。浏览器发 HTTP<br>请求要携带三样东西:<strong>请求行</strong>、<strong>请求头</strong>和<strong>请求体</strong>。</p>
+<p>首先，浏览器会向服务器发送<strong>请求行</strong>,关于<strong>请求行</strong>， 我们在这一部分的第一步就构建完了，贴一下内容:</p>
+<pre><code>// 请求方法是GET，路径为根路径，HTTP协议版本为1.1
+GET / HTTP/1.1复制代码
+</code></pre>
+<p>结构很简单，由<strong>请求方法</strong>、<strong>请求URI</strong>和<strong>HTTP版本协议</strong>组成。</p>
+<p>同时也要带上<strong>请求头</strong>，比如我们之前说的<strong>Cache-Control</strong>、<strong>If-Modified-Since</strong>、<strong>If-None-Match</strong>都由可能被放入请求头中作为缓存的标识信息。当然了还有一些其他的属性，列举如下:</p>
+<pre><code>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cache-Control: no-cache
+Connection: keep-alive
+Cookie: /* 省略cookie信息 */
+Host: www.baidu.com
+Pragma: no-cache
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1
+复制代码
+</code></pre>
+<p>最后是请求体，请求体只有在<code>POST</code>方法下存在，常见的场景是<strong>表单提交</strong>。</p>
+<h3 id="网络响应"><a href="#网络响应" class="headerlink" title="网络响应"></a>网络响应</h3><p>HTTP 请求到达服务器，服务器进行对应的处理。最后要把数据传给浏览器，也就是返回网络响应。</p>
+<p>跟请求部分类似，网络响应具有三个部分:<strong>响应行</strong>、<strong>响应头</strong>和<strong>响应体</strong>。</p>
+<p>响应行类似下面这样:</p>
+<pre><code>HTTP/1.1200 OK
+复制代码
+</code></pre>
+<p>由<code>HTTP协议版本</code>、<code>状态码</code>和<code>状态描述</code>组成。</p>
+<p>响应头包含了服务器及其返回数据的一些信息, 服务器生成数据的时间、返回的数据类型以及对即将写入的Cookie信息。</p>
+<p>举例如下:</p>
+<pre><code>Cache-Control: no-cache
+Connection: keep-alive
+Content-Encoding: gzip
+Content-Type: text/html;charset=utf-8
+Date: Wed, 04 Dec 2019 12:29:13 GMT
+Server: apache
+Set-Cookie: rsv_i=f9a0SIItKqzv7kqgAAgphbGyRts3RwTg%2FLyU3Y5Eh5LwyfOOrAsvdezbay0QqkDqFZ0DfQXby4wXKT8Au8O7ZT9UuMsBq2k; path=/; domain=.baidu.com
+复制代码
+</code></pre>
+<p>响应完成之后怎么办？TCP 连接就断开了吗？</p>
+<p>不一定。这时候要判断<code>Connection</code>字段, 如果请求头或响应头中包含<strong>Connection:<br>Keep-Alive</strong>，表示建立了持久连接，这样<code>TCP</code>连接会一直保持，之后请求统一站点的资源会复用这个连接。</p>
+<p>否则断开<code>TCP</code>连接, 请求-响应流程结束。</p>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p>到此，我们来总结一下主要内容，也就是浏览器端的网络请求过程：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/15/16f080b095268038?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h2 id="第4篇-说一说从输入URL到页面呈现发生了什么？——解析算法篇"><a href="#第4篇-说一说从输入URL到页面呈现发生了什么？——解析算法篇" class="headerlink" title="第4篇: 说一说从输入URL到页面呈现发生了什么？——解析算法篇"></a>第4篇: 说一说从输入URL到页面呈现发生了什么？——解析算法篇</h2><p>完成了网络请求和响应，如果响应头中<code>Content-Type</code>的值是<code>text/html</code>，那么接下来就是浏览器的<code>解析</code>和<code>渲染</code>工作了。</p>
+<p>首先来介绍解析部分，主要分为以下几个步骤:</p>
+<ul>
+<li>构建 <code>DOM</code>树</li>
+<li><code>样式</code>计算</li>
+<li>生成<code>布局树</code>(<code>Layout Tree</code>)</li>
+</ul>
+<h3 id="构建-DOM-树"><a href="#构建-DOM-树" class="headerlink" title="构建 DOM 树"></a>构建 DOM 树</h3><p>由于浏览器无法直接理解<code>HTML字符串</code>，因此将这一系列的字节流转换为一种有意义并且方便操作的数据结构，这种数据结构就是<code>DOM树</code>。<code>DOM树</code>本质上是一个以<code>document</code>为根节点的多叉树。</p>
+<p>那通过什么样的方式来进行解析呢？</p>
+<h4 id="HTML文法的本质"><a href="#HTML文法的本质" class="headerlink" title="HTML文法的本质"></a>HTML文法的本质</h4><p>首先，我们应该清楚把握一点: HTML 的文法并不是<code>上下文无关文法</code>。</p>
+<p>这里，有必要讨论一下什么是<code>上下文无关文法</code>。</p>
+<p>在计算机科学的<strong>编译原理</strong>学科中，有非常明确的定义:</p>
+<blockquote>
+<p>若一个形式文法G &#x3D; (N, Σ, P, S) 的产生式规则都取如下的形式：V-&gt;w，则叫上下文无关语法。其中 V∈N ，w∈(N∪Σ)* 。</p>
+</blockquote>
+<p>其中把 G &#x3D; (N, Σ, P, S) 中各个参量的意义解释一下:</p>
+<ol>
+<li>N 是<strong>非终结符</strong>(顾名思义，就是说最后一个符号不是它, 下面同理)集合。</li>
+<li>Σ 是<strong>终结符</strong>集合。</li>
+<li>P 是开始符，它必须属于 N ，也就是非终结符。</li>
+<li>S 就是不同的产生式的集合。如 S -&gt; aSb 等等。</li>
+</ol>
+<p>通俗一点讲，<code>上下文无关的文法</code>就是说这个文法中所有产生式的左边都是一个非终结符。</p>
+<p>看到这里，如果还有一点懵圈，我举个例子你就明白了。</p>
+<p>比如:</p>
+<pre><code>A -&gt; B
+复制代码
+</code></pre>
+<p>这个文法中，每个产生式左边都会有一个非终结符，这就是<code>上下文无关的文法</code>。在这种情况下，<code>xBy</code>一定是可以规约出<code>xAy</code>的。</p>
+<p>我们下面看看看一个反例：</p>
+<pre><code>aA -&gt; B
+Aa -&gt; B
+复制代码
+</code></pre>
+<p>这种情况就是不是<code>上下文无关的文法</code>，当遇到<code>B</code>的时候，我们不知道到底能不能规约出<code>A</code>，取决于左边或者右边是否有<code>a</code>存在，也就是说和上下文有关。</p>
+<p>关于它为什么是<code>非上下文无关文法</code>，首先需要让大家注意的是，规范的 HTML<br>语法，是符合<code>上下文无关文法</code>的，能够体现它<code>非上下文无关</code>的是<strong>不标准的语法</strong>。在此我仅举一个反例即可证明。</p>
+<p>比如解析器扫描到<code>form</code>标签的时候，<strong>上下文无关文法</strong>的处理方式是直接创建对应 form 的 DOM 对象，而真实的 HTML5<br>场景中却不是这样，解析器会查看 <code>form</code> 的上下文，如果这个 <code>form</code> 标签的父标签也是 <code>form</code>, 那么<strong>直接跳过</strong>当前的 <code>form</code><br>标签，否则才创建 DOM 对象。</p>
+<p>常规的编程语言都是<strong>上下文无关</strong>的，而HTML却相反，也正是它<strong>非上下文无关</strong>的特性，决定了<code>HTML Parser</code>并不能使用常规编程语言的解析器来完成，需要另辟蹊径。</p>
+<h4 id="解析算法"><a href="#解析算法" class="headerlink" title="解析算法"></a>解析算法</h4><p>HTML5<br><a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/parsing.html">规范</a>详细地介绍了解析算法。这个算法分为两个阶段:</p>
+<ol>
+<li>标记化。</li>
+<li>建树。</li>
+</ol>
+<p>对应的两个过程就是<strong>词法分析</strong>和<strong>语法分析</strong>。</p>
+<h4 id="标记化算法"><a href="#标记化算法" class="headerlink" title="标记化算法"></a>标记化算法</h4><p>这个算法输入为<code>HTML文本</code>，输出为<code>HTML标记</code>，也成为<strong>标记生成器</strong>。其中运用<strong>有限自动状态机</strong>来完成。即在当当前状态下，接收一个或多个字符，就会更新到下一个状态。</p>
+<pre><code>&lt;html&gt;&lt;body&gt;
+    Hello sanyuan
+  &lt;/body&gt;&lt;/html&gt;复制代码
+</code></pre>
+<p>通过一个简单的例子来演示一下<code>标记化</code>的过程。</p>
+<p>遇到<code>&lt;</code>, 状态为<strong>标记打开</strong>。</p>
+<p>接收<code>[a-z]</code>的字符，会进入<strong>标记名称状态</strong>。</p>
+<p>这个状态一直保持，直到遇到<code>&gt;</code>，表示标记名称记录完成，这时候变为<strong>数据状态</strong>。</p>
+<p>接下来遇到<code>body</code>标签做同样的处理。</p>
+<p>这个时候<code>html</code>和<code>body</code>的标记都记录好了。</p>
+<p>现在来到<body>中的&gt;，进入<strong>数据状态</strong>，之后保持这样状态接收后面的字符<strong>hello sanyuan</strong>。</p>
+<p>接着接收 </body> 中的<code>&lt;</code>，回到<strong>标记打开</strong>, 接收下一个<code>/</code>后，这时候会创建一个<code>end tag</code>的token。</p>
+<p>随后进入<strong>标记名称状态</strong>, 遇到<code>&gt;</code>回到<strong>数据状态</strong>。</p>
+<p>接着以同样的样式处理 </body>。</p>
+<h4 id="建树算法"><a href="#建树算法" class="headerlink" title="建树算法"></a>建树算法</h4><p>之前提到过，DOM<br>树是一个以<code>document</code>为根节点的多叉树。因此解析器首先会创建一个<code>document</code>对象。标记生成器会把每个标记的信息发送给<strong>建树器</strong>。<strong>建树器</strong>接收到相应的标记时，会<strong>创建对应的<br>DOM 对象</strong>。创建这个<code>DOM对象</code>后会做两件事情:</p>
+<ol>
+<li>将<code>DOM对象</code>加入 DOM 树中。</li>
+<li>将对应标记压入存放开放(与<code>闭合标签</code>意思对应)元素的栈中。</li>
+</ol>
+<p>还是拿下面这个例子说:</p>
+<pre><code>&lt;html&gt;&lt;body&gt;
+    Hello sanyuan
+  &lt;/body&gt;&lt;/html&gt;复制代码
+</code></pre>
+<p>首先，状态为<strong>初始化状态</strong>。</p>
+<p>接收到标记生成器传来的<code>html</code>标签，这时候状态变为<strong>before html状态</strong>。同时创建一个<code>HTMLHtmlElement</code>的 DOM 元素,<br>将其加到<code>document</code>根对象上，并进行压栈操作。</p>
+<p>接着状态自动变为<strong>before head</strong>, 此时从标记生成器那边传来<code>body</code>，表示并没有<code>head</code>,<br>这时候<strong>建树器</strong>会自动创建一个<strong>HTMLHeadElement</strong>并将其加入到<code>DOM树</code>中。</p>
+<p>现在进入到<strong>in head</strong>状态, 然后直接跳到<strong>after head</strong>。</p>
+<p>现在<strong>标记生成器</strong>传来了<code>body</code>标记，创建<strong>HTMLBodyElement</strong>, 插入到<code>DOM</code>树中，同时压入开放标记栈。</p>
+<p>接着状态变为<strong>in body</strong>，然后来接收后面一系列的字符: <strong>Hello<br>sanyuan</strong>。接收到第一个字符的时候，会创建一个<strong>Text</strong>节点并把字符插入其中，然后把<strong>Text</strong>节点插入到 DOM<br>树中<code>body元素</code>的下面。随着不断接收后面的字符，这些字符会附在<strong>Text</strong>节点上。</p>
+<p>现在，<strong>标记生成器</strong>传过来一个<code>body</code>的结束标记，进入到<strong>after body</strong>状态。</p>
+<p><strong>标记生成器</strong>最后传过来一个<code>html</code>的结束标记, 进入到<strong>after after body</strong>的状态，表示解析过程到此结束。</p>
+<h4 id="容错机制"><a href="#容错机制" class="headerlink" title="容错机制"></a>容错机制</h4><p>讲到<code>HTML5</code>规范，就不得不说它强大的<strong>宽容策略</strong>, 容错能力非常强，虽然大家褒贬不一，不过我想作为一名资深的前端工程师，有必要知道<code>HTML Parser</code>在容错方面做了哪些事情。</p>
+<p>接下来是 WebKit 中一些经典的容错示例，发现有其他的也欢迎来补充。</p>
+<ol>
+<li><p>使用</br>而不是<br></p>
+<p> if (t-&gt;isCloseTag(brTag) &amp;&amp; m_document-&gt;inCompatMode()) {<br>   reportError(MalformedBRError);<br>   t-&gt;beginTag &#x3D; true;<br> }<br> 复制代码</p>
+</li>
+</ol>
+<p>全部换为<br>的形式。</p>
+<ol>
+<li><p>表格离散</p>
+ <table><table><tr><td>inner table</td></tr></table><tr><td>outer table</td></tr></table>复制代码</li>
+</ol>
+<p><code>WebKit</code>会自动转换为:</p>
+<pre><code>&lt;table&gt;&lt;tr&gt;&lt;td&gt;outer table&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;inner table&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;复制代码
+</code></pre>
+<ol>
+<li>表单元素嵌套</li>
+</ol>
+<p>这时候直接忽略里面的<code>form</code>。</p>
+<h3 id="样式计算"><a href="#样式计算" class="headerlink" title="样式计算"></a>样式计算</h3><p>关于CSS样式，它的来源一般是三种:</p>
+<ol>
+<li><strong>link标签引用</strong></li>
+<li><strong>style标签中的样式</strong></li>
+<li><strong>元素的内嵌style属性</strong></li>
+</ol>
+<h4 id="格式化样式表"><a href="#格式化样式表" class="headerlink" title="格式化样式表"></a>格式化样式表</h4><p>首先，浏览器是无法直接识别 CSS 样式文本的，因此渲染引擎接收到 CSS 文本之后第一件事情就是将其转化为一个结构化的对象，即styleSheets。</p>
+<p>这个格式化的过程过于复杂，而且对于不同的浏览器会有不同的优化策略，这里就不展开了。</p>
+<p>在浏览器控制台能够通过<code>document.styleSheets</code>来查看这个最终的结构。当然，这个结构包含了以上三种CSS来源，为后面的样式操作提供了基础。</p>
+<h4 id="标准化样式属性"><a href="#标准化样式属性" class="headerlink" title="标准化样式属性"></a>标准化样式属性</h4><p>有一些 CSS<br>样式的数值并不容易被渲染引擎所理解，因此需要在计算样式之前将它们标准化，如<code>em</code>-&gt;<code>px</code>,<code>red</code>-&gt;<code>#ff0000</code>,<code>bold</code>-&gt;<code>700</code>等等。</p>
+<h4 id="计算每个节点的具体样式"><a href="#计算每个节点的具体样式" class="headerlink" title="计算每个节点的具体样式"></a>计算每个节点的具体样式</h4><p>样式已经被<code>格式化</code>和<code>标准化</code>,接下来就可以计算每个节点的具体样式信息了。</p>
+<p>其实计算的方式也并不复杂，主要就是两个规则: <strong>继承</strong>和<strong>层叠</strong>。</p>
+<p>每个子节点都会默认继承父节点的样式属性，如果父节点中没有找到，就会采用浏览器默认样式，也叫<code>UserAgent样式</code>。这就是继承规则，非常容易理解。</p>
+<p>然后是层叠规则，CSS<br>最大的特点在于它的层叠性，也就是最终的样式取决于各个属性共同作用的效果，甚至有很多诡异的层叠现象，看过《CSS世界》的同学应该对此深有体会，具体的层叠规则属于深入<br>CSS 语言的范畴，这里就不过多介绍了。</p>
+<p>不过值得注意的是，在计算完样式之后，所有的样式值会被挂在到<code>window.getComputedStyle</code>当中，也就是可以通过JS来获取计算后的样式，非常方便。</p>
+<h3 id="生成布局树"><a href="#生成布局树" class="headerlink" title="生成布局树"></a>生成布局树</h3><p>现在已经生成了<code>DOM树</code>和<code>DOM样式</code>，接下来要做的就是通过浏览器的布局系统<code>确定元素的位置</code>，也就是要生成一棵<code>布局树</code>(Layout Tree)。</p>
+<p>布局树生成的大致工作如下:</p>
+<ol>
+<li>遍历生成的 DOM 树节点，并把他们添加到<code>布局树中</code>。</li>
+<li>计算布局树节点的坐标位置。</li>
+</ol>
+<p>值得注意的是，这棵布局树值包含可见元素，对于 <code>head</code>标签和设置了<code>display: none</code>的元素，将不会被放入其中。</p>
+<p>有人说首先会生成<code>Render Tree</code>，也就是渲染树，其实这还是 16 年之前的事情，现在 Chrome 团队已经做了大量的重构，已经没有生成<code>Render Tree</code>的过程了。而布局树的信息已经非常完善，完全拥有<code>Render Tree</code>的功能。</p>
+<p>之所以不讲布局的细节，是因为它过于复杂，一一介绍会显得文章过于臃肿，不过大部分情况下我们只需要知道它所做的工作<strong>是什么</strong>即可，如果想深入其中的原理，知道它是<strong>如何来做的</strong>，我强烈推荐你去读一读人人FED团队的文章<a target="_blank" rel="noopener" href="https://www.rrfed.com/2017/02/26/chrome-layout/">从Chrome源码看浏览器如何layout布局</a>。</p>
+<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p>梳理一下这一节的主要脉络:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/15/16f080b2f718e4ad?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h2 id="第5篇-说一说从输入URL到页面呈现发生了什么？——渲染过程篇"><a href="#第5篇-说一说从输入URL到页面呈现发生了什么？——渲染过程篇" class="headerlink" title="第5篇: 说一说从输入URL到页面呈现发生了什么？——渲染过程篇"></a>第5篇: 说一说从输入URL到页面呈现发生了什么？——渲染过程篇</h2><p>上一节介绍了浏览器<code>解析</code>的过程,其中包含<code>构建DOM</code>、<code>样式计算</code>和<code>构建布局树</code>。</p>
+<p>接下来就来拆解下一个过程——<code>渲染</code>。分为以下几个步骤:</p>
+<ul>
+<li>建立<code>图层树</code>(<code>Layer Tree</code>)</li>
+<li>生成<code>绘制列表</code></li>
+<li>生成<code>图块</code>并<code>栅格化</code></li>
+<li>显示器显示内容</li>
+</ul>
+<h3 id="一、建图层树"><a href="#一、建图层树" class="headerlink" title="一、建图层树"></a>一、建图层树</h3><p>如果你觉得现在<code>DOM节点</code>也有了，样式和位置信息也都有了，可以开始绘制页面了，那你就错了。</p>
+<p>因为你考虑掉了另外一些复杂的场景，比如3D动画如何呈现出变换效果，当元素含有层叠上下文时如何控制显示和隐藏等等。</p>
+<p>为了解决如上所述的问题，浏览器在构建完<code>布局树</code>之后，还会对特定的节点进行分层，构建一棵<code>图层树</code>(<code>Layer Tree</code>)。</p>
+<p>那这棵图层树是根据什么来构建的呢？</p>
+<p>一般情况下，节点的图层会默认属于父亲节点的图层(这些图层也称为<strong>合成层</strong>)。那什么时候会提升为一个单独的合成层呢？</p>
+<p>有两种情况需要分别讨论，一种是<strong>显式合成</strong>，一种是<strong>隐式合成</strong>。</p>
+<h4 id="显式合成"><a href="#显式合成" class="headerlink" title="显式合成"></a>显式合成</h4><p>下面是<code>显式合成</code>的情况:</p>
+<p>一、 拥有<strong>层叠上下文</strong>的节点。</p>
+<p>层叠上下文也基本上是有一些特定的CSS属性创建的，一般有以下情况:</p>
+<ol>
+<li>HTML根元素本身就具有层叠上下文。</li>
+<li>普通元素设置<strong>position不为static</strong>并且<strong>设置了z-index属性</strong>，会产生层叠上下文。</li>
+<li>元素的 <strong>opacity</strong> 值不是 1</li>
+<li>元素的 <strong>transform</strong> 值不是 none</li>
+<li>元素的 <strong>filter</strong> 值不是 none</li>
+<li>元素的 <strong>isolation</strong> 值是isolate</li>
+<li><strong>will-change</strong>指定的属性值为上面任意一个。(will-change的作用后面会详细介绍)</li>
+</ol>
+<p>二、需要<strong>剪裁</strong>的地方。</p>
+<p>比如一个div，你只给他设置 100 * 100<br>像素的大小，而你在里面放了非常多的文字，那么超出的文字部分就需要被剪裁。当然如果出现了滚动条，那么滚动条会被单独提升为一个图层。</p>
+<h4 id="隐式合成"><a href="#隐式合成" class="headerlink" title="隐式合成"></a>隐式合成</h4><p>接下来是<code>隐式合成</code>，简单来说就是<code>层叠等级低</code>的节点被提升为单独的图层之后，那么<code>所有层叠等级比它高</code>的节点<strong>都会</strong>成为一个单独的图层。</p>
+<p>这个隐式合成其实隐藏着巨大的风险，如果在一个大型应用中，当一个<code>z-index</code>比较低的元素被提升为单独图层之后，层叠在它上面的的元素统统都会被提升为单独的图层，可能会增加上千个图层，大大增加内存的压力，甚至直接让页面崩溃。这就是<strong>层爆炸</strong>的原理。这里有一个具体的例子，<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000014520786">点击打开</a>。</p>
+<p>值得注意的是，当需要<code>repaint</code>时，只需要<code>repaint</code>本身，而不会影响到其他的层。</p>
+<h3 id="二、生成绘制列表"><a href="#二、生成绘制列表" class="headerlink" title="二、生成绘制列表"></a>二、生成绘制列表</h3><p>接下来渲染引擎会将图层的绘制拆分成一个个绘制指令，比如先画背景、再描绘边框……然后将这些指令按顺序组合成一个待绘制列表，相当于给后面的绘制操作做了一波计划。</p>
+<p>这里我以百度首页为例，大家可以在 Chrome 开发者工具中在设置栏中展开 <code>more tools</code>, 然后选择<code>Layers</code>面板，就能看到下面的绘制列表:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/15/16f080b57cdb8f39?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h3 id="三、生成图块和生成位图"><a href="#三、生成图块和生成位图" class="headerlink" title="三、生成图块和生成位图"></a>三、生成图块和生成位图</h3><p>现在开始绘制操作，实际上在渲染进程中绘制操作是由专门的线程来完成的，这个线程叫<strong>合成线程</strong>。</p>
+<p>绘制列表准备好了之后，渲染进程的主线程会给<code>合成线程</code>发送<code>commit</code>消息，把绘制列表提交给合成线程。接下来就是合成线程一展宏图的时候啦。</p>
+<p>首先，考虑到视口就这么大，当页面非常大的时候，要滑很长时间才能滑到底，如果要一口气全部绘制出来是相当浪费性能的。因此，合成线程要做的第一件事情就是将图层<strong>分块</strong>。这些块的大小一般不会特别大，通常是<br>256 * 256 或者 512 * 512 这个规格。这样可以大大加速页面的首屏展示。</p>
+<p>因为后面图块数据要进入 GPU 内存，考虑到浏览器内存上传到 GPU 内存的操作比较慢，即使是绘制一部分图块，也可能会耗费大量时间。针对这个问题，Chrome<br>采用了一个策略:<br>在首次合成图块时只采用一个<strong>低分辨率</strong>的图片，这样首屏展示的时候只是展示出低分辨率的图片，这个时候继续进行合成操作，当正常的图块内容绘制完毕后，会将当前低分辨率的图块内容替换。这也是<br>Chrome 底层优化首屏加载速度的一个手段。</p>
+<p>顺便提醒一点，渲染进程中专门维护了一个<strong>栅格化线程池</strong>，专门负责把<strong>图块</strong>转换为<strong>位图数据</strong>。</p>
+<p>然后合成线程会选择视口附近的<strong>图块</strong>，把它交给<strong>栅格化线程池</strong>生成位图。</p>
+<p>生成位图的过程实际上都会使用 GPU 进行加速，生成的位图最后发送给<code>合成线程</code>。</p>
+<h3 id="四、显示器显示内容"><a href="#四、显示器显示内容" class="headerlink" title="四、显示器显示内容"></a>四、显示器显示内容</h3><p>栅格化操作完成后，<strong>合成线程</strong>会生成一个绘制命令，即”DrawQuad”，并发送给浏览器进程。</p>
+<p>浏览器进程中的<code>viz组件</code>接收到这个命令，根据这个命令，把页面内容绘制到内存，也就是生成了页面，然后把这部分内存发送给显卡。为什么发给显卡呢？我想有必要先聊一聊显示器显示图像的原理。</p>
+<p>无论是 PC 显示器还是手机屏幕，都有一个固定的刷新频率，一般是 60 HZ，即 60 帧，也就是一秒更新 60 张图片，一张图片停留的时间约为 16.7<br>ms。而每次更新的图片都来自显卡的<strong>前缓冲区</strong>。而显卡接收到浏览器进程传来的页面后，会合成相应的图像，并将图像保存到<strong>后缓冲区</strong>，然后系统自动将<code>前缓冲区</code>和<code>后缓冲区</code>对换位置，如此循环更新。</p>
+<p>看到这里你也就是明白，当某个动画大量占用内存的时候，浏览器生成图像的时候会变慢，图像传送给显卡就会不及时，而显示器还是以不变的频率刷新，因此会出现卡顿，也就是明显的掉帧现象。</p>
+<h3 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h3><p>到这里，我们算是把整个过程给走通了，现在重新来梳理一下页面渲染的流程。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/15/16f080b7b8926b7f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h2 id="第6篇-谈谈你对重绘和回流的理解。"><a href="#第6篇-谈谈你对重绘和回流的理解。" class="headerlink" title="第6篇: 谈谈你对重绘和回流的理解。"></a>第6篇: 谈谈你对重绘和回流的理解。</h2><p>我们首先来回顾一下<code>渲染流水线</code>的流程:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/15/16f080ba7fa706eb?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>接下来，我们将来以此为依据来介绍重绘和回流，以及让更新视图的另外一种方式——合成。</p>
+<h3 id="回流"><a href="#回流" class="headerlink" title="回流"></a>回流</h3><p>首先介绍<code>回流</code>。<code>回流</code>也叫<code>重排</code>。</p>
+<h4 id="触发条件"><a href="#触发条件" class="headerlink" title="触发条件"></a>触发条件</h4><p>简单来说，就是当我们对 DOM 结构的修改引发 DOM 几何尺寸变化的时候，会发生<code>回流</code>的过程。</p>
+<p>具体一点，有以下的操作会触发回流:</p>
+<ol>
+<li><p>一个 DOM<br>元素的几何属性变化，常见的几何属性有<code>width</code>、<code>height</code>、<code>padding</code>、<code>margin</code>、<code>left</code>、<code>top</code>、<code>border</code> 等等,<br>这个很好理解。</p>
+</li>
+<li><p>使 DOM 节点发生<code>增减</code>或者<code>移动</code>。</p>
+</li>
+<li><p>读写 <code>offset</code>族、<code>scroll</code>族和<code>client</code>族属性的时候，浏览器为了获取这些值，需要进行回流操作。</p>
+</li>
+<li><p>调用 <code>window.getComputedStyle</code> 方法。</p>
+</li>
+</ol>
+<h4 id="回流过程"><a href="#回流过程" class="headerlink" title="回流过程"></a>回流过程</h4><p>依照上面的渲染流水线，触发回流的时候，如果 DOM 结构发生改变，则重新渲染 DOM 树，然后将后面的流程(包括主线程之外的任务)全部走一遍。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/15/16f0809e65b3d2fc?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>相当于将解析和合成的过程重新又走了一篇，开销是非常大的。</p>
+<h3 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h3><h4 id="触发条件-1"><a href="#触发条件-1" class="headerlink" title="触发条件"></a>触发条件</h4><p>当 DOM 的修改导致了样式的变化，并且没有影响几何属性的时候，会导致<code>重绘</code>(<code>repaint</code>)。</p>
+<h4 id="重绘过程"><a href="#重绘过程" class="headerlink" title="重绘过程"></a>重绘过程</h4><p>由于没有导致 DOM 几何属性的变化，因此元素的位置信息不需要更新，从而省去布局的过程。流程如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/15/16f080a26aa222d4?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>跳过了<code>生成布局树</code>和<code>建图层树</code>的阶段，直接生成绘制列表，然后继续进行分块、生成位图等后面一系列操作。</p>
+<p>可以看到，重绘不一定导致回流，但回流一定发生了重绘。</p>
+<h3 id="合成"><a href="#合成" class="headerlink" title="合成"></a>合成</h3><p>还有一种情况，是直接合成。比如利用 CSS3<br>的<code>transform</code>、<code>opacity</code>、<code>filter</code>这些属性就可以实现合成的效果，也就是大家常说的<strong>GPU加速</strong>。</p>
+<h4 id="GPU加速的原因"><a href="#GPU加速的原因" class="headerlink" title="GPU加速的原因"></a>GPU加速的原因</h4><p>在合成的情况下，会直接跳过布局和绘制流程，直接进入<code>非主线程</code>处理的部分，即直接交给<code>合成线程</code>处理。交给它处理有两大好处:</p>
+<ol>
+<li><p>能够充分发挥<code>GPU</code>的优势。合成线程生成位图的过程中会调用线程池，并在其中使用<code>GPU</code>进行加速生成，而GPU 是擅长处理位图数据的。</p>
+</li>
+<li><p>没有占用主线程的资源，即使主线程卡住了，效果依然能够流畅地展示。</p>
+</li>
+</ol>
+<h3 id="实践意义"><a href="#实践意义" class="headerlink" title="实践意义"></a>实践意义</h3><p>知道上面的原理之后，对于开发过程有什么指导意义呢？</p>
+<ol>
+<li>避免频繁使用 style，而是采用修改<code>class</code>的方式。</li>
+<li>使用<code>createDocumentFragment</code>进行批量的 DOM 操作。</li>
+<li>对于 resize、scroll 等进行防抖&#x2F;节流处理。</li>
+<li>添加 will-change: tranform<br>，让渲染引擎为其单独实现一个图层，当这些变换发生时，仅仅只是利用合成线程去处理这些变换，而不牵扯到主线程，大大提高渲染效率。当然这个变化不限于<code>tranform</code>,<br>任何可以实现合成效果的 CSS 属性都能用<code>will-change</code>来声明。这里有一个实际的例子，一行<code>will-change: tranform</code>拯救一个项目，<a target="_blank" rel="noopener" href="https://juejin.im/post/5da52531518825094e373372">点击直达</a>。</li>
+</ol>
+<h2 id="第7篇-能不能说一说XSS攻击？"><a href="#第7篇-能不能说一说XSS攻击？" class="headerlink" title="第7篇: 能不能说一说XSS攻击？"></a>第7篇: 能不能说一说XSS攻击？</h2><h3 id="什么是-XSS-攻击？"><a href="#什么是-XSS-攻击？" class="headerlink" title="什么是 XSS 攻击？"></a>什么是 XSS 攻击？</h3><p><code>XSS</code> 全称是 <code>Cross Site Scripting</code>(即<code>跨站脚本</code>)，为了和 CSS 区分，故叫它<code>XSS</code>。XSS<br>攻击是指浏览器中执行恶意脚本(无论是跨域还是同域)，从而拿到用户的信息并进行操作。</p>
+<p>这些操作一般可以完成下面这些事情:</p>
+<ol>
+<li>窃取<code>Cookie</code>。</li>
+<li>监听用户行为，比如输入账号密码后直接发送到黑客服务器。</li>
+<li>修改 DOM 伪造登录表单。</li>
+<li>在页面中生成浮窗广告。</li>
+</ol>
+<p>通常情况，XSS 攻击的实现有三种方式——<strong>存储型</strong>、<strong>反射型</strong>和<strong>文档型</strong>。原理都比较简单，先来一一介绍一下。</p>
+<h4 id="存储型"><a href="#存储型" class="headerlink" title="存储型"></a>存储型</h4><p><code>存储型</code>，顾名思义就是将恶意脚本存储了起来，确实，存储型的 XSS 将脚本存储到了服务端的数据库，然后在客户端执行这些脚本，从而达到攻击的效果。</p>
+<p>常见的场景是留言评论区提交一段脚本代码，如果前后端没有做好转义的工作，那评论内容存到了数据库，在页面渲染过程中<code>直接执行</code>, 相当于执行一段未知逻辑的 JS<br>代码，是非常恐怖的。这就是存储型的 XSS 攻击。</p>
+<h4 id="反射型"><a href="#反射型" class="headerlink" title="反射型"></a>反射型</h4><p><code>反射型XSS</code>指的是恶意脚本作为<strong>网络请求的一部分</strong>。</p>
+<p>比如我输入:</p>
+<pre><code>http://sanyuan.com?q=&lt;script&gt;alert(&quot;你完蛋了&quot;)&lt;/script&gt;
+复制代码
+</code></pre>
+<p>这杨，在服务器端会拿到<code>q</code>参数,然后将内容返回给浏览器端，浏览器将这些内容作为HTML的一部分解析，发现是一个脚本，直接执行，这样就被攻击了。</p>
+<p>之所以叫它<code>反射型</code>,<br>是因为恶意脚本是通过作为网络请求的参数，经过服务器，然后再反射到HTML文档中，执行解析。和<code>存储型</code>不一样的是，服务器并不会存储这些恶意脚本。</p>
+<h4 id="文档型"><a href="#文档型" class="headerlink" title="文档型"></a>文档型</h4><p>文档型的 XSS 攻击并不会经过服务端，而是作为中间人的角色，在数据传输过程劫持到网络数据包，然后<strong>修改里面的 html 文档</strong>！</p>
+<p>这样的劫持方式包括<code>WIFI路由器劫持</code>或者<code>本地恶意软件</code>等。</p>
+<h3 id="防范措施"><a href="#防范措施" class="headerlink" title="防范措施"></a>防范措施</h3><p>明白了三种<code>XSS</code>攻击的原理，我们能发现一个共同点: 都是让恶意脚本直接能在浏览器中执行。</p>
+<p>那么要防范它，就是要避免这些脚本代码的执行。</p>
+<p>为了完成这一点，必须做到<strong>一个信念，两个利用</strong>。</p>
+<h4 id="一个信念"><a href="#一个信念" class="headerlink" title="一个信念"></a>一个信念</h4><p>千万不要相信任何用户的输入！</p>
+<p>无论是在前端和服务端，都要对用户的输入进行<strong>转码</strong>或者<strong>过滤</strong>。</p>
+<p>如:</p>
+<pre><code>&lt;script&gt;alert(&#39;你完蛋了&#39;)&lt;/script&gt;
+复制代码
+</code></pre>
+<p>转码后变为:</p>
+<pre><code>&amp;lt;script&amp;gt;alert(&amp;#39;你完蛋了&amp;#39;)&amp;lt;/script&amp;gt;
+复制代码
+</code></pre>
+<p>这样的代码在 html 解析的过程中是无法执行的。</p>
+<p>当然也可以利用关键词过滤的方式，将 script 标签给删除。那么现在的内容只剩下:</p>
+<pre><code>复制代码
+</code></pre>
+<p>什么也没有了:）</p>
+<h4 id="利用-CSP"><a href="#利用-CSP" class="headerlink" title="利用 CSP"></a>利用 CSP</h4><p>CSP，即浏览器中的内容安全策略，它的核心思想就是服务器决定浏览器加载哪些资源，具体来说可以完成以下功能:</p>
+<ol>
+<li>限制其他域下的资源加载。</li>
+<li>禁止向其它域提交数据。</li>
+<li>提供上报机制，能帮助我们及时发现 XSS 攻击。</li>
+</ol>
+<h4 id="利用-HttpOnly"><a href="#利用-HttpOnly" class="headerlink" title="利用 HttpOnly"></a>利用 HttpOnly</h4><p>很多 XSS 攻击脚本都是用来窃取Cookie, 而设置 Cookie 的 HttpOnly 属性后，JavaScript 便无法读取 Cookie<br>的值。这样也能很好的防范 XSS 攻击。</p>
+<h3 id="总结-5"><a href="#总结-5" class="headerlink" title="总结"></a>总结</h3><p><code>XSS</code> 攻击是指浏览器中执行恶意脚本, 然后拿到用户的信息进行操作。主要分为<code>存储型</code>、<code>反射型</code>和<code>文档型</code>。防范的措施包括:</p>
+<ul>
+<li>一个信念: 不要相信用户的输入，对输入内容转码或者过滤，让其不可执行。</li>
+<li>两个利用: 利用 CSP，利用 Cookie 的 HttpOnly 属性。</li>
+</ul>
+<h2 id="第8篇-能不能说一说CSRF攻击？"><a href="#第8篇-能不能说一说CSRF攻击？" class="headerlink" title="第8篇: 能不能说一说CSRF攻击？"></a>第8篇: 能不能说一说CSRF攻击？</h2><h3 id="什么是CSRF攻击？"><a href="#什么是CSRF攻击？" class="headerlink" title="什么是CSRF攻击？"></a>什么是CSRF攻击？</h3><p>CSRF(Cross-site request forgery),<br>即跨站请求伪造，指的是黑客诱导用户点击链接，打开黑客的网站，然后黑客利用用户<strong>目前的登录状态</strong>发起跨站请求。</p>
+<p>举个例子, 你在某个论坛点击了黑客精心挑选的小姐姐图片，你点击后，进入了一个新的页面。</p>
+<p>那么恭喜你，被攻击了:）</p>
+<p>你可能会比较好奇，怎么突然就被攻击了呢？接下来我们就来拆解一下当你点击了链接之后，黑客在背后做了哪些事情。</p>
+<p>可能会做三样事情。列举如下：</p>
+<h4 id="1-自动发-GET-请求"><a href="#1-自动发-GET-请求" class="headerlink" title="1. 自动发 GET 请求"></a>1. 自动发 GET 请求</h4><p>黑客网页里面可能有一段这样的代码:</p>
+<pre><code>&lt;img src=&quot;https://xxx.com/info?user=hhh&amp;count=100&quot;&gt;
+复制代码
+</code></pre>
+<p>进入页面后自动发送 get 请求，值得注意的是，这个请求会自动带上关于 xxx.com 的 cookie 信息(这里是假定你已经在 xxx.com 中登录过)。</p>
+<p>假如服务器端没有相应的验证机制，它可能认为发请求的是一个正常的用户，因为携带了相应的 cookie，然后进行相应的各种操作，可以是转账汇款以及其他的恶意操作。</p>
+<h4 id="2-自动发-POST-请求"><a href="#2-自动发-POST-请求" class="headerlink" title="2. 自动发 POST 请求"></a>2. 自动发 POST 请求</h4><p>黑客可能自己填了一个表单，写了一段自动提交的脚本。</p>
+<pre><code>&lt;formid=&#39;hacker-form&#39;action=&quot;https://xxx.com/info&quot;method=&quot;POST&quot;&gt;&lt;inputtype=&quot;hidden&quot;name=&quot;user&quot;value=&quot;hhh&quot; /&gt;&lt;inputtype=&quot;hidden&quot;name=&quot;count&quot;value=&quot;100&quot; /&gt;&lt;/form&gt;&lt;script&gt;document.getElementById(&#39;hacker-form&#39;).submit();&lt;/script&gt;复制代码
+</code></pre>
+<p>同样也会携带相应的用户 cookie 信息，让服务器误以为是一个正常的用户在操作，让各种恶意的操作变为可能。</p>
+<h4 id="3-诱导点击发送-GET-请求"><a href="#3-诱导点击发送-GET-请求" class="headerlink" title="3. 诱导点击发送 GET 请求"></a>3. 诱导点击发送 GET 请求</h4><p>在黑客的网站上，可能会放上一个链接，驱使你来点击:</p>
+<pre><code>&lt;ahref=&quot;https://xxx/info?user=hhh&amp;count=100&quot;taget=&quot;_blank&quot;&gt;点击进入修仙世界&lt;/a&gt;复制代码
+</code></pre>
+<p>点击后，自动发送 get 请求，接下来和<code>自动发 GET 请求</code>部分同理。</p>
+<p>这就是<code>CSRF</code>攻击的原理。和<code>XSS</code>攻击对比，CSRF<br>攻击并不需要将恶意代码注入用户当前页面的<code>html</code>文档中，而是跳转到新的页面，利用服务器的<strong>验证漏洞</strong>和<strong>用户之前的登录状态</strong>来模拟用户进行操作。</p>
+<h3 id="防范措施-1"><a href="#防范措施-1" class="headerlink" title="防范措施"></a>防范措施</h3><h4 id="1-利用Cookie的SameSite属性"><a href="#1-利用Cookie的SameSite属性" class="headerlink" title="1. 利用Cookie的SameSite属性"></a>1. 利用Cookie的SameSite属性</h4><p><code>CSRF攻击</code>中重要的一环就是自动发送目标站点下的 <code>Cookie</code>,然后就是这一份 Cookie<br>模拟了用户的身份。因此在<code>Cookie</code>上面下文章是防范的不二之选。</p>
+<p>恰好，在 Cookie 当中有一个关键的字段，可以对请求中 Cookie 的携带作一些限制，这个字段就是<code>SameSite</code>。</p>
+<p><code>SameSite</code>可以设置为三个值，<code>Strict</code>、<code>Lax</code>和<code>None</code>。</p>
+<p><strong>a.</strong><br>在<code>Strict</code>模式下，浏览器完全禁止第三方请求携带Cookie。比如请求<code>sanyuan.com</code>网站只能在<code>sanyuan.com</code>域名当中请求才能携带<br>Cookie，在其他网站请求都不能。</p>
+<p><strong>b.</strong> 在<code>Lax</code>模式，就宽松一点了，但是只能在 <code>get 方法提交表单</code>况或者<code>a 标签发送 get 请求</code>的情况下可以携带<br>Cookie，其他情况均不能。</p>
+<p><strong>c.</strong> 在<code>None</code>模式下，也就是默认模式，请求会自动携带上 Cookie。</p>
+<h4 id="2-验证来源站点"><a href="#2-验证来源站点" class="headerlink" title="2. 验证来源站点"></a>2. 验证来源站点</h4><p>这就需要要用到请求头中的两个字段: <strong>Origin</strong>和<strong>Referer</strong>。</p>
+<p>其中，<strong>Origin</strong>只包含域名信息，而<strong>Referer</strong>包含了<code>具体</code>的 URL 路径。</p>
+<p>当然，这两者都是可以伪造的，通过 Ajax 中自定义请求头即可，安全性略差。</p>
+<h4 id="3-CSRF-Token"><a href="#3-CSRF-Token" class="headerlink" title="3. CSRF Token"></a>3. CSRF Token</h4><p><code>Django</code>作为 Python 的一门后端框架，如果是用它开发过的同学就知道，在它的模板(template)中, 开发表单时，经常会附上这样一行代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; % csrf_token % &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这就是<code>CSRF Token</code>的典型应用。那它的原理是怎样的呢？</p>
+<p>首先，浏览器向服务器发送请求时，服务器生成一个字符串，将其植入到返回的页面中。</p>
+<p>然后浏览器如果要发送请求，就必须带上这个字符串，然后服务器来验证是否合法，如果不合法则不予响应。这个字符串也就是<code>CSRF Token</code>，通常第三方站点无法拿到这个 token, 因此也就是被服务器给拒绝。</p>
+<h3 id="总结-6"><a href="#总结-6" class="headerlink" title="总结"></a>总结</h3><p>CSRF(Cross-site request forgery),<br>即跨站请求伪造，指的是黑客诱导用户点击链接，打开黑客的网站，然后黑客利用用户目前的登录状态发起跨站请求。</p>
+<p><code>CSRF</code>攻击一般会有三种方式:</p>
+<ul>
+<li>自动 GET 请求</li>
+<li>自动 POST 请求</li>
+<li>诱导点击发送 GET 请求。</li>
+</ul>
+<p>防范措施: <code>利用 Cookie 的 SameSite 属性</code>、<code>验证来源站点</code>和<code>CSRF Token</code>。</p>
+<h2 id="第9篇-HTTPS为什么让数据传输更安全？"><a href="#第9篇-HTTPS为什么让数据传输更安全？" class="headerlink" title="第9篇:HTTPS为什么让数据传输更安全？"></a>第9篇:HTTPS为什么让数据传输更安全？</h2><p>谈到<code>HTTPS</code>,<br>就不得不谈到与之相对的<code>HTTP</code>。<code>HTTP</code>的特性是明文传输，因此在传输的每一个环节，数据都有可能被第三方窃取或者篡改，具体来说，HTTP 数据经过 TCP<br>层，然后经过<code>WIFI路由器</code>、<code>运营商</code>和<code>目标服务器</code>，这些环节中都可能被中间人拿到数据并进行篡改，也就是我们常说的<strong>中间人攻击</strong>。</p>
+<p>为了防范这样一类攻击，我们不得已要引入新的加密方案，即 HTTPS。</p>
+<p><code>HTTPS</code>并不是一个新的协议,<br>而是一个加强版的<code>HTTP</code>。其原理是在<code>HTTP</code>和<code>TCP</code>之间建立了一个中间层，当<code>HTTP</code>和<code>TCP</code>通信时并不是像以前那样直接通信，直接经过了一个中间层进行加密，将加密后的数据包传给<code>TCP</code>,<br>响应的，<code>TCP</code>必须将数据包解密，才能传给上面的<code>HTTP</code>。这个中间层也叫<code>安全层</code>。<code>安全层</code>的核心就是对数据<code>加解密</code>。</p>
+<p>接下来我们就来剖析一下<code>HTTPS</code>的加解密是如何实现的。</p>
+<h3 id="对称加密和非对称加密"><a href="#对称加密和非对称加密" class="headerlink" title="对称加密和非对称加密"></a>对称加密和非对称加密</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>首先需要理解<code>对称加密</code>和<code>非对称加密</code>的概念，然后讨论两者应用后的效果如何。</p>
+<p><code>对称加密</code>是最简单的方式，指的是<code>加密</code>和<code>解密</code>用的是<strong>同样的密钥</strong>。</p>
+<p>而对于<code>非对称加密</code>，如果有 A、 B 两把密钥，如果用 A 加密过的数据包只能用 B 解密，反之，如果用 B 加密过的数据包只能用 A 解密。</p>
+<h4 id="加解密过程"><a href="#加解密过程" class="headerlink" title="加解密过程"></a>加解密过程</h4><p>接着我们来谈谈<code>浏览器</code>和<code>服务器</code>进行协商加解密的过程。</p>
+<p>首先，浏览器会给服务器发送一个随机数<code>client_random</code>和一个加密的方法列表。</p>
+<p>服务器接收后给浏览器返回另一个随机数<code>server_random</code>和加密方法。</p>
+<p>现在，两者拥有三样相同的凭证: <code>client_random</code>、<code>server_random</code>和加密方法。</p>
+<p>接着用这个加密方法将两个随机数混合起来生成密钥，这个密钥就是浏览器和服务端通信的<code>暗号</code>。</p>
+<h4 id="各自应用的效果"><a href="#各自应用的效果" class="headerlink" title="各自应用的效果"></a>各自应用的效果</h4><p>如果用<code>对称加密</code>的方式，那么第三方可以在中间获取到<code>client_random</code>、<code>server_random</code>和加密方法，由于这个加密方法同时可以解密，所以中间人可以成功对暗号进行解密，拿到数据，很容易就将这种加密方式破解了。</p>
+<p>既然<code>对称加密</code>这么不堪一击，我们就来试一试<code>非对称</code>加密。在这种加密方式中，服务器手里有两把钥匙，一把是<code>公钥</code>，也就是说每个人都能拿到，是公开的，另一把是<code>私钥</code>，这把私钥只有服务器自己知道。</p>
+<p>好，现在开始传输。</p>
+<p>浏览器把<code>client_random</code>和加密方法列表传过来，服务器接收到，把<code>server_random</code>、<code>加密方法</code>和<code>公钥</code>传给浏览器。</p>
+<p>现在两者拥有相同的<code>client_random</code>、<code>server_random</code>和加密方法。然后浏览器用公钥将<code>client_random</code>和<code>server_random</code>加密，生成与服务器通信的<code>暗号</code>。</p>
+<p>这时候由于是<strong>非对称加密</strong>，公钥加密过的数据只能用<code>私钥</code>解密，因此中间人就算拿到浏览器传来的数据，由于他没有私钥，照样无法解密，保证了数据的安全性。</p>
+<p>这难道一定就安全吗？聪明的小伙伴早就发现了端倪。回到<code>非对称加密</code>的定义，公钥加密的数据可以用私钥解密，那私钥加密的数据也可以用公钥解密呀！</p>
+<p>服务器的数据只能用私钥进行加密(因为如果它用公钥那么浏览器也没法解密啦)，中间人一旦拿到公钥，那么就可以对服务端传来的数据进行解密了，就这样又被破解了。而且，只是采用非对称加密，对于服务器性能的消耗也是相当巨大的，因此我们暂且不采用这种方案。</p>
+<h3 id="对称加密和非对称加密的结合"><a href="#对称加密和非对称加密的结合" class="headerlink" title="对称加密和非对称加密的结合"></a>对称加密和非对称加密的结合</h3><p>可以发现，对称加密和非对称加密，单独应用任何一个，都会存在安全隐患。那我们能不能把两者结合，进一步保证安全呢？</p>
+<p>其实是可以的，演示一下整个流程：</p>
+<ol>
+<li>浏览器向服务器发送<code>client_random</code>和加密方法列表。</li>
+<li>服务器接收到，返回<code>server_random</code>、加密方法以及公钥。</li>
+<li>浏览器接收，接着生成另一个随机数<code>pre_random</code>, 并且用公钥加密，传给服务器。(敲黑板！重点操作！)</li>
+<li>服务器用私钥解密这个被加密后的<code>pre_random</code>。</li>
+</ol>
+<p>现在浏览器和服务器有三样相同的凭证:<code>client_random</code>、<code>server_random</code>和<code>pre_random</code>。然后两者用相同的加密方法混合这三个随机数，生成最终的<code>密钥</code>。</p>
+<p>然后浏览器和服务器尽管用一样的密钥进行通信，即使用<code>对称加密</code>。</p>
+<p>这个最终的密钥是很难被中间人拿到的，为什么呢? 因为中间人没有私钥，从而<strong>拿不到pre_random</strong>，也就无法生成最终的密钥了。</p>
+<p>回头比较一下和单纯的使用<strong>非对称加密</strong>,<br>这种方式做了什么改进呢？本质上是<strong>防止了私钥加密的数据外传</strong>。单独使用<strong>非对称加密</strong>，最大的漏洞在于服务器传数据给浏览器只能用<code>私钥</code>加密，这是危险产生的根源。利用<code>对称和非对称</code>加密结合的方式，就防止了这一点，从而保证了安全。</p>
+<h3 id="添加数字证书"><a href="#添加数字证书" class="headerlink" title="添加数字证书"></a>添加数字证书</h3><p>尽管通过两者加密方式的结合，能够很好地实现加密传输，但实际上还是存在一些问题。黑客如果采用 DNS<br>劫持，将目标地址替换成黑客服务器的地址，然后黑客自己造一份公钥和私钥，照样能进行数据传输。而对于浏览器用户而言，他是不知道自己正在访问一个危险的服务器的。</p>
+<p>事实上<code>HTTPS</code>在上述<code>结合对称和非对称加密</code>的基础上，又添加了<code>数字证书认证</code>的步骤。其目的就是让服务器证明自己的身份。</p>
+<h4 id="传输过程"><a href="#传输过程" class="headerlink" title="传输过程"></a>传输过程</h4><p>为了获取这个证书，服务器运营者需要向第三方认证机构获取授权，这个第三方机构也叫<code>CA</code>(<code>Certificate Authority</code>), 认证通过后 CA<br>会给服务器颁发<strong>数字证书</strong>。</p>
+<p>这个数字证书有两个作用:</p>
+<ol>
+<li>服务器向浏览器证明自己的身份。</li>
+<li>把公钥传给浏览器。</li>
+</ol>
+<p>这个验证的过程发生在什么时候呢？</p>
+<p>当服务器传送<code>server_random</code>、加密方法的时候，顺便会带上<code>数字证书</code>(包含了<code>公钥</code>),<br>接着浏览器接收之后就会开始验证数字证书。如果验证通过，那么后面的过程照常进行，否则拒绝执行。</p>
+<p>现在我们来梳理一下<code>HTTPS</code>最终的加解密过程:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/15/16f080a6f6375dc1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<h4 id="认证过程"><a href="#认证过程" class="headerlink" title="认证过程"></a>认证过程</h4><p>浏览器拿到数字证书后，如何来对证书进行认证呢？</p>
+<p>首先，会读取证书中的明文内容。CA 进行数字证书的签名时会保存一个 Hash<br>函数，来这个函数来计算明文内容得到<code>信息A</code>，然后用公钥解密明文内容得到<code>信息B</code>，两份信息做比对，一致则表示认证合法。</p>
+<p>当然有时候对于浏览器而言，它不知道哪些 CA 是值得信任的，因此会继续查找 CA 的上级 CA，以同样的信息比对方式验证上级 CA 的合法性。一般根级的 CA<br>会内置在操作系统当中，当然如果向上找没有找到根级的 CA，那么将被视为不合法。</p>
+<h3 id="总结-7"><a href="#总结-7" class="headerlink" title="总结"></a>总结</h3><p>HTTPS并不是一个新的协议,<br>它在<code>HTTP</code>和<code>TCP</code>的传输中建立了一个安全层，利用<code>对称加密</code>和<code>非对称加密</code>结合数字证书认证的方式，让传输过程的安全性大大提高。</p>
+<h2 id="第10篇-能不能实现事件的防抖和节流？"><a href="#第10篇-能不能实现事件的防抖和节流？" class="headerlink" title="第10篇: 能不能实现事件的防抖和节流？"></a>第10篇: 能不能实现事件的防抖和节流？</h2><h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><p>节流的核心思想: 如果在定时器的时间范围内再次触发，则不予理睬，等当前定时器<code>完成</code>，才能启动<strong>下一个定时器任务</strong>。这就好比公交车，10 分钟一趟，10<br>分钟内有多少人在公交站等我不管，10 分钟一到我就要发车走人！</p>
+<p>代码如下:</p>
+<pre><code>functionthrottle(fn, interval) {
+  let flag = true;
+  returnfunction(...args) {
+    let context = this;
+    if (!flag) return;
+    flag = false;
+    setTimeout(() =&gt; {
+      fn.apply(context, args);
+      flag = true;
+    }, interval);
+  };
+};
+复制代码
+</code></pre>
+<p>写成下面的方式也是表达一样的意思:</p>
+<pre><code>const throttle = function(fn, interval) {
+  let last = 0;
+  returnfunction (...args) {
+    let context = this;
+    let now = +newDate();
+    // 还没到时间if(now - last &lt; interval) return;
+    last = now;
+    fn.apply(this, args)
+  }
+}
+复制代码
+</code></pre>
+<h3 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h3><p>核心思想:<br>每次事件触发则删除原来的定时器，建立新的定时器。跟<strong>王者荣耀</strong>的<strong>回城</strong>功能类似，你反复触发回城功能，那么只认最后一次，从最后一次触发开始计时。</p>
+<pre><code>functiondebounce(fn, delay) {
+  let timer = null;
+  returnfunction (...args) {
+    let context = this;
+    if(timer) clearTimeout(timer);
+    timer = setTimeout(function() {
+      fn.apply(context, args);
+    }, delay);
+  }
+}
+复制代码
+</code></pre>
+<h3 id="双剑合璧——加强版节流"><a href="#双剑合璧——加强版节流" class="headerlink" title="双剑合璧——加强版节流"></a>双剑合璧——加强版节流</h3><p>现在我们可以把<code>防抖</code>和<code>节流</code>放到一起，为什么呢？因为防抖有时候触发的太频繁会导致一次响应都没有，我们希望到了固定的时间必须给用户一个响应，事实上很多前端库就是采取了这样的思路。</p>
+<pre><code>functionthrottle(fn, delay) {
+  let last = 0, timer = null;
+  returnfunction (...args) {
+    let context = this;
+    let now = newDate();
+    if(now - last &lt; delay){
+      clearTimeout(timer);
+      setTimeout(function() {
+        last = now;
+        fn.apply(context, args);
+      }, delay);
+    } else {
+      // 这个时候表示时间到了，必须给响应
+      last = now;
+      fn.apply(context, args);
+    }
+  }
+}
+复制代码
+</code></pre>
+<h2 id="第11篇-能不能实现图片懒加载？"><a href="#第11篇-能不能实现图片懒加载？" class="headerlink" title="第11篇: 能不能实现图片懒加载？"></a>第11篇: 能不能实现图片懒加载？</h2><h3 id="方案一-clientHeight、scrollTop-和-offsetTop"><a href="#方案一-clientHeight、scrollTop-和-offsetTop" class="headerlink" title="方案一:clientHeight、scrollTop 和 offsetTop"></a>方案一:clientHeight、scrollTop 和 offsetTop</h3><p>首先给图片一个占位资源:</p>
+<pre><code>&lt;imgsrc=&quot;default.jpg&quot;data-src=&quot;http://www.xxx.com/target.jpg&quot; /&gt;复制代码
+</code></pre>
+<p>接着，通过监听 scroll 事件来判断图片是否到达视口:</p>
+<pre><code>let img = document.getElementsByTagName(&quot;img&quot;);
+let num = img.length;
+let count = 0;//计数器，从第一张图片开始计
+
+lazyload();//首次加载别忘了显示图片window.addEventListener(&#39;scroll&#39;, lazyload);
+
+functionlazyload() {
+  let viewHeight = document.documentElement.clientHeight;//视口高度let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;//滚动条卷去的高度for(let i = count; i &lt;num; i++) {
+    // 元素现在已经出现在视口中if(img[i].offsetTop &lt; scrollHeight + viewHeight) {
+      if(img[i].getAttribute(&quot;src&quot;) !== &quot;default.jpg&quot;) continue;
+      img[i].src = img[i].getAttribute(&quot;data-src&quot;);
+      count ++;
+    }
+  }
+}
+复制代码
+</code></pre>
+<p>当然，最好对 scroll 事件做节流处理，以免频繁触发:</p>
+<pre><code>// throttle函数我们上节已经实现window.addEventListener(&#39;scroll&#39;, throttle(lazyload, 200));
+复制代码
+</code></pre>
+<h3 id="方案二：getBoundingClientRect"><a href="#方案二：getBoundingClientRect" class="headerlink" title="方案二：getBoundingClientRect"></a>方案二：getBoundingClientRect</h3><p>现在我们用另外一种方式来判断图片是否出现在了当前视口, 即 DOM 元素的 <code>getBoundingClientRect</code> API。</p>
+<p>上述的 lazyload 函数改成下面这样:</p>
+<pre><code>functionlazyload() {
+  for(let i = count; i &lt;num; i++) {
+    // 元素现在已经出现在视口中if(img[i].getBoundingClientRect().top &lt; document.documentElement.clientHeight) {
+      if(img[i].getAttribute(&quot;src&quot;) !== &quot;default.jpg&quot;) continue;
+      img[i].src = img[i].getAttribute(&quot;data-src&quot;);
+      count ++;
+    }
+  }
+}
+复制代码
+</code></pre>
+<h3 id="方案三-IntersectionObserver"><a href="#方案三-IntersectionObserver" class="headerlink" title="方案三: IntersectionObserver"></a>方案三: IntersectionObserver</h3><p>这是浏览器内置的一个<code>API</code>，实现了<code>监听window的scroll事件</code>、<code>判断是否在视口中</code>以及<code>节流</code>三大功能。</p>
+<p>我们来具体试一把：</p>
+<pre><code>let img = document.getElementsByTagName(&quot;img&quot;);
+
+const observer = new IntersectionObserver(changes =&gt; {
+  //changes 是被观察的元素集合for(let i = 0, len = changes.length; i &lt; len; i++) {
+    let change = changes[i];
+    // 通过这个属性判断是否在视口中if(change.isIntersecting) {
+      const imgElement = change.target;
+      imgElement.src = imgElement.getAttribute(&quot;data-src&quot;);
+      observer.unobserve(imgElement);
+    }
+  }
+})
+Array.from(img).forEach(item =&gt; observer.observe(item));
+复制代码
+</code></pre>
+<p>这样就很方便地实现了图片懒加载，当然这个<code>IntersectionObserver</code>也可以用作其他资源的预加载，功能非常强大。</p>
+<h2 id="文末碎碎念"><a href="#文末碎碎念" class="headerlink" title="文末碎碎念"></a>文末碎碎念</h2><p>以上文章在均在开源项目<a target="_blank" rel="noopener" href="https://github.com/sanyuan0704/frontend_daily_question">前端灵魂之问</a>首发，旨在打造完整前端知识体系，如果对你些许的帮助，请帮项目点一个star，非常感谢！</p>
+<p>另外，本人的<strong>掘金小册</strong>《React<br>Hooks与Immutable数据流实战》最近已经上线，虽然是关于React的实战教程，但也包含了诸多浏览器和性能优化相关的实践手段，一共有<code>36</code>个小节，后期打算将<br>hooks<br>源码解析的系列文章直接放到小册中，不断给小册增值，相信能对正在进阶的各位有所帮助，望多多支持！<a target="_blank" rel="noopener" href="https://juejin.im/book/5da96626e51d4524ba0fd237">小册链接</a></p>
+<p>如果要获取更多学习资料、与我取得联系，或者加群事宜，可关注公众号:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/12/16/16f0c19ba7de489f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>参考文献:</p>
+<p><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/169468">极客时间浏览器专栏</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5da52531518825094e373372">浏览器层合成与页面渲染优化</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/#The_browsers_we_will_talk_about">浏览器是如何工作的</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5dbf7b6a6fb9a0207326b32b">山月——实现图片懒加载的几种方案比较</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/book/5b936540f265da0a9624b04b">掘金小册——前端性能优化原理与实践</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/fc41c5ee.html"><div class="related-post-title">Chrome 命令行参数生成器</div><div class="related-post-meta"><time>2025-09-30</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">Chrome</span></div></div></a><a class="related-post-item" href="/article/c3fcb716.html"><div class="related-post-title">基于HTML5、阿里云播放SDK、腾讯云播放SDK开发的M3U8在线播放器</div><div class="related-post-meta"><time>2025-09-30</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">播放器</span><span class="category-badge">M3U8</span><span class="category-badge">Hls</span></div></div></a><a class="related-post-item" href="/article/362fd171.html"><div class="related-post-title">Chrome浏览器垃圾回收机制与内存泄漏分析</div><div class="related-post-meta"><time>2019-10-31</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/bf7e7421.html"><div class="related-post-title">git多账号配置</div><div class="related-post-meta"><time>2022-03-12</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/586ec14f.html"><div class="related-post-title">Web性能领域常见的专业术语</div><div class="related-post-meta"><time>2019-12-16</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/6a610663.html">https://xuehuayu.cn/article/6a610663.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/a34ba2f.html">2019年浏览器市场份额排行榜</a><a class="next" href="/article/7092568c.html">一步步从零开始用 webpack 搭建一个大型项目</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

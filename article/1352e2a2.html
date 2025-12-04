@@ -1,0 +1,460 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>一文搞懂 Webpack 多入口配置 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">一文搞懂 Webpack 多入口配置</h1><div class="post-meta"><span class="date">2019-11-22</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.3k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 13</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/1352e2a2.html#waline-comment"><span class="waline-comment-count" data-path="/article/1352e2a2.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/F89xzQ9YvoRSXaCw5GL3ug</code></p>
+<p>最近在做项目的时候遇到了一个场景：一个项目有多个入口，不同的入口，路由、组件、资源等有重叠部分，也有各自不同的部分。由于不同入口下的路由页面有一些是重复的，因此我考虑使用<br>Webpack 多入口配置来解决这个需求。</p>
+<span id="more"></span>
+
+<p>再一次，在网上找的不少文章都不合我的需求，很多文章都是只简单介绍了生产环境下配置，没有介绍开发环境下的配置，有的也没有将多入口结合 <code>vue-router</code>、<br><code>vuex</code>、 <code>ElementUI</code><br>等进行配置，因此在下通过不断探坑，然后将思路和配置过程记录下来，留给自己作为笔记，同时也分享给大家，希望可以帮助到有同样需求的同学们～</p>
+<h2 id="1-目标分析"><a href="#1-目标分析" class="headerlink" title="1. 目标分析"></a>1. 目标分析</h2><ol>
+<li><p>一个项目中保存了多个 HTML 模版，不同的模版有不同的入口，并且有各自的 router、store 等；</p>
+</li>
+<li><p>不仅可以打包出不同 HTML，而且开发的时候也可以顺利进行调试；</p>
+</li>
+<li><p>不同入口的文件可以引用同一份组件、图片等资源，也可以引用不同的资源；</p>
+</li>
+</ol>
+<p>代码仓库：multi-entry-vue</p>
+<p>示意图如下：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<h2 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2. 准备工作"></a>2. 准备工作</h2><p>首先我们 <code>vue init webpack multi-entry-vue</code> 使用 <code>vue-cli</code> 创建一个 webpack 模版的项。文件结构如下：</p>
+<pre><code>├── build
+├── config
+├── src
+│   ├── assets
+│   │   └── logo.png
+│   ├── components
+│   │   └──HelloWorld.vue
+│   ├── router
+│   │   └── index.js
+│   ├──App.vue
+│   └── main.js
+├── static
+├── README.md
+├── index.html
+├── package-lock.json
+└── package.json
+</code></pre>
+<blockquote>
+<p>这里顺便介绍在不同系统下生成目录树的方法：</p>
+<ol>
+<li>mac 系统命令行生成目录树的方法 <code>tree-I node_modules--dirsfirst</code> ，这个命令的意思是，不显示</li>
+</ol>
+</blockquote>
+<p><code>node_modules</code> 路径的文件，并且以文件夹在前的排序方式生成目录树。如果报没有找到 tree 命令的错，安装 tree 命令行 <code>brew install tree</code> 即可。</p>
+<blockquote>
+<ol start="2">
+<li>windows 系统在目标目录下使用 <code>tree/f1.txt</code> 即可把当前目录树生成到一个新文件 <code>1.txt</code> 中。</li>
+</ol>
+</blockquote>
+<p>首先我们简单介绍一下 Webpack 的相关配置项，这些配置项根据使用的 Webpack 模版不同，一般存放在 <code>webpack.config.js</code> 或<br><code>webpack.base.conf.js</code> 中：</p>
+<pre><code>const path = require(&#39;path&#39;)
+module.exports ={
+  context: path.resolve(__dirname,&#39;../&#39;),
+  entry:{
+    app:&#39;./src/main.js&#39;
+},
+  output:{
+    path: path.resolve(__dirname,&#39;../dist&#39;),
+    filename:&#39;output-file.js&#39;,
+    publicPath:&#39;/&#39;
+},
+  module:{},// 文件的解析 loader 配置
+  plugins:[],// 插件，根据需要配置各种插件
+  devServer:{}// 配置 dev 服务功能
+}
+</code></pre>
+<p>这个配置的意思是，进行 Webpack 后，会在命令的执行目录下新建 <code>dist</code> 目录（如果需要的话），并将打包 <code>src</code> 目录下的 <code>main.js</code><br>和它的依赖，生成 <code>output-file.js</code> 放在 <code>dist</code> 目录中。</p>
+<p>下面稍微解释一下相关配置项：</p>
+<ol>
+<li><p><strong>entry：</strong> 入口文件配置项，可以为字符串、对象、数组。以上面的对象形式为例， <code>app</code> 是入口名称，如果 <code>output.filename</code><br>中有 <code>[name]</code> 的话，就会被替换成 <code>app</code>。</p>
+</li>
+<li><p><strong>context：</strong> 是 webpack 编译时的基础目录，用于解析 <code>entry</code> 选项的基础目录(绝对路径)， <code>entry</code><br>入口起点会相对于此目录查找，相当于公共目录，下面所有的目录都在这个公共目录下面。</p>
+</li>
+<li><p><strong>output：</strong> 出口文件的配置项。</p>
+</li>
+<li><p><strong>output&#x2F;path：</strong> 打包文件输出的目录，比如上面的 <code>dist</code>，那么就会将输出的文件放在当前目录同级目录的 <code>dist</code><br>文件夹下，没有这个文件夹就新建一个。可以配置为 <code>path.resolve(__dirname,&#39;./dist/${Date.now()}/&#39;)</code> （md<br>语法不方便改成模板字符串，请自行修改）方便做持续集成。</p>
+</li>
+<li><p><strong>output.filename：</strong> 输出的文件名称， <code>[name]</code><br>的意为根据入口文件的名称，打包成相同的名称，有几个入口，就可以打包出几个文件。比如入口的 <code>key</code> 为 <code>app</code>，打包出来就是 <code>app.js</code>，入口是<br><code>my-entry</code>，打包出来就是 <code>my-entry.js</code>。</p>
+</li>
+<li><p><strong>output.publicPath：</strong> 静态资源的公共路径，可以记住这个公式：<br><code>静态资源最终访问路径=output.publicPath+资源loader或插件等配置路径</code>。举个例子， <code>publicPath</code> 配置为<br><code>/dist/</code>，图片的 <code>url-loader</code> 配置项为 <code>name:&#39;img/[name].[ext]&#39;</code> ，那么最终打包出来文件中图片的引用路径为<br><code>output.publicPath+&#39;img/[name].[ext]&#39;=&#39;/dist/img/[name].[ext]&#39;</code>。</p>
+</li>
+</ol>
+<p>本文由于是入口和出口相关的配置，所以内容主要围绕着 <code>entry</code> 、 <code>output</code> 和一个重要的 webpack 插件<br>html-webpack-plugin，这个插件是跟打包出来的 HTML 文件密切相关，主要有下面几个作用：</p>
+<ol>
+<li><p>根据模版生成 HTML 文件；</p>
+</li>
+<li><p>给生成的 HTML 文件引入外部资源比如 <code>link</code>、 <code>script</code> 等；</p>
+</li>
+<li><p>改变每次引入的外部文件的 Hash，防止 HTML 引用缓存中的过时资源；</p>
+</li>
+</ol>
+<p>下面我们从头一步步配置一个多入口项目。</p>
+<h2 id="3-开始配置"><a href="#3-开始配置" class="headerlink" title="3. 开始配置"></a>3. 开始配置</h2><h3 id="3-1-文件结构改动"><a href="#3-1-文件结构改动" class="headerlink" title="3.1 文件结构改动"></a>3.1 文件结构改动</h3><p>在 <code>src</code> 目录下将 <code>main.js</code> 和 <code>App.vue</code> 两个文件各复制一下，作为不同入口，文件结构变为：</p>
+<pre><code>├── build
+│   ├── build.js
+│   ├── check-versions.js
+│   ├── logo.png
+│   ├── utils.js
+│   ├── vue-loader.conf.js
+│   ├── webpack.base.conf.js
+│   ├── webpack.dev.conf.js    # 主要配置目标
+│   └── webpack.prod.conf.js   # 主要配置目标
+├── config
+│   ├── dev.env.js
+│   ├── index.js
+│   └── prod.env.js
+├── src
+│   ├── assets
+│   │   └── logo.png
+│   ├── components
+│   │   └──HelloWorld.vue
+│   ├── router
+│   │   └── index.js
+│   ├──App.vue
+│   ├──App2.vue       # 新增的入口
+│   ├── main.js
+│   └── main2.js       # 新增的入口
+├── static
+├── README.md
+├── index.html
+└── package.json
+</code></pre>
+<h3 id="3-2-简单配置"><a href="#3-2-简单配置" class="headerlink" title="3.2 简单配置"></a>3.2 简单配置</h3><p>要想从不同入口，打包出不同 HTML，我们可以改变一下 <code>entry</code> 和 <code>output</code> 两个配置，</p>
+<pre><code>// build/webpack.prod.conf.js
+module.exports ={
+  entry:{
+    entry1:&#39;./src/main.js&#39;,
+    entry2:&#39;./src/main2.js&#39;
+},
+  output:{
+    filename:&#39;[name].js&#39;,
+    publicPath:&#39;/&#39;
+},
+    plugins:[
+      newHtmlWebpackPlugin({
+                  template:&quot;index.html&quot;,// 要打包输出哪个文件，可以使用相对路径
+                  filename:&quot;index.html&quot;// 打包输出后该html文件的名称
+      })
+    ]
+}
+</code></pre>
+<p>根据上面一小节我们知道，webpack 配置里的 <code>output.filename</code> 如果有 <code>[name]</code> 意为根据入口文件的名称，打包成对应名称的 JS<br>文件，那么现在我们是可以根据两个入口打包出 <code>entry.js</code> 和 <code>entry2.js</code>。</p>
+<p>打包的结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XP4dRIhZqqU4jEtH5Upia9D5BoOxBGFRpJSxrh63T80haHxrNCrtIdDFmdShOHWxZR6BSuJclxp4rmiazdDmymDA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="xuehuayu.cn"></p>
+<p>当前代码：Github - multi-entry-vue1</p>
+<p>如上图，此时我们 <code>npm run build</code> 打包出一个引用了这两个文件的 <code>index.html</code>，那么如何打包出不同 HTML 文件，分别应用不同入口<br>JS 文件呢，此时我们需要借助于 <code>HtmlWebpackPlugin</code> 这个插件。</p>
+<p><code>HtmlWebpackPlugin</code> 这个插件， <code>new</code> 一个，就打包一个 HTML 页面，所以我们在 <code>plugins</code> 配置里 <code>new</code><br>两个，就能打包出两个页面来。</p>
+<h3 id="3-3-打包出不同的-HTML-页面"><a href="#3-3-打包出不同的-HTML-页面" class="headerlink" title="3.3 打包出不同的 HTML 页面"></a>3.3 打包出不同的 HTML 页面</h3><p>我们把配置文件改成下面这样：</p>
+<pre><code>// build/webpack.prod.conf.js
+module.exports ={
+  entry:{
+    entry:&#39;./src/main.js&#39;,// 打包输出的chunk名为entry
+    entry2:&#39;./src/main2.js&#39;// 打包输出的chunk名为entry2
+  },
+  output:{
+    filename:&#39;[name].js&#39;,
+    publicPath:&#39;/&#39;
+  },
+  plugins:[
+    newHtmlWebpackPlugin({
+          filename:&#39;entry.html&#39;,// 要打包输出的文件名
+          template:&#39;index.html&#39;,// 打包输出后该html文件的名称
+          chunks:[&#39;manifest&#39;,&#39;vendor&#39;,&#39;entry&#39;]// 输出的html文件引入的入口chunk
+    // 还有一些其他配置比如minify、chunksSortMode和本文无关就省略，详见github
+    }),
+    newHtmlWebpackPlugin({
+      filename:&#39;entry2.html&#39;,
+      template:&#39;index.html&#39;,
+      chunks:[&#39;manifest&#39;,&#39;vendor&#39;,&#39;entry2&#39;]
+    })
+  ]
+}
+</code></pre>
+<p>上面一个配置要注意的是 <code>chunks</code>，如果没有配置，那么生成的 HTML 会引入所有入口 JS 文件，在上面的例子就是，生成的两个 HTML 文件都会引入<br><code>entry.js</code> 和 <code>entry2.js</code>，所以要使用 <code>chunks</code> 配置来指定生成的 HTML 文件应该引入哪个 JS 文件。配置了<br><code>chunks</code> 之后，才能达到不同的 HTML 只引入对应 <code>chunks</code> 的 JS 文件的目的。</p>
+<p>大家可以看到除了我们打包生成的 <code>chunk</code> 文件 <code>entry.js</code> 和 <code>entry2.js</code> 之外，还有 <code>manifest</code> 和 <code>vendor</code><br>这两个，这里稍微解释一下这两个 <code>chunk</code>：</p>
+<ol>
+<li><p><code>vendor</code> 是指提取涉及 <code>node_modules</code> 中的公共模块；</p>
+</li>
+<li><p><code>manifest</code> 是对 <code>vendor</code> 模块做的缓存；</p>
+</li>
+</ol>
+<p>打包完的结果如下：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p>文件结构：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p>现在打包出来的样式正是我们所需要的，此时我们在 <code>dist</code> 目录下启动 <code>live-server</code>（如果你没安装的话可以先安装 <code>npm i-g live-server</code>），就可以看到效果出来了：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<p>当前代码：Github - multi-entry-vue2</p>
+<p>至此就实现了一个简单的多入口项目的配置。</p>
+<h2 id="4-配置改进"><a href="#4-配置改进" class="headerlink" title="4. 配置改进"></a>4. 配置改进</h2><h3 id="4-1-文件结构改动"><a href="#4-1-文件结构改动" class="headerlink" title="4.1 文件结构改动"></a>4.1 文件结构改动</h3><p>我们在前文进行了多入口的配置，要想新建一个新的入口，就复制多个文件，再手动改一下对应配置。</p>
+<p>但是如果不同的 HTML 文件下不同的 <code>vue-router</code>、 <code>vuex</code> 都放到 <code>src</code><br>目录下，多个入口的内容平铺在一起，项目目录会变得凌乱不清晰，因此在下将多入口相关的文件放到一个单独的文件夹中，以后如果有多入口的内容，就到这个文件夹中处理。</p>
+<p>下面我们进行文件结构的改造：</p>
+<ol>
+<li><p>首先我们在根目录创建一个 <code>entries</code> 文件夹，把不同入口的 <code>router</code>、 <code>store</code>、 <code>main.js</code><br>都放这里，每个入口相关单独放在一个文件夹；</p>
+</li>
+<li><p>在 <code>src</code> 目录下建立一个 <code>common</code> 文件夹，用来存放多入口共用的组件等；</p>
+</li>
+</ol>
+<p>现在的目录结构：</p>
+<pre><code>├── build    # 没有改动
+├── config   # 没有改动
+├── entries  # 存放不同入口的文件
+│   ├── entry1
+│   │   ├── router       # entry1 的 router
+│   │   │   └── index.js
+│   │   ├── store        # entry1 的 store
+│   │   │   └── index.js
+│   │   ├──App.vue      # entry1 的根组件
+│   │   ├── index.html   # entry1 的页面模版
+│   │   └── main.js      # entry1 的入口
+│   └── entry2
+│       ├── router
+│       │   └── index.js
+│       ├── store
+│       │   └── index.js
+│       ├──App.vue
+│       ├── index.html
+│       └── main.js
+├── src
+│   ├── assets
+│   │   └── logo.png
+│   ├── common          # 多入口通用组件
+│   │   └──CommonTemplate.vue
+│   └── components
+│       ├──HelloWorld.vue
+│       ├── test1.vue
+│       └── test2.vue
+├── static
+├── README.md
+├── index.html
+├── package-lock.json
+└── package.json
+</code></pre>
+<h3 id="4-2-webpack-配置"><a href="#4-2-webpack-配置" class="headerlink" title="4.2 webpack 配置"></a>4.2 webpack 配置</h3><p>然后我们在 <code>build/utils</code> 文件中加两个函数，分别用来生成 webpack 的 <code>entry</code> 配置和 <code>HtmlWebpackPlugin</code><br>插件配置，由于要使用 <code>node.js</code> 来读取文件夹结构，因此需要引入 <code>fs</code>、 <code>glob</code> 等模块：</p>
+<pre><code>// build/utils
+const fs = require(&#39;fs&#39;)
+const glob = require(&#39;glob&#39;)
+const merge = require(&#39;webpack-merge&#39;)
+constHtmlWebpackPlugin= require(&#39;html-webpack-plugin&#39;)
+const ENTRY_PATH = path.resolve(__dirname,&#39;../entries&#39;)
+// 多入口配置，这个函数从 entries 文件夹中读取入口文件，装配成webpack.entry配置
+exports.entries =function(){
+const entryFiles = glob.sync(ENTRY_PATH +&#39;/*/*.js&#39;)
+const map ={}
+  entryFiles.forEach(filePath =&gt;{
+const filename = filePath.replace(/.*\/(\w+)\/\w+(\.html|\.js)$/,(rs, $1)=&gt; $1)
+    map[filename]= filePath
+})
+return map
+}
+// 多页面输出模版配置 HtmlWebpackPlugin，根据环境装配html模版配置
+exports.htmlPlugin =function(){
+  let entryHtml = glob.sync(ENTRY_PATH +&#39;/*/*.html&#39;)
+  let arr =[]
+  entryHtml.forEach(filePath =&gt;{
+    let filename = filePath.replace(/.*\/(\w+)\/\w+(\.html|\.js)$/,(rs, $1)=&gt; $1)
+    let conf ={
+      template: filePath,
+      filename: filename +&#39;.html&#39;,
+      chunks:[filename],
+      inject:true
+}
+
+// production 生产模式下配置
+if(process.env.NODE_ENV ===&#39;production&#39;){
+      conf = merge(conf,{
+        chunks:[&#39;manifest&#39;,&#39;vendor&#39;],
+        minify:{
+          removeComments:true,
+          collapseWhitespace:true,
+          removeAttributeQuotes:true
+},
+        chunksSortMode:&#39;dependency&#39;
+})
+}
+    arr.push(newHtmlWebpackPlugin(conf))
+})
+return arr
+}
+</code></pre>
+<p>稍微解释一下这两个函数：</p>
+<ol>
+<li><p><code>exports.entries</code> 函数从 <code>entries</code> 文件夹中找到二级目录下的 JS 文件作为入口文件，并且将二级目录的文件夹名作为<br><code>key</code>，生成这样一个对象：<code>{&quot;entry1&quot;:&quot;/multi-entry-vue/entries/entry1/main.js&quot;}</code>，多个入口情况下会有更多键值对；</p>
+</li>
+<li><p><code>exports.htmlPlugin</code> 函数和之前函数的原理类似，不过组装的是 <code>HtmlWebpackPlugin</code><br>插件的配置，生成这样一个数组，可以看到和我们手动设置的配置基本一样，只不过现在是根据文件夹结构来生成的：</p>
+<p> &#x2F;&#x2F; production 下<br> [<br> {<br> template:”&#x2F;multi-entry-vue&#x2F;entries&#x2F;entry1&#x2F;index.html”,<br> chunks:[‘manifest’,’vendor’,’entry1’],<br> filename:”entry1.html”,<br> chunksSortMode:’dependency’<br> },<br> {…}&#x2F;&#x2F; 下一个入口的配置<br> ]</p>
+</li>
+</ol>
+<p>有了这两个根据 <code>entries</code> 文件夹的结构来自动生成 webpack 配置的函数，下面来改一下 webpack 相关的几个配置文件：</p>
+<pre><code>// build/webpack.base.conf.js
+module.exports ={
+  entry: utils.entries(),// 使用函数生成 entry 配置
+  output:{
+    path: config.build.assetsRoot,
+    filename:&#39;[name].js&#39;,
+    publicPath: process.env.NODE_ENV ===&#39;production&#39;
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
+  }
+}
+// build/webpack.dev.conf.js
+// const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)  // 不需要了
+const devWebpackConfig = merge(baseWebpackConfig,{
+  devServer:{
+    historyApiFallback:{
+      rewrites:[// 别忘了把 devserver 的默认路由改一下
+        { from:/.*/, to: path.posix.join(config.dev.assetsPublicPath,&#39;entry1.html&#39;)},
+      ],
+    }
+  },
+  plugins:[
+    // https://github.com/ampedandwired/html-webpack-plugin
+    // new HtmlWebpackPlugin({
+    //   filename: &#39;index.html&#39;,
+    //   template: &#39;index.html&#39;,
+    //   inject: true
+    // }),                   // 注释掉原来的 HtmlWebpackPlugin 配置，使用生成的配置
+  ].concat(utils.htmlPlugin())
+})
+
+// build/webpack.prod.conf.js
+// const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)
+const webpackConfig = merge(baseWebpackConfig,{
+  plugins:[
+  // new HtmlWebpackPlugin({
+  //   ... 注释掉，不需要了
+  // }),
+  ].concat(utils.htmlPlugin())
+})
+</code></pre>
+<p>现在我们再 <code>npm run build</code>，看看生成的目录是什么样的：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XP4dRIhZqqU4jEtH5Upia9D5BoOxBGFRpwD2amvMGhAiaicmvPlBf4QMfslVV9WT3YxtV6nliaTcQdbZca7PQCm4rg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="xuehuayu.cn"></p>
+<p>此时我们在 <code>dist</code> 目录下启动 <code>live-server</code> 看看是什么效果：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/XP4dRIhZqqU4jEtH5Upia9D5BoOxBGFRpTjh4JwsEcOibT8JicJemY6aPk3mn9y2kSYpq6Piamu6uOde4hTyfoeqRg/640?wx_fmt=gif&tp=webp&wxfrom=5&wx_lazy=1" alt="xuehuayu.cn"></p>
+<p>当前代码：Github - multi-entry-vue3</p>
+<hr>
+<p>网上的帖子大多深浅不一，甚至有些前后矛盾，在下的文章都是学习过程中的总结，如果发现错误，欢迎留言指出~</p>
+<blockquote>
+<p>参考：</p>
+<ol>
+<li>webpack解惑：多入口文件打包策略</li>
+<li>webpack配置文件：入口和出口，多入口、多出口配置</li>
+<li>一看就懂之webpack高级配置与优化</li>
+</ol>
+</blockquote>
+<p><strong>推荐阅读</strong></p>
+<p>（点击标题可跳转阅读）</p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651557057&idx=1&sn=3fc52a1998d954e6124dae11f859fe75&chksm=80255b00b752d216450352894c3c35f54691401af65688a789df63c7b74b9401740250463fca&scene=21#wechat_redirect">浏览器垃圾回收机制与 Vue<br>项目内存泄漏场景分析</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651557043&idx=2&sn=531feefa5133f279ccae6242ea16e0c0&chksm=80255b72b752d264692bfee6d71ed582cef914c526fc18b5ddcc841cc4f64c07e447dff06a42&scene=21#wechat_redirect">愿未来没有<br>Webpack</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651557038&idx=1&sn=c1bda14bb9e8da7db2a17cacfb885eb1&chksm=80255b6fb752d279e303bb61ec0a92c79352dfe73d2ee26d16d14f1bfb22d036c68b77decae5&scene=21#wechat_redirect">深入理解图片和框架的原生懒加载功能</a></p>
+<p>觉得本文对你有帮助？请分享给更多人</p>
+<p>关注「前端大全」加星标，提升前端技能</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/zPh0erYjkib3jzxuxibgz8GJ7k0UVp4kHMMDsL32ialKjpkgA9q7BFkbJ8VRYh0Liad1x6rD7w6oU7icR9DVPgsIxzQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="xuehuayu.cn"></p>
+<p>好文章，我在看❤️</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/68c9c2c2.html"><div class="related-post-title">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</div><div class="related-post-meta"><time>2025-11-21</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">Frontend</span><span class="category-badge">Redis</span><span class="category-badge">Vercel</span></div></div></a><a class="related-post-item" href="/article/83ade139.html"><div class="related-post-title">重磅！TypeScript 3.7 RC发布</div><div class="related-post-meta"><time>2019-10-25</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/6103b430.html"><div class="related-post-title">antd的select选择框设置下拉框的宽度</div><div class="related-post-meta"><time>2020-04-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/bee8f892.html"><div class="related-post-title">前端入门和进阶学习笔记，超详细的Web前端学习图文教程</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/480a4f2d.html"><div class="related-post-title">新型肺炎疫情最新动态播报汇总</div><div class="related-post-meta"><time>2020-01-19</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/1352e2a2.html">https://xuehuayu.cn/article/1352e2a2.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/8a051342.html">前端面试之手写观察者模式</a><a class="next" href="/article/201610a0.html">如何对 React 函数式组件进行优化</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

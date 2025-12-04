@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>异常监控：教你如何优雅的处理前端异常 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">异常监控：教你如何优雅的处理前端异常</h1><div class="post-meta"><span class="date">2019-12-17</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 13</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/6a90feea.html#waline-comment"><span class="waline-comment-count" data-path="/article/6a90feea.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://mp.weixin.qq.com/s/bOohIxkx7A3OiilkgvjvXg</code></p>
+<blockquote>
+<p><code>作者：Jartto&#39;s blog来源：http://jartto.wang/2018/11/20/js-exception-handling/</code></p>
+</blockquote>
+<p><code>前端一直是距离用户最近的一层，随着产品的日益完善，我们会更加注重用户体验，而前端异常却如鲠在喉，甚是烦人。</code></p>
+<span id="more"></span>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>异常是不可控的，会影响最终的呈现结果，但是我们有充分的理由去做这样的事情。</p>
+<ol>
+<li>增强用户体验；</li>
+<li>远程定位问题；</li>
+<li>未雨绸缪，及早发现问题；</li>
+<li>无法复线问题，尤其是移动端，机型，系统都是问题；</li>
+<li>完善的前端方案，前端监控系统；</li>
+</ol>
+<p>对于 JS 而言，我们面对的仅仅只是异常，异常的出现不会直接导致 JS 引擎崩溃，最多只会使当前执行的任务终止。</p>
+<h3 id="二、需要处理哪些异常？"><a href="#二、需要处理哪些异常？" class="headerlink" title="二、需要处理哪些异常？"></a>二、需要处理哪些异常？</h3><p>对于前端来说，我们可做的异常捕获还真不少。总结一下，大概如下：</p>
+<ul>
+<li>JS 语法错误、代码异常</li>
+<li>AJAX 请求异常</li>
+<li>静态资源加载异常</li>
+<li>Promise 异常</li>
+<li>Iframe 异常</li>
+<li>跨域 Script error</li>
+<li>崩溃和卡顿</li>
+</ul>
+<p>下面我会针对每种具体情况来说明如何处理这些异常。</p>
+<h3 id="三、Try-Catch-的误区"><a href="#三、Try-Catch-的误区" class="headerlink" title="三、Try-Catch 的误区"></a>三、Try-Catch 的误区</h3><p>try-catch 只能捕获到同步的运行时错误，对语法和异步错误却无能为力，捕获不到。</p>
+<ol>
+<li><p>同步运行时错误：</p>
+<p> try {<br> let name &#x3D; ‘jartto’;<br> console.log(nam);<br> } catch(e) {<br> console.log(‘捕获到异常：’,e);<br> }</p>
+</li>
+</ol>
+<p>输出：<br>    捕获到异常：ReferenceError: nam is not defined<br>        at <anonymous>:3:15</p>
+<ol>
+<li><p>不能捕获到具体的语法错误，只有一个语法错误提示。我们修改一下代码，删掉一个单引号：</p>
+<p> try {<br> let name &#x3D; ‘jartto;<br>   console.log(nam);<br> } catch(e) {</p>
+<p>   console.log(‘捕获到异常：’,e);<br> }</p>
+</li>
+</ol>
+<p>输出：<br>    Uncaught SyntaxError: Invalid or unexpected token<br>    不过语法错误在我们开发阶段就可以看到，应该不会顺利上到线上环境。</p>
+<ol>
+<li><p>异步错误</p>
+<p> try {<br>   setTimeout(() &#x3D;&gt; {<br> undefined.map(v &#x3D;&gt; v);<br>   }, 1000)<br> } catch(e) {<br> console.log(‘捕获到异常：’,e);<br> }</p>
+</li>
+</ol>
+<p>我们看看日志：<br>    Uncaught TypeError: Cannot read property ‘map’ofundefined<br>        at setTimeout (<anonymous>:3:11)</p>
+<p>并没有捕获到异常，这是需要我们特别注意的地方。</p>
+<h3 id="四、window-onerror-不是万能的"><a href="#四、window-onerror-不是万能的" class="headerlink" title="四、window.onerror 不是万能的"></a>四、window.onerror 不是万能的</h3><p>当 JS 运行时错误发生时，window 会触发一个 ErrorEvent 接口的 error 事件，并执行 window.onerror()。<br>    &#x2F;**<br>    - @param {String}  message    错误信息<br>    - @param {String}  source    出错文件<br>    - @param {Number}  lineno    行号<br>    - @param {Number}  colno    列号<br>    - @param {Object}  error  Error对象（对象）<br>    *&#x2F;</p>
+<pre><code>window.onerror = function(message, source, lineno, colno, error) {
+console.log(&#39;捕获到异常：&#39;,{message, source, lineno, colno, error});
+}
+</code></pre>
+<ol>
+<li><p>首先试试同步运行时错误</p>
+<p> window.onerror &#x3D; function(message, source, lineno, colno, error) {<br> &#x2F;&#x2F; message：错误信息（字符串）。<br> &#x2F;&#x2F; source：发生错误的脚本URL（字符串）<br> &#x2F;&#x2F; lineno：发生错误的行号（数字）<br> &#x2F;&#x2F; colno：发生错误的列号（数字）<br> &#x2F;&#x2F; error：Error对象（对象）<br> console.log(‘捕获到异常：’,{message, source, lineno, colno, error});<br> }<br> Jartto;</p>
+</li>
+</ol>
+<p>可以看到，我们捕获到了异常：<img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn"></p>
+<ol>
+<li><p>再试试语法错误呢？</p>
+<p> window.onerror &#x3D; function(message, source, lineno, colno, error) {<br> console.log(‘捕获到异常：’,{message, source, lineno, colno, error});<br> }<br> let name &#x3D; ‘Jartto</p>
+</li>
+</ol>
+<p>控制台打印出了这样的异常：<br>    Uncaught SyntaxError: Invalid or unexpected token</p>
+<p>什么，竟然没有捕获到语法错误？</p>
+<ol>
+<li><p>怀着忐忑的心，我们最后来试试异步运行时错误：</p>
+<p> window.onerror &#x3D; function(message, source, lineno, colno, error) {<br> console.log(‘捕获到异常：’,{message, source, lineno, colno, error});<br> }<br> setTimeout(() &#x3D;&gt; {<br> Jartto;<br> });</p>
+</li>
+</ol>
+<p>控制台输出了：<br>    捕获到异常：{message: “Uncaught ReferenceError: Jartto is not defined”, source: “<a target="_blank" rel="noopener" href="http://127.0.0.1:8001/">http://127.0.0.1:8001/</a>“, lineno: 36, colno: 5, error: ReferenceError: Jartto is not defined<br>        at setTimeout (<a target="_blank" rel="noopener" href="http://127.0.0.1:8001/:36:5)%7D">http://127.0.0.1:8001/:36:5)}</a></p>
+<ol>
+<li><p>接着，我们试试网络请求异常的情况：</p>
+ <script>
+ window.onerror = function(message, source, lineno, colno, error) {
+ console.log('捕获到异常：',{message, source, lineno, colno, error});
+ return true;
+ }
+ </script>
+ <img src="./jartto.png"></li>
+</ol>
+<p>**<code>我们发现，不论是静态资源异常，或者接口异常，错误都无法捕获到。</code>**补充一点：window.onerror 函数只有在返回 true<br>的时候，异常才不会向上抛出，否则即使是知道异常的发生控制台还是会显示 Uncaught Error: xxxxx<br>    window.onerror &#x3D; function(message, source, lineno, colno, error) {<br>    console.log(‘捕获到异常：’,{message, source, lineno, colno, error});<br>    return true;<br>    }<br>    setTimeout(() &#x3D;&gt; {<br>        Jartto;<br>    });</p>
+<p>控制台就不会再有这样的错误了：<br>    Uncaught ReferenceError: Jartto is not defined<br>        at setTimeout ((index):36)</p>
+<p>需要注意：</p>
+<ul>
+<li>onerror 最好写在所有 JS 脚本的前面，否则有可能捕获不到错误；</li>
+<li>onerror 无法捕获语法错误；</li>
+</ul>
+<p>到这里基本就清晰了：在实际的使用过程中，onerror 主要是来捕获预料之外的错误，而 try-catch<br>则是用来在可预见情况下监控特定的错误，两者结合使用更加高效。问题又来了，捕获不到静态资源加载异常怎么办？</p>
+<h3 id="五、window-addEventListener"><a href="#五、window-addEventListener" class="headerlink" title="五、window.addEventListener"></a>五、window.addEventListener</h3><p>当一项资源（如图片或脚本）加载失败，加载资源的元素会触发一个 Event 接口的 error 事件，并执行该元素上的onerror() 处理函数。这些<br>error 事件不会向上冒泡到 window ，不过（至少在 Firefox 中）能被单一的window.addEventListener 捕获。<br>    <scritp><br>    window.addEventListener(‘error’, (error) &#x3D;&gt; {<br>    console.log(‘捕获到异常：’, error);<br>    }, true)<br>    </script><br>    <img src="./jartto.png"></p>
+<p>控制台输出：<img src="https://mmbiz.qpic.cn/sz_mmbiz_png/2wV7LicL762YeOjHo4DGx70L0dQYGxkrgibD9q95zjVtjVtUnNvXhYCgpCmb0A8YBeUZyLOauWLGycbzhbria0VsQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn">由于网络请求异常不会事件冒泡，因此必须在捕获阶段将其捕捉到才行，但是这种方式虽然可以捕捉到网络请求的异常，但是无法判断<br>HTTP 的状态是 404 还是其他比如 500 等等，所以还需要配合服务端日志才进行排查分析才可以。<strong>需要注意：</strong></p>
+<ul>
+<li>不同浏览器下返回的 error 对象可能不同，需要注意兼容处理。</li>
+<li>需要注意避免 addEventListener 重复监听。</li>
+</ul>
+<h3 id="六、Promise-Catch"><a href="#六、Promise-Catch" class="headerlink" title="六、Promise Catch"></a>六、Promise Catch</h3><p>在 promise 中使用 catch 可以非常方便的捕获到异步 error ，这个很简单。没有写 catch 的 Promise 中抛出的错误无法被<br>onerror 或 try-catch 捕获到，所以我们务必要在 Promise 中不要忘记写 catch 处理抛出的异常。解决方案：为了防止有漏掉的<br>Promise 异常，建议在全局增加一个对 unhandledrejection 的监听，用来全局监听Uncaught Promise Error。使用方式：<br>    window.addEventListener(“unhandledrejection”, function(e){<br>    console.log(e);<br>    });</p>
+<p>我们继续来尝试一下：<br>    window.addEventListener(“unhandledrejection”, function(e){<br>      e.preventDefault()<br>    console.log(‘捕获到异常：’, e);<br>    return true;<br>    });<br>    Promise.reject(‘promise error’);</p>
+<p>可以看到如下输出：<img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="xuehuayu.cn">那如果对<br>Promise 不进行 catch 呢？<br>    window.addEventListener(“unhandledrejection”, function(e){<br>      e.preventDefault()<br>    console.log(‘捕获到异常：’, e);<br>    return true;<br>    });<br>    newPromise((resolve, reject) &#x3D;&gt; {<br>      reject(‘jartto: promise error’);<br>    });</p>
+<p>嗯，事实证明，也是会被正常捕获到的。所以，正如我们上面所说，为了防止有漏掉的 Promise 异常，建议在全局增加一个对 unhandledrejection<br>的监听，用来全局监听 Uncaught Promise Error。补充一点：如果去掉控制台的异常显示，需要加上：<br>    event.preventDefault();</p>
+<h3 id="VUE-errorHandler"><a href="#VUE-errorHandler" class="headerlink" title="VUE errorHandler"></a>VUE errorHandler</h3><pre><code>Vue.config.errorHandler = (err, vm, info) =&gt; {
+console.error(&#39;通过vue errorHandler捕获的错误&#39;);
+console.error(err);
+console.error(vm);
+console.error(info);
+}
+</code></pre>
+<p>八、React 异常捕获 React 16 提供了一个内置函数 componentDidCatch，使用它可以非常简单的获取到 react 下的错误信息<br>    componentDidCatch(error, info) {<br>    console.log(error, info);<br>    }</p>
+<p>除此之外，我们可以了解一下：error boundary UI 的某部分引起的 JS 错误不应该破坏整个程序，为了帮 React<br>的使用者解决这个问题，React 16 介绍了一种关于错误边界（error boundary)的新观念。需要注意的是：error boundaries<br>并不会捕捉下面这些错误。</p>
+<ol>
+<li>事件处理器</li>
+<li>异步代码</li>
+<li>服务端的渲染代码</li>
+<li>在 error boundaries 区域内的错误</li>
+</ol>
+<p>我们来举一个小例子，在下面这个 componentDIdCatch(error,info) 里的类会变成一个 error boundary：<br>    classErrorBoundaryextendsReact.Component{<br>    constructor(props) {<br>    super(props);<br>    this.state &#x3D; { hasError: false };<br>      }</p>
+<pre><code>  componentDidCatch(error, info) {
+// Display fallback UI
+this.setState({ hasError: true });
+// You can also log the error to an error reporting service
+    logErrorToMyService(error, info);
+  }
+
+  render() {
+if (this.state.hasError) {
+// You can render any custom fallback UI
+return&lt;h1&gt;Something went wrong.&lt;/h1&gt;;
+    }
+returnthis.props.children;
+  }
+}
+</code></pre>
+<p>然后我们像使用普通组件那样使用它：<br>    <ErrorBoundary><br>    <MyWidget /><br>    </ErrorBoundary></p>
+<p>componentDidCatch() 方法像 JS 的 catch{} 模块一样工作，但是对于组件，只有 class 类型的组件(class<br>component )可以成为一个 error boundaries 。实际上，大多数情况下我们可以在整个程序中定义一个 error boundary<br>组件，之后就可以一直使用它了！</p>
+<h3 id="九、iframe-异常"><a href="#九、iframe-异常" class="headerlink" title="九、iframe 异常"></a>九、iframe 异常</h3><p>对于 iframe 的异常捕获，我们还得借力 window.onerror：<br>    window.onerror &#x3D; function(message, source, lineno, colno, error) {<br>    console.log(‘捕获到异常：’,{message, source, lineno, colno, error});<br>    }</p>
+<p>一个简单的例子可能如下：<br>    <iframe src="./iframe.html" frameborder="0"></iframe><br>    <script><br>    window.frames[0].onerror = function (message, source, lineno, colno, error) {<br>    console.log(&#39;捕获到 iframe 异常：&#39;,{message, source, lineno, colno, error});<br>    return true;<br>      };<br>    </script></p>
+<h3 id="十、Script-error"><a href="#十、Script-error" class="headerlink" title="十、Script error"></a>十、Script error</h3><p>一般情况，如果出现 Script error<br>这样的错误，基本上可以确定是出现了跨域问题。这时候，是不会有其他太多辅助信息的，但是解决思路无非如下：跨源资源共享机制( CORS )：我们为 script<br>标签添加 crossOrigin 属性。<br>    <script src="http://jartto.wang/main.js" crossorigin></script></p>
+<p>或者动态去添加 js 脚本：<br>    const script &#x3D; document.createElement(‘script’);<br>    script.crossOrigin &#x3D; ‘anonymous’;<br>    script.src &#x3D; url;<br>    document.body.appendChild(script);</p>
+<p>特别注意，服务器端需要设置：Access-Control-Allow-Origin此外，我们也可以试试这个-解决 Script Error 的另类思路：<br>    const originAddEventListener &#x3D; EventTarget.prototype.addEventListener;<br>    EventTarget.prototype.addEventListener &#x3D; function (type, listener, options) {<br>    const wrappedListener &#x3D; function (…args) {<br>    try {<br>    return listener.apply(this, args);<br>        }<br>    catch (err) {<br>    throw err;<br>        }<br>      }<br>    return originAddEventListener.call(this, type, wrappedListener, options);<br>    }</p>
+<p>简单解释一下：改写了 EventTarget 的 addEventListener 方法；对传入的 listener 进行包装，返回包装过的<br>listener，对其执行进行 try-catch；浏览器不会对 try-catch 起来的异常进行跨域拦截，所以 catch 到的时候，是有堆栈信息的；重新<br>throw 出来异常的时候，执行的是同域代码，所以 window.onerror 捕获的时候不会丢失堆栈信息；利用包装<br>addEventListener，我们还可以达到「扩展堆栈」的效果：<br>    (() &#x3D;&gt; {<br>    const originAddEventListener &#x3D; EventTarget.prototype.addEventListener;<br>        EventTarget.prototype.addEventListener &#x3D; function (type, listener, options) {<br>    - &#x2F;&#x2F; 捕获添加事件时的堆栈<br>    - const addStack &#x3D; newError(<code>Event (${type})</code>).stack;<br>    const wrappedListener &#x3D; function (…args) {<br>    try {<br>    return listener.apply(this, args);<br>            }<br>    catch (err) {<br>    - &#x2F;&#x2F; 异常发生时，扩展堆栈<br>    - err.stack +&#x3D; ‘\n’ + addStack;<br>    throw err;<br>            }<br>          }<br>    return originAddEventListener.call(this, type, wrappedListener, options);<br>        }<br>      })();</p>
+<h3 id="十一、崩溃和卡顿"><a href="#十一、崩溃和卡顿" class="headerlink" title="十一、崩溃和卡顿"></a>十一、崩溃和卡顿</h3><p>卡顿也就是网页暂时响应比较慢， JS 可能无法及时执行。但崩溃就不一样了，网页都崩溃了，JS<br>都不运行了，还有什么办法可以监控网页的崩溃，并将网页崩溃上报呢？崩溃和卡顿也是不可忽视的，也许会导致你的用户流失。</p>
+<ol>
+<li><p>利用 window 对象的 load 和 beforeunload 事件实现了网页崩溃的监控。不错的文章，推荐阅读：Logging Information<br>on Browser Crashes。</p>
+<p> window.addEventListener(‘load’, function () {<br> sessionStorage.setItem(‘good_exit’, ‘pending’);<br> setInterval(function () {<br>     sessionStorage.setItem(‘time_before_crash’, newDate().toString());<br> }, 1000);<br>   });</p>
+<p> window.addEventListener(‘beforeunload’, function () {<br> sessionStorage.setItem(‘good_exit’, ‘true’);<br>   });</p>
+<p> if(sessionStorage.getItem(‘good_exit’) &amp;&amp;<br> sessionStorage.getItem(‘good_exit’) !&#x3D;&#x3D; ‘true’) {<br> &#x2F;*<br>     insert crash logging code here<br> *&#x2F;<br> alert(‘Hey, welcome back from your crash, looks like you crashed on: ‘ + sessionStorage.getItem(‘time_before_crash’));<br>   }</p>
+</li>
+<li><p>基于以下原因，我们可以使用 Service Worker 来实现网页崩溃的监控：</p>
+</li>
+</ol>
+<p>Service Worker 有自己独立的工作线程，与网页区分开，网页崩溃了，Service Worker 一般情况下不会崩溃；Service Worker<br>生命周期一般要比网页还要长，可以用来监控网页的状态；网页可以通过 navigator.serviceWorker.controller.postMessage<br>API 向掌管自己的 SW 发送消息。</p>
+<h3 id="十二、错误上报"><a href="#十二、错误上报" class="headerlink" title="十二、错误上报"></a>十二、错误上报</h3><p>1.通过 Ajax 发送数据 因为 Ajax 请求本身也有可能会发生异常，而且有可能会引发跨域问题，一般情况下更推荐使用动态创建 img<br>标签的形式进行上报。2.动态创建 img 标签的形式<br>    functionreport(error) {<br>    let reportUrl &#x3D; ‘<a target="_blank" rel="noopener" href="http://jartto.wang/report">http://jartto.wang/report</a>‘;<br>    new Image().src &#x3D; <code>${reportUrl}?logs=${error}</code>;<br>    }</p>
+<p>收集异常信息量太多，怎么办？实际中，我们不得不考虑这样一种情况：如果你的网站访问量很大，那么一个必然的错误发送的信息就有很多条，这时候，我们需要设置采集率，从而减缓服务器的压力：<br>    Reporter.send &#x3D; function(data) {<br>    &#x2F;&#x2F; 只采集 30%<br>    if(Math.random() &lt; 0.3) {<br>        send(data)      &#x2F;&#x2F; 上报错误信息<br>      }<br>    }</p>
+<p>采集率应该通过实际情况来设定，随机数，或者某些用户特征都是不错的选择。</p>
+<h3 id="十三、总结"><a href="#十三、总结" class="headerlink" title="十三、总结"></a>十三、总结</h3><p>回到我们开头提出的那个问题，如何优雅的处理异常呢？</p>
+<ol>
+<li>可疑区域增加 Try-Catch</li>
+<li>全局监控 JS 异常 window.onerror</li>
+<li>全局监控静态资源异常 window.addEventListener</li>
+<li>捕获没有 Catch 的 Promise 异常：unhandledrejection</li>
+<li>VUE errorHandler 和 React componentDidCatch</li>
+<li>监控网页崩溃：window 对象的 load 和 beforeunload</li>
+<li>跨域 crossOrigin 解决</li>
+</ol>
+<p>其实很简单，正如上文所说：采用组合方案，分类型的去捕获异常，这样基本 80%-90% 的问题都化于无形。</p>
+<h3 id="十四、参考"><a href="#十四、参考" class="headerlink" title="十四、参考"></a>十四、参考</h3><ul>
+<li>Logging Information on Browser Crashes</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://jasonjl.me/blog/2015/06/21/taking-action-on-browser-crashes/">http://jasonjl.me/blog/2015/06/21/taking-action-on-browser-crashes/</a></p>
+<ul>
+<li>前端代码异常监控实战 <a target="_blank" rel="noopener" href="https://github.com/happylindz/blog/issues/5">https://github.com/happylindz/blog/issues/5</a></li>
+<li>Error Boundaries <a target="_blank" rel="noopener" href="https://blog.csdn.net/a986597353/article/details/78469979">https://blog.csdn.net/a986597353/article/details/78469979</a></li>
+<li>前端监控知识点</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/RicardoCao-Biker/Front-End-Monitoring/blob/master/BasicKnowledge.md">https://github.com/RicardoCao-Biker/Front-End-Monitoring/blob/master/BasicKnowledge.md</a></p>
+<ul>
+<li>Capture and report JavaScript errors with window.onerror</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.sentry.io/2016/01/04/client-javascript-reporting-window-onerror">https://blog.sentry.io/2016/01/04/client-javascript-reporting-window-onerror</a></p>
+<p>The End</p>
+<p>如果你觉得这篇内容对你挺有启发，我想邀请你帮我三个小忙：</p>
+<ol>
+<li><p>点个「<strong>在看</strong>」，让更多的人也能看到这篇内容（喜欢不点在看，都是耍流氓 -_-）</p>
+</li>
+<li><p>关注我的官网 <strong>https:&#x2F;&#x2F;<strong>m</strong></strong><strong>uyiy.cn</strong>，让我们成为长期关系</p>
+</li>
+<li><p>关注公众号「<strong>高级前端进阶</strong>」，每周重点攻克一个前端面试重难点，公众号后台回复「面试题」 送你高级前端面试题。</p>
+</li>
+</ol>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/KfGu3WwVIa07mhHsu1WqrJfjQDuJcxlGGiaKwwze8QgVq8mB2HSAChTG8zEPyRicKR2xxyqovyxTNf1fzMHepJEg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="xuehuayu.cn"></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/ca35918e.html"><div class="related-post-title">jQuery 模块终于从 AMD 迁移到了 ES 模块</div><div class="related-post-meta"><time>2019-12-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/fa01fe52.html"><div class="related-post-title">前端面试中常见的手写代码题合集</div><div class="related-post-meta"><time>2020-02-26</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/1aca6da1.html"><div class="related-post-title">一文完全吃透 JavaScript 继承(面试必备良药)</div><div class="related-post-meta"><time>2020-03-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/26a1123e.html"><div class="related-post-title">使用node运行electron时报Error: spawn electron-forge ENOENT解决办法</div><div class="related-post-meta"><time>2019-10-26</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/fd8c55d1.html"><div class="related-post-title">uni-app自定义tabbar导航栏</div><div class="related-post-meta"><time>2021-08-08</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/6a90feea.html">https://xuehuayu.cn/article/6a90feea.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/8628a584.html">前端实现弹幕效果的方法总结(包含css3和canvas的实现方式)</a><a class="next" href="/article/586ec14f.html">Web性能领域常见的专业术语</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

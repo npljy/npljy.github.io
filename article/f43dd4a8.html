@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>使用 Hooks 优化 React 组件 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">使用 Hooks 优化 React 组件</h1><div class="post-meta"><span class="date">2019-12-04</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.3k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 17</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/f43dd4a8.html#waline-comment"><span class="waline-comment-count" data-path="/article/f43dd4a8.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址： https://zhuanlan.zhihu.com/p/93912040</code></p>
+<p>注：本文内容主要是我之前分享的文字版，若想看重点的话可以看之前的Slide:</p>
+<span id="more"></span>
+<p><a href="https://link.zhihu.com/?target=https://ppt.baomitu.com/d/75fc979a">记一次使用 Hooks 优化 React<br>组件&#8203;ppt.baomitu.com</a></p>
+<h2 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h2><p>由于我所在的业务是资讯内容类业务，因而在业务中会经常碰到如下场景：有一个内容列表，列表中需要按照一定的规则插入广告。除了获取广告数据，广告展现和点击后需要有打点上报逻辑。正常来说我们会这么写：</p>
+<pre><code>import React from &#39;react&#39;;
+export default class extends React.Component {
+  state = {newsData: [], adData: []};
+  constructor() { this.getNewsData(); }
+  getNewsData() {
+    const newsData = [...];
+    this.setState({newsData});
+    this.getAdData(newsData.length / 2);  //根据新闻数和插入规则换算广告请求数
+  }
+  getAdData() {
+    const adData = [...];
+    this.setState({adData});
+  }
+  render() {
+    const {newsData, adData} = this.state;
+    const comps = [];
+    for(let i = 0; i &lt; newsData.length; i++) {
+      // 根据插入规则判断当前新闻卡片后是否要插入广告
+      comps.push(&lt;NewsCard {...newsData[i]} key={`news-${i}`} /&gt;);
+      if(i % 2) { comps.push(&lt;AdCard {...adData[i/2]} key={`ad-${i}`} /&gt;); }
+    }
+    return (&lt;div&gt;{comps}&lt;/div&gt;);
+  }
+}
+
+class AdCard extends React.Component {
+  componentDidMount() {
+    observe(this.dom, () =&gt; {});
+  }
+  onClick = () =&gt; {};
+  onMouseUp = () =&gt; {};
+  onMouseDown = () =&gt; {};
+
+  getDOM = dom =&gt; this.dom = dom;
+  render() {
+    return &lt;div
+      ref={this.getDOM}
+      onMouseUp={this.onMouseUp}
+      onMouseDown={this.onMouseDown}
+      onClick={this.onClick}
+    &gt;{this.props.title}&lt;/div&gt;
+  }
+}
+</code></pre>
+<p>逻辑非常的简单，<code>getNewsData()</code> 拿到资讯列表数据之后计算需要请求的广告数调用 <code>getAdData()</code><br>请求广告数据，最后根据插入规则将资讯和内容渲染到列表中。广告使用自定义组件渲染，使用 <a href="https://link.zhihu.com/?target=https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API">Intersection<br>Observe</a><br>API 实现广告曝光打点，监听 DOM 对应的点击时间实现广告点击打点。</p>
+<p><img src="https://pic2.zhimg.com/v2-77f851b4aa625772357b063a9e446531_b.jpg" alt="xuehuayu.cn"><img src="https://pic2.zhimg.com/80/v2-77f851b4aa625772357b063a9e446531_hd.jpg" alt="xuehuayu.cn"></p>
+<p>如果说只有一个组件是这样的还好说，但是从上图可以看出，我们有大量的内容+广告混排场景。整体的逻辑和刚才说的都是一样的，唯一的区别是不同的列表对应不一样的显现形式。在这种情况下如何设计一个既能将通用逻辑提取，又能满足各个模块的自定义需求的通用模块就成了我们必须考虑的事情了。</p>
+<h2 id="React-组件设计模式"><a href="#React-组件设计模式" class="headerlink" title="React 组件设计模式"></a>React 组件设计模式</h2><p>在具体讨论方案之前，我们先简单的了解一下常见的 React 组件设计模式。基本上分为以下几种方案：</p>
+<ul>
+<li>[Context</li>
+</ul>
+<h2 id="模式-https-link-zhihu-com-target-https-3A-zh-hans-reactjs-org-docs-context-html"><a href="#模式-https-link-zhihu-com-target-https-3A-zh-hans-reactjs-org-docs-context-html" class="headerlink" title="模式](https://link.zhihu.com/?target=https%3A//zh-hans.reactjs.org/docs/context.html)"></a>模式](<a href="https://link.zhihu.com/?target=https://zh-hans.reactjs.org/docs/context.html">https://link.zhihu.com/?target=https%3A//zh-hans.reactjs.org/docs/context.html</a>)</h2><p><a href="https://link.zhihu.com/?target=https://zh-hans.reactjs.org/docs/composition-vs-inheritance.html">组合组件</a></p>
+<ul>
+<li>继承模式</li>
+<li>容器组件和展示组件</li>
+<li>Render Props</li>
+<li>Hoc 高阶组件</li>
+</ul>
+<p>其中 Context<br>模式多用来在多层嵌套组件中进行跨组件的数据传递，针对我们当前组件层级不多的情况用处不是非常大，这里就不多表。我们来看看剩下的几个模式各自有什么优缺点，最终来评估下是否能应用到我们的场景中。</p>
+<h3 id="组合组件"><a href="#组合组件" class="headerlink" title="组合组件"></a>组合组件</h3><p>组合组件是通过模块化组件构建应用的模式，它是 React<br>模块化开发的基础。除去普通的按照正常的业务功能进行模块拆分，还有就是将配置和逻辑进行解耦的组合组件方式。例如下面的组合方式就是利用类似 Vue 的 slot<br>方式将配置通过子组件的形式与 <code>&lt;Modal /&gt;</code> 组件进行组合，是的组件配置更优雅。</p>
+<pre><code>&lt;Modal&gt;
+  &lt;Modal.Title&gt;Modal Title&lt;/Modal.Title&gt;
+  &lt;Modal.Content&gt;Modal Content&lt;/Modal.Content&gt;
+  &lt;Modal.Footer&gt; &lt;button&gt;OK&lt;/button&gt; &lt;/Modal.Footer&gt;
+&lt;/Modal&gt;
+</code></pre>
+<p>又如下面的下拉选择组件，通过将 <code>&lt;Select/&gt;</code> 和 <code>&lt;Option&gt;</code> 进行组合，即达到了组件化配置的目的，又达到了通用方法的复用。同时将点击操作在<br><code>&lt;Select/&gt;</code> 组件中直接传递下去方便了点击后直接修改选择状态。</p>
+<pre><code>export default function(props) {
+  return React.Children.map(props.children, child =        React.cloneElement(child, {onClick() { console.log(&#39;click&#39;) } }
+  ));
+}
+
+&lt;Select&gt;&lt;Option&gt;Click Me!&lt;/Option&gt;&lt;Option&gt;Click Me!&lt;/Option&gt;&lt;/Select&gt;
+</code></pre>
+<h3 id="继承模式"><a href="#继承模式" class="headerlink" title="继承模式"></a>继承模式</h3><p>继承模式是使用类继承的方式对组件代码进行复用。在面向对象编程模式中，继承是一种非常简单且通用的代码抽象复用方式。如果大部分逻辑相同，只是一些细节不一致，只要简单的将不一致的地方抽成成员方法，继承的时候复写该成员方法即可达到简单的组件复用。</p>
+<p>不过我们知道 JS<br>中的集成本质上还是通过原型链实现的语法糖，所以在一些场景使用上没有其它语言的继承那么方便，例如无法直接实现多继承，多继承后的跨层级方法调用比较麻烦，适合简单的逻辑复用。另外通过继承方式会将父类中的所有方法都继承过来，不小心的话非常容易继承到不需要的功能。</p>
+<h3 id="容器组件和展示组件"><a href="#容器组件和展示组件" class="headerlink" title="容器组件和展示组件"></a>容器组件和展示组件</h3><p>展示组件和容器组件是将数据逻辑和渲染逻辑进行拆分从而降低组件复杂度的模式。使用容器组件可以把最开始的代码改写成如下的形式。这样做最大的好处是渲染层可以抽离成无状态组件，它不需要关心数据的获取逻辑，直接通过<br><code>props</code> 获取数据渲染即可，针对展示组件能实现很好的复用。</p>
+<pre><code>class NewsList extends React.Component {
+  state = {newsData: [], adData: []};
+  constructor() { this.getNewsData(); }
+  getNewsData() { this.getAdData(newsData.length / 2) }
+  getAdData() {}
+  render() { return &lt;List news={this.state.newsData} ad={this.state.adData} /&gt; }
+}
+
+function List({news, ad}) {
+  const {newsData, adData} = this.state;
+  const comps = [];
+  for(let i = 0; i &lt; newsData.length; i++) {
+    comps.push(&lt;NewsCard {...newsData[i]} key={`news-${i}`} /&gt;);
+    if(i % 2) { comps.push(&lt;AdCard {...adData[i/2]} key={`ad-${i}`} /&gt;); }
+  }
+  return (&lt;div&gt;{comps}&lt;/div&gt;);
+}
+</code></pre>
+<p>但是我们也可以看到即使我们把渲染逻辑拆分出去了，本身组件的数据逻辑还是非常的复杂，没有做到很好的拆分。同时容器组件和展示组件存在耦合关系，所以无法很好的对逻辑组件进行复用。</p>
+<h3 id="Render-Props"><a href="#Render-Props" class="headerlink" title="Render Props"></a>Render Props</h3><blockquote>
+<p>术语 “render prop” 是指一种在 React 组件之间使用一个值为函数的 prop 共享代码的简单技术 via: [Render</p>
+</blockquote>
+<p>Props](<a href="https://link.zhihu.com/?target=https://zh-hans.reactjs.org/docs/render-props.html">https://link.zhihu.com/?target=https%3A//zh-hans.reactjs.org/docs/render-props.html</a>)</p>
+<p>它的本质实际上是通过一个函数 prop 将数据传递到其它组件的方式，所以按照这个逻辑我们又可以将刚才的代码简单的改写一下。</p>
+<pre><code>class NewsList extends React.Component {
+  state = {newsData: [], adData: []};
+  constructor() { this.getNewsData(); }
+  getNewsData() { this.getAdData(newsData.length / 2) }
+  getAdData() {}
+  render() { return this.props.render(this.state) }
+}
+function List({news, ad}) {
+  const {newsData, adData} = this.state;
+  const comps = [];
+  for(let i = 0; i &lt; newsData.length; i++) {
+    comps.push(&lt;NewsCard {...newsData[i]} key={`news-${i}`} /&gt;);
+    if(i % 2) { comps.push(&lt;AdCard {...adData[i/2]} key={`ad-${i}`} /&gt;); }
+  }
+  return (&lt;div&gt;{comps}&lt;/div&gt;);
+}
+
+&lt;NewsList render={({newsData, adData}) =&gt; &lt;List news={newsData} ad={adData} /&gt;
+</code></pre>
+<p>可以看到，通过一个函数调用我们将数据逻辑和渲染逻辑进行解耦，解决了之前数据逻辑无法复用的问题。不过通过函数回调的形式将数据传入，如果想要把逻辑拆分（例如资讯数据获取与广告数据获取逻辑拆分）会变得比较麻烦，让我想起了被<br>callback 支配的恐惧。</p>
+<p>同时由于 <code>render</code> 的值为一个匿名函数，每次渲染 <code>&lt;NewsList /&gt;</code> 的时候都会重新生成，而这个匿名函数执行的时候会返回一个 <code>&lt;List /&gt;</code> 组件，这个本质上每次执行也是一个“新”的组件。所以 Render Props 使用不当的话会非常容易造成不必要的重复渲染。</p>
+<h3 id="HoC-组件"><a href="#HoC-组件" class="headerlink" title="HoC 组件"></a>HoC 组件</h3><p>React 里还有一种使用比较广泛的组件模式就是 HoC 高阶组件设计模式。它是一种基于 React<br>的组合特性而形成的设计模式，它的本质是参数为组件，返回值为新组件的函数。我们来看看刚才的代码使用 HoC 组件修改后会变成什么样子。</p>
+<pre><code>function withNews(Comp) {
+  return class extends React.Component {
+    state = {newsData: []};
+    constructor() { this.getNewsData(); }
+    render() { return &lt;Comp {...this.props} news={this.state.newsData} /&gt; }
+  }
+}
+function withAd(Comp) {
+  return class extends React.Component {
+    state = {adData: []};
+    componentWillReceiveProps(nextProps) {
+      if(this.props.news.length) { this.getAdData(); }
+    }
+    render() { return &lt;Comp {...this.props} ad={this.state.adData} /&gt; }
+  }
+}
+const ListWithNewsAndAd = withAd(withNews(List));
+</code></pre>
+<p>可以看到这次改动最激动的地方在于我们第一次把数据逻辑进行了拆分，这也是高阶组件的魅力，它不局限于 UI 复用，使得代码复用更加自由（当然 Render<br>Props 也是可以实现的）。</p>
+<p>当然这种模式也并不是完美的，它也有它的缺点。我们可以看到它的本质是通过 props 在高阶组件中将多个数据传入到子组件中，非常类似 mixin<br>的形式。所以它也会有 mixin<br>的缺点，那就是属性名冲突的问题。由于不同的高阶组件由不同的开发者开发，内部会传递什么样的属性名到子组件中就成了未知数。同时多层组件的嵌套导致组件层级过多，在性能和调试上都会带来问题。</p>
+<h2 id="初版实现"><a href="#初版实现" class="headerlink" title="初版实现"></a>初版实现</h2><p>了解完这些设计模式之后，我们再回头来看看我们的需求。通过观察了解不同的组件中的共同部分之后，我们可以将这种类型的组件抽象为如下描述“在一个内容列表中按照一定规则插入一定数量的和内容一致的一定样式的广告组件”。在这段描述中存在着三个不定因素：</p>
+<ul>
+<li>一定规则：不同的组件插入广告的逻辑是不一样的</li>
+<li>一定数量：不同的组件由于资讯内容的不同，插入逻辑的不同导致需要的广告数量也是不一样的</li>
+<li>一定样式：不同的组件由于资讯内容样式不同所以广告的样式自然也不相同</li>
+</ul>
+<p>除却以上三个因素之外，广告其它的逻辑广告数据的获取以及广告的曝光和点击打点等都是通用的。最后我们将广告组件的逻辑顺着之前了解的设计模式抽离成三个部分：</p>
+<ul>
+<li>广告数据的获取：<code>&lt;Mediav.Provider /&gt;</code></li>
+<li>广告模块的渲染：<code>&lt;Mediav.Item /&gt;</code> Base 模块</li>
+<li>广告模块的插入：由具体业务处理</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Mediav</span> <span class="keyword">from</span> <span class="string">&#x27;@q/mediav&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">extends</span> <span class="title class_">React</span>.<span class="property">Component</span> &#123;</span><br><span class="line">  state = &#123;<span class="attr">newsData</span>: []&#125;;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123; <span class="variable language_">this</span>.<span class="title function_">getNewsData</span>(); &#125;</span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> comps = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; newsData.<span class="property">length</span>; i++) &#123;</span><br><span class="line">      comps.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">NewsCard</span> &#123;<span class="attr">...newsData</span>[<span class="attr">i</span>]&#125; <span class="attr">key</span>=<span class="string">&#123;</span>`<span class="attr">news-</span>$&#123;<span class="attr">i</span>&#125;`&#125; /&gt;</span></span>);</span><br><span class="line">      <span class="keyword">if</span>(i % <span class="number">2</span>) &#123; comps.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">AdCard</span> <span class="attr">key</span>=<span class="string">&#123;</span>`<span class="attr">ad-</span>$&#123;<span class="attr">i</span>&#125;`&#125; /&gt;</span></span>); &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;<span class="name">Mediav.Provider</span> <span class="attr">id</span>=<span class="string">&quot;xxx&quot;</span>&gt;</span>&#123;comps&#125;<span class="tag">&lt;/<span class="name">Mediav.Provider</span>&gt;</span></span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AdCard</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Mediav.Item</span> &#123;</span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="variable language_">this</span>.<span class="property">props</span>.<span class="property">type</span>) &#123; <span class="keyword">return</span> <span class="literal">null</span>; &#125;</span><br><span class="line">    <span class="keyword">const</span> &#123;title&#125; = <span class="variable language_">this</span>.<span class="property">props</span>;</span><br><span class="line">    <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.getDOM&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.onClick&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">onMouseUp</span>=<span class="string">&#123;this.onMouseUp&#125;</span> <span class="attr">onMouseDown</span>=<span class="string">&#123;this.onMouseDown&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    &gt;</span>&#123;title&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>通过容器组件 <code>&lt;Mediav.Provider /&gt;</code> 对数据获取逻辑进行封装，通过遍历子组件找到 <code>&lt;Mediav.Item /&gt;</code><br>组件的示例个数来告知需要请求的广告数量。请求到广告后通过 Props 注入的形式传入到渲染组件中。而渲染组件 <code>&lt;AdCard /&gt;</code> 继承自<br><code>&lt;Mediav.Item /&gt;</code>，一方面能告诉容器组件它是广告组件的插槽，同时还能抽离广告曝光打点和点击打点等通用逻辑进行复用。在用户自定义的<br><code>&lt;AdCard /&gt;</code> 组件中，我们可以自定义不同模块的广告组件的渲染样式，最终完成了一套广告组件的渲染。</p>
+<p>不过这样实现还是有一些不足的地方。广告曝光检测需要依赖原生 DOM，而 Ref 使用 <code>forwardRef()</code><br>在组件间传递稍微有点复杂，所以最后采用了继承模式进行公共方法的抽离。子组件继承后自行绑定父类的一些方法即可，在这点上理解起来有点晦涩，看起来总像是绑定了一些“不存在”的方法。</p>
+<h2 id="React-Hooks"><a href="#React-Hooks" class="headerlink" title="React Hooks"></a>React Hooks</h2><p>针对上面提出的问题，有没有什么方法可以解决呢？最终我想到了 Hooks 的方案，通过使用 Hooks 改写后能完美的解决这个问题。我们先简单的了解下什么是<br>Hooks，它允许我们在不编写 class 的情况下使用 state 和 React 生命周期等相关特性。</p>
+<pre><code>const {useState, useEffect} = React;
+
+function App() {
+  const [count, setCount] = useState(0);
+  useEffect(() =&gt; {
+    const interval = setInterval(() =&gt; setCount(count + 1), 1000);
+    return () =&gt; clearInterval(interval);
+  });
+
+  return &lt;span&gt;{count}&lt;/span&gt;;
+}
+
+ReactDOM.render(&lt;App /&gt;, document.getElementById(&#39;app&#39;));
+</code></pre>
+<p>可以看到，它使用 <code>useState</code> 提供了 state，使用 <code>useEffect</code> 来做一些需要在声明周期中执行的方法。使用 <code>useEffect</code><br>代理了原来生命周期的概念后，让代码理解起来更加简单。</p>
+<p>当然这不是 Hooks 厉害的地方，它最厉害的地方是支持自定义 Hooks，通过自定义 Hooks<br>你能对逻辑进行统一的封装。针对一个数据获取的逻辑，我们需要定义 <code>state</code>，然后在初始化的时候去获取数据，当 id 发生变化后我们需要重新获取数据。</p>
+<pre><code>class User extends React.Component {
+  state = {
+    user: {}
+  }
+
+  constructor(...args) {
+    super(...args);
+    const {name} = this.props;
+    this.getUserInfo(name)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props.name === nextProps.name) {
+      return;
+    }
+    this.getUserInfo(nextProps.name);
+  }
+
+  async getUserInfo(name) {
+    const user = await fetch(url, {name});
+    this.setState({user});
+  }
+
+  render() {
+    return &lt;div&gt;{this.state.user.name}&lt;/div&gt;
+  }
+}
+</code></pre>
+<p>可以看到我们获取用户信息的这个逻辑要实现需要在组件的各种地方写逻辑，代码一多之后非常容易造成需要各种跳行来查看某个数据逻辑的流程。而通过自定义 Hooks<br>我们能够将实现这个业务逻辑的代码全部整合到一处，最终达到业务逻辑的复用。</p>
+<pre><code>function useUserInfo(name) {
+  const [user, setUser] = useState({});
+  useEffect(() =&gt; {
+    fetch(url, {name}).then(user =&gt; setUser(user));
+  }, [name]);
+  return user;
+}
+
+function User({name}) {
+  const user = useUserInfo(name);
+  return &lt;div&gt;{user.name}&lt;/div&gt;
+}
+</code></pre>
+<p>我们可以从下面的视频中一窥 Hooks 的魅力，同颜色的表示是同一个业务逻辑，最终同颜色的代码都被归置到一处实现了逻辑的解耦。</p>
+<p>Hooks 将同类业务逻辑归置到一块</p>
+<p><a href="https://link.zhihu.com/?target=https://twitter.com/prchdk/status/1056960391543062528">https://twitter.com/prchdk/status/1056960391543062528&#8203;twitter.com</a></p>
+<h2 id="使用-Hooks-改进"><a href="#使用-Hooks-改进" class="headerlink" title="使用 Hooks 改进"></a>使用 Hooks 改进</h2><p>那 Hooks<br>是否能应用于我们的业务场景中呢？通过我们之前的分析我们知道，实际上我们的目的就是为了抽离出广告数据获取以及广告的曝光和点击打点这两个通用的业务逻辑出来。所以<br>Hooks 针对逻辑的封装正好可以为我们所用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;useState, useEffect, useRef&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;useFetchMediav, useMediavEvent&#125; <span class="keyword">from</span> <span class="string">&#x27;@q/mediav&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [newsData, setNewsData] = <span class="title function_">useState</span>([]);</span><br><span class="line">  <span class="keyword">const</span> [adData] = <span class="title function_">useFetchMediav</span>(&#123;<span class="attr">id</span>: <span class="string">&quot;xxx&quot;</span>, <span class="attr">length</span>: newsData.<span class="property">length</span> / <span class="number">2</span>&#125;);</span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> newsData = [...];</span><br><span class="line">    <span class="title function_">setNewsData</span>(newsData);</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> comps = [];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; newsData.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    comps.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">NewsCard</span> &#123;<span class="attr">...newsData</span>[<span class="attr">i</span>]&#125; <span class="attr">key</span>=<span class="string">&#123;</span>`<span class="attr">news-</span>$&#123;<span class="attr">i</span>&#125;`&#125; /&gt;</span></span>);</span><br><span class="line">    <span class="keyword">if</span>(i % <span class="number">2</span>) &#123; comps.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">AdCard</span> <span class="attr">data</span>=<span class="string">&#123;adData[Math.floor(i/2)]&#125;</span> <span class="attr">key</span>=<span class="string">&#123;</span>`<span class="attr">ad-</span>$&#123;<span class="attr">i</span>&#125;`&#125; /&gt;</span></span>); &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;comp&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">AdCard</span>(<span class="params">&#123;data&#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ref = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> bind = <span class="title function_">useMediavEvent</span>(ref, data);</span><br><span class="line">  <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;gg&quot;</span> <span class="attr">ref</span>=<span class="string">&#123;ref&#125;</span> &#123;<span class="attr">...bind</span>&#125;&gt;</span>&#123;data.title&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>useFetchMediav()</code> 获取广告数据，通过 props 传入到 <code>&lt;AdCard /&gt;</code> 组件中，通过 <code>useMediavEvent()</code><br>获取打点相关的方法，并绑定到对应的元素上。使用 Hooks 修改之后的代码不仅复用性提高了，整体代码的逻辑也变的更加可阅读起来。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>当然 Hooks 本身也不是没有缺点。为了在无状态的函数组件中创造去有状态的 Hooks，势必是需要通过副作用将每个 Hooks 缓存在组件中的。而我们没有指定<br>id 之类的东西，React 是如何区分每一个 Hooks 的呢？答案就是通过调用顺序。内部通过数组（链表？）根据调用顺序依次记录。为了遵守这个规则，Hooks<br>要求我们不能在 <code>if</code> 等会动态执行的地方进行 Hooks 的定义，因为这样有可能会导致 Hooks 执行顺序发生变化。其次 <code>useEffect()</code><br>合并了多个生命周期，某些 Effect<br>需要在哪些生命周期执行以及如何控制其仅在这些生命周期执行，这些都对开发者带来了更大的挑战。稍微处理不当的话，很可能会造成页面的性能问题。</p>
+<p>参考资料：</p>
+<ul>
+<li>[React Today and Tomorrow and 90% Cleaner React With</li>
+</ul>
+<h2 id="Hooks-https-link-zhihu-com-target-https-3A-www-youtube-com-watch-3Fv-3Ddpw9EHDh2bM"><a href="#Hooks-https-link-zhihu-com-target-https-3A-www-youtube-com-watch-3Fv-3Ddpw9EHDh2bM" class="headerlink" title="Hooks](https://link.zhihu.com/?target=https%3A//www.youtube.com/watch%3Fv%3Ddpw9EHDh2bM)"></a>Hooks](<a href="https://link.zhihu.com/?target=https://www.youtube.com/watch?v=dpw9EHDh2bM">https://link.zhihu.com/?target=https%3A//www.youtube.com/watch%3Fv%3Ddpw9EHDh2bM</a>)</h2><h2 id="你想知道的React组件设计模式这里都有（上）"><a href="#你想知道的React组件设计模式这里都有（上）" class="headerlink" title="你想知道的React组件设计模式这里都有（上）"></a><a href="https://link.zhihu.com/?target=https://mp.weixin.qq.com/s/1LJj00h7cspibXNuQ-ZggA">你想知道的React组件设计模式这里都有（上）</a></h2><p><a href="https://link.zhihu.com/?target=https://mp.weixin.qq.com/s/3mdP7ulz_mfDPTpUUFlBNA">你想知道的React组件设计模式这里都有（下）</a></p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/65953a19.html"><div class="related-post-title">electron-vite+react项目中如何使用css module</div><div class="related-post-meta"><time>2024-11-27</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/8f9a9ae3.html"><div class="related-post-title">axios下载流文件</div><div class="related-post-meta"><time>2021-01-26</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/fc41c5ee.html"><div class="related-post-title">Chrome 命令行参数生成器</div><div class="related-post-meta"><time>2025-09-30</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span><span class="category-badge">Chrome</span></div></div></a><a class="related-post-item" href="/article/bf7e7421.html"><div class="related-post-title">git多账号配置</div><div class="related-post-meta"><time>2022-03-12</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/99abea60.html"><div class="related-post-title">修复Web应用程序中的内存泄漏</div><div class="related-post-meta"><time>2020-03-23</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/f43dd4a8.html">https://xuehuayu.cn/article/f43dd4a8.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/c767da51.html">轻松理解webpack热更新原理</a><a class="next" href="/article/8fefb501.html">Webpack 是怎样运行的?</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

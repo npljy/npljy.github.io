@@ -1,0 +1,344 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd,Event Loop,事件循环,线程"><title>从多线程到Event Loop全面梳理 | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">从多线程到Event Loop全面梳理</h1><div class="post-meta"><span class="date">2019-09-29</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.6k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 12</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/6a2e3b1e.html#waline-comment"><span class="waline-comment-count" data-path="/article/6a2e3b1e.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://juejin.im/post/5d5b4c2df265da03dd3d73e5</code><br>几乎在每一本JS相关的书籍中，都会说JS是<code>单线程</code>的，JS是通过事件队列<code>(Event Loop)</code>的方式来实现异步回调的。<br>对很多初学JS的人来说，根本搞不清楚单线程的JS为什么拥有<code>异步</code>的能力，所以，我试图从<code>进程</code>、<code>线程</code>的角度来解释这个问题。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>你知道的越多，你不知道的越多<br><code>点赞</code>再看，手留余香，与有荣焉</p>
+</blockquote>
+<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><p><img src="https://user-gold-cdn.xitu.io/2019/8/20/16caca3ddada3a3d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="CPU"></p>
+<p>计算机的核心是<code>CPU</code>，它承担了所有的计算任务。</p>
+<p>它就像一座工厂，时刻在运行。</p>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p><img src="https://user-gold-cdn.xitu.io/2019/8/20/16caca3ddb1e54c7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="进程"></p>
+<p>假定工厂的电力有限，一次只能供给一个车间使用。<br>也就是说，一个车间开工的时候，其他车间都必须停工。<br>背后的含义就是，单个CPU一次只能运行一个任务。</p>
+<p><code>进程</code>就好比工厂的车间，它代表CPU所能处理的单个任务。<br><code>进程</code>之间相互独立，任一时刻，CPU总是运行一个<code>进程</code>，其他<code>进程</code>处于非运行状态。<br>CPU使用时间片轮转进度算法来实现同时运行多个<code>进程</code>。</p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p><img src="https://user-gold-cdn.xitu.io/2019/8/20/16caca3ddb0197b8?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="线程"></p>
+<p>一个车间里，可以有很多工人，共享车间所有的资源，他们协同完成一个任务。</p>
+<p><code>线程</code>就好比车间里的工人，一个<code>进程</code>可以包括多个<code>线程</code>，多个<code>线程</code>共享<code>进程</code>资源。</p>
+<h2 id="CPU、进程、线程之间的关系"><a href="#CPU、进程、线程之间的关系" class="headerlink" title="CPU、进程、线程之间的关系"></a>CPU、进程、线程之间的关系</h2><p>从上文我们已经简单了解了CPU、进程、线程，简单汇总一下。</p>
+<ul>
+<li><code>进程</code>是cpu资源分配的最小单位（是能拥有资源和独立运行的最小单位）</li>
+<li><code>线程</code>是cpu调度的最小单位（线程是建立在进程的基础上的一次程序运行单位，一个进程中可以有多个线程）</li>
+<li>不同<code>进程</code>之间也可以通信，不过代价较大</li>
+<li><code>单线程</code>与<code>多线程</code>，都是指在一个<code>进程</code>内的单和多</li>
+</ul>
+<h2 id="浏览器是多进程的"><a href="#浏览器是多进程的" class="headerlink" title="浏览器是多进程的"></a>浏览器是多进程的</h2><p>我们已经知道了<code>CPU</code>、<code>进程</code>、<code>线程</code>之间的关系，对于计算机来说，每一个应用程序都是一个<code>进程</code>，<br>而每一个应用程序都会分别有很多的功能模块，这些功能模块实际上是通过<code>子进程</code>来实现的。<br>对于这种<code>子进程</code>的扩展方式，我们可以称这个应用程序是<code>多进程</code>的。</p>
+<p>而对于浏览器来说，浏览器就是多进程的，我在Chrome浏览器中打开了多个tab，然后打开windows控制管理器：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/21/16cb1f0a851c86b9?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="浏览器是多进程的"></p>
+<p>如上图，我们可以看到一个Chrome浏览器启动了好多个进程。</p>
+<p>总结一下：</p>
+<ul>
+<li>浏览器是多进程的</li>
+<li>每一个Tab页，就是一个独立的进程</li>
+</ul>
+<h2 id="浏览器包含了哪些进程"><a href="#浏览器包含了哪些进程" class="headerlink" title="浏览器包含了哪些进程"></a>浏览器包含了哪些进程</h2><ul>
+<li><p>主进程</p>
+</li>
+<li><p>协调控制其他子进程（创建、销毁）</p>
+</li>
+<li><p>浏览器界面显示，用户交互，前进、后退、收藏</p>
+</li>
+<li><p>将渲染进程得到的内存中的Bitmap，绘制到用户界面上</p>
+</li>
+<li><p>处理不可见操作，网络请求，文件访问等</p>
+</li>
+<li><p>第三方插件进程</p>
+</li>
+<li><p>每种类型的插件对应一个进程，仅当使用该插件时才创建</p>
+</li>
+<li><p>GPU进程</p>
+</li>
+<li><p>用于3D绘制等</p>
+</li>
+<li><p><code>渲染进程</code>，就是我们说的<code>浏览器内核</code></p>
+</li>
+<li><p>负责页面渲染，脚本执行，事件处理等</p>
+</li>
+<li><p>每个tab页一个渲染进程</p>
+</li>
+</ul>
+<p>那么浏览器中包含了这么多的进程，那么对于普通的前端操作来说，最重要的是什么呢？</p>
+<p>答案是<code>渲染进程</code>，也就是我们常说的<code>浏览器内核</code></p>
+<h2 id="浏览器内核（渲染进程）"><a href="#浏览器内核（渲染进程）" class="headerlink" title="浏览器内核（渲染进程）"></a>浏览器内核（渲染进程）</h2><p>从前文我们得知，进程和线程是一对多的关系，也就是说一个进程包含了多条线程。</p>
+<p>而对于<code>渲染进程</code>来说，它当然也是多线程的了，接下来我们来看一下渲染进程包含哪些线程。</p>
+<ul>
+<li><p><code>GUI渲染线程</code></p>
+</li>
+<li><p>负责渲染页面，布局和绘制</p>
+</li>
+<li><p>页面需要重绘和回流时，该线程就会执行</p>
+</li>
+<li><p>与js引擎线程互斥，防止渲染结果不可预期</p>
+</li>
+<li><p><code>JS引擎线程</code></p>
+</li>
+<li><p>负责处理解析和执行javascript脚本程序</p>
+</li>
+<li><p>只有一个JS引擎线程（单线程）</p>
+</li>
+<li><p>与GUI渲染线程互斥，防止渲染结果不可预期</p>
+</li>
+<li><p><code>事件触发线程</code></p>
+</li>
+<li><p>用来控制事件循环（鼠标点击、setTimeout、ajax等）</p>
+</li>
+<li><p>当事件满足触发条件时，将事件放入到JS引擎所在的执行队列中</p>
+</li>
+<li><p><code>定时触发器线程</code></p>
+</li>
+<li><p>setInterval与setTimeout所在的线程</p>
+</li>
+<li><p>定时任务并不是由JS引擎计时的，是由定时触发线程来计时的</p>
+</li>
+<li><p>计时完毕后，通知事件触发线程</p>
+</li>
+<li><p><code>异步http请求线程</code></p>
+</li>
+<li><p>浏览器有一个单独的线程用于处理AJAX请求</p>
+</li>
+<li><p>当请求完成时，若有回调函数，通知事件触发线程</p>
+</li>
+</ul>
+<p>当我们了解了渲染进程包含的这些线程后，我们思考两个问题：</p>
+<ol>
+<li>为什么 javascript 是单线程的</li>
+<li>为什么 GUI 渲染线程为什么与 JS 引擎线程互斥</li>
+</ol>
+<h3 id="为什么-javascript-是单线程的"><a href="#为什么-javascript-是单线程的" class="headerlink" title="为什么 javascript 是单线程的"></a>为什么 javascript 是单线程的</h3><p>首先是历史原因，在创建 javascript 这门语言时，多进程多线程的架构并不流行，硬件支持并不好。</p>
+<p>其次是因为多线程的复杂性，多线程操作需要加锁，编码的复杂性会增高。</p>
+<p>而且，如果同时操作 DOM ，在多线程不加锁的情况下，最终会导致 DOM 渲染的结果不可预期。</p>
+<h3 id="为什么-GUI-渲染线程与-JS-引擎线程互斥"><a href="#为什么-GUI-渲染线程与-JS-引擎线程互斥" class="headerlink" title="为什么 GUI 渲染线程与 JS 引擎线程互斥"></a>为什么 GUI 渲染线程与 JS 引擎线程互斥</h3><p>这是由于 JS 是可以操作 DOM 的，如果同时修改元素属性并同时渲染界面(即 <code>JS线程</code>和<code>UI线程</code>同时运行)，<br>那么渲染线程前后获得的元素就可能不一致了。</p>
+<p>因此，为了防止渲染出现不可预期的结果，浏览器设定 <code>GUI渲染线程</code>和<code>JS引擎线程</code>为互斥关系，<br>当<code>JS引擎线程</code>执行时<code>GUI渲染线程</code>会被挂起，GUI更新则会被保存在一个队列中等待<code>JS引擎线程</code>空闲时立即被执行。</p>
+<h2 id="从-Event-Loop-看-JS-的运行机制"><a href="#从-Event-Loop-看-JS-的运行机制" class="headerlink" title="从 Event Loop 看 JS 的运行机制"></a>从 Event Loop 看 JS 的运行机制</h2><p>到了这里，终于要进入我们的主题，什么是 Event Loop</p>
+<p>先理解一些概念：</p>
+<ul>
+<li>JS 分为同步任务和异步任务</li>
+<li>同步任务都在JS引擎线程上执行，形成一个<code>执行栈</code></li>
+<li>事件触发线程管理一个<code>任务队列</code>，异步任务触发条件达成，将回调事件放到<code>任务队列</code>中</li>
+<li><code>执行栈</code>中所有同步任务执行完毕，此时JS引擎线程空闲，系统会读取<code>任务队列</code>，将可运行的异步任务回调事件添加到<code>执行栈</code>中，开始执行</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/21/16cb1d70e5120bea?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>在前端开发中我们会通过<code>setTimeout/setInterval</code>来指定定时任务，会通过<code>XHR/fetch</code>发送网络请求，<br>接下来简述一下<code>setTimeout/setInterval</code>和<code>XHR/fetch</code>到底做了什么事</p>
+<p>我们知道，不管是<code>setTimeout/setInterval</code>和<code>XHR/fetch</code>代码，在这些代码执行时，<br>本身是同步任务，而其中的回调函数才是异步任务。</p>
+<p>当代码执行到<code>setTimeout/setInterval</code>时，实际上是<code>JS引擎线程</code>通知<code>定时触发器线程</code>，间隔一个时间后，会触发一个回调事件，<br>而<code>定时触发器线程</code>在接收到这个消息后，会在等待的时间后，将回调事件放入到由<code>事件触发线程</code>所管理的<code>事件队列</code>中。</p>
+<p>当代码执行到<code>XHR/fetch</code>时，实际上是<code>JS引擎线程</code>通知<code>异步http请求线程</code>，发送一个网络请求，并制定请求完成后的回调事件，<br>而<code>异步http请求线程</code>在接收到这个消息后，会在请求成功后，将回调事件放入到由<code>事件触发线程</code>所管理的<code>事件队列</code>中。</p>
+<p>当我们的同步任务执行完，<code>JS引擎线程</code>会询问<code>事件触发线程</code>，在<code>事件队列</code>中是否有待执行的回调函数，如果有就会加入到执行栈中交给<code>JS引擎线程</code>执行</p>
+<p>用一张图来解释：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/21/16cb1d7433f29c46?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="xuehuayu.cn"></p>
+<p>再用代码来解释一下：</p>
+<pre><code>let timerCallback = function() {
+  console.log(&#39;wait one second&#39;);
+};
+let httpCallback = function() {
+  console.log(&#39;get server data success&#39;);
+}
+
+// 同步任务console.log(&#39;hello&#39;);
+// 同步任务// 通知定时器线程 1s 后将 timerCallback 交由事件触发线程处理// 1s 后事件触发线程将 timerCallback 加入到事件队列中
+setTimeout(timerCallback,1000);
+// 同步任务// 通知异步http请求线程发送网络请求，请求成功后将 httpCallback 交由事件触发线程处理// 请求成功后事件触发线程将 httpCallback 加入到事件队列中
+$.get(&#39;www.xxxx.com&#39;,httpCallback);
+// 同步任务console.log(&#39;world&#39;);
+//...// 所有同步任务执行完后// 询问事件触发线程在事件事件队列中是否有需要执行的回调函数// 如果没有，一直询问，直到有为止// 如果有，将回调事件加入执行栈中，开始执行回调代码复制代码
+</code></pre>
+<p>总结一下：</p>
+<ul>
+<li>JS引擎线程只执行执行栈中的事件</li>
+<li>执行栈中的代码执行完毕，就会读取事件队列中的事件</li>
+<li>事件队列中的回调事件，是由各自线程插入到事件队列中的</li>
+<li>如此循环</li>
+</ul>
+<h2 id="宏任务、微任务"><a href="#宏任务、微任务" class="headerlink" title="宏任务、微任务"></a>宏任务、微任务</h2><p>当我们基本了解了什么是执行栈，什么是事件队列之后，我们深入了解一下事件循环中<code>宏任务</code>、<code>微任务</code></p>
+<h3 id="什么是宏任务"><a href="#什么是宏任务" class="headerlink" title="什么是宏任务"></a>什么是宏任务</h3><p>我们可以将每次执行栈执行的代码当做是一个宏任务（包括每次从事件队列中获取一个事件回调并放到执行栈中执行），<br>每一个宏任务会从头到尾执行完毕，不会执行其他。</p>
+<p>我们前文提到过<code>JS引擎线程</code>和<code>GUI渲染线程</code>是互斥的关系，浏览器为了能够使<code>宏任务</code>和<code>DOM任务</code>有序的进行，会在一个<code>宏任务</code>执行结果后，在下一个<code>宏任务</code>执行前，<code>GUI渲染线程</code>开始工作，对页面进行渲染。</p>
+<pre><code>// 宏任务--&gt;渲染--&gt;宏任务--&gt;渲染--&gt;渲染．．．复制代码
+</code></pre>
+<p>主代码块，setTimeout，setInterval等，都属于宏任务</p>
+<p><strong>第一个例子：</strong></p>
+<pre><code>document.body.style = &#39;background:black&#39;;
+document.body.style = &#39;background:red&#39;;
+document.body.style = &#39;background:blue&#39;;
+document.body.style = &#39;background:grey&#39;;
+复制代码
+</code></pre>
+<p>我们可以将这段代码放到浏览器的控制台执行以下，看一下效果：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/20/16caca3e44d7d357?imageslim" alt="xuehuayu.cn"></p>
+<p>我们会看到的结果是，页面背景会在瞬间变成灰色，以上代码属于同一次<code>宏任务</code>，所以全部执行完才触发<code>页面渲染</code>，渲染时<code>GUI线程</code>会将所有UI改动优化合并，所以视觉效果上，只会看到页面变成灰色。</p>
+<p><strong>第二个例子：</strong></p>
+<pre><code>document.body.style = &#39;background:blue&#39;;
+setTimeout(function(){
+    document.body.style = &#39;background:black&#39;
+},0)
+复制代码
+</code></pre>
+<p>执行一下，再看效果：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/20/16caca3ed44e6b16?imageslim" alt="xuehuayu.cn"></p>
+<p>我会看到，页面先显示成蓝色背景，然后瞬间变成了黑色背景，这是因为以上代码属于两次<code>宏任务</code>，第一次<code>宏任务</code>执行的代码是将背景变成蓝色，然后触发渲染，将页面变成蓝色，再触发第二次宏任务将背景变成黑色。</p>
+<h3 id="什么是微任务"><a href="#什么是微任务" class="headerlink" title="什么是微任务"></a>什么是微任务</h3><p>我们已经知道<code>宏任务</code>结束后，会执行渲染，然后执行下一个<code>宏任务</code>，<br>而微任务可以理解成在当前<code>宏任务</code>执行后立即执行的任务。</p>
+<p>也就是说，当<code>宏任务</code>执行完，会在渲染前，将执行期间所产生的所有<code>微任务</code>都执行完。</p>
+<p>Promise，process.nextTick等，属于<code>微任务</code>。</p>
+<p><strong>第一个例子：</strong></p>
+<pre><code>document.body.style = &#39;background:blue&#39;console.log(1);
+Promise.resolve().then(()=&gt;{
+    console.log(2);
+    document.body.style = &#39;background:black&#39;
+});
+console.log(3);
+复制代码
+</code></pre>
+<p>执行一下，再看效果：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/20/16cad85d2378ccb5?imageslim" alt="xuehuayu.cn"></p>
+<p>控制台输出 1 3 2 , 是因为 promise 对象的 then 方法的回调函数是异步执行，所以 2 最后输出</p>
+<p>页面的背景色直接变成黑色，没有经过蓝色的阶段，是因为，我们在宏任务中将背景设置为蓝色，但在进行渲染前执行了微任务，<br>在微任务中将背景变成了黑色，然后才执行的渲染</p>
+<p><strong>第二个例子：</strong></p>
+<pre><code>setTimeout(() =&gt; {
+    console.log(1)
+    Promise.resolve(3).then(data =&gt;console.log(data))
+}, 0)
+
+setTimeout(() =&gt; {
+    console.log(2)
+}, 0)
+
+// print : 1 3 2复制代码
+</code></pre>
+<p>上面代码共包含两个 setTimeout ，也就是说除主代码块外，共有两个<code>宏任务</code>，<br>其中第一个<code>宏任务</code>执行中，输出 1 ，并且创建了<code>微任务队列</code>，所以在下一个<code>宏任务</code>队列执行前，<br>先执行<code>微任务</code>，在<code>微任务</code>执行中，输出 3 ，微任务执行后，执行下一次<code>宏任务</code>，执行中输出 2</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>执行一个<code>宏任务</code>（栈中没有就从<code>事件队列</code>中获取）</li>
+<li>执行过程中如果遇到<code>微任务</code>，就将它添加到<code>微任务</code>的任务队列中</li>
+<li><code>宏任务</code>执行完毕后，立即执行当前<code>微任务队列</code>中的所有<code>微任务</code>（依次执行）</li>
+<li>当前<code>宏任务</code>执行完毕，开始检查渲染，然后<code>GUI线程</code>接管渲染</li>
+<li>渲染完毕后，<code>JS线程</code>继续接管，开始下一个<code>宏任务</code>（从事件队列中获取）</li>
+</ul>
+<h2 id="系列文章推荐"><a href="#系列文章推荐" class="headerlink" title="系列文章推荐"></a>系列文章推荐</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5d3e4304f265da1b8608cee5">「前端进阶」如何优雅的处理图片异常</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5d2d19ccf265da1b7f29b05f">「前端进阶」单页路由解析与实现</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5d2299faf265da1bb67a3b65">「前端进阶」彻底弄懂函数柯里化</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5d116a9df265da1bb47d717b">「前端进阶」JS中的栈内存堆内存</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5d0706a6f265da1bc23f77a9">「前端进阶」JS中的内存管理</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5d004ad95188257c6b518056">「前端进阶」数组乱序</a></li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://book.douban.com/subject/25910556/">WebKit技术内幕</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1e455a9226ce">浏览器都包含哪些进程</a></p>
+</li>
+<li></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">进程与线程的一个简单解释</a></p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><ul>
+<li><p>文中如有错误，欢迎在评论区指正，如果这篇文章帮到了你，欢迎<code>点赞</code>和<code>关注</code></p>
+</li>
+<li></li>
+</ul>
+<p>本文同步首发与<a target="_blank" rel="noopener" href="https://github.com/chenqf/frontEndBlog">github</a>，可在<a target="_blank" rel="noopener" href="https://github.com/chenqf/frontEndBlog">github</a>中找到更多精品文章，欢迎<code>Watch</code><br>&amp; <code>Star ★</code></p>
+<ul>
+<li>后续文章参见：<a target="_blank" rel="noopener" href="https://github.com/chenqf/frontEndBlog/blob/master/PLAN.md">计划</a></li>
+</ul>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/c8b81ddd.html"><div class="related-post-title">Mozilla 为开发者推出新的网页调试 Firefox Replay</div><div class="related-post-meta"><time>2019-12-02</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/a188a3ec.html"><div class="related-post-title">利用&quot;交叉观察者&quot;(IntersectionObserver接口)，轻松实现懒加载、吸顶、触底</div><div class="related-post-meta"><time>2019-09-29</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/3db197cc.html"><div class="related-post-title">http/3尝鲜</div><div class="related-post-meta"><time>2020-10-12</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/809a1fd.html"><div class="related-post-title">uni-app无网络提示ajax拦截无网络提示</div><div class="related-post-meta"><time>2021-11-14</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/6ae7ad99.html"><div class="related-post-title">Electron 7.0.0 发布</div><div class="related-post-meta"><time>2019-10-28</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/6a2e3b1e.html">https://xuehuayu.cn/article/6a2e3b1e.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"><a href="/tags/Event-Loop/">Event Loop</a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环</a><a href="/tags/%E7%BA%BF%E7%A8%8B/">线程</a></div><div class="post-nav"><a class="pre" href="/article/b5946fcc.html">Array.from() 五个超好用的用途</a><a class="next" href="/article/c2e25d1a.html">可靠React组件设计的7个准则之封装</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>

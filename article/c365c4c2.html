@@ -1,0 +1,574 @@
+<!DOCTYPE html><html lang="zh-CN" data-dark><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="前端搬砖大老，写写搬砖那些事儿"><meta name="msvalidate.01" content="0FE4D8B3381D3D87088996B886E1E2BD"><meta name="google-adsense-account" content="ca-pub-8385136408348258"><meta name="keywords" content="前端壹菜鸟, HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客,转载,FrontEnd"><title>JavaScript中数组的15种常见操作（备忘单） | 前端壹菜鸟</title><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="/css/pure-min.min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="icon" mask="" sizes="any" href="/img/blog.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/img/blog.ico"><link rel="apple-touch-icon" href="/img/blog.png"><link rel="apple-touch-icon-precomposed" href="/img/blog.png"><script type="text/javascript" src="/js/jquery.min.js"></script><script type="text/javascript" src="/js/isPhone.js"></script><script type="text/javascript" src="/js/fixedPage.jm.js"></script><script type="text/javascript" src="/js/check.js"></script><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8385136408348258"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https'){
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  document.head.append(bp)
+})();
+</script><script async src="https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ETCMPGS7S6"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','G-ETCMPGS7S6');
+</script><script async src="https://hm.baidu.com/hm.js?011f0b44e8452bfa57fbfa23c5fe7683"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id: 'JkUaixMjOhC8emNs', ck: 'JkUaixMjOhC8emNs', autoTrack:true})
+</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "keywords": "HTML,CSS,JavaScript,ES6+,Sass,Less,Stylus,PostCSS,BEM,TailwindCSS,Bootstrap,React,Vue.js,Angular,Svelte,TypeScript,Vite,Webpack,npm,Yarn,pnpm,Redux,Zustand,Pinia,ReactRouter,VueRouter,ESLint,Prettier,Git,Node.js,ReactNative,Flutter,Electron,Next.js,Nuxt.js,Micro-frontends,WebAssembly,PWA,Three.js,前端,技术博客",
+  "description": "前端搬砖大老，写写搬砖那些事儿",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "author": {
+    "@type": "Person",
+    "name": "前端壹菜鸟"
+  },
+  "@graph": [{
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://xuehuayu.cn",
+  }, {
+    "@type": "WebSite",
+    "name": "前端壹菜鸟",
+    "url": "https://cainiaoblog.cn",
+  }, ]
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div class="body_container"><div id="webtraf_17015" style="width:100%;display:flex;justify-content: center;"><script src="https://webtrafic.ru/ads.php?uid=17015" async></script></div><div id="header"><div class="site-name"><a id="logo" href="/.">前端壹菜鸟</a><p class="description">关注前端知识，收集精彩博文，做技术的搬运工</p></div><div id="nav-menu"><a class="current" id="" href="/." target="_self"><i class="fa fa-home"> 首页</i></a><a id="" href="/archives/" target="_self"><i class="fa fa-archive"> 归档</i></a><a id="" href="/guestbook/" target="_self"><i class="fa fa-comments"> 留言</i></a><a id="" href="https://afdian.com/a/big_old/thank" target="_self"><i class="fa fa-group"> 感谢</i></a><a id="" href="/love/" target="_self"><i class="fa fa-heart"> LOVE</i></a><a id="area" href="/area" target="_self" style="display:none;"><i class="fa fa-internet-explorer"> Area</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title c-post">JavaScript中数组的15种常见操作（备忘单）</h1><div class="post-meta"><span class="date">2019-12-09</span><span> | </span><span class="reproduce">转载 </span><span> | </span><span class="category"><a href="/categories/%E5%89%8D%E7%AB%AF/">前端 </a><a href="/categories/FrontEnd/">FrontEnd </a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 3.5k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 15</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/article/c365c4c2.html#waline-comment"><span class="waline-comment-count" data-path="/article/c365c4c2.html">0</span><span> 条评论</span></a><div class="post-content"><p><code>原文地址：https://www.html.cn/web/javascript/14284.html</code></p>
+<p>数组是 JS 中广泛使用的数据结构。数组对象提供了大量有用的方法，如<code>array. forEach()</code>、<code>array.map()</code>等来操作数组。</p>
+<span id="more"></span>
+
+<p><img src="https://img.php.cn/upload/article/000/000/006/5ddf2597f3918924.jpg" alt="xuehuayu.cn"></p>
+<p>在实战中，我经常对数组可能的操作和相应采用哪个更好的方法不知所措，所以本文就列出 <code>15</code> 种常用数据方法，让咱们重温加强记忆一下。</p>
+<h2 id="1-数组的遍历"><a href="#1-数组的遍历" class="headerlink" title="1. 数组的遍历"></a>1. 数组的遍历</h2><p><strong>1.1 <code>for..of</code> 循环</strong></p>
+<p><code>for(const item of items)</code>循环遍历数组项，如下所示遍历<code>colors</code>列表：</p>
+<pre><code>const colors = [&#39;blue&#39;, &#39;green&#39;, &#39;white&#39;];
+
+for (const color of colors) {
+  console.log(color);
+}
+// &#39;blue&#39;
+// &#39;green&#39;
+// &#39;white&#39;
+</code></pre>
+<p><strong>提示：</strong></p>
+<p>咱们可以随时使用<code>break</code>语句停止遍历。</p>
+<p><strong>1.2 <code>for</code> 循环</strong></p>
+<p><code>for(let i; i &lt; array.length; i++)</code>循环使用递增的索引变量遍历数组项。</p>
+<p><code>for</code>通常需要在每个循环中递增<code>index</code> 变量</p>
+<pre><code>const colors = [&#39;blue&#39;, &#39;green&#39;, &#39;white&#39;];
+
+for (let index = 0; index &lt; colors.length; index++) {
+  const color = colors[index];
+  console.log(color);
+}
+// &#39;blue&#39;
+// &#39;green&#39;
+// &#39;white&#39;
+</code></pre>
+<p><code>index</code>变量从<code>0</code>递增到<code>colors.length-1</code>。此变量用于按以下索引访问项：<code>colors [index]</code>。</p>
+<p><strong>提示</strong></p>
+<p>咱们可以随时使用<code>break</code>语句停止遍历。</p>
+<p><strong>1.3 <code>array.forEach()</code> 方法</strong></p>
+<p><code>array.forEach(callback)</code>方法通过在每个数组项上调用<code>callback</code>函数来遍历数组项。</p>
+<p>在每次遍历中，都使用以下参数调用<code>callback(item [, index [, array]])</code>：当前遍历项，当前遍历索引和数组本身。</p>
+<pre><code>const colors = [&#39;blue&#39;, &#39;green&#39;, &#39;white&#39;];
+
+colors.forEach(function callback(value, index) {
+  console.log(value, index);
+});
+// &#39;blue&#39;, 0
+// &#39;green&#39;, 1
+// &#39;white&#39;, 2
+</code></pre>
+<p><strong>提示：</strong></p>
+<p>咱们不能中断<code>array.forEach()</code>迭代。</p>
+<h2 id="2-数组的映射"><a href="#2-数组的映射" class="headerlink" title="2. 数组的映射"></a>2. 数组的映射</h2><p>**2.1 ****<code>Array.map()</code>方法**</p>
+<p><code>array.map(callback)</code> 方法通过在每个数组项上使用<code>callback</code>调用结果来创建一个新数组。</p>
+<p>在每个遍历中的<code>callback(item[, index[, array]])</code>使用参数调用:当前项、索引和数组本身，并应该返回新项。</p>
+<p>如下所示咱们对每个数组元素都递增 <code>1</code>：</p>
+<pre><code>const numbers = [0, 2, 4];
+
+const newNumbers = numbers.map(function increment(number) {
+  return number + 1;
+});
+
+newNumbers; // =&gt; [1, 3, 5]
+</code></pre>
+<p><strong>提示：</strong></p>
+<p><code>array.map()</code>创建一个新的映射数组，而不改变原始数组。</p>
+<p>**2.2 ****<code>Array.from()</code>方法**</p>
+<p><code>Array.from(arrayLike[, callback])</code>方法通过在每个数组项上使用<code>callback</code> 调用结果来创建一个新数组。</p>
+<p>在每个遍历中<code>callback(item[, index[, array]])</code>使用参数调用:当前项、索引和数组本身并且应该返回新项。</p>
+<p>如下所示咱们对每个数组元素都递增 <code>1</code>：</p>
+<pre><code>const numbers = [0, 2, 4];
+
+const newNumbers = Array.from(numbers,
+  function increment(number) {
+    return number + 1;
+  }
+);
+
+newNumbers; // =&gt; [1, 3, 5]
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>Array.from()</code>创建一个新的映射数组，而不改变原始数组。</li>
+<li><code>Array.from()</code>更适合从类似数组的对象进行映射。</li>
+</ul>
+<h2 id="3-数据的简化"><a href="#3-数据的简化" class="headerlink" title="3. 数据的简化"></a>3. 数据的简化</h2><p>**3.1 ****<code>Array.reduce()</code> 方法**</p>
+<p><code>array.reduce(callback[, initialValue])</code>通过调用<code>callback</code> 函数来将数组简化为一个值。</p>
+<p>在每次遍历中的<code>callback(accumulator, item[, index[, array]])</code>使用用参数调用的:累加器，当前项，索引和数组本身且应该返回累加器。</p>
+<p>经典示例是对数字数组求和：</p>
+<pre><code>const numbers = [2, 0, 4];
+
+function summarize(accumulator, number) {
+  return accumulator + number;
+}
+
+const sum = numbers.reduce(summarize, 0);
+
+sum; // =&gt; 6
+</code></pre>
+<p>第一步，将<code>accumulator</code> 初始化为<code>0</code>。然后，对每个累加数字和的数组项调用<code>summary</code>函数。</p>
+<p><strong>提示：</strong></p>
+<p>如果没有使用 initialValue 来设置初始值，则默认使用数组的第一个元素作为初始值。</p>
+<h2 id="4-数据的连接"><a href="#4-数据的连接" class="headerlink" title="4. 数据的连接"></a>4. 数据的连接</h2><p>**4.1 ****<code>array.concat()</code> 方法**</p>
+<p><code>array.concat(array1[, array2, ...])</code>将一个或多个数组连接到原始数组。如下所示，连接两个数组：</p>
+<pre><code>const heroes = [&#39;Batman&#39;, &#39;Robin&#39;];
+const villains = [&#39;Joker&#39;, &#39;Bane&#39;];
+
+const everyone = heroes.concat(villains);
+
+everyone; // =&gt; [&#39;Batman&#39;, &#39;Robin&#39;, &#39;Joker&#39;, &#39;Bane&#39;]
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>concat()</code>创建一个新的数组，而不改变原来的数组</li>
+<li><code>array.concat(array1 [，array2，...])</code> 接受多个要连接的数组。</li>
+</ul>
+<p><strong>4.2 展开操作符号</strong></p>
+<p>咱们将展开操作符与数组字面量一起使用来连接数组:<code>[...array1, ...array2]</code>。</p>
+<pre><code>const heroes = [&#39;Batman&#39;, &#39;Catwoman&#39;];
+const villains = [&#39;Joker&#39;, &#39;Bane&#39;];
+
+const names = [...heroes, ...villains];
+
+names; // =&gt; [&#39;Batman&#39;, &#39;Catwoman&#39;, &#39;Joker&#39;, &#39;Bane&#39;]
+</code></pre>
+<p><strong>提示：</strong></p>
+<p><code>[...arr1, ...arr2, ...arrN]</code>：咱们可以使用展开运算符连接所需数量的数组。</p>
+<h2 id="获取数组的片段"><a href="#获取数组的片段" class="headerlink" title="获取数组的片段"></a>获取数组的片段</h2><p>**5.1 ****<code>array.slice()</code> 方法**</p>
+<p><code>array.slice([fromIndex [，toIndex]])</code>返回数组的一个片段，该片段从<code>fromIndex</code>开始，以<code>toIndex</code>结尾（不包括<code>toIndex</code>本身）。<code>fromIndex</code>可选参数默认为<code>0</code>，<code>toIndex</code>可选参数默认为<code>array.length</code>。</p>
+<pre><code>const names = [&#39;Batman&#39;, &#39;Catwoman&#39;, &#39;Joker&#39;, &#39;Bane&#39;];
+
+const heroes = names.slice(0, 2);
+const villains = names.slice(2);
+
+heroes; // =&gt; [&#39;Batman&#39;, &#39;Catwoman&#39;]
+villains; // =&gt; [&#39;Joker&#39;, &#39;Bane&#39;]
+</code></pre>
+<p><strong>提示：</strong></p>
+<p><code>array.slice()</code> 创建一个新数组，而不改变原始数组。</p>
+<h2 id="6-数组的拷贝"><a href="#6-数组的拷贝" class="headerlink" title="6. 数组的拷贝"></a>6. 数组的拷贝</h2><p><strong>6.1 展开操作符</strong></p>
+<p>拷贝数组的一种简单方法是使用展开运算符：<code>const clone = [... array]</code>，如下所示，拷贝 <code>colors</code> 数组：</p>
+<pre><code>const colors = [&#39;white&#39;, &#39;black&#39;, &#39;gray&#39;];
+
+const clone = [...colors];
+
+clone; // =&gt; [&#39;white&#39;, &#39;black&#39;, &#39;gray&#39;]
+colors === clone; // =&gt; false
+</code></pre>
+<p>提示：</p>
+<p><code>[...array]</code> 创建一个浅拷贝。</p>
+<p>**6.2 ****<code>array.concat()</code>方法**</p>
+<p><code>[].concat(array)</code>是另一种拷贝数组的方法。</p>
+<pre><code>const colors = [&#39;white&#39;, &#39;black&#39;, &#39;gray&#39;];
+
+const clone = [].concat(colors);
+
+clone; // =&gt; [&#39;white&#39;, &#39;black&#39;, &#39;gray&#39;]
+colors === clone; // =&gt; false
+</code></pre>
+<p>提示：</p>
+<p><code>[].concat(array)</code> 创建一个浅拷贝。</p>
+<p>**6.3 ****<code>array.slice()</code> 方法**</p>
+<p><code>array.slice())</code>是另一种拷贝数组的方法。</p>
+<pre><code>const colors = [&#39;white&#39;, &#39;black&#39;, &#39;gray&#39;];
+
+const clone = colors.slice();
+
+clone; // =&gt; [&#39;white&#39;, &#39;black&#39;, &#39;gray&#39;]
+colors === clone; // =&gt; false
+</code></pre>
+<p>提示：</p>
+<p><code>colors.slice()</code> 创建一个浅拷贝。</p>
+<h2 id="7-查找数组"><a href="#7-查找数组" class="headerlink" title="7. 查找数组"></a>7. 查找数组</h2><p>**7.1 ****<code>array.includes()</code> 方法**</p>
+<p><code>array.includes(itemToSearch [，fromIndex])</code>返回一个布尔值，<code>array</code> 是否包含<code>itemToSearch</code>。<br>可选参数<code>fromIndex</code>，默认为<code>0</code>，表示开始搜索的索引。如下所示：判断<code>2</code>和<code>99</code>是否存在于一组数字中：</p>
+<pre><code>const numbers = [1, 2, 3, 4, 5];
+
+numbers.includes(2);  // =&gt; true
+numbers.includes(99); // =&gt; false
+</code></pre>
+<p>**7.2 ****<code>array.find()</code> 方法**</p>
+<p><code>array.find(predicate)</code> 方法返回数组中满足提供的测试函数的第一个元素的值。否则返回 <code>undefined</code>。</p>
+<p>如下所示，找到数组中的第一个偶数：</p>
+<pre><code>const numbers = [1, 2, 3, 4, 5];
+
+function isEven(number) {
+  return number % 2 === 0;
+}
+
+const evenNumber = numbers.find(isEven);
+
+evenNumber; // =&gt; 2
+</code></pre>
+<p>**7.3 ****<code>array.indexOf()</code> 方法**</p>
+<p><code>array.indexOf(itemToSearch[, fromIndex])</code><br>返回<code>array</code>中第一个出现的<code>itemToSearch</code>的索引。默认为<code>0的</code>可选参数<code>fromIndex</code>表示开始搜索的索引。</p>
+<p>如下所示，找到<code>Catwoman</code>的索引：</p>
+<pre><code>const names = [&#39;Batman&#39;, &#39;Catwoman&#39;, &#39;Joker&#39;, &#39;Bane&#39;];
+
+const index = names.indexOf(&#39;Catwoman&#39;);
+
+index; // =&gt; 1
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li>如果找不到该项，则<code>array.indexOf(itemToSearch)</code>返回<code>-1</code></li>
+<li><code>array.findIndex(predicate)</code>是使用<code>predicate</code>函数查找索引的替代方法。</li>
+</ul>
+<h2 id="8-查询数组"><a href="#8-查询数组" class="headerlink" title="8. 查询数组"></a>8. 查询数组</h2><p>**8.1 ****<code>array.every()</code> 方法**</p>
+<p>如果每个项都通过<code>predicate</code> 检查，则<code>array.every(predicate)</code>返回<code>true</code>。</p>
+<p>在每个遍历<code>predicate(item[, index[, array]])</code>上，用参数调用<code>predicate</code> 函数:当前遍历项、索引和数组本身。</p>
+<p>如下所示，确定数组是否只包含偶数：</p>
+<pre><code>const evens = [0, 2, 4, 6];
+const numbers = [0, 1, 4, 6];
+
+function isEven(number) {
+  return number % 2 === 0;
+}
+
+evens.every(isEven); // =&gt; true
+numbers.every(isEven); // =&gt; false
+</code></pre>
+<p>**8.2 ****<code>array.some()</code> 方法**</p>
+<p>如果每个项只要一下通过<code>predicate</code> 检查，则<code>array.every(predicate)</code>返回<code>true</code>。</p>
+<p>在每个遍历<code>predicate(item[, index[, array]])</code>上，用参数调用<code>predicate</code> 函数:当前遍历项、索引和数组本身。</p>
+<p>如下所示：确定数组是否至少包含一个偶数：</p>
+<pre><code>const numbers = [1, 5, 7, 10];
+const odds = [1, 3, 3, 3];
+
+function isEven(number) {
+  return number % 2 === 0;
+}
+
+numbers.some(isEven); // =&gt; true
+odds.some(isEven);   // =&gt; false
+</code></pre>
+<h2 id="9-数组的过滤"><a href="#9-数组的过滤" class="headerlink" title="9. 数组的过滤"></a>9. 数组的过滤</h2><p>**9.1 ****<code>array.filter()</code> 方法**</p>
+<p><code>array.filter(predicate)</code>方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。</p>
+<p>在每个遍历<code>predicate(item[, index[, array]])</code>上，用参数调用<code>predicate</code> 函数:当前遍历项、索引和数组本身。</p>
+<p>如下所示：将一个数组过滤为仅包含偶数：</p>
+<pre><code>const numbers = [1, 5, 7, 10];
+
+function isEven(number) {
+  return number % 2 === 0;
+}
+
+const evens = numbers.filter(isEven);
+
+evens; // =&gt; [10]
+</code></pre>
+<p><strong>提示：</strong></p>
+<p><code>array.filter()</code> 创建一个新数组，而不改变原始数组。</p>
+<h2 id="10-数组的插入"><a href="#10-数组的插入" class="headerlink" title="10. 数组的插入"></a>10. 数组的插入</h2><p>**10.1 ****<code>array.push()</code> 方法**</p>
+<p><code>array.push(item1 [...，itemN])</code> 方法将一个或多个项追加到数组的末尾，并返回新的长度。</p>
+<p>如下所示，在<code>names</code> 数组的末尾添加 <code>&#39;Joker&#39;</code></p>
+<pre><code>const names = [&#39;Batman&#39;];
+
+names.push(&#39;Joker&#39;);
+
+names; // [&#39;Batman&#39;, &#39;Joker&#39;]
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>array.push()</code> 会改变原数组</li>
+<li><code>array.push(item1, item2, ..., itemN)</code> 可以添加多个元素。</li>
+</ul>
+<p>**10.2 ****<code>array.unshift()</code> 方法**</p>
+<p><code>array.unshift(item1[..., itemN])</code>方法将一个或多个项追加到数组的开头，返回数组的新长度</p>
+<pre><code>const names = [&#39;Batman&#39;];
+
+names.unshift(&#39;Catwoman&#39;);
+
+names; // [&#39;Catwoman&#39;, &#39;Batman&#39;]
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>array.unshift()</code> 会改变原数组</li>
+<li><code>array.unshift(item1, item2, ..., itemN)</code> 可以添加多个元素。</li>
+</ul>
+<p><strong>10.3 展开操作符</strong></p>
+<p>可以通过组合展开操作符和数组字面量以不可变的方式在数组中插入项。</p>
+<p>在数组末尾追加一个项:</p>
+<pre><code>const names = [&#39;Joker&#39;, &#39;Bane&#39;];
+
+const names2 = [
+  ...names,
+  &#39;Batman&#39;,
+];
+
+names2; // =&gt; [&#39;Joker&#39;, &#39;Bane&#39;, &#39;Batman&#39;];
+</code></pre>
+<p>在数组的开头追加一个项:</p>
+<pre><code>const names = [&#39;Joker&#39;, &#39;Bane&#39;];
+
+const names2 = [
+  &#39;Batman&#39;,
+  ...names
+];
+
+names2; // =&gt; [&#39;Batman&#39;, &#39;Joker&#39;, &#39;Bane&#39;];
+</code></pre>
+<p>在任何索引处插入元素：</p>
+<pre><code>const names = [&#39;Joker&#39;, &#39;Bane&#39;];
+const indexToInsert = 1;
+
+const names2 = [
+  ...names.slice(0, indexToInsert),
+  &#39;Batman&#39;,
+  ...names.slice(indexToInsert)
+];
+
+names2; // =&gt; [&#39;Joker&#39;, &#39;Batman&#39;, &#39;Bane&#39;];
+</code></pre>
+<h2 id="11-删除数组元素"><a href="#11-删除数组元素" class="headerlink" title="11. 删除数组元素"></a>11. 删除数组元素</h2><p>**11.1 ****<code>array.pop()</code> 方法**</p>
+<p><code>array.pop()</code>方法从数组中删除最后一个元素，然后返回该元素。如下所示，删除<code>colors</code>数组的最后一个元素：</p>
+<pre><code>const colors = [&#39;blue&#39;, &#39;green&#39;, &#39;black&#39;];
+
+const lastColor = colors.pop();
+
+lastColor; // =&gt; &#39;black&#39;
+colors; // =&gt; [&#39;blue&#39;, &#39;green&#39;]
+</code></pre>
+<p>提示：</p>
+<p><code>array.pop()</code> 会改变原数组。</p>
+<p>**11.2 ****<code>array.shift()</code> 方法**</p>
+<p><code>array.shift()</code>方法从数组中删除第一个元素，然后返回该元素。</p>
+<pre><code>const colors = [&#39;blue&#39;, &#39;green&#39;, &#39;black&#39;];
+
+const firstColor = colors.shift();
+
+firstColor; // =&gt; &#39;blue&#39;
+colors; // =&gt; [&#39;green&#39;, &#39;black&#39;]
+</code></pre>
+<p>提示：</p>
+<ul>
+<li><code>array.shift()</code> 会改变原数组。</li>
+<li><code>array.shift()</code> 具<code>有O(n)</code>复杂度。</li>
+</ul>
+<p>**11.3 ****<code>array.splice()</code> 方法**</p>
+<p><code>array.splice(fromIndex[, removeCount[, item1[, item2[, ...]]]])</code>从数组中删除元素，并插入新的元素。</p>
+<p>例如，咱们从索引<code>1</code>处删除<code>2</code>个元素：</p>
+<pre><code>const names = [&#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;, &#39;赵六&#39;]
+
+names.splice(1, 2)
+
+names // =&gt; [&quot;张三&quot;, &quot;赵六&quot;]
+</code></pre>
+<p><code>names.splice(1，2)</code>删除元素<code>&#39;张三&#39;</code>和<code>&#39;赵六&#39;</code>。</p>
+<p><code>names.splice()</code> 可以插入新元素，而不是插入已删除的元素。 咱们可以替换索引<code>1</code>处开始的的<code>2</code>个元素，然后插入一个新的元素 <code>&#39;小红&#39;</code>：</p>
+<pre><code>const names = [&#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;, &#39;赵六&#39;]
+
+names.splice(1, 2, &#39;小红&#39;)
+
+names //  [&quot;张三&quot;, &quot;小红&quot;, &quot;赵六&quot;]
+</code></pre>
+<p>提示：</p>
+<ul>
+<li><code>array.splice()</code> 会改变原数组。</li>
+</ul>
+<p><strong>11.4 展开操作符号</strong></p>
+<p>可以通过组合展开操作符和数据字面量以不可变的方式从数组中删除项。</p>
+<pre><code>const names = [&#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;, &#39;赵六&#39;]
+const fromIndex = 1
+const removeCount = 2
+
+const newNames = [
+    ...names.slice(0, fromIndex),
+    ...names.slice(fromIndex + removeCount)
+]
+
+newNames // [&quot;张三&quot;, &quot;赵六&quot;]
+</code></pre>
+<h2 id="12-清空数组"><a href="#12-清空数组" class="headerlink" title="12. 清空数组"></a>12. 清空数组</h2><p>**12.1 ****<code>array.length</code>属性**</p>
+<p><code>array.length</code>是保存数组长度的属性。 除此之外，<code>array.length</code>是可写的。</p>
+<p>如果咱们写一个小于当前长度的<code>array.length = newLength</code>，多余的元素从数组中移除。</p>
+<p>如下所示：使用<code>array.length = 0</code>删除数组中的所有项目：</p>
+<pre><code>const colors = [&#39;blue&#39;, &#39;green&#39;, &#39;black&#39;];
+
+colors.length = 0;
+
+colors; // []
+</code></pre>
+<p>**12.2 ****<code>array.splice()</code> 方法**</p>
+<p><code>array.splice(fromIndex[, removeCount[, item1[, item2[, ...]]]])</code>从数组中删除元素，并插入新的元素。</p>
+<p>如果<code>removeCount</code>参数被省略，那么<code>array.splice()</code>将删除从<code>fromIndex</code>开始的数组的所有元素。咱们使用它来删除数组中的所有元素：</p>
+<pre><code>const colors = [&#39;blue&#39;, &#39;green&#39;, &#39;black&#39;];
+
+colors.splice(0);
+
+colors; // []
+</code></pre>
+<h2 id="13-填充数组"><a href="#13-填充数组" class="headerlink" title="13. 填充数组"></a>13. 填充数组</h2><p>**13.1 ****<code>array.fill()</code> 方法**</p>
+<p><code>array.fill(value[, fromIndex[, toIndex]])</code>用从<code>fromIndex</code><br>到<code>toIndex</code>的值填充数组(不包括<code>toIndex</code>本身)。<code>fromIndex</code>可选参数默认为<code>0</code>,<code>toIndex</code>可选参数默认为<code>array.length</code>。</p>
+<p>例如，使用用零值填充数组：</p>
+<pre><code>const numbers = [1, 2, 3, 4];
+
+numbers.fill(0);
+
+numbers; // =&gt; [0, 0, 0, 0]
+</code></pre>
+<p>不仅如此，还可以使用<code>Array(length).fill(initial)</code>来初始化特定长度和初始值的数组。</p>
+<pre><code>const length = 3;
+const zeros = Array(length).fill(0);
+
+zeros; // [0, 0, 0]
+</code></pre>
+<p>提示：</p>
+<ul>
+<li><code>array.splice()</code> 会改变原数组。</li>
+</ul>
+<p>**13.2 ****<code>Array.from()</code> 函数**</p>
+<p><code>Array.from()</code> 有助于初始化带有对象的特定长度的数组：</p>
+<pre><code>const length = 4;
+const emptyObjects = Array.from(Array(length), function() {
+  return {};
+});
+
+emptyObjects; // [{}, {}, {}, {}]
+</code></pre>
+<h2 id="14-数组的扁平化"><a href="#14-数组的扁平化" class="headerlink" title="14. 数组的扁平化"></a>14. 数组的扁平化</h2><p>**14.1 ****<code>array.flat()</code>方法**</p>
+<p><code>array.flat([depth])</code>方法通过递归扁平属于数组的项直到一定深度来创建新数组。 <code>depth</code>可选参数默认为<code>1</code>：</p>
+<pre><code>const arrays = [0, [1, 3, 5], [2, 4, 6]];
+
+const flatArray = arrays.flat();
+
+flatArray; // [0, 1, 3, 5, 2, 4, 6]
+</code></pre>
+<p><code>arrays</code> 包含数字和数字数组的混合。 <code>arrays.flat()</code>对数组进行扁平，使其仅包含数字。</p>
+<p><strong>提示：</strong></p>
+<p><code>array.flat()</code> 创建一个新数组，而不会改变原始数组。</p>
+<h2 id="15-数组的排序"><a href="#15-数组的排序" class="headerlink" title="15. 数组的排序"></a>15. 数组的排序</h2><p>**15.1 ****<code>array.sort()</code> 方法**</p>
+<p><code>array.sort([compare])</code>方法对数组的元素进行排序。</p>
+<p>可选参数<code>compare(a, b)</code>是一个自定义排序顺的回调函数。如果比较<code>compare(a, b)</code>返回的结果：</p>
+<ul>
+<li>如果 <code>a</code>小于<code>b</code>，在排序后的数组中<code>a</code>应该出现在<code>b</code>之前，就返回一个小于<code>0</code>的值。</li>
+<li>如果<code>a</code>等于<code>b</code>，就返回<code>0</code>。</li>
+<li>如果<code>a</code>大于<code>b</code>，就返回一个大于<code>0</code>的值。</li>
+</ul>
+<p>如下所示，对数组 <code>numbers</code> 时行排序</p>
+<pre><code>const numbers = [4, 3, 1, 2];
+
+numbers.sort();
+
+numbers; // =&gt; [1, 2, 3, 4]
+</code></pre>
+<p><code>numbers.sort()</code> 以升序对数字进行排序。</p>
+<p>使用比较函数，让偶数排在奇数前面：</p>
+<pre><code>const numbers = [4, 3, 1, 2];
+
+function compare(n1, n2) {
+  if (n1 % 2 === 0 &amp;&amp; n2 % 2 !== 0) {
+    return -1;
+  }
+  if (n1 % 2 !== 0 &amp;&amp; n2 % 2 === 0) {
+    return 1;
+  }
+  return 0;
+}
+
+numbers.sort(compare);
+
+numbers; // =&gt; [4, 2, 3, 1]
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>array.sort()</code> 会改变原数组。</li>
+</ul>
+<p>原文：<a target="_blank" rel="noopener" href="https://dmitripavlutin.com/operations-on-arrays-javascript/">https://dmitripavlutin.com/operations-on-arrays-javascript/</a></p>
+<p>更多<a target="_blank" rel="noopener" href="https://www.html.cn/">前端开发</a>知识，请查阅 HTML中文网 ！！</p>
+<p>以上就是JavaScript中数组的15种常见操作（备忘单）的详细内容，更多请关注html中文网其它相关文章！</p>
+</div><div class="related-posts-section"><h3 class="related-posts-title">📚 相关文章</h3><div class="related-posts-list"><a class="related-post-item" href="/article/569b7b15.html"><div class="related-post-title">Node.js 13.0 正式发布</div><div class="related-post-meta"><time>2019-10-24</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/98b4db70.html"><div class="related-post-title">前端面试之webpack面试常见问题</div><div class="related-post-meta"><time>2019-12-09</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/cd071ee9.html"><div class="related-post-title">React新旧生命周期一览</div><div class="related-post-meta"><time>2019-10-01</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/83ade139.html"><div class="related-post-title">重磅！TypeScript 3.7 RC发布</div><div class="related-post-meta"><time>2019-10-25</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a><a class="related-post-item" href="/article/53803e6.html"><div class="related-post-title">git提交注释规范</div><div class="related-post-meta"><time>2022-06-17</time><div class="related-post-categories"><span class="category-badge">前端</span><span class="category-badge">FrontEnd</span></div></div></a></div></div><iframe src="/donate/?AliPayQR=/img/AliPayQR.png&amp;WeChatQR=/img/WeChatQR.png&amp;UnionPayQR=null&amp;GitHub=null&amp;BTCQR=null&amp;BTCKEY=null&amp;PayPal=https://paypal.me/BigOldTwo&amp;afd=https://ifdian.net/order/create?user_id=1f326f88329e11eeb16752540025c377" style="overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;" frameborder="0" scrolling="no"></iframe><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>搬砖大老</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/article/c365c4c2.html">https://xuehuayu.cn/article/c365c4c2.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>① 标为原创的文章为博主原创，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接。② 部分文章内容由 AI 生成，内容仅供参考，请仔细甄别。③ 标为转载的文章来自网络，已标明出处，<a href="mailto:boss@xuehuayu.cn">侵删</a>。</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/article/dc8c5dee.html">常见React.js问题（附解决方案）</a><a class="next" href="/article/ececceb2.html">前端面试时面试官想要听到什么答案（关于一些Vue的问题）</a></div><div id="waline-comment"></div><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.css"><script src="//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.min.js"></script><script type="module">const { init } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+const locale = {
+  placeholder: '请正确填写昵称和邮箱，方便接收回复通知~',
+  sofa: '沙发空缺中，还不快抢~',
+  admin: '管理员'
+};
+init({
+  el: '#waline-comment',
+  serverURL: serverURL,
+  locale,
+  pageSize: '20',
+  visitor: false == true, // 阅读量统计
+  requiredMeta: ['nick', 'mail'],
+  pageview: true,
+  reaction: true,
+  emoji: [
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/qq',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bmoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/bilibili',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/weibo',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tieba',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/tw-emoji',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/alus',
+    '//cdn.jsdelivr.net/npm/@waline/emojis@1.4.0/soul-emoji'
+  ],
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4 fixed-search hidden_mid_and_down"><div id="sidebar"><script type="text/javascript" src="/js/search.js"></script><div class="widget widget-all-search"><div class="widget-search"><input class="search" type="radio" name="search" value="baidu" id="baidu" checked="checked"/><label class="label" for="baidu" title="百度全站搜索">百度</label><input class="search" type="radio" name="search" value="google" id="google"/><label class="label" for="google" title="谷歌全站搜索">谷歌</label><input class="search" type="radio" name="search" value="self" id="self"/><label class="label" for="self" title="使用站内搜索">站内</label></div><div class="widget" id="search"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"/><input type="hidden" name="si" value="xuehuayu.cn"/><input type="hidden" name="cl" value="3"/><input type="hidden" name="ct" value="2097152"/><input type="hidden" name="s" value="on"/><input class="search-submit" type="submit" value=""/></form></div></div><script>$('input[type=radio][name=search]').change(function() {
+  var val = $(this).val()
+  var self = '<div class="search-form"><input id="local-search-input" placeholder="站内搜索，首次慢" type="search" name="q" results="0"><input class="search-submit" type="submit" value=""/><div id="local-search-result"></div></div>'
+  var google = '<form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="q" maxlength="30" placeholder="谷歌全站搜索"><input type="hidden" name="sitesearch" value="xuehuayu.cn"><input class="search-submit" type="submit" value=""/></form>'
+  var baidu = '<form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="30" placeholder="百度全站搜索"><input type="hidden" name="si" value="xuehuayu.cn"><input type="hidden" name="cl" value="3"><input type="hidden" name="ct" value="2097152"><input type="hidden" name="s" value="on"><input class="search-submit" type="submit" value=""/></form>'
+
+  if (val === 'self') {
+      $('#search').html(self)
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = '//search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+  } else if (val === 'baidu') {
+      $('#search').html(baidu)
+  } else if (val === 'google') {
+      $('#search').html(google)
+  }
+})</script><div class="widget widget-wxmp"><img alt="微信公众号" width="100%" src="/img/mp-mini.png"/></div><div class="widget widget-recent-posts"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/article/90947add.html">又拍云注销账号退款结果</a></li><li class="post-list-item"><a class="post-list-link" href="/article/40a96678.html">又拍云注销账号退款：一场本不该如此“恶心”的用户告别</a></li><li class="post-list-item"><a class="post-list-link" href="/article/87ba5860.html">本站已全面接入腾讯edgeone</a></li><li class="post-list-item"><a class="post-list-link" href="/article/68c9c2c2.html">使用 Vercel + Upstash Redis 搭建自己的加速缓存服务</a></li><li class="post-list-item"><a class="post-list-link" href="/article/46124b4e.html">账号被封了？被担心，不是！是Cloudflare崩了！</a></li></ul></div><div class="widget widget-recent-comments"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><div class="waline-recent" id="waline-recent"></div></div><script type="module">const { RecentComments } = await import('//cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js');
+const origin = window.location.origin
+const serverURL = origin.includes('cainiaoblog') ? 'https://guest.cainiaoblog.cn' : 'https://guest.xuehuayu.cn'
+
+RecentComments({
+  el: '#waline-recent',
+  serverURL,
+  count: 5,
+}).then(({ comments }) => {
+  const commentList = comments?.data.map(
+    (comment) => {
+      const cmts = ((comment||{}).comment || '').replace(/<\/?.*?>/g, '').replace(/\n/g, ' ')
+      const time = ((comment||{}).insertedAt || '').substring(0, 10)
+      const link = (comment||{}).link
+      const info = link ? `<a class="flex-block align-center" href="${link}"><img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span></a>` : `<img class="comment-avatar" width="30" src="${comment.avatar}" alt="${comment.nick}"/><span class="comment-nick">${comment.nick}</span>`
+      const url = (comment||{}).url + '#' + (comment||{}).objectId
+      return `<li class="comment-list-item"><div class="comment-top flex-block justify-between align-center"><div class="comment-info flex-block align-center">${info}</div><span>${time}</span></div><div class="comment-content"><a class="post-list-link line-3" href="${url}">${cmts}</a></div></li>`
+    }
+  );
+  document.getElementById('waline-recent').innerHTML = `<url class="comment-list">${commentList.join('')}</ul>`
+});</script><div class="widget widget-categories"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ADBlock/">ADBlock</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/">CDN</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CDN/%E7%BD%91%E7%AB%99/">网站</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/FrontEnd/">FrontEnd</a><span class="category-list-count">277</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Games/">Games</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Games/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Histiry/">Histiry</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hls/">Hls</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KKPlayer/">KKPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LiveTV/">LiveTV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/M3U8/">M3U8</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movies/">Movies</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TV/">TV</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue3/">Vue3</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Webpack/">Webpack</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/World-of-Warcraft/">World of Warcraft</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debugger/">debugger</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E7%A8%8E/">个税</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/">儿童</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/">健康</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/">Children</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%84%BF%E7%AB%A5/%E5%81%A5%E5%BA%B7/Children/Health/">Health</a><span class="category-list-count">8</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AC%E4%BC%97%E5%8F%B7/">公众号</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">293</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/">FrontEnd</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Chrome/">Chrome</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Class/">Class</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Map/">Map</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/TypeScript/">TypeScript</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/FrontEnd/Vue3/">Vue3</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/">Frontend</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/">PDF</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/">Image</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/PDF/Image/%E8%AF%B7%E6%B1%82%E5%A4%B4/">请求头</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/">Redis</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Frontend/Redis/Vercel/">Vercel</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8E%86%E5%8F%B2/Histiry/">Histiry</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%BF%E5%91%8A%E8%BF%87%E6%BB%A4/">广告过滤</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86/">影视</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%92%AD%E6%94%BE%E5%99%A8/">播放器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/">新华字典</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/">历史</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8/%E5%8E%86%E5%8F%B2/%E6%96%87%E5%8C%96/">文化</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/%E6%89%8B%E6%9C%BA/">手机</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%B5%E5%BD%B1/">电影</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%B4%E6%92%AD/">直播</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A5%9E%E8%AF%9D/">神话</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/">System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/System/Windows/">Windows</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%9B%98/">网盘</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8A%82%E7%82%B9/">节点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%A3%85%E4%BF%AE/">装修</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C/">魔兽世界</a><span class="category-list-count">2</span></li></ul></div><div class="widget widget-links"><div class="widget-title"><i class="fa fa-external-link"> 友链</i></div><ul><li><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></li><li><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></li><li><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></li><li><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></li></ul></div><div class="widget widget-ip"><div class="widget-title"></div><img alt="info" width="100%" src="https://tool.lu/netcard/" onclick="window.open(&quot;https://laonongmin.online&quot;)"/></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer"><div class="flex-block justify-center align-center flex-wrap"><a class="gxba-link" id="gxba" rel="nofollow" target="_blank" href="http://beian.miit.gov.cn/">京ICP备20007647号-2</a><a class="gaba-link" id="gaba-link" rel="nofollow" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031264"><img class="nofancybox" src="/img/gaba.png" alt=""/><span id="gaba">京公网安备 11010802031264号</span><span style="padding-right: 10px;"></span></a><span>Copyright © 2025 </span><a href="/." rel="nofollow">前端壹菜鸟. </a><script>(function(){
+  var cnb =window.location.origin.includes('cainiaoblog')
+  if (cnb) {
+    var gxba =document.getElementById('gxba')
+    var gaba =document.getElementById('gaba')
+    var gabaLink =document.getElementById('gaba-link')
+    gxba.innerText ='京ICP备20007647号-1'
+    gaba.innerText ='京公网安备 11010802031254号'
+    gabaLink.setAttribute('href','http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802031254')
+  }
+})()</script></div><div><a class="flex-block justify-center align-center flex-wrap" rel="nofollow" title="51la网站统计" target="_blank" href="https://v6.51.la/s/Guz3lwHCsVme9Cu"><script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/JkUaixMjOhC8emNs/quote.js?theme=0&amp;f=12&amp;display=0,1,1,1,1,1,1,1"></script></a></div></div></div></div><a class="show" id="rocket" title="返回顶部" href="#top"></a><div class="darkmode-toggle" title="开灯/关灯">🌓</div><script type="text/javascript" src="/js/totop.js?v=9" async></script><script type="text/javascript" src="/js/dark.js?v=9" async></script><script type="text/javascript" src="/js/codeblock-resizer.js"></script><script type="text/javascript" src="/js/smartresize.js"></script></div></body><div class="footer-links"><i class="fa fa-external-link"> 友链</i><span>：</span><span class="link"><span class="gap gap-0">|</span><a href="https://ghfast.top/https://raw.githubusercontent.com/npljy/haoka/main/imgs/qrcode.jpg" title="运营商官方大流量手机卡" target="_blank">运营商官方大流量手机卡</a></span><span class="link"><span class="gap gap-1">|</span><a href="https://m3u8.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="M3U8加速播放器" target="_blank">M3U8加速播放器</a></span><span class="link"><span class="gap gap-2">|</span><a href="https://chrome.xuehuayu.cn?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="Chrome命令行参数生成器" target="_blank">Chrome命令行参数生成器</a></span><span class="link"><span class="gap gap-3">|</span><a href="https://laonongmin.online?utm_source=xuehuayu.cn&amp;utm_term=KKPlayer" title="KK Player" target="_blank">KK Player</a></span></div></html>
